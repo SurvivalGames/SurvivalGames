@@ -1,3 +1,11 @@
+/**
+ * Name: TheSurvivalGames.java
+ * Created: 19 Nov 2013
+ * 
+ * @author TheEpicButterStudios calebbfmv jimbo8 xTrollxDudex
+ * @version 1.0.0
+ */
+
 package me.theepicbutterstudios.thesurvivalgames;
 
 import com.gmail.woodyc40.arenaapi.*;
