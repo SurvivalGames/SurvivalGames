@@ -12,8 +12,6 @@ import com.gmail.woodyc40.arenaapi.*;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.java.util.logging.Logger;
-
 public class TheSurvivalGames extends JavaPlugin  {
 
     public void onEnable() {
@@ -23,7 +21,6 @@ public class TheSurvivalGames extends JavaPlugin  {
     }
 
     public void onDisable() {
-        
         getLogger().info("[The Survival Games] was disabled.")
 
     }
