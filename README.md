@@ -138,3 +138,4 @@ survivalgames.join.* (access to join all arenas)
 
 PM me or leave a comment to start collaborating! Looking forward to it :)
 Our GitHub page is http://github.com/TheEpicButterStudios/The-Survival-Games
+Our BukkitDev page is http://dev.bukkit.org/bukkit-plugins/the-survival-games/
