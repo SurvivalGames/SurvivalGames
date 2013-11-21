@@ -1,5 +1,7 @@
 package com.gmail.woodyc40.arenaapi;
 
+import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -12,32 +14,25 @@ import java.util.Map;
 
 public class ArenaManager{
 
-    //save where the player teleported
     public Map<String, Location> locs = new HashMap<String, Location>();
-    //make a new instance of the class
     public static ArenaManager am = new ArenaManager();
-    //a few other fields
     Map<String, ItemStack[]> inv = new HashMap<String, ItemStack[]>();
     Map<String, ItemStack[]> armor = new HashMap<String, ItemStack[]>();
-    //list of arenas
     List<Arena> arenas = new ArrayList<Arena>();
     int arenaSize = 0;
 
-    static ArenaPVP plugin;
-    public ArenaManager(ArenaPVP arenaPVP) {
+    static TheSurvivalGames plugin;
+    public ArenaManager(TheSurvivalGAmes arenaPVP) {
         plugin = arenaPVP;
     }
 
-    public ArenaManager(){
-
-    }
-
-    //we want to get an instance of the manager to work with it statically
+    protected ArenaManager(){}
+  
     public static ArenaManager getManager(){
         return am;
     }
 
-    //get an Arena object from the list
+    
     public Arena getArena(int i){
         for(Arena a : arenas){
             if(a.getId() == i){
@@ -47,47 +42,46 @@ public class ArenaManager{
         return null;
     }
 
-    //add players to the arena, save their inventory
+    
     public void addPlayer(Player p, int i){
-        Arena a = getArena(i);//get the arena you want to join
-        if(a == null){//make sure it is not null
+        Arena a = getArena(i);
+        if(a == null){
             p.sendMessage("Invalid arena!");
             return;
         }
 
-        a.getPlayers().add(p.getName());//add them to the arena list of players
-        inv.put(p.getName(), p.getInventory().getContents());//save inventory
+        a.getPlayers().add(p.getName());
+        inv.put(p.getName(), p.getInventory().getContents());
         armor.put(p.getName(), p.getInventory().getArmorContents());
 
         p.getInventory().setArmorContents(null);
         p.getInventory().clear();
 
-        p.teleport(a.spawn);//teleport to the arena spawn
+        p.teleport(a.spawn);
     }
 
-    //remove players
+    
     public void removePlayer(Player p){
-        Arena a = null;//make an arena
+        Arena a = null;
         for(Arena arena : arenas){
             if(arena.getPlayers().contains(p.getName())){
-                a = arena;//if the arena has the player, the arena field would be the arena containing the player
+                a = arena;
             }
-            //if none is found, the arena will be null
         }
-        if(a == null || !a.getPlayers().contains(p.getName())){//make sure it is not null
+        if(a == null || !a.getPlayers().contains(p.getName())){
             p.sendMessage("Invalid operation!");
             return;
         }
 
-        a.getPlayers().remove(p.getName());//remove from arena
+        a.getPlayers().remove(p.getName());
 
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
 
-        p.getInventory().setContents(inv.get(p.getName()));//restore inventory
+        p.getInventory().setContents(inv.get(p.getName()));
         p.getInventory().setArmorContents(armor.get(p.getName()));
 
-        inv.remove(p.getName());//remove entries from hashmaps
+        inv.remove(p.getName());
         armor.remove(p.getName());
         p.teleport(locs.get(p.getName()));
         locs.remove(p.getName());
