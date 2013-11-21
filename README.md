@@ -17,8 +17,8 @@ First you have the join sign which will be laid out like so
 Survival Games
 <Arena Number>
 <What state the game is in (e.g. Voting, pre-game, in-game and deathmatch)>
-<Total players in the game (e.g. 3/24)>`
-``
+<Total players in the game (e.g. 3/24)>
+```
 
 Next, when you right click on the sign you will teleported to a location set with a command, your inventory will be cleared (and saved), you are now in the lobby faze you will not be able to break any blocks and you will be able to do /sg vote <arena number> (e.g. /sg vote 2) this will create your vote for the map number 2, if it is possible the map number (e.g. 2) will have the map name next to it (e.g. 2 - Teweran Survival Games 3 (Votes: 4)) In the end, the map with the most number of votes will win and will be selected to be played. If there isn't another players in the lobby it will restart but the votes/maps will be kept (amount of min players could be configurable per arena/lobby in config or with an in-game command). People in the lobby, pre-game, in-game and deathmatch will be able to do /sg records to see their total kills, deaths, wins and points (i'll get onto points later).
 
