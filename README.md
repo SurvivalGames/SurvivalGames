@@ -1,25 +1,26 @@
 The-Survival-Games
 ==================
 
-{http://icap.me/i/ffb9c91e68.png|SGPIC\}\}\
+{http://icap.me/i/ffb9c91e68.png|SGPIC\}
 Description
 What is there to describe? This will be a community project, this is the description:\
-Survival Games plugin cannot be boring, it has to have a lot of cool features that will make people want to play on it so I have come up with this idea. The plugin is very similar to MCSG. I would also like it to be MultiWorld compatible if you can so it is more useful to other people.\
+Survival Games plugin cannot be boring, it has to have a lot of cool features that will make people want to play on it so I have come up with this idea. The plugin is very similar to MCSG. I would also like it to be MultiWorld compatible if you can so it is more useful to other people.
+
+========
 
 Signs
 First you have the join sign which will be laid out like so
 
-Survival Games\
-<Arena Number>\
-<What state the game is in (e.g. Voting, pre-game, in-game and deathmatch)>\
-<Total players in the game (e.g. 3/24)>\
+Survival Games
+<Arena Number>
+<What state the game is in (e.g. Voting, pre-game, in-game and deathmatch)>
+<Total players in the game (e.g. 3/24)>
 
 Next, when you right click on the sign you will teleported to a location set with a command, your inventory will be cleared (and saved), you are now in the lobby faze you will not be able to break any blocks and you will be able to do /sg vote <arena number> (e.g. /sg vote 2) this will create your vote for the map number 2, if it is possible the map number (e.g. 2) will have the map name next to it (e.g. 2 - Teweran Survival Games 3 (Votes: 4)) In the end, the map with the most number of votes will win and will be selected to be played. If there isn't another players in the lobby it will restart but the votes/maps will be kept (amount of min players could be configurable per arena/lobby in config or with an in-game command). People in the lobby, pre-game, in-game and deathmatch will be able to do /sg records to see their total kills, deaths, wins and points (i'll get onto points later).
 
+========
 
 Map
-
-========
 
 When the map has been selected to be played you will be teleported to one of the spawnpoints (set with a command) and you will not be able to move until the configurable time (default 45 seconds) has gone, in the time all the chests on the map will generate random items (i'll talk later about chests), once the time is up the game timer will start and players will be able to run and collect items from chests, every minute a message will popup saying how long is left in minutes (each game is 30 mins long then deathmatch will start if there is still more than 4 players) and how many players are left (players can type /sg list to see who is in game and the message will be displayed as so in this example:
  Alive: Player1, Player2, Dave1234, Jimmy1235, Yebol, SteveMC, ImSoPr0.
@@ -27,16 +28,16 @@ When the map has been selected to be played you will be teleported to one of the
  Spectating: SamHaribo, bob987, RandomGuy6, JamkoMC.)
  Chests will refill with items at 17 minutes through the game, with the same Tier (i'll talk about them in a minute) items. When in the arena the only blocks you will be able to break are, flowers, long grass, mushrooms, and leaves.
 
-Winning and Deathmatch
-
 ========
+
+Winning and Deathmatch
 
 Once the 30 minutes are up or their are 4 players left alive the deathmatch countdown will begin from 60, if all but one players are killed then the remaining player wins and the game ends, if more than 1 player is still alive when the deathmatch counter has ended both players will be sent to the deathmatch arena on different spawnpoints where they will fight to the death and one will become the victor.
 The game ends and players will be teleported back to where they were when they first clicked the sign and will be given the items they had in their inventory again
 
-Extra Info
-
 ========
+
+Extra Info
 
 Chests will have 2 Tiers, Tier 1 chests and Tier 2 chests.
 
@@ -48,24 +49,24 @@ When setting up the arenas all chests will be T1s by default and doing the /sg s
 
 Spectating will hopefully be a feature, when a player dies they respawn where they died with flying enabled, they wont be able to attack people/knockback, they will be invisible to everyone else, no health (other players, fall damage and fire damage can't kill them) or hunger can be lost and a compass in their inventory, the compass, when right-clicked will open up a GUI with players heads in them (which can't be taken out) and when right clicked the spectator will teleport to the person they have selected.
 
-Points
-
 ========
+
+Points
 
 Points will be gained when you get a kill (customise amount in config) and winning a game (customise amount in config), you can lose points by dying (customise amount in config) and you can spend points either bountying them (see below) on people or sponsoring other players (again, see below). Your points will be displayed before your name like this example when you are in the lobby stage or before you have even joined a game:
  1234 : DaveMan123: Hi, I have 1234 points, lol that is funny! :D
 after the lobby stage (pre-game, in-game and deathmatch) your name will look like this and the number you have before your name will be the amount of points bountied on you.
  50 : DaveMan123: LOL! someone bountied 50 points because I killed them!
 
-Bountying
-
 ========
+
+Bountying
 
 Bountying will be able to happen throughout the game by players and spectators, when a player types /sg bounty <playername> <amount of points being bountied> the points will be taken from their profile and put on the other players name (see above Points section). When a player with a bounty on them is killed, the killer will receive the points added onto the points gained from killing a player. If they player does not die in the whole game then they will get the points added onto their points total
 
-Sponsoring
-
 ========
+
+Sponsoring
 
 When you are spectating a game you can sponsor a player with /sg sponsor <playername> <amount of points you sponsor>. Also a sponsoring group e.g. 1-10 can only be done once per game so if 1 person does /sg sponsor dave12 8 and then another person does /sg sponsor dave1235678 9 then the 2nd person will get a message like this: Sorry. Someone has already been sponsored with an amount of points between 1-10. Try sponsoring more points or leave the player to fight by themselves! I will make a little table thing to show how the points you sponsor help.
  1-15 points = food, if more points are given the person will recvieve better items e.g. 5 points = raw steak, chicken, apple 13 points = steak, porkchop, cake. (if 15 points are sponsored the player will have a 1/7 chance of receiving a regular golden apple)
@@ -75,9 +76,9 @@ When you are spectating a game you can sponsor a player with /sg sponsor <player
 
  TNT which when placed on the floor instantly lights and explodes after 2-4 seconds.
 
-Kits and Items
-
 ========
+
+Kits and Items
 
 Sugar (named Sugar rush) which when right clicked, slows you down like you are eating it for same amount of time as normal food and then gives you a speed 1 boost for 10 seconds, great for out running people.
 
@@ -85,9 +86,9 @@ Another item is the slowball, when a snowball (renamed slowball) hits the player
 
 Care Package, a renamed firework which when right-clicked sends a firework up into the air where it explodes constantly for 10 seconds so other players are alerted to the users position, after the 10 seconds a random T2 item will drop from the sky to the location that the care package was set off.
 
-Commands
+=========
 
-========
+Commands
 
  /sg create arena <arena number> (creates arena)
  /sg setradius <arena number> <radius> (sets radius where people cannot break blocks and where the automatic chest refill is)
@@ -104,9 +105,9 @@ Commands
  /sg forcestart <arena number> <the state to put the game into> (force starts the state the game needs to go into e.g. player is in-game and does /sg forcestart 2 dm for a deathmatch force start)
  /sg forcestop <arena number> (force stops a game)
 
-Permissions
-
 ========
+
+Permissions
 
 survivalgames.admin (access to all survivalgames.player commands and survivalgames.mod commands as well as the arena setup commands)
  survivalgames.mod (access to all survivalgames.player commands and also /sg forcestart and /sg forcestop)
@@ -115,9 +116,9 @@ survivalgames.admin (access to all survivalgames.player commands and survivalgam
  survivalgames.join.<arena name> ( permission to join an arena, when set to false players cannot join the arena (useful for donator only arenas + staff only testing)
  survivalgames.join.* (access to join all arenas)
 
-Get Involved
-
 ========
+
+Get Involved
 
 PM me or leave a comment to start collaborating! Looking forward to it :)
 Our GitHub page is http://github.com/TheEpicButterStudios/The-Survival-Games
