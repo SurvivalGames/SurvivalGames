@@ -1,14 +1,16 @@
-The-Survival-Games
+The Survival Games
 ==================
 
 {http://icap.me/i/ffb9c91e68.png|SGPIC\}
-Description
+*Description*
+
 What is there to describe? This will be a community project, this is the description:\
 Survival Games plugin cannot be boring, it has to have a lot of cool features that will make people want to play on it so I have come up with this idea. The plugin is very similar to MCSG. I would also like it to be MultiWorld compatible if you can so it is more useful to other people.
 
 ========
 
 Signs
+
 First you have the join sign which will be laid out like so
 
 Survival Games
@@ -23,10 +25,12 @@ Next, when you right click on the sign you will teleported to a location set wit
 Map
 
 When the map has been selected to be played you will be teleported to one of the spawnpoints (set with a command) and you will not be able to move until the configurable time (default 45 seconds) has gone, in the time all the chests on the map will generate random items (i'll talk later about chests), once the time is up the game timer will start and players will be able to run and collect items from chests, every minute a message will popup saying how long is left in minutes (each game is 30 mins long then deathmatch will start if there is still more than 4 players) and how many players are left (players can type /sg list to see who is in game and the message will be displayed as so in this example:
- Alive: Player1, Player2, Dave1234, Jimmy1235, Yebol, SteveMC, ImSoPr0.
- Dead: ImBadAtPvP, SamHaribo, Isuck12, QuantumTiger, JamkoMC, bob987.
- Spectating: SamHaribo, bob987, RandomGuy6, JamkoMC.)
- Chests will refill with items at 17 minutes through the game, with the same Tier (i'll talk about them in a minute) items. When in the arena the only blocks you will be able to break are, flowers, long grass, mushrooms, and leaves.
+
+Alive: Player1, Player2, Dave1234, Jimmy1235, Yebol, SteveMC, ImSoPr0.
+Dead: ImBadAtPvP, SamHaribo, Isuck12, QuantumTiger, JamkoMC, bob987.
+Spectating: SamHaribo, bob987, RandomGuy6, JamkoMC.)
+
+Chests will refill with items at 17 minutes through the game, with the same Tier (i'll talk about them in a minute) items. When in the arena the only blocks you will be able to break are, flowers, long grass, mushrooms, and leaves.
 
 ========
 
