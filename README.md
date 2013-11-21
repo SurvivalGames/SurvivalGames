@@ -13,10 +13,12 @@ Survival Games plugin cannot be boring, it has to have a lot of cool features th
 
 First you have the join sign which will be laid out like so
 
+```
 Survival Games
 <Arena Number>
 <What state the game is in (e.g. Voting, pre-game, in-game and deathmatch)>
-<Total players in the game (e.g. 3/24)>
+<Total players in the game (e.g. 3/24)>`
+``
 
 Next, when you right click on the sign you will teleported to a location set with a command, your inventory will be cleared (and saved), you are now in the lobby faze you will not be able to break any blocks and you will be able to do /sg vote <arena number> (e.g. /sg vote 2) this will create your vote for the map number 2, if it is possible the map number (e.g. 2) will have the map name next to it (e.g. 2 - Teweran Survival Games 3 (Votes: 4)) In the end, the map with the most number of votes will win and will be selected to be played. If there isn't another players in the lobby it will restart but the votes/maps will be kept (amount of min players could be configurable per arena/lobby in config or with an in-game command). People in the lobby, pre-game, in-game and deathmatch will be able to do /sg records to see their total kills, deaths, wins and points (i'll get onto points later).
 
@@ -26,9 +28,11 @@ Next, when you right click on the sign you will teleported to a location set wit
 
 When the map has been selected to be played you will be teleported to one of the spawnpoints (set with a command) and you will not be able to move until the configurable time (default 45 seconds) has gone, in the time all the chests on the map will generate random items (i'll talk later about chests), once the time is up the game timer will start and players will be able to run and collect items from chests, every minute a message will popup saying how long is left in minutes (each game is 30 mins long then deathmatch will start if there is still more than 4 players) and how many players are left (players can type /sg list to see who is in game and the message will be displayed as so in this example:
 
+```
 Alive: Player1, Player2, Dave1234, Jimmy1235, Yebol, SteveMC, ImSoPr0.
 Dead: ImBadAtPvP, SamHaribo, Isuck12, QuantumTiger, JamkoMC, bob987.
 Spectating: SamHaribo, bob987, RandomGuy6, JamkoMC.)
+```
 
 Chests will refill with items at 17 minutes through the game, with the same Tier (i'll talk about them in a minute) items. When in the arena the only blocks you will be able to break are, flowers, long grass, mushrooms, and leaves.
 
@@ -49,7 +53,7 @@ Tier 1s will contain items like: leather armour pieces, gold armour pieces, wood
 
 Tier 2s will contain rarer items like: diamonds (maximum of 5 in a game), iron armour pieces, chain armour pieces, regular golden apple, the care package, cooked food, cake, and 1 or 2 tier 1 items as well e.g. arrows will be more common in T2 than in T1.
 
-When setting up the arenas all chests will be T1s by default and doing the /sg setchest t2 <arena number> while looking at a chest will turn it into a t2 chest. (cannot be done ingame)
+When setting up the arenas all chests will be T1s by default and doing the /sg setchest t2 <arena number> while looking at a chest will turn it into a T2 chest. (cannot be done ingame)
 
 Spectating will hopefully be a feature, when a player dies they respawn where they died with flying enabled, they wont be able to attack people/knockback, they will be invisible to everyone else, no health (other players, fall damage and fire damage can't kill them) or hunger can be lost and a compass in their inventory, the compass, when right-clicked will open up a GUI with players heads in them (which can't be taken out) and when right clicked the spectator will teleport to the person they have selected.
 
@@ -59,11 +63,11 @@ Spectating will hopefully be a feature, when a player dies they respawn where th
 
 Points will be gained when you get a kill (customise amount in config) and winning a game (customise amount in config), you can lose points by dying (customise amount in config) and you can spend points either bountying them (see below) on people or sponsoring other players (again, see below). Your points will be displayed before your name like this example when you are in the lobby stage or before you have even joined a game:
 
-1234 : DaveMan123: Hi, I have 1234 points, lol that is funny! :D
+```696 : DaveMan123: Hi, I have 696 points, lol that is funny! :D```
 
 after the lobby stage (pre-game, in-game and deathmatch) your name will look like this and the number you have before your name will be the amount of points bountied on you.
 
-50 : DaveMan123: LOL! someone bountied 50 points because I killed them!
+```50 : DaveMan123: LOL! someone bountied 50 points because I killed them!```
 
 ========
 
@@ -99,6 +103,7 @@ Care Package, a renamed firework which when right-clicked sends a firework up in
 
 **Commands**
 
+```
 /sg create arena <arena number> (creates arena)
 /sg setradius <arena number> <radius> (sets radius where people cannot break blocks and where the automatic chest refill is)
 /sg setspawn lobby <arena number> (sets lobby spawn point)
@@ -113,17 +118,19 @@ Care Package, a renamed firework which when right-clicked sends a firework up in
 /sg leave (leave an arena)
 /sg forcestart <arena number> <the state to put the game into> (force starts the state the game needs to go into e.g. player is in-game and does /sg forcestart 2 dm for a deathmatch force start)
 /sg forcestop <arena number> (force stops a game)
-
+```
 ========
 
 **Permissions**
 
+```
 survivalgames.admin (access to all survivalgames.player commands and survivalgames.mod commands as well as the arena setup commands)
 survivalgames.mod (access to all survivalgames.player commands and also /sg forcestart and /sg forcestop)
 survivalgames.player (access to joining arenas, showing available arenas, voting for maps, spectating, boutying and sponsoring)
 survivalgames.vote.worth.<number> (how much a vote is worth, survivalgames.player will have 1 by default but it can be given to other players for example donators so that they can have a better chance of having their map selected)
 survivalgames.join.<arena name> ( permission to join an arena, when set to false players cannot join the arena (useful for donator only arenas + staff only testing)
 survivalgames.join.* (access to join all arenas)
+```
 
 ========
 
