@@ -1,4 +1,4 @@
-package com.gmail.woodyc40.arenapvp;
+package com.gmail.woodyc40.arenaapi;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
