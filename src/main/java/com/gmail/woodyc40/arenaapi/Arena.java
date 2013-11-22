@@ -7,21 +7,38 @@ import java.util.List;
  
 public class Arena{
  
-    //you want some info about the arena stored here
-    public int id = 0;//the arena id
-    Location spawn = null;//spawn location for the arena
-    List<String> players = new ArrayList<String>();//list of players
+    public int id = 0;
+    Location spawn = null;
+    List<String> players = new ArrayList<String>();
  
-    //now let's make a few getters/setters, and a constructor
+    /**
+     * Constructs a new arena based off of a Location and an ID
+     * 
+     * @param loc The default spawn for the arena
+     * @param id The ID the arena will have
+     */
+    
     public Arena(Location loc, int id){
         this.spawn = loc;
         this.id = id;
     }
  
+    /**
+     * Gets the ID of the arena
+     * 
+     * @return The ID of the arena
+     */
+    
     public int getId(){
         return this.id;
     }
  
+    /**
+     * Gets the list of players in the arena
+     * 
+     * @return List of players in the arena
+     */
+    
     public List<String> getPlayers(){
         return this.players;
     }
