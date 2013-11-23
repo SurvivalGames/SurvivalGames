@@ -1,3 +1,11 @@
+/**
+ * Name: ArenaManager.java
+ * Edited: 22 Nov 12
+ * 
+ * @author Community
+ * @version 1.0.0
+ */ 
+
 package com.gmail.woodyc40.arenaapi;
 
 import org.bukkit.Bukkit;
