@@ -25,11 +25,8 @@ public class TheSurvivalGames extends JavaPlugin  {
         new ArenaManager(this);
         ArenaManager.getManager().loadGames();
 
-        getLogger().info("[The Survival Games] has been enabled!")
-        getLogger().info("[The Survival Games] is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/")
+        getLogger().info("is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
     }
 
-    public void onDisable() {
-        getLogger().info("[The Survival Games] was disabled.")
-    }
+    public void onDisable() {}
 }
