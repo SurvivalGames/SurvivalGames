@@ -13,7 +13,7 @@ import com.java.util.logging.Logger;
 
 import me.theepicbutterstudios.thesurvivalgames.command.CommandHandler;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.Help;
-import me.theepicbutterstudios.thesurvivalgames.handlers.ArenaHandler;
+import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
