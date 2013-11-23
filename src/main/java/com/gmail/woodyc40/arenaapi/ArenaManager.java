@@ -221,7 +221,7 @@ public class ArenaManager{
         }
                 
         for(int i : plugin.getConfig().getIntegerList("Arenas.Arenas")){
-            reloadArena(i);
+            Arena a = reloadArena(deserializeLoc(plugin.getConfig().getString("Arenas." + i)));
             a.id = i;
         }
     }
@@ -240,7 +240,7 @@ public class ArenaManager{
     /**
      * Gets a location from a string
      * 
-     * @param The string to deserialize
+     * @param s The string to deserialize
      * @return The location represented from the string
      */
     
