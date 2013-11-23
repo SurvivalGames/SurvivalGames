@@ -4,7 +4,7 @@ The Survival Games
 ![SurvivalGames](http://icap.me/i/ffb9c91e68.png)
 **Description**
 
-What is there to describe? This will be a community project, this is the description:\
+What is there to describe? This will be a community project, this is the description
 Survival Games plugin cannot be boring, it has to have a lot of cool features that will make people want to play on it so I have come up with this idea. The plugin is very similar to MCSG. I would also like it to be MultiWorld compatible if you can so it is more useful to other people.
 
 ========
