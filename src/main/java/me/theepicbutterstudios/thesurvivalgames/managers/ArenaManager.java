@@ -1,4 +1,4 @@
-package me.theepicbutterstudios.thesurvivalgames.handlers;
+package me.theepicbutterstudios.thesurvivalgames.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
