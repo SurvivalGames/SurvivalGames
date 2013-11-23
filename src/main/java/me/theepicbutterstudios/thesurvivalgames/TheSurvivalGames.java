@@ -8,7 +8,12 @@
 
 package me.theepicbutterstudios.thesurvivalgames;
 
+//What the heck is "com.java"...
 import com.java.util.logging.Logger;
+
+import me.theepicbutterstudios.thesurvivalgames.command.CommandHandler;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.Help;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class TheSurvivalGames extends JavaPlugin  {
@@ -16,27 +21,21 @@ public class TheSurvivalGames extends JavaPlugin  {
     public void onEnable() {
         registerAll();
         new ArenaManager(this);
-
+       
+        //Please erase the [The Survival Games], getLogger() auto puts that in the front...
         getLogger().info("[The Survival Games] has been enabled!")
         getLogger().info("[The Survival Games] is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
         saveDefaultConfig();
     }
 
     public void onDisable() {
+        //Same for here, remove the [The Survival Games] part
         getLogger().info("[The Survival Games] was disabled.")
-
     }
 
     public void registerAll() {
         //register all commands and listeners
         getCommand("sg").setExecutor(new CommandHandler());
-    }
-
-    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        if(commandLabel.equalsIgnoreCase("sg") {
-            //Do Stuff
-            return true;
-        }
-        return false;
+        CommandHandler.register("help", new Help());
     }
 }
