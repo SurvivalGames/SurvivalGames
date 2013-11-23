@@ -154,7 +154,7 @@ public class ArenaManager{
      * @return The arena that was created
      */ 
 
-    public Arena reloadArena(Location l) {
+    /* public Arena reloadArena(Location l) {
         int num = arenaSize + 1;
         arenaSize++;
  
