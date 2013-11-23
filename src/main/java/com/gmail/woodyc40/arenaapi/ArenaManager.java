@@ -1,10 +1,10 @@
-/**
+/*
  * Name: ArenaManager.java
+ *
+ * Version: 1.0
+ *
  * Edited: 22 Nov 12
- * 
- * @author Community
- * @version 1.0.0
- */ 
+ */
 
 package com.gmail.woodyc40.arenaapi;
 
@@ -20,6 +20,12 @@ import java.util.Map;
 
 import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
 
+/**
+ * This is the singleton class to manage the arenas
+ *
+ * @author Community
+ * @version 1.0, 11/22/13
+ */ 
 public class ArenaManager{
 
     public Map<String, Location> locs = new HashMap<String, Location>();
