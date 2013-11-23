@@ -1,6 +1,6 @@
 /**
  * Name: Arena.java
- * Created: 22 Nov 2013
+ * Edited: 22 Nov 2013
  * 
  * @author Community
  * @version 1.0.0
