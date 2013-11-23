@@ -13,6 +13,7 @@ import com.java.util.logging.Logger;
 
 import me.theepicbutterstudios.thesurvivalgames.command.CommandHandler;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.Help;
+import me.theepicbutterstudios.thesurvivalgames.handlers.ArenaHandler;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,9 +22,9 @@ public class TheSurvivalGames extends JavaPlugin  {
     public void onEnable() {
         registerAll();
         new ArenaManager(this);
-       
+
         //Please erase the [The Survival Games], getLogger() auto puts that in the front...
-        getLogger().info("[The Survival Games] has been enabled!")
+        getLogger().info("[The Survival Games] has been enabled!");
         getLogger().info("[The Survival Games] is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
         saveDefaultConfig();
     }
