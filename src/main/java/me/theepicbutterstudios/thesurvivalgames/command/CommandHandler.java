@@ -11,8 +11,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandHandler implements CommandExecutor{
-
     static Map<String, SubCommand> commands = new HashMap<>();
+
+    /**
+     * Registers a command
+     *
+     * @param cmd The command to register
+     * @param clazz The class to register the command to. Must implement SubCommand.
+     */
 
     public static void register(String cmd, Commander clazz) {
         try {
@@ -27,12 +33,29 @@ public class CommandHandler implements CommandExecutor{
             commands.put(cmd, clazz);
     }
 
-    Commander getCommand(String cmd) throws CommandException {
+    /**
+     * Gets the SubCommand represnted by a specific Command
+     *
+     * @param cmd The name of the command to get
+     * @return The SubCommand of the command
+     */
+
+    SubCommand getCommand(String cmd) throws CommandException {
         if(commands.containsKey(cmd)) {
             return commands.get(cmd);
         } else
             throw new CommandException("This command was not found.");
     }
+
+    /**
+     * The main executor for the SubCommands. DO NOT CALL.
+     *
+     * @param sender The CommandSender that executed the command
+     * @param command The Command executed
+     * @param commandLabel The command's label
+     * @param args The arguments after the command seperated by a space
+     * @return Whether or not the command was executed successfully
+     */
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
@@ -63,6 +86,5 @@ public class CommandHandler implements CommandExecutor{
         }
 
         return false;
-
     }
 }
