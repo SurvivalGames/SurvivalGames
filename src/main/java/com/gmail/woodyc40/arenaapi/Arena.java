@@ -1,3 +1,11 @@
+/*
+ * Name: Arena.java
+ * 
+ * Version: 1.0
+ *
+ * Edited: 22 November 2013
+ */
+
 package com.gmail.woodyc40.arenaapi;
 
 import org.bukkit.Location;
@@ -5,6 +13,13 @@ import org.bukkit.Location;
 import java.util.ArrayList;
 import java.util.List;
  
+/**
+ * This is the representation of an Arena object in which one can play a game of SurvivalGames
+ *
+ * @author Community
+ * @version 1.0, 11/22/13
+ */
+
 public class Arena{
  
     public int id = 0;
