@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * The main class of TheSurvivalGames plugin, register events, commands and files
  *
  * @author Communtity
- * @version 1.0
+ * @version 1.0, 11/22/13
  */
 
 public class TheSurvivalGames extends JavaPlugin  {
