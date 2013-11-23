@@ -1,3 +1,11 @@
+/**
+ * Name: Arena.java
+ * Created: 22 Nov 2013
+ * 
+ * @author Community
+ * @version 1.0.0
+ */ 
+
 package com.gmail.woodyc40.arenaapi;
 
 import org.bukkit.Location;
