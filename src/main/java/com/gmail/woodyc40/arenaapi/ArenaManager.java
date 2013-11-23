@@ -1,5 +1,6 @@
 package com.gmail.woodyc40.arenaapi;
 
+import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -9,8 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
 
 public class ArenaManager{
 
@@ -213,7 +212,7 @@ public class ArenaManager{
         }
                 
         for(int i : plugin.getConfig().getIntegerList("Arenas.Arenas")){
-            reloadArena(i);
+            Arena a = reloadArena(deserializeLoc(plugin.getConfig().getString("Arenas." + i)));
             a.id = i;
         }
     }
@@ -232,7 +231,7 @@ public class ArenaManager{
     /**
      * Gets a location from a string
      * 
-     * @param The string to deserialize
+     * @param s The string to deserialize
      * @return The location represented from the string
      */
     
