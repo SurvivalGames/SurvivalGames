@@ -1,4 +1,4 @@
-package com.gmail.woodyc40.arenaapi;
+package me.theepicbutterstudios.thesurvivalgames;
 
 import org.bukkit.Location;
  
