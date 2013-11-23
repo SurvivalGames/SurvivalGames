@@ -1,4 +1,12 @@
 name: The Survival Games
 main: me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames
 version: 1.0.0
-author: The Communtity!
+author: The Community!
+
+commands:
+    sg: 
+        usage: /sg <command>
+        description: You don't need any other commands since the CommandHandler handles the rest
+
+permissions:
+    #Indev
