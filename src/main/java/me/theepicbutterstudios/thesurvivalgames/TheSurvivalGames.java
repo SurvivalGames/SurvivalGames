@@ -20,15 +20,14 @@ public class TheSurvivalGames extends JavaPlugin  {
         registerAll();
         new ArenaManager(this);
 
-        //Please erase the [The Survival Games], getLogger() auto puts that in the front...
-        getLogger().info("[The Survival Games] has been enabled!");
-        getLogger().info("[The Survival Games] is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
+        getLogger().info("has been enabled!");
+        getLogger().info("is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
         saveDefaultConfig();
     }
 
     public void onDisable() {
-        //Same for here, remove the [The Survival Games] part
-        getLogger().info("[The Survival Games] was disabled.");
+        getLogger().info(" was disabled.");
+//      getServer().getPluginManager().enablePlugin(); Cmon, have some fun!
     }
 
     public void registerAll() {
