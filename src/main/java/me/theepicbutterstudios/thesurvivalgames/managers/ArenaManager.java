@@ -1,4 +1,4 @@
-package com.gmail.woodyc40.arenaapi;
+package me.theepicbutterstudios.thesurvivalgames.managers;
 
 import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
 import org.bukkit.Bukkit;
@@ -130,7 +130,7 @@ public class ArenaManager{
      * @return The arena that was created
      */ 
 
-    public Arena createArena(Location l){
+    /* Work on this later. Reading the README on how to setup public Arena createArena(Location l){
         int num = arenaSize + 1;
         arenaSize++;
 
@@ -153,7 +153,7 @@ public class ArenaManager{
      * @return The arena that was created
      */ 
 
-    public Arena reloadArena(Location l) {
+    /* public Arena reloadArena(Location l) {
         int num = arenaSize + 1;
         arenaSize++;
  
@@ -161,7 +161,7 @@ public class ArenaManager{
         arenas.add(a);
  
         return a;
-    }
+    } */
     
     /**
      * Removes an arena from memory
@@ -204,7 +204,7 @@ public class ArenaManager{
      * 
      */
 
-    public void loadGames(){
+    /* public void loadGames(){
         arenaSize = 0;      
 
         if(plugin.getConfig().getIntegerList("Arenas.Arenas").isEmpty()){
@@ -215,7 +215,7 @@ public class ArenaManager{
             Arena a = reloadArena(deserializeLoc(plugin.getConfig().getString("Arenas." + i)));
             a.id = i;
         }
-    }
+    } */
     
     /**
      * Serializeds a location to a string

@@ -1,11 +1,11 @@
-package com.gmail.woodyc40.arenaapi;
+package me.theepicbutterstudios.thesurvivalgames;
 
 import org.bukkit.Location;
  
 import java.util.ArrayList;
 import java.util.List;
  
-public class Arena{
+public class Arena {
  
     public int id = 0;
     Location spawn = null;
@@ -14,12 +14,10 @@ public class Arena{
     /**
      * Constructs a new arena based off of a Location and an ID
      * 
-     * @param loc The default spawn for the arena
      * @param id The ID the arena will have
      */
     
-    public Arena(Location loc, int id){
-        this.spawn = loc;
+    public Arena(int id) {
         this.id = id;
     }
  
@@ -29,17 +27,17 @@ public class Arena{
      * @return The ID of the arena
      */
     
-    public int getId(){
+    public int getId() {
         return this.id;
     }
- 
+
     /**
      * Gets the list of players in the arena
      * 
      * @return List of players in the arena
      */
     
-    public List<String> getPlayers(){
+    public List<String> getPlayers() {
         return this.players;
     }
 }
