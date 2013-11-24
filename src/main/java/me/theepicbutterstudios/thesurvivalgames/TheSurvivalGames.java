@@ -8,9 +8,6 @@
 
 package me.theepicbutterstudios.thesurvivalgames;
 
-//What the heck is "com.java"...
-import com.java.util.logging.Logger;
-
 import me.theepicbutterstudios.thesurvivalgames.command.CommandHandler;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.Help;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
@@ -31,7 +28,7 @@ public class TheSurvivalGames extends JavaPlugin  {
 
     public void onDisable() {
         //Same for here, remove the [The Survival Games] part
-        getLogger().info("[The Survival Games] was disabled.")
+        getLogger().info("[The Survival Games] was disabled.");
     }
 
     public void registerAll() {

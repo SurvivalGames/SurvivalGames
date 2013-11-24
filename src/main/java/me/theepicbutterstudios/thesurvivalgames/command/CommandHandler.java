@@ -20,14 +20,14 @@ public class CommandHandler implements CommandExecutor{
      * @param clazz The class to register the command to. Must implement SubCommand.
      */
 
-    public static void register(String cmd, Commander clazz) {
+    public static void register(String cmd, SubCommand clazz) {
         try {
             Class.forName(clazz.getClass().getName());
         } catch(ClassNotFoundException e) {
             return;
         }
 
-        if(!Commander.class.isAssignableFrom(clazz.getClass())) {
+        if(!SubCommand.class.isAssignableFrom(clazz.getClass())) {
             throw new IllegalArgumentException("Class does not implement SubCommand");
         } else
             commands.put(cmd, clazz);
@@ -65,13 +65,13 @@ public class CommandHandler implements CommandExecutor{
                 try {
                     getCommand(args[0]).execute(args[0], (Player)sender, new String[]{args[1]});
                 } catch (CommandException e){
-                    sender.sendMessage(ErrorHandler.getEh().error + "Command does not exist!");
+                    sender.sendMessage(/*error prefix*/"Command does not exist!");
                 }
             } else if(args.length == 1) {
                 try{
                     getCommand(args[0]).execute(args[0], (Player)sender, new String[]{});
                 }catch (CommandException e){
-                    sender.sendMessage(ErrorHandler.getEh().error + "Command does not exist!");
+                    sender.sendMessage(/*error prefix*/ "Command does not exist!");
                 }
             } else if(args.length == 0){
                 Bukkit.dispatchCommand(sender, "help TheSurvivalGames");

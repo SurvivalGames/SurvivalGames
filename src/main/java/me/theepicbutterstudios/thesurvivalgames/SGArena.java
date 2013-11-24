@@ -5,7 +5,7 @@ import org.bukkit.Location;
 import java.util.ArrayList;
 import java.util.List;
  
-public class Arena {
+public class SGArena {
  
     public int id = 0;
     Location spawn = null;
@@ -17,7 +17,7 @@ public class Arena {
      * @param id The ID the arena will have
      */
     
-    public Arena(int id) {
+    public SGArena(int id) {
         this.id = id;
     }
  

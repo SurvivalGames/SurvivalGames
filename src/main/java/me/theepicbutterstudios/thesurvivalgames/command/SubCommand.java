@@ -1,5 +1,7 @@
 package me.theepicbutterstudios.thesurvivalgames.command;
 
+import org.bukkit.entity.Player;
+
 public interface SubCommand {
 
     /**

@@ -1,5 +1,6 @@
 package me.theepicbutterstudios.thesurvivalgames.managers;
 
+import me.theepicbutterstudios.thesurvivalgames.SGArena;
 import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -17,7 +18,7 @@ public class ArenaManager{
     public static ArenaManager am = new ArenaManager();
     Map<String, ItemStack[]> inv = new HashMap<String, ItemStack[]>();
     Map<String, ItemStack[]> armor = new HashMap<String, ItemStack[]>();
-    List<Arena> arenas = new ArrayList<Arena>();
+    List<SGArena> arenas = new ArrayList<SGArena>();
     int arenaSize = 0;
 
     /**
@@ -56,8 +57,8 @@ public class ArenaManager{
      * @return The arena from which the ID represents. May be null.
      */
 
-    public Arena getArena(int i){
-        for(Arena a : arenas){
+    public SGArena getArena(int i){
+        for(SGArena a : arenas){
             if(a.getId() == i){
                 return a;
             }
@@ -73,7 +74,7 @@ public class ArenaManager{
      */
 
     public void addPlayer(Player p, int i){
-        Arena a = getArena(i);
+        SGArena a = getArena(i);
         if(a == null){
             p.sendMessage("Invalid arena!");
             return;
@@ -86,7 +87,7 @@ public class ArenaManager{
         p.getInventory().setArmorContents(null);
         p.getInventory().clear();
 
-        p.teleport(a.spawn);
+        //p.teleport(a.spawn);
     }
 
     /**
@@ -96,8 +97,8 @@ public class ArenaManager{
      */ 
 
     public void removePlayer(Player p){
-        Arena a = null;
-        for(Arena arena : arenas){
+        SGArena a = null;
+        for(SGArena arena : arenas){
             if(arena.getPlayers().contains(p.getName())){
                 a = arena;
             }
@@ -119,16 +120,16 @@ public class ArenaManager{
         armor.remove(p.getName());
         p.teleport(locs.get(p.getName()));
         locs.remove(p.getName());
-        
+
         p.setFireTicks(0);
     }
 
     /**
      * Creates a new arena
-     * 
+     *
      * @param l The location the arena spawn will be at
      * @return The arena that was created
-     */ 
+     */
 
     /* Work on this later. Reading the README on how to setup public Arena createArena(Location l){
         int num = arenaSize + 1;
@@ -148,29 +149,29 @@ public class ArenaManager{
 
     /**
      * Stores an existing arena in the list, for example after reloads
-     * 
+     *
      * @param l The location teh arena spawn will be at
      * @return The arena that was created
-     */ 
+     */
 
     /* public Arena reloadArena(Location l) {
         int num = arenaSize + 1;
         arenaSize++;
- 
+
         Arena a = new Arena(l, num);
         arenas.add(a);
- 
+
         return a;
     } */
-    
+
     /**
      * Removes an arena from memory
-     * 
+     *
      * @param i The ID of the arena to be removed
-     */ 
-    
+     */
+
     public void removeArena(int i) {
-        Arena a = getArena(i);
+        SGArena a = getArena(i);
         if(a == null) {
             return;
         }
@@ -180,18 +181,18 @@ public class ArenaManager{
         List<Integer> list = plugin.getConfig().getIntegerList("Arenas.Arenas");
         list.remove(i);
         plugin.getConfig().set("Arenas.Arenas", list);
-        plugin.saveConfig();    
+        plugin.saveConfig();
     }
 
     /**
      * Gets whether the player is playing
-     * 
+     *
      * @param p The player that will be scanned
      * @return Whether the player is in a game
-     */ 
+     */
 
     public boolean isInGame(Player p){
-        for(Arena a : arenas){
+        for(SGArena a : arenas){
             if(a.getPlayers().contains(p.getName()))
                 return true;
         }
