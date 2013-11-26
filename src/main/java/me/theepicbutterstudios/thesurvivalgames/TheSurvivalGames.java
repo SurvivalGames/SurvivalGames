@@ -27,7 +27,8 @@ public class TheSurvivalGames extends JavaPlugin  {
 
     public void onDisable() {
         getLogger().info(" was disabled.");
-//      getServer().getPluginManager().enablePlugin(); Cmon, have some fun!
+//      getServer().getPluginManager().enablePlugin(); Cmon, have some fun! \\CHALLENGE ACCEPTED!
+//      while(true) {getLogger().severe("HAS GLITCHED! RUN, ITS ON A RAMPAGE!");}
     }
 
     public void registerAll() {
