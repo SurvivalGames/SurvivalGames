@@ -104,11 +104,12 @@ Care Package, a renamed firework which when right-clicked sends a firework up in
 **Commands**
 
 ```
-/sg create arena <arena number> (creates arena)
+/sg create (creates arena)
 /sg setradius <arena number> <radius> (sets radius where people cannot break blocks and where the automatic chest refill is)
-/sg setspawn lobby <arena number> (sets lobby spawn point)
-/sg setspawn gamespawn <spawn point number> (max can be set in config, default 48)> <arena number>
-/sg setspawn deathmatch <spawn point number> (max can be set in config, default 48)> <arena number>
+/sg setlobby <arena number> (sets lobby spawn point)
+/sg setgamespawn <spawn point number> (max can be set in config, default 48)> <arena number>
+/sg setnextspawn (Sets the next spawn in areba, should you be creating one)
+/sg setdeathmatch <spawn point number> (max can be set in config, default 48)> <arena number>
 /sg setmaxplayers <max players> <arena number>
 /sg setchest t1 / t2 <arena number> (set chest tiers, by default all are t1s)
 /sg join <arena number> (only available before joining any other game)
@@ -116,8 +117,8 @@ Care Package, a renamed firework which when right-clicked sends a firework up in
 /sg bounty <player> <points> (set a bounty on a player)
 /sg sponsor <player> <points> (sponsor a player with items)
 /sg leave (leave an arena)
-/sg forcestart <arena number> <the state to put the game into> (force starts the state the game needs to go into e.g. player is in-game and does /sg forcestart 2 dm for a deathmatch force start)
-/sg forcestop <arena number> (force stops a game)
+/sg start <arena number> <the state to put the game into> (force starts the state the game needs to go into e.g. player is in-game and does /sg forcestart 2 dm for a deathmatch force start)
+/sg stop <arena number> (force stops a game)
 ```
 ========
 
