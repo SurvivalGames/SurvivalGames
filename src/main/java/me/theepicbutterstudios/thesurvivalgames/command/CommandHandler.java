@@ -1,3 +1,10 @@
+/**
+ * Name: CommandHandler.java
+ * Edited: 25 November 2013
+ *
+ * @version 1.0.0
+ */
+
 package me.theepicbutterstudios.thesurvivalgames.command;
 
 import org.bukkit.Bukkit;
