@@ -21,6 +21,7 @@ import java.util.Map;
 
 public class ArenaManager{
 
+    public Map<String, SGArena> = new HashMap<String, SGArena>();
     public Map<String, Location> locs = new HashMap<String, Location>();
     public static ArenaManager am = new ArenaManager();
     Map<String, ItemStack[]> inv = new HashMap<String, ItemStack[]>();
@@ -138,13 +139,14 @@ public class ArenaManager{
      * @return The arena that was created
      */
 
-    /* Work on this later. Reading the README on how to setup public Arena createArena(Location l){
+    /* Work on this later. Reading the README on how to setup public Arena createArena(Player creator) {
         int num = arenaSize + 1;
         arenaSize++;
 
         Arena a = new Arena(l, num);
         arenas.add(a);
 
+        creators.put(p.getName(), a);
         plugin.getConfig().set("Arenas." + num, serializeLoc(l));
         List<Integer> list = plugin.getConfig().getIntegerList("Arenas.Arenas");
         list.add(num);
