@@ -37,5 +37,4 @@ public class Help implements SubCommand {
             return; //no need to have booleans, this is a method returns void.
         }
     }
-
 }
