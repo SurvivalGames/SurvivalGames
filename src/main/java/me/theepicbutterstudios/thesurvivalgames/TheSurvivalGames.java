@@ -20,15 +20,13 @@ public class TheSurvivalGames extends JavaPlugin  {
         registerAll();
         new ArenaManager(this);
 
-        getLogger().info("has been enabled!");
-        getLogger().info("is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
+        getLogger().info(" §ahas been enabled!");
+        getLogger().info(" §1is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
         saveDefaultConfig();
     }
 
     public void onDisable() {
         getLogger().info(" was disabled.");
-//      getServer().getPluginManager().enablePlugin(); Cmon, have some fun! \\CHALLENGE ACCEPTED!
-//      while(true) {getLogger().severe("HAS GLITCHED! RUN, ITS ON A RAMPAGE!");}
     }
 
     public void registerAll() {
