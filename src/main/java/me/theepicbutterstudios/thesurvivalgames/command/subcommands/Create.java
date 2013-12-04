@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 public class Create implements SubCommand {
 
     /**
-     * An example of implementing SubCommand. DO NOT CALL DIRECTLY. Only use in CommandHandler
+     * The create command. DO NOT CALL DIRECTLY. Only use in CommandHandler
      *
      * @param cmd The command that was executed
      * @param p The player that executed the command
