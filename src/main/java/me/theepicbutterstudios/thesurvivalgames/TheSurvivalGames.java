@@ -1,7 +1,7 @@
 /**
  * Name: TheSurvivalGames.java
- * Created: 19 Nov 2013
- * Edited 30 Nov 2013
+ * Created: 19 November 2013
+ * Edited: 3 December 2013
  *
  * @version 1.0.0
  */
