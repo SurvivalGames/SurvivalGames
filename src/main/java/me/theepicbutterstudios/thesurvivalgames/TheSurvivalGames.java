@@ -18,7 +18,8 @@ public class TheSurvivalGames extends JavaPlugin  {
 
     public void onEnable() {
         registerAll();
-        new ArenaManager(this);
+        ArenaManager am = new ArenaManager(this);
+        am.loadGames();
 
         getLogger().info(" §ahas been enabled!");
         getLogger().info(" §1is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
@@ -34,5 +35,6 @@ public class TheSurvivalGames extends JavaPlugin  {
         getCommand("sg").setExecutor(new CommandHandler());
         CommandHandler.register("help", new Help());
         CommandHandler.register("create", new Create());
+        CommandHandler.register("join", new Join());
     }
 }
