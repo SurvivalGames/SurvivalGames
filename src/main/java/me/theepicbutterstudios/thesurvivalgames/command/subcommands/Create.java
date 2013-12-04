@@ -26,7 +26,7 @@ public class Create implements SubCommand {
     @Override
     public void execute(String cmd, Player p, String[] args) {
         if(cmd.equalsIgnoreCase("create")) {
-            // ArenaManager.getManager().createArena(p); improve this method in the ArenaManager
+            ArenaManager.getManager().createArena(p); improve this method in the ArenaManager
             return; 
         }
     }
