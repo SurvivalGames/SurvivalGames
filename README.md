@@ -6,6 +6,7 @@ The Survival Games
 We don't use @author. Ever. (TheEpicButterStudios)
 
 Never use tabs. (AgentTroll)
+
 ========
 
 ![SurvivalGames](http://icap.me/i/ffb9c91e68.png)
