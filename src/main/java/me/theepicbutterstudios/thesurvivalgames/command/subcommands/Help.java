@@ -83,6 +83,7 @@ public class Help implements SubCommand {
      * @param page The page number
      * @param args The help messages separated by a : to display command and help. Limit 5
      */
+     
     private void sendHelpMessages(Player p, int page, String... args) {
     	p.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.DARK_AQUA + "--------------");
 		p.sendMessage(ChatColor.GOLD + "Page: " + page);
