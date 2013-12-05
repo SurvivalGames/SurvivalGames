@@ -2,11 +2,9 @@ The Survival Games
 ==================
 
 **[ANNOUNCEMENT|TheEpicButterStudios]**
-
 We don't use @author. Ever. 
 
 **[ANNOUNCEMENT|AgentTroll]**
-
 Never use tabs.
 
 ========
