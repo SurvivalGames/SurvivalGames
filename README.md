@@ -5,7 +5,7 @@ The Survival Games
 We don't use @author. Ever. 
 
 **[ANNOUNCEMENT|AgentTroll]** 
-Never use tabs. (AgentTroll)
+Never use tabs.
 
 ========
 
