@@ -1,6 +1,14 @@
 The Survival Games
 ==================
 
+**ANNOUNCEMENTS**
+
+We don't use @author. Ever. (TheEpicButterStudios)
+
+Never use tabs. (AgentTroll)
+
+========
+
 ![SurvivalGames](http://icap.me/i/ffb9c91e68.png)
 **Description**
 
@@ -141,6 +149,4 @@ PM me or leave a comment to start collaborating! Looking forward to it :)
 Our GitHub page is http://github.com/TheEpicButterStudios/The-Survival-Games
 Our BukkitDev page is http://dev.bukkit.org/bukkit-plugins/the-survival-games/
 
-**NOTE**
 
-We don't use @author. Ever.
