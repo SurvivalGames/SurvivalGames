@@ -1,6 +1,6 @@
 /**
  * Name: ArenaManager.java
- * Edited: 25 November 2013
+ * Edited: 4 December 2013
  *
  * @version 1.0.0
  */
@@ -10,6 +10,7 @@ package me.theepicbutterstudios.thesurvivalgames.managers;
 import me.theepicbutterstudios.thesurvivalgames.SGArena;
 import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -20,6 +21,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ArenaManager{
+	
+	public String prefix = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.GOLD;
+	public String error = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.RED;
 
     public Map<String, SGArena> creators = new HashMap<String, SGArena>();
     public Map<String, Location> locs = new HashMap<String, Location>();
@@ -139,14 +143,14 @@ public class ArenaManager{
      * @return The arena that was created
      */
 
-    public Arena createArena(Player creator) {
+    public SGArena createArena(Player creator) {
         int num = arenaSize + 1;
         arenaSize++;
 
-        SGArena a = new Arena(num);
+        SGArena a = new SGArena(num);
         arenas.add(a);
 
-        creators.put(p.getName(), a);
+        creators.put(creator.getName(), a);
         //plugin.getConfig().set("Arenas." + num, serializeLoc(l));
         //List<Integer> list = plugin.getConfig().getIntegerList("Arenas.Arenas");
         //list.add(num);
@@ -163,7 +167,7 @@ public class ArenaManager{
      * @return The arena that was created
      */
 
-    public Arena reloadArena(int i) {
+    public SGArena reloadArena(int i) {
         int num = arenaSize + 1;
         arenaSize++;
 
@@ -222,7 +226,7 @@ public class ArenaManager{
         }
                 
         for(int i : plugin.getConfig().getIntegerList("Arenas.Arenas")){
-            SGArena a = reloadArena(i);
+            reloadArena(i);
         }
     } 
     
