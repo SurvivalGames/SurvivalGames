@@ -3,9 +3,9 @@ The Survival Games
 
 **ANNOUNCEMENTS**
 
-We don't use @author. Ever. (TheEpicButterStudios)
+**[ANNOUNCEMENT|TheEpicButterStudios]**We don't use @author. Ever. 
 
-Never use tabs. (AgentTroll)
+**[ANNOUNCEMENT|AgentTroll]**Never use tabs. (AgentTroll)
 
 ========
 
