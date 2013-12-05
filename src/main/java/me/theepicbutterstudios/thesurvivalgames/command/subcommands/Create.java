@@ -1,13 +1,14 @@
 /**
  * Name: Create.java
  * Created: 25 November 2013
- * Edited: 3 December 2013
+ * Edited: 4 December 2013
  *
  * @version 1.0.0
  */
 
 package me.theepicbutterstudios.thesurvivalgames.command.subcommands;
 
+import me.theepicbutterstudios.thesurvivalgames.SGArena;
 import me.theepicbutterstudios.thesurvivalgames.command.SubCommand;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 
@@ -26,7 +27,9 @@ public class Create implements SubCommand {
     @Override
     public void execute(String cmd, Player p, String[] args) {
         if(cmd.equalsIgnoreCase("create")) {
-            ArenaManager.getManager().createArena(p); improve this method in the ArenaManager
+            SGArena a = ArenaManager.getManager().createArena(p);
+            p.sendMessage(ArenaManager.getManager().prefix + "Creating arena #" + a.getId());
+            
             return; 
         }
     }
