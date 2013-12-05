@@ -1,8 +1,6 @@
 The Survival Games
 ==================
 
-**ANNOUNCEMENTS**
-
 **[ANNOUNCEMENT|TheEpicButterStudios]** 
 We don't use @author. Ever. 
 
