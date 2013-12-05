@@ -1,6 +1,6 @@
 /**
  * Name: Join.java
- * Created: 3 December 2013
+ * Created: 4 December 2013
  *
  * @version 1.0.0
  */
@@ -29,7 +29,7 @@ public class Join implements SubCommand {
             try {
               id = Integer.parseInt(args[0]);
             }catch(NumberFormatException x) {
-              p.sendMessage(ArenaManager.error + "Invalid arena: " + args[0]);
+              p.sendMessage(ArenaManager.getManager().error + "Invalid arena: " + args[0]);
               return;
             }
             
