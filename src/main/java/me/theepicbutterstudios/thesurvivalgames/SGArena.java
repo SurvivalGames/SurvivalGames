@@ -1,6 +1,6 @@
 /**
  * Name: SGArena.java
- * Edited: 25 November 2013
+ * Edited: 4 December 2013
  *
  * @version 1.0.0
  */
@@ -15,7 +15,8 @@ import java.util.List;
 public class SGArena {
  
     public int id = 0;
-    Location spawn = null;
+    public Location lobby = null;
+    public List<Location> locs = new ArrayList<Location>();
     List<String> players = new ArrayList<String>();
  
     /**
@@ -27,6 +28,18 @@ public class SGArena {
     public SGArena(int id) {
         this.id = id;
     }
+ 
+    /**
+     * Nakes sure that the fields aren't null on startup
+     * 
+     * @param list The locatins for game spawns
+     * @param lob The lobby spawn
+     */
+    
+    public void initialize(List<Location> list, Location lob) {
+        this.lobby = lob;
+        this.locs = list;
+    } 
  
     /**
      * Gets the ID of the arena
