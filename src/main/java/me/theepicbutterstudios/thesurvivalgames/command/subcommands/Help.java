@@ -61,7 +61,7 @@ public class Help implements SubCommand {
 	                	sendHelpMessages(p, 3, "/sg bounty [Player][Amount]: Set bounty for this player",
 	                			"/sg sponsor [Player][Amount]: Sponsor a player",
 	                			"/sg leave: Leaves an arena",
-	                			"/sg start [Arena ID][State ID]: Puts teh game into a defined state",
+	                			"/sg start [Arena ID][State ID]: Puts the game into a defined state",
 	                			"/sg stop [Arena ID]: Stops the arena and rollsback");
 	                	p.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.DARK_AQUA + "End of help" + ChatColor.DARK_AQUA + "--------------");
 	                	break;
