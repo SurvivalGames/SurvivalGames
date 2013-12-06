@@ -86,7 +86,7 @@ public class Help implements SubCommand {
      
     private void sendHelpMessages(Player p, int page, String... args) {
     	p.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.DARK_AQUA + "[The Survival Games]" + ChatColor.DARK_AQUA + "--------------");
-		p.sendMessage(ChatColor.GOLD + "Page: " + page);
+		p.sendMessage(ChatColor.GOLD + "Page: " + ChatColor.GREEN + page + ChatColor.GOLD + " of 3");
     	for(String s : args) {
     		String[] split = s.split(": ");
     		
