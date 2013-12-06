@@ -58,7 +58,7 @@ public class Help implements SubCommand {
 	                	break;
 	                	
 	                case 3:
-	                	sendHelpMessages(p, 3, "/sg bounty [Player][Amount]: Set bounty for this player",
+	                	sendHelpMessages(p, 3, "/sg bounty [Player][Amount]: Set a bounty for this player",
 	                			"/sg sponsor [Player][Amount]: Sponsor a player",
 	                			"/sg leave: Leaves an arena",
 	                			"/sg start [Arena ID][State ID]: Puts the game into a defined state",
@@ -85,7 +85,7 @@ public class Help implements SubCommand {
      */
      
     private void sendHelpMessages(Player p, int page, String... args) {
-    	p.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.DARK_AQUA + "--------------");
+    	p.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.DARK_AQUA + "[The Survival Games]" + ChatColor.DARK_AQUA + "--------------");
 		p.sendMessage(ChatColor.GOLD + "Page: " + page);
     	for(String s : args) {
     		String[] split = s.split(": ");
