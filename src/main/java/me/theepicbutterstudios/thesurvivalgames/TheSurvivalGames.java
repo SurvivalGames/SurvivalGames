@@ -1,7 +1,7 @@
 /**
  * Name: TheSurvivalGames.java
  * Created: 19 November 2013
- * Edited: 3 December 2013
+ * Edited: 6 December 2013
  *
  * @version 1.0.0
  */
@@ -10,6 +10,7 @@ package me.theepicbutterstudios.thesurvivalgames;
 
 import me.theepicbutterstudios.thesurvivalgames.command.CommandHandler;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.*;
+import me.theepicbutterstudios.thesurvivalgames.listeners.*;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 
 import org.bukkit.plugin.java.JavaPlugin;
@@ -36,5 +37,7 @@ public class TheSurvivalGames extends JavaPlugin  {
         CommandHandler.register("help", new Help());
         CommandHandler.register("create", new Create());
         CommandHandler.register("join", new Join());
+        
+        getServer().getPluginManager().registerEvents(new SetupListener(), this);
     }
 }
