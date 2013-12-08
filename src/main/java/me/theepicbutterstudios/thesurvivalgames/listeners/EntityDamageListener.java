@@ -6,6 +6,8 @@
  */
 package me.theepicbutterstudios.thesurvivalgames.listeners;
 
+import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
@@ -29,7 +31,7 @@ public class EntityDamageListener implements Listener {
 		if (entity instanceof Snowball) {
 			if (event.getEntity() instanceof Player) {
 				Player damaged = (Player) event.getEntity();
-				if (ArenaManager().getManager().isInGame(damaged)) {
+				if (ArenaManager.getManager().isInGame(damaged)) {
 					damaged.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 600, 2, false));
 				}
 			}
