@@ -45,7 +45,7 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		PluginManager pm = getServer().getPluginManager();
 
-		pm.registerEvents(new ItemListener(null), this);
+		pm.registerEvents(new ItemListener(), this);
 		pm.registerEvents(new SetupListener(), this);
 		pm.registerEvents(new EntityDamageListener(), this);
 	}
