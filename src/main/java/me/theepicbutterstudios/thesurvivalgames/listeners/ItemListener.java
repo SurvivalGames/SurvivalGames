@@ -7,6 +7,7 @@
 package me.theepicbutterstudios.thesurvivalgames.listeners;
 
 import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
+import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -29,6 +30,12 @@ import org.bukkit.inventory.meta.FireworkMeta;
 
 public class ItemListener implements Listener {
 
+	TheSurvivalGames plugin;
+
+	public ItemListener(TheSurvivalGames plugin) {
+		this.plugin = plugin;
+	}
+
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onPlayerUse(PlayerInteractEvent event) {
 		final Player p = event.getPlayer();
@@ -48,10 +55,11 @@ public class ItemListener implements Listener {
 							}
 						}
 						try {
-							Thread.sleep(500);// -_-
+							Thread.sleep(500);// -_-  How else do you want me to make the runnable wait?
 						} catch (InterruptedException ignored) {}
 
 						for (int i = 0; i < 20; i++) {
+
 							Firework fw = (Firework) p.getWorld().spawnEntity(careLocation, EntityType.FIREWORK);
 							FireworkMeta fwm = fw.getFireworkMeta();
 							Type type = Type.BALL;
@@ -63,13 +71,14 @@ public class ItemListener implements Listener {
 							fwm.setPower(rp);
 							fw.setFireworkMeta(fwm);
 							try {
-								Thread.sleep(350);// -_-
+								Thread.sleep(350);// -_- How else do you want me to get the runnable to wait?
 							} catch (InterruptedException ignored) {}
 							careLocation.getBlock().getRelative(BlockFace.DOWN).setType(Material.DIRT);
 							careLocation.getBlock().setType(Material.CHEST);
 							Chest c = (Chest) careLocation.getBlock().getState();
 							c.getInventory().addItem(new ItemStack(Material.DIAMOND));
-							//TODO: Get the list of Tier 2 items and add them here
+							// TODO: Get the list of Tier 2 items and add them 
+							// here
 						}
 					}
 				});
