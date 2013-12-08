@@ -1,5 +1,8 @@
 The Survival Games
 ==================
+**[ANNOUNCEMENT|AgentTroll]**
+Format is important: All classes should be based off of the Help SubCommand class with the titling comment and comments for each method. All indentations should be SPACES, not tabs. They should be 4 spaces, not 8 as well.
+
 **[ANNOUNCEMENT|Quantum64]**
 Let's not use .*; for imports. If you're using eclipse, just Ctrl + Shift + o and it will auto clean up all your imports.
 
