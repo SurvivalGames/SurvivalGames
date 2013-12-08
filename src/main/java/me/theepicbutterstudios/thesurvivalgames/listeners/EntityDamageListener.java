@@ -33,6 +33,7 @@ public class EntityDamageListener implements Listener {
 				Player damaged = (Player) event.getEntity();
 				if (ArenaManager.getManager().isInGame(damaged)) {
 					damaged.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 600, 2, false));
+					damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1, false));
 				}
 			}
 		}
