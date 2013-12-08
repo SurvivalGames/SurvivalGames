@@ -80,6 +80,8 @@ public class ItemListener implements Listener {
 						c.getInventory().addItem(new ItemStack(Material.DIAMOND));
 						// TODO: Get the list of Tier 2 items and add them
 						// here
+						for (int i = 0; i < 4; i++)
+							careLocation.getWorld().strikeLightning(careLocation);
 					}
 				});
 			}
