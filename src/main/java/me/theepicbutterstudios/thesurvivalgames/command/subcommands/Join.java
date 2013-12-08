@@ -22,7 +22,7 @@ public class Join implements SubCommand {
 	 * @param args The arguments after the command
 	 */
 
-	@Override
+        @Override
 	public void execute(String cmd, Player p, String[] args) {
 		if (cmd.equalsIgnoreCase("join") && args.length >= 1) {
 			int id = 0;
