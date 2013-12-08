@@ -22,18 +22,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 public class ItemListener implements Listener {
-	TheSurvivalGames plugin;
-
-	public ItemListener(TheSurvivalGames plugin) {
-		this.plugin = plugin;
-	}
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onPlayerUse(PlayerInteractEvent event) {
 		final Player p = event.getPlayer();
 		final Location careLocation = p.getLocation();
 		if (p.getItemInHand().getData().getItemType() == Material.NETHER_STAR && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Care Package")) {
-			if (plugin.getArenaManager().isInGame(p)) {
+			if (ArenaManager.getManager().isInGame(p)) {
 				p.getInventory().remove(Material.NETHER_STAR);
 				Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 					public void run() {
@@ -47,9 +42,9 @@ public class ItemListener implements Listener {
 							}
 						}
 						try {
-							Thread.sleep(500);
-						} catch (InterruptedException e) {
-						}
+							Thread.sleep(500);// -_-
+						} catch (InterruptedException ignored) {}
+
 						for (int i = 0; i < 20; i++) {
 							Firework fw = (Firework) p.getWorld().spawnEntity(careLocation, EntityType.FIREWORK);
 							FireworkMeta fwm = fw.getFireworkMeta();
@@ -62,9 +57,8 @@ public class ItemListener implements Listener {
 							fwm.setPower(rp);
 							fw.setFireworkMeta(fwm);
 							try {
-								Thread.sleep(350);
-							} catch (InterruptedException e) {
-							}
+								Thread.sleep(350);// -_-
+							} catch (InterruptedException ignored) {}
 							careLocation.getBlock().getRelative(BlockFace.DOWN).setType(Material.DIRT);
 							careLocation.getBlock().setType(Material.CHEST);
 							Chest c = (Chest) careLocation.getBlock().getState();
