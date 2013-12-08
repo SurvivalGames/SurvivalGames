@@ -1,6 +1,6 @@
 /**
  * Name: Help.java
- * Edited: 6 December 2013
+ * Edited: 7 December 2013
  *
  * @version 1.0.0
  */
