@@ -55,12 +55,13 @@ public class ItemListener implements Listener {
 							}
 						}
 						try {
-							Thread.sleep(500);// -_-  How else do you want me to make the runnable wait?
+							Thread.sleep(500);// -_- How else do you want me to
+												// make the runnable wait?
 						} catch (InterruptedException ignored) {}
-
+						Location fLoc;
 						for (int i = 0; i < 20; i++) {
-
-							Firework fw = (Firework) p.getWorld().spawnEntity(careLocation, EntityType.FIREWORK);
+							fLoc = new Location(careLocation.getWorld(), careLocation.getX(), (careLocation.getY() + (2 * i)), careLocation.getZ());
+							Firework fw = (Firework) p.getWorld().spawnEntity(fLoc, EntityType.FIREWORK);
 							FireworkMeta fwm = fw.getFireworkMeta();
 							Type type = Type.BALL;
 							Color c1 = Color.YELLOW;
@@ -71,15 +72,18 @@ public class ItemListener implements Listener {
 							fwm.setPower(rp);
 							fw.setFireworkMeta(fwm);
 							try {
-								Thread.sleep(350);// -_- How else do you want me to get the runnable to wait?
+								Thread.sleep(350);// -_- How else do you want me
+													// to get the runnable to
+													// wait?
 							} catch (InterruptedException ignored) {}
-							careLocation.getBlock().getRelative(BlockFace.DOWN).setType(Material.DIRT);
-							careLocation.getBlock().setType(Material.CHEST);
-							Chest c = (Chest) careLocation.getBlock().getState();
-							c.getInventory().addItem(new ItemStack(Material.DIAMOND));
-							// TODO: Get the list of Tier 2 items and add them 
-							// here
+
 						}
+						careLocation.getBlock().getRelative(BlockFace.DOWN).setType(Material.DIRT);
+						careLocation.getBlock().setType(Material.CHEST);
+						Chest c = (Chest) careLocation.getBlock().getState();
+						c.getInventory().addItem(new ItemStack(Material.DIAMOND));
+						// TODO: Get the list of Tier 2 items and add them
+						// here
 					}
 				});
 			}
