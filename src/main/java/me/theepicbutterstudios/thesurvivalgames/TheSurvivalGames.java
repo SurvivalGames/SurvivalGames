@@ -12,6 +12,8 @@ import me.theepicbutterstudios.thesurvivalgames.command.CommandHandler;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.Create;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.Help;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.Join;
+import me.theepicbutterstudios.thesurvivalgames.listeners.EntityDamageListener;
+import me.theepicbutterstudios.thesurvivalgames.listeners.ItemListener;
 import me.theepicbutterstudios.thesurvivalgames.listeners.SetupListener;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 
