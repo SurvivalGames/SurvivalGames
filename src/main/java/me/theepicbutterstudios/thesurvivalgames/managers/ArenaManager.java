@@ -28,7 +28,7 @@ public class ArenaManager {
 
 	public Map<String, SGArena> creators = new HashMap<String, SGArena>();
 	public Map<String, Location> locs = new HashMap<String, Location>();
-	public static ArenaManager am = new ArenaManager();
+	public static final ArenaManager am = new ArenaManager();
 	Map<String, ItemStack[]> inv = new HashMap<String, ItemStack[]>();
 	Map<String, ItemStack[]> armor = new HashMap<String, ItemStack[]>();
 	List<SGArena> arenas = new ArrayList<SGArena>();
