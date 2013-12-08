@@ -8,6 +8,7 @@
 
 package me.theepicbutterstudios.thesurvivalgames;
 
+import me.theepicbutterstudios.scoreboard.MainScoreboard;
 import me.theepicbutterstudios.thesurvivalgames.command.CommandHandler;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.Create;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.Help;
@@ -48,6 +49,8 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new ItemListener(this), this);
 		pm.registerEvents(new SetupListener(), this);
 		pm.registerEvents(new EntityDamageListener(), this);
+		
+		MainScoreboard.registerScoreboard(this);
 	}
 
 }

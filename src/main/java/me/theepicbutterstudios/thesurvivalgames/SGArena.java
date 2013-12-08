@@ -18,6 +18,8 @@ public class SGArena {
 	public int id = 0;
 	public Location lobby = null;
 	public List<Location> locs = new ArrayList<Location>();
+	public int maxPlayers;
+	public int minPlayers;
 	List<String> players = new ArrayList<String>();
 
 	/**
@@ -35,11 +37,15 @@ public class SGArena {
 	 * 
 	 * @param list The locatins for game spawns
 	 * @param lob The lobby spawn
+	 * @param maxPlayers The max players for the arena
+	 * @param minPlayers The min players needed for the game to start
 	 */
 
-	public void initialize(List<Location> list, Location lob) {
+	public void initialize(List<Location> list, Location lob, int maxPlayers, int minPlayers) {
 		this.lobby = lob;
 		this.locs = list;
+		this.maxPlayers = maxPlayers;
+		this.minPlayers = minPlayers;
 	}
 
 	/**
@@ -70,7 +76,7 @@ public class SGArena {
 	public List<String> getPlayers() {
 		return this.players;
 	}
-	
+
 	/**
 	 * Gets the current state of the arena
 	 * 
@@ -78,5 +84,25 @@ public class SGArena {
 	 */
 	public ArenaState getState() {
 		return currentState;
+	}
+
+	/**
+	 * Gets the max number of players the arena will hold
+	 * 
+	 * @return Number of players
+	 */
+
+	public int getMaxPlayers() {
+		return maxPlayers;
+	}
+
+	/**
+	 * Gets the min number of players for the arena to start
+	 * 
+	 * @return Number of players
+	 */
+
+	public int getMinPlayers() {
+		return minPlayers;
 	}
 }

@@ -81,6 +81,14 @@ public class ArenaManager {
 		return null;
 	}
 
+	public SGArena getArena(Player p) {
+		for (SGArena a : arenas) {
+			if (a.getPlayers().contains(p.getName()))
+				return a;
+		}
+		return null;
+	}
+
 	/**
 	 * Adds a player to the specified arena 
 	 * 
@@ -101,6 +109,7 @@ public class ArenaManager {
 
 		p.getInventory().setArmorContents(null);
 		p.getInventory().clear();
+		p.setExp(0);
 
 		// p.teleport(a.spawn);
 	}
