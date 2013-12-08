@@ -1,6 +1,6 @@
 /**
  * Name: Join.java
- * Created: 4 December 2013
+ * Created: 7 December 2013
  *
  * @version 1.0.0
  */
