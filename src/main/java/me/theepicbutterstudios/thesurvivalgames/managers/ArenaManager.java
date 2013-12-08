@@ -7,6 +7,11 @@
 
 package me.theepicbutterstudios.thesurvivalgames.managers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import me.theepicbutterstudios.thesurvivalgames.SGArena;
 import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
 
@@ -16,241 +21,239 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+public class ArenaManager {
 
-public class ArenaManager{
-	
 	public String prefix = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.GOLD;
 	public String error = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.RED;
 
-    public Map<String, SGArena> creators = new HashMap<String, SGArena>();
-    public Map<String, Location> locs = new HashMap<String, Location>();
-    public static ArenaManager am = new ArenaManager();
-    Map<String, ItemStack[]> inv = new HashMap<String, ItemStack[]>();
-    Map<String, ItemStack[]> armor = new HashMap<String, ItemStack[]>();
-    List<SGArena> arenas = new ArrayList<SGArena>();
-    int arenaSize = 0;
+	public Map<String, SGArena> creators = new HashMap<String, SGArena>();
+	public Map<String, Location> locs = new HashMap<String, Location>();
+	public static ArenaManager am = new ArenaManager();
+	Map<String, ItemStack[]> inv = new HashMap<String, ItemStack[]>();
+	Map<String, ItemStack[]> armor = new HashMap<String, ItemStack[]>();
+	List<SGArena> arenas = new ArrayList<SGArena>();
+	int arenaSize = 0;
 
-    /**
-     * Initialize the singleton with a SurvivalGames plugin field
-     * 
-     * @param sg TheSurvivalGames plugin reference
-     */
+	/**
+	 * Initialize the singleton with a SurvivalGames plugin field
+	 * 
+	 * @param sg TheSurvivalGames plugin reference
+	 */
 
-    static TheSurvivalGames plugin;
-    public ArenaManager(TheSurvivalGames sg) {
-        plugin = sg;
-    }
+	static TheSurvivalGames plugin;
 
-    /**
-     * 
-     * The constructor for a new reference of the singleton
-     * 
-     */
+	public ArenaManager(TheSurvivalGames sg) {
+		plugin = sg;
+	}
 
-    protected ArenaManager(){}
+	/**
+	 * 
+	 * The constructor for a new reference of the singleton
+	 * 
+	 */
 
-    /**
-     * Gets the reference of the singlton
-     * 
-     * @return The reference of the ArenaManager
-     */ 
+	protected ArenaManager() {
+	}
 
-    public static ArenaManager getManager(){
-        return am;
-    }
+	/**
+	 * Gets the reference of the singlton
+	 * 
+	 * @return The reference of the ArenaManager
+	 */
 
-    /**
-     * Gets an arena from an integer ID 
-     * 
-     * @param i The ID to get the Arena from
-     * @return The arena from which the ID represents. May be null.
-     */
+	public static ArenaManager getManager() {
+		return am;
+	}
 
-    public SGArena getArena(int i){
-        for(SGArena a : arenas){
-            if(a.getId() == i){
-                return a;
-            }
-        }
-        return null;
-    }
+	/**
+	 * Gets an arena from an integer ID 
+	 * 
+	 * @param i The ID to get the Arena from
+	 * @return The arena from which the ID represents. May be null.
+	 */
 
-    /**
-     * Adds a player to the specified arena 
-     * 
-     * @param p The player to be added
-     * @param i The arena ID in which the player will be added to. 
-     */
+	public SGArena getArena(int i) {
+		for (SGArena a : arenas) {
+			if (a.getId() == i) {
+				return a;
+			}
+		}
+		return null;
+	}
 
-    public void addPlayer(Player p, int i){
-        SGArena a = getArena(i);
-        if(a == null){
-            p.sendMessage("Invalid arena!");
-            return;
-        }
+	/**
+	 * Adds a player to the specified arena 
+	 * 
+	 * @param p The player to be added
+	 * @param i The arena ID in which the player will be added to. 
+	 */
 
-        a.getPlayers().add(p.getName());
-        inv.put(p.getName(), p.getInventory().getContents());
-        armor.put(p.getName(), p.getInventory().getArmorContents());
+	public void addPlayer(Player p, int i) {
+		SGArena a = getArena(i);
+		if (a == null) {
+			p.sendMessage("Invalid arena!");
+			return;
+		}
 
-        p.getInventory().setArmorContents(null);
-        p.getInventory().clear();
+		a.getPlayers().add(p.getName());
+		inv.put(p.getName(), p.getInventory().getContents());
+		armor.put(p.getName(), p.getInventory().getArmorContents());
 
-        //p.teleport(a.spawn);
-    }
+		p.getInventory().setArmorContents(null);
+		p.getInventory().clear();
 
-    /**
-     * Removes the player from an arena
-     * 
-     * @param p The player to remove from an arena
-     */ 
+		// p.teleport(a.spawn);
+	}
 
-    public void removePlayer(Player p){
-        SGArena a = null;
-        for(SGArena arena : arenas){
-            if(arena.getPlayers().contains(p.getName())){
-                a = arena;
-            }
-        }
-        if(a == null || !a.getPlayers().contains(p.getName())){
-            p.sendMessage("Invalid operation!");
-            return;
-        }
+	/**
+	 * Removes the player from an arena
+	 * 
+	 * @param p The player to remove from an arena
+	 */
 
-        a.getPlayers().remove(p.getName());
+	public void removePlayer(Player p) {
+		SGArena a = null;
+		for (SGArena arena : arenas) {
+			if (arena.getPlayers().contains(p.getName())) {
+				a = arena;
+			}
+		}
+		if (a == null || !a.getPlayers().contains(p.getName())) {
+			p.sendMessage("Invalid operation!");
+			return;
+		}
 
-        p.getInventory().clear();
-        p.getInventory().setArmorContents(null);
+		a.getPlayers().remove(p.getName());
 
-        p.getInventory().setContents(inv.get(p.getName()));
-        p.getInventory().setArmorContents(armor.get(p.getName()));
+		p.getInventory().clear();
+		p.getInventory().setArmorContents(null);
 
-        inv.remove(p.getName());
-        armor.remove(p.getName());
-        p.teleport(locs.get(p.getName()));
-        locs.remove(p.getName());
+		p.getInventory().setContents(inv.get(p.getName()));
+		p.getInventory().setArmorContents(armor.get(p.getName()));
 
-        p.setFireTicks(0);
-    }
+		inv.remove(p.getName());
+		armor.remove(p.getName());
+		p.teleport(locs.get(p.getName()));
+		locs.remove(p.getName());
 
-    /**
-     * Creates a new arena
-     *
-     * @param creator The creator attributed with making the arena
-     * @return The arena that was created
-     */
+		p.setFireTicks(0);
+	}
 
-    public SGArena createArena(Player creator) {
-        int num = arenaSize + 1;
-        arenaSize++;
+	/**
+	 * Creates a new arena
+	 *
+	 * @param creator The creator attributed with making the arena
+	 * @return The arena that was created
+	 */
 
-        SGArena a = new SGArena(num);
-        arenas.add(a);
+	public SGArena createArena(Player creator) {
+		int num = arenaSize + 1;
+		arenaSize++;
 
-        creators.put(creator.getName(), a);
-        //plugin.getConfig().set("Arenas." + num, serializeLoc(l));
-        //List<Integer> list = plugin.getConfig().getIntegerList("Arenas.Arenas");
-        //list.add(num);
-        //plugin.getConfig().set("Arenas.Arenas", list);
-        plugin.saveConfig();
+		SGArena a = new SGArena(num);
+		arenas.add(a);
 
-        return a;
-    }
+		creators.put(creator.getName(), a);
+		// plugin.getConfig().set("Arenas." + num, serializeLoc(l));
+		// List<Integer> list =
+		// plugin.getConfig().getIntegerList("Arenas.Arenas");
+		// list.add(num);
+		// plugin.getConfig().set("Arenas.Arenas", list);
+		plugin.saveConfig();
 
-    /**
-     * Stores an existing arena in the list, for example after reloads
-     *
-     * @param l The location teh arena spawn will be at
-     * @return The arena that was created
-     */
+		return a;
+	}
 
-    public SGArena reloadArena(int i) {
-        int num = arenaSize + 1;
-        arenaSize++;
+	/**
+	 * Stores an existing arena in the list, for example after reloads
+	 *
+	 * @param l The location teh arena spawn will be at
+	 * @return The arena that was created
+	 */
 
-        SGArena a = new SGArena(num);
-        arenas.add(a);
+	public SGArena reloadArena(int i) {
+		int num = arenaSize + 1;
+		arenaSize++;
 
-        return a;
-    } 
+		SGArena a = new SGArena(num);
+		arenas.add(a);
 
-    /**
-     * Removes an arena from memory
-     *
-     * @param i The ID of the arena to be removed
-     */
+		return a;
+	}
 
-    public void removeArena(int i) {
-        SGArena a = getArena(i);
-        if(a == null) {
-            return;
-        }
-        arenas.remove(a);
+	/**
+	 * Removes an arena from memory
+	 *
+	 * @param i The ID of the arena to be removed
+	 */
 
-        plugin.getConfig().set("Arenas." + i, null);
-        List<Integer> list = plugin.getConfig().getIntegerList("Arenas.Arenas");
-        list.remove(i);
-        plugin.getConfig().set("Arenas.Arenas", list);
-        plugin.saveConfig();
-    }
+	public void removeArena(int i) {
+		SGArena a = getArena(i);
+		if (a == null) {
+			return;
+		}
+		arenas.remove(a);
 
-    /**
-     * Gets whether the player is playing
-     *
-     * @param p The player that will be scanned
-     * @return Whether the player is in a game
-     */
+		plugin.getConfig().set("Arenas." + i, null);
+		List<Integer> list = plugin.getConfig().getIntegerList("Arenas.Arenas");
+		list.remove(i);
+		plugin.getConfig().set("Arenas.Arenas", list);
+		plugin.saveConfig();
+	}
 
-    public boolean isInGame(Player p){
-        for(SGArena a : arenas){
-            if(a.getPlayers().contains(p.getName()))
-                return true;
-        }
-        return false;
-    }
-    
-    /**
-     * 
-     * Loads the game into memory after a shutdown or a relaod
-     * 
-     */
+	/**
+	 * Gets whether the player is playing
+	 *
+	 * @param p The player that will be scanned
+	 * @return Whether the player is in a game
+	 */
 
-    public void loadGames(){
-        arenaSize = 0;      
+	public boolean isInGame(Player p) {
+		for (SGArena a : arenas) {
+			if (a.getPlayers().contains(p.getName()))
+				return true;
+		}
+		return false;
+	}
 
-        if(plugin.getConfig().getIntegerList("Arenas.Arenas").isEmpty()){
-            return;
-        }
-                
-        for(int i : plugin.getConfig().getIntegerList("Arenas.Arenas")){
-            reloadArena(i);
-        }
-    } 
-    
-    /**
-     * Serializeds a location to a string
-     * 
-     * @param l The location to serialize
-     * @return The serialized location
-     */
-    
-    public String serializeLoc(Location l){
-        return l.getWorld().getName()+","+l.getBlockX()+","+l.getBlockY()+","+l.getBlockZ();
-    }
-    
-    /**
-     * Gets a location from a string
-     * 
-     * @param s The string to deserialize
-     * @return The location represented from the string
-     */
-    
-    public Location deserializeLoc(String s){
-        String[] st = s.split(",");
-        return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), Integer.parseInt(st[3]));
-    }
+	/**
+	 * 
+	 * Loads the game into memory after a shutdown or a relaod
+	 * 
+	 */
+
+	public void loadGames() {
+		arenaSize = 0;
+
+		if (plugin.getConfig().getIntegerList("Arenas.Arenas").isEmpty()) {
+			return;
+		}
+
+		for (int i : plugin.getConfig().getIntegerList("Arenas.Arenas")) {
+			reloadArena(i);
+		}
+	}
+
+	/**
+	 * Serializeds a location to a string
+	 * 
+	 * @param l The location to serialize
+	 * @return The serialized location
+	 */
+
+	public String serializeLoc(Location l) {
+		return l.getWorld().getName() + "," + l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ();
+	}
+
+	/**
+	 * Gets a location from a string
+	 * 
+	 * @param s The string to deserialize
+	 * @return The location represented from the string
+	 */
+
+	public Location deserializeLoc(String s) {
+		String[] st = s.split(",");
+		return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), Integer.parseInt(st[3]));
+	}
 }

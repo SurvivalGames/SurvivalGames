@@ -1,5 +1,7 @@
 package me.theepicbutterstudios.thesurvivalgames.listeners;
 
-public class SetupListener {
+import org.bukkit.event.Listener;
+
+public class SetupListener implements Listener {
 
 }
