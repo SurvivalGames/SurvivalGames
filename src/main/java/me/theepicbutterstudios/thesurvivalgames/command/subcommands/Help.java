@@ -42,15 +42,26 @@ public class Help implements SubCommand {
 					break;
 
 				case 1:
-					sendHelpMessages(p, 1, "/sg create: Creates an arena", "/sg setradius [Arena ID][Radius]: Sets the radius of the arena", "/sg setlobby [Arena ID]: Sets the lobby spawn", "/sg setgamespawn [Number]: Set the spawn ingame for the specific point", "/sg setnextspawn: Set the next spawn in line for the arena");
+					sendHelpMessages(p, 1, "/sg create: Creates an arena", 
+                                            "/sg setradius [Arena ID][Radius]: Sets the radius of the arena", 
+                                            "/sg setlobby [Arena ID]: Sets the lobby spawn", 
+                                            "/sg setgamespawn [Number]: Set the spawn ingame for the specific point", 
+                                            "/sg setnextspawn: Set the next spawn in line for the arena");
 					break;
 
 				case 2:
-					sendHelpMessages(p, 2, "/sg setdeathmatch [Number]: Sets the deathmatch spawn at the point", "/sg setmaxplayers [Number]: Set the max arena capacity", "/sg setchest [T1/T2]: Set a specific chest tier", "/sg join [Arena ID]: Joins an arena", "/sg vote [Number]: Makes you vote for a map");
+					sendHelpMessages(p, 2, "/sg setdeathmatch [Number]: Sets the deathmatch spawn at the point", 
+                                            "/sg setmaxplayers [Number]: Set the max arena capacity",
+                                            "/sg setchest [T1/T2]: Set a specific chest tier",
+                                            "/sg join [Arena ID]: Joins an arena",
+                                            "/sg vote [Number]: Makes you vote for a map");
 					break;
 
 				case 3:
-					sendHelpMessages(p, 3, "/sg bounty [Player][Amount]: Set a bounty for this player", "/sg sponsor [Player][Amount]: Sponsor a player", "/sg leave: Leaves an arena", "/sg start [Arena ID][State ID]: Puts the game into a defined state", "/sg stop [Arena ID]: Stops the arena and rollsback");
+					sendHelpMessages(p, 3, "/sg bounty [Player][Amount]: Set a bounty for this player",         "/sg sponsor [Player][Amount]: Sponsor a player",
+                                            "/sg leave: Leaves an arena",
+                                            "/sg start [Arena ID][State ID]: Puts the game into a defined state",
+                                            "/sg stop [Arena ID]: Stops the arena and rollsback");
 					p.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.DARK_AQUA + "End of help" + ChatColor.DARK_AQUA + "--------------");
 					break;
 
