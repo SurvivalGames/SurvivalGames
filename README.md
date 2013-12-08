@@ -1,5 +1,7 @@
 The Survival Games
 ==================
+**[ANNOUNCEMENT|Quantum64]**
+Let's not use .*; for imports. If you're using eclipse, just Ctrl + Shift + o and it will auto clean up all your imports.
 
 **[ANNOUNCEMENT|TheEpicButterStudios]**
 We don't use @author. Ever. 
