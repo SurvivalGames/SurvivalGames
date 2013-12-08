@@ -26,13 +26,13 @@ public class TheSurvivalGames extends JavaPlugin {
 		am = new ArenaManager(this);
 		am.loadGames();
 
-		getLogger().info(" §ahas been enabled!");
-		getLogger().info(" §1is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
+		getLogger().info("§ahas been enabled!");
+		getLogger().info("§1is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
 		saveDefaultConfig();
 	}
 
 	public void onDisable() {
-		getLogger().info(" was disabled.");
+		getLogger().info("was disabled.");
 	}
 
 	public void registerAll() {
@@ -42,11 +42,10 @@ public class TheSurvivalGames extends JavaPlugin {
 		CommandHandler.register("create", new Create());
 		CommandHandler.register("join", new Join());
 
-		getServer().getPluginManager().registerEvents(new SetupListener(), this);
-		getServer().getPluginManager().registerEvents(new EntityDamageListener(this), this);
+                PluginManager pm = getServer().getPluginManager();
+
+		pm.registerEvents(new SetupListener(), this);
+		pm.registerEvents(new EntityDamageListener(this), this);
 	}
 
-	public ArenaManager getArenaManager() {
-		return am;
-	}
 }
