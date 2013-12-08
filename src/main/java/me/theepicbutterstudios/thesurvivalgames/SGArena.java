@@ -14,6 +14,7 @@ import org.bukkit.Location;
 
 public class SGArena {
 
+	ArenaState currentState;
 	public int id = 0;
 	public Location lobby = null;
 	public List<Location> locs = new ArrayList<Location>();
@@ -30,7 +31,7 @@ public class SGArena {
 	}
 
 	/**
-	 * Nakes sure that the fields aren't null on startup
+	 * Makes sure that the fields aren't null on startup
 	 * 
 	 * @param list The locatins for game spawns
 	 * @param lob The lobby spawn
@@ -39,6 +40,15 @@ public class SGArena {
 	public void initialize(List<Location> list, Location lob) {
 		this.lobby = lob;
 		this.locs = list;
+	}
+
+	/**
+	 * Sets the state of the SG arena
+	 * 
+	 * @param state - The new state
+	 */
+	public void setState(ArenaState state) {
+		currentState = state;
 	}
 
 	/**
@@ -59,5 +69,14 @@ public class SGArena {
 
 	public List<String> getPlayers() {
 		return this.players;
+	}
+	
+	/**
+	 * Gets the current state of the arena
+	 * 
+	 * @return The current state
+	 */
+	public ArenaState getState() {
+		return currentState;
 	}
 }
