@@ -19,9 +19,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class TheSurvivalGames extends JavaPlugin {
 
+	private ArenaManager am;
+
 	public void onEnable() {
 		registerAll();
-		ArenaManager am = new ArenaManager(this);
+		am = new ArenaManager(this);
 		am.loadGames();
 
 		getLogger().info(" §ahas been enabled!");
@@ -41,5 +43,10 @@ public class TheSurvivalGames extends JavaPlugin {
 		CommandHandler.register("join", new Join());
 
 		getServer().getPluginManager().registerEvents(new SetupListener(), this);
+		getServer().getPluginManager().registerEvents(new EntityDamageListener(this), this);
+	}
+
+	public ArenaManager getArenaManager() {
+		return am;
 	}
 }
