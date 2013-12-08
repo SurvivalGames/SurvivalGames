@@ -17,6 +17,7 @@ import me.theepicbutterstudios.thesurvivalgames.listeners.ItemListener;
 import me.theepicbutterstudios.thesurvivalgames.listeners.SetupListener;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class TheSurvivalGames extends JavaPlugin {
@@ -42,9 +43,9 @@ public class TheSurvivalGames extends JavaPlugin {
 		CommandHandler.register("create", new Create());
 		CommandHandler.register("join", new Join());
 
-                PluginManager pm = getServer().getPluginManager();
+		PluginManager pm = getServer().getPluginManager();
 
-                pm.registerEvents(new ItemListener(), this);
+		pm.registerEvents(new ItemListener(null), this);
 		pm.registerEvents(new SetupListener(), this);
 		pm.registerEvents(new EntityDamageListener(), this);
 	}
