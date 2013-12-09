@@ -49,6 +49,21 @@ public class SGArena {
 	}
 
 	/**
+	 * Sends all the players a message
+	 * 
+	 * @param message The message to send, do not include prefix
+	 */
+	 
+	public void broadcast(String message) {
+		for(String s : players) {
+			Player p = Bukkit.getServer().getPlayerExact(s);
+			if(p != null) {
+				p.sendMessage(ArenaManager.getManager().prefix + message);
+			}
+		}
+	}
+
+	/**
 	 * Sets the state of the SG arena
 	 * 
 	 * @param state - The new state
