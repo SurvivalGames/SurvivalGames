@@ -1,3 +1,9 @@
+/**
+ * Name: InviteCommand.java
+ * Created: 8 December 2013
+ *
+ * @version 1.0.0
+ */
 package me.theepicbutterstudios.thesurvivalgames.command.subcommands.party;
 
 import java.util.UUID;
@@ -8,6 +14,13 @@ import me.theepicbutterstudios.thesurvivalgames.managers.PartyManager;
 import org.bukkit.Bukkit;
 
 public class InviteCommand {
+	
+	/**
+	 * Invites a player to your party - creates a party if you don't have one
+	 * @param sender The player executing the command
+	 * @param player The player to be invited to the party
+	 */
+	
 	public static void execute(org.bukkit.entity.Player sender, String player) {
 		UUID partyID = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());
 		if (partyID == null) {
@@ -24,7 +37,15 @@ public class InviteCommand {
 			sender.sendMessage(org.bukkit.ChatColor.YELLOW + "Your party is full");
 		}
 	}
-
+	
+	/**
+	 * NOTE: This is a backend function and is not to be used outside of this class
+	 * 
+	 * Sends the invite to the player
+	 * @param sender The player sending the invite
+	 * @param player The player to receive the invite
+	 * @param id The UUID of the player to be invited
+	 */
 	public static void sendInvite(org.bukkit.entity.Player sender, String player, UUID id) {
 		org.bukkit.entity.Player p = Bukkit.getServer().getPlayer(player);
 		if (p != null) {

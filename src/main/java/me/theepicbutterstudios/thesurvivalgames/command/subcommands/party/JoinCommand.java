@@ -1,3 +1,9 @@
+/**
+ * Name: JoinCommand.java
+ * Created: 8 December 2013
+ *
+ * @version 1.0.0
+ */
 package me.theepicbutterstudios.thesurvivalgames.command.subcommands.party;
 
 import java.util.UUID;
@@ -8,6 +14,12 @@ import me.theepicbutterstudios.thesurvivalgames.managers.PartyManager;
 import org.bukkit.Bukkit;
 
 public class JoinCommand {
+	
+	/**
+	 * Joins a party if you have been invited to one
+	 * @param player The player executing the command
+	 */
+	
 	public static void execute(org.bukkit.entity.Player sender) {
 		UUID partyID = (UUID) PartyManager.getPartyManager().getInvites().get(sender.getName());
 		if (partyID != null) {

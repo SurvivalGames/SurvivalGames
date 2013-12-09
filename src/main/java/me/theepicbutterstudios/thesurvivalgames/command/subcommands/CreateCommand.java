@@ -1,5 +1,5 @@
 /**
- * Name: Create.java
+ * Name: CreateCommand.java
  * Created: 25 November 2013
  * Edited: 7 December 2013
  *

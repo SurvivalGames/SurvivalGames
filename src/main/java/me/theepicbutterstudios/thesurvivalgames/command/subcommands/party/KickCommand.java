@@ -1,3 +1,9 @@
+/**
+ * Name: KickCommand.java
+ * Created: 8 December 2013
+ *
+ * @version 1.0.0
+ */
 package me.theepicbutterstudios.thesurvivalgames.command.subcommands.party;
 
 import java.util.UUID;
@@ -8,6 +14,13 @@ import me.theepicbutterstudios.thesurvivalgames.managers.PartyManager;
 import org.bukkit.Bukkit;
 
 public class KickCommand {
+	
+	/**
+	 * Kicks a player out of the party if you are the party leader
+	 * @param sender The player executing the command
+	 * @param player The player to be kicked from the party
+	 */
+	
 	public static void execute(org.bukkit.entity.Player sender, String player) {
 		UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());
 		if (id != null) {

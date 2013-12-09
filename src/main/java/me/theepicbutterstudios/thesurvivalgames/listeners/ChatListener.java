@@ -1,3 +1,9 @@
+/**
+ * Name: ChatListener.java
+ * Created: 8 December 2013
+ *
+ * @version 1.0.0
+ */
 package me.theepicbutterstudios.thesurvivalgames.listeners;
 
 import java.util.UUID;
@@ -10,7 +16,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 public class ChatListener implements Listener {
-
+	
+	/**
+	 * Formats chat and detects if the player is using party chat, if so, it will only send messages to the people in that player's party
+	 * @param event The event being called
+	 */
 	@EventHandler
 	public void onPlayerChat(org.bukkit.event.player.AsyncPlayerChatEvent event) {
 		if (PartyManager.getPartyManager().getPartyChat().contains(event.getPlayer().getName())) {

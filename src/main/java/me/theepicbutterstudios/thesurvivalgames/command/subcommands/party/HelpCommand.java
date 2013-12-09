@@ -1,9 +1,23 @@
+/**
+ * Name: HelpCommand.java
+ * Created: 8 December 2013
+ *
+ * @version 1.0.0
+ */
 package me.theepicbutterstudios.thesurvivalgames.command.subcommands.party;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 public class HelpCommand {
-	public static void execute(org.bukkit.command.CommandSender sender, String[] args) {
+	
+	/**
+	 * Displays the help for the party commands
+	 * @param player The player executing the command
+	 * @param args The page of help to be shown
+	 */
+	
+	public static void execute(Player sender, String[] args) {
 		String help = ChatColor.YELLOW + "";
 		if ((args.length == 0) || ((args.length == 1) && (args[0].equalsIgnoreCase("help")))) {
 			help = "Party Manager Help\n";
