@@ -1,4 +1,4 @@
-package me.theepicbutterstudios.scoreboard;
+package me.theepicbutterstudios.thesurvivalgames.runnables;
 
 import java.util.logging.Level;
 
@@ -22,11 +22,11 @@ import org.bukkit.scoreboard.Scoreboard;
  * @version 1.0.0
  */
 
-public class MainScoreboard implements Runnable {
+public class Scoreboard implements Runnable {
 
 	TheSurvivalGames plugin;
 
-	public MainScoreboard(TheSurvivalGames base) {
+	public Scoreboard(TheSurvivalGames base) {
 		plugin = base;
 	}
 

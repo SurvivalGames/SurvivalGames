@@ -28,7 +28,7 @@ import me.theepicbutterstudios.thesurvivalgames.listeners.EntityDamageListener;
 import me.theepicbutterstudios.thesurvivalgames.listeners.ItemListener;
 import me.theepicbutterstudios.thesurvivalgames.listeners.SetupListener;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
-import me.theepicbutterstudios.thesurvivalgames.runnables.MainScoreboard;
+import me.theepicbutterstudios.thesurvivalgames.runnables.Scoreboard;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -74,7 +74,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new SetupListener(), this);
 		pm.registerEvents(new EntityDamageListener(), this);
 		
-		MainScoreboard.registerScoreboard(this);
+		Scoreboard.registerScoreboard(this);
 	}
 	
     private void setupDatabase() {
