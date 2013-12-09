@@ -1,19 +1,17 @@
 package me.theepicbutterstudios.thesurvivalgames.runnables;
 
-import java.util.logging.Level;
-
 import me.theepicbutterstudios.thesurvivalgames.ArenaState;
 import me.theepicbutterstudios.thesurvivalgames.SGArena;
 import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
+
+import java.util.logging.Level;
 
 /**
  * Name: MainScoreboard.java
@@ -43,7 +41,7 @@ public class Scoreboard implements Runnable {
 	}
 
 	private void createScoreboard(Player player) {
-		Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+		org.bukkit.scoreboard.Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective objective = scoreboard.registerNewObjective("Global", "dummy");
 		objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lWelcome, " + player.getDisplayName()));
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
@@ -51,8 +49,7 @@ public class Scoreboard implements Runnable {
 			try {
 				player.setScoreboard(scoreboard);
 			} catch (IllegalStateException ex) {
-				Bukkit.getLogger().log(Level.SEVERE, "The scoarboard could not be created for player " + player.getDisplayName() + "!");
-				objective = null;
+				Bukkit.getLogger().log(Level.SEVERE, "The scoreboard could not be created for player " + player.getDisplayName() + "!");
 				return;
 			}
 
@@ -65,16 +62,16 @@ public class Scoreboard implements Runnable {
 		if (ArenaManager.getManager().isInGame(player)) {
 			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lWelcome, " + player.getDisplayName()));
 			sendScore(objective, "&a&lPoints", 11, complete);
-			sendScore(objective, "&6&l" + getPlugin().getPoints(player), 10, complete); //TODO
+			//sendScore(objective, "&6&l" + getPlugin().getPoints(player), 10, complete); TODO
 			sendScore(objective, "&r", 9, complete);
 			sendScore(objective, "&e&lRank", 8, complete);
-			sendScore(objective, "&f" + getPlugin().getRank(), 7, complete); //TODO
+			//sendScore(objective, "&f" + getPlugin().getRank(), 7, complete); TODO
 			sendScore(objective, "&0", 6, complete);
 			sendScore(objective, "&4&lKills", 5, complete);
-			sendScore(objective, "&f" + getPlugin().getKills(player), 4, complete); //TODO
+			//sendScore(objective, "&f" + getPlugin().getKills(player), 4, complete); TODO
 			sendScore(objective, "&c", 3, complete);
 			sendScore(objective, "&dWins", 2, complete);
-			sendScore(objective, "&f" + getPlugin().getWins(player), 1, complete); //TODO
+			//sendScore(objective, "&f" + getPlugin().getWins(player), 1, complete); TODO
 			return;
 		}
 		SGArena arena = ArenaManager.getManager().getArena(player);
@@ -93,16 +90,20 @@ public class Scoreboard implements Runnable {
 			sendScore(objective, "*null*", 4, complete); //TODO
 			sendScore(objective, "&c", 3, complete);  
 			sendScore(objective, "&a&lPoints", 2, complete);  
-			sendScore(objective, "&6&l" + getPlugin().getPoints(player), 1, complete); //TODO
+			//sendScore(objective, "&6&l" + getPlugin().getPoints(player), 1, complete); TODO
 			return;
 		}
+
 		objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lSurvival Games"));
-		sendScore(objective, "&bKills", arena.getKills(player), complete); //TODO
-		sendScore(objective, "&alive", arena.getAlive(), complete); //TODO
-		sendScore(objective, "&4Dead", arena.getDead(player), complete); //TODO
-		sendScore(objective, "&7Spectating", arena.getSpectating(), complete); //TODO
-		sendScore(objective, "&eTime", arena.getSpectating(), complete); //TODO
-		
+
+        /*
+		sendScore(objective, "&bKills", arena.getKills(player), complete); TODO
+		sendScore(objective, "&alive", arena.getAlive(), complete); TODO
+		sendScore(objective, "&4Dead", arena.getDead(player), complete); TODO
+		sendScore(objective, "&7Spectating", arena.getSpectating(), complete); TODO
+		sendScore(objective, "&eTime", arena.getSpectating(), complete); TODO
+		*/
+
 		//TODO Probably end up having something that switches the scoreboard back and forth about every ~5 to showing all players and their lives and this
 	}
 
@@ -127,6 +128,6 @@ public class Scoreboard implements Runnable {
 	}
 
 	public static void registerScoreboard(TheSurvivalGames plugin) {
-		plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new MainScoreboard(plugin), 5, 20);
+		plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Scoreboard(plugin), 5, 20);
 	}
 }
