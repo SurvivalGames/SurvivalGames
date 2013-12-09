@@ -1,5 +1,5 @@
 /**
- * Name: Join.java
+ * Name: JoinCommand.java
  * Created: 7 December 2013
  *
  * @version 1.0.0

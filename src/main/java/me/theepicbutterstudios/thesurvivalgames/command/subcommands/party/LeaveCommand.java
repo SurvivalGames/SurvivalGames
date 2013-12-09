@@ -1,3 +1,9 @@
+/**
+ * Name: LeaveCommand.java
+ * Created: 8 December 2013
+ *
+ * @version 1.0.0
+ */
 package me.theepicbutterstudios.thesurvivalgames.command.subcommands.party;
 
 import java.util.UUID;
@@ -8,6 +14,12 @@ import me.theepicbutterstudios.thesurvivalgames.managers.PartyManager;
 import org.bukkit.Bukkit;
 
 public class LeaveCommand {
+	
+	/**
+	 * Leaves the current party
+	 * @param player The player executing the command
+	 */
+	
 	public static void execute(org.bukkit.entity.Player sender) {
 		UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());
 		if (id != null) {

@@ -1,5 +1,5 @@
 /**
- * Name: Help.java
+ * Name: HelpCommand.java
  * Edited: 7 December 2013
  *
  * @version 1.0.0
