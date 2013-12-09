@@ -5,7 +5,7 @@ Team members may get a copy of the latest build.
 [![wercker status](https://app.wercker.com/status/0d41ae473b9de1215e239b9b52bbb42a/m "wercker status")](https://app.wercker.com/project/bykey/0d41ae473b9de1215e239b9b52bbb42a)
 
 **[ANNOUNCEMENT|AgentTroll]**
-Format is important: All classes should be based off of the Help SubCommand class with the titling comment and comments for each method. All indentations should be SPACES, not tabs. They should be 4 spaces, not 8 as well.
+Format is important: All classes should be based off of the Help SubCommand class with the titling comment and comments for each method. All indentations should be SPACES, not tabs. They should be 4 spaces, not 8 as well. **ALL CODE MUST BE IN JAVA 6**
 
 **[ANNOUNCEMENT|Quantum64]**
 Let's not use .*; for imports. If you're using eclipse, just Ctrl + Shift + o and it will auto clean up all your imports.
