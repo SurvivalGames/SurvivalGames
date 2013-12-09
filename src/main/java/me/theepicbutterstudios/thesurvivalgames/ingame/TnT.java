@@ -6,7 +6,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.EntityType;
 
-/* Class TnT
+/** Class TnT
  *
  * Created 9 December 2013
  *
