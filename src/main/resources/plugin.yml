@@ -7,6 +7,7 @@ commands:
     sg: 
         usage: /sg <command>
         description: You don't need any other commands since the CommandHandler handles the rest
+        aliases: [survival-games, sgames]
 
 permissions:
     #Indev
