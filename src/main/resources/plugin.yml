@@ -7,9 +7,12 @@ author: The Community!
 commands:
     sg: 
         usage: /sg <command>
-        description: You don't need any other commands since the CommandHandler handles the rest
-        aliases: [survival-games, sgames]
-
+        description: Base command for all SG related functions
+        aliases: [survival-games, sgames, hg] 
+    party:
+        usage: /party <command>
+        description: Base command for all party related functions
+         aliases: [team, p] 
 permissions:
     sg.*:
         description: Allows you to run EVERY LAST SG COMMAND!
