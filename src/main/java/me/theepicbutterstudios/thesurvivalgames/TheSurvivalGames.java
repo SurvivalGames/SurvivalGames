@@ -8,6 +8,11 @@
 
 package me.theepicbutterstudios.thesurvivalgames;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.PersistenceException;
+
 import me.theepicbutterstudios.thesurvivalgames.command.CommandHandler;
 import me.theepicbutterstudios.thesurvivalgames.command.PartyCommandHandler;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.CreateCommand;
@@ -32,6 +37,7 @@ public class TheSurvivalGames extends JavaPlugin {
 
 	public void onEnable() {
 		registerAll();
+		setupDatabase();
 		ArenaManager am = new ArenaManager(this);
 		am.loadGames();
 
@@ -70,5 +76,21 @@ public class TheSurvivalGames extends JavaPlugin {
 		
 		MainScoreboard.registerScoreboard(this);
 	}
+	
+    private void setupDatabase() {
+        try {
+            getDatabase().find(PlayerData.class).findRowCount();
+        } catch (PersistenceException ex) {
+            System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
+            installDDL();
+        }
+    }
+ 
+    @Override
+    public List<Class<?>> getDatabaseClasses() {
+        List<Class<?>> list = new ArrayList<Class<?>>();
+        list.add(PlayerData.class);
+        return list;
+    }
 
 }
