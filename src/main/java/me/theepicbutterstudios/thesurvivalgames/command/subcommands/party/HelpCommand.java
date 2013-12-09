@@ -39,7 +39,7 @@ public class HelpCommand implements SubCommand {
 			help = help + "- /sg party kick: Removes a player from your party\n";
 			help = help + "- /sg party promote: Promotes another player to party leader\n";
 			help = help + "- /sg party chat: Toggles whether or not to speak in party chat only\n";
-			help = help + "For more information on a commant type /sg party help <command>";
+			help = help + "For more information on a commant type /party help <command>";
 		} else if ((args[0].equalsIgnoreCase("help")) || (args[0].equalsIgnoreCase("?"))) {
 			if (args[1].equalsIgnoreCase("invite")) {
 				help = "Party Invite Help\n";

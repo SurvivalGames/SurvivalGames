@@ -15,7 +15,7 @@ import me.theepicbutterstudios.thesurvivalgames.managers.PartyManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class ListCommand implements SubCommand{
+public class ListCommand implements SubCommand {
 
 	/**
 	 * Lists the current members of your party
@@ -23,6 +23,9 @@ public class ListCommand implements SubCommand{
 	 */
 
 	public void execute(String cmd, Player sender, String[] args) {
+		if ((args.length == 1) && (args[0].equalsIgnoreCase("list")) && (sender.hasPermission("party.admin.list"))) {
+			executeAdmin(sender, args[0]);
+		}
 		if ((cmd.equalsIgnoreCase("list"))) {
 
 			UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());
@@ -53,7 +56,7 @@ public class ListCommand implements SubCommand{
 	 * @param args The player's username of the party who you want to list the members of
 	 */
 
-	public static void execute(Player sender, String args) {
+	public static void executeAdmin(Player sender, String args) {
 		Player p = Bukkit.getServer().getPlayer(args);
 		if (p != null) {
 			UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(p.getName());
