@@ -84,6 +84,21 @@ after the lobby stage (pre-game, in-game and deathmatch) your name will look lik
 
 ========
 
+**Parties**
+
+Parties can be used to chat with your friends, and join the same games, without having to rush click the same sign.  The list of command of using and creating parties are as follows:
+
+```/sg party invite : Invites a player to your party```
+```/sg party join : Joins the party you were invited to```
+```/sg party leave : Leaves your current party```
+```/sg party decline: Declines your current party invite```
+```/sg party list: Displays your current party members```
+```/sg party kick: Removes a player from your party```
+```/sg party promote: Promotes another player to party leader```
+```/sg party chat: Toggles whether or not to speak in party chat only```
+
+========
+
 **Bountying**
 
 Bountying will be able to happen throughout the game by players and spectators, when a player types /sg bounty <playername> <amount of points being bountied> the points will be taken from their profile and put on the other players name (see above Points section). When a player with a bounty on them is killed, the killer will receive the points added onto the points gained from killing a player. If they player does not die in the whole game then they will get the points added onto their points total
