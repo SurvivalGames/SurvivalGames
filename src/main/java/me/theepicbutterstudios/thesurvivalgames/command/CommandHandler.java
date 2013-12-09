@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandHandler implements CommandExecutor{
-    static Map<String, SubCommand> commands = new HashMap<>();
+    static Map<String, SubCommand> commands = new HashMap<String, SubCommand>();
 
     /**
      * Registers a command
