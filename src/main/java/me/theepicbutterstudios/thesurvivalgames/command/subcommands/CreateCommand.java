@@ -14,7 +14,7 @@ import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 
 import org.bukkit.entity.Player;
 
-public class Create implements SubCommand {
+public class CreateCommand implements SubCommand {
 
 	/**
 	 * The create command. DO NOT CALL DIRECTLY. Only use in CommandHandler

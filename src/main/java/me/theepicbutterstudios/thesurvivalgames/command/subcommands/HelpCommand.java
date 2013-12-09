@@ -13,7 +13,7 @@ import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class Help implements SubCommand {
+public class HelpCommand implements SubCommand {
 
 	/**
 	 * An example of implementing SubCommand. DO NOT CALL DIRECTLY. Only use in CommandHandler

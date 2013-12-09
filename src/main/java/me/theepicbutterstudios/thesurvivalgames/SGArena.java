@@ -10,7 +10,11 @@ package me.theepicbutterstudios.thesurvivalgames;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 public class SGArena {
 

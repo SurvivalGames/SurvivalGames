@@ -8,15 +8,15 @@
 
 package me.theepicbutterstudios.thesurvivalgames;
 
-import me.theepicbutterstudios.scoreboard.MainScoreboard;
 import me.theepicbutterstudios.thesurvivalgames.command.CommandHandler;
-import me.theepicbutterstudios.thesurvivalgames.command.subcommands.Create;
-import me.theepicbutterstudios.thesurvivalgames.command.subcommands.Help;
-import me.theepicbutterstudios.thesurvivalgames.command.subcommands.Join;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.CreateCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.HelpCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.JoinCommand;
 import me.theepicbutterstudios.thesurvivalgames.listeners.EntityDamageListener;
 import me.theepicbutterstudios.thesurvivalgames.listeners.ItemListener;
 import me.theepicbutterstudios.thesurvivalgames.listeners.SetupListener;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
+import me.theepicbutterstudios.thesurvivalgames.runnables.MainScoreboard;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -40,9 +40,9 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void registerAll() {
 		// register all commands and listeners
 		getCommand("sg").setExecutor(new CommandHandler());
-		CommandHandler.register("help", new Help());
-		CommandHandler.register("create", new Create());
-		CommandHandler.register("join", new Join());
+		CommandHandler.register("help", new HelpCommand());
+		CommandHandler.register("create", new CreateCommand());
+		CommandHandler.register("join", new JoinCommand());
 
 		PluginManager pm = getServer().getPluginManager();
 

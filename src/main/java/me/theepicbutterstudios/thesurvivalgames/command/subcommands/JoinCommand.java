@@ -12,7 +12,7 @@ import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 
 import org.bukkit.entity.Player;
 
-public class Join implements SubCommand {
+public class JoinCommand implements SubCommand {
 
 	/**
 	 * The join command. DO NOT CALL DIRECTLY. Only use in CommandHandler
