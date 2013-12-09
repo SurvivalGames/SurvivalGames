@@ -9,18 +9,20 @@ package me.theepicbutterstudios.thesurvivalgames.command.subcommands.party;
 import java.util.UUID;
 
 import me.theepicbutterstudios.thesurvivalgames.Party;
+import me.theepicbutterstudios.thesurvivalgames.command.SubCommand;
 import me.theepicbutterstudios.thesurvivalgames.managers.PartyManager;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
-public class JoinCommand {
+public class JoinCommand implements SubCommand{
 	
 	/**
 	 * Joins a party if you have been invited to one
 	 * @param player The player executing the command
 	 */
 	
-	public static void execute(org.bukkit.entity.Player sender) {
+	public void execute(String cmd, Player sender, String[] args) {
 		UUID partyID = (UUID) PartyManager.getPartyManager().getInvites().get(sender.getName());
 		if (partyID != null) {
 			Party party = (Party) PartyManager.getPartyManager().getParties().get(partyID);
@@ -29,11 +31,11 @@ public class JoinCommand {
 					party.addMember(sender.getName());
 					PartyManager.getPartyManager().getPlayers().put(sender.getName(), partyID);
 					sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You have joined " + party.getLeader() + "'s party");
-					org.bukkit.entity.Player player = Bukkit.getServer().getPlayer(party.getLeader());
+					Player player = Bukkit.getServer().getPlayer(party.getLeader());
 					player.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + " has joined your party");
 					for (String member : party.getMembers()) {
 						if (member != null) {
-							org.bukkit.entity.Player p = Bukkit.getServer().getPlayer(member);
+							Player p = Bukkit.getServer().getPlayer(member);
 							if (p != null) {
 								p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + " has joined your party");
 							}

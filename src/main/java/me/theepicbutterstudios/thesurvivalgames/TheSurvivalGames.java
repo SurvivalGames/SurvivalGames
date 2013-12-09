@@ -9,9 +9,16 @@
 package me.theepicbutterstudios.thesurvivalgames;
 
 import me.theepicbutterstudios.thesurvivalgames.command.CommandHandler;
+import me.theepicbutterstudios.thesurvivalgames.command.PartyCommandHandler;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.CreateCommand;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.HelpCommand;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.JoinCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.ChatCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.DeclineCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.InviteCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.LeaveCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.ListCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.PromoteCommand;
 import me.theepicbutterstudios.thesurvivalgames.listeners.EntityDamageListener;
 import me.theepicbutterstudios.thesurvivalgames.listeners.ItemListener;
 import me.theepicbutterstudios.thesurvivalgames.listeners.SetupListener;
@@ -40,9 +47,20 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void registerAll() {
 		// register all commands and listeners
 		getCommand("sg").setExecutor(new CommandHandler());
+		getCommand("party").setExecutor(new PartyCommandHandler());
+		
 		CommandHandler.register("help", new HelpCommand());
 		CommandHandler.register("create", new CreateCommand());
 		CommandHandler.register("join", new JoinCommand());
+		
+		PartyCommandHandler.register("chat", new ChatCommand());
+		PartyCommandHandler.register("decline", new DeclineCommand());
+		PartyCommandHandler.register("help", new HelpCommand());
+		PartyCommandHandler.register("invite", new InviteCommand());
+		PartyCommandHandler.register("join", new JoinCommand());
+		PartyCommandHandler.register("leave", new LeaveCommand());
+		PartyCommandHandler.register("list", new ListCommand());
+		PartyCommandHandler.register("promote", new PromoteCommand());
 
 		PluginManager pm = getServer().getPluginManager();
 

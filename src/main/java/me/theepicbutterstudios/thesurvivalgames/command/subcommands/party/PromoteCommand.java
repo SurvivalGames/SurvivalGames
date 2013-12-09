@@ -9,25 +9,27 @@ package me.theepicbutterstudios.thesurvivalgames.command.subcommands.party;
 import java.util.UUID;
 
 import me.theepicbutterstudios.thesurvivalgames.Party;
+import me.theepicbutterstudios.thesurvivalgames.command.SubCommand;
 import me.theepicbutterstudios.thesurvivalgames.managers.PartyManager;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
-public class PromoteCommand {
+public class PromoteCommand implements SubCommand{
 	
 	/**
 	 * Promotes another player to party leader if the executer is the current leader
 	 * @param player The player executing the command
 	 */
 	
-	public static void execute(org.bukkit.entity.Player sender, String player) {
+	public void execute(String cmd, Player sender, String[] args) {
 		UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());
 		if (id != null) {
 			Party party = (Party) PartyManager.getPartyManager().getParties().get(id);
 			if (party.getLeader().equalsIgnoreCase(sender.getName())) {
 				for (String member : party.getMembers()) {
-					if ((member != null) && (member.equalsIgnoreCase(player))) {
-						org.bukkit.entity.Player p = Bukkit.getServer().getPlayer(player);
+					if ((member != null) && (member.equalsIgnoreCase(args[0]))) {
+						Player p = Bukkit.getServer().getPlayer(args[0]);
 						if (p != null) {
 							String oldLeader = party.getLeader();
 							party.setLeader(p.getName());
@@ -36,13 +38,13 @@ public class PromoteCommand {
 							sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You have promoted " + p.getName() + " to leader");
 							p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + " has promoted you to leader");
 						} else {
-							sender.sendMessage(org.bukkit.ChatColor.YELLOW + player + " is not online");
+							sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + " is not online");
 						}
 						return;
 					}
 				}
 
-				sender.sendMessage(org.bukkit.ChatColor.YELLOW + player + " is not in your party");
+				sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + " is not in your party");
 			} else {
 				sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You must be the party leader to promote another player");
 			}

@@ -6,18 +6,27 @@
  */
 package me.theepicbutterstudios.thesurvivalgames.command.subcommands.party;
 
+import me.theepicbutterstudios.thesurvivalgames.command.SubCommand;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class HelpCommand {
-	
+public class HelpCommand implements SubCommand {
+
 	/**
 	 * Displays the help for the party commands
 	 * @param player The player executing the command
 	 * @param args The page of help to be shown
 	 */
-	
-	public static void execute(Player sender, String[] args) {
+
+	public void execute(String cmd, Player sender, String[] args) {
+		if ((args.length == 0) || (cmd.equalsIgnoreCase("help")) || (cmd.equalsIgnoreCase("?"))) {
+			staticExecute(sender, args);
+		}
+	}
+
+	public static void staticExecute(Player sender, String[] args) {
+
 		String help = ChatColor.YELLOW + "";
 		if ((args.length == 0) || ((args.length == 1) && (args[0].equalsIgnoreCase("help")))) {
 			help = "Party Manager Help\n";
@@ -68,7 +77,7 @@ public class HelpCommand {
 					help = help + "OR\n";
 					help = help + "Usage: /party list <playername>\n";
 				}
-				
+
 				help = help + "Lists your current party members and their status.\n";
 				help = help + "You must be in a party to use this command. The party leader's name is gold, online members are white, and offline members are gray.\n";
 			}

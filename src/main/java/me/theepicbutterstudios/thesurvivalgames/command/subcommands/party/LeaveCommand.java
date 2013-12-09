@@ -9,18 +9,20 @@ package me.theepicbutterstudios.thesurvivalgames.command.subcommands.party;
 import java.util.UUID;
 
 import me.theepicbutterstudios.thesurvivalgames.Party;
+import me.theepicbutterstudios.thesurvivalgames.command.SubCommand;
 import me.theepicbutterstudios.thesurvivalgames.managers.PartyManager;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
-public class LeaveCommand {
-	
+public class LeaveCommand implements SubCommand {
+
 	/**
 	 * Leaves the current party
 	 * @param player The player executing the command
 	 */
-	
-	public static void execute(org.bukkit.entity.Player sender) {
+
+	public void execute(String cmd, Player sender, String[] args) {
 		UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());
 		if (id != null) {
 			Party party = (Party) PartyManager.getPartyManager().getParties().get(id);
@@ -34,7 +36,7 @@ public class LeaveCommand {
 				}
 				for (String member : party.getMembers()) {
 					if (member != null) {
-						org.bukkit.entity.Player p = Bukkit.getServer().getPlayer(member);
+						Player p = Bukkit.getServer().getPlayer(member);
 						if (p != null) {
 							p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + " has left the party");
 						}
