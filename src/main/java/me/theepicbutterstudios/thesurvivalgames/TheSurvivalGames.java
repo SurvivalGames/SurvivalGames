@@ -1,7 +1,7 @@
 /**
  * Name: TheSurvivalGames.java
  * Created: 19 November 2013
- * Edited: 7 December 2013
+ * Edited: 9 December 2013
  *
  * @version 1.0.0
  */
@@ -35,8 +35,8 @@ public class TheSurvivalGames extends JavaPlugin {
 		ArenaManager am = new ArenaManager(this);
 		am.loadGames();
 
-		getLogger().info("§ahas been enabled!");
-		getLogger().info("§1is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
+		getLogger().info("has been enabled!");
+		getLogger().info("is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
 		saveDefaultConfig();
 	}
 
