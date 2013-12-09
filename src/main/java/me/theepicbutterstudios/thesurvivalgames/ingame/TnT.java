@@ -11,7 +11,7 @@ import org.bukkit.entity.EntityType;
  * Created 9 December 2013
  *
  * Edited never
- *\
+\*
 
 
 public class TnT {
