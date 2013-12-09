@@ -2,6 +2,7 @@ name: The Survival Games
 main: me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames
 version: 1.0.0
 author: The Community!
+#database: true  Uncomment once Quantum64 adds the SQL database
 
 commands:
     sg: 
@@ -10,4 +11,10 @@ commands:
         aliases: [survival-games, sgames]
 
 permissions:
-    #Indev
+    sg.*:
+        description: Allows you to run EVERY LAST SG COMMAND!
+        children:
+            sg.admin
+            sg.mod
+            sg.player
+# Rest Indev
