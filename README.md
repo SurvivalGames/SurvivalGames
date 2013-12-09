@@ -11,8 +11,9 @@ We don't use @author. Ever.
 
 **[ANNOUNCEMENT|AgentTroll]**
 Never use tabs.
+
 **[ANNOUNCEMENT|TheEpicButterStudios]**
-Try to edit with an IDE before putting something on GitHub as much as possible, but small tweaks directly on GitHub is fine.
+Try to edit with an IDE before putting something on GitHub as much as possible, but small tweaks directly on GitHub are fine.
 
 ========
 
