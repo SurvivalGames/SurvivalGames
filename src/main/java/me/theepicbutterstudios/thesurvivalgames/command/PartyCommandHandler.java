@@ -13,7 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class PartyCommandHandler implements CommandExecutor {
-	static Map<String, SubCommand> commands = new HashMap<>();
+	static Map<String, SubCommand> commands = new HashMap<String, SubCommand>();
 
 	/**
 	 * Registers a command
