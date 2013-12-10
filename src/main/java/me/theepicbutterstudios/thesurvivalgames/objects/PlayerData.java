@@ -30,7 +30,7 @@ public class PlayerData {
     private String rank;
  
     public void setId(int id) {
-        this.id = id;
+       this.id = id;
     }
  
     public int getId() {

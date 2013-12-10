@@ -32,6 +32,7 @@ import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 import me.theepicbutterstudios.thesurvivalgames.objects.PlayerData;
 import me.theepicbutterstudios.thesurvivalgames.runnables.Scoreboard;
 
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -104,6 +105,10 @@ public class TheSurvivalGames extends JavaPlugin {
 		List<Class<?>> list = new ArrayList<Class<?>>();
 		list.add(PlayerData.class);
 		return list;
+	}
+
+	public PlayerData getPlayerData(Player player) {
+		return getDatabase().find(PlayerData.class).where().ieq("playerName", player.getName()).findUnique();
 	}
 
 }
