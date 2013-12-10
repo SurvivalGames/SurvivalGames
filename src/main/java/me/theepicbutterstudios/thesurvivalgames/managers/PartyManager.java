@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import me.theepicbutterstudios.thesurvivalgames.Party;
+import me.theepicbutterstudios.thesurvivalgames.objects.Party;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

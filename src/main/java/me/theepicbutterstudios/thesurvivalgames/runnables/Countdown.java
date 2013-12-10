@@ -6,7 +6,7 @@
  */ 
 package me.theepicbutterstudios.thesurvivalgames.runnables;
 
-import me.theepicbutterstudios.thesurvivalgames.SGArena;
+import me.theepicbutterstudios.thesurvivalgames.objects.SGArena;
 
 import org.bukkit.Bukkit;
 

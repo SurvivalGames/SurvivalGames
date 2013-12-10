@@ -5,18 +5,21 @@
  * @version 1.0.0
  */
 
-package me.theepicbutterstudios.thesurvivalgames;
-
-import java.util.ArrayList;
-import java.util.List;
+package me.theepicbutterstudios.thesurvivalgames.objects;
 
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SGArena {
+
+    public static enum ArenaState {
+        WAITING_FOR_PLAYERS, STARTING_COUNTDOWN, PRE_GAME, IN_GAME, POST_GAME
+    }
 
 	ArenaState currentState;
 	public int id = 0;
@@ -124,4 +127,11 @@ public class SGArena {
 	public int getMinPlayers() {
 		return minPlayers;
 	}
+
+    /**
+     * Name: ArenaState.java
+     * Edited: 8 December 2013
+     *
+     * @version 1.0.0
+     */
 }

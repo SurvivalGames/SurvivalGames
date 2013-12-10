@@ -8,7 +8,7 @@
 
 package me.theepicbutterstudios.thesurvivalgames.command.subcommands;
 
-import me.theepicbutterstudios.thesurvivalgames.SGArena;
+import me.theepicbutterstudios.thesurvivalgames.objects.SGArena;
 import me.theepicbutterstudios.thesurvivalgames.command.SubCommand;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 

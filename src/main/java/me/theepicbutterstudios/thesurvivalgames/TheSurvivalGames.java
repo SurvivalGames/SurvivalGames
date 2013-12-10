@@ -28,6 +28,7 @@ import me.theepicbutterstudios.thesurvivalgames.listeners.EntityDamageListener;
 import me.theepicbutterstudios.thesurvivalgames.listeners.ItemListener;
 import me.theepicbutterstudios.thesurvivalgames.listeners.SetupListener;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
+import me.theepicbutterstudios.thesurvivalgames.objects.PlayerData;
 import me.theepicbutterstudios.thesurvivalgames.runnables.Scoreboard;
 
 import org.bukkit.plugin.PluginManager;

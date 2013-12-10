@@ -1,15 +1,14 @@
-package me.theepicbutterstudios.thesurvivalgames;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+package me.theepicbutterstudios.thesurvivalgames.objects;
 
 import com.avaje.ebean.validation.Length;
 import com.avaje.ebean.validation.NotEmpty;
 import com.avaje.ebean.validation.NotNull;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity()
 @Table(name = "sg_player")

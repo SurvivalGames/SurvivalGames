@@ -4,11 +4,11 @@
  *
  * @version 1.0.0
  */
-package me.theepicbutterstudios.thesurvivalgames;
-
-import java.util.UUID;
+package me.theepicbutterstudios.thesurvivalgames.objects;
 
 import me.theepicbutterstudios.thesurvivalgames.managers.PartyManager;
+
+import java.util.UUID;
 
 
 public class Party {

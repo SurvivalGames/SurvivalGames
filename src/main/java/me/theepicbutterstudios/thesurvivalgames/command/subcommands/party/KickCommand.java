@@ -8,7 +8,7 @@ package me.theepicbutterstudios.thesurvivalgames.command.subcommands.party;
 
 import java.util.UUID;
 
-import me.theepicbutterstudios.thesurvivalgames.Party;
+import me.theepicbutterstudios.thesurvivalgames.objects.Party;
 import me.theepicbutterstudios.thesurvivalgames.command.SubCommand;
 import me.theepicbutterstudios.thesurvivalgames.managers.PartyManager;
 

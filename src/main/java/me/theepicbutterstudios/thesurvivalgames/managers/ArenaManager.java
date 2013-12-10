@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import me.theepicbutterstudios.thesurvivalgames.SGArena;
+import me.theepicbutterstudios.thesurvivalgames.objects.SGArena;
 import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
 
 import org.bukkit.Bukkit;

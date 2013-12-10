@@ -1,7 +1,6 @@
 package me.theepicbutterstudios.thesurvivalgames.runnables;
 
-import me.theepicbutterstudios.thesurvivalgames.ArenaState;
-import me.theepicbutterstudios.thesurvivalgames.SGArena;
+import me.theepicbutterstudios.thesurvivalgames.objects.SGArena;
 import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 import org.bukkit.Bukkit;
@@ -75,7 +74,7 @@ public class Scoreboard implements Runnable {
 			return;
 		}
 		SGArena arena = ArenaManager.getManager().getArena(player);
-		if (arena.getState() == ArenaState.WAITING_FOR_PLAYERS) {
+		if (arena.getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS) {
 			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lWaiting For Players..."));
 			sendScore(objective, "&eMax Players", 14, complete);
 			sendScore(objective, "&f" + arena.getMaxPlayers(), 13, complete);
