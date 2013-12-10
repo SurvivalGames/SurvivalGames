@@ -22,7 +22,7 @@ Try to edit with an IDE before putting something on GitHub as much as possible, 
 
 ![SurvivalGames](http://icap.me/i/ffb9c91e68.png)
 
-CommunitySurvivalGames.com
+![Website CommunitySurvivalGames.com](http://CommunitySurvivalGames.com)
 
 **Description**
 
