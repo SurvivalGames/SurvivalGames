@@ -2,7 +2,7 @@ name: The Survival Games
 main: me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames
 version: 1.0.0
 author: The Community!
-#database: true  Uncomment once Quantum64 adds the SQL database
+database: true
 
 commands:
     sg: 
