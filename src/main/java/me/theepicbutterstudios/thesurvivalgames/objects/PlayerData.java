@@ -13,16 +13,21 @@ import javax.persistence.Table;
 @Entity()
 @Table(name = "sg_player")
 public class PlayerData {
+	
+	//
+	// Start persistence code
+	// WARNING: DO NOT EDIT
+	//
+	
 	@Id
     private int id;
+
     @NotNull
-    private String playerName;
-    @Length(max = 30)
+    private String playerName; 
+    @NotNull
+    private int points;
     @NotEmpty
-    private String name;
- 
-    @NotEmpty
-    private String Test;
+    private String rank;
  
     public void setId(int id) {
         this.id = id;
@@ -32,12 +37,12 @@ public class PlayerData {
         return id;
     }
  
-    public String getName() {
-        return name;
+    public String getRank() {
+        return rank;
     }
  
-    public void setName(String name) {
-        this.name = name;
+    public void setRank(String rank) {
+        this.rank = rank;
     }
  
     public String getPlayerName() {
@@ -56,11 +61,15 @@ public class PlayerData {
         this.playerName = player.getName();
     }
  
-    public String getTest(){
-        return Test;
+    public int getPoints(){
+        return points;
     }
  
-    public void setTest(String test){
-        this.Test = test;
+    public void setPoints(int points){
+        this.points = points;
     }
+    
+    //
+    // End persistence code
+    //
 }

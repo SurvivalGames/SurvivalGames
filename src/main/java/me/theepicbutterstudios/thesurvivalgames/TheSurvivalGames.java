@@ -78,6 +78,9 @@ public class TheSurvivalGames extends JavaPlugin {
 		Scoreboard.registerScoreboard(this);
 	}
 	
+	/**
+	 * Setup Persistence Databases and Install DDL if there are none
+	 */
     private void setupDatabase() {
         try {
             getDatabase().find(PlayerData.class).findRowCount();
@@ -86,7 +89,11 @@ public class TheSurvivalGames extends JavaPlugin {
             installDDL();
         }
     }
- 
+    
+    /**
+     * Gets Persistence Database classes
+     * WARNING: DO NOT EDIT
+     */
     @Override
     public List<Class<?>> getDatabaseClasses() {
         List<Class<?>> list = new ArrayList<Class<?>>();
