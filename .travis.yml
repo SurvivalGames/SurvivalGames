@@ -8,5 +8,5 @@ deploy:
   provider: openshift
   user: "woodyc40@gmail.com"
   password: "TheSGDev"
-  domain: "https://openshift.redhat.com/broker/rest/domains/tsg-sgdevteam"
+  domain: "https://tsg-sgdevteam"
   skip_cleanup: true
