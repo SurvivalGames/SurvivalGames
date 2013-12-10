@@ -4,3 +4,8 @@ jdk:
   - openjdk7
 notifications:
   email: false
+deploy:
+  provider: openshift
+  user: "woodyc40@gmail.com"
+  password: "TheSGDev"
+  domain: "http://tsg-sgdevteam.rhcloud.com/"
