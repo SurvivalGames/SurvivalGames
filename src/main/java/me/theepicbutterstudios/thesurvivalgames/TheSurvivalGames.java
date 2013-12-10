@@ -8,6 +8,7 @@
 
 package me.theepicbutterstudios.thesurvivalgames;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,11 +56,11 @@ public class TheSurvivalGames extends JavaPlugin {
 		// register all commands and listeners
 		getCommand("sg").setExecutor(new CommandHandler());
 		getCommand("party").setExecutor(new PartyCommandHandler());
-		
+
 		CommandHandler.register("help", new HelpCommand());
 		CommandHandler.register("create", new CreateCommand());
 		CommandHandler.register("join", new JoinCommand());
-		
+
 		PartyCommandHandler.register("chat", new ChatCommand());
 		PartyCommandHandler.register("decline", new DeclineCommand());
 		PartyCommandHandler.register("help", new HelpCommand());
@@ -74,31 +75,35 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new ItemListener(this), this);
 		pm.registerEvents(new SetupListener(), this);
 		pm.registerEvents(new EntityDamageListener(), this);
-		
+
 		Scoreboard.registerScoreboard(this);
 	}
-	
+
 	/**
 	 * Setup Persistence Databases and Install DDL if there are none
 	 */
-    private void setupDatabase() {
-        try {
-            getDatabase().find(PlayerData.class).findRowCount();
-        } catch (PersistenceException ex) {
-            System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
-            installDDL();
-        }
-    }
-    
-    /**
-     * Gets Persistence Database classes
-     * WARNING: DO NOT EDIT
-     */
-    @Override
-    public List<Class<?>> getDatabaseClasses() {
-        List<Class<?>> list = new ArrayList<Class<?>>();
-        list.add(PlayerData.class);
-        return list;
-    }
+	private void setupDatabase() {
+		File ebean = new File(getDataFolder(), "ebean.properties");
+		if (!ebean.exists()) {
+			saveResource("ebean.properties", false);
+		}
+		try {
+			getDatabase().find(PlayerData.class).findRowCount();
+		} catch (PersistenceException ex) {
+			System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
+			installDDL();
+		}
+	}
+
+	/**
+	 * Gets Persistence Database classes
+	 * WARNING: DO NOT EDIT
+	 */
+	@Override
+	public List<Class<?>> getDatabaseClasses() {
+		List<Class<?>> list = new ArrayList<Class<?>>();
+		list.add(PlayerData.class);
+		return list;
+	}
 
 }
