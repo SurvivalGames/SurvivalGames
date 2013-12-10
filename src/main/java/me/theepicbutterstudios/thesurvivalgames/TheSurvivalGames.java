@@ -108,7 +108,17 @@ public class TheSurvivalGames extends JavaPlugin {
 	}
 
 	public PlayerData getPlayerData(Player player) {
-		return getDatabase().find(PlayerData.class).where().ieq("playerName", player.getName()).findUnique();
+		PlayerData data =  getDatabase().find(PlayerData.class).where().ieq("playerName", player.getName()).findUnique();
+		if(data == null){
+			data = new PlayerData();
+			//TODO Add default PlayerData vars here
+		}
+			
+		return data;
+	}
+
+	public void setPlayerData(PlayerData data) {
+		getDatabase().save(data);
 	}
 
 }
