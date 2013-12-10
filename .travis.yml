@@ -8,4 +8,4 @@ deploy:
   provider: openshift
   user: "woodyc40@gmail.com"
   password: "TheSGDev"
-  domain: "tsg"
+  domain: "tsg-sgdevteam"
