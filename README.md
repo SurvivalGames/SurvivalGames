@@ -153,7 +153,6 @@ Care Package, a renamed firework which when right-clicked sends a firework up in
 /sg setradius <arena number> <radius> (sets radius where people cannot break blocks and where the automatic chest refill is)
 /sg setlobby <arena number> (sets lobby spawn point)
 /sg setgamespawn <spawn point number> (max can be set in config, default 48)> <arena number>
-/sg setnextspawn (Sets the next spawn in areba, should you be creating one)
 /sg setdeathmatch <spawn point number> (max can be set in config, default 48)> <arena number>
 /sg setmaxplayers <max players> <arena number>
 /sg setchest t1 / t2 <arena number> (set chest tiers, by default all are t1s)

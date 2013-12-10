@@ -7,19 +7,19 @@
 
 package me.theepicbutterstudios.thesurvivalgames.managers;
 
+import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
+import me.theepicbutterstudios.thesurvivalgames.objects.SGArena;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import me.theepicbutterstudios.thesurvivalgames.objects.SGArena;
-import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public class ArenaManager {
 
@@ -34,13 +34,13 @@ public class ArenaManager {
 	List<SGArena> arenas = new ArrayList<SGArena>();
 	int arenaSize = 0;
 
+    static TheSurvivalGames plugin;
+
 	/**
 	 * Initialize the singleton with a SurvivalGames plugin field
 	 * 
 	 * @param sg TheSurvivalGames plugin reference
 	 */
-
-	static TheSurvivalGames plugin;
 
 	public ArenaManager(TheSurvivalGames sg) {
 		plugin = sg;
@@ -103,6 +103,11 @@ public class ArenaManager {
 			return;
 		}
 
+        if(!a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)) {
+            // set player to spectator
+            return;
+        }
+
 		a.getPlayers().add(p.getName());
 		inv.put(p.getName(), p.getInventory().getContents());
 		armor.put(p.getName(), p.getInventory().getArmorContents());
@@ -111,7 +116,7 @@ public class ArenaManager {
 		p.getInventory().clear();
 		p.setExp(0);
 
-		// p.teleport(a.spawn);
+		p.teleport(a.lobby);
 	}
 
 	/**
@@ -159,8 +164,11 @@ public class ArenaManager {
 		int num = arenaSize + 1;
 		arenaSize++;
 
+        creator.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
+
 		SGArena a = new SGArena(num);
 		arenas.add(a);
+        a.getPlayers().add(creator.getName());
 
 		creators.put(creator.getName(), a);
 		// plugin.getConfig().set("Arenas." + num, serializeLoc(l));
@@ -176,16 +184,14 @@ public class ArenaManager {
 	/**
 	 * Stores an existing arena in the list, for example after reloads
 	 *
-	 * @param l The location teh arena spawn will be at
+	 * @param i The location the arena spawn will be at
 	 * @return The arena that was created
 	 */
 
 	public SGArena reloadArena(int i) {
-		int num = arenaSize + 1;
-		arenaSize++;
-
-		SGArena a = new SGArena(num);
+		SGArena a = new SGArena(i);
 		arenas.add(a);
+        // a.initialize(...)
 
 		return a;
 	}

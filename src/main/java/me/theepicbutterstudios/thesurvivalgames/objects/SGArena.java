@@ -17,17 +17,24 @@ import java.util.List;
 
 public class SGArena {
 
-    public static enum ArenaState {
-        WAITING_FOR_PLAYERS, STARTING_COUNTDOWN, PRE_GAME, IN_GAME, POST_GAME
-    }
-
 	ArenaState currentState;
 	public int id = 0;
 	public Location lobby = null;
-	public List<Location> locs = new ArrayList<Location>();
+	public List<Location> locs = new ArrayList<Location>(24);
 	public int maxPlayers;
 	public int minPlayers;
 	List<String> players = new ArrayList<String>();
+
+    /**
+     * Name: ArenaState.java
+     * Edited: 8 December 2013
+     *
+     * @version 1.0.0
+     */
+
+    public static enum ArenaState {
+        WAITING_FOR_PLAYERS, STARTING_COUNTDOWN, PRE_GAME, IN_GAME, POST_GAME
+    }
 
 	/**
 	 * Constructs a new arena based off of a Location and an ID
@@ -99,6 +106,16 @@ public class SGArena {
 		return this.players;
 	}
 
+    /**
+     * Adds the next spawn into the list of spawns
+     *
+     * @param loc The location of the spawn
+     */
+
+    public void nextSpawn(Location loc) {
+        locs.add(loc);
+    }
+
 	/**
 	 * Gets the current state of the arena
 	 * 
@@ -127,11 +144,4 @@ public class SGArena {
 	public int getMinPlayers() {
 		return minPlayers;
 	}
-
-    /**
-     * Name: ArenaState.java
-     * Edited: 8 December 2013
-     *
-     * @version 1.0.0
-     */
 }
