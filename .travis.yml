@@ -8,5 +8,5 @@ deploy:
   provider: openshift
   user: "woodyc40@gmail.com"
   password: "TheSGDev"
-  domain: "tsg-sgdevteam/applications/The-Survival-Games"
+  domain: "tsg-sgdevteam/"
   skip_cleanup: true
