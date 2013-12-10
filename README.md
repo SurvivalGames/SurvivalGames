@@ -97,21 +97,21 @@ after the lobby stage (pre-game, in-game and deathmatch) your name will look lik
 
 Parties can be used to chat with your friends, and join the same games, without having to rush click the same sign.  The list of command of using and creating parties are as follows:
 
-```/sg party invite : Invites a player to your party```
+```/party invite : Invites a player to your party```
 
-```/sg party join : Joins the party you were invited to```
+```/party join : Joins the party you were invited to```
 
-```/sg party leave : Leaves your current party```
+```/party leave : Leaves your current party```
 
-```/sg party decline: Declines your current party invite```
+```/party decline: Declines your current party invite```
 
-```/sg party list: Displays your current party members```
+```/party list: Displays your current party members```
 
-```/sg party kick: Removes a player from your party```
+```/party kick: Removes a player from your party```
 
-```/sg party promote: Promotes another player to party leader```
+```/party promote: Promotes another player to party leader```
 
-```/sg party chat: Toggles whether or not to speak in party chat only```
+```/party chat: Toggles whether or not to speak in party chat only```
 
 
 ========
