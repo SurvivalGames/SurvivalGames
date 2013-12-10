@@ -242,6 +242,16 @@ public class ArenaManager {
 			reloadArena(i);
 		}
 	}
+	
+	/**
+	 * Gets the HashMap that contains the creators
+	 *
+	 * @return The HashMap of creators
+	 */ 
+	 
+	public Map<String, SGArena> getCreators() {
+		return creators;
+	}
 
 	/**
 	 * Serializeds a location to a string
