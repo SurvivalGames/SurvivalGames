@@ -1,16 +1,17 @@
 package me.theepicbutterstudios.thesurvivalgames.runnables;
 
-import me.theepicbutterstudios.thesurvivalgames.objects.SGArena;
+import java.util.logging.Level;
+
 import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
+import me.theepicbutterstudios.thesurvivalgames.objects.SGArena;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
-
-import java.util.logging.Level;
 
 /**
  * Name: MainScoreboard.java
