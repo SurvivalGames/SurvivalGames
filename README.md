@@ -1,8 +1,7 @@
 The Survival Games
 ==================
 **[ANNOUNCEMENT|AgentTroll]**
-Team members may get a copy of the latest build. [![Build Status](https://travis-ci.org/SurvivalGamesDevTeam/The-Survival-Games.png?branch=master)](https://travis-ci.org/SurvivalGamesDevTeam/The-Survival-Games)
-
+Team members may get a copy of the latest build. [![Build Status](https://travis-ci.org/SurvivalGamesDevTeam/TheSurvivalGames.png?branch=master)](https://travis-ci.org/SurvivalGamesDevTeam/TheSurvivalGames)
 **[ANNOUNCEMENT|AgentTroll]**
 Format is important: All classes should be based off of the Help SubCommand class with the titling comment and comments for each method. All indentations should be SPACES, not tabs. They should be 4 spaces, not 8 as well. **ALL CODE MUST BE IN JAVA 6**
 
@@ -150,7 +149,6 @@ Care Package, a renamed firework which when right-clicked sends a firework up in
 
 ```
 /sg create (creates arena)
-/sg setradius <arena number> <radius> (sets radius where people cannot break blocks and where the automatic chest refill is)
 /sg setlobby <arena number> (sets lobby spawn point)
 /sg setgamespawn <spawn point number> (max can be set in config, default 48)> <arena number>
 /sg setdeathmatch <spawn point number> (max can be set in config, default 48)> <arena number>
