@@ -11,7 +11,7 @@ public class NameUtil {
         return hash(p);
     }
 
-    public static int hash(String s) {
+    private static int hash(String s) {
         int h = 0;
         for (int i = 0; i < s.length(); i++) {
             h = 31 * h + s.charAt(i);
