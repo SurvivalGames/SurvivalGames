@@ -17,24 +17,24 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommandHandler implements CommandExecutor{
+public class CommandHandler implements CommandExecutor {
     static Map<String, SubCommand> commands = new HashMap<String, SubCommand>();
 
     /**
      * Registers a command
      *
-     * @param cmd The command to register
+     * @param cmd   The command to register
      * @param clazz The class to register the command to. Must implement SubCommand.
      */
 
     public static void register(String cmd, SubCommand clazz) {
         try {
             Class.forName(clazz.getClass().getName());
-        } catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             return;
         }
 
-        if(!SubCommand.class.isAssignableFrom(clazz.getClass())) {
+        if (!SubCommand.class.isAssignableFrom(clazz.getClass())) {
             throw new IllegalArgumentException("Class does not implement SubCommand");
         } else
             commands.put(cmd, clazz);
@@ -48,7 +48,7 @@ public class CommandHandler implements CommandExecutor{
      */
 
     SubCommand getCommand(String cmd) throws CommandException {
-        if(commands.containsKey(cmd)) {
+        if (commands.containsKey(cmd)) {
             return commands.get(cmd);
         } else
             throw new CommandException("This command was not found.");
@@ -57,30 +57,30 @@ public class CommandHandler implements CommandExecutor{
     /**
      * The main executor for the SubCommands. DO NOT CALL.
      *
-     * @param sender The CommandSender that executed the command
-     * @param command The Command executed
+     * @param sender       The CommandSender that executed the command
+     * @param command      The Command executed
      * @param commandLabel The command's label
-     * @param args The arguments after the command seperated by a space
+     * @param args         The arguments after the command seperated by a space
      * @return Whether or not the command was executed successfully
      */
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
-        if(command.getName().equalsIgnoreCase("sg") && sender instanceof Player) {
-             if(args.length == 2) {
+        if (command.getName().equalsIgnoreCase("sg") && sender instanceof Player) {
+            if (args.length == 2) {
                 try {
-                    getCommand(args[0]).execute(args[0], (Player)sender, new String[]{args[1]});
-                } catch (CommandException e){
+                    getCommand(args[0]).execute(args[0], (Player) sender, new String[]{args[1]});
+                } catch (CommandException e) {
                     sender.sendMessage(/*error prefix*/"Command does not exist!");
                 }
-            } else if(args.length == 1) {
-                try{
-                    getCommand(args[0]).execute(args[0], (Player)sender, new String[]{});
-                }catch (CommandException e){
+            } else if (args.length == 1) {
+                try {
+                    getCommand(args[0]).execute(args[0], (Player) sender, new String[]{});
+                } catch (CommandException e) {
                     sender.sendMessage(/*error prefix*/ "Command does not exist!");
                 }
-            } else if(args.length == 0){
+            } else if (args.length == 0) {
                 Bukkit.dispatchCommand(sender, "help TheSurvivalGames");
             } else {
                 Bukkit.dispatchCommand(sender, "help TheSurvivalGames");//TODO

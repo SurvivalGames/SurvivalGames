@@ -16,7 +16,7 @@ public class SetupListener implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
-        if(ArenaManager.getManager().getCreators().containsKey(e.getPlayer().getName())) {
+        if (ArenaManager.getManager().getCreators().containsKey(e.getPlayer().getName())) {
             SGArena a = ArenaManager.getManager().getArena(e.getPlayer());
 
             a.nextSpawn(e.getClickedBlock().getLocation());
