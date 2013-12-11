@@ -19,6 +19,7 @@ import me.theepicbutterstudios.thesurvivalgames.command.PartyCommandHandler;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.CreateCommand;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.HelpCommand;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.JoinCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.UserCommand;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.ChatCommand;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.DeclineCommand;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.InviteCommand;
@@ -37,8 +38,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class TheSurvivalGames extends JavaPlugin {
-
+	static TheSurvivalGames plugin;
 	public void onEnable() {
+		plugin = this;
 		registerAll();
 		setupDatabase();
 		ArenaManager am = new ArenaManager(this);
@@ -61,6 +63,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		CommandHandler.register("help", new HelpCommand());
 		CommandHandler.register("create", new CreateCommand());
 		CommandHandler.register("join", new JoinCommand());
+		CommandHandler.register("user", new UserCommand());
 
 		PartyCommandHandler.register("chat", new ChatCommand());
 		PartyCommandHandler.register("decline", new DeclineCommand());
@@ -120,5 +123,11 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void setPlayerData(PlayerData data) {
 		getDatabase().save(data);
 	}
-
+	
+	/**
+	 * Only to be used if 100% needed
+	 */
+	public static TheSurvivalGames getPlugin() {
+		return plugin;
+	}
 }
