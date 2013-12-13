@@ -25,7 +25,7 @@ public class CreateCommand implements SubCommand {
 
     @Override
     public void execute(String cmd, Player p, String[] args) {
-        if (cmd.equalsIgnoreCase("create") || p.hasPermission("sg.create")) {
+        if (cmd.equalsIgnoreCase("create") && p.hasPermission("sg.create")) {
             SGArena a = ArenaManager.getManager().createArena(p);
             p.sendMessage(ArenaManager.getManager().prefix + "Creating arena #" + a.getId());
 
