@@ -12,7 +12,7 @@ public class UserCommand implements SubCommand {
         @Override
         public void execute(String cmd, Player p, String[] args) {
                 PlayerData data = TheSurvivalGames.getPlugin().getPlayerData(Bukkit.getPlayer(args[1]));
-                if (cmd.equalsIgnoreCase("points") || p.hasPermission("sg.points")) {
+                if (cmd.equalsIgnoreCase("points") && p.hasPermission("sg.points")) {
                         if (args[0].equalsIgnoreCase("set")) {
                                 data.setPoints(Integer.parseInt(args[2]));
                         } else if (args[0].equalsIgnoreCase("add")) {
