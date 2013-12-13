@@ -23,7 +23,7 @@ public class StartCommand implements SubCommand {
 
     @Override
     public void execute(String cmd, Player p, String[] args) {
-        if (cmd.equalsIgnoreCase("start") && args.length == 2) {
+        if (cmd.equalsIgnoreCase("start") && args.length == 2 || p.hasPermission("sg.gamestate.start")) {
             int id = 0;
             try {
                 id = Integer.parseInt(args[0]);
@@ -36,7 +36,7 @@ public class StartCommand implements SubCommand {
                 return;
             }
 
-            if (args[1].equals("pre")) {
+            if (args[1].equals("pre") || p.hasPermission("sg.gamestate.pregame")) {
                 if (!a.getState().equals(SGArena.ArenaState.PRE_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.PRE_GAME)) {
                     p.sendMessage(ArenaManager.getManager().error + "You can't change force anything yet.");
                     return;
@@ -46,7 +46,7 @@ public class StartCommand implements SubCommand {
                 return;
             }
 
-            if (args[1].equals("starting")) {
+            if (args[1].equals("starting") || p.hasPermission("sg.gamestate.starting")) {
                 if (!a.getState().equals(SGArena.ArenaState.STARTING_COUNTDOWN) || a.getState().isConvertable(a, SGArena.ArenaState.STARTING_COUNTDOWN)) {
                     p.sendMessage(ArenaManager.getManager().error + "You can't change force anything yet.");
                     return;
@@ -56,7 +56,7 @@ public class StartCommand implements SubCommand {
                 return;
             }
 
-            if (args[1].equals("game")) {
+            if (args[1].equals("game") || p.hasPermission("sg.gamestate.ingame")) {
                 if (!a.getState().equals(SGArena.ArenaState.IN_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.IN_GAME)) {
                     p.sendMessage(ArenaManager.getManager().error + "You can't change force anything yet.");
                     return;
@@ -66,7 +66,7 @@ public class StartCommand implements SubCommand {
                 return;
             }
 
-            if (args[1].equals("dm")) {
+            if (args[1].equals("dm") || p.hasPermission("sg.gamestate.dm")) {
                 /* TODO
                 if (!a.getState().equals(SGArena.ArenaState.IN_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.IN_GAME)) {
                     p.sendMessage(ArenaManager.getManager().error + "You can't change force anything yet.");
