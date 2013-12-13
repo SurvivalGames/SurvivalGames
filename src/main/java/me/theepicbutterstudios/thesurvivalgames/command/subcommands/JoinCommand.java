@@ -23,7 +23,7 @@ public class JoinCommand implements SubCommand {
 
     @Override
     public void execute(String cmd, Player p, String[] args) {
-        if (cmd.equalsIgnoreCase("join") && args.length >= 1) {
+        if (cmd.equalsIgnoreCase("join") && args.length >= 1 || p.hasPermission("sg.join")) {
             int id;
             try {
                 id = Integer.parseInt(args[0]);
