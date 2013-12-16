@@ -31,4 +31,6 @@ public class World {
         wc.createWorld();
     }
 
+    public void remove() {}
+
 }
