@@ -1,7 +1,7 @@
 The-Survival-Games
 ==================
 
-THe new website is here!
+The new website is here!
 
 Quite glitchy, working on that (Come on JQuery Parallax, work with me here)
 
