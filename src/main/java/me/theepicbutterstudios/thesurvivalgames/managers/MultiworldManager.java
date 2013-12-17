@@ -69,4 +69,19 @@ public class MultiworldManager {
         in.close();
         out.close();
     }
+    
+    public static boolean checkIfIsWorld(File worldFolder) {
+        if (worldFolder.isDirectory()) {
+            File[] files = worldFolder.listFiles(new FilenameFilter() {
+                @Override
+                public boolean accept(File file, String name) {
+                    return name.equalsIgnoreCase("level.dat");
+                }
+            });
+            if (files != null && files.length > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
