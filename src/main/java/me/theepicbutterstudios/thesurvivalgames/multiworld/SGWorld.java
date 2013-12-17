@@ -66,6 +66,7 @@ public class SGWorld {
                 }
             }
         }
+        path.delete();
     }
 
 }
