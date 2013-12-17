@@ -12,6 +12,7 @@ import org.bukkit.World;
 
 import java.io.*;
 import java.net.URL;
+import java.util.zip.GZIPInputStream;
 
 public class MultiworldManager {
 
@@ -48,14 +49,23 @@ public class MultiworldManager {
         }
 
         InputStream in = source.openConnection().getInputStream();
+        
+        unTar(in, target);
+        in.close();
+
+        return Bukkit.getServer().getWorld("SurvivalGamesWorld" + i);
+    }
+    
+    private void unTar(InputStream stream, File target) throws IOException {
+        GZIPInputStream in = new GZIPInputStream(stream);
         OutputStream out = new FileOutputStream(target);
+        
         byte[] buffer = new byte[1024];
         int length;
         while ((length = in.read(buffer)) > 0)
             out.write(buffer, 0, length);
+        
         in.close();
         out.close();
-
-        return Bukkit.getServer().getWorld("SurvivalGamesWorld" + i);
     }
 }
