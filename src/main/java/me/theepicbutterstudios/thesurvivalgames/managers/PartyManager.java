@@ -1,6 +1,5 @@
 /**
- * Name: PartyManager.java
- * Edited: 8 December 2013
+ * Name: PartyManager.java Edited: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -16,6 +15,7 @@ import java.util.Set;
 import java.util.UUID;
 
 public class PartyManager {
+
     private static PartyManager pm = new PartyManager();
     private static java.util.Map<String, java.util.UUID> players = new HashMap<String, UUID>();
     private static java.util.Map<java.util.UUID, Party> parties = new HashMap<UUID, Party>();
@@ -67,7 +67,7 @@ public class PartyManager {
         Party party = new Party(player.getName());
         players.put(player.getName(), party.getID());
         parties.put(party.getID(), party);
-        if (player != null) {
+        if (player != null) { //TODO what the hell? You're checking if the player is null when you're getting a null name already...
             player.sendMessage(ChatColor.YELLOW + "You have created a new party");
         }
         return party.getID();
@@ -77,7 +77,7 @@ public class PartyManager {
      * Ends a party
      *
      * @param name Name of the player ending the party
-     * @param id   The UUID of the party to end
+     * @param id The UUID of the party to end
      */
     public static void endParty(String name, java.util.UUID id) {
         Party party = (Party) parties.get(id);
@@ -113,7 +113,8 @@ public class PartyManager {
      * Gets the party members of the party the player is in
      *
      * @param p The player to get the members of
-     * @return null if the player is not in a party, a String separated by commas of usernames
+     * @return null if the player is not in a party, a String separated by
+     * commas of usernames
      */
     public String getParty(org.bukkit.entity.Player p) {
         java.util.UUID id = (java.util.UUID) players.get(p.getName());
@@ -138,7 +139,7 @@ public class PartyManager {
     /**
      * Gets if the player is the party leader
      *
-     * @param p The player  to be checked
+     * @param p The player to be checked
      * @return If the player is the leader
      */
     public boolean isPartyLeader(org.bukkit.entity.Player p) {
@@ -157,7 +158,7 @@ public class PartyManager {
     /**
      * Gets the Party Manager
      *
-     * @return The singlton of the party manager
+     * @return The singleton of the party manager
      */
     public static PartyManager getPartyManager() {
         return pm;

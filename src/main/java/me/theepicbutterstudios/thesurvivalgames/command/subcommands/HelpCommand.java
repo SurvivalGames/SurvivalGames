@@ -1,10 +1,8 @@
 /**
- * Name: HelpCommand.java
- * Edited: 7 December 2013
+ * Name: HelpCommand.java Edited: 7 December 2013
  *
  * @version 1.0.0
  */
-
 package me.theepicbutterstudios.thesurvivalgames.command.subcommands;
 
 import me.theepicbutterstudios.thesurvivalgames.command.SubCommand;
@@ -15,13 +13,13 @@ import org.bukkit.entity.Player;
 public class HelpCommand implements SubCommand {
 
     /**
-     * An example of implementing SubCommand. DO NOT CALL DIRECTLY. Only use in CommandHandler
+     * An example of implementing SubCommand. DO NOT CALL DIRECTLY. Only use in
+     * CommandHandler
      *
-     * @param cmd  The command that was executed
-     * @param p    The player that executed the command
+     * @param cmd The command that was executed
+     * @param p The player that executed the command
      * @param args The arguments after the command
      */
-
     @Override
     public void execute(String cmd, Player p, String[] args) {
         if (cmd.equalsIgnoreCase("help")) {
@@ -71,18 +69,17 @@ public class HelpCommand implements SubCommand {
 
             }
 
-            return; // no need to have booleans, this is a method returns void.
         }
     }
 
     /**
      * Send specific messages to the player
      *
-     * @param p    The player to send the help message to
+     * @param p The player to send the help message to
      * @param page The page number
-     * @param args The help messages separated by a : to display command and help. Limit 5
+     * @param args The help messages separated by a : to display command and
+     * help. Limit 5
      */
-
     private void sendHelpMessages(Player p, int page, String... args) {
         p.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.DARK_AQUA + "[The Survival Games]" + ChatColor.DARK_AQUA + "--------------");
         p.sendMessage(ChatColor.GOLD + "Page: " + ChatColor.GREEN + page + ChatColor.GOLD + " of 3");

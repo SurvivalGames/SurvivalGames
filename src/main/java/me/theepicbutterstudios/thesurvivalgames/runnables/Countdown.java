@@ -1,6 +1,5 @@
 /**
- * Name: Countdown.java
- * Created: 8 December 2013
+ * Name: Countdown.java Created: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -18,10 +17,9 @@ public class Countdown implements Runnable {
     /**
      * Constructs a new countdown for this arena
      *
-     * @param a     The arena to countdown on
+     * @param a The arena to countdown on
      * @param count The amount of numbers to countdown from
      */
-
     public Countdown(SGArena a, int count) {
         this.a = a;
         this.count = count;
@@ -32,7 +30,6 @@ public class Countdown implements Runnable {
      *
      * @param id The return value from starting a new task
      */
-
     public void setId(int id) {
         this.id = id;
     }
@@ -40,7 +37,6 @@ public class Countdown implements Runnable {
     /**
      * The overrided method to run
      */
-
     @Override
     public void run() {
 

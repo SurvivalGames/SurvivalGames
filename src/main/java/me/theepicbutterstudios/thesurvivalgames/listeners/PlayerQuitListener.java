@@ -1,6 +1,5 @@
 /**
- * Name: PlayerQuitListener.java
- * Created: 8 December 2013
+ * Name: PlayerQuitListener.java Created: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -18,12 +17,12 @@ import java.util.UUID;
 public class PlayerQuitListener implements Listener {
 
     /**
-     * Detects when a player quits, and if that player is the party leader, the party will disband
-     * Also removes the player from the arena if they are in game
+     * Detects when a player quits, and if that player is the party leader, the
+     * party will disband Also removes the player from the arena if they are in
+     * game
      *
      * @param event The event being called
      */
-
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         org.bukkit.entity.Player p = event.getPlayer();

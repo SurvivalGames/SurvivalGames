@@ -1,6 +1,5 @@
 /**
- * Name: EntityDamageListener.java
- * Created: 7 December 2013
+ * Name: EntityDamageListener.java Created: 7 December 2013
  *
  * @version 1.0.0
  */
@@ -20,7 +19,8 @@ import org.bukkit.potion.PotionEffectType;
 public class EntityDamageListener implements Listener {
 
     /**
-     * Listens for a player being hit by a snow ball, gives player Slowness II for 30 seconds
+     * Listens for a player being hit by a snow ball, gives player Slowness II
+     * for 30 seconds
      *
      * @param event - The EntityDamageByEntityEvent event
      */

@@ -1,6 +1,5 @@
 /**
- * Name: Party.java
- * Edited: 8 December 2013
+ * Name: Party.java Edited: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -10,11 +9,11 @@ import me.theepicbutterstudios.thesurvivalgames.managers.PartyManager;
 
 import java.util.UUID;
 
-
 public class Party {
+
     private String leader;
-    private String[] members;
-    private UUID id;
+    private final String[] members;
+    private final UUID id;
 
     /**
      * Creates an instance of a party
@@ -82,10 +81,7 @@ public class Party {
                 return true;
             }
         }
-        if (this.leader.equalsIgnoreCase(player)) {
-            return true;
-        }
-        return false;
+        return this.leader.equalsIgnoreCase(player);
     }
 
     /**
@@ -124,7 +120,8 @@ public class Party {
     }
 
     /**
-     * Checks to see if the party has members -- I am looking to remove this method in the future
+     * Checks to see if the party has members -- I am looking to remove this
+     * method in the future
      *
      * @return If the party has no members
      */

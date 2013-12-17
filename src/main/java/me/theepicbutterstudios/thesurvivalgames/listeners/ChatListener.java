@@ -1,6 +1,5 @@
 /**
- * Name: ChatListener.java
- * Created: 8 December 2013
+ * Name: ChatListener.java Created: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -13,11 +12,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.util.UUID;
+import java.util.logging.Level;
 
 public class ChatListener implements Listener {
 
     /**
-     * Formats chat and detects if the player is using party chat, if so, it will only send messages to the people in that player's party
+     * Formats chat and detects if the player is using party chat, if so, it
+     * will only send messages to the people in that player's party
      *
      * @param event The event being called
      */
@@ -41,13 +42,11 @@ public class ChatListener implements Listener {
                     }
                     org.bukkit.entity.Player p = org.bukkit.Bukkit.getServer().getPlayer(party.getLeader());
                     if (p != null) {
-                        if (p != null) {
-                            p.sendMessage(org.bukkit.ChatColor.DARK_AQUA + "[P] " + event.getPlayer().getDisplayName() + org.bukkit.ChatColor.DARK_AQUA + ": " + event.getMessage());
-                        }
+                        p.sendMessage(org.bukkit.ChatColor.DARK_AQUA + "[P] " + event.getPlayer().getDisplayName() + org.bukkit.ChatColor.DARK_AQUA + ": " + event.getMessage());
                     }
                 }
                 event.setCancelled(true);
-                Bukkit.getLogger().info("[P] " + event.getPlayer().getDisplayName() + ": " + event.getMessage());
+                Bukkit.getLogger().log(Level.INFO, "[P] {0}: {1}", new Object[]{event.getPlayer().getDisplayName(), event.getMessage()});
 
                 org.bukkit.entity.Player[] playerList = org.bukkit.Bukkit.getServer().getOnlinePlayers();
                 int playersNum = org.bukkit.Bukkit.getServer().getOnlinePlayers().length;

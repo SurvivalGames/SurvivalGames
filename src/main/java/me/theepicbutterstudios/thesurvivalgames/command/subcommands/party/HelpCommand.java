@@ -1,6 +1,5 @@
 /**
- * Name: HelpCommand.java
- * Created: 8 December 2013
+ * Name: HelpCommand.java Created: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -16,9 +15,8 @@ public class HelpCommand implements SubCommand {
      * Displays the help for the party commands
      *
      * @param player The player executing the command
-     * @param args   The page of help to be shown
+     * @param args The page of help to be shown
      */
-
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 0) || (cmd.equalsIgnoreCase("help")) || (cmd.equalsIgnoreCase("?"))) {
             staticExecute(sender, args);

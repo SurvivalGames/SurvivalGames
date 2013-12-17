@@ -1,6 +1,5 @@
 /**
- * Name: ListCommand.java
- * Created: 8 December 2013
+ * Name: ListCommand.java Created: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -21,7 +20,6 @@ public class ListCommand implements SubCommand {
      *
      * @param player The player executing the command
      */
-
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 1) && (args[0].equalsIgnoreCase("list")) && (sender.hasPermission("party.admin.list"))) {
             executeAdmin(sender, args[0]);
@@ -54,9 +52,9 @@ public class ListCommand implements SubCommand {
      * Lists the members of another player's party
      *
      * @param sender The player executing the command
-     * @param args   The player's username of the party who you want to list the members of
+     * @param args The player's username of the party who you want to list the
+     * members of
      */
-
     public static void executeAdmin(Player sender, String args) {
         Player p = Bukkit.getServer().getPlayer(args);
         if (p != null) {

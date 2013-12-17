@@ -1,6 +1,5 @@
 /**
- * Name: JoinCommand.java
- * Created: 8 December 2013
+ * Name: JoinCommand.java Created: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -21,7 +20,6 @@ public class JoinCommand implements SubCommand {
      *
      * @param player The player executing the command
      */
-
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 1) && (args[0].equalsIgnoreCase("join"))) {
             UUID partyID = (UUID) PartyManager.getPartyManager().getInvites().get(sender.getName());

@@ -3,6 +3,7 @@ package me.theepicbutterstudios.thesurvivalgames.util;
 import org.bukkit.entity.Player;
 
 public class NameUtil {
+
     public static int getNameUUID(Player p) {
         return hash(p.getName());
     }

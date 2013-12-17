@@ -1,10 +1,8 @@
 /**
- * Name: SGArena.java
- * Edited: 7 December 2013
+ * Name: SGArena.java Edited: 7 December 2013
  *
  * @version 1.0.0
  */
-
 package me.theepicbutterstudios.thesurvivalgames.objects;
 
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
@@ -26,13 +24,12 @@ public class SGArena {
     List<String> players = new ArrayList<String>();
 
     /**
-     * Name: ArenaState.java
-     * Edited: 8 December 2013
+     * Name: ArenaState.java Edited: 8 December 2013
      *
      * @version 1.0.0
      */
-
     public enum ArenaState {
+
         WAITING_FOR_PLAYERS, STARTING_COUNTDOWN, PRE_GAME, IN_GAME, POST_GAME;
 
         public boolean isConvertable(SGArena arena, ArenaState a) {
@@ -75,7 +72,6 @@ public class SGArena {
      *
      * @param id The ID the arena will have
      */
-
     public SGArena(int id) {
         this.id = id;
     }
@@ -83,12 +79,11 @@ public class SGArena {
     /**
      * Makes sure that the fields aren't null on startup
      *
-     * @param list       The locatins for game spawns
-     * @param lob        The lobby spawn
+     * @param list The locatins for game spawns
+     * @param lob The lobby spawn
      * @param maxPlayers The max players for the arena
      * @param minPlayers The min players needed for the game to start
      */
-
     public void initialize(List<Location> list, Location lob, int maxPlayers, int minPlayers) {
         this.lobby = lob;
         this.locs = list;
@@ -101,7 +96,6 @@ public class SGArena {
      *
      * @param message The message to send, do not include prefix
      */
-
     public void broadcast(String message) {
         for (String s : players) {
             Player p = Bukkit.getServer().getPlayerExact(s);
@@ -125,7 +119,6 @@ public class SGArena {
      *
      * @return The ID of the arena
      */
-
     public int getId() {
         return this.id;
     }
@@ -135,7 +128,6 @@ public class SGArena {
      *
      * @return List of players in the arena
      */
-
     public List<String> getPlayers() {
         return this.players;
     }
@@ -145,7 +137,6 @@ public class SGArena {
      *
      * @param loc The location of the spawn
      */
-
     public void nextSpawn(Location loc) {
         locs.add(loc);
     }
@@ -164,7 +155,6 @@ public class SGArena {
      *
      * @return Number of players
      */
-
     public int getMaxPlayers() {
         return maxPlayers;
     }
@@ -174,7 +164,6 @@ public class SGArena {
      *
      * @return Number of players
      */
-
     public int getMinPlayers() {
         return minPlayers;
     }

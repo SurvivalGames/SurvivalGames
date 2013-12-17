@@ -1,6 +1,5 @@
 /**
- * Name: ItemListener.java
- * Created: 7 December 2013
+ * Name: ItemListener.java Created: 7 December 2013
  *
  * @version 1.0.0
  */
@@ -38,6 +37,7 @@ public class ItemListener implements Listener {
             if (ArenaManager.getManager().isInGame(p)) {
                 p.getInventory().remove(Material.NETHER_STAR);
                 Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                    @Override
                     public void run() {
                         plugin.getServer().broadcastMessage(ChatColor.WHITE + "CARE PACKAGE INCOMING: (" + ChatColor.YELLOW + careLocation.getX() + ChatColor.WHITE + "," + ChatColor.YELLOW + careLocation.getY() + ChatColor.WHITE + "," + ChatColor.YELLOW + careLocation.getZ() + ChatColor.WHITE + ")");
                         careLocation.getBlock().getRelative(BlockFace.DOWN).setType(Material.BEACON);
@@ -66,7 +66,7 @@ public class ItemListener implements Listener {
                             fwm.setPower(rp);
                             fw.setFireworkMeta(fwm);
                             try {
-                                Thread.sleep(350);// -_- How else do you want me to get the runnable to	wait?
+                                Thread.sleep(350);// -_- How else do you want me to get the runnable to	wait? Nested runnables
                             } catch (InterruptedException ignored) {
                             }
                         }
@@ -76,8 +76,9 @@ public class ItemListener implements Listener {
                         c.getInventory().addItem(new ItemStack(Material.DIAMOND));
                         // TODO: Get the list of Tier 2 items and add them
                         // here
-                        for (int i = 0; i < 4; i++)
+                        for (int i = 0; i < 4; i++) {
                             careLocation.getWorld().strikeLightning(careLocation);
+                        }
                     }
                 });
             }

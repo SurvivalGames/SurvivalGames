@@ -1,10 +1,8 @@
 /**
- * Name: CommandHandler.java
- * Edited: 28 November 2013
+ * Name: CommandHandler.java Edited: 28 November 2013
  *
  * @version 1.0.0
  */
-
 package me.theepicbutterstudios.thesurvivalgames.command;
 
 import org.bukkit.Bukkit;
@@ -18,15 +16,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandHandler implements CommandExecutor {
+
     static Map<String, SubCommand> commands = new HashMap<String, SubCommand>();
 
     /**
      * Registers a command
      *
-     * @param cmd   The command to register
-     * @param clazz The class to register the command to. Must implement SubCommand.
+     * @param cmd The command to register
+     * @param clazz The class to register the command to. Must implement
+     * SubCommand.
      */
-
     public static void register(String cmd, SubCommand clazz) {
         try {
             Class.forName(clazz.getClass().getName());
@@ -36,8 +35,9 @@ public class CommandHandler implements CommandExecutor {
 
         if (!SubCommand.class.isAssignableFrom(clazz.getClass())) {
             throw new IllegalArgumentException("Class does not implement SubCommand");
-        } else
+        } else {
             commands.put(cmd, clazz);
+        }
     }
 
     /**
@@ -46,24 +46,23 @@ public class CommandHandler implements CommandExecutor {
      * @param cmd The name of the command to get
      * @return The SubCommand of the command
      */
-
     SubCommand getCommand(String cmd) throws CommandException {
         if (commands.containsKey(cmd)) {
             return commands.get(cmd);
-        } else
+        } else {
             throw new CommandException("This command was not found.");
+        }
     }
 
     /**
      * The main executor for the SubCommands. DO NOT CALL.
      *
-     * @param sender       The CommandSender that executed the command
-     * @param command      The Command executed
+     * @param sender The CommandSender that executed the command
+     * @param command The Command executed
      * @param commandLabel The command's label
-     * @param args         The arguments after the command seperated by a space
+     * @param args The arguments after the command seperated by a space
      * @return Whether or not the command was executed successfully
      */
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
@@ -78,7 +77,7 @@ public class CommandHandler implements CommandExecutor {
                 try {
                     getCommand(args[0]).execute(args[0], (Player) sender, new String[]{});
                 } catch (CommandException e) {
-                    sender.sendMessage(/*error prefix*/ "Command does not exist!");
+                    sender.sendMessage(/*error prefix*/"Command does not exist!");
                 }
             } else if (args.length == 0) {
                 Bukkit.dispatchCommand(sender, "help TheSurvivalGames");

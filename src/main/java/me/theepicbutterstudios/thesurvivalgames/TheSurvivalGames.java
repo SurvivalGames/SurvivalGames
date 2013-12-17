@@ -1,11 +1,8 @@
 /**
- * Name: TheSurvivalGames.java
- * Created: 19 November 2013
- * Edited: 9 December 2013
+ * Name: TheSurvivalGames.java Created: 19 November 2013 Edited: 9 December 2013
  *
  * @version 1.0.0
  */
-
 package me.theepicbutterstudios.thesurvivalgames;
 
 import me.theepicbutterstudios.thesurvivalgames.command.CommandHandler;
@@ -31,8 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TheSurvivalGames extends JavaPlugin {
+
     static TheSurvivalGames plugin;
 
+    @Override
     public void onEnable() {
         plugin = this;
         registerAll();
@@ -45,6 +44,7 @@ public class TheSurvivalGames extends JavaPlugin {
         saveDefaultConfig();
     }
 
+    @Override
     public void onDisable() {
         getLogger().info("was disabled.");
     }
@@ -94,8 +94,9 @@ public class TheSurvivalGames extends JavaPlugin {
     }
 
     /**
-     * Gets Persistence Database classes
-     * WARNING: DO NOT EDIT
+     * Gets Persistence Database classes WARNING: DO NOT EDIT
+     * 
+     * @return The list of classes for the database
      */
     @Override
     public List<Class<?>> getDatabaseClasses() {

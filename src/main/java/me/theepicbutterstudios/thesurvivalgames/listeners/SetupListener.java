@@ -1,6 +1,5 @@
 /**
- * Name: SetupListener.java
- * Created: 7 December 2013
+ * Name: SetupListener.java Created: 7 December 2013
  *
  * @version 1.0.0
  */

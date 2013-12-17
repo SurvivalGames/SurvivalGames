@@ -1,6 +1,5 @@
 /**
- * Name: DeclineCommand.java
- * Created: 8 December 2013
+ * Name: DeclineCommand.java Created: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -19,7 +18,6 @@ import java.util.UUID;
  *
  * @param player The player executing the command
  */
-
 public class DeclineCommand implements SubCommand {
 
     public void execute(String cmd, Player sender, String[] args) {

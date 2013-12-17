@@ -1,6 +1,5 @@
 /**
- * Name: LeaveCommand.java
- * Created: 8 December 2013
+ * Name: LeaveCommand.java Created: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -21,7 +20,6 @@ public class LeaveCommand implements SubCommand {
      *
      * @param player The player executing the command
      */
-
     public void execute(String cmd, Player sender, String[] args) {
         if (cmd.equalsIgnoreCase("leave")) {
             UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());

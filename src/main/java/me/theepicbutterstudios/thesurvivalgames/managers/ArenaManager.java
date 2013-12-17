@@ -1,10 +1,8 @@
 /**
- * Name: ArenaManager.java
- * Edited: 7 December 2013
+ * Name: ArenaManager.java Edited: 7 December 2013
  *
  * @version 1.0.0
  */
-
 package me.theepicbutterstudios.thesurvivalgames.managers;
 
 import me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames;
@@ -41,7 +39,6 @@ public class ArenaManager {
      *
      * @param sg TheSurvivalGames plugin reference
      */
-
     public ArenaManager(TheSurvivalGames sg) {
         plugin = sg;
     }
@@ -49,7 +46,6 @@ public class ArenaManager {
     /**
      * The constructor for a new reference of the singleton
      */
-
     protected ArenaManager() {
     }
 
@@ -58,7 +54,6 @@ public class ArenaManager {
      *
      * @return The reference of the ArenaManager
      */
-
     public static ArenaManager getManager() {
         return am;
     }
@@ -69,7 +64,6 @@ public class ArenaManager {
      * @param i The ID to get the Arena from
      * @return The arena from which the ID represents. May be null.
      */
-
     public SGArena getArena(int i) {
         for (SGArena a : arenas) {
             if (a.getId() == i) {
@@ -81,8 +75,9 @@ public class ArenaManager {
 
     public SGArena getArena(Player p) {
         for (SGArena a : arenas) {
-            if (a.getPlayers().contains(p.getName()))
+            if (a.getPlayers().contains(p.getName())) {
                 return a;
+            }
         }
         return null;
     }
@@ -93,7 +88,6 @@ public class ArenaManager {
      * @param p The player to be added
      * @param i The arena ID in which the player will be added to.
      */
-
     public void addPlayer(Player p, int i) {
         SGArena a = getArena(i);
         if (a == null) {
@@ -122,7 +116,6 @@ public class ArenaManager {
      *
      * @param p The player to remove from an arena
      */
-
     public void removePlayer(Player p) {
         SGArena a = null;
         for (SGArena arena : arenas) {
@@ -157,7 +150,6 @@ public class ArenaManager {
      * @param creator The creator attributed with making the arena
      * @return The arena that was created
      */
-
     public SGArena createArena(Player creator) {
         int num = arenaSize + 1;
         arenaSize++;
@@ -185,7 +177,6 @@ public class ArenaManager {
      * @param i The location the arena spawn will be at
      * @return The arena that was created
      */
-
     public SGArena reloadArena(int i) {
         SGArena a = new SGArena(i);
         arenas.add(a);
@@ -199,7 +190,6 @@ public class ArenaManager {
      *
      * @param i The ID of the arena to be removed
      */
-
     public void removeArena(int i) {
         SGArena a = getArena(i);
         if (a == null) {
@@ -220,11 +210,11 @@ public class ArenaManager {
      * @param p The player that will be scanned
      * @return Whether the player is in a game
      */
-
     public boolean isInGame(Player p) {
         for (SGArena a : arenas) {
-            if (a.getPlayers().contains(p.getName()))
+            if (a.getPlayers().contains(p.getName())) {
                 return true;
+            }
         }
         return false;
     }
@@ -232,7 +222,6 @@ public class ArenaManager {
     /**
      * Loads the game into memory after a shutdown or a relaod
      */
-
     public void loadGames() {
         arenaSize = 0;
 
@@ -250,18 +239,16 @@ public class ArenaManager {
      *
      * @return The HashMap of creators
      */
-
     public Map<String, SGArena> getCreators() {
         return creators;
     }
 
     /**
-     * Serializeds a location to a string
+     * Serializes a location to a string
      *
      * @param l The location to serialize
      * @return The serialized location
      */
-
     public String serializeLoc(Location l) {
         return l.getWorld().getName() + "," + l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ();
     }
@@ -272,7 +259,6 @@ public class ArenaManager {
      * @param s The string to deserialize
      * @return The location represented from the string
      */
-
     public Location deserializeLoc(String s) {
         String[] st = s.split(",");
         return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), Integer.parseInt(st[3]));

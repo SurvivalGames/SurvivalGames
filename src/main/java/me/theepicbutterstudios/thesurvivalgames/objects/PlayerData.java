@@ -17,7 +17,6 @@ public class PlayerData {
     // Start persistence code
     // WARNING: DO NOT EDIT
     //
-
     @Id
     private int id;
 

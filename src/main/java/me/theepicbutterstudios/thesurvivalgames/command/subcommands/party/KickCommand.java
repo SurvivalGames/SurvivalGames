@@ -1,6 +1,5 @@
 /**
- * Name: KickCommand.java
- * Created: 8 December 2013
+ * Name: KickCommand.java Created: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -22,7 +21,6 @@ public class KickCommand implements SubCommand {
      * @param sender The player executing the command
      * @param player The player to be kicked from the party
      */
-
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 1) && (args[0].equalsIgnoreCase("kick"))) {
             UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());

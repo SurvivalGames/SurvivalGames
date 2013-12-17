@@ -1,6 +1,5 @@
 /**
- * Name: SGWorld.java
- * Created: 16 December 2013
+ * Name: SGWorld.java Created: 16 December 2013
  *
  * @version 1.0.0
  */
@@ -30,7 +29,7 @@ public class SGWorld {
     }
 
     public World create() {
-        if(Bukkit.getServer().getWorld(name) != null) {
+        if (Bukkit.getServer().getWorld(name) != null) {
             //TODO What do we do? Should we copy the world? Or skip this step?
             return Bukkit.getServer().getWorld(name);
         }
@@ -41,13 +40,13 @@ public class SGWorld {
     public void remove() {
         World world = Bukkit.getServer().getWorld(name);
 
-        for(Player p : world.getPlayers()) {
+        for (Player p : world.getPlayers()) {
             //TODO teleport player somewhere safe
         }
-        for(Entity e : world.getEntities()) {
+        for (Entity e : world.getEntities()) {
             e.remove();
         }
-        for(Chunk c : world.getLoadedChunks()) {
+        for (Chunk c : world.getLoadedChunks()) {
             c.unload(false, false);
             world.unloadChunk(c);
         }

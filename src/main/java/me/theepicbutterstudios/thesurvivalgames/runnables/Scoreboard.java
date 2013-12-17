@@ -13,12 +13,10 @@ import org.bukkit.scoreboard.Score;
 import java.util.logging.Level;
 
 /**
- * Name: Scoreboard.java
- * Edited: 8 December 2013
+ * Name: Scoreboard.java Edited: 8 December 2013
  *
  * @version 1.0.0
  */
-
 public class Scoreboard implements Runnable {
 
     TheSurvivalGames plugin;
@@ -48,7 +46,7 @@ public class Scoreboard implements Runnable {
             try {
                 player.setScoreboard(scoreboard);
             } catch (IllegalStateException ex) {
-                Bukkit.getLogger().log(Level.SEVERE, "The scoreboard could not be created for player " + player.getDisplayName() + "!");
+                Bukkit.getLogger().log(Level.SEVERE, "The scoreboard could not be created for player {0}!", player.getDisplayName());
                 return;
             }
 
@@ -96,13 +94,12 @@ public class Scoreboard implements Runnable {
         objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lSurvival Games"));
 
         /*
-        sendScore(objective, "&bKills", arena.getKills(player), complete); TODO
-		sendScore(objective, "&alive", arena.getAlive(), complete); TODO
-		sendScore(objective, "&4Dead", arena.getDead(player), complete); TODO
-		sendScore(objective, "&7Spectating", arena.getSpectating(), complete); TODO
-		sendScore(objective, "&eTime", arena.getSpectating(), complete); TODO
-		*/
-
+         sendScore(objective, "&bKills", arena.getKills(player), complete); TODO
+         sendScore(objective, "&alive", arena.getAlive(), complete); TODO
+         sendScore(objective, "&4Dead", arena.getDead(player), complete); TODO
+         sendScore(objective, "&7Spectating", arena.getSpectating(), complete); TODO
+         sendScore(objective, "&eTime", arena.getSpectating(), complete); TODO
+         */
         //TODO Probably end up having something that switches the scoreboard back and forth about every ~5 to showing all players and their lives and this
     }
 

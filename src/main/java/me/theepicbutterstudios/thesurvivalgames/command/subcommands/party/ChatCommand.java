@@ -1,6 +1,5 @@
 /**
- * Name: ChatCommand.java
- * Created: 8 December 2013
+ * Name: ChatCommand.java Created: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -15,11 +14,11 @@ import java.util.UUID;
 public class ChatCommand implements SubCommand {
 
     /**
-     * Switches chat mode from party chat to global chat and vice versa for player
+     * Switches chat mode from party chat to global chat and vice versa for
+     * player
      *
      * @param player The player executing the command
      */
-
     public void execute(String cmd, Player player, String args[]) {
         if (cmd.equalsIgnoreCase("chat")) {
             UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(player.getName());

@@ -1,6 +1,5 @@
 /**
- * Name: PromoteCommand.java
- * Created: 8 December 2013
+ * Name: PromoteCommand.java Created: 8 December 2013
  *
  * @version 1.0.0
  */
@@ -17,11 +16,11 @@ import java.util.UUID;
 public class PromoteCommand implements SubCommand {
 
     /**
-     * Promotes another player to party leader if the executer is the current leader
+     * Promotes another player to party leader if the executer is the current
+     * leader
      *
      * @param player The player executing the command
      */
-
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 2) && (args[0].equalsIgnoreCase("promote"))) {
             UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());

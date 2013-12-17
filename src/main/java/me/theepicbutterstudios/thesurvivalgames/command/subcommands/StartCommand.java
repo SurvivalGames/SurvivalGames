@@ -1,6 +1,5 @@
 /**
- * Name: StartCommand.java
- * Created: 10 December 2013
+ * Name: StartCommand.java Created: 10 December 2013
  *
  * @version 1.0.0
  */
@@ -16,11 +15,10 @@ public class StartCommand implements SubCommand {
     /**
      * The start command. DO NOT CALL DIRECTLY. Only use in CommandHandler
      *
-     * @param cmd  The command that was executed
-     * @param p    The player that executed the command
+     * @param cmd The command that was executed
+     * @param p The player that executed the command
      * @param args The arguments after the command
      */
-
     @Override
     public void execute(String cmd, Player p, String[] args) {
         if (cmd.equalsIgnoreCase("start") && args.length == 2 && p.hasPermission("sg.gamestate.start")) {
@@ -68,14 +66,14 @@ public class StartCommand implements SubCommand {
 
             if (args[1].equals("dm") && p.hasPermission("sg.gamestate.dm")) {
                 /* TODO the death match
-                if (!a.getState().equals(SGArena.ArenaState.IN_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.IN_GAME)) {
-                    p.sendMessage(ArenaManager.getManager().error + "You can't change force anything yet.");
-                    return;
-                }
-                a.setState(SGArena.ArenaState.IN_GAME);
-                p.sendMessage(ArenaManager.getManager().prefix + "Changed the state.");
-                return;
-                */
+                 if (!a.getState().equals(SGArena.ArenaState.IN_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.IN_GAME)) {
+                 p.sendMessage(ArenaManager.getManager().error + "You can't change force anything yet.");
+                 return;
+                 }
+                 a.setState(SGArena.ArenaState.IN_GAME);
+                 p.sendMessage(ArenaManager.getManager().prefix + "Changed the state.");
+                 return;
+                 */
             }
         }
     }
