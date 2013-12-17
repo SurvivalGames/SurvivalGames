@@ -12,7 +12,7 @@ commands:
     party:
         usage: /party <command>
         description: Base command for all party related functions
-         aliases: [team, p] 
+        aliases: [team, p] 
 permissions:
     sg.*:
         description: Allows you to run EVERY LAST SG COMMAND!
