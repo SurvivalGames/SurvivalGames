@@ -1,35 +1,36 @@
-;(function($){
-	function update(modal) {
-		modal.find('.modal-body').outerHeight(
-			modal.innerHeight() -
-			modal.find('.modal-header').outerHeight() -
-			modal.find('.modal-footer').outerHeight()
-		);
-	}
+;
+(function($) {
+    function update(modal) {
+        modal.find('.modal-body').outerHeight(
+                modal.innerHeight() -
+                modal.find('.modal-header').outerHeight() -
+                modal.find('.modal-footer').outerHeight()
+                );
+    }
 
-	if ($.fn.modal) {
-		var bigmodals = $(),
-				modal;
+    if ($.fn.modal) {
+        var bigmodals = $(),
+                modal;
 
-		$(window).resize(function() {
-			bigmodals.filter(':visible').each(function() {
-				update($(this));
-			});
-		});
+        $(window).resize(function() {
+            bigmodals.filter(':visible').each(function() {
+                update($(this));
+            });
+        });
 
-		$.fn.bigmodal = function(option) {
-			var ret = $.fn.modal.apply(this, arguments);
-			this.addClass('bigmodal');
-			bigmodals = bigmodals.add(this);
-			this.on('shown', function(){
-				update($(this));
-			});
-			return ret;
-		};
-	}
-	else {
-		$.fn.bigmodal = function(option){
-			return this;
-		};
-	}
+        $.fn.bigmodal = function(option) {
+            var ret = $.fn.modal.apply(this, arguments);
+            this.addClass('bigmodal');
+            bigmodals = bigmodals.add(this);
+            this.on('shown', function() {
+                update($(this));
+            });
+            return ret;
+        };
+    }
+    else {
+        $.fn.bigmodal = function(option) {
+            return this;
+        };
+    }
 }(window.jQuery));
