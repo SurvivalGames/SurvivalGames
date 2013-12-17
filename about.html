@@ -7,6 +7,35 @@
     <meta name="description" content="The Survival Games : The Survival Games Project" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <style>
+        #myDiv {
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        #effect{
+            display:none;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        #color{
+            display:none;
+            width:100%;
+            height:150px;
+            background-color:lightblue;
+        }
+        #myDiv:hover #effect {
+            display:block;
+            -webkit-filter: blur(20px);
+            -moz-filter: blur(15px);
+            -o-filter: blur(15px);
+            -ms-filter: blur(15px);
+            filter: blur(15px);
+            opacity: 0.95;
+        }
+        #myDiv:hover #color {
+            display:block;
+        }
+    </style>
 
     <title>The Survival Games - What Is It?</title>
   </head>
@@ -14,7 +43,7 @@
   <body>
 
     <!-- HEADER -->
-    <div id="header_wrap" class="outer">
+    <div id="header_wrap" id="myDiv" id="color" id="effect" class="outer">
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/SurvivalGamesDevTeam/The-Survival-Games">View on GitHub</a>
 
