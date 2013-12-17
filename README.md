@@ -1,4 +1,9 @@
 The-Survival-Games
 ==================
 
-The Survival Games Project website!  Any changes made to the README.md file should be made here as well.
+THe new website is here!
+
+Quite glitchy, working on that (Come on JQuery Parallax, work with me here)
+
+Took me awhile, its quite a mess of my own code and html tricks I found online
+ - Quantum64
