@@ -20,6 +20,12 @@ public class PlayerNameUtil {
     	//TODO: What's you IGN everyone?
     	return list;
     }
+    
+    public static ArrayList<String> getAwesomePeople(){
+    	ArrayList<String> list = new ArrayList<String>();
+    	list.add("Jonthespartan29"); //TODO XD
+    	return list;
+    }
 
     private static int stringToHash(String s) {
         int h = 0;

@@ -1,7 +1,11 @@
+//PLEASE DON'T EDIT THIS CLASS - Quantum64
 package me.theepicbutterstudios.thesurvivalgames.objects;
 
 import com.avaje.ebean.validation.NotEmpty;
 import com.avaje.ebean.validation.NotNull;
+
+import me.theepicbutterstudios.thesurvivalgames.util.PlayerNameUtil;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -13,61 +17,127 @@ import javax.persistence.Table;
 @Table(name = "sg_player")
 public class PlayerData {
 
-    //
-    // Start persistence code
-    // WARNING: DO NOT EDIT
-    //
-    @Id
-    private int id;
+	//
+	// Start persistence code
+	// WARNING: DO NOT EDIT
+	//
+	@Id
+	private int id;
 
-    @NotNull
-    private String playerName;
-    @NotNull
-    private int points;
-    @NotEmpty
-    private String rank;
+	@NotNull
+	private String playerName;
+	@NotNull
+	private int points;
+	@NotNull
+	private int kills;
+	@NotNull
+	private int wins;
+	@NotEmpty
+	private String rank;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getRank() {
-        return rank;
-    }
+	public String getRank() {
+		return rank;
+	}
 
-    public void setRank(String rank) {
-        this.rank = rank;
-    }
+	public int getKills() {
+		return kills;
+	}
+	
+	public int getWins(){
+		return wins;
+	}
 
-    public String getPlayerName() {
-        return playerName;
-    }
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
 
-    public void setPlayerName(String ply) {
-        this.playerName = ply;
-    }
+	public String getPlayerName() {
+		return playerName;
+	}
 
-    public Player getPlayer() {
-        return Bukkit.getServer().getPlayer(playerName);
-    }
+	public void setPlayerName(String ply) {
+		this.playerName = ply;
+	}
 
-    public void setPlayer(Player player) {
-        this.playerName = player.getName();
-    }
+	public Player getPlayer() {
+		return Bukkit.getServer().getPlayer(playerName);
+	}
 
-    public int getPoints() {
-        return points;
-    }
+	public void setPlayer(Player player) {
+		this.playerName = player.getName();
+	}
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
+	public int getPoints() {
+		return points;
+	}
 
-    //
-    // End persistence code
-    //
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
+	public void setKills(int kills) {
+		this.kills = kills;
+	}
+	
+	public void setWins(int wins) {
+		this.wins = wins;
+	}
+
+	//
+	// End persistence code
+	//
+
+	public PlayerData() {
+		//TODO Just no...
+	}
+
+	public PlayerData(Player p) {
+		this.playerName = p.getName();
+		this.kills = 0;
+		this.points = 0;
+		this.rank = "&f[M]";
+		if (PlayerNameUtil.getDevs().contains(p.getName()) || PlayerNameUtil.getAwesomePeople().contains(p.getName())) {
+			this.setRank("&dOMG&eITS");
+		}
+	}
+
+	public void addPoints(int points) {
+		setPoints(getPoints() + points);
+	}
+
+	public void removePoints(int points) {
+		setPoints(getPoints() - points);
+	}
+
+	public void addKill() {
+		setKills(getKills() + 1);
+	}
+
+	public void addKills(int kills) {
+		setKills(getKills() + kills);
+	}
+
+	public void removeKills(int kills) {
+		setKills(getKills() - kills);
+	}
+
+	public void addWin() {
+		setWins(getWins() + 1);
+	}
+	
+	public void addWins(int wins) {
+		setKills(getKills() + wins);
+	}
+
+	public void removeWins(int wins) {
+		setKills(getKills() - wins);
+	}
 }

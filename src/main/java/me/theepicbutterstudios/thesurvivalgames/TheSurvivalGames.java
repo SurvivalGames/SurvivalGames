@@ -5,27 +5,34 @@
  */
 package me.theepicbutterstudios.thesurvivalgames;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.PersistenceException;
+
 import me.theepicbutterstudios.thesurvivalgames.command.CommandHandler;
 import me.theepicbutterstudios.thesurvivalgames.command.PartyCommandHandler;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.CreateCommand;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.HelpCommand;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.JoinCommand;
 import me.theepicbutterstudios.thesurvivalgames.command.subcommands.UserCommand;
-import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.*;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.ChatCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.DeclineCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.InviteCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.LeaveCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.ListCommand;
+import me.theepicbutterstudios.thesurvivalgames.command.subcommands.party.PromoteCommand;
 import me.theepicbutterstudios.thesurvivalgames.listeners.EntityDamageListener;
 import me.theepicbutterstudios.thesurvivalgames.listeners.ItemListener;
 import me.theepicbutterstudios.thesurvivalgames.listeners.SetupListener;
 import me.theepicbutterstudios.thesurvivalgames.managers.ArenaManager;
 import me.theepicbutterstudios.thesurvivalgames.objects.PlayerData;
 import me.theepicbutterstudios.thesurvivalgames.runnables.Scoreboard;
+
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import javax.persistence.PersistenceException;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TheSurvivalGames extends JavaPlugin {
 
@@ -108,8 +115,7 @@ public class TheSurvivalGames extends JavaPlugin {
     public PlayerData getPlayerData(Player player) {
         PlayerData data = getDatabase().find(PlayerData.class).where().ieq("playerName", player.getName()).findUnique();
         if (data == null) {
-            data = new PlayerData();
-            //TODO Add default PlayerData vars here
+            data = new PlayerData(player);
         }
 
         return data;
