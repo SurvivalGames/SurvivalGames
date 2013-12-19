@@ -23,6 +23,7 @@ public class SGArena {
     public int maxPlayers;
     public int minPlayers;
     List<String> players = new ArrayList<String>();
+    public Scoreboard scoreboard;
 
     /**
      * Name: ArenaState.java Edited: 8 December 2013
