@@ -1,5 +1,5 @@
 name: The Survival Games
-main: me.theepicbutterstudios.thesurvivalgames.TheSurvivalGames
+main: com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames
 version: 1.0.0
 author: The Community!
 database: true
