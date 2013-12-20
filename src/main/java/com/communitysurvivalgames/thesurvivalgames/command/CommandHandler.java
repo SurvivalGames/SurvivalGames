@@ -67,7 +67,7 @@ public class CommandHandler implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
 		if (command.getName().equalsIgnoreCase("sg") && sender instanceof Player) {
-			if (args.length == 4) {
+			if (args.length == 5) {
 				try {
 					getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2], args[3], args[4], args[5] });
 				} catch (CommandException e) {
