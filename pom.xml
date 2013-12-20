@@ -7,6 +7,12 @@
     <packaging>jar</packaging>
 
     <name>TheSurvivalGames</name>
+
+    <scm>
+        <connection>scm:git:https://github.com/SurvivalGamesDevTeam/survivalgamesdevteam.github.io.git</connection>
+        <developerConnection>scm:git:https://github.com/SurvivalGamesDevTeam/survivalgamesdevteam.github.io.git</developerConnection>
+        <url>https://github.com/SurvivalGamesDevTeam/TheSurvivalGames</url>
+    </scm>
     
     <profiles>
         <profile>
