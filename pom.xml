@@ -157,14 +157,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-file</artifactId>
-                <version>2.2</version>
-            </extension>
-        </extensions>
     </build>
 
     <repositories>
