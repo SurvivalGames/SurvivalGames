@@ -62,7 +62,7 @@
                                         <!-- <dryRun>true</dryRun> -->
                                         <repositoryOwner>SurvivalGamesDevTeam</repositoryOwner>      
                                         <repositoryName>survivalgamesdevteam.github.io</repositoryName>     
-                                        <branch>refs/heads/master</branch>                
+                                        <branch>refs/heads/gh-pages</branch>                
                                         <path>maven/snapshots</path>
 
                                         <!-- This token, obtained from https://github.com/settings/applications, 
