@@ -7,76 +7,7 @@
     <packaging>jar</packaging>
 
     <name>TheSurvivalGames</name>
-
-    <scm>
-        <connection>scm:git:https://github.com/SurvivalGamesDevTeam/survivalgamesdevteam.github.io.git</connection>
-        <developerConnection>scm:git:https://github.com/SurvivalGamesDevTeam/survivalgamesdevteam.github.io.git</developerConnection>
-        <url>https://github.com/SurvivalGamesDevTeam/TheSurvivalGames</url>
-    </scm>
     
-    <profiles>
-        <profile>
-            <id>release</id>
-            <properties>
-                <repository>release</repository>
-                <repository.append>true</repository.append>
-            </properties>
-        </profile>
-        
-        <profile>
-            <id>update-site</id>
-                
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-scm-plugin</artifactId>
-                        <version>1.8.1</version>
-                        <executions>
-                            
-                            <execution>
-                                <id>add-rest</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>add</goal>
-                                </goals>
-                                <configuration>
-                                    <excludes>plugins/**/*</excludes>
-                                </configuration>
-                            </execution>
-                            
-                            <execution>
-                                <id>add-plugins</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>add</goal>
-                                </goals>
-                                <configuration>
-                                    <includes>plugins/**/*</includes>
-                                </configuration>
-                            </execution>
-                            
-                            <execution>
-                                <id>install</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>checkin</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        
-                        <configuration>
-                            <basedir>${repository.base.directory}/${repository}/</basedir>
-                            <developerConnectionUrl>scm:git:https://github.com/SurvivalGamesDevTeam/survivalgamesdevteam.github.io.git</developerConnectionUrl>
-                            <includes>.</includes>
-                        </configuration>
-                        
-                        </plugin>
-                    </plugins>
-                </build>
-            </profile>
-        </profiles>
-
     <build>
         <finalName>TheSurvivalGames</finalName>
 
@@ -116,29 +47,6 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-scm-plugin</artifactId>
-                <version>1.8.1</version>
-                <executions>
-                    <execution>
-                        <id>checkout</id>
-                        <phase>prepare-package</phase>
-                            <goals>
-                                <goal>checkout</goal>
-                            </goals>
-                            <configuration>
-                                <scmVersion>gh-pages</scmVersion>
-                            </configuration>
-                    </execution>
-                </executions>
-                <configuration>
-                    <basedir>${repository.base.directory}/${repository}/</basedir>
-                    <developerConnectionUrl>scm:git:https://github.com/SurvivalGamesDevTeam/survivalgamesdevteam.github.io.git</developerConnectionUrl>
-                    <includes>.</includes>
                 </configuration>
             </plugin>
 
