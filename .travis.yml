@@ -5,4 +5,4 @@ notifications:
   email: false
 env:
   global:
-    secure: af5b94b1d13b8ae4943b810e65dc1e3d565ba6c7  Sooae – Edit
+    secure: 1b821619ed418ccce51b8200a8f10a58bcddd8a6
