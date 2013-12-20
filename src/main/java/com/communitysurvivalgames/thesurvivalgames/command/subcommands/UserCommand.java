@@ -15,14 +15,18 @@ public class UserCommand implements SubCommand {
         if (cmd.equalsIgnoreCase("points") && p.hasPermission("sg.points")) {
             if (args[0].equalsIgnoreCase("set")) {
                 data.setPoints(Integer.parseInt(args[2]));
+                TheSurvivalGames.getPlugin().getDatabase().save(data);
             } else if (args[0].equalsIgnoreCase("add")) {
                 data.setPoints(data.getPoints() + Integer.parseInt(args[2]));
+                TheSurvivalGames.getPlugin().getDatabase().save(data);
             } else if (args[0].equalsIgnoreCase("remove")) {
                 data.setPoints(data.getPoints() - Integer.parseInt(args[2]));
+                TheSurvivalGames.getPlugin().getDatabase().save(data);
             }
         } else if (cmd.equalsIgnoreCase("rank")) {
             if (args[0].equalsIgnoreCase("set")) {
                 data.setRank(args[2].toUpperCase());
+                TheSurvivalGames.getPlugin().getDatabase().save(data);
             }
         }
     }

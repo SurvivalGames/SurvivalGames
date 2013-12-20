@@ -66,10 +66,10 @@ public class Scoreboard implements Runnable {
             sendScore(objective, "&f" + getPlugin().getPlayerData(player).getRank(), 7, complete);
             sendScore(objective, "&0", 6, complete);
             sendScore(objective, "&4&lKills", 5, complete);
-            sendScore(objective, "&f" + getPlugin().getPlayerData(player).getKills(), 4, complete);
+            sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getKills(), 4, complete);
             sendScore(objective, "&c", 3, complete);
             sendScore(objective, "&dWins", 2, complete);
-            sendScore(objective, "&f" + getPlugin().getPlayerData(player).getWins(), 1, complete);
+            sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getWins(), 1, complete);
             return;
         }
         SGArena arena = ArenaManager.getManager().getArena(player);
@@ -108,9 +108,6 @@ public class Scoreboard implements Runnable {
 
         final Score score = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.translateAlternateColorCodes('&', title)));
 
-        if (title.startsWith("$")) {
-            title = "";
-        }
 
         if (complete && value == 0) {
             // Have to use this because the score wouldn't send otherwise
