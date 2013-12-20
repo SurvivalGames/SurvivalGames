@@ -13,11 +13,4 @@ commands:
         usage: /party <command>
         description: Base command for all party related functions
         aliases: [team, p] 
-permissions:
-    sg.*:
-        description: Allows you to run EVERY LAST SG COMMAND!
-        children:
-            sg.admin
-            sg.mod
-            sg.player
 # Rest Indev

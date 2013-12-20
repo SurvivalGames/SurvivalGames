@@ -1,82 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.communitysurvivalgames</groupId>
+    <groupId>com.communitysurvivalgames.thesurvivalgames</groupId>
     <artifactId>TheSurvivalGames</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>TheSurvivalGames</name>
-
-    <scm>
-        <connection>scm:git:https://github.com/SurvivalGamesDevTeam/survivalgamesdevteam.github.io.git</connection>
-        <developerConnection>scm:git:https://github.com/SurvivalGamesDevTeam/survivalgamesdevteam.github.io.git</developerConnection>
-        <url>https://github.com/SurvivalGamesDevTeam/TheSurvivalGames</url>
-    </scm>
     
-    <profiles>
-        <profile>
-            <id>release</id>
-            <properties>
-                <repository>release</repository>
-                <repository.append>true</repository.append>
-            </properties>
-        </profile>
-        
-        <profile>
-            <id>update-site</id>
-                
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-scm-plugin</artifactId>
-                        <version>1.8.1</version>
-                        <configuration>
-                            <basedir>${repository.base.directory}/${repository}/</basedir>
-                            <developerConnectionUrl>scm:git:https://github.com/SurvivalGamesDevTeam/survivalgamesdevteam.github.io.git</developerConnectionUrl>
-                            <includes>.</includes>
-                        </configuration>
-
-                        <executions>
-                            
-                            <execution>
-                                <id>add-rest</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>add</goal>
-                                </goals>
-                                <configuration>
-                                    <excludes>plugins/**/*</excludes>
-                                </configuration>
-                            </execution>
-                            
-                            <execution>
-                                <id>add-plugins</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>add</goal>
-                                </goals>
-                                <configuration>
-                                    <includes>plugins/**/*</includes>
-                                </configuration>
-                            </execution>
-                            
-                            <execution>
-                                <id>install</id>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>checkin</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        
-                        </plugin>
-                    </plugins>
-                </build>
-            </profile>
-        </profiles>
-
     <build>
         <finalName>TheSurvivalGames</finalName>
 
@@ -89,6 +20,7 @@
                 <directory>${basedir}/src/main/resources/</directory>
                 <includes>
                     <include>*.yml</include>
+                    <include>*.properties</include>
                 </includes>
             </resource>
         </resources>
@@ -109,6 +41,52 @@
         </pluginManagement>
 
         <plugins>
+                                    <plugin>
+                                <artifactId>maven-deploy-plugin</artifactId>
+                                <version>2.7</version>
+                                <configuration>
+                                        <altDeploymentRepository>internal.repo::default::file://${built.repo.dir}</altDeploymentRepository>
+                                </configuration>
+                        </plugin>
+
+                        <plugin>
+                                <groupId>com.github.github</groupId>
+                                <artifactId>site-maven-plugin</artifactId>
+                                <version>0.8</version>
+                                <configuration>
+                                        <message>Added artifacts</message>
+                                        <noJekyll>true</noJekyll>                                                                           <!-- disable webpage processing -->
+                                        <outputDirectory>${built.repo.dir}</outputDirectory>
+                                        <!-- This isn't perfect, because every old SNAPSHOT is kept.. -->
+                                        <merge>true</merge>
+
+                                        <!-- <dryRun>true</dryRun> -->
+                                        <repositoryOwner>SurvivalGamesDevTeam</repositoryOwner>      
+                                        <repositoryName>survivalgamesdevteam.github.io</repositoryName>     
+                                        <branch>refs/heads/gh-pages</branch>                
+                                        <path>maven/snapshots</path>
+
+                                        <!-- This token, obtained from https://github.com/settings/applications, 
+                                                encrypted using http://about.travis-ci.org/docs/user/build-configuration/#Secure-environment-variables, 
+                                                is like a password; encrypt & guard it carefully! -->
+                                        <oauth2Token>${env.TOKEN}</oauth2Token>
+
+                                        <includes>
+                                                <include>**/*</include>
+                                        </includes>
+                                </configuration>
+                                <executions>
+                                        <!-- run site-maven-plugin's 'site' target as part of the build's normal 
+                                                'deploy' phase -->
+                                        <execution>
+                                                <goals>
+                                                        <goal>site</goal>
+                                                </goals>
+                                                <phase>deploy</phase>
+                                        </execution>
+                                </executions>
+                        </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -117,30 +95,6 @@
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-scm-plugin</artifactId>
-                <version>1.8.1</version>
-                <configuration>
-                    <basedir>${repository.base.directory}/${repository}/</basedir>
-                    <developerConnectionUrl>scm:git:https://github.com/SurvivalGamesDevTeam/survivalgamesdevteam.github.io.git</developerConnectionUrl>
-                    <includes>.</includes>
-                </configuration>
-
-                <executions>
-                    <execution>
-                        <id>checkout</id>
-                        <phase>prepare-package</phase>
-                            <goals>
-                                <goal>checkout</goal>
-                            </goals>
-                            <configuration>
-                                <scmVersion>gh-pages</scmVersion>
-                            </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
