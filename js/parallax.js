@@ -26,7 +26,6 @@
         var paddingTop = 0;
 
         //get the starting position of each element to have parallax applied to it		
-        //TODO This isn't working right, causes images to spaz at top and bottom of pages
         jQuerythis.each(function() {
             firstTop = jQuerythis.offset().top;
         });
@@ -59,6 +58,7 @@
                 var height = getHeight(jQueryelement);
 
                 // Check if totally above or totally below viewport
+                //TODO This isn't working right, causes images to spaz at top and bottom of pages
                 if (top + height < pos || top > pos + windowHeight) {
                     return;
                 }
