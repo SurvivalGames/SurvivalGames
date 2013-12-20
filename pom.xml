@@ -40,6 +40,52 @@
         </pluginManagement>
 
         <plugins>
+                                    <plugin>
+                                <artifactId>maven-deploy-plugin</artifactId>
+                                <version>2.7</version>
+                                <configuration>
+                                        <altDeploymentRepository>internal.repo::default::file://${built.repo.dir}</altDeploymentRepository>
+                                </configuration>
+                        </plugin>
+
+                        <plugin>
+                                <groupId>com.github.github</groupId>
+                                <artifactId>site-maven-plugin</artifactId>
+                                <version>0.8</version>
+                                <configuration>
+                                        <message>Added artifacts</message>
+                                        <noJekyll>true</noJekyll>                                                                           <!-- disable webpage processing -->
+                                        <outputDirectory>${built.repo.dir}</outputDirectory>
+                                        <!-- This isn't perfect, because every old SNAPSHOT is kept.. -->
+                                        <merge>true</merge>
+
+                                        <!-- <dryRun>true</dryRun> -->
+                                        <repositoryOwner>SurvivalGamesDevTeam</repositoryOwner>      
+                                        <repositoryName>survivalgamesdevteam.github.io</repositoryName>     
+                                        <branch>refs/heads/master</branch>                
+                                        <path>maven/snapshots</path>
+
+                                        <!-- This token, obtained from https://github.com/settings/applications, 
+                                                encrypted using http://about.travis-ci.org/docs/user/build-configuration/#Secure-environment-variables, 
+                                                is like a password; encrypt & guard it carefully! -->
+                                        <oauth2Token>${env.TOKEN}</oauth2Token>
+
+                                        <includes>
+                                                <include>**/*</include>
+                                        </includes>
+                                </configuration>
+                                <executions>
+                                        <!-- run site-maven-plugin's 'site' target as part of the build's normal 
+                                                'deploy' phase -->
+                                        <execution>
+                                                <goals>
+                                                        <goal>site</goal>
+                                                </goals>
+                                                <phase>deploy</phase>
+                                        </execution>
+                                </executions>
+                        </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
