@@ -11,6 +11,7 @@ public class UserCommand implements SubCommand {
 
     @Override
     public void execute(String cmd, Player p, String[] args) {
+    	//TODO Something is getting Null Pointered here every single time - probably SQL save function, can't be sure
         PlayerData data = TheSurvivalGames.getPlugin().getPlayerData(Bukkit.getPlayer(args[1]));
         if (cmd.equalsIgnoreCase("points") && p.hasPermission("sg.points")) {
             if (args[0].equalsIgnoreCase("set")) {
