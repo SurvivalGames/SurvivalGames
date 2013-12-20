@@ -69,19 +69,19 @@ public class CommandHandler implements CommandExecutor {
 		if (command.getName().equalsIgnoreCase("sg") && sender instanceof Player) {
 			if (args.length == 5) {
 				try {
-					getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2], args[3], args[4], args[5] });
+					getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2], args[3], args[4] });
 				} catch (CommandException e) {
 					sender.sendMessage(/* error prefix */"Command does not exist!");
 				}
 			} else if (args.length == 4) {
 				try {
-					getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2], args[3], args[4] });
+					getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2], args[3] });
 				} catch (CommandException e) {
 					sender.sendMessage(/* error prefix */"Command does not exist!");
 				}
 			} else if (args.length == 3) {
 				try {
-					getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2], args[3] });
+					getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2] });
 				} catch (CommandException e) {
 					sender.sendMessage(/* error prefix */"Command does not exist!");
 				}
