@@ -99,7 +99,7 @@ jQuery('#counter-2').appear(function() {
 jQuery('#counter-3').appear(function() {
     $('#counter-3').countTo({
         from: 0,
-        to: 7000,
+        to: 11000,
         speed: 4000,
         refreshInterval: 50,
         onComplete: function(value) {
