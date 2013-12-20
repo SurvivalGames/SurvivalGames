@@ -60,16 +60,16 @@ public class Scoreboard implements Runnable {
         if (!ArenaManager.getManager().isInGame(player)) {
             objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lWelcome, " + player.getDisplayName()));
             sendScore(objective, "&a&lPoints", 11, complete);
-            sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints(), 10, complete);
+            sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "   ", 10, complete);
             sendScore(objective, "&r", 9, complete);
             sendScore(objective, "&e&lRank", 8, complete);
             sendScore(objective, "&f" + getPlugin().getPlayerData(player).getRank(), 7, complete);
             sendScore(objective, "&0", 6, complete);
             sendScore(objective, "&4&lKills", 5, complete);
-            sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getKills(), 4, complete);
+            sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getKills() + "  ", 4, complete);
             sendScore(objective, "&c", 3, complete);
             sendScore(objective, "&dWins", 2, complete);
-            sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getWins(), 1, complete);
+            sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getWins() + " ", 1, complete);
             return;
         }
         SGArena arena = ArenaManager.getManager().getArena(player);
