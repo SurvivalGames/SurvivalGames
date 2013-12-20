@@ -5,4 +5,4 @@ notifications:
   email: false
 env:
   global:
-    secure: "15a8a76a4b313d01d997b17b2604e44dfe056e54"
+    secure:
