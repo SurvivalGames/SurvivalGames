@@ -62,8 +62,6 @@
                         <configuration>
                             <basedir>${repository.base.directory}/${repository}/</basedir>
                             <developerConnectionUrl>scm:git:https://github.com/SurvivalGamesDevTeam/survivalgamesdevteam.github.io.git</developerConnectionUrl>
-                            <username>uibindings-build-user</username>
-                            <password>${uibindings-build-user.password}</password>
                             <includes>.</includes>
                         </configuration>
                         
@@ -127,15 +125,13 @@
                                 <goal>checkout</goal>
                             </goals>
                             <configuration>
-                                <scnVersion>gh-pages</scnVersion>
+                                <scmVersion>gh-pages</scmVersion>
                             </configuration>
                     </execution>
                 </executions>
                 <configuration>
                     <basedir>${repository.base.directory}/${repository}/</basedir>
                     <developerConnectionUrl>scm:git:https://github.com/SurvivalGamesDevTeam/survivalgamesdevteam.github.io.git</developerConnectionUrl>
-                    <username>uibindings-build-user</username>
-                    <password>${uibindings-build-user-password}</password>
                     <includes>.</includes>
                 </configuration>
             </plugin>
@@ -157,6 +153,7 @@
                     </execution>
                 </executions>
             </plugin>
+        </plugins>
     </build>
 
     <repositories>
