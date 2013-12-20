@@ -57,7 +57,7 @@ public class Scoreboard implements Runnable {
 
     private void updateScoreboard(Player player, boolean complete) {
         final Objective objective = player.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
-        if (ArenaManager.getManager().isInGame(player)) {
+        if (!ArenaManager.getManager().isInGame(player)) {
             objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lWelcome, " + player.getDisplayName()));
             sendScore(objective, "&a&lPoints", 11, complete);
             sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints(), 10, complete);
