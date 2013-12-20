@@ -3,9 +3,6 @@ jdk:
   - oraclejdk7
 notifications:
   email: false
-deploy:
-  provider: openshift
-  user: "woodyc40@gmail.com"
-  password: "TheSGDev"
-  domain: "sgdevteam"
-  skip_cleanup: true
+env:
+  global:
+    secure: af5b94b1d13b8ae4943b810e65dc1e3d565ba6c7  Sooae – Edit
