@@ -26,7 +26,7 @@ Until a translator got around to it, then it would look like:
 
 Once you have updated all the language files, the final log line would look like this:
 
-```Bukkit.getLogger.log(Level.INFO, I18N.getLocaleString("BEEN_DISABLED")```
+```Bukkit.getLogger.log(Level.INFO, I18N.getLocaleString("HELLO_WORLD")```
 
 That’s it!  Thanks for helping make out plugin go international!
 
