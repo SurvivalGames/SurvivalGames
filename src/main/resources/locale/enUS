@@ -5,6 +5,7 @@ LOCALE_LOADED = English language file loaded!
 BEEN_ENABLED = has been enabled!
 COMMUNITY_PROJECT = is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/
 BEEN_DISABLED = was disabled.
+SURVIVAL_GAMES = Survival Games
 
 # Scoreboard #
 COULD_NOT_CREATE = The scoreboard could not be created for player
@@ -13,3 +14,12 @@ POINTS = Points
 RANK = Rank
 KILLS = Kills
 WINS = Wins
+WAITING_FOR_PLAYERS = Waiting For Players...
+MAX_PLAYERS = Max Players
+MIN_PLAYERS = Min Players
+PLAYERS = Players
+CLASS = Class
+
+# Command Handler #
+NO_COMMAND = Command does not exist!
+ONLY_PLAYERS = This command may only executed by players!
