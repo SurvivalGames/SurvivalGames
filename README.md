@@ -7,6 +7,9 @@ Downloadables here:
 https://github.com/SurvivalGamesDevTeam/Builds/tree/master/com/communitysurvivalgames/thesurvivalgames/TheSurvivalGames
 
 **[ANNOUNCEMENT|AgentTroll]**
+All developers should read the tutorial for developing on the new multilingual string system here:  https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/blob/master/I18N_TUTORIAL.md
+
+**[ANNOUNCEMENT|AgentTroll]**
 Format is important: All classes should be based off of the Help SubCommand class with the titling comment and comments for each method. All indentations should be SPACES, not tabs. They should be 4 spaces, not 8 as well. **ALL CODE MUST BE IN JAVA 6**
 
 **[ANNOUNCEMENT|Quantum64]**
