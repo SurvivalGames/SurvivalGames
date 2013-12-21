@@ -1,0 +1,391 @@
+@charset "UTF-8";
+/* CSS Document */
+
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('../font/BebasNeue-webfont.eot');
+    src: url('../font/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/BebasNeue-webfont.woff') format('woff'),
+         url('../font/BebasNeue-webfont.ttf') format('truetype'),
+         url('../font/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+#lissa{
+	display: none;
+}
+
+*{
+	outline:none;
+	text-decoration: none;
+}
+
+body{
+	border-top: 10px solid #393939;}
+
+h1{
+	text-align: center;
+}
+
+#desktopnav{
+	display: none;
+}
+
+header{
+	background-color: #f6f6f6;
+	padding-bottom: 70px;
+	margin-bottom: 70px;
+	padding-top: 10px;
+}
+
+#header{
+	margin: 0 auto;
+	width: 90%;
+	max-width: 1000px;
+}
+
+
+#logo{
+	width: 160px;
+	margin: 80px 0 100px 0;
+}
+
+#container{
+	margin: 0 auto;
+	width: 90%;
+	max-width: 1000px;
+}
+nav{
+	text-align: center;
+}
+
+nav li{
+	line-height: 50px;
+}
+
+nav a{
+	display: block;
+	letter-spacing: 1px;
+}
+
+nav li, nav a{
+	font-family: 'BebasNeueRegular', Arial, serif; 
+	color: #393939;
+	text-transform: uppercase;
+	font-size: 32px;
+}
+
+
+#top{
+	float: right;
+	color: #adacac;
+	font-size: 1px;
+	margin-top: -50px;
+	font-family:"ff-tisa-web-pro";
+	font-weight: lighter;
+}
+
+#menu{
+	border-bottom: 1px solid #d6d6d6;
+	padding-bottom: 5px;
+}
+
+.menuitem{
+	display: none;
+}
+
+#headertitle{
+	font-size: 50px;
+	font-family: 'BebasNeueRegular', Arial, serif;
+	color: #393939;
+	text-align: center;
+}
+
+#headersubtitle{
+	margin-top: 5px;
+	text-align: center;
+	color: #adacac;
+	font-size: 20px;
+	line-height: 28px;
+	font-family:"ff-tisa-web-pro";
+	font-weight: lighter;
+}
+
+#headersubtitle a{
+	color: #393939;
+	font-family:"ff-tisa-web-pro";
+}
+
+#headersubtitle a:hover{
+	color: #adacac;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
+}
+
+#abouttitle, #showcasetitle, #contacttitle{
+	font-size: 30px;
+	font-family: 'BebasNeueRegular', Arial, serif;
+	color: #393939;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#showcasesubtitle{
+	margin-bottom: 50px;
+}
+
+#aboutcontent, #showcasesubtitle{
+	color: #adacac;
+	font-size: 20px;
+	line-height: 28px;
+	text-align: center;
+	font-family:"ff-tisa-web-pro";
+	font-weight: lighter;
+}
+
+#showcase a:hover, #contactinfo a:hover{
+	color: #393939;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
+}
+
+#about, #showcase{
+	padding-bottom: 70px;
+	margin-bottom: 70px;
+	border-bottom: 1px solid #d6d6d6;
+}
+
+#contact{
+	padding-bottom: 70px;
+	margin-bottom: 70px;
+}
+
+.project{
+	border:1px solid #d6d6d6;
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+
+.projectinfo{
+	margin: 20px 0 20px 0;
+}
+
+.projectinfo, #showcase a{
+	color: #adacac;
+	font-size: 20px;
+	text-align: center;
+	line-height: 28px;
+	font-family:"ff-tisa-web-pro";
+	font-weight: lighter;
+}
+
+.showcaselinktitle, .projecttitle{
+	font-size: 20px;
+	font-family: 'BebasNeueRegular', Arial, serif;
+	color: #393939;
+	display: block;
+	letter-spacing: 1px;
+	margin-bottom: 5px;
+}
+
+.links{
+	text-align: center;
+	margin-bottom: 70px;
+}
+
+
+footer{
+	padding: 20px 0 30px 0;
+	margin-top: 70px;
+	border-top: 1px solid #d6d6d6;
+	text-align: center;
+	display: block;
+}
+
+#facebook{
+	display: none;
+}
+
+#top{
+	color: #adacac;
+	font-size: 20px;
+	font-weight: lighter;
+	float: right;
+	font-family:"ff-tisa-web-pro";
+}
+
+#hireme{
+	color: #393939;
+	font-size: 20px;
+	text-align: center;
+	line-height: 28px;
+	font-family:"ff-tisa-web-pro";
+	font-weight: lighter;
+}
+
+#hireme:hover{
+	color: #adacac;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
+}
+
+/* -------------------------- CONTACT -------------------------- */
+
+#contactinfo{
+	display: none;
+}
+
+#send{
+	background-color: transparent;
+	border: none;
+	color: #393939;
+	font-size: 25px;
+	font-family: 'BebasNeueRegular', Arial, serif;
+	font-weight: lighter;
+	letter-spacing: 1px;
+}
+
+#response{
+	color: #adacac;
+	font-size: 20px;
+	line-height: 28px;
+	font-family:"ff-tisa-web-pro";
+	font-weight: lighter;
+}
+
+#name, #email{
+	border: none;
+	border-bottom: 1px dashed #393939;
+	height: 30px;
+	margin-bottom: 40px;
+	color: #adacac;
+	font-size: 20px;
+	line-height: 28px;
+	font-family:"ff-tisa-web-pro";
+	font-weight: lighter;
+}
+
+#message{
+	border: none;
+	background-image: url(../img/bginput.png);
+	margin-bottom: 40px;
+	color: #adacac;
+	font-size: 20px;
+	line-height: 35px;
+	font-family:"ff-tisa-web-pro";
+	font-weight: lighter;
+	overflow:hidden;
+	height: 30px;
+	resize: none;
+}
+
+#divform{
+	text-align: center;
+}
+
+table{
+	min-width: 99%;
+	margin: 0 auto;
+}
+
+#contacttitle{
+	margin-bottom: 50px;
+}
+
+#name, #email, #message{
+	width:90%;
+	margin-top: 5px;
+	max-width: 450px;
+	}
+
+form table label{
+	color: #adacac;
+	font-size: 16px;
+	line-height: 20px;
+	font-family:"ff-tisa-web-pro";
+	font-weight: lighter;
+	color: #393939;
+	text-align: left;
+}
+
+
+
+
+/* -------------------------- 404 -------------------------- */
+#content404{
+   width: 684px;
+   height: 396px;
+   position: absolute;
+   left: 50%;
+   top: 50%; 
+   margin-left: -342px;
+   margin-top: -250px;
+}
+
+#pendulum{
+	margin: -317px 0 0 -136px;
+}
+
+#draad{
+	-webkit-animation: swinging 3s infinite ease-in-out;
+	-webkit-transform-origin: right top;
+}
+
+
+#body404{
+	background-color: #F6F6F6;
+}
+
+@-webkit-keyframes swinging {
+    0% {
+        -webkit-transform: rotate(15deg);
+    }
+
+    50% {
+        -webkit-transform: rotate(-5deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(15deg);
+    }
+}
+
+#content404 p{
+	color: #adacac;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size:25px;
+	line-height: 35px;
+	text-align: center;
+	margin-top: -130px;
+}
+
+#content404 a{
+	color: #393939;
+}
+
+#content404 a:hover{
+	color:#adacac;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
