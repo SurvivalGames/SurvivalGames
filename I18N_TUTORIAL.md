@@ -1,6 +1,8 @@
+Multilingual Tutorial
+=====
 Our plugin supports Multilanguage, but for this to function properly, we need bout out developers and translators to follow certain guidelines.
 
-For our developers:  (Translators, you are further down the page)
+***For our developers:***  (Translators, you are further down the page)
 
 From now on, all strings added that are printed to the console or displayed to MUST be localized in the language files.
 
@@ -29,7 +31,7 @@ Once you have updated all the language files, the final log line would look like
 That’s it!  Thanks for helping make out plugin go international!
 
 
-Translators Tutorial:
+***Translators Tutorial:***
 
 The language files are located in the main/src/resources/lang folder of out GitHub repository.  Find your language file, we will use Indonesian here as an example.  Download both your language file (idID) and the English file (enUS) and open both of them in your favorite text editor.  If you see no lines that begin with a “#” then everything has already been translated, but if you see a line that begins with a hashtag, find the corresponding label in the enUS file, and translate the text from English to your language after the equals sign, and also sans the hashtag.
 
