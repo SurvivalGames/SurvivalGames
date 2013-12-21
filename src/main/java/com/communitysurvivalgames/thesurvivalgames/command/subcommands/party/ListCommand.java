@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.local.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 
@@ -44,7 +45,7 @@ public class ListCommand implements SubCommand {
 
                 sender.sendMessage(list);
             } else {
-                sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You are not in a party");
+                sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NO_PARTY_2"));
             }
         }
     }
@@ -76,10 +77,10 @@ public class ListCommand implements SubCommand {
 
                 sender.sendMessage(list);
             } else {
-                sender.sendMessage(org.bukkit.ChatColor.YELLOW + args + " is not in a party");
+                sender.sendMessage(org.bukkit.ChatColor.YELLOW + args + I18N.getLocaleString("NOT_IN_PARTY"));
             }
         } else {
-            sender.sendMessage(org.bukkit.ChatColor.YELLOW + args + " is not online");
+            sender.sendMessage(org.bukkit.ChatColor.YELLOW + args + I18N.getLocaleString("NOT_IN_PARTY"));
         }
     }
 }

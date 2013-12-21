@@ -1,5 +1,11 @@
+# English, United States - Java I18N standard language file
+
+# Load #
 LOCALE_NAME = English
 LOCALE_LOADED = English language file loaded!
+
+# General #
+PLAYER = Player
 
 # Enable #
 BEEN_ENABLED = has been enabled!
@@ -51,3 +57,41 @@ COMMAND_HELP_13 = /sg leave: Leaves an arena
 COMMAND_HELP_14 = /sg start [Arena ID][State ID]: Puts the game into a defined state
 COMMAND_HELP_15 = /sg stop [Arena ID]: Stops the arena and rollsback
 COMMAND_HELP_16 = End of help
+
+# Party Commands #
+NO_CHAT = You are no longer party chatting
+CHAT = You are now party chatting
+PARTY_TO_CHAT = You must be in a party to use party chat
+HAS_DECLINED =  has declined your invitation
+YOU_DECLINED =  You have declined 
+INVITATION = 's invitation
+NO_INVITE = You do not have a pending invite
+NOT_LEADER = You must be the party leader to send invites
+PARTY_FULL = Your party is full
+IN_PARTY =  is already in a party
+PENDING_INVITE =  already has a pending invite from you
+INVIEED_TO_PARTY = You have been invited to a party by 
+YOU_INVITED = You have invited 
+TO_JOIN_PARTY = to join your party
+COULD_NOT_FIND_INVITE = Could not find player 
+YOU_JOINED = You have joined 
+PARTY = 's party
+JOINED_YOUR_PARTY =  has joined your party
+PARTY_FULL_2 = The party is full
+NO_PARTY = The party does not exist
+NO_INVITE = You do not have a pending invite
+KICKED_FROM_PARTY =  was kicked from the party
+KICKED_FROM_PARTY_2 = You were kicked from the party
+NOT_IN_YOUR_PARTY =  is not in your party
+LEADER_TO_KICK = You must be the party leader to kick another player
+NO_PARTY_2 = You are not in a party
+LEFT_PARTY =  has left the party
+YOU_LEFT_PARTY = You have left the party
+NOT_ONLINE =  is not online
+NOT_IN_PARTY =  is not in a party
+LEADER_TO_PROMOTE = You must be the party leader to promote another player
+PROMOTED = You have promoted
+TO_LEADER =  to leader
+PROMOTED_YOU = has promoted you to leader
+
+# Party Help Command Menu - NOTE: Please do not translate commands

@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.local.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 
@@ -29,16 +30,16 @@ public class DeclineCommand implements SubCommand {
                 if (party != null) {
                     Player player = Bukkit.getServer().getPlayer(party.getLeader());
                     if (player != null) {
-                        player.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + " has declined your invitation");
+                        player.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + I18N.getLocaleString("HAS_DECLINED"));
                     }
                     if (party.hasNoMembers()) {
                         PartyManager.endParty(party.getLeader(), id);
-                        sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You have declined " + party.getLeader() + "'s invitation");
+                        sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("YOU_DECLINED") + party.getLeader() + I18N.getLocaleString("INVITATION"));
                     }
                 }
                 PartyManager.getPartyManager().getInvites().remove(sender.getName());
             } else {
-                sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You do not have a pending invite");
+                sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NO_INVITE"));
             }
 
         }
