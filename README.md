@@ -6,7 +6,7 @@ Team members may get a copy of the latest build. [![Build Status](https://travis
 Downloadables here:
 https://github.com/SurvivalGamesDevTeam/Builds/tree/master/com/communitysurvivalgames/thesurvivalgames/TheSurvivalGames
 
-**[ANNOUNCEMENT|AgentTroll]**
+**[ANNOUNCEMENT|Quantum64]**
 All developers should read the tutorial for developing on the new multilingual string system here:  https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/blob/master/I18N_TUTORIAL.md
 
 **[ANNOUNCEMENT|AgentTroll]**
