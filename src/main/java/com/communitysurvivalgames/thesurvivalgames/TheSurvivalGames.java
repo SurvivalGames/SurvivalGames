@@ -50,24 +50,28 @@ public class TheSurvivalGames extends JavaPlugin {
 		if (!i18N.exists()) {
 			saveResource("I18N.yml", false);
 		}
-		FileConfiguration users = YamlConfiguration.loadConfiguration(i18N);
+		FileConfiguration lang = YamlConfiguration.loadConfiguration(i18N);
 		
 		I18N.setupLocale();
-		I18N.setLocale(users.getString("language"));
+		I18N.setLocale(lang.getString("language"));
+		
+		//TODO Add more languages!
+		saveResource("enUS", true);
+		saveResource("idID", true);
 
 		registerAll();
 		setupDatabase();
 		ArenaManager am = new ArenaManager(this);
 		am.loadGames();
 
-		getLogger().info("has been enabled!");
-		getLogger().info("is a community project, join at http://dev.bukkit.org/bukkit-plugins/the-survival-games/");
+		getLogger().info(I18N.getLocaleString("BEEN_ENABLED"));
+		getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
 		saveDefaultConfig();
 	}
 
 	@Override
 	public void onDisable() {
-		getLogger().info("was disabled.");
+		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
 	}
 
 	public void registerAll() {
