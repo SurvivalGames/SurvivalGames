@@ -8,23 +8,23 @@ There is a semi-automatic method of doing this.  Here’s how:
 
 So say you wanted to print “Hello World!” to the console, you would normally do this:
 
-'''Bukkit.getLogger.log(Level.INFO, “Hello World!”);'''
+```Bukkit.getLogger.log(Level.INFO, “Hello World!”);```
 
 With I18N, you would edit the enUS language file with the text editor of your choice, and under the correct section you would add the line:
 
-'''HELLO_WORLD =  Hello World!'''
+```HELLO_WORLD =  Hello World!```
 
 Do the same for every other language file we currently have, except leave the field after the equals sign blank, and comment out the line completely with a “#”.  This signals to our translators that this line needs to be translated, when the line is commented out, the plugin will automatically fall back to the English version, to avoid null pointers.  So the idID file (Indonesian) version would look like this:
 
-'''#HELLO_WORLD = '''
+```#HELLO_WORLD = ```
 
 Until a translator got around to it, then it would look like:
 
-'''HELLO_WORLD = Halo Dunia!'''
+```HELLO_WORLD = Halo Dunia!```
 
 Once you have updated all the language files, the final log line would look like this:
 
-'''Bukkit.getLogger.log(Level.INFO, I18N.getLocaleString("BEEN_DISABLED")'''
+```Bukkit.getLogger.log(Level.INFO, I18N.getLocaleString("BEEN_DISABLED")```
 
 That’s it!  Thanks for helping make out plugin go international!
 
@@ -37,17 +37,17 @@ Here is an example:
 
 English file (enUS):
 
-'''HELLO_WORLD =  Hello World!'''
+```HELLO_WORLD =  Hello World!```
  
 Indonesian File (idID):
 
-'''#HELLO_WORLD = '''
+```#HELLO_WORLD = ```
 
 You would change to this:
 
 Indonesian File (idID):
 
-'''HELLO_WORLD = Halo Dunia!'''
+```HELLO_WORLD = Halo Dunia!```
 
 You would then save the file and preferably submit a Pull Request on GitHub, but files can also be emailed to: communitysurvivalgames@gmail.com
 
