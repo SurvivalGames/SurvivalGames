@@ -9,7 +9,7 @@
   <pluginGroups/>
   <servers>
     <server>
-      <id>GitHub credentials</id>
+      <id>github</id>
       <username>${env.CI_DEPLOY_USERNAME}</username>
       <password>${env.CI_DEPLOY_PASSWORD}</password>
     </server>
