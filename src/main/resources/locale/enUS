@@ -26,3 +26,28 @@ ONLY_PLAYERS = This command may only executed by players!
 
 # SG Commands #
 CREATING_ARENA = Creating arena number
+CANT_JOIN = You can't join that arena
+INVALID_ARENA = Invalid arena:
+CHANGED_STATE = Changed the state.
+NOT_VALID = That is not a valid arena
+CANT_FORCE = You can't change force anything yet.
+
+# SG Command Help Menu - NOTE: Please do not translate commands
+NO_HELP = That help page doesn't exist
+NO_PAGE = That's not a real page
+COMMAND_HELP_1 = /sg create: Creates an arena
+COMMAND_HELP_2 = /sg setradius [Arena ID][Radius]: Sets the radius of the arena
+COMMAND_HELP_3 = /sg setlobby [Arena ID]: Sets the lobby spawn
+COMMAND_HELP_4 = /sg setgamespawn [Number]: Set the spawn ingame for the specific point
+COMMAND_HELP_5 = /sg setnextspawn: Set the next spawn in line for the arena
+COMMAND_HELP_6 = /sg setdeathmatch [Number]: Sets the deathmatch spawn at the point
+COMMAND_HELP_7 = /sg setmaxplayers [Number]: Set the max arena capacity
+COMMAND_HELP_8 = /sg setchest [T1/T2]: Set a specific chest tier
+COMMAND_HELP_9 = /sg join [Arena ID]: Joins an arena
+COMMAND_HELP_10 = /sg vote [Number]: Makes you vote for a map
+COMMAND_HELP_11 = /sg bounty [Player][Amount]: Set a bounty for this player
+COMMAND_HELP_12 = /sg sponsor [Player][Amount]: Sponsor a player
+COMMAND_HELP_13 = /sg leave: Leaves an arena
+COMMAND_HELP_14 = /sg start [Arena ID][State ID]: Puts the game into a defined state
+COMMAND_HELP_15 = /sg stop [Arena ID]: Stops the arena and rollsback
+COMMAND_HELP_16 = End of help
