@@ -53,7 +53,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		FileConfiguration users = YamlConfiguration.loadConfiguration(i18N);
 		
 		I18N.setupLocale();
-		I18N.setLocale(users.getString("enUS"));
+		I18N.setLocale(users.getString("language"));
 
 		registerAll();
 		setupDatabase();
