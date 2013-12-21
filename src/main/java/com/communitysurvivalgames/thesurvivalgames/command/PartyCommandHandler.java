@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.HelpCommand;
+import com.communitysurvivalgames.thesurvivalgames.local.I18N;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,13 +68,13 @@ public class PartyCommandHandler implements CommandExecutor {
                 try {
                     getCommand(args[0]).execute(args[0], (Player) sender, new String[]{args[1]});
                 } catch (CommandException e) {
-                    sender.sendMessage(/* error prefix */"Command does not exist!");
+                    sender.sendMessage(/* error prefix */I18N.getLocaleString("NO_COMMAND"));
                 }
             } else if (args.length == 1) {
                 try {
                     getCommand(args[0]).execute(args[0], (Player) sender, new String[]{});
                 } catch (CommandException e) {
-                    sender.sendMessage(/* error prefix */"Command does not exist!");
+                    sender.sendMessage(/* error prefix */I18N.getLocaleString("NO_COMMAND"));
                 }
             } else if (args.length == 0) {
                 HelpCommand.staticExecute((Player) sender, new String[]{});
@@ -83,7 +84,7 @@ public class PartyCommandHandler implements CommandExecutor {
             return true;
 
         } else if (!(sender instanceof Player)) {
-            sender.sendMessage("This command may only executed by players!");
+            sender.sendMessage(I18N.getLocaleString("ONLY_PLAYERS"));
             return true;
         }
 
