@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
 
     <name>TheSurvivalGames</name>
-    
+
     <build>
         <finalName>TheSurvivalGames</finalName>
 
@@ -41,51 +41,27 @@
         </pluginManagement>
 
         <plugins>
-                                    <plugin>
-                                <artifactId>maven-deploy-plugin</artifactId>
-                                <version>2.7</version>
-                                <configuration>
-                                        <altDeploymentRepository>internal.repo::default::file://${built.repo.dir}</altDeploymentRepository>
-                                </configuration>
-                        </plugin>
-
-                        <plugin>
-                                <groupId>com.github.github</groupId>
-                                <artifactId>site-maven-plugin</artifactId>
-                                <version>0.8</version>
-                                <configuration>
-                                        <message>Added artifacts</message>
-                                        <noJekyll>true</noJekyll>                                                                           <!-- disable webpage processing -->
-                                        <outputDirectory>${built.repo.dir}</outputDirectory>
-                                        <!-- This isn't perfect, because every old SNAPSHOT is kept.. -->
-                                        <merge>true</merge>
-
-                                        <!-- <dryRun>true</dryRun> -->
-                                        <repositoryOwner>SurvivalGamesDevTeam</repositoryOwner>      
-                                        <repositoryName>survivalgamesdevteam.github.io</repositoryName>     
-                                        <branch>refs/heads/gh-pages</branch>                
-                                        <path>maven/snapshots</path>
-
-                                        <!-- This token, obtained from https://github.com/settings/applications, 
-                                                encrypted using http://about.travis-ci.org/docs/user/build-configuration/#Secure-environment-variables, 
-                                                is like a password; encrypt & guard it carefully! -->
-                                        <oauth2Token>${env.TOKEN}</oauth2Token>
-
-                                        <includes>
-                                                <include>**/*</include>
-                                        </includes>
-                                </configuration>
-                                <executions>
-                                        <!-- run site-maven-plugin's 'site' target as part of the build's normal 
-                                                'deploy' phase -->
-                                        <execution>
-                                                <goals>
-                                                        <goal>site</goal>
-                                                </goals>
-                                                <phase>deploy</phase>
-                                        </execution>
-                                </executions>
-                        </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.9</version>
+                <configuration>
+                    <message>Added artifacts</message>
+                    <outputDirectory>${project.build.directory}/repo</outputDirectory>
+                    <branch>refs/heads/master</branch>
+                    <includes><include>**/*</include></includes>
+                    <repositoryName>Builds</repositoryName>
+                    <repositoryOwner>SurvivalGamesDevTeam</repositoryOwner>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                    </execution>
+                </executions>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -134,7 +110,16 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>internal.repo</id>
+            <name>Temporary Staging Repository</name>
+            <url>file://${project.build.directory}/repo</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
+        <github.global.server>github</github.global.server>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
