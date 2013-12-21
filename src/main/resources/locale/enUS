@@ -23,3 +23,6 @@ CLASS = Class
 # Command Handler #
 NO_COMMAND = Command does not exist!
 ONLY_PLAYERS = This command may only executed by players!
+
+# SG Commands #
+CREATING_ARENA = Creating arena number

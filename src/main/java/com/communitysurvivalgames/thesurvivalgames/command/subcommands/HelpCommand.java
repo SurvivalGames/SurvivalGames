@@ -9,6 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.local.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 
 public class HelpCommand implements SubCommand {
@@ -31,41 +32,41 @@ public class HelpCommand implements SubCommand {
                 try {
                     page = Integer.parseInt(args[0]);
                 } catch (NumberFormatException e) {
-                    p.sendMessage(ArenaManager.getManager().error + "That help page doesn't exist");
+                    p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_HELP"));
                 }
 
                 switch (page) {
                     case 0:
-                        p.sendMessage(ArenaManager.getManager().error + "That's not a real page");
+                        p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_PAGE"));
                         break;
 
                     case 1:
-                        sendHelpMessages(p, 1, "/sg create: Creates an arena",
-                                "/sg setradius [Arena ID][Radius]: Sets the radius of the arena",
-                                "/sg setlobby [Arena ID]: Sets the lobby spawn",
-                                "/sg setgamespawn [Number]: Set the spawn ingame for the specific point",
-                                "/sg setnextspawn: Set the next spawn in line for the arena");
+                        sendHelpMessages(p, 1, I18N.getLocaleString("COMMAND_HELP_1"),
+                        		I18N.getLocaleString("COMMAND_HELP_2"),
+                        		I18N.getLocaleString("COMMAND_HELP_3"),
+                        		I18N.getLocaleString("COMMAND_HELP_4"),
+                        		I18N.getLocaleString("COMMAND_HELP_5"));
                         break;
 
                     case 2:
-                        sendHelpMessages(p, 2, "/sg setdeathmatch [Number]: Sets the deathmatch spawn at the point",
-                                "/sg setmaxplayers [Number]: Set the max arena capacity",
-                                "/sg setchest [T1/T2]: Set a specific chest tier",
-                                "/sg join [Arena ID]: Joins an arena",
-                                "/sg vote [Number]: Makes you vote for a map");
+                        sendHelpMessages(p, 2, I18N.getLocaleString("COMMAND_HELP_6"),
+                        		I18N.getLocaleString("COMMAND_HELP_7"),
+                        		I18N.getLocaleString("COMMAND_HELP_8"),
+                        		I18N.getLocaleString("COMMAND_HELP_9"),
+                        		I18N.getLocaleString("COMMAND_HELP_10"));
                         break;
 
                     case 3:
-                        sendHelpMessages(p, 3, "/sg bounty [Player][Amount]: Set a bounty for this player",
-                                "/sg sponsor [Player][Amount]: Sponsor a player",
-                                "/sg leave: Leaves an arena",
-                                "/sg start [Arena ID][State ID]: Puts the game into a defined state",
-                                "/sg stop [Arena ID]: Stops the arena and rollsback");
-                        p.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.DARK_AQUA + "End of help" + ChatColor.DARK_AQUA + "--------------");
+                        sendHelpMessages(p, 3, I18N.getLocaleString("COMMAND_HELP_11"),
+                        		I18N.getLocaleString("COMMAND_HELP_12"),
+                        		I18N.getLocaleString("COMMAND_HELP_13"),
+                        		I18N.getLocaleString("COMMAND_HELP_14"),
+                        		I18N.getLocaleString("COMMAND_HELP_15"));
+                        p.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.DARK_AQUA + I18N.getLocaleString("COMMAND_HELP_16") + ChatColor.DARK_AQUA + "--------------");
                         break;
 
                     default:
-                        p.sendMessage(ArenaManager.getManager().error + "That's not a real page");
+                        p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_PAGE"));
                 }
 
             }
