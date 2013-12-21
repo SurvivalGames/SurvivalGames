@@ -1,6 +1,6 @@
 Multilingual Tutorial
 =====
-Our plugin supports Multilanguage, but for this to function properly, we need bout out developers and translators to follow certain guidelines.
+Our plugin supports Multilanguage, but for this to function properly, we need both out developers and translators to follow certain guidelines.
 
 ***For our developers:***  (Translators, you are further down the page)
 
