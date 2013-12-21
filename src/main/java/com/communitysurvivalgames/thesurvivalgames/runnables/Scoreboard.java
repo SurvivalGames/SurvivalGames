@@ -76,19 +76,19 @@ public class Scoreboard implements Runnable {
         if (arena.getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS) {
             objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&lWaiting For Players..."));
             sendScore(objective, "&eMax Players", 14, complete);
-            sendScore(objective, "&f" + arena.getMaxPlayers(), 13, complete);
+            sendScore(objective, "&f" + arena.getMaxPlayers() + " ", 13, complete);
             sendScore(objective, "&0", 12, complete);
             sendScore(objective, "&eMin Players", 11, complete);
-            sendScore(objective, "&f" + arena.getMinPlayers(), 10, complete);
+            sendScore(objective, "&f" + arena.getMinPlayers() + "  ", 10, complete);
             sendScore(objective, "&r", 9, complete);
             sendScore(objective, "&ePlayers", 8, complete);
-            sendScore(objective, "&f" + arena.getPlayers().size(), 7, complete);
+            sendScore(objective, "&f" + arena.getPlayers().size() + "   ", 7, complete);
             sendScore(objective, "&f", 6, complete);
             sendScore(objective, "&4&lClass", 5, complete);
             sendScore(objective, "*null*", 4, complete); //TODO
             sendScore(objective, "&c", 3, complete);
             sendScore(objective, "&a&lPoints", 2, complete);
-            sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints(), 1, complete);
+            sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "    ", 1, complete);
             return;
         }
 

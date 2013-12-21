@@ -9,20 +9,31 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 
 public class BlockListener {
 
-    // Instantly exploding TnT, see description on dev.bukkit.org.
-    @EventHandler(priority = EventPriority.NORMAL)
-    public void onBlockPlace(BlockPlaceEvent event) {
-        if (ArenaManager.getManager().isInGame(event.getPlayer())) {
-            if (event.getBlock().getType().equals(Material.TNT)) {
-                event.getBlock().setType(Material.AIR);
-                event.getPlayer().getWorld().spawnEntity(event.getBlock().getLocation(), EntityType.PRIMED_TNT);
-            }
-        }
-    }
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onBlockPlace(BlockPlaceEvent event) {
+		if (ArenaManager.getManager().isInGame(event.getPlayer())) {
+			if (event.getBlock().getType().equals(Material.TNT)) {
+				event.getPlayer().getWorld().spawnEntity(event.getBlock().getLocation(), EntityType.PRIMED_TNT);
+			}
+			event.setCancelled(true);
+		}
+
+		if (!event.getPlayer().hasPermission("sg.build")) {
+			event.setCancelled(true);
+		}
+	}
+
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onBlockBreak(BlockBreakEvent event) {
+		if (!event.getPlayer().hasPermission("sg.build")) {
+			event.setCancelled(true);
+		}
+	}
 }
