@@ -61,7 +61,7 @@ public class SetCommand implements SubCommand {
                         }    
                         
                         SGArena a = ArenaManager.getManager().getArena(i);
-                        a.maxplayers = p.getLocation();
+                        a.maxPlayers = p.getLocation();
                         
                         p.sendMessage(ArenaManager.getManager().prefix + /* I18N.getLocaleString("CREATING_ARENA") */ "Deathmatch spawn set for " + a.getId());
                 } else if(args.length != 1) {
