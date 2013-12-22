@@ -9,6 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.local.I18N;
 
 public class HelpCommand implements SubCommand {
 
@@ -28,78 +29,78 @@ public class HelpCommand implements SubCommand {
 
         String help = ChatColor.YELLOW + "";
         if ((args.length == 0) || ((args.length == 1) && (args[0].equalsIgnoreCase("help")))) {
-            help = "Party Manager Help\n";
+            help = I18N.getLocaleString("PARTY_HELP") + "\n";
             help = help + "------------------\n";
-            help = help + "- /sg party invite : Invites a player to your party\n";
-            help = help + "- /sg party join : Joins the party you were invited to\n";
-            help = help + "- /sg party leave : Leaves your current party\n";
-            help = help + "- /sg party decline: Declines your current party invite\n";
-            help = help + "- /sg party list: Displays your current party members\n";
-            help = help + "- /sg party kick: Removes a player from your party\n";
-            help = help + "- /sg party promote: Promotes another player to party leader\n";
-            help = help + "- /sg party chat: Toggles whether or not to speak in party chat only\n";
-            help = help + "For more information on a commant type /party help <command>";
+            help = help + I18N.getLocaleString("PARTY_HELP_1") + "\n";
+            help = help + I18N.getLocaleString("PARTY_HELP_2") + "\n";
+            help = help + I18N.getLocaleString("PARTY_HELP_3") + "\n";
+            help = help + I18N.getLocaleString("PARTY_HELP_4") + "\n";
+            help = help + I18N.getLocaleString("PARTY_HELP_5") + "\n";
+            help = help + I18N.getLocaleString("PARTY_HELP_6") + "\n";
+            help = help + I18N.getLocaleString("PARTY_HELP_7") + "\n";
+            help = help + I18N.getLocaleString("PARTY_HELP_8") + "\n";
+            help = help + I18N.getLocaleString("PARTY_HELP_9");
         } else if ((args[0].equalsIgnoreCase("help")) || (args[0].equalsIgnoreCase("?"))) {
             if (args[1].equalsIgnoreCase("invite")) {
-                help = "Party Invite Help\n";
+                help = I18N.getLocaleString("PARTY_INVITE_HELP") + "\n";
                 help = help + "-----------------\n";
-                help = help + "Usage: /party invite <player>\n";
-                help = help + "Invites the specified player to join your party.\n";
-                help = help + "You must be the party leader, or not part of a party to use this command. This will start a new party if you are not in one.\n";
+                help = help + I18N.getLocaleString("PARTY_INVITE_HELP_1") + "\n";
+                help = help + I18N.getLocaleString("PARTY_INVITE_HELP_2") + "\n";
+                help = help + I18N.getLocaleString("PARTY_INVITE_HELP_3") + "\n";
             }
             if (args[1].equalsIgnoreCase("join")) {
-                help = "Party Join Help\n";
+                help = I18N.getLocaleString("PARTY_JOIN_HELP") + "\n";
                 help = help + "---------------\n";
-                help = help + "Usage: /party join\n";
-                help = help + "Accepts your most recently received party invite.\n";
-                help = help + "You may not use this command if you are in a party.\n";
+                help = help + I18N.getLocaleString("PARTY_JOIN_HELP_1") + "\n";
+                help = help + I18N.getLocaleString("PARTY_JOIN_HELP_2") + "\n";
+                help = help + I18N.getLocaleString("PARTY_JOIN_HELP_3") + "\n";
             }
             if (args[1].equalsIgnoreCase("leave")) {
-                help = "Party Leave Help\n";
+                help = I18N.getLocaleString("PARTY_LEAVE_HELP") + "\n";
                 help = help + "----------------\n";
-                help = help + "Usage: /party leave\n";
-                help = help + "Leaves your current party.\n";
-                help = help + "You must be in a party to use this command. Your current party will be disbanded if you are the leader, or the last remaining non-leader.\n";
+                help = help + I18N.getLocaleString("PARTY_LEAVE_HELP_1") + "\n";
+                help = help + I18N.getLocaleString("PARTY_LEAVE_HELP_2") + "\n";
+                help = help + I18N.getLocaleString("PARTY_LEAVE_HELP_3") + "\n";
             }
             if (args[1].equalsIgnoreCase("decline")) {
-                help = "Party Decline Help\n";
+                help = I18N.getLocaleString("PARTY_DECLINE_HELP") + "\n";
                 help = help + "-----------------\n";
-                help = help + "Usage: /party decline\n";
-                help = help + "Declines your pending party invite.\n";
-                help = help + "You must have a pending invite to use this command.\n";
+                help = help + I18N.getLocaleString("PARTY_DECLINE_HELP_1") + "\n";
+                help = help + I18N.getLocaleString("PARTY_DECLINE_HELP_2") + "\n";
+                help = help + I18N.getLocaleString("PARTY_DECLINE_HELP_3") + "\n";
             }
             if (args[1].equalsIgnoreCase("list")) {
-                help = "Party List Help\n";
+                help = I18N.getLocaleString("PARTY_LIST_HELP") + "\n";
                 help = help + "---------------\n";
-                help = help + "Usage: /party list\n";
+                help = help + I18N.getLocaleString("PARTY_LIST_HELP_1") + "\n";
                 if (sender.hasPermission("partymanager.admin.list")) {
-                    help = help + "OR\n";
-                    help = help + "Usage: /party list <playername>\n";
+                    help = help + I18N.getLocaleString("PARTY_LIST_HELP_2") + "\n";
+                    help = help + I18N.getLocaleString("PARTY_LIST_HELP_3") + "\n";
                 }
 
-                help = help + "Lists your current party members and their status.\n";
-                help = help + "You must be in a party to use this command. The party leader's name is gold, online members are white, and offline members are gray.\n";
+                help = help + I18N.getLocaleString("PARTY_LIST_HELP_4") + "\n";
+                help = help + I18N.getLocaleString("PARTY_LIST_HELP_5") + "\n";
             }
             if (args[1].equalsIgnoreCase("kick")) {
-                help = "Party Kick Help\n";
+                help = I18N.getLocaleString("PARTY_KICK_HELP") + "\n";
                 help = help + "---------------\n";
-                help = help + "Usage: /party kick <player>\n";
-                help = help + "Removes the specified player from the party\n";
-                help = help + "You must be the party leader to use this command\n";
+                help = help + I18N.getLocaleString("PARTY_KICK_HELP_1");
+                help = help + I18N.getLocaleString("PARTY_KICK_HELP_2");
+                help = help + I18N.getLocaleString("PARTY_KICK_HELP_3");
             }
             if (args[1].equalsIgnoreCase("promote")) {
-                help = "Party Promote Help\n";
+                help = I18N.getLocaleString("PARTY_PROMOTE_HELP") + "\n";
                 help = help + "------------------\n";
-                help = help + "Usage: /party promote <player>\n";
-                help = help + "Promotes the specified player to party leader\n";
-                help = help + "You must be the party leader to use this command\n";
+                help = I18N.getLocaleString("PARTY_PROMOTE_HELP_1") + "\n";
+                help = I18N.getLocaleString("PARTY_PROMOTE_HELP_2") + "\n";
+                help = I18N.getLocaleString("PARTY_PROMOTE_HELP_3") + "\n";
             }
             if (args[1].equalsIgnoreCase("chat")) {
-                help = "Party Promote Help\n";
+                help = I18N.getLocaleString("PARTY_CHAT_HELP") + "\n";
                 help = help + "------------------\n";
-                help = help + "Usage: /party chat\n";
-                help = help + "Toggles whether or not you are speaking in party chat\n";
-                help = help + "You must be in a party to talk in part chat\n";
+                help = help + I18N.getLocaleString("PARTY_CHAT_HELP_1") + "\n";
+                help = help + I18N.getLocaleString("PARTY_CHAT_HELP_2") + "\n";
+                help = help + I18N.getLocaleString("PARTY_CHAT_HELP_3") + "\n";
             }
         }
         sender.sendMessage(help);
