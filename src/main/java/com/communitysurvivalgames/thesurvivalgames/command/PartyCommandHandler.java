@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.HelpCommand;
-import com.communitysurvivalgames.thesurvivalgames.local.I18N;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 
 import java.util.HashMap;
 import java.util.Map;

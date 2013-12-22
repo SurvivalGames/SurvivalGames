@@ -9,7 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
-import com.communitysurvivalgames.thesurvivalgames.local.I18N;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 
 public class HelpCommand implements SubCommand {

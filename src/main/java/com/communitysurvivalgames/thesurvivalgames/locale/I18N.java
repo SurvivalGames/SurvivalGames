@@ -1,4 +1,4 @@
-package com.communitysurvivalgames.thesurvivalgames.local;
+package com.communitysurvivalgames.thesurvivalgames.locale;
 
 import java.io.File;
 import java.io.FileInputStream;

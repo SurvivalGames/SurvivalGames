@@ -33,7 +33,7 @@ import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.Pro
 import com.communitysurvivalgames.thesurvivalgames.listeners.EntityDamageListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.ItemListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SetupListener;
-import com.communitysurvivalgames.thesurvivalgames.local.I18N;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;

@@ -8,7 +8,7 @@ package com.communitysurvivalgames.thesurvivalgames.managers;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-import com.communitysurvivalgames.thesurvivalgames.local.I18N;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 
 import java.util.HashMap;
