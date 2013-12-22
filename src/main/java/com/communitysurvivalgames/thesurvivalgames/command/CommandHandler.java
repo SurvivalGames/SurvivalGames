@@ -92,7 +92,7 @@ public class CommandHandler implements CommandExecutor {
 				try {
 					getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1] });
 				} catch (CommandException e) {
-					sender.sendMessage(ArenaManager.getManager().error + 18N.getLocaleString("NO_COMMAND"));
+					sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
 				}
 			} else if (args.length == 1) {
 				try {
