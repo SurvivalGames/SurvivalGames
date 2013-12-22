@@ -41,7 +41,7 @@ public class SGWorld {
         World world = Bukkit.getServer().getWorld(name);
 
         for (Player p : world.getPlayers()) {
-        	p.kickPlayer("You suck");
+        	p.kickPlayer("You suck ");
             //TODO teleport player somewhere safe
         }
         for (Entity e : world.getEntities()) {
