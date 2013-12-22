@@ -28,6 +28,8 @@ Once you have updated all the language files, the final log line would look like
 
 ```Bukkit.getLogger.log(Level.INFO, I18N.getLocaleString("HELLO_WORLD")```
 
+Please not that all colors, spaces (before and after line), and new line chars (\n) should be done in code, not in the lang file
+
 That’s it!  Thanks for helping make out plugin go international!
 
 
