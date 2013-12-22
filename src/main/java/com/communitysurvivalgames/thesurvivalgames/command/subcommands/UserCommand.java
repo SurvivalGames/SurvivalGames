@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
-import com.communitysurvivalgames.thesurivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 
