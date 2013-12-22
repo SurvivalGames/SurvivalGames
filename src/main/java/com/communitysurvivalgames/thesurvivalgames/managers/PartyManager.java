@@ -8,6 +8,7 @@ package com.communitysurvivalgames.thesurvivalgames.managers;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
+import com.communitysurvivalgames.thesurvivalgames.local.I18N;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 
 import java.util.HashMap;
@@ -68,8 +69,8 @@ public class PartyManager {
         Party party = new Party(player.getName());
         players.put(player.getName(), party.getID());
         parties.put(party.getID(), party);
-        if (player != null) { //TODO what the hell? You're checking if the player is null when you're getting a null name already...
-            player.sendMessage(ChatColor.YELLOW + "You have created a new party");
+        if (player != null) { //We check this here, because if the player would happen to quit before this, it would 100% completely crash the server.
+            player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
         }
         return party.getID();
     }
@@ -87,7 +88,7 @@ public class PartyManager {
             if (members != null) {
                 org.bukkit.entity.Player player = Bukkit.getServer().getPlayer(members);
                 if (player != null) {
-                    player.sendMessage(ChatColor.YELLOW + "Your party has been disbanded");
+                    player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
                 }
                 players.remove(members);
             }
@@ -95,7 +96,7 @@ public class PartyManager {
         party.removeAll();
         org.bukkit.entity.Player player = Bukkit.getServer().getPlayer(name);
         if (player != null) {
-            player.sendMessage(ChatColor.YELLOW + "Your party has been disbanded");
+            player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
         }
         players.remove(name);
         parties.remove(id);

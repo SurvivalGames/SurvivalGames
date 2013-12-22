@@ -139,3 +139,12 @@ PARTY_CHAT_HELP = Party Chat Help
 PARTY_CHAT_HELP_1 = Usage: /party chat
 PARTY_CHAT_HELP_2 = Toggles whether or not you are speaking in party chat
 PARTY_CHAT_HELP_3 = You must be in a party to talk in part chat
+
+# Death #
+KILLED_BY = was killed by
+WITH_A = with a
+FAIL = somehow managed to die whilst in the lobby because of 
+
+# Party Manager #
+PARTY_CREATED = You have created a new party
+PARTY_DISBANDED = Your party has been disbanded

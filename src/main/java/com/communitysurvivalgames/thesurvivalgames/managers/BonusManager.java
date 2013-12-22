@@ -27,6 +27,7 @@ public class BonusManager {
 		register("Y U KILL UR CREATOR", new String[]{"Kill a developer in an SG match"}, 700);
 		register("Are you God?", new String[]{"Kill Quantum64 in a SG match"}, Integer.MAX_VALUE);
 		//TODO More!
+		//TODO Translate these?  Do we need to?
 	}
 
 	public void register(String name, String[] lore, int points) {

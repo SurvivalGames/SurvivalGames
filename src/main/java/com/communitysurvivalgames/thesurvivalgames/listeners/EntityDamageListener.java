@@ -19,6 +19,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import com.communitysurvivalgames.thesurvivalgames.local.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.util.PlayerVanishUtil;
 
@@ -52,9 +53,9 @@ public class EntityDamageListener implements Listener {
 
 					if (entity instanceof Player) {
 						Player damager = (Player) entity;
-						ArenaManager.getManager().getArena(damager).broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6was killed by &e&l" + damager.getDisplayName() + " &r&6with a &e&l" + damager.getInventory().getItemInHand()));
+						ArenaManager.getManager().getArena(damager).broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("KILLED_BY") + " &e&l" + damager.getDisplayName() + " &r&6" + I18N.getLocaleString("WITH_A") + " &e&l" + damager.getInventory().getItemInHand()));
 					}
-					
+
 					PlayerVanishUtil.hideAll(ArenaManager.getManager().getArena(damaged), damaged);
 				}
 				return;
@@ -65,7 +66,7 @@ public class EntityDamageListener implements Listener {
 				damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 1, false));
 				damaged.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 40, 1, false));
 				damaged.setVelocity(new Vector(0, 0, 0.5));
-				TheSurvivalGames.getPlugin().getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6somehow managed to die whilst in the lobby because of &e&l" + event.getDamager()));
+				TheSurvivalGames.getPlugin().getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("FAIL") + " &e&l" + event.getDamager()));
 			}
 		}
 	}
