@@ -50,7 +50,7 @@ public class SetCommand implements SubCommand {
                         SGArena a = ArenaManager.getManager().getArena(i);
                         a.lobby = p.getLocation();
                         
-                        p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_DM") " " + a.getId());
+                        p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_DM") + " " + a.getId());
                 }  else if(cmd.equalsIgnoreCase("setmaxplayers") && args.length == 2) {
                         int i = 0;
                         int amount = 0;
