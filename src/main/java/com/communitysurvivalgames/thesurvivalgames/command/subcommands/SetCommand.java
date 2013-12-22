@@ -14,6 +14,7 @@ import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class SetCommand implements SubCommand {
+        //TODO setspawn and setchest
 
         /**
          * The create command. DO NOT CALL DIRECTLY. Only use in CommandHandler
@@ -48,6 +49,19 @@ public class SetCommand implements SubCommand {
                         
                         SGArena a = ArenaManager.getManager().getArena(i);
                         a.lobby = p.getLocation();
+                        
+                        p.sendMessage(ArenaManager.getManager().prefix + /* I18N.getLocaleString("CREATING_ARENA") */ "Deathmatch spawn set for " + a.getId());
+                }  else if(cmd.equalsIgnoreCase("setmaxplayers")) {
+                        int i = 0;
+                        try {
+                            i = Integer.parseInt(args[1]);
+                        } catch(NumberFormatException x) {
+                            p.sendMessage(ArenaManager.getManager().error + "Not a real number");
+                            return;
+                        }    
+                        
+                        SGArena a = ArenaManager.getManager().getArena(i);
+                        a.maxplayers = p.getLocation();
                         
                         p.sendMessage(ArenaManager.getManager().prefix + /* I18N.getLocaleString("CREATING_ARENA") */ "Deathmatch spawn set for " + a.getId());
                 } else if(args.length != 1) {
