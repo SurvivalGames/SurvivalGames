@@ -30,27 +30,27 @@ public class SetCommand implements SubCommand {
                         try {
                             i = Integer.parseInt(args[0]);
                         } catch(NumberFormatException x) {
-                            p.sendMessage(ArenaManager.getManager().error + "Not a real number");
+                            p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_NUMBER"));
                             return;
                         }    
                         
                         SGArena a = ArenaManager.getManager().getArena(i);
                         a.lobby = p.getLocation();
                         
-                        p.sendMessage(ArenaManager.getManager().prefix + /* I18N.getLocaleString("CREATING_ARENA") */ "Lobby spawn set for " + a.getId());
+                        p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_LOBBY") + " " + a.getId());
                 } else if(cmd.equalsIgnoreCase("setdeathmatch")) {
                         int i = 0;
                         try {
                             i = Integer.parseInt(args[0]);
                         } catch(NumberFormatException x) {
-                            p.sendMessage(ArenaManager.getManager().error + "Not a real number");
+                            p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_NUMBER"));
                             return;
                         }    
                         
                         SGArena a = ArenaManager.getManager().getArena(i);
                         a.lobby = p.getLocation();
                         
-                        p.sendMessage(ArenaManager.getManager().prefix + /* I18N.getLocaleString("CREATING_ARENA") */ "Deathmatch spawn set for " + a.getId());
+                        p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_DM") " " + a.getId());
                 }  else if(cmd.equalsIgnoreCase("setmaxplayers") && args.length == 2) {
                         int i = 0;
                         int amount = 0;
@@ -58,16 +58,16 @@ public class SetCommand implements SubCommand {
                             i = Integer.parseInt(args[0]);
                             amount = Integer.parseInt(args[1]);
                         } catch(NumberFormatException x) {
-                            p.sendMessage(ArenaManager.getManager().error + "Not a real number");
+                            p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_NUMBER"));
                             return;
                         }    
                         
                         SGArena a = ArenaManager.getManager().getArena(i);
                         a.maxPlayers = amount;
                         
-                        p.sendMessage(ArenaManager.getManager().prefix + /* I18N.getLocaleString("CREATING_ARENA") */ "Deathmatch spawn set for " + a.getId());
+                        p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("SET_MAXPLAYERS") + " " + a.getId());
                 } else if(args.length != 1 || args.length != 2) {
-                        p.sendMessage(ArenaManager.getManager().error + "Those aren't the arguments");
+                        p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARGUMENTS"));
                 }
         }
 }
