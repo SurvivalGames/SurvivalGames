@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,36 +74,36 @@ public class CommandHandler implements CommandExecutor {
 				try {
 					getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2], args[3], args[4] });
 				} catch (CommandException e) {
-					sender.sendMessage(/* error prefix */I18N.getLocaleString("NO_COMMAND"));
+					sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
 				}
 			} else if (args.length == 4) {
 				try {
 					getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2], args[3] });
 				} catch (CommandException e) {
-					sender.sendMessage(/* error prefix */I18N.getLocaleString("NO_COMMAND"));
+					sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
 				}
 			} else if (args.length == 3) {
 				try {
 					getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2] });
 				} catch (CommandException e) {
-					sender.sendMessage(/* error prefix */I18N.getLocaleString("NO_COMMAND"));
+					sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
 				}
 			} else if (args.length == 2) {
 				try {
 					getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1] });
 				} catch (CommandException e) {
-					sender.sendMessage(/* error prefix */I18N.getLocaleString("NO_COMMAND"));
+					sender.sendMessage(ArenaManager.getManager().error + 18N.getLocaleString("NO_COMMAND"));
 				}
 			} else if (args.length == 1) {
 				try {
 					getCommand(args[0]).execute(args[0], (Player) sender, new String[] {});
 				} catch (CommandException e) {
-					sender.sendMessage(/* error prefix */I18N.getLocaleString("NO_COMMAND"));
+					sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
 				}
 			} else if (args.length == 0) {
-				Bukkit.dispatchCommand(sender, "help TheSurvivalGames");
+				Bukkit.dispatchCommand(sender, "sg help");
 			} else {
-				Bukkit.dispatchCommand(sender, "help TheSurvivalGames");//TODO
+				Bukkit.dispatchCommand(sender, "sg help");
 			}
 			return true;
 
