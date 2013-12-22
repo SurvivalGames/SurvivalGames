@@ -23,6 +23,7 @@ import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.CreateCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.HelpCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.JoinCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SetCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.UserCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.ChatCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.DeclineCommand;
@@ -84,6 +85,8 @@ public class TheSurvivalGames extends JavaPlugin {
 		CommandHandler.register("create", new CreateCommand());
 		CommandHandler.register("join", new JoinCommand());
 		CommandHandler.register("user", new UserCommand());
+		CommandHandler.register("setlobby", new SetCommand());
+		CommandHandler.register("setlobby", new SetCommand());
 
 		PartyCommandHandler.register("chat", new ChatCommand());
 		PartyCommandHandler.register("decline", new DeclineCommand());
