@@ -29,9 +29,14 @@ CLASS = Class
 # Command Handler #
 NO_COMMAND = Command does not exist!
 ONLY_PLAYERS = This command may only executed by players!
+INVALID_ARGUMENTS = Those aren't the arguments
+NOT_NUMBER = That's not a number, learn how to count
 
 # SG Commands #
 CREATING_ARENA = Creating arena number
+CREATING_LOBBY = Lobby spawn set for arena
+CREATING_DM = Deathmatch spawn set for arena 
+SET_MAXPLAYERS = Max players set for arena 
 CANT_JOIN = You can't join that arena
 INVALID_ARENA = Invalid arena:
 CHANGED_STATE = Changed the state.
