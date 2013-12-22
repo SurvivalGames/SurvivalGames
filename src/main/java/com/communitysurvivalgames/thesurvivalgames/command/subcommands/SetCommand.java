@@ -56,14 +56,14 @@ public class SetCommand implements SubCommand {
                         int amount = 0;
                         try {
                             i = Integer.parseInt(args[0]);
-                            amount = Integer.parseInt(args[1])
+                            amount = Integer.parseInt(args[1]);
                         } catch(NumberFormatException x) {
                             p.sendMessage(ArenaManager.getManager().error + "Not a real number");
                             return;
                         }    
                         
                         SGArena a = ArenaManager.getManager().getArena(i);
-                        a.maxPlayers = args[1];
+                        a.maxPlayers = amount;
                         
                         p.sendMessage(ArenaManager.getManager().prefix + /* I18N.getLocaleString("CREATING_ARENA") */ "Deathmatch spawn set for " + a.getId());
                 } else if(args.length != 1 || args.length != 2) {
