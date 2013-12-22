@@ -53,7 +53,7 @@ Indonesian File (idID):
 
 ```HELLO_WORLD = Halo Dunia!```
 
-You would then save the file and preferably submit a Pull Request on GitHub, but files can also be emailed to: communitysurvivalgames@gmail.com
+You would then save the file and preferably submit a Pull Request on GitHub, but files can also be emailed to: communitysurvivalgamesdevteam@gmail.com
 
 TOOLS SUCH AS GOOGLE TRANSLATE ARE UNACCEPTABLE!!!
 
