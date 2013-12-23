@@ -5,12 +5,11 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
+import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
-
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class SetupListener implements Listener {
 

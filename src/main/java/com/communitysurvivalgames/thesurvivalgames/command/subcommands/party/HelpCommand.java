@@ -5,10 +5,9 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
+import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-
-import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 
 public class HelpCommand implements SubCommand {
 
@@ -16,7 +15,7 @@ public class HelpCommand implements SubCommand {
      * Displays the help for the party commands
      *
      * @param player The player executing the command
-     * @param args The page of help to be shown
+     * @param args   The page of help to be shown
      */
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 0) || (cmd.equalsIgnoreCase("help")) || (cmd.equalsIgnoreCase("?"))) {

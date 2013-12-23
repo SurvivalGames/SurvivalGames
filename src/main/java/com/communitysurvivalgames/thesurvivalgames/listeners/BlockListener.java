@@ -5,13 +5,12 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
+import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockPlaceEvent;
-
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 
 public class BlockListener {
 

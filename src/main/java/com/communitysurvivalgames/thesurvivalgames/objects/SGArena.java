@@ -5,11 +5,10 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
+import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,8 +79,8 @@ public class SGArena {
     /**
      * Makes sure that the fields aren't null on startup
      *
-     * @param list The locatins for game spawns
-     * @param lob The lobby spawn
+     * @param list       The locatins for game spawns
+     * @param lob        The lobby spawn
      * @param maxPlayers The max players for the arena
      * @param minPlayers The min players needed for the game to start
      */

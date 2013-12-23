@@ -5,12 +5,11 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 

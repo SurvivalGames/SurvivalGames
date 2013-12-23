@@ -5,12 +5,11 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
+import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
+import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-
-import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
-import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 
 import java.util.UUID;
 import java.util.logging.Level;

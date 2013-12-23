@@ -6,9 +6,9 @@
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
 
-import java.util.UUID;
-
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
+
+import java.util.UUID;
 
 public class Party {
 

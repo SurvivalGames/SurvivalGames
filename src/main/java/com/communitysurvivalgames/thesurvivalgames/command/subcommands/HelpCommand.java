@@ -5,11 +5,10 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 public class HelpCommand implements SubCommand {
 
@@ -17,8 +16,8 @@ public class HelpCommand implements SubCommand {
      * An example of implementing SubCommand. DO NOT CALL DIRECTLY. Only use in
      * CommandHandler
      *
-     * @param cmd The command that was executed
-     * @param p The player that executed the command
+     * @param cmd  The command that was executed
+     * @param p    The player that executed the command
      * @param args The arguments after the command
      */
     @Override
@@ -76,10 +75,10 @@ public class HelpCommand implements SubCommand {
     /**
      * Send specific messages to the player
      *
-     * @param p The player to send the help message to
+     * @param p    The player to send the help message to
      * @param page The page number
      * @param args The help messages separated by a : to display command and
-     * help. Limit 5
+     *             help. Limit 5
      */
     private void sendHelpMessages(Player p, int page, String... args) {
         p.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.DARK_AQUA + "[The Survival Games]" + ChatColor.DARK_AQUA + "--------------");

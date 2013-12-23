@@ -5,12 +5,11 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -53,8 +52,8 @@ public class ListCommand implements SubCommand {
      * Lists the members of another player's party
      *
      * @param sender The player executing the command
-     * @param args The player's username of the party who you want to list the
-     * members of
+     * @param args   The player's username of the party who you want to list the
+     *               members of
      */
     public static void executeAdmin(Player sender, String args) {
         Player p = Bukkit.getServer().getPlayer(args);

@@ -1,8 +1,8 @@
 package com.communitysurvivalgames.thesurvivalgames.util;
 
-import java.util.ArrayList;
-
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
 
 public class PlayerNameUtil {
 
@@ -11,20 +11,20 @@ public class PlayerNameUtil {
     }
 
     public static int getNameUUID(String p) {
-        return stringToHash(p); 
+        return stringToHash(p);
     }
-    
-    public static ArrayList<String> getDevs(){
-    	ArrayList<String> list = new ArrayList<String>();
-    	list.add("Quantum64");
-    	//TODO: What's you IGN everyone?
-    	return list;
+
+    public static ArrayList<String> getDevs() {
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("Quantum64");
+        //TODO: What's you IGN everyone?
+        return list;
     }
-    
-    public static ArrayList<String> getAwesomePeople(){
-    	ArrayList<String> list = new ArrayList<String>();
-    	list.add("Jonthespartan29"); //TODO XD
-    	return list;
+
+    public static ArrayList<String> getAwesomePeople() {
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("Jonthespartan29"); //TODO XD
+        return list;
     }
 
     private static int stringToHash(String s) {

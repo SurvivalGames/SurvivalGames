@@ -5,18 +5,17 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
-import org.bukkit.entity.Player;
-
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import org.bukkit.entity.Player;
 
 public class JoinCommand implements SubCommand {
 
     /**
      * The join command. DO NOT CALL DIRECTLY. Only use in CommandHandler
      *
-     * @param cmd The command that was executed
-     * @param p The player that executed the command
+     * @param cmd  The command that was executed
+     * @param p    The player that executed the command
      * @param args The arguments after the command
      */
     @Override

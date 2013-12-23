@@ -5,6 +5,7 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
+import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
@@ -14,8 +15,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 
 public class EntityDamageListener implements Listener {
 

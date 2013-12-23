@@ -5,12 +5,11 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -49,7 +48,7 @@ public class InviteCommand implements SubCommand {
      *
      * @param sender The player sending the invite
      * @param player The player to receive the invite
-     * @param id The UUID of the player to be invited
+     * @param id     The UUID of the player to be invited
      */
     public static void sendInvite(Player sender, String player, UUID id) {
         Player p = Bukkit.getServer().getPlayer(player);

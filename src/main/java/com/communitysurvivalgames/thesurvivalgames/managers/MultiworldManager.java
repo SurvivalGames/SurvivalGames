@@ -5,10 +5,9 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
+import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-
-import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 
 import java.io.*;
 import java.net.URL;
@@ -70,7 +69,7 @@ public class MultiworldManager {
         in.close();
         out.close();
     }
-    
+
     public static boolean checkIfIsWorld(File worldFolder) {
         if (worldFolder.isDirectory()) {
             File[] files = worldFolder.listFiles(new FilenameFilter() {

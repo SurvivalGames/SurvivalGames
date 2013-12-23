@@ -5,9 +5,8 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.runnables;
 
-import org.bukkit.Bukkit;
-
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import org.bukkit.Bukkit;
 
 public class Countdown implements Runnable {
 
@@ -18,7 +17,7 @@ public class Countdown implements Runnable {
     /**
      * Constructs a new countdown for this arena
      *
-     * @param a The arena to countdown on
+     * @param a     The arena to countdown on
      * @param count The amount of numbers to countdown from
      */
     public Countdown(SGArena a, int count) {

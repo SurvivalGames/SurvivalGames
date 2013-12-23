@@ -5,10 +5,9 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
+import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-
-import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -78,7 +77,7 @@ public class PartyManager {
      * Ends a party
      *
      * @param name Name of the player ending the party
-     * @param id The UUID of the party to end
+     * @param id   The UUID of the party to end
      */
     public static void endParty(String name, java.util.UUID id) {
         Party party = (Party) parties.get(id);
@@ -115,7 +114,7 @@ public class PartyManager {
      *
      * @param p The player to get the members of
      * @return null if the player is not in a party, a String separated by
-     * commas of usernames
+     *         commas of usernames
      */
     public String getParty(org.bukkit.entity.Player p) {
         java.util.UUID id = (java.util.UUID) players.get(p.getName());
