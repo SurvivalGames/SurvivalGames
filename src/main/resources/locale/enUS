@@ -38,6 +38,7 @@ CREATING_LOBBY = Lobby spawn set for arena
 CREATING_DM = Deathmatch spawn set for arena 
 SET_MAXPLAYERS = Max players set for arena 
 SET_CHEST = Chest tier set for arena
+SET_SPAWN = Game spawn set for arena
 CANT_JOIN = You can't join that arena
 INVALID_ARENA = Invalid arena:
 CHANGED_STATE = Changed the state.
