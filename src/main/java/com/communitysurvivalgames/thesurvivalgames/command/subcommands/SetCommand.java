@@ -17,7 +17,7 @@ import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class SetCommand implements SubCommand {
-        //TODO commands
+        //TODO permissions
 
         /**
          * The create command. DO NOT CALL DIRECTLY. Only use in CommandHandler
