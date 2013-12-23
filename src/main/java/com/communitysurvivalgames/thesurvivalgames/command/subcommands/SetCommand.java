@@ -7,6 +7,7 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BlockIterator;
 
@@ -83,7 +84,6 @@ public class SetCommand implements SubCommand {
                         while(bit.hasNext()) {
                             next = bit.next();
                             if(next.getType() == Material.CHEST) {
-                                SGArena a = ArenaManager.getManager().getArena(i);
                                 if(args[0].equalsIgnoreCase("t2") && !a.t2.contains(next.getState())) {
                                     a.t2.add(next.getState());
                                 } else if(args[0].equalsIgnoreCase("t1") && a.t2.contains(next.getState())) {
