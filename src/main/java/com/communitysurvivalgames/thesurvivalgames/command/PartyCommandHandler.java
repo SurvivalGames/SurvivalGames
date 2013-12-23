@@ -1,13 +1,12 @@
 package com.communitysurvivalgames.thesurvivalgames.command;
 
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.HelpCommand;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.HelpCommand;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,9 +18,9 @@ public class PartyCommandHandler implements CommandExecutor {
     /**
      * Registers a command
      *
-     * @param cmd The command to register
+     * @param cmd   The command to register
      * @param clazz The class to register the command to. Must implement
-     * SubCommand.
+     *              SubCommand.
      */
     public static void register(String cmd, SubCommand clazz) {
         try {
@@ -54,10 +53,10 @@ public class PartyCommandHandler implements CommandExecutor {
     /**
      * The main executor for the SubCommands. DO NOT CALL.
      *
-     * @param sender The CommandSender that executed the command
-     * @param command The Command executed
+     * @param sender       The CommandSender that executed the command
+     * @param command      The Command executed
      * @param commandLabel The command's label
-     * @param args The arguments after the command seperated by a space
+     * @param args         The arguments after the command seperated by a space
      * @return Whether or not the command was executed successfully
      */
     @Override

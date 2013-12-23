@@ -41,26 +41,26 @@ public class HelpCommand implements SubCommand {
 
                     case 1:
                         sendHelpMessages(p, 1, I18N.getLocaleString("COMMAND_HELP_1"),
-                        		I18N.getLocaleString("COMMAND_HELP_2"),
-                        		I18N.getLocaleString("COMMAND_HELP_3"),
-                        		I18N.getLocaleString("COMMAND_HELP_4"),
-                        		I18N.getLocaleString("COMMAND_HELP_5"));
+                                I18N.getLocaleString("COMMAND_HELP_2"),
+                                I18N.getLocaleString("COMMAND_HELP_3"),
+                                I18N.getLocaleString("COMMAND_HELP_4"),
+                                I18N.getLocaleString("COMMAND_HELP_5"));
                         break;
 
                     case 2:
                         sendHelpMessages(p, 2, I18N.getLocaleString("COMMAND_HELP_6"),
-                        		I18N.getLocaleString("COMMAND_HELP_7"),
-                        		I18N.getLocaleString("COMMAND_HELP_8"),
-                        		I18N.getLocaleString("COMMAND_HELP_9"),
-                        		I18N.getLocaleString("COMMAND_HELP_10"));
+                                I18N.getLocaleString("COMMAND_HELP_7"),
+                                I18N.getLocaleString("COMMAND_HELP_8"),
+                                I18N.getLocaleString("COMMAND_HELP_9"),
+                                I18N.getLocaleString("COMMAND_HELP_10"));
                         break;
 
                     case 3:
                         sendHelpMessages(p, 3, I18N.getLocaleString("COMMAND_HELP_11"),
-                        		I18N.getLocaleString("COMMAND_HELP_12"),
-                        		I18N.getLocaleString("COMMAND_HELP_13"),
-                        		I18N.getLocaleString("COMMAND_HELP_14"),
-                        		I18N.getLocaleString("COMMAND_HELP_15"));
+                                I18N.getLocaleString("COMMAND_HELP_12"),
+                                I18N.getLocaleString("COMMAND_HELP_13"),
+                                I18N.getLocaleString("COMMAND_HELP_14"),
+                                I18N.getLocaleString("COMMAND_HELP_15"));
                         p.sendMessage(ChatColor.GOLD + "--------------" + ChatColor.DARK_AQUA + I18N.getLocaleString("COMMAND_HELP_16") + ChatColor.DARK_AQUA + "--------------");
                         break;
 
