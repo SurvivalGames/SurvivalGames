@@ -7,6 +7,7 @@ package com.communitysurvivalgames.thesurvivalgames.objects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
@@ -22,10 +23,12 @@ public class SGArena {
 
 	public Location lobby = null;
 	public List<Location> locs = new ArrayList<Location>(0);
+        public List<BlockState> t2 = new ArrayList<BlockState>();
 	public Location dm = null;
 
 	public int maxPlayers;
 	public int minPlayers;
+
 	List<String> players = new ArrayList<String>();
 	List<String> spectators = new ArrayList<String>();
 
