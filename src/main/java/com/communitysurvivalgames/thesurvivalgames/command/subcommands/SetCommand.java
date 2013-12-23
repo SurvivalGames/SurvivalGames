@@ -6,7 +6,9 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.util.BlockIterator;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
@@ -14,7 +16,7 @@ import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class SetCommand implements SubCommand {
-        //TODO setspawn and setchest
+        //TODO setspawn 
 
         /**
          * The create command. DO NOT CALL DIRECTLY. Only use in CommandHandler
@@ -66,6 +68,31 @@ public class SetCommand implements SubCommand {
                         a.maxPlayers = amount;
                         
                         p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("SET_MAXPLAYERS") + " " + a.getId());
+                }  else if(cmd.equalsIgnoreCase("setchest") && args.length == 2) {
+                        int i = 0;
+                        try {
+                            i = Integer.parseInt(args[1]);
+                        } catch(NumberFormatException x) {
+                            p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_NUMBER"));
+                            return;
+                        }    
+                        SGArena a = ArenaManager.getManager().getArena(i);
+                                                              
+                        BlockIterator bit = new BlockIterator(p, 6);
+                        Block next = null;
+                        while(bit.hasNext()) {
+                            next = bit.next();
+                            if(next.getType() == Material.CHEST) {
+                                SGArena a = ArenaManager.getManager().getArena(i);
+                                if(args[0].equalsIgnoreCase("t2") && !a.t2.contains(next.getState())) {
+                                    a.t2.add(next.getState());
+                                } else if(args[0].equalsIgnoreCase("t1") && a.t2.contains(next.getState())) {
+                                    a.t2.remove(next.getState());
+                                } else { p.chat("/sg help"); }
+                            }
+                        }
+                        
+                        p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("SET_CHEST") + " " + a.getId());
                 } else if(args.length != 1 || args.length != 2) {
                         p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARGUMENTS"));
                 }
