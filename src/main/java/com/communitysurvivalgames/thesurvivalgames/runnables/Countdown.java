@@ -5,8 +5,10 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.runnables;
 
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.Bukkit;
+
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class Countdown implements Runnable {
 
@@ -17,7 +19,7 @@ public class Countdown implements Runnable {
     /**
      * Constructs a new countdown for this arena
      *
-     * @param a     The arena to countdown on
+     * @param a The arena to countdown on
      * @param count The amount of numbers to countdown from
      */
     public Countdown(SGArena a, int count) {
@@ -41,12 +43,12 @@ public class Countdown implements Runnable {
     public void run() {
 
         if (count == 0) {
-            a.broadcast("May the odds be ever in your favor");
+            a.broadcast(I18N.getLocaleString("ODDS"));
             Bukkit.getServer().getScheduler().cancelTask(this.id);
             return;
         }
 
-        a.broadcast("This arena is starting in " + count);
+        a.broadcast(I18N.getLocaleString("STARTING_IN") + " " + count);
         count--;
 
     }

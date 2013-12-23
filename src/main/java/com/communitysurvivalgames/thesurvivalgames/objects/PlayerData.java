@@ -4,6 +4,8 @@ package com.communitysurvivalgames.thesurvivalgames.objects;
 import com.avaje.ebean.validation.NotEmpty;
 import com.avaje.ebean.validation.NotNull;
 import com.communitysurvivalgames.thesurvivalgames.util.PlayerNameUtil;
+
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -15,127 +17,127 @@ import javax.persistence.Table;
 @Table(name = "sg_player")
 public class PlayerData {
 
-    //
-    // Start persistence code
-    // WARNING: DO NOT EDIT
-    //
-    @Id
-    private int id;
+	//
+	// Start persistence code
+	// WARNING: DO NOT EDIT
+	//
+	@Id
+	private int id;
 
-    @NotNull
-    private String playerName;
-    @NotNull
-    private int points;
-    @NotNull
-    private int kills;
-    @NotNull
-    private int wins;
-    @NotEmpty
-    private String rank;
+	@NotNull
+	private String playerName;
+	@NotNull
+	private int points;
+	@NotNull
+	private int kills;
+	@NotNull
+	private int wins;
+	@NotEmpty
+	private String rank;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getRank() {
-        return rank;
-    }
+	public String getRank() {
+		return rank;
+	}
 
-    public int getKills() {
-        return kills;
-    }
+	public int getKills() {
+		return kills;
+	}
+	
+	public int getWins(){
+		return wins;
+	}
 
-    public int getWins() {
-        return wins;
-    }
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
 
-    public void setRank(String rank) {
-        this.rank = rank;
-    }
+	public String getPlayerName() {
+		return playerName;
+	}
 
-    public String getPlayerName() {
-        return playerName;
-    }
+	public void setPlayerName(String ply) {
+		this.playerName = ply;
+	}
 
-    public void setPlayerName(String ply) {
-        this.playerName = ply;
-    }
+	public Player getPlayer() {
+		return Bukkit.getServer().getPlayer(playerName);
+	}
 
-    public Player getPlayer() {
-        return Bukkit.getServer().getPlayer(playerName);
-    }
+	public void setPlayer(Player player) {
+		this.playerName = player.getName();
+	}
 
-    public void setPlayer(Player player) {
-        this.playerName = player.getName();
-    }
+	public int getPoints() {
+		return points;
+	}
 
-    public int getPoints() {
-        return points;
-    }
+	public void setPoints(int points) {
+		this.points = points;
+	}
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
+	public void setKills(int kills) {
+		this.kills = kills;
+	}
+	
+	public void setWins(int wins) {
+		this.wins = wins;
+	}
 
-    public void setKills(int kills) {
-        this.kills = kills;
-    }
+	//
+	// End persistence code
+	//
 
-    public void setWins(int wins) {
-        this.wins = wins;
-    }
+	public PlayerData() {
+		//TODO Just no...
+	}
 
-    //
-    // End persistence code
-    //
+	public PlayerData(Player p) {
+		this.playerName = p.getName();
+		this.kills = 0;
+		this.points = 0;
+		this.rank = "&7[M]";
+		if (PlayerNameUtil.getDevs().contains(p.getName()) || PlayerNameUtil.getAwesomePeople().contains(p.getName())) {
+			this.setRank("&dOMG&eITS");
+		}
+	}
 
-    public PlayerData() {
-        //TODO Just no...
-    }
+	public void addPoints(int points) {
+		setPoints(getPoints() + points);
+	}
 
-    public PlayerData(Player p) {
-        this.playerName = p.getName();
-        this.kills = 0;
-        this.points = 0;
-        this.rank = "&f[M]";
-        if (PlayerNameUtil.getDevs().contains(p.getName()) || PlayerNameUtil.getAwesomePeople().contains(p.getName())) {
-            this.setRank("&dOMG&eITS");
-        }
-    }
+	public void removePoints(int points) {
+		setPoints(getPoints() - points);
+	}
 
-    public void addPoints(int points) {
-        setPoints(getPoints() + points);
-    }
+	public void addKill() {
+		setKills(getKills() + 1);
+	}
 
-    public void removePoints(int points) {
-        setPoints(getPoints() - points);
-    }
+	public void addKills(int kills) {
+		setKills(getKills() + kills);
+	}
 
-    public void addKill() {
-        setKills(getKills() + 1);
-    }
+	public void removeKills(int kills) {
+		setKills(getKills() - kills);
+	}
 
-    public void addKills(int kills) {
-        setKills(getKills() + kills);
-    }
+	public void addWin() {
+		setWins(getWins() + 1);
+	}
+	
+	public void addWins(int wins) {
+		setKills(getKills() + wins);
+	}
 
-    public void removeKills(int kills) {
-        setKills(getKills() - kills);
-    }
-
-    public void addWin() {
-        setWins(getWins() + 1);
-    }
-
-    public void addWins(int wins) {
-        setKills(getKills() + wins);
-    }
-
-    public void removeWins(int wins) {
-        setKills(getKills() - wins);
-    }
+	public void removeWins(int wins) {
+		setKills(getKills() - wins);
+	}
 }

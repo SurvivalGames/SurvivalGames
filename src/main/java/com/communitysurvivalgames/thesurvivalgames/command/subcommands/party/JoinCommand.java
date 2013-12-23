@@ -6,6 +6,7 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 import org.bukkit.Bukkit;
@@ -29,27 +30,27 @@ public class JoinCommand implements SubCommand {
                     if (((Party) PartyManager.getPartyManager().getParties().get(partyID)).hasRoom()) {
                         party.addMember(sender.getName());
                         PartyManager.getPartyManager().getPlayers().put(sender.getName(), partyID);
-                        sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You have joined " + party.getLeader() + "'s party");
+                        sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("YOU_JOINED") + party.getLeader() + I18N.getLocaleString("PARTY"));
                         Player player = Bukkit.getServer().getPlayer(party.getLeader());
-                        player.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + " has joined your party");
+                        player.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + I18N.getLocaleString("HAS_JOINED_YOUR_PARTY"));
                         for (String member : party.getMembers()) {
                             if (member != null) {
                                 Player p = Bukkit.getServer().getPlayer(member);
                                 if (p != null) {
-                                    p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + " has joined your party");
+                                    p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + I18N.getLocaleString("HAS_JOINED_YOUR_PARTY"));
                                 }
                             }
                         }
                     } else {
-                        sender.sendMessage(org.bukkit.ChatColor.YELLOW + "The party is full");
+                        sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("PARTY_FULL_2"));
                     }
 
                 } else {
-                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + "The party does not exist");
+                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NO_PARTY"));
                 }
                 PartyManager.getPartyManager().getInvites().remove(sender.getName());
             } else {
-                sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You do not have a pending invite");
+                sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NO_INVITE"));
             }
         }
     }

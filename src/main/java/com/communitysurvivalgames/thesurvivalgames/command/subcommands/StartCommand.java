@@ -6,6 +6,7 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.entity.Player;
@@ -26,41 +27,41 @@ public class StartCommand implements SubCommand {
             try {
                 id = Integer.parseInt(args[0]);
             } catch (NumberFormatException x) {
-                p.sendMessage(ArenaManager.getManager().error + "Invalid arena: " + args[0]);
+                p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARENA") + args[0]);
             }
             SGArena a = ArenaManager.getManager().getArena(id);
             if (a == null) {
-                p.sendMessage(ArenaManager.getManager().error + "Thats not a valid arena");
+                p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_VALID"));
                 return;
             }
 
             if (args[1].equals("pre") && p.hasPermission("sg.gamestate.pregame")) {
                 if (!a.getState().equals(SGArena.ArenaState.PRE_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.PRE_GAME)) {
-                    p.sendMessage(ArenaManager.getManager().error + "You can't change force anything yet.");
+                    p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("CANT_FORCE"));
                     return;
                 }
                 a.setState(SGArena.ArenaState.PRE_GAME);
-                p.sendMessage(ArenaManager.getManager().prefix + "Changed the state.");
+                p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
                 return;
             }
 
             if (args[1].equals("starting") && p.hasPermission("sg.gamestate.starting")) {
                 if (!a.getState().equals(SGArena.ArenaState.STARTING_COUNTDOWN) || a.getState().isConvertable(a, SGArena.ArenaState.STARTING_COUNTDOWN)) {
-                    p.sendMessage(ArenaManager.getManager().error + "You can't change force anything yet.");
+                    p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("CANT_FORCE"));
                     return;
                 }
                 a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
-                p.sendMessage(ArenaManager.getManager().prefix + "Changed the state.");
+                p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
                 return;
             }
 
             if (args[1].equals("game") && p.hasPermission("sg.gamestate.ingame")) {
                 if (!a.getState().equals(SGArena.ArenaState.IN_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.IN_GAME)) {
-                    p.sendMessage(ArenaManager.getManager().error + "You can't change force anything yet.");
+                    p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("CANT_FORCE"));
                     return;
                 }
                 a.setState(SGArena.ArenaState.IN_GAME);
-                p.sendMessage(ArenaManager.getManager().prefix + "Changed the state.");
+                p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
                 return;
             }
 

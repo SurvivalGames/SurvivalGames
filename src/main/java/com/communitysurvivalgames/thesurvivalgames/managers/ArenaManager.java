@@ -127,7 +127,9 @@ public class ArenaManager {
             p.sendMessage("Invalid operation!");
             return;
         }
-
+        
+        if(a.getSpectators().contains(p.getName()))
+        	a.getSpectators().remove(p.getName());
         a.getPlayers().remove(p.getName());
 
         p.getInventory().clear();

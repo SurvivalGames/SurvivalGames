@@ -6,6 +6,7 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 import org.bukkit.Bukkit;
@@ -35,21 +36,21 @@ public class PromoteCommand implements SubCommand {
                                 party.setLeader(p.getName());
                                 party.removeMember(p.getName());
                                 party.addMember(oldLeader);
-                                sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You have promoted " + p.getName() + " to leader");
-                                p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + " has promoted you to leader");
+                                sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("PROMOTED") + p.getName() + I18N.getLocaleString("TO_LEADER"));
+                                p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + I18N.getLocaleString("PROMOTED_YOU"));
                             } else {
-                                sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + " is not online");
+                                sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString("NOT_ONLINE"));
                             }
                             return;
                         }
                     }
 
-                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + " is not in your party");
+                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString("NOT_IN_YOUR_PARTY"));
                 } else {
-                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You must be the party leader to promote another player");
+                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("LEADER_TO_PROMOTE"));
                 }
             } else {
-                sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You are not in a party");
+                sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NO_PARTY_2"));
             }
         }
     }

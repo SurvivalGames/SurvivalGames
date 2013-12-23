@@ -5,9 +5,11 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -67,8 +69,8 @@ public class PartyManager {
         Party party = new Party(player.getName());
         players.put(player.getName(), party.getID());
         parties.put(party.getID(), party);
-        if (player != null) { //TODO what the hell? You're checking if the player is null when you're getting a null name already...
-            player.sendMessage(ChatColor.YELLOW + "You have created a new party");
+        if (player != null) { //We check this here, because if the player would happen to quit before this, it would 100% completely crash the server.
+            player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
         }
         return party.getID();
     }
@@ -77,7 +79,7 @@ public class PartyManager {
      * Ends a party
      *
      * @param name Name of the player ending the party
-     * @param id   The UUID of the party to end
+     * @param id The UUID of the party to end
      */
     public static void endParty(String name, java.util.UUID id) {
         Party party = (Party) parties.get(id);
@@ -86,7 +88,7 @@ public class PartyManager {
             if (members != null) {
                 org.bukkit.entity.Player player = Bukkit.getServer().getPlayer(members);
                 if (player != null) {
-                    player.sendMessage(ChatColor.YELLOW + "Your party has been disbanded");
+                    player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
                 }
                 players.remove(members);
             }
@@ -94,7 +96,7 @@ public class PartyManager {
         party.removeAll();
         org.bukkit.entity.Player player = Bukkit.getServer().getPlayer(name);
         if (player != null) {
-            player.sendMessage(ChatColor.YELLOW + "Your party has been disbanded");
+            player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
         }
         players.remove(name);
         parties.remove(id);
@@ -114,7 +116,7 @@ public class PartyManager {
      *
      * @param p The player to get the members of
      * @return null if the player is not in a party, a String separated by
-     *         commas of usernames
+     * commas of usernames
      */
     public String getParty(org.bukkit.entity.Player p) {
         java.util.UUID id = (java.util.UUID) players.get(p.getName());

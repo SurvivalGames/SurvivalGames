@@ -6,6 +6,7 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
 import org.bukkit.entity.Player;
 
@@ -25,13 +26,13 @@ public class ChatCommand implements SubCommand {
             if (id != null) {
                 if (PartyManager.getPartyManager().getPartyChat().contains(player.getName())) {
                     PartyManager.getPartyManager().getPartyChat().remove(player.getName());
-                    player.sendMessage(org.bukkit.ChatColor.YELLOW + "You are no longer party chatting");
+                    player.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NO_CHAT"));
                 } else {
                     PartyManager.getPartyManager().getPartyChat().add(player.getName());
-                    player.sendMessage(org.bukkit.ChatColor.YELLOW + "You are now party chatting");
+                    player.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("CHAT"));
                 }
             } else {
-                player.sendMessage(org.bukkit.ChatColor.YELLOW + "You must be in a party to use party chat");
+                player.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("PARTY_TO_CHAT"));
             }
         }
 

@@ -6,6 +6,7 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 import org.bukkit.Bukkit;
@@ -37,14 +38,14 @@ public class LeaveCommand implements SubCommand {
                         if (member != null) {
                             Player p = Bukkit.getServer().getPlayer(member);
                             if (p != null) {
-                                p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + " has left the party");
+                                p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + I18N.getLocaleString("LEFT_PARTY"));
                             }
                         }
                     }
-                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You have left the party");
+                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("YOU_LEFT_PARTY"));
                 }
             } else {
-                sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You are not in a party");
+                sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NO_PARTY_2"));
             }
         }
     }

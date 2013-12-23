@@ -6,6 +6,7 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 import org.bukkit.Bukkit;
@@ -31,10 +32,10 @@ public class KickCommand implements SubCommand {
                         if ((members != null) && (members.equalsIgnoreCase(args[0]))) {
                             party.removeMember(args[0]);
                             PartyManager.getPartyManager().getPlayers().remove(args[0]);
-                            sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + " was kicked from the party");
+                            sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString("KICKED_FROM_PARTY"));
                             Player p = Bukkit.getServer().getPlayer(args[0]);
                             if (p != null) {
-                                p.sendMessage(org.bukkit.ChatColor.YELLOW + "You were kicked from the party");
+                                p.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("KICKED_FROM_PARTY_2"));
                             }
                             if (party.hasNoMembers()) {
                                 PartyManager.endParty(sender.getName(), id);
@@ -43,7 +44,7 @@ public class KickCommand implements SubCommand {
                                 if (member != null) {
                                     Player play = Bukkit.getServer().getPlayer(member);
                                     if (play != null) {
-                                        play.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + " was kicked from the party");
+                                        play.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString("KICKED_FROM_PARTY"));
                                     }
                                 }
                             }
@@ -51,12 +52,12 @@ public class KickCommand implements SubCommand {
                         }
                     }
 
-                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + "Player " + args[0] + " is not in your party");
+                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("PLAYER") + args[0] + I18N.getLocaleString("NOT_IN_YOUR_PARTY"));
                 } else {
-                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You must be the party leader to kick another player");
+                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("LEADER_TO_KICK"));
                 }
             } else {
-                sender.sendMessage(org.bukkit.ChatColor.YELLOW + "You are not in a party");
+                sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NO_PARTY_2"));
             }
         }
     }
