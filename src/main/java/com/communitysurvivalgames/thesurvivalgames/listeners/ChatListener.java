@@ -8,13 +8,15 @@ package com.communitysurvivalgames.thesurvivalgames.listeners;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.util.UUID;
 import java.util.logging.Level;
 
-public class ChatListener implements Listener {
+class ChatListener implements Listener {
 
     /**
      * Formats chat and detects if the player is using party chat, if so, it
@@ -25,18 +27,17 @@ public class ChatListener implements Listener {
     @EventHandler
     public void onPlayerChat(org.bukkit.event.player.AsyncPlayerChatEvent event) {
         if (PartyManager.getPartyManager().getPartyChat().contains(event.getPlayer().getName())) {
-            UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(event.getPlayer().getName());
+            UUID id = PartyManager.getPartyManager().getPlayers().get(event.getPlayer().getName());
             if (id != null) {
-                Party party = (Party) PartyManager.getPartyManager().getParties().get(id);
+                Party party = PartyManager.getPartyManager().getParties().get(id);
                 if (party != null) {
                     String[] members = party.getMembers();
                     int membersNum = members.length;
-                    for (int i = 0; i < membersNum; i++) {
-                        String member = members[i];
+                    for (String member : members) {
                         if (member != null) {
-                            org.bukkit.entity.Player p = org.bukkit.Bukkit.getServer().getPlayer(member);
+                            Player p = Bukkit.getServer().getPlayer(member);
                             if (p != null) {
-                                p.sendMessage(org.bukkit.ChatColor.DARK_AQUA + "[P] " + event.getPlayer().getDisplayName() + org.bukkit.ChatColor.DARK_AQUA + ": " + event.getMessage());
+                                p.sendMessage(ChatColor.DARK_AQUA + "[P] " + event.getPlayer().getDisplayName() + ChatColor.DARK_AQUA + ": " + event.getMessage());
                             }
                         }
                     }
@@ -52,6 +53,7 @@ public class ChatListener implements Listener {
                 int playersNum = org.bukkit.Bukkit.getServer().getOnlinePlayers().length;
                 for (int i = 0; i < playersNum; i++) {
                     org.bukkit.entity.Player p = playerList[i];
+                    assert party != null;
                     if ((p.hasPermission("partymanager.admin.spy")) && (!party.hasMember(p.getName()))) {
                         p.sendMessage(org.bukkit.ChatColor.GRAY + "[P] " + event.getPlayer().getName() + ": " + event.getMessage());
                     }

@@ -21,18 +21,18 @@ import java.util.Map;
 
 public class ArenaManager {
 
-    public String prefix = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.GOLD;
-    public String error = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.RED;
+    public final String prefix = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.GOLD;
+    public final String error = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.RED;
 
-    public Map<String, SGArena> creators = new HashMap<String, SGArena>();
-    public Map<String, Location> locs = new HashMap<String, Location>();
-    public static final ArenaManager am = new ArenaManager();
-    Map<String, ItemStack[]> inv = new HashMap<String, ItemStack[]>();
-    Map<String, ItemStack[]> armor = new HashMap<String, ItemStack[]>();
-    List<SGArena> arenas = new ArrayList<SGArena>();
-    int arenaSize = 0;
+    private final Map<String, SGArena> creators = new HashMap<String, SGArena>();
+    private final Map<String, Location> locs = new HashMap<String, Location>();
+    private static final ArenaManager am = new ArenaManager();
+    private final Map<String, ItemStack[]> inv = new HashMap<String, ItemStack[]>();
+    private final Map<String, ItemStack[]> armor = new HashMap<String, ItemStack[]>();
+    private final List<SGArena> arenas = new ArrayList<SGArena>();
+    private int arenaSize = 0;
 
-    static TheSurvivalGames plugin;
+    private static TheSurvivalGames plugin;
 
     /**
      * Initialize the singleton with a SurvivalGames plugin field
@@ -46,7 +46,7 @@ public class ArenaManager {
     /**
      * The constructor for a new reference of the singleton
      */
-    protected ArenaManager() {
+    private ArenaManager() {
     }
 
     /**
@@ -177,14 +177,11 @@ public class ArenaManager {
      * Stores an existing arena in the list, for example after reloads
      *
      * @param i The location the arena spawn will be at
-     * @return The arena that was created
      */
-    public SGArena reloadArena(int i) {
+    void reloadArena(int i) {
         SGArena a = new SGArena(i);
         arenas.add(a);
         // a.initialize(...)
-
-        return a;
     }
 
     /**

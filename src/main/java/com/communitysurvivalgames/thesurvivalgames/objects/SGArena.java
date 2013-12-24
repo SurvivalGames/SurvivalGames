@@ -16,20 +16,20 @@ import java.util.List;
 
 public class SGArena {
 
-    ArenaState currentState;
-    public int id = 0;
-    public String displayName;
+    private ArenaState currentState;
+    private int id = 0;
+    private String displayName;
 
     public Location lobby = null;
     public List<Location> locs = new ArrayList<Location>(0);
-    public List<BlockState> t2 = new ArrayList<BlockState>();
-    public Location dm = null;
+    public final List<BlockState> t2 = new ArrayList<BlockState>();
+    private Location dm = null;
 
     public int maxPlayers;
-    public int minPlayers;
+    private int minPlayers;
 
-    List<String> players = new ArrayList<String>();
-    List<String> spectators = new ArrayList<String>();
+    private final List<String> players = new ArrayList<String>();
+    private final List<String> spectators = new ArrayList<String>();
 
     /**
      * Name: ArenaState.java Edited: 8 December 2013

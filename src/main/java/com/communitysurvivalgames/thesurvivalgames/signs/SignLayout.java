@@ -35,23 +35,23 @@ public class SignLayout {
         this.teleport = teleport;
     }
 
-    public String getName() {
+    String getName() {
         return this.name;
     }
 
-    public String getOnline() {
+    String getOnline() {
         return this.online;
     }
 
-    public String getOffline() {
+    String getOffline() {
         return this.offline;
     }
 
-    public List<String> getLines() {
+    List<String> getLines() {
         return this.lines;
     }
 
-    public boolean isTeleport() {
+    boolean isTeleport() {
         return this.teleport;
     }
 

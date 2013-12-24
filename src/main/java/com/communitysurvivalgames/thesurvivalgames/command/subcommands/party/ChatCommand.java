@@ -22,7 +22,7 @@ public class ChatCommand implements SubCommand {
      */
     public void execute(String cmd, Player player, String args[]) {
         if (cmd.equalsIgnoreCase("chat")) {
-            UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(player.getName());
+            UUID id = PartyManager.getPartyManager().getPlayers().get(player.getName());
             if (id != null) {
                 if (PartyManager.getPartyManager().getPartyChat().contains(player.getName())) {
                     PartyManager.getPartyManager().getPartyChat().remove(player.getName());

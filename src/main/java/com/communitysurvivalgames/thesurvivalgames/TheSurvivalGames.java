@@ -32,7 +32,7 @@ import java.util.List;
 
 public class TheSurvivalGames extends JavaPlugin {
 
-    static TheSurvivalGames plugin;
+    private static TheSurvivalGames plugin;
 
     @Override
     public void onEnable() {
@@ -66,7 +66,7 @@ public class TheSurvivalGames extends JavaPlugin {
         getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
     }
 
-    public void registerAll() {
+    void registerAll() {
         // register all commands and listeners
         getCommand("sg").setExecutor(new CommandHandler());
         getCommand("party").setExecutor(new PartyCommandHandler());

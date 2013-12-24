@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.UUID;
 
-public class PlayerQuitListener implements Listener {
+class PlayerQuitListener implements Listener {
 
     /**
      * Detects when a player quits, and if that player is the party leader, the
@@ -30,9 +30,9 @@ public class PlayerQuitListener implements Listener {
             if (ArenaManager.getManager().isInGame(p)) {
                 ArenaManager.getManager().removePlayer(p);
             }
-            UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(p.getName());
+            UUID id = PartyManager.getPartyManager().getPlayers().get(p.getName());
             if (id != null) {
-                Party party = (Party) PartyManager.getPartyManager().getParties().get(id);
+                Party party = PartyManager.getPartyManager().getParties().get(id);
                 if ((party != null) && (p.getName().equalsIgnoreCase(party.getLeader()))) {
                     PartyManager.endParty(party.getLeader(), id);
                 }

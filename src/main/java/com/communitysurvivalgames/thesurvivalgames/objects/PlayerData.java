@@ -81,11 +81,11 @@ public class PlayerData {
         this.points = points;
     }
 
-    public void setKills(int kills) {
+    void setKills(int kills) {
         this.kills = kills;
     }
 
-    public void setWins(int wins) {
+    void setWins(int wins) {
         this.wins = wins;
     }
 

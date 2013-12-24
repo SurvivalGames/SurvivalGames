@@ -8,17 +8,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ConfigurationData {
-    private TheSurvivalGames plugin;
+class ConfigurationData {
+    private final TheSurvivalGames plugin;
     private FileConfiguration config;
-    private Map<String, SignLayout> signLayouts = new HashMap<String, SignLayout>();
+    private final Map<String, SignLayout> signLayouts = new HashMap<String, SignLayout>();
 
     public ConfigurationData(TheSurvivalGames plugin) {
         this.plugin = plugin;
         this.config = plugin.getConfig();
     }
 
-    public void loadConfig() {
+    void loadConfig() {
         this.plugin.saveDefaultConfig();
         this.plugin.reloadConfig();
         this.config = this.plugin.getConfig();
@@ -44,7 +44,7 @@ public class ConfigurationData {
     }
 
     public SignLayout getLayout(String layout) {
-        return (SignLayout) this.signLayouts.get(layout);
+        return this.signLayouts.get(layout);
     }
 
     public TheSurvivalGames getPlugin() {

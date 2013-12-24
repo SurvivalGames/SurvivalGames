@@ -19,15 +19,15 @@ public class JoinCommand implements SubCommand {
     /**
      * Joins a party if you have been invited to one
      *
-     * @param player The player executing the command
+     * @param sender The player executing the command
      */
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 1) && (args[0].equalsIgnoreCase("join"))) {
-            UUID partyID = (UUID) PartyManager.getPartyManager().getInvites().get(sender.getName());
+            UUID partyID = PartyManager.getPartyManager().getInvites().get(sender.getName());
             if (partyID != null) {
-                Party party = (Party) PartyManager.getPartyManager().getParties().get(partyID);
+                Party party = PartyManager.getPartyManager().getParties().get(partyID);
                 if (party != null) {
-                    if (((Party) PartyManager.getPartyManager().getParties().get(partyID)).hasRoom()) {
+                    if (PartyManager.getPartyManager().getParties().get(partyID).hasRoom()) {
                         party.addMember(sender.getName());
                         PartyManager.getPartyManager().getPlayers().put(sender.getName(), partyID);
                         sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("YOU_JOINED") + party.getLeader() + I18N.getLocaleString("PARTY"));

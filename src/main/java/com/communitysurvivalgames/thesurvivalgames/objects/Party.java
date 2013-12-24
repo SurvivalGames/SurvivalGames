@@ -57,17 +57,16 @@ public class Party {
     /**
      * Adds a player to the party
      *
+     *
      * @param player The player to be added
-     * @return If the party addition was successful
      */
-    public boolean addMember(String player) {
+    public void addMember(String player) {
         for (int i = 0; i < PartyManager.getMaxPartySize() - 1; i++) {
             if (this.members[i] == null) {
                 this.members[i] = player;
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     /**
@@ -88,18 +87,17 @@ public class Party {
     /**
      * Removes a player from the party
      *
+     *
      * @param player Player to be removed
-     * @return If the removal was successful
      */
-    public boolean removeMember(String player) {
+    public void removeMember(String player) {
         for (int i = 0; i < PartyManager.getMaxPartySize() - 1; i++) {
             if ((this.members[i] != null) && (this.members[i].equalsIgnoreCase(player))) {
                 this.members[i] = null;
-                return true;
+                return;
             }
         }
 
-        return false;
     }
 
     /**

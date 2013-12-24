@@ -5,11 +5,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BonusManager {
 
-    ArrayList<Bonus> bonus = new ArrayList<Bonus>();
-    public static BonusManager bonusManager = new BonusManager();
+    private final ArrayList<Bonus> bonus = new ArrayList<Bonus>();
+    private static final BonusManager bonusManager = new BonusManager();
 
     public static BonusManager getManager() {
         return bonusManager;
@@ -30,7 +31,7 @@ public class BonusManager {
         //TODO Translate these?  Do we need to?
     }
 
-    public void register(String name, String[] lore, int points) {
+    void register(String name, String[] lore, int points) {
         bonus.add(new Bonus(name, lore, points, bonus.size()));
     }
 
@@ -38,15 +39,15 @@ public class BonusManager {
         Bonus b = bonus.get(id);
         Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&4" + p.getDisplayName() + ": &e&l" + b.getName()));
         for (int i = 0; i < b.getLore().length; i++) {
-            Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&3    " + b.getLore()));
+            Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&3    " + Arrays.toString(b.getLore())));
         }
     }
 
     public class Bonus {
-        int id;
-        String name;
-        String[] lore;
-        int points;
+        final int id;
+        final String name;
+        final String[] lore;
+        final int points;
 
         public Bonus(String name, String[] lore, int points, int id) {
             this.name = name;

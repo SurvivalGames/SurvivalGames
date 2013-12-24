@@ -20,13 +20,13 @@ public class PromoteCommand implements SubCommand {
      * Promotes another player to party leader if the executer is the current
      * leader
      *
-     * @param player The player executing the command
+     * @param sender The player executing the command
      */
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 2) && (args[0].equalsIgnoreCase("promote"))) {
-            UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());
+            UUID id = PartyManager.getPartyManager().getPlayers().get(sender.getName());
             if (id != null) {
-                Party party = (Party) PartyManager.getPartyManager().getParties().get(id);
+                Party party = PartyManager.getPartyManager().getParties().get(id);
                 if (party.getLeader().equalsIgnoreCase(sender.getName())) {
                     for (String member : party.getMembers()) {
                         if ((member != null) && (member.equalsIgnoreCase(args[0]))) {

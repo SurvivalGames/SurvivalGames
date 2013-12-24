@@ -23,7 +23,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 
 public class ItemListener implements Listener {
 
-    TheSurvivalGames plugin;
+    private final TheSurvivalGames plugin;
 
     public ItemListener(TheSurvivalGames plugin) {
         this.plugin = plugin;

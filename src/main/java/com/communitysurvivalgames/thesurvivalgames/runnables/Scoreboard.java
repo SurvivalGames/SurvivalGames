@@ -20,9 +20,9 @@ import java.util.logging.Level;
  */
 public class Scoreboard implements Runnable {
 
-    TheSurvivalGames plugin;
+    private final TheSurvivalGames plugin;
 
-    public Scoreboard(TheSurvivalGames base) {
+    private Scoreboard(TheSurvivalGames base) {
         plugin = base;
     }
 
@@ -105,7 +105,7 @@ public class Scoreboard implements Runnable {
         //TODO Probably end up having something that switches the scoreboard back and forth about every ~5 to showing all players and their lives and this
     }
 
-    public static void sendScore(Objective objective, String title, int value, boolean complete) {
+    private static void sendScore(Objective objective, String title, int value, boolean complete) {
 
         final Score score = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.translateAlternateColorCodes('&', title)));
 
@@ -117,7 +117,7 @@ public class Scoreboard implements Runnable {
         score.setScore(value);
     }
 
-    public TheSurvivalGames getPlugin() {
+    TheSurvivalGames getPlugin() {
         return plugin;
     }
 

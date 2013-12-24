@@ -19,13 +19,13 @@ public class LeaveCommand implements SubCommand {
     /**
      * Leaves the current party
      *
-     * @param player The player executing the command
+     * @param sender The player executing the command
      */
     public void execute(String cmd, Player sender, String[] args) {
         if (cmd.equalsIgnoreCase("leave")) {
-            UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());
+            UUID id = PartyManager.getPartyManager().getPlayers().get(sender.getName());
             if (id != null) {
-                Party party = (Party) PartyManager.getPartyManager().getParties().get(id);
+                Party party = PartyManager.getPartyManager().getParties().get(id);
                 if (party.getLeader().equalsIgnoreCase(sender.getName())) {
                     PartyManager.endParty(party.getLeader(), id);
                 } else {

@@ -25,7 +25,7 @@ public class HelpCommand implements SubCommand {
     public void execute(String cmd, Player p, String[] args) {
         if (cmd.equalsIgnoreCase("help")) {
             if (args.length == 0) {
-                // display page one of help
+                p.chat("/sg help 1");
             } else if (args.length >= 1) {
                 int page = 0;
                 try {

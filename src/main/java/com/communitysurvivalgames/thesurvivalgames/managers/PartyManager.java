@@ -17,11 +17,11 @@ import java.util.UUID;
 
 public class PartyManager {
 
-    private static PartyManager pm = new PartyManager();
-    private static java.util.Map<String, java.util.UUID> players = new HashMap<String, UUID>();
-    private static java.util.Map<java.util.UUID, Party> parties = new HashMap<UUID, Party>();
-    private static java.util.Map<String, java.util.UUID> invites = new HashMap<String, UUID>();
-    private static Set<String> partyChat = new HashSet<String>();
+    private static final PartyManager pm = new PartyManager();
+    private static final java.util.Map<String, java.util.UUID> players = new HashMap<String, UUID>();
+    private static final java.util.Map<java.util.UUID, Party> parties = new HashMap<UUID, Party>();
+    private static final java.util.Map<String, java.util.UUID> invites = new HashMap<String, UUID>();
+    private static final Set<String> partyChat = new HashSet<String>();
     private static int partySize;
 
     /**
@@ -81,7 +81,7 @@ public class PartyManager {
      * @param id   The UUID of the party to end
      */
     public static void endParty(String name, java.util.UUID id) {
-        Party party = (Party) parties.get(id);
+        Party party = parties.get(id);
 
         for (String members : party.getMembers()) {
             if (members != null) {
@@ -118,9 +118,9 @@ public class PartyManager {
      *         commas of usernames
      */
     public String getParty(org.bukkit.entity.Player p) {
-        java.util.UUID id = (java.util.UUID) players.get(p.getName());
+        java.util.UUID id = players.get(p.getName());
         if (id != null) {
-            Party party = (Party) parties.get(id);
+            Party party = parties.get(id);
             if (party != null) {
                 String partyMembers = party.getLeader();
                 for (String member : party.getMembers()) {
@@ -144,9 +144,9 @@ public class PartyManager {
      * @return If the player is the leader
      */
     public boolean isPartyLeader(org.bukkit.entity.Player p) {
-        java.util.UUID id = (java.util.UUID) players.get(p.getName());
+        java.util.UUID id = players.get(p.getName());
         if (id != null) {
-            Party party = (Party) parties.get(id);
+            Party party = parties.get(id);
             if (party != null) {
                 if (party.getLeader().equalsIgnoreCase(p.getName())) {
                     return true;

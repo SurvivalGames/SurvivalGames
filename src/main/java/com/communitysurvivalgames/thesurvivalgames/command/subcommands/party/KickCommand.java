@@ -20,13 +20,12 @@ public class KickCommand implements SubCommand {
      * Kicks a player out of the party if you are the party leader
      *
      * @param sender The player executing the command
-     * @param player The player to be kicked from the party
      */
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 1) && (args[0].equalsIgnoreCase("kick"))) {
-            UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());
+            UUID id = PartyManager.getPartyManager().getPlayers().get(sender.getName());
             if (id != null) {
-                Party party = (Party) PartyManager.getPartyManager().getParties().get(id);
+                Party party = PartyManager.getPartyManager().getParties().get(id);
                 if (party.getLeader().equalsIgnoreCase(sender.getName())) {
                     for (String members : party.getMembers()) {
                         if ((members != null) && (members.equalsIgnoreCase(args[0]))) {

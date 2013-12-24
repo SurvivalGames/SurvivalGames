@@ -16,7 +16,7 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 
 public class DoubleJump implements Listener {
 
-    TheSurvivalGames plugin;
+    private final TheSurvivalGames plugin;
 
     public DoubleJump(TheSurvivalGames plugin) {
         this.plugin = plugin;

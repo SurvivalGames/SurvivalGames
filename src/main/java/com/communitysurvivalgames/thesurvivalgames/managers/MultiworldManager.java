@@ -15,16 +15,16 @@ import java.util.zip.GZIPInputStream;
 
 public class MultiworldManager {
 
-    static final MultiworldManager wm = new MultiworldManager();
+    private static final MultiworldManager wm = new MultiworldManager();
 
-    public MultiworldManager() {
+    private MultiworldManager() {
     }
 
     public static MultiworldManager getInstance() {
         return wm;
     }
 
-    public World createWorld(String name) {
+    World createWorld(String name) {
         return new SGWorld(name).create();
     }
 
@@ -38,7 +38,7 @@ public class MultiworldManager {
             return null;
         }
 
-        File target = null;
+        File target;
         int i = 0;
         while (true) {
             String name = "SurvivalGamesWorld" + i;

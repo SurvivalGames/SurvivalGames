@@ -14,18 +14,18 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-/**
- * Declines an invitation to join a party
- *
- * @param player The player executing the command
- */
 public class DeclineCommand implements SubCommand {
 
+    /**
+     * Declines an invitation to join a party
+     *
+     * @param sender The player executing the command
+     */
     public void execute(String cmd, Player sender, String[] args) {
         if (cmd.equalsIgnoreCase("decline")) {
-            UUID id = (UUID) PartyManager.getPartyManager().getInvites().get(sender.getName());
+            UUID id = PartyManager.getPartyManager().getInvites().get(sender.getName());
             if (id != null) {
-                Party party = (Party) PartyManager.getPartyManager().getParties().get(id);
+                Party party = PartyManager.getPartyManager().getParties().get(id);
                 if (party != null) {
                     Player player = Bukkit.getServer().getPlayer(party.getLeader());
                     if (player != null) {

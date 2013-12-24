@@ -12,15 +12,15 @@ import java.util.Properties;
 import java.util.logging.Level;
 
 public class I18N {
-    private static Properties locales = new Properties();
-    private static Properties fallback = new Properties();
-    private static File dir = new File(TheSurvivalGames.getPlugin().getDataFolder(), "locale");
-    public static HashMap<String, String> localeFiles = new HashMap<String, String>();
-    public static HashMap<Integer, String> localeIndices = new HashMap<Integer, String>();
-    public static Locale currentLocale = Locale.enUS;
+    private static final Properties locales = new Properties();
+    private static final Properties fallback = new Properties();
+    private static final File dir = new File(TheSurvivalGames.getPlugin().getDataFolder(), "locale");
+    private static final HashMap<String, String> localeFiles = new HashMap<String, String>();
+    private static final HashMap<Integer, String> localeIndices = new HashMap<Integer, String>();
+    private static Locale currentLocale = Locale.enUS;
 
     public enum Locale {
-        enUS, idID
+        enUS, idID, nwNO
     }
 
     /**
@@ -57,7 +57,7 @@ public class I18N {
     /**
      * Add files from the locale directory
      */
-    public static void addFiles() {
+    private static void addFiles() {
         int i = 1;
         Properties tmp = new Properties();
         String[] list = dir.list();

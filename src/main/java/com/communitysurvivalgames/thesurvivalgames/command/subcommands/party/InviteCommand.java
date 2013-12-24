@@ -8,7 +8,6 @@ package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
-import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -20,17 +19,16 @@ public class InviteCommand implements SubCommand {
      * Invites a player to your party - creates a party if you don't have one
      *
      * @param sender The player executing the command
-     * @param player The player to be invited to the party
      */
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 1) && (args[0].equalsIgnoreCase("invite"))) {
-            UUID partyID = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());
+            UUID partyID = PartyManager.getPartyManager().getPlayers().get(sender.getName());
             if (partyID == null) {
                 partyID = PartyManager.startParty(sender);
 
                 sendInvite(sender, args[0], partyID);
-            } else if (((Party) PartyManager.getPartyManager().getParties().get(partyID)).hasRoom()) {
-                if (((Party) PartyManager.getPartyManager().getParties().get(partyID)).getLeader().equalsIgnoreCase(sender.getName())) {
+            } else if (PartyManager.getPartyManager().getParties().get(partyID).hasRoom()) {
+                if (PartyManager.getPartyManager().getParties().get(partyID).getLeader().equalsIgnoreCase(sender.getName())) {
                     sendInvite(sender, args[0], partyID);
                 } else {
                     sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NOT_LEADER"));
@@ -51,12 +49,12 @@ public class InviteCommand implements SubCommand {
      * @param player The player to receive the invite
      * @param id     The UUID of the player to be invited
      */
-    public static void sendInvite(Player sender, String player, UUID id) {
+    private static void sendInvite(Player sender, String player, UUID id) {
         Player p = Bukkit.getServer().getPlayer(player);
         if (p != null) {
             if (PartyManager.getPartyManager().getPlayers().get(p.getName()) != null) {
                 sender.sendMessage(org.bukkit.ChatColor.YELLOW + player + I18N.getLocaleString("IN_PARTY"));
-                if (((Party) PartyManager.getPartyManager().getParties().get(id)).hasNoMembers()) {
+                if (PartyManager.getPartyManager().getParties().get(id).hasNoMembers()) {
                     PartyManager.endParty(sender.getName(), id);
                 }
                 return;
@@ -71,7 +69,7 @@ public class InviteCommand implements SubCommand {
             sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("YOU_INVITED") + player + I18N.getLocaleString("TO_JOIN_PARTY"));
         } else {
             sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("COULD_NOT_FIND_INVITE") + player);
-            if (((Party) PartyManager.getPartyManager().getParties().get(id)).hasNoMembers()) {
+            if (PartyManager.getPartyManager().getParties().get(id).hasNoMembers()) {
                 PartyManager.endParty(sender.getName(), id);
             }
         }

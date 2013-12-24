@@ -15,7 +15,7 @@ public class HelpCommand implements SubCommand {
     /**
      * Displays the help for the party commands
      *
-     * @param player The player executing the command
+     * @param sender The player executing the command
      * @param args   The page of help to be shown
      */
     public void execute(String cmd, Player sender, String[] args) {

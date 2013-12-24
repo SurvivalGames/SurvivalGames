@@ -29,7 +29,7 @@ public class SetCommand implements SubCommand {
     public void execute(String cmd, Player p, String[] args) {
         try {
             if (cmd.equalsIgnoreCase("setlobby") && p.hasPermission("sg.create")) {
-                int i = 0;
+                int i;
                 try {
                     i = Integer.parseInt(args[0]);
                 } catch (NumberFormatException x) {
@@ -42,7 +42,7 @@ public class SetCommand implements SubCommand {
 
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_LOBBY") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setdeathmatch")) {
-                int i = 0;
+                int i;
                 try {
                     i = Integer.parseInt(args[0]);
                 } catch (NumberFormatException x) {
@@ -55,8 +55,8 @@ public class SetCommand implements SubCommand {
 
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_DM") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setmaxplayers")) {
-                int i = 0;
-                int amount = 0;
+                int i;
+                int amount;
                 try {
                     i = Integer.parseInt(args[0]);
                     amount = Integer.parseInt(args[1]);
@@ -70,7 +70,7 @@ public class SetCommand implements SubCommand {
 
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("SET_MAXPLAYERS") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setchest")) {
-                int i = 0;
+                int i;
                 try {
                     i = Integer.parseInt(args[1]);
                 } catch (NumberFormatException x) {
@@ -80,7 +80,7 @@ public class SetCommand implements SubCommand {
                 SGArena a = ArenaManager.getManager().getArena(i);
 
                 BlockIterator bit = new BlockIterator(p, 6);
-                Block next = null;
+                Block next;
                 while (bit.hasNext()) {
                     next = bit.next();
                     if (next.getType() == Material.CHEST) {
@@ -96,8 +96,8 @@ public class SetCommand implements SubCommand {
 
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("SET_CHEST") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setgamespawn")) {
-                int i = 0;
-                int spawn = 0;
+                int i;
+                int spawn;
                 try {
                     spawn = Integer.parseInt(args[0]);
                     i = Integer.parseInt(args[1]);

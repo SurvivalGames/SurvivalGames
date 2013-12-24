@@ -9,11 +9,11 @@ import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.Bukkit;
 
-public class Countdown implements Runnable {
+class Countdown implements Runnable {
 
-    SGArena a = null;
-    int count = 0;
-    int id = 0;
+    private SGArena a = null;
+    private int count = 0;
+    private int id = 0;
 
     /**
      * Constructs a new countdown for this arena

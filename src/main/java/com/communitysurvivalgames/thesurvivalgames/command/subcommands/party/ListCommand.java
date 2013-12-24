@@ -19,7 +19,7 @@ public class ListCommand implements SubCommand {
     /**
      * Lists the current members of your party
      *
-     * @param player The player executing the command
+     * @param sender The player executing the command
      */
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 1) && (args[0].equalsIgnoreCase("list")) && (sender.hasPermission("party.admin.list"))) {
@@ -27,9 +27,9 @@ public class ListCommand implements SubCommand {
         }
         if ((cmd.equalsIgnoreCase("list"))) {
 
-            UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(sender.getName());
+            UUID id = PartyManager.getPartyManager().getPlayers().get(sender.getName());
             if (id != null) {
-                Party party = (Party) PartyManager.getPartyManager().getParties().get(id);
+                Party party = PartyManager.getPartyManager().getParties().get(id);
                 String list = org.bukkit.ChatColor.GOLD + party.getLeader() + " ";
                 for (String member : party.getMembers()) {
                     if (member != null) {
@@ -56,12 +56,12 @@ public class ListCommand implements SubCommand {
      * @param args   The player's username of the party who you want to list the
      *               members of
      */
-    public static void executeAdmin(Player sender, String args) {
+    private static void executeAdmin(Player sender, String args) {
         Player p = Bukkit.getServer().getPlayer(args);
         if (p != null) {
-            UUID id = (UUID) PartyManager.getPartyManager().getPlayers().get(p.getName());
+            UUID id = PartyManager.getPartyManager().getPlayers().get(p.getName());
             if (id != null) {
-                Party party = (Party) PartyManager.getPartyManager().getParties().get(id);
+                Party party = PartyManager.getPartyManager().getParties().get(id);
                 String list = org.bukkit.ChatColor.GOLD + party.getLeader() + " ";
                 for (String member : party.getMembers()) {
                     if (member != null) {
