@@ -72,37 +72,49 @@ public class CommandHandler implements CommandExecutor {
             if (args.length == 5) {
                 try {
                     getCommand(args[0]).execute(args[0], (Player) sender, new String[]{args[1], args[2], args[3], args[4]});
+                    return true;
                 } catch (CommandException e) {
                     sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
+                    return true;
                 }
             } else if (args.length == 4) {
                 try {
                     getCommand(args[0]).execute(args[0], (Player) sender, new String[]{args[1], args[2], args[3]});
+                    return true;
                 } catch (CommandException e) {
                     sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
+                    return true;
                 }
             } else if (args.length == 3) {
                 try {
                     getCommand(args[0]).execute(args[0], (Player) sender, new String[]{args[1], args[2]});
+                    return true;
                 } catch (CommandException e) {
                     sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
+                    return true;
                 }
             } else if (args.length == 2) {
                 try {
                     getCommand(args[0]).execute(args[0], (Player) sender, new String[]{args[1]});
+                    return true;
                 } catch (CommandException e) {
                     sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
+                    return true;
                 }
             } else if (args.length == 1) {
                 try {
                     getCommand(args[0]).execute(args[0], (Player) sender, new String[]{});
+                    return true;
                 } catch (CommandException e) {
                     sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
+                    return true;
                 }
             } else if (args.length == 0) {
                 Bukkit.dispatchCommand(sender, "sg help");
+                return true;
             } else {
                 Bukkit.dispatchCommand(sender, "sg help");
+                return true;
             }
             return true;
 
