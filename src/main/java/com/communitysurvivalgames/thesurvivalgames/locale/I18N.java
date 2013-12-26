@@ -32,7 +32,7 @@ public class I18N {
         locales.clear();
         if (file.equalsIgnoreCase("enUS")) {
             try {
-                locales.load(new InputStreamReader(I18N.class.getResource("/i18n/enUS").openStream(), "UTF8"));
+                locales.load(new InputStreamReader(I18N.class.getResource("/i18n/enUS.txt").openStream(), "UTF8"));
             } catch (IOException e) {
                 Bukkit.getLogger().log(Level.SEVERE, "[i18n] Could not load language file", e);
             }
@@ -64,7 +64,7 @@ public class I18N {
         for (String file : list) {
             if (file.matches("^\\w{4}$")) {
                 try {
-                    if (!file.equalsIgnoreCase("enUS")) {
+                    if (!file.equalsIgnoreCase("enUS.txt")) {
                         tmp.clear();
                         tmp.load(new InputStreamReader(new FileInputStream(dir.getAbsolutePath() + File.separator + file), "UTF8"));
                         localeFiles.put(file, tmp.getProperty("LOCALE_NAME", file));
@@ -78,7 +78,7 @@ public class I18N {
         }
         try {
             fallback.clear();
-            fallback.load(new InputStreamReader(I18N.class.getResource("/i18n/enUS").openStream(), "UTF8"));
+            fallback.load(new InputStreamReader(I18N.class.getResource("/i18n/enUS.txt").openStream(), "UTF8"));
             Bukkit.getLogger().log(Level.SEVERE, "[i18n] Fallback enUS loaded");
         } catch (IOException e) {
             Bukkit.getLogger().log(Level.SEVERE, "[i18n] Could not load fallback file", e);
