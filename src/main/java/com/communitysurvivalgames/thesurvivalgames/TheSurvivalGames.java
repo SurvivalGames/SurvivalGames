@@ -48,8 +48,8 @@ public class TheSurvivalGames extends JavaPlugin {
         I18N.setLocale(lang.getString("language"));
 
         //TODO Add more languages!
-        saveResource("enUS", true);
-        saveResource("idID", true);
+        saveResource("locale/enUS", true);
+        //saveResource("locale/idID", true);
 
         registerAll();
         setupDatabase();
