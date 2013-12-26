@@ -58,7 +58,7 @@ public class SGWorld {
     private void deleteFiles(File path) {
         if (path.exists()) {
             File files[] = path.listFiles();
-            for (File file : files) {
+            for (File file : files != null ? files : new File[0]) {
                 if (file.isDirectory()) {
                     deleteFiles(file);
                 } else {

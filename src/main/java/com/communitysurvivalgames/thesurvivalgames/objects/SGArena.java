@@ -23,7 +23,6 @@ public class SGArena {
     public Location lobby = null;
     public List<Location> locs = new ArrayList<Location>(0);
     public final List<BlockState> t2 = new ArrayList<BlockState>();
-    private Location dm = null;
 
     public int maxPlayers;
     private int minPlayers;
@@ -95,7 +94,7 @@ public class SGArena {
      */
     public void initialize(List<Location> list, Location lob, Location dm, int maxPlayers, int minPlayers, String name) {
         this.lobby = lob;
-        this.dm = dm;
+        Location dm1 = dm;
         this.locs = list;
         this.maxPlayers = maxPlayers;
         this.minPlayers = minPlayers;

@@ -57,7 +57,6 @@ public class Party {
     /**
      * Adds a player to the party
      *
-     *
      * @param player The player to be added
      */
     public void addMember(String player) {
@@ -86,7 +85,6 @@ public class Party {
 
     /**
      * Removes a player from the party
-     *
      *
      * @param player Player to be removed
      */

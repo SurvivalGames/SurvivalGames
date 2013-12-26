@@ -32,7 +32,6 @@ class ChatListener implements Listener {
                 Party party = PartyManager.getPartyManager().getParties().get(id);
                 if (party != null) {
                     String[] members = party.getMembers();
-                    int membersNum = members.length;
                     for (String member : members) {
                         if (member != null) {
                             Player p = Bukkit.getServer().getPlayer(member);

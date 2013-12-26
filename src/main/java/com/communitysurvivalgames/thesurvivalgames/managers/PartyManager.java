@@ -68,7 +68,7 @@ public class PartyManager {
         Party party = new Party(player.getName());
         players.put(player.getName(), party.getID());
         parties.put(party.getID(), party);
-        if (player != null) { //We check this here, because if the player would happen to quit before this, it would 100% completely crash the server.
+        if (player != null) { //TODO problem-an NPE would be thrown before the statement is reached
             player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
         }
         return party.getID();

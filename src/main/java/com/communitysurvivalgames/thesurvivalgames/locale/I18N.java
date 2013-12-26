@@ -14,10 +14,10 @@ import java.util.logging.Level;
 public class I18N {
     private static final Properties locales = new Properties();
     private static final Properties fallback = new Properties();
-    private static final File dir = new File(TheSurvivalGames.getPlugin().getDataFolder());
-    private static final HashMap<String, String> localeFiles = new HashMap<String, String>();
-    private static final HashMap<Integer, String> localeIndices = new HashMap<Integer, String>();
-    private static Locale currentLocale = Locale.enUS;
+    private static final File dir = TheSurvivalGames.getPlugin().getDataFolder();
+    private static final HashMap<String, String> localeFiles = new HashMap<String, String>();      //
+    private static final HashMap<Integer, String> localeIndices = new HashMap<Integer, String>();  // TODO updated but never queried
+    private static Locale currentLocale = Locale.enUS;                                             //
 
     public enum Locale {
         enUS, idID, nwNO

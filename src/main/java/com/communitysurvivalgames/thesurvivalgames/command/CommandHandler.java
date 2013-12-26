@@ -116,7 +116,6 @@ public class CommandHandler implements CommandExecutor {
                 Bukkit.dispatchCommand(sender, "sg help");
                 return true;
             }
-            return true;
 
         } else if (!(sender instanceof Player)) {
             sender.sendMessage(I18N.getLocaleString("ONLY_PLAYERS"));
