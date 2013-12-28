@@ -44,8 +44,7 @@ class Countdown implements Runnable {
     @Override
     public void run() {
 
-        if (count == 0) {
-            a.broadcast(I18N.getLocaleString("ODDS"));
+        if (count == 0) 
             Bukkit.getServer().getScheduler().cancelTask(this.id);
             ce.runCode();
             return;
