@@ -187,4 +187,5 @@ public class SGArena {
     public String getDisplayName() {
         return displayName;
     }
+
 }

@@ -9,7 +9,7 @@ import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.Bukkit;
 
-class Countdown implements Runnable {
+public class Countdown implements Runnable {
 
     private SGArena a = null;
     private int amount = 0;
@@ -51,16 +51,12 @@ class Countdown implements Runnable {
      */
     @Override
     public void run() {
-
-        if (count == 0) 
+        if (count == 0) {
             Bukkit.getServer().getScheduler().cancelTask(this.id);
             ce.runCode();
             return;
         }
-
         a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + count + " " + s[1]);
-        count = count - amount;
-
+        count -= amount;
     }
-
 }
