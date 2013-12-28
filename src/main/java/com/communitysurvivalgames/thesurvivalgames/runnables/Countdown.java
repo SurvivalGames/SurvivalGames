@@ -13,6 +13,7 @@ class Countdown implements Runnable {
 
     private SGArena a = null;
     private int count = 0;
+    private CodeExecutor ce = null;
     private int id = 0;
 
     /**
@@ -20,10 +21,12 @@ class Countdown implements Runnable {
      *
      * @param a     The arena to countdown on
      * @param count The amount of numbers to countdown from
+     * @param ce    The code to run when the runnable stops
      */
-    public Countdown(SGArena a, int count) {
+    public Countdown(SGArena a, int count, CodeExecutor ce) {
         this.a = a;
         this.count = count;
+        this.ce = ce;
     }
 
     /**
@@ -44,6 +47,7 @@ class Countdown implements Runnable {
         if (count == 0) {
             a.broadcast(I18N.getLocaleString("ODDS"));
             Bukkit.getServer().getScheduler().cancelTask(this.id);
+            ce.runCode();
             return;
         }
 
