@@ -13,7 +13,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import java.utili.ArrayList;
 import java.util.List;
 
-public class BlockListener implements Listener {
+public class SafeEntityListener implements Listener {
 
     public static List<String> safe = new ArrayList<String>();
 
