@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.UUID;
 
-class PlayerQuitListener implements Listener {
+public class PlayerQuitListener implements Listener {
 
     /**
      * Detects when a player quits, and if that player is the party leader, the
