@@ -8,11 +8,10 @@ package com.communitysurvivalgames.thesurvivalgames;
 import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.*;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.HelpCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.JoinCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.*;
 import com.communitysurvivalgames.thesurvivalgames.listeners.EntityDamageListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.ItemListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SetupListener;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
@@ -94,6 +93,7 @@ public class TheSurvivalGames extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
 
         pm.registerEvents(new ItemListener(this), this);
+        pm.registerEvents(new MoveListener(), this);
         pm.registerEvents(new SetupListener(), this);
         pm.registerEvents(new EntityDamageListener(), this);
         pm.registerEvents(new DoubleJump(this), this);
