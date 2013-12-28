@@ -158,4 +158,4 @@ PARTY_DISBANDED = Your party has been disbanded
 
 # Game Text #
 ODDS = May the odds be ever in your favour
-STARTING_IN = This arena is starting in
+STARTING_IN = starting in
