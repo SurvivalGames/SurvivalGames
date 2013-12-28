@@ -9,15 +9,13 @@ import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.*;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.*;
-import com.communitysurvivalgames.thesurvivalgames.listeners.EntityDamageListener;
-import com.communitysurvivalgames.thesurvivalgames.listeners.ItemListener;
-import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
-import com.communitysurvivalgames.thesurvivalgames.listeners.SetupListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.*;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
 import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -92,6 +90,9 @@ public class TheSurvivalGames extends JavaPlugin {
 
         PluginManager pm = getServer().getPluginManager();
 
+        pm.registerEvents(new BlockListener(), this);
+        pm.registerEvents(new ChatListener(), this);
+        pm.registerEvents(new PlayerQuitListener(), this);
         pm.registerEvents(new ItemListener(this), this);
         pm.registerEvents(new MoveListener(), this);
         pm.registerEvents(new SetupListener(), this);
