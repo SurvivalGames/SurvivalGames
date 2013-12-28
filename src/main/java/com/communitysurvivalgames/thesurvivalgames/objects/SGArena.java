@@ -37,7 +37,7 @@ public class SGArena {
      */
     public enum ArenaState {
 
-        WAITING_FOR_PLAYERS, STARTING_COUNTDOWN, PRE_GAME, IN_GAME, POST_GAME;
+        WAITING_FOR_PLAYERS, STARTING_COUNTDOWN, IN_GAME, DEATHMATCH, POST_GAME;
 
         public boolean isConvertable(SGArena arena, ArenaState a) {
             if (a.equals(WAITING_FOR_PLAYERS)) {
@@ -54,12 +54,14 @@ public class SGArena {
                 }
             }
 
-            if (a.equals(PRE_GAME)) {
+            if (a.equals(DEATHMATCH)) {
                 if (arena.getState().equals(WAITING_FOR_PLAYERS)) {
                     return false;
                 } else if (arena.getState().equals(STARTING_COUNTDOWN)) {
                     return false;
-                } else if (arena.getState().equals(PRE_GAME)) {
+                } else if (arena.getState().equals(IN_GAME)) {
+                    return false;
+                } else if (arena.getState().equals(DEATHMATCH)) {
                     return false;
                 }
             }
