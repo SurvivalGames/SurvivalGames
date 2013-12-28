@@ -16,7 +16,7 @@ import org.bukkit.event.Listener;
 import java.util.UUID;
 import java.util.logging.Level;
 
-class ChatListener implements Listener {
+public class ChatListener implements Listener {
 
     /**
      * Formats chat and detects if the player is using party chat, if so, it
