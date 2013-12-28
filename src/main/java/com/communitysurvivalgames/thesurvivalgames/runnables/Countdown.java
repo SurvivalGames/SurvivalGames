@@ -12,20 +12,28 @@ import org.bukkit.Bukkit;
 class Countdown implements Runnable {
 
     private SGArena a = null;
+    private int amount = 0;
     private int count = 0;
+    String[] s = new String[2];
     private CodeExecutor ce = null;
     private int id = 0;
 
     /**
      * Constructs a new countdown for this arena
      *
-     * @param a     The arena to countdown on
-     * @param count The amount of numbers to countdown from
-     * @param ce    The code to run when the runnable stops
+     * @param a      The arena to countdown on
+     * @param amount The amount to decrement each time
+     * @param count  The amount of numbers to countdown from
+     * @param stage  The next stage to go to
+     * @param unit   The trailing suffix after count
+     * @param ce     The code to run when the runnable stops
      */
-    public Countdown(SGArena a, int count, CodeExecutor ce) {
+    public Countdown(SGArena a, int amount, int count, String stage, String unit, CodeExecutor ce) {
         this.a = a;
+        this.amount = amount;
         this.count = count;
+        s[0] = stage;
+        s[1] = unit;
         this.ce = ce;
     }
 
@@ -50,8 +58,8 @@ class Countdown implements Runnable {
             return;
         }
 
-        a.broadcast(I18N.getLocaleString("STARTING_IN") + " " + count);
-        count--;
+        a.broadcast(s[0] + I18N.getLocaleString("STARTING_IN") + " " + count + s[1]);
+        count = count - amount;
 
     }
 
