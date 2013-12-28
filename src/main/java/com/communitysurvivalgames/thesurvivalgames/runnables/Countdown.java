@@ -58,7 +58,7 @@ class Countdown implements Runnable {
             return;
         }
 
-        a.broadcast(s[0] + I18N.getLocaleString("STARTING_IN") + " " + count + s[1]);
+        a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + count + " " + s[1]);
         count = count - amount;
 
     }
