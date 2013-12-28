@@ -35,16 +35,6 @@ public class StartCommand implements SubCommand {
                 return;
             }
 
-            if (args[1].equals("pre") && p.hasPermission("sg.gamestate.pregame")) {
-                if (!a.getState().equals(SGArena.ArenaState.PRE_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.PRE_GAME)) {
-                    p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("CANT_FORCE"));
-                    return;
-                }
-                a.setState(SGArena.ArenaState.PRE_GAME);
-                p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
-                return;
-            }
-
             if (args[1].equals("starting") && p.hasPermission("sg.gamestate.starting")) {
                 if (!a.getState().equals(SGArena.ArenaState.STARTING_COUNTDOWN) || a.getState().isConvertable(a, SGArena.ArenaState.STARTING_COUNTDOWN)) {
                     p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("CANT_FORCE"));
@@ -61,6 +51,16 @@ public class StartCommand implements SubCommand {
                     return;
                 }
                 a.setState(SGArena.ArenaState.IN_GAME);
+                p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
+                return;
+            }
+            
+            if (args[1].equals("dm") && p.hasPermission("sg.gamestate.dm")) {
+                if (!a.getState().equals(SGArena.ArenaState.DEATHMATCH) || a.getState().isConvertable(a, SGArena.ArenaState.DEATHMATCH)) {
+                    p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("CANT_FORCE"));
+                    return;
+                }
+                a.setState(SGArena.ArenaState.DEATHMATCH);
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
                 return;
             }
