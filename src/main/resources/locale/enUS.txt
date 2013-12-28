@@ -160,3 +160,6 @@ PARTY_DISBANDED = Your party has been disbanded
 ODDS = May the odds be ever in your favour
 STARTING_IN = starting in
 GAME_STARTING = Game countdown has commenced!
+DM_STARTING = Deathmatch countdown has commenced!
+START = You can now take damage, fight!
+END = The game has ended, the winner is:
