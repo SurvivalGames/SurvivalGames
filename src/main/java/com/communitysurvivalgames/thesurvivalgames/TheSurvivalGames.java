@@ -68,9 +68,9 @@ public class TheSurvivalGames extends JavaPlugin {
         getCommand("sg").setExecutor(new CommandHandler());
         getCommand("party").setExecutor(new PartyCommandHandler());
 
-        CommandHandler.register("help", new HelpCommand());
+        CommandHandler.register("help", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.HelpCommand());
         CommandHandler.register("create", new CreateCommand());
-        CommandHandler.register("join", new JoinCommand());
+        CommandHandler.register("join", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.JoinCommand());
         CommandHandler.register("user", new UserCommand());
         CommandHandler.register("setlobby", new SetCommand());
         CommandHandler.register("setdeathmatch", new SetCommand());
@@ -81,9 +81,9 @@ public class TheSurvivalGames extends JavaPlugin {
 
         PartyCommandHandler.register("chat", new ChatCommand());
         PartyCommandHandler.register("decline", new DeclineCommand());
-        PartyCommandHandler.register("help", new HelpCommand());
+        PartyCommandHandler.register("help", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.HelpCommand());
         PartyCommandHandler.register("invite", new InviteCommand());
-        PartyCommandHandler.register("join", new JoinCommand());
+        PartyCommandHandler.register("join", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.JoinCommand());
         PartyCommandHandler.register("leave", new LeaveCommand());
         PartyCommandHandler.register("list", new ListCommand());
         PartyCommandHandler.register("promote", new PromoteCommand());

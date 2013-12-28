@@ -22,8 +22,8 @@ public class MoveListener implements Listener {
         Location q = e.getFrom();
         Location w = e.getTo();
     
-        if(list.contains(e.getPlayer().getName()) && (q.getBlockX != w.getBlockX() || q.getBlockZ() != w.getBlockZ())) {
-            e.setTo(e.getFrom);
+        if(list.contains(e.getPlayer().getName()) && (q.getBlockX() != w.getBlockX() || q.getBlockZ() != w.getBlockZ())) {
+            e.setTo(e.getFrom());
         }
     }
     

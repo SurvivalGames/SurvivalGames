@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-import java.utili.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SafeEntityListener implements Listener {
