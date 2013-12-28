@@ -159,3 +159,4 @@ PARTY_DISBANDED = Your party has been disbanded
 # Game Text #
 ODDS = May the odds be ever in your favour
 STARTING_IN = starting in
+GAME_STARTING = Game countdown has commenced!
