@@ -186,8 +186,13 @@ survivalgames.join.* (access to join all arenas)
 
 **Get Involved**
 
-PM me or leave a comment to start collaborating! Looking forward to it :)
-Our GitHub page is http://github.com/TheEpicButterStudios/The-Survival-Games
-Our BukkitDev page is http://dev.bukkit.org/bukkit-plugins/the-survival-games/
+You can PM someone on BukkitDev:
+TheEpicButterStudios **Reccomended**
+Trolldood3 (AgentTroll)
+Quantum64
+Email us:
+survivalgamesdevteam@gmail.com
+Or visit our website, http://communitysurvivalgames.com/
+Start developing! See you then!
 
 
