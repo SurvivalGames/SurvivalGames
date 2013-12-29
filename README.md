@@ -187,12 +187,19 @@ survivalgames.join.* (access to join all arenas)
 **Get Involved**
 
 You can PM someone on BukkitDev:
+
 TheEpicButterStudios **Reccomended**
+
 Trolldood3 (AgentTroll)
+
 Quantum64
+
 Email us:
+
 survivalgamesdevteam@gmail.com
+
 Or visit our website, http://communitysurvivalgames.com/
+
 Start developing! See you then!
 
 
