@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 public class LeaveCommand implements SubCommand {
 
     @Override
-    public void execute(Player p, String cmd, String[] args) {
+    public void execute(String cmd, Player p, String[] args) {
         if(cmd.equalsIgnoreCase("leave")) {
             if(ArenaManager.getManager().isInGame(p)) {
                 ArenaManager.getManager().removePlayer(p);
