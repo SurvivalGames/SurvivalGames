@@ -71,6 +71,7 @@ public class TheSurvivalGames extends JavaPlugin {
         CommandHandler.register("help", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.HelpCommand());
         CommandHandler.register("create", new CreateCommand());
         CommandHandler.register("join", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.JoinCommand());
+        CommandHandler.register("leave", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.LeaveCommand());
         CommandHandler.register("user", new UserCommand());
         CommandHandler.register("setlobby", new SetCommand());
         CommandHandler.register("setdeathmatch", new SetCommand());
