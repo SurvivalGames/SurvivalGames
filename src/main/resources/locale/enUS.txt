@@ -44,6 +44,8 @@ INVALID_ARENA = Invalid arena:
 CHANGED_STATE = Changed the state.
 NOT_VALID = That is not a valid arena
 CANT_FORCE = You can't change force anything yet.
+LEFT_ARENA = You have left the arena
+LOL_NOPE = You can't leave. Yet.
 
 # SG Command Help Menu - NOTE: Please do not translate commands themselves, only the help that follows
 NO_HELP = That help page doesn't exist
