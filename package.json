@@ -1,0 +1,17 @@
+{
+  "name": "communitysurvivalgames",
+  "version": "1.0.0",
+  "devDependencies": {
+    "tape": "~2.3.0"
+  },
+  "testling": {
+    "files": "*",
+    "browsers": {
+      "ie": [ 8, 9 ],
+      "firefox": [ 13 ],
+      "chrome": [ 20 ],
+      "safari": [ 5.1 ],
+      "opera": [ 12 ]
+    }
+  }
+}
