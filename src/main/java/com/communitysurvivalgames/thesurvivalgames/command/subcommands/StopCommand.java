@@ -8,6 +8,7 @@ package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 
 import org.bukkit.entity.Player;
@@ -23,7 +24,7 @@ public class StopCommand implements SubCommand {
                 p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_NUMBER"));
                 return;
             }
-            Arena a = ArenaManager.getManager().getArena(i);
+            SGArena a = ArenaManager.getManager().getArena(i);
             if(a == null) {
                 p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARENA") + a);
                 return;
