@@ -20,7 +20,7 @@ public class StopCommand implements SubCommand {
             try {
                 i = Integer.parseInt(args[0]);
             } catch(NumberFormatException x) {
-                p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARGS"));
+                p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARGUMENTS"));
                 return;
             }
             Arena a = ArenaManager.getManager().getArena(i)
