@@ -78,6 +78,7 @@ public class TheSurvivalGames extends JavaPlugin {
         CommandHandler.register("setmaxplayers", new SetCommand());
         CommandHandler.register("setchest", new SetCommand());
         CommandHandler.register("setspawn", new SetCommand());
+        CommandHandler.register("stop", new StopCommand());
         CommandHandler.register("start", new StartCommand());
 
         PartyCommandHandler.register("chat", new ChatCommand());
