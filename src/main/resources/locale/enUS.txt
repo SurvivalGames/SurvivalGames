@@ -44,6 +44,7 @@ INVALID_ARENA = Invalid arena:
 CHANGED_STATE = Changed the state.
 NOT_VALID = That is not a valid arena
 CANT_FORCE = You can't change force anything yet.
+ARENA_END = This arena has been forced to end.
 LEFT_ARENA = You have left the arena
 LOL_NOPE = You can't leave. Yet.
 
