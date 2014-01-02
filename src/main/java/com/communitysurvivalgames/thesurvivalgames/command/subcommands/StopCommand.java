@@ -20,11 +20,18 @@ public class StopCommand implements SubCommand {
             try {
                 i = Integer.parseInt(args[0]);
             } catch(NumberFormatException x) {
-                p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARGUMENTS"));
+                p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_NUMBER"));
                 return;
             }
-            Arena a = ArenaManager.getManager().getArena(i)
+            Arena a = ArenaManager.getManager().getArena(i);
+            if(a == null) {
+                p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARENA") + a);
+                return;
+            }
             // a.end();
+            p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("ARENA_END"));
         }
+    } else {
+        p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARGUMENTS"));
     }
 }
