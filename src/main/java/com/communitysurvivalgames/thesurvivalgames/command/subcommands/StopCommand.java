@@ -30,8 +30,8 @@ public class StopCommand implements SubCommand {
             }
             // a.end();
             p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("ARENA_END"));
+        } else {
+            p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARGUMENTS"));
         }
-    } else {
-        p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARGUMENTS"));
     }
 }
