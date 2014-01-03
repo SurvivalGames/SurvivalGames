@@ -161,7 +161,7 @@ PARTY_DISBANDED = Kelompok anda telah ditutup
 # Game Text #
 ODDS = Semoga keberuntungan ada di sisi anda
 STARTING_IN = Permainan akan mulai dalam
-GAME_STARTING = Permainan akan mulai, menghitung mundur waktu !
-DM_STARTING = Deathmatch akan mulai, menghitung mundur waktu !
-START = Sekarang anda sudah bisa mendapat cedera, mulailah bertarung !
+GAME_STARTING = Permainan akan segera dimulai ! Bersiaplah !
+DM_STARTING = Deathmatch akan segera dimulai ! Bersiaplah !
+START = Sekarang anda sudah bisa membunuh pemain lain, mulailah bertarung !
 END = Permainan telah selesai, pemenangnya adalah :
