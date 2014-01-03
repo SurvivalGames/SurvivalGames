@@ -62,7 +62,7 @@ When the map has been selected to be played you will be teleported to one of the
 ```
 Alive: Player1, Player2, Dave1234, Jimmy1235, Yebol, SteveMC, ImSoPr0.
 Dead: ImBadAtPvP, SamHaribo, Isuck12, QuantumTiger, JamkoMC, bob987.
-Spectating: SamHaribo, bob987, RandomGuy6, JamkoMC.)
+Spectating: SamHaribo, bob987, RandomGuy6, JamkoMC.
 ```
 
 Chests will refill with items at 17 minutes through the game, with the same Tier (i'll talk about them in a minute) items. When in the arena the only blocks you will be able to break are, flowers, long grass, mushrooms, and leaves.
@@ -181,7 +181,7 @@ survivalgames.admin (access to all survivalgames.player commands and survivalgam
 survivalgames.mod (access to all survivalgames.player commands and also /sg forcestart and /sg forcestop)
 survivalgames.player (access to joining arenas, showing available arenas, voting for maps, spectating, boutying and sponsoring)
 survivalgames.vote.worth.<number> (how much a vote is worth, survivalgames.player will have 1 by default but it can be given to other players for example donators so that they can have a better chance of having their map selected)
-survivalgames.join.<arena name> ( permission to join an arena, when set to false players cannot join the arena (useful for donator only arenas + staff only testing)
+survivalgames.join.<arena name> (permission to join an arena, when set to false players cannot join the arena (useful for donator only arenas + staff only testing)
 survivalgames.join.* (access to join all arenas)
 ```
 
@@ -191,18 +191,22 @@ survivalgames.join.* (access to join all arenas)
 
 You can PM someone on BukkitDev:
 
-TheEpicButterStudios **Reccomended**
+TheEpicButterStudios **(Recommended)** ``` http://dev.bukkit.org/profiles/TheEpicButterStudios/ ```
 
-Trolldood3 (AgentTroll)
+Trolldood3 (AgentTroll) ``` http://dev.bukkit.org/profiles/Trolldood3/ ```
 
-Quantum64
+Quantum64 ``` http://dev.bukkit.org/profiles/Quantum64/ ```
 
-Email us:
+========
+
+**Contact Details**
+
+Email us :
 
 survivalgamesdevteam@gmail.com
 
 Or visit our website, http://communitysurvivalgames.com/
 
-Start developing! See you then!
+Start developing ! See you then !
 
 
