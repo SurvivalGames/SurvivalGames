@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -456,7 +457,7 @@ public class FileUtil {
 	 * @param zipFile input zip file
 	 * @param output zip file output folder
 	 */
-	public void unZipIt(String zipFile, String outputFolder) {
+	public static void unZipIt(String zipFile, String outputFolder) {
 
 		byte[] buffer = new byte[1024];
 
@@ -504,4 +505,57 @@ public class FileUtil {
 			ex.printStackTrace();
 		}
 	}
+
+	public static void delete(File file) throws IOException {
+
+		if (file.isDirectory()) {
+
+			//directory is empty, then delete it
+			if (file.list().length == 0) {
+
+				file.delete();
+				System.out.println("Directory is deleted : " + file.getAbsolutePath());
+
+			} else {
+
+				//list all the directory contents
+				String files[] = file.list();
+
+				for (String temp : files) {
+					//construct the file structure
+					File fileDelete = new File(file, temp);
+
+					//recursive delete
+					delete(fileDelete);
+				}
+
+				//check the directory again, if empty then delete it
+				if (file.list().length == 0) {
+					file.delete();
+					System.out.println("Directory is deleted : " + file.getAbsolutePath());
+				}
+			}
+
+		} else {
+			//if file, then delete it
+			file.delete();
+			System.out.println("File is deleted : " + file.getAbsolutePath());
+		}
+	}
+	
+	public static boolean exists(String URLName){
+	    try {
+	      HttpURLConnection.setFollowRedirects(false);
+	      // note : you may also need
+	      //        HttpURLConnection.setInstanceFollowRedirects(false)
+	      HttpURLConnection con =
+	         (HttpURLConnection) new URL(URLName).openConnection();
+	      con.setRequestMethod("HEAD");
+	      return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+	    }
+	    catch (Exception e) {
+	       e.printStackTrace();
+	       return false;
+	    }
+	  }
 }
