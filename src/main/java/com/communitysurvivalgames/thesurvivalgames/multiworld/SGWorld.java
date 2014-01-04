@@ -30,7 +30,6 @@ public class SGWorld {
 
     public World create() {
         if (Bukkit.getServer().getWorld(name) != null) {
-            //TODO What do we do? Should we copy the world? Or skip this step?
             return Bukkit.getServer().getWorld(name);
         }
 

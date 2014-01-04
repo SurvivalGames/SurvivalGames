@@ -13,18 +13,25 @@ import org.bukkit.entity.Player;
 
 public class CreateCommand implements SubCommand {
 
-    /**
-     * The create command. DO NOT CALL DIRECTLY. Only use in CommandHandler
-     *
-     * @param cmd  The command that was executed
-     * @param p    The player that executed the command
-     * @param args The arguments after the command
-     */
-    @Override
-    public void execute(String cmd, Player p, String[] args) {
-        if (cmd.equalsIgnoreCase("create") && p.hasPermission("sg.create")) {
-            SGArena a = ArenaManager.getManager().createArena(p);
-            p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_ARENA") + " " + a.getId());
-        }
-    }
+	/**
+	 * The create command. DO NOT CALL DIRECTLY. Only use in CommandHandler
+	 *
+	 * @param cmd  The command that was executed
+	 * @param p    The player that executed the command
+	 * @param args The arguments after the command
+	 */
+	@Override
+	public void execute(String cmd, Player p, String[] args) {
+		if (cmd.equalsIgnoreCase("create") && p.hasPermission("sg.create")) {
+			if (args[0].equalsIgnoreCase("custom")) {
+				SGArena a = ArenaManager.getManager().createArena(p);
+				p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_ARENA") + " " + a.getId());
+			} else if (args[0].equalsIgnoreCase("download")) {
+				
+			} else if (args[0].equalsIgnoreCase("import")) {
+				
+			}
+
+		}
+	}
 }
