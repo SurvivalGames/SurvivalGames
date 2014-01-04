@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class ConfigurationData {
+public class ConfigurationData {
     private final TheSurvivalGames plugin;
     private FileConfiguration config;
     private final Map<String, SignLayout> signLayouts = new HashMap<String, SignLayout>();
@@ -65,7 +65,13 @@ class ConfigurationData {
         return this.config.getBoolean("allow-double-jump-IG");
     }
 
+    public boolean doBloodEffect() {
+        return this.config.getBoolean("blood-effect");
+    }
+    
     public int getStartingPoints() {
         return this.config.getInt("starting-points");
     }
+    
+    
 }

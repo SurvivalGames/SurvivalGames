@@ -9,8 +9,13 @@ import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.util.PlayerVanishUtil;
+import com.phazecraft.server.util.BloodSplat;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
@@ -24,49 +29,63 @@ import org.bukkit.util.Vector;
 
 public class EntityDamageListener implements Listener {
 
-    /**
-     * Listens for a player being hit by a snow ball, gives player Slowness II
-     * for 30 seconds
-     *
-     * @param event - The EntityDamageByEntityEvent event
-     */
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        Entity entity = event.getDamager();
-        if (event.getEntity() instanceof Player) {
-            Player damaged = (Player) event.getEntity();
-            if (ArenaManager.getManager().isInGame(damaged)) {
-                if (entity instanceof Snowball) {
-                    event.setDamage(3);
-                    damaged.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 600, 2, false));
-                    damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1, false));
-                }
-                if ((damaged.getHealth() - event.getDamage()) <= 0) {
-                    event.setCancelled(true);
-                    damaged.setHealth(20);
-                    damaged.setVelocity(new Vector(0, 0, 0.5));
-                    damaged.setGameMode(GameMode.CREATIVE);
-                    damaged.setAllowFlight(true);
-                    damaged.setFlying(true);
-                    damaged.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 9999999, 1, false)); //Just for effect
+	/**
+	 * Listens for a player being hit by a snow ball, gives player Slowness II
+	 * for 30 seconds
+	 *
+	 * @param event - The EntityDamageByEntityEvent event
+	 */
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
+		if (TheSurvivalGames.getPlugin().getPluginConfig().doBloodEffect()) {
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(), new Runnable() {
+				@Override
+				public void run() {
+					for (int i = 0; i < event.getDamage(); i++) {
+						event.getDamager().getWorld().playEffect(event.getEntity().getLocation().add(0.0D, 0.8D, 0.0D), Effect.STEP_SOUND, Material.REDSTONE_WIRE);
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {}
+					}
+				}
+			});
+		}
 
-                    if (entity instanceof Player) {
-                        Player damager = (Player) entity;
-                        ArenaManager.getManager().getArena(damager).broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("KILLED_BY") + " &e&l" + damager.getDisplayName() + " &r&6" + I18N.getLocaleString("WITH_A") + " &e&l" + damager.getInventory().getItemInHand()));
-                    }
+		Entity entity = event.getDamager();
+		if (event.getEntity() instanceof Player) {
+			Player damaged = (Player) event.getEntity();
+			if (ArenaManager.getManager().isInGame(damaged)) {
+				if (entity instanceof Snowball) {
+					event.setDamage(3);
+					damaged.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 600, 2, false));
+					damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1, false));
+				}
+				if ((damaged.getHealth() - event.getDamage()) <= 0) {
+					event.setCancelled(true);
+					damaged.setHealth(20);
+					damaged.setVelocity(new Vector(0, 0, 0.5));
+					damaged.setGameMode(GameMode.CREATIVE);
+					damaged.setAllowFlight(true);
+					damaged.setFlying(true);
+					damaged.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 9999999, 1, false)); //Just for effect
 
-                    PlayerVanishUtil.hideAll(ArenaManager.getManager().getArena(damaged), damaged);
-                }
-                return;
-            }
-            if ((damaged.getHealth() - event.getDamage()) <= 0) {
-                event.setCancelled(true);
-                damaged.setHealth(20);
-                damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 1, false));
-                damaged.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 40, 1, false));
-                damaged.setVelocity(new Vector(0, 0, 0.5));
-                TheSurvivalGames.getPlugin().getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("FAIL") + " &e&l" + event.getDamager()));
-            }
-        }
-    }
+					if (entity instanceof Player) {
+						Player damager = (Player) entity;
+						ArenaManager.getManager().getArena(damager).broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("KILLED_BY") + " &e&l" + damager.getDisplayName() + " &r&6" + I18N.getLocaleString("WITH_A") + " &e&l" + damager.getInventory().getItemInHand()));
+					}
+
+					PlayerVanishUtil.hideAll(ArenaManager.getManager().getArena(damaged), damaged);
+				}
+				return;
+			}
+			if ((damaged.getHealth() - event.getDamage()) <= 0) {
+				event.setCancelled(true);
+				damaged.setHealth(20);
+				damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 1, false));
+				damaged.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 40, 1, false));
+				damaged.setVelocity(new Vector(0, 0, 0.5));
+				TheSurvivalGames.getPlugin().getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("FAIL") + " &e&l" + event.getDamager()));
+			}
+		}
+	}
 }
