@@ -5,12 +5,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
-import com.communitysurvivalgames.thesurvivalgames.util.PlayerVanishUtil;
-import com.phazecraft.server.util.BloodSplat;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
@@ -26,6 +20,11 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+
+import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.util.PlayerVanishUtil;
 
 public class EntityDamageListener implements Listener {
 
