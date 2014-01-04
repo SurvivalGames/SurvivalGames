@@ -24,7 +24,7 @@ Never use tabs.
 **[ANNOUNCEMENT|TheEpicButterStudios]**
 Try to edit with an IDE before putting something on GitHub as much as possible, but small tweaks directly on GitHub are fine.
 
-**[ANNOUNCEMENT|TheEpicButterStudios]**
+**[ANNOUNCEMENT|TheEpicButterStudios]** 
 WORK! 3 People can't handle the biggest plugin ever coded!
 
 ========
@@ -35,8 +35,8 @@ http://CommunitySurvivalGames.com
 
 **Description**
 
-What is there to describe? This will be a community project, this is the description
-Survival Games plugin cannot be boring, it has to have a lot of cool features that will make people want to play on it so I have come up with this idea. The plugin is very similar to MCSG. I would also like it to be MultiWorld compatible if you can so it is more useful to other people.
+What is there to describe? This will be a community project, this is the description.
+Survival Games plugin cannot be boring, it has to have a lot of cool features that will make people want to play on it, so I have come up with this idea. The plugin is very similar to MCSG. I would also like it to be MultiWorld compatible if you can so it is more useful to other people.
 
 ========
 
@@ -51,13 +51,13 @@ Survival Games
 <Total players in the game (e.g. 3/24)>
 ```
 
-Next, when you right click on the sign you will teleported to a location set with a command, your inventory will be cleared (and saved), you are now in the lobby faze you will not be able to break any blocks and you will be able to do /sg vote <arena number> (e.g. /sg vote 2) this will create your vote for the map number 2, if it is possible the map number (e.g. 2) will have the map name next to it (e.g. 2 - Teweran Survival Games 3 (Votes: 4)) In the end, the map with the most number of votes will win and will be selected to be played. If there isn't another players in the lobby it will restart but the votes/maps will be kept (amount of min players could be configurable per arena/lobby in config or with an in-game command). People in the lobby, pre-game, in-game and deathmatch will be able to do /sg records to see their total kills, deaths, wins and points (i'll get onto points later).
+Next, when you right click on the sign you will teleported to a location set with a command, your inventory will be cleared (and saved) and you are now in the lobby phase. You will not be able to break any blocks and you will be able to do /sg vote <arena number> (e.g. /sg vote 2), which will create your vote for the map number 2, if it is possible the map number (e.g. 2) will have the map name next to it (e.g. 2 - Teweran Survival Games 3 (Votes: 4)) In the end, the map with the most number of votes will win and will be selected to be played. If there isn't another players in the lobby it will restart but the votes/maps will be kept (amount of min players could be configurable per arena/lobby in config or with an in-game command). People in the lobby, pre-game, in-game and deathmatch will be able to do /sg records to see their total kills, deaths, wins and points (I'll get onto points later).
 
 ========
 
 **Map**
 
-When the map has been selected to be played you will be teleported to one of the spawnpoints (set with a command) and you will not be able to move until the configurable time (default 45 seconds) has gone, in the time all the chests on the map will generate random items (i'll talk later about chests), once the time is up the game timer will start and players will be able to run and collect items from chests, every minute a message will popup saying how long is left in minutes (each game is 30 mins long then deathmatch will start if there is still more than 4 players) and how many players are left (players can type /sg list to see who is in game and the message will be displayed as so in this example:
+When the map has been selected to be played, you will be teleported to one of the spawnpoints (set with a command) and you will not be able to move until the configurable time (default 45 seconds) has past. In the time all the chests on the map will generate random items (I'll talk later about chests), once the time is up the game timer will start and players will be able to run and collect items from chests, every minute a message will pop-up saying how long is left in minutes (each game is 30 mins long then deathmatch will start if there is still more than 4 players) and how many players are left (players can type /sg list to see who is in game and the message will be displayed as so in this example):
 
 ```
 Alive: Player1, Player2, Dave1234, Jimmy1235, Yebol, SteveMC, ImSoPr0.
@@ -72,13 +72,13 @@ Chests will refill with items at 17 minutes through the game, with the same Tier
 **Winning and Deathmatch**
 
 Once the 30 minutes are up or their are 4 players left alive the deathmatch countdown will begin from 60, if all but one players are killed then the remaining player wins and the game ends, if more than 1 player is still alive when the deathmatch counter has ended both players will be sent to the deathmatch arena on different spawnpoints where they will fight to the death and one will become the victor.
-The game ends and players will be teleported back to where they were when they first clicked the sign and will be given the items they had in their inventory again
+The game ends and players will be teleported back to where they were when they first clicked the sign and will be given the items they had in their inventory again.
 
 ========
 
 **Extra Info**
 
-Chests will have 2 Tiers, Tier 1 chests and Tier 2 chests.
+Chests will have 2 Tiers, Tier 1 (T1) chests and Tier 2 (T2) chests.
 
 Tier 1s will contain items like: leather armour pieces, gold armour pieces, wooden swords and axes, stone swords and axes, un-cooked food like cookies, apples, carrots, pumpkin pie, raw chicken, raw steak, raw fish (include 1.7 fish if you want to as well), the chests will also have items such as sticks x2 (not very common), feathers x3, bones x2, fishing rods (not very common), flint (not very common), arrows x4 (not very common), a gold ingot (not very common), wheat x2, flint and steel x1 (not very common), and an iron ingot (not very common). The T1s will also include the Extra items which you can find lower down the page. TNT will be a not very common item, Sugar rush will also be a not very common item and also the slowball which will be quite common but not so that it is OP.
 
@@ -96,7 +96,7 @@ Points will be gained when you get a kill (customise amount in config) and winni
 
 ```696 : DaveMan123: Hi, I have 696 points, lol that is funny! :D```
 
-after the lobby stage (pre-game, in-game and deathmatch) your name will look like this and the number you have before your name will be the amount of points bountied on you.
+After the lobby stage (pre-game, in-game and deathmatch), your name will look like this and the number you have before your name will be the amount of points bountied on you.
 
 ```50 : DaveMan123: LOL! someone bountied 50 points because I killed them!```
 
@@ -127,7 +127,7 @@ Parties can be used to chat with your friends, and join the same games, without 
 
 **Bountying**
 
-Bountying will be able to happen throughout the game by players and spectators, when a player types /sg bounty <playername> <amount of points being bountied> the points will be taken from their profile and put on the other players name (see above Points section). When a player with a bounty on them is killed, the killer will receive the points added onto the points gained from killing a player. If they player does not die in the whole game then they will get the points added onto their points total
+Bountying will be able to happen throughout the game by players and spectators, when a player types /sg bounty <playername> <amount of points being bountied> the points will be taken from their profile and put on the other players name (see above Points section). When a player with a bounty on them is killed, the killer will receive the points added onto the points gained from killing a player. If the player does not die in the whole game then they will get the points added onto their points total.
 
 ========
 
@@ -141,17 +141,17 @@ When you are spectating a game you can sponsor a player with /sg sponsor <player
 Extra Items
 The extra items I have thought up of and nicked from other great servers are,
 
-TNT which when placed on the floor instantly lights and explodes after 2-4 seconds.
+TNT which when placed on the floor instantly lights up and explodes after 2-4 seconds.
 
 ========
 
 **Kits and Items**
 
-Sugar (named Sugar rush) which when right clicked, slows you down like you are eating it for same amount of time as normal food and then gives you a speed 1 boost for 10 seconds, great for out running people.
+Sugar (named Sugar rush) which when right clicked, slows you down like you are eating it for same amount of time as normal food and then gives you a speed 1 boost for 10 seconds, great for outrunning people.
 
-Another item is the slowball, when a snowball (renamed slowball) hits the player it gives them slowness 1 for 20 seconds this will allow players to chance them down and hopefully get the kill.
+Another item is the slowball, which is a snowball (renamed slowball) that can be used to hit the targeted player and it gives them slowness 1 for 20 seconds, which allows players to chase them down and hopefully get the kill.
 
-Care Package, a renamed firework which when right-clicked sends a firework up into the air where it explodes constantly for 10 seconds so other players are alerted to the users position, after the 10 seconds a random T2 item will drop from the sky to the location that the care package was set off.
+Care Package, a renamed firework which when right-clicked sends a firework up into the air where it explodes constantly for 10 seconds so other players are alerted to the users position. After the 10 seconds, a random T2 item will drop from the sky to the location that the care package was set off.
 
 =========
 
@@ -197,15 +197,11 @@ Trolldood3 (AgentTroll) ``` http://dev.bukkit.org/profiles/Trolldood3/ ```
 
 Quantum64 ``` http://dev.bukkit.org/profiles/Quantum64/ ```
 
-========
-
-**Contact Details**
-
 Email us :
 
-survivalgamesdevteam@gmail.com
+**survivalgamesdevteam@gmail.com**
 
-Or visit our website, http://communitysurvivalgames.com/
+Or visit our website, **http://communitysurvivalgames.com/**
 
 Start developing ! See you then !
 
