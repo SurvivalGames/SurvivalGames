@@ -5,6 +5,8 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
+import java.io.IOException;
+
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
@@ -24,12 +26,16 @@ public class CreateCommand implements SubCommand {
 	public void execute(String cmd, Player p, String[] args) {
 		if (cmd.equalsIgnoreCase("create") && p.hasPermission("sg.create")) {
 			if (args[0].equalsIgnoreCase("custom")) {
-				SGArena a = ArenaManager.getManager().createArena(p, p.getWorld().getName());
-				p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_ARENA") + " " + a.getId());
+				ArenaManager.getManager().createArena(p, args[1]);
+				p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_ARENA")); //TODO This should be moved, as the creation happens in a Runnable now
 			} else if (args[0].equalsIgnoreCase("download")) {
-				
+				try {
+					ArenaManager.getManager().createArenaFromDownload(p, args[1]);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			} else if (args[0].equalsIgnoreCase("import")) {
-				
+				ArenaManager.getManager().createArenaFromImport(p, args[1]);
 			}
 
 		}

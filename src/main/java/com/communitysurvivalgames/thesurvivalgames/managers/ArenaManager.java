@@ -157,43 +157,65 @@ public class ArenaManager {
 	 * @param creator The creator attributed with making the arena
 	 * @return The arena that was created
 	 */
-	public SGArena createArena(Player creator, String worldName) {
-		int num = arenaSize + 1;
+	public void createArena(final Player creator, final String worldName) {
+		final int num = arenaSize + 1;
 		arenaSize++;
 
 		creator.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
 
-		SGArena a = new SGArena(num, MultiworldManager.getInstance().createRandomWorld(creator, worldName));
-		arenas.add(a);
-		a.getPlayers().add(creator.getName());
+		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(), new Runnable() {
 
-		creators.put(creator.getName(), a);
-		
-		//TODO Create new file configuration with default values here
-		
-		plugin.saveConfig();
+			@Override
+			public void run() {
 
-		return a;
+				SGArena a = new SGArena(num, MultiworldManager.getInstance().createRandomWorld(creator, worldName));
+				arenas.add(a);
+				a.getPlayers().add(creator.getName());
+
+				creators.put(creator.getName(), a);
+
+				//TODO Create new file configuration with default values here
+
+				plugin.saveConfig();
+			}
+		});
+
 	}
-	
-	public SGArena createArenaFromDownload(Player creator, String worldName) throws IOException {
-		int num = arenaSize + 1;
-		arenaSize++;
 
-		SGArena a = new SGArena(num, MultiworldManager.getInstance().copyFromInternet(creator, worldName));
-		arenas.add(a);
+	public void createArenaFromDownload(final Player creator, final String worldName) throws IOException {
+		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(), new Runnable() {
 
-		return a;
+			@Override
+			public void run() {
+				int num = arenaSize + 1;
+				arenaSize++;
+
+				SGArena a = null;
+				try {
+					a = new SGArena(num, MultiworldManager.getInstance().copyFromInternet(creator, worldName));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				arenas.add(a);
+			}
+		});
+
 	}
-	
-	public SGArena createArenaFromImport(Player creator, String worldName) {
-		int num = arenaSize + 1;
-		arenaSize++;
 
-		SGArena a = new SGArena(num, MultiworldManager.getInstance().importWorldFromFolder(creator, worldName));
-		arenas.add(a);
+	public void createArenaFromImport(final Player creator, final String worldName) {
 
-		return a;
+		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(), new Runnable() {
+
+			@Override
+			public void run() {
+				int num = arenaSize + 1;
+				arenaSize++;
+
+				SGArena a = new SGArena(num, MultiworldManager.getInstance().importWorldFromFolder(creator, worldName));
+				arenas.add(a);
+			}
+		});
+
 	}
 
 	/**

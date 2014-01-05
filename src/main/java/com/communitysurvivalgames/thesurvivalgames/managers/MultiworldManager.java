@@ -40,55 +40,45 @@ public class MultiworldManager {
 
 	public World copyFromInternet(final Player sender, final String worldName) throws IOException {//TODO: Translate
 
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(), new Runnable() {
-
-			@Override
-			public void run() {
-				String url = "http://communitysurvivalgames.com/worlds/" + worldName + ".zip";
-				if (!FileUtil.exists(url.toString())) {
-					sender.sendMessage("That arena dosen't seem to be in our database!  :(");
-					sender.sendMessage("Look for worlds we do have at: http://communitysurvivalgames.com/worlds/");
-					return;
-				}
-				try {
-					FileUtil.copyURLToFile(new URL(url), new File(TheSurvivalGames.getPlugin().getDataFolder().getAbsolutePath(), "SG_ARENA_TMP.zip"));
-				} catch (MalformedURLException e) {
-					sender.sendMessage("Bad world name! Are you using special characters?");
-					return;
-				} catch (IOException e) {
-					sender.sendMessage("World downloading failed, try again later or something");
-					return;
-				}
-				FileUtil.unZipIt(new File(TheSurvivalGames.getPlugin().getDataFolder().getAbsolutePath(), "SG_ARENA_TMP.zip").getAbsolutePath(), new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName).getAbsolutePath());
-				if (!checkIfIsWorld(new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName))) {
-					sender.sendMessage("The downloaded world was not a world at all!");
-					return;
-				}
-				createWorld(worldName);
-			}
-		});
+		String url = "http://communitysurvivalgames.com/worlds/" + worldName + ".zip";
+		if (!FileUtil.exists(url.toString())) {
+			sender.sendMessage("That arena dosen't seem to be in our database!  :(");
+			sender.sendMessage("Look for worlds we do have at: http://communitysurvivalgames.com/worlds/");
+			return null;
+		}
+		try {
+			FileUtil.copyURLToFile(new URL(url), new File(TheSurvivalGames.getPlugin().getDataFolder().getAbsolutePath(), "SG_ARENA_TMP.zip"));
+		} catch (MalformedURLException e) {
+			sender.sendMessage("Bad world name! Are you using special characters?");
+			return null;
+		} catch (IOException e) {
+			sender.sendMessage("World downloading failed, try again later or something");
+			return null;
+		}
+		FileUtil.unZipIt(new File(TheSurvivalGames.getPlugin().getDataFolder().getAbsolutePath(), "SG_ARENA_TMP.zip").getAbsolutePath(), new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName).getAbsolutePath());
+		if (!checkIfIsWorld(new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName))) {
+			sender.sendMessage("The downloaded world was not a world at all!");
+			return null;
+		}
+		createWorld(worldName);
 
 		return Bukkit.getWorld(worldName);
 	}
 
 	public World importWorldFromFolder(final Player sender, final String worldName) {
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(), new Runnable() {
 
-			@Override
-			public void run() {
-				if (!checkIfIsWorld(new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName))) {
-					sender.sendMessage("That's not a world :/");
-					return;
-				}
-				createWorld(worldName);
-			}
-		});
+		if (!checkIfIsWorld(new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName))) {
+			sender.sendMessage("That's not a world :/");
+			return null;
+		}
+		createWorld(worldName);
+
 		return Bukkit.getWorld(worldName);
 	}
 
 	public World createRandomWorld(final Player sender, final String worldName) {
 		//TODO
-		return Bukkit.getWorld(worldName); 
+		return Bukkit.getWorld(worldName);
 	}
 
 	public static boolean checkIfIsWorld(File worldFolder) {
