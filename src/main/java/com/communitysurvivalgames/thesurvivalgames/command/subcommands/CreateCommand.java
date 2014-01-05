@@ -24,7 +24,7 @@ public class CreateCommand implements SubCommand {
 	public void execute(String cmd, Player p, String[] args) {
 		if (cmd.equalsIgnoreCase("create") && p.hasPermission("sg.create")) {
 			if (args[0].equalsIgnoreCase("custom")) {
-				SGArena a = ArenaManager.getManager().createArena(p);
+				SGArena a = ArenaManager.getManager().createArena(p, p.getWorld().getName());
 				p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_ARENA") + " " + a.getId());
 			} else if (args[0].equalsIgnoreCase("download")) {
 				
