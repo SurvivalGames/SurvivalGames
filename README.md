@@ -24,9 +24,6 @@ Never use tabs.
 **[ANNOUNCEMENT|TheEpicButterStudios]**
 Try to edit with an IDE before putting something on GitHub as much as possible, but small tweaks directly on GitHub are fine.
 
-**[ANNOUNCEMENT|TheEpicButterStudios]** 
-WORK! 3 People can't handle the biggest plugin ever coded!
-
 ========
 
 ![SurvivalGames](http://icap.me/i/ffb9c91e68.png)
