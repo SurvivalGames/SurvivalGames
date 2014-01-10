@@ -86,18 +86,25 @@ public class I18N {
     }
 
     /**
-     * Sets the locale for the launcher
+     * Sets the locale for the files
      *
      * @param locale the language file to be loaded
      */
     public static void setLocale(String locale) {
-        if (locale.equalsIgnoreCase("idID")) {
-            currentLocale = Locale.idID;
-        } else {
+        if (locale == null) {
+            locale = "enUS";
             currentLocale = Locale.enUS;
         }
-        getLocaleProperties(locale);
-        Bukkit.getLogger().log(Level.INFO, "[i18n] " + locale + " " + locales.getProperty("LOCALE_LOADED", "loaded"));
+        else {
+            try {
+            currentLocale = Locale.valueOf(locale);
+            } catch(IllegalArgumentException e) {
+                Bukkit.getLogger().severe("[i18n] Unknown locale " + locale + ". Loaded enUs");
+                currentLocale = Locale.enUS;
+            }
+        }           
+            getLocaleProperties(locale);
+            Bukkit.getLogger().info("[i18n] " + locale + " " + locales.getProperty("LOCALE_LOADED", "loaded"));
     }
 
     /**
