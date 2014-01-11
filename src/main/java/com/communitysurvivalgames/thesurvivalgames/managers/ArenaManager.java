@@ -16,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -114,6 +115,11 @@ public class ArenaManager {
 		p.setExp(0);
 
 		p.teleport(a.lobby);
+		
+		//Ding!
+		for (Player player : plugin.getServer().getOnlinePlayers()){
+			player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
+		}
 	}
 
 	/**
