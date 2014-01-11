@@ -32,7 +32,6 @@ import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.Pro
 import com.communitysurvivalgames.thesurvivalgames.listeners.BlockListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.ChatListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.EntityDamageListener;
-import com.communitysurvivalgames.thesurvivalgames.listeners.ItemListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.PlayerQuitListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SetupListener;
@@ -41,6 +40,7 @@ import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
 import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
+import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
 
 public class TheSurvivalGames extends JavaPlugin {
 
@@ -117,7 +117,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new BlockListener(), this);
 		pm.registerEvents(new ChatListener(), this);
 		pm.registerEvents(new PlayerQuitListener(), this);
-		pm.registerEvents(new ItemListener(this), this);
+		pm.registerEvents(new CarePackage(this), this);
 		pm.registerEvents(new MoveListener(), this);
 		pm.registerEvents(new SetupListener(), this);
 		pm.registerEvents(new EntityDamageListener(), this);
