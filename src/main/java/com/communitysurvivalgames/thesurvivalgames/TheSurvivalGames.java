@@ -43,7 +43,6 @@ import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
 import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
 import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
-import com.phazecraft.lobby.signs.TeleportSign;
 
 public class TheSurvivalGames extends JavaPlugin {
 
