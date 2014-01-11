@@ -18,7 +18,7 @@ public class BonusManager {
 
     public void registerAll() {
         register("Who's in charge NOW?!", new String[]{"Kill an Administrator in the survival games"}, 100);
-        register("Hope you weren't recording!", new String[]{"Kill an Administrator in the survival games"}, 500);
+        register("Hope you weren't recording!", new String[]{"Kill a YouTuber in the survival games"}, 500);
         register("Slow Reflexes", new String[]{"Die within the first 60 seconds of a SG match."}, 20);
         register("Slowpokes!", new String[]{"Win a SG game using TNT"}, 75);
         register("High Five!", new String[]{"Kill s player with your fists"}, 300);
