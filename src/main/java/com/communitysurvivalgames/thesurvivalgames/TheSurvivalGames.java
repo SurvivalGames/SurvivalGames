@@ -55,6 +55,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		if (!i18N.exists()) {
 			saveResource("I18N.yml", false);
 		}
+		
 		FileConfiguration lang = YamlConfiguration.loadConfiguration(i18N);
 
 		I18N.setupLocale();
@@ -64,6 +65,8 @@ public class TheSurvivalGames extends JavaPlugin {
 		saveResource("enUS.lang", true);
 		saveResource("idID.lang", true);
 		saveResource("esES.lang", true);
+
+
 
 		registerAll();
 		setupDatabase();
