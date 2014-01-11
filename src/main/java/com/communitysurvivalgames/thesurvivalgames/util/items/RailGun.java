@@ -14,7 +14,6 @@ public class RailGun implements Listener {
 	int timer, id = 0;
 	Random gen = new Random();
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onS(PlayerInteractEvent event) {
 		try {
