@@ -23,6 +23,11 @@ arenas:
   - testArena.yml
   - testArena2.yml
 
+#Welcome Message
+welcome-message:
+  - &eHi there, and welcome to
+  - &a&lThe Survival Games Server
+  - &2Read the book in your inventory for more information
 #Signs config
 signs:
   #placeholders:

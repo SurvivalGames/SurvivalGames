@@ -31,9 +31,9 @@ public class DoubleJump implements Listener {
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
         if ((event.getPlayer().hasPermission("doublejump.use")) && (event.getPlayer().getGameMode() != GameMode.CREATIVE) && (event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR)) {
-            if (ArenaManager.getManager().isInGame(event.getPlayer()) && plugin.getConfig().getBoolean("game.doubleJumpInGame"))
+            if (ArenaManager.getManager().isInGame(event.getPlayer()) && plugin.getPluginConfig().allowDoubleJumpIG())
                 event.getPlayer().setAllowFlight(true);
-            if (plugin.getConfig().getBoolean("lobby.doubleJumpInLobby")) {
+            if (plugin.getPluginConfig().allowDoubleJump()) {
                 event.getPlayer().setAllowFlight(true);
             }
         }
