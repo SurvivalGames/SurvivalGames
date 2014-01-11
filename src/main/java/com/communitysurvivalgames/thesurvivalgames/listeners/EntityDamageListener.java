@@ -22,6 +22,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.util.PlayerVanishUtil;
@@ -70,10 +71,18 @@ public class EntityDamageListener implements Listener {
 
 					if (entity instanceof Player) {
 						Player damager = (Player) entity;
-						ArenaManager.getManager().getArena(damager).broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("KILLED_BY") + " &e&l" + damager.getDisplayName() + " &r&6" + I18N.getLocaleString("WITH_A") + " &e&l" + damager.getInventory().getItemInHand()));
+						try {
+							ArenaManager.getManager().getArena(damager).broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("KILLED_BY") + " &e&l" + damager.getDisplayName() + " &r&6" + I18N.getLocaleString("WITH_A") + " &e&l" + damager.getInventory().getItemInHand()));
+						} catch (ArenaNotFoundException e) {
+							e.printStackTrace();
+						}
 					}
 
-					PlayerVanishUtil.hideAll(ArenaManager.getManager().getArena(damaged), damaged);
+					try {
+						PlayerVanishUtil.hideAll(ArenaManager.getManager().getArena(damaged), damaged);
+					} catch (ArenaNotFoundException e) {
+						e.printStackTrace();
+					}
 				}
 				return;
 			}

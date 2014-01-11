@@ -6,9 +6,12 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class StartCommand implements SubCommand {
@@ -29,11 +32,13 @@ public class StartCommand implements SubCommand {
             } catch (NumberFormatException x) {
                 p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARENA") + args[0]);
             }
-            SGArena a = ArenaManager.getManager().getArena(id);
-            if (a == null) {
-                p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_VALID"));
-                return;
-            }
+            SGArena a;
+			try {
+				a = ArenaManager.getManager().getArena(id);
+			} catch (ArenaNotFoundException e) {
+				Bukkit.getLogger().severe(e.getMessage());
+				return;
+			}
 
             if (args[1].equals("starting") && p.hasPermission("sg.gamestate.starting")) {
                 if (!a.getState().equals(SGArena.ArenaState.STARTING_COUNTDOWN) || a.getState().isConvertable(a, SGArena.ArenaState.STARTING_COUNTDOWN)) {

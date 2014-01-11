@@ -37,10 +37,13 @@ import com.communitysurvivalgames.thesurvivalgames.listeners.PlayerQuitListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SetupListener;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SignManager;
+import com.communitysurvivalgames.thesurvivalgames.objects.JSign;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
 import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
 import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
+import com.phazecraft.lobby.signs.TeleportSign;
 
 public class TheSurvivalGames extends JavaPlugin {
 
@@ -123,6 +126,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new EntityDamageListener(), this);
 		pm.registerEvents(new DoubleJump(this), this);
 
+		SignManager.getSignManager().signs = getDatabase().find(JSign.class).findList();
 		Scoreboard.registerScoreboard(this);
 	}
 
@@ -151,6 +155,7 @@ public class TheSurvivalGames extends JavaPlugin {
 	public List<Class<?>> getDatabaseClasses() {
 		List<Class<?>> list = new ArrayList<Class<?>>();
 		list.add(PlayerData.class);
+		list.add(JSign.class);
 		return list;
 	}
 

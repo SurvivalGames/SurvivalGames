@@ -23,6 +23,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class ArenaManager {
@@ -69,23 +70,24 @@ public class ArenaManager {
 	 *
 	 * @param i The ID to get the Arena from
 	 * @return The arena from which the ID represents. May be null.
+	 * @throws ArenaNotFoundException 
 	 */
-	public SGArena getArena(int i) {
+	public SGArena getArena(int i) throws ArenaNotFoundException {
 		for (SGArena a : arenas) {
 			if (a.getId() == i) {
 				return a;
 			}
 		}
-		return null;
+		throw new ArenaNotFoundException("Could not find given arena with given ID: " + i);
 	}
 
-	public SGArena getArena(Player p) {
+	public SGArena getArena(Player p) throws ArenaNotFoundException {
 		for (SGArena a : arenas) {
 			if (a.getPlayers().contains(p.getName())) {
 				return a;
 			}
 		}
-		return null;
+		throw new ArenaNotFoundException("Could not find given arena with given Player: " + p.getDisplayName());
 	}
 
 	/**
@@ -95,9 +97,11 @@ public class ArenaManager {
 	 * @param i The arena ID in which the player will be added to.
 	 */
 	public void addPlayer(Player p, int i) {
-		SGArena a = getArena(i);
-		if (a == null) {
-			p.sendMessage("Invalid arena!");
+		SGArena a;
+		try {
+			a = getArena(i);
+		} catch (ArenaNotFoundException e) {
+			Bukkit.getLogger().severe(e.getMessage());
 			return;
 		}
 
@@ -251,8 +255,11 @@ public class ArenaManager {
 	 * @param i The ID of the arena to be removed
 	 */
 	public void removeArena(int i) {
-		SGArena a = getArena(i);
-		if (a == null) {
+		SGArena a;
+		try {
+			a = getArena(i);
+		} catch (ArenaNotFoundException e) {
+			Bukkit.getLogger().severe(e.getMessage());
 			return;
 		}
 		arenas.remove(a);

@@ -7,10 +7,12 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class StopCommand implements SubCommand {
@@ -24,7 +26,13 @@ public class StopCommand implements SubCommand {
                 p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_NUMBER"));
                 return;
             }
-            SGArena a = ArenaManager.getManager().getArena(i);
+            SGArena a;
+			try {
+				a = ArenaManager.getManager().getArena(i);
+			} catch (ArenaNotFoundException e) {
+				Bukkit.getLogger().severe(e.getMessage());
+				return;
+			}
             if(a == null) {
                 p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARENA") + a);
                 return;
