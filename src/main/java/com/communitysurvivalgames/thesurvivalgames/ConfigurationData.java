@@ -74,7 +74,7 @@ public class ConfigurationData {
 	}
 
 	public List<String> getWelcomeMessage() {
-		return this.config.getStringList("welocme-message");
+		return this.config.getStringList("welcome-message");
 	}
 
 }
