@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.Random;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Firework;
 import org.bukkit.event.EventHandler;
@@ -15,7 +16,8 @@ public class RailGun implements Listener {
 	Random gen = new Random();
 
 	@EventHandler
-	public void onS(PlayerInteractEvent event) {
+	public void onPlayerInteract(PlayerInteractEvent event) {
+		if(event.getItem().getType() == Material.DIAMOND_HOE)
 		try {
 			for (Block loc : event.getPlayer().getLineOfSight(null, 100)) {
 				playFirework(loc.getLocation());

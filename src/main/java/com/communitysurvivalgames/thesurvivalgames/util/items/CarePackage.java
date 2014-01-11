@@ -1,13 +1,11 @@
-/**
- * Name: ItemListener.java Created: 7 December 2013
- *
- * @version 1.0.0
- */
-package com.communitysurvivalgames.thesurvivalgames.listeners;
+package com.communitysurvivalgames.thesurvivalgames.util.items;
 
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
@@ -16,16 +14,17 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-public class ItemListener implements Listener {
+import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 
-    private final TheSurvivalGames plugin;
+public class CarePackage {
+	private final TheSurvivalGames plugin;
 
-    public ItemListener(TheSurvivalGames plugin) {
+    public CarePackage(TheSurvivalGames plugin) {
         this.plugin = plugin;
     }
 
