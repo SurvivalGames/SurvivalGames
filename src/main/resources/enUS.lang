@@ -35,7 +35,8 @@ NOT_NUMBER = That's not a number, learn how to count
 # SG Commands #
 CREATING_ARENA = Creating arena number
 CREATING_LOBBY = Lobby spawn set for arena
-CREATING_DM = Deathmatch spawn set for arena 
+CREATING_DM = Deathmatch spawn set for arena
+REMOVED_ARENA = Arena successfully removed
 SET_MAXPLAYERS = Max players set for arena 
 SET_CHEST = Chest tier set for arena
 SET_SPAWN = Game spawn set for arena
@@ -166,3 +167,4 @@ GAME_STARTING = Game countdown has commenced!
 DM_STARTING = Deathmatch countdown has commenced!
 START = You can now take damage, fight!
 END = The game has ended, the winner is:
+NOT_HAPPY = You can't escape the deathmatch, coward!

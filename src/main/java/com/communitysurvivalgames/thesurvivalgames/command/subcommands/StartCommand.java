@@ -9,8 +9,8 @@ import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.TimeManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -33,12 +33,12 @@ public class StartCommand implements SubCommand {
                 p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARENA") + args[0]);
             }
             SGArena a;
-			try {
-				a = ArenaManager.getManager().getArena(id);
-			} catch (ArenaNotFoundException e) {
-				Bukkit.getLogger().severe(e.getMessage());
-				return;
-			}
+            try {
+                a = ArenaManager.getManager().getArena(id);
+            } catch (ArenaNotFoundException e) {
+                Bukkit.getLogger().severe(e.getMessage());
+                return;
+            }
 
             if (args[1].equals("starting") && p.hasPermission("sg.gamestate.starting")) {
                 if (!a.getState().equals(SGArena.ArenaState.STARTING_COUNTDOWN) || a.getState().isConvertable(a, SGArena.ArenaState.STARTING_COUNTDOWN)) {
@@ -46,6 +46,7 @@ public class StartCommand implements SubCommand {
                     return;
                 }
                 a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
+                TimeManager.getInstance(a).countdownLobby(1);
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
                 return;
             }
@@ -56,10 +57,11 @@ public class StartCommand implements SubCommand {
                     return;
                 }
                 a.setState(SGArena.ArenaState.IN_GAME);
+                TimeManager.getInstance(a).countdown();
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
                 return;
             }
-            
+
             if (args[1].equals("dm") && p.hasPermission("sg.gamestate.dm")) {
                 if (!a.getState().equals(SGArena.ArenaState.DEATHMATCH) || a.getState().isConvertable(a, SGArena.ArenaState.DEATHMATCH)) {
                     p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("CANT_FORCE"));
@@ -71,15 +73,13 @@ public class StartCommand implements SubCommand {
             }
 
             if (args[1].equals("dm") && p.hasPermission("sg.gamestate.dm")) {
-                /* TODO the death match
-                 if (!a.getState().equals(SGArena.ArenaState.IN_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.IN_GAME)) {
-                 p.sendMessage(ArenaManager.getManager().error + "You can't change force anything yet.");
-                 return;
-                 }
-                 a.setState(SGArena.ArenaState.IN_GAME);
-                 p.sendMessage(ArenaManager.getManager().prefix + "Changed the state.");
-                 return;
-                 */
+                if (!a.getState().equals(SGArena.ArenaState.IN_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.IN_GAME)) {
+                    p.sendMessage(ArenaManager.getManager().error + "You can't change force anything yet.");
+                    return;
+                }
+                a.setState(SGArena.ArenaState.DEATHMATCH);
+                TimeManager.getInstance(a).countdownDm();
+                p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
             }
         }
     }

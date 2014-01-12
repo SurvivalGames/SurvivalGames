@@ -14,7 +14,7 @@ public class Countdown implements Runnable {
     private SGArena a = null;
     private int amount = 0;
     private int count = 0;
-    String[] s = new String[2];
+    private final String[] s = new String[2];
     private CodeExecutor ce = null;
     private int id = 0;
 

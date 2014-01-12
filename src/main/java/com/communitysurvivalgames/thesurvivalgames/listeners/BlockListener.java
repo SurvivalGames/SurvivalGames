@@ -9,11 +9,13 @@ package com.communitysurvivalgames.thesurvivalgames.listeners;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-public class BlockListener implements Listener{
+public class BlockListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onBlockPlace(BlockPlaceEvent event) {

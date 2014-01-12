@@ -32,7 +32,7 @@ public class I18N {
         locales.clear();
         if (file.equalsIgnoreCase("enUS")) {
             try {
-            	locales.load(new InputStreamReader(new FileInputStream(dir.getAbsolutePath() + File.separator + "enUS.lang"), "UTF8"));
+                locales.load(new InputStreamReader(new FileInputStream(dir.getAbsolutePath() + File.separator + "enUS.lang"), "UTF8"));
             } catch (IOException e) {
                 Bukkit.getLogger().log(Level.SEVERE, "[i18n] Could not load language file", e);
             }
@@ -94,17 +94,16 @@ public class I18N {
         if (locale == null) {
             locale = "enUS";
             currentLocale = Locale.enUS;
-        }
-        else {
+        } else {
             try {
-            currentLocale = Locale.valueOf(locale);
-            } catch(IllegalArgumentException e) {
+                currentLocale = Locale.valueOf(locale);
+            } catch (IllegalArgumentException e) {
                 Bukkit.getLogger().severe("[i18n] Unknown locale " + locale + ". Loaded enUs");
                 currentLocale = Locale.enUS;
             }
-        }           
-            getLocaleProperties(locale);
-            Bukkit.getLogger().info("[i18n] " + locale + " " + locales.getProperty("LOCALE_LOADED", "loaded"));
+        }
+        getLocaleProperties(locale);
+        Bukkit.getLogger().info("[i18n] " + locale + " " + locales.getProperty("LOCALE_LOADED", "loaded"));
     }
 
     /**

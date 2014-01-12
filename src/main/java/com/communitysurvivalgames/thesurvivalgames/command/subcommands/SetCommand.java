@@ -11,7 +11,6 @@ import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundExcept
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -41,12 +40,12 @@ public class SetCommand implements SubCommand {
                 }
 
                 SGArena a;
-				try {
-					a = ArenaManager.getManager().getArena(i);
-				} catch (ArenaNotFoundException e) {
-					Bukkit.getLogger().severe(e.getMessage());
-					return;
-				}
+                try {
+                    a = ArenaManager.getManager().getArena(i);
+                } catch (ArenaNotFoundException e) {
+                    Bukkit.getLogger().severe(e.getMessage());
+                    return;
+                }
                 a.lobby = p.getLocation();
 
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_LOBBY") + " " + a.getId());
@@ -60,12 +59,12 @@ public class SetCommand implements SubCommand {
                 }
 
                 SGArena a;
-				try {
-					a = ArenaManager.getManager().getArena(i);
-				} catch (ArenaNotFoundException e) {
-					Bukkit.getLogger().severe(e.getMessage());
-					return;
-				}
+                try {
+                    a = ArenaManager.getManager().getArena(i);
+                } catch (ArenaNotFoundException e) {
+                    Bukkit.getLogger().severe(e.getMessage());
+                    return;
+                }
                 a.lobby = p.getLocation();
 
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_DM") + " " + a.getId());
@@ -81,12 +80,12 @@ public class SetCommand implements SubCommand {
                 }
 
                 SGArena a;
-				try {
-					a = ArenaManager.getManager().getArena(i);
-				} catch (ArenaNotFoundException e) {
-					Bukkit.getLogger().severe(e.getMessage());
-					return;
-				}
+                try {
+                    a = ArenaManager.getManager().getArena(i);
+                } catch (ArenaNotFoundException e) {
+                    Bukkit.getLogger().severe(e.getMessage());
+                    return;
+                }
                 a.maxPlayers = amount;
 
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("SET_MAXPLAYERS") + " " + a.getId());
@@ -99,12 +98,12 @@ public class SetCommand implements SubCommand {
                     return;
                 }
                 SGArena a;
-				try {
-					a = ArenaManager.getManager().getArena(i);
-				} catch (ArenaNotFoundException e) {
-					Bukkit.getLogger().severe(e.getMessage());
-					return;
-				}
+                try {
+                    a = ArenaManager.getManager().getArena(i);
+                } catch (ArenaNotFoundException e) {
+                    Bukkit.getLogger().severe(e.getMessage());
+                    return;
+                }
 
                 BlockIterator bit = new BlockIterator(p, 6);
                 Block next;
@@ -133,12 +132,12 @@ public class SetCommand implements SubCommand {
                     return;
                 }
                 SGArena a;
-				try {
-					a = ArenaManager.getManager().getArena(i);
-				} catch (ArenaNotFoundException e) {
-					Bukkit.getLogger().severe(e.getMessage());
-					return;
-				}
+                try {
+                    a = ArenaManager.getManager().getArena(i);
+                } catch (ArenaNotFoundException e) {
+                    Bukkit.getLogger().severe(e.getMessage());
+                    return;
+                }
                 a.locs.set(spawn - 1, p.getLocation());
 
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("SET_SPAWN") + " " + a.getId());

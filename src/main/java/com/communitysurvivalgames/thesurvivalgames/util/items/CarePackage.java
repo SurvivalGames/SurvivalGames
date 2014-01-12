@@ -1,11 +1,8 @@
 package com.communitysurvivalgames.thesurvivalgames.util.items;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import org.bukkit.*;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
@@ -19,11 +16,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
-
 public class CarePackage implements Listener {
-	private final TheSurvivalGames plugin;
+    private final TheSurvivalGames plugin;
 
     public CarePackage(TheSurvivalGames plugin) {
         this.plugin = plugin;

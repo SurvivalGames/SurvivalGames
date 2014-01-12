@@ -20,19 +20,21 @@ public class TimeManager {
     private static SGArena a;
     private static final TimeManager tm = new TimeManager();
 
-    private TimeManager() { }
+    private TimeManager() {
+    }
+
     public static TimeManager getInstance(SGArena arena) {
         a = arena;
         return tm;
     }
 
-    public void countdownLobby() {
-        Countdown c = new Countdown(a, 1, 5, "Game", "minutes", new CodeExecutor() {
+    public void countdownLobby(int n) {
+        Countdown c = new Countdown(a, 1, n, "Game", "minutes", new CodeExecutor() {
             @Override
             public void runCode() {
                 a.broadcast(I18N.getLocaleString("GAME_STARTING"));
                 a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
-                for(int i = 0; i <= a.maxPlayers; i++) {
+                for (int i = 0; i <= a.maxPlayers; i++) {
                     org.bukkit.entity.Player p = Bukkit.getPlayerExact(a.getPlayers().get(i));
                     org.bukkit.Location loc = a.locs.get(i);
                     p.teleport(loc);
@@ -42,7 +44,7 @@ public class TimeManager {
                 }
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 60*20L));
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 60 * 20L));
     }
 
     public void countdown() {
@@ -51,8 +53,8 @@ public class TimeManager {
             public void runCode() {
                 a.broadcast(I18N.getLocaleString("ODDS"));
                 a.setState(SGArena.ArenaState.IN_GAME);
-                for(String s : a.getPlayers()) {
-                    if(MoveListener.getPlayers().contains(s)) {
+                for (String s : a.getPlayers()) {
+                    if (MoveListener.getPlayers().contains(s)) {
                         MoveListener.getPlayers().remove(s);
                     }
                 }
@@ -62,7 +64,7 @@ public class TimeManager {
         });
         c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 20L));
     }
-    
+
     public void countdownDm() {
         Countdown c = new Countdown(a, 5, 30, "DeathMatch", "minutes", new CodeExecutor() {
             @Override
@@ -75,10 +77,10 @@ public class TimeManager {
                 commenceDm();
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 5*60*20L));
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 5 * 60 * 20L));
     }
-    
-    public void commenceDm() {
+
+    void commenceDm() {
         Countdown c = new Countdown(a, 1, 10, "DeathMatch", "seconds", new CodeExecutor() {
             @Override
             public void runCode() {
@@ -90,8 +92,8 @@ public class TimeManager {
         });
         c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 20L));
     }
-    
-    public void countdownEnd() {
+
+    void countdownEnd() {
         Countdown c = new Countdown(a, 1, 5, "EndGame", "minutes", new CodeExecutor() {
             @Override
             public void runCode() {
@@ -99,7 +101,7 @@ public class TimeManager {
                 //tp out of arena, rollback, pick up all items and arrows
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 60*20L));
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 60 * 20L));
     }
-    
+
 }
