@@ -83,31 +83,31 @@ public class JSign {
         }
     }
 
-    int getId() {
+    public int getId() {
         return this.id;
     }
 
-    int getArena() {
+    public int getArena() {
         return this.arena;
     }
 
-    String getLayout() {
+    public String getLayout() {
         return this.layout;
     }
 
-    String getWorldName() {
+    public String getWorldName() {
         return this.worldName;
     }
 
-    double getX() {
+    public double getX() {
         return this.x;
     }
 
-    double getY() {
+    public double getY() {
         return this.y;
     }
 
-    double getZ() {
+    public double getZ() {
         return this.z;
     }
 
