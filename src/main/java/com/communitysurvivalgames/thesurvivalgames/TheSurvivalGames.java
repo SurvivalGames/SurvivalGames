@@ -38,6 +38,9 @@ public class TheSurvivalGames extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
+        configurationData = new ConfigurationData(this);
+        setupDatabase();
+        
         File i18N = new File(getDataFolder(), "I18N.yml");
         if (!i18N.exists()) {
             saveResource("I18N.yml", false);
@@ -54,7 +57,6 @@ public class TheSurvivalGames extends JavaPlugin {
         saveResource("esES.lang", true);
 
         registerAll();
-        setupDatabase();
         ArenaManager am = new ArenaManager(this);
         am.loadGames();
 
@@ -62,7 +64,7 @@ public class TheSurvivalGames extends JavaPlugin {
         getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
         saveDefaultConfig();
 
-        configurationData = new ConfigurationData(this);
+
     }
 
     @Override
@@ -122,6 +124,7 @@ public class TheSurvivalGames extends JavaPlugin {
         }
         try {
             getDatabase().find(PlayerData.class).findRowCount();
+            getDatabase().find(JSign.class).findRowCount();
         } catch (PersistenceException ex) {
             System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
             installDDL();
