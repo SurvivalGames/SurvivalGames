@@ -111,6 +111,8 @@ public class EntityDamageListener implements Listener {
 				damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 1, false));
 				damaged.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 40, 1, false));
 				damaged.setVelocity(new Vector(0, 0, 0.5));
+				for (int i = 0; i < 4; i++)
+					fireworkIt(event.getDamager().getLocation());
 				TheSurvivalGames.getPlugin().getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("FAIL") + " &e&l" + event.getDamager()));
 			}
 		}
