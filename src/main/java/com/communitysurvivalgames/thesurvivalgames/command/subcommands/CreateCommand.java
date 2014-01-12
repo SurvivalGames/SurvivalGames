@@ -10,8 +10,6 @@ import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import org.bukkit.entity.Player;
 
-import java.io.IOException;
-
 public class CreateCommand implements SubCommand {
 
     /**
@@ -28,11 +26,7 @@ public class CreateCommand implements SubCommand {
                 ArenaManager.getManager().createArena(p, args[1]);
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_ARENA")); //TODO This should be moved, as the creation happens in a Runnable now
             } else if (args[0].equalsIgnoreCase("download")) {
-                try {
-                    ArenaManager.getManager().createArenaFromDownload(p, args[1]);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                ArenaManager.getManager().createArenaFromDownload(p, args[1]);
             } else if (args[0].equalsIgnoreCase("import")) {
                 ArenaManager.getManager().createArenaFromImport(p, args[1]);
             }
