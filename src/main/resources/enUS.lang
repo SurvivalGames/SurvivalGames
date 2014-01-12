@@ -53,6 +53,7 @@ LOL_NOPE = You can't leave. Yet.
 NO_HELP = That help page doesn't exist
 NO_PAGE = That's not a real page
 COMMAND_HELP_1 = - /sg create: Creates an arena
+COMMAND_HELP_69 = - /sg remove [Arena ID]: Removes an arena
 COMMAND_HELP_2 = - /sg setradius [Arena ID][Radius]: Sets the radius of the arena
 COMMAND_HELP_3 = - /sg setlobby [Arena ID]: Sets the lobby spawn
 COMMAND_HELP_4 = - /sg setgamespawn [Number]: Set the spawn ingame for the specific point
