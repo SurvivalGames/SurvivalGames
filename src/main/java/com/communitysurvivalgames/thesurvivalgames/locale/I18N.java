@@ -38,7 +38,7 @@ public class I18N {
             }
         } else {
             try {
-                locales.load(new InputStreamReader(new FileInputStream(dir.getAbsolutePath() + File.separator + file), "UTF8"));
+                locales.load(new InputStreamReader(new FileInputStream(dir.getAbsolutePath() + File.separator + file + ".lang"), "UTF8"));
             } catch (IOException e) {
                 Bukkit.getLogger().log(Level.SEVERE, "[i18n] Could not load language file", e);
             }
