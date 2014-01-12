@@ -42,6 +42,7 @@ public class HelpCommand implements SubCommand {
                     case 1:
                         sendHelpMessages(p, 1, I18N.getLocaleString("COMMAND_HELP_1"),
                                 I18N.getLocaleString("COMMAND_HELP_2"),
+                                I18N.getLocaleString("COMMAND_HELP_69");
                                 I18N.getLocaleString("COMMAND_HELP_3"),
                                 I18N.getLocaleString("COMMAND_HELP_4"),
                                 I18N.getLocaleString("COMMAND_HELP_5"));
