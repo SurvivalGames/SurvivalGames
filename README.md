@@ -156,6 +156,7 @@ Care Package, a renamed firework which when right-clicked sends a firework up in
 
 ```
 /sg create (creates arena)
+/sg remove <arena number> removes an arena
 /sg setlobby <arena number> (sets lobby spawn point)
 /sg setgamespawn <spawn point number> (max can be set in config, default 48)> <arena number>
 /sg setdeathmatch <spawn point number> (max can be set in config, default 48)> <arena number>
