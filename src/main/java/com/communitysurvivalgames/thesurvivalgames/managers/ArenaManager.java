@@ -15,7 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -172,7 +171,7 @@ public class ArenaManager {
             @Override
             public void run() {
 
-                SGArena a = new SGArena(num, MultiworldManager.getInstance().createRandomWorld(creator, worldName));
+                SGArena a = new SGArena(num, MultiworldManager.getInstance().createRandomWorld(worldName));
                 arenas.add(a);
                 a.getPlayers().add(creator.getName());
 
@@ -194,12 +193,8 @@ public class ArenaManager {
                 int num = arenaSize + 1;
                 arenaSize++;
 
-                SGArena a = null;
-                try {
-                    a = new SGArena(num, MultiworldManager.getInstance().copyFromInternet(creator, worldName));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                SGArena a;
+                a = new SGArena(num, MultiworldManager.getInstance().copyFromInternet(creator, worldName));
                 arenas.add(a);
             }
         });
