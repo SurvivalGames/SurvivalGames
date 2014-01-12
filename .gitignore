@@ -24,6 +24,10 @@ local.properties
 # Locally stored "Eclipse launch configurations"
 *.launch
 
+#Eclipse Juno Project Files
+.project
+.classpath
+
 # CDT-specific
 .cproject
 
