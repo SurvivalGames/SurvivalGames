@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.PersistenceException;
+
 import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.*;
@@ -19,7 +20,6 @@ import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SignManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.JSign;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
-import com.communitysurvivalgames.thesurvivalgames.runnables.QuartzTest;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
 import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
 import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
@@ -38,10 +38,11 @@ public class TheSurvivalGames extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        QuartzTest quartzTest = new QuartzTest();
-      configurationData = new ConfigurationData(this);
-        setupDatabase();
-        
+        /*
+         * QuartzTest quartzTest = new QuartzTest(); configurationData = new
+         * ConfigurationData(this); setupDatabase();
+         */
+       
         File i18N = new File(getDataFolder(), "I18N.yml");
         if (!i18N.exists()) {
             saveResource("I18N.yml", false);
