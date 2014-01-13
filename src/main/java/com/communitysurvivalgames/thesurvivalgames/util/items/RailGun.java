@@ -57,7 +57,7 @@ class RailGun implements Listener {
     }
 
     public Set<Block> getLineOfSigt(Player p) {
-        Set<Block> set = new HashSet<Block>();
+        @SuppressWarnings("Convert2Diamond") Set<Block> set = new HashSet<>();
         Iterator<Block> it = new BlockIterator(p, 100);
         while (it.hasNext()) {
             set.add(it.next());

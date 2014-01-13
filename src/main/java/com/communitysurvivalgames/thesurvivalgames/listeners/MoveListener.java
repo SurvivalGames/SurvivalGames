@@ -20,7 +20,7 @@ import java.util.List;
 
 public class MoveListener implements Listener {
 
-    private static final List<String> list = new ArrayList<String>();
+    private static final List<String> list = new ArrayList<>();
 
     @EventHandler
     public void onMove(PlayerMoveEvent e) {

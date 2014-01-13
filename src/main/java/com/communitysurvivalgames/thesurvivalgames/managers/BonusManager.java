@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class BonusManager {
 
-    private final ArrayList<Bonus> bonus = new ArrayList<Bonus>();
+    private final ArrayList<Bonus> bonus = new ArrayList<>();
     private static final BonusManager bonusManager = new BonusManager();
 
     public static BonusManager getManager() {

@@ -15,14 +15,14 @@ public class PlayerNameUtil {
     }
 
     public static ArrayList<String> getDevs() {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         list.add("Quantum64");
         //TODO: What's you IGN everyone?
         return list;
     }
 
     public static ArrayList<String> getAwesomePeople() {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         list.add("Jonthespartan29"); //TODO XD
         return list;
     }

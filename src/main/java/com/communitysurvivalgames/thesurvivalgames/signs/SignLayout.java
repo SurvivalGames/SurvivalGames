@@ -15,7 +15,7 @@ public class SignLayout {
     private final boolean teleport;
 
     public List<String> parseLayout(SGArena sinfo) {
-        List<String> laa = new ArrayList<String>();
+        @SuppressWarnings("Convert2Diamond") List<String> laa = new ArrayList<>();
         for (String line : this.lines) {
             line = line.replace("%displayname%", sinfo.getDisplayName());
             line = line.replace("%numpl%", String.valueOf(sinfo.getPlayers().size()));

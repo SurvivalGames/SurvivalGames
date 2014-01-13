@@ -25,12 +25,12 @@ public class ArenaManager {
     public final String prefix = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.GOLD;
     public final String error = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.RED;
 
-    private final Map<String, SGArena> creators = new HashMap<String, SGArena>();
-    private final Map<String, Location> locs = new HashMap<String, Location>();
+    private final Map<String, SGArena> creators = new HashMap<>();
+    private final Map<String, Location> locs = new HashMap<>();
     private static final ArenaManager am = new ArenaManager();
-    private final Map<String, ItemStack[]> inv = new HashMap<String, ItemStack[]>();
-    private final Map<String, ItemStack[]> armor = new HashMap<String, ItemStack[]>();
-    private final List<SGArena> arenas = new ArrayList<SGArena>();
+    private final Map<String, ItemStack[]> inv = new HashMap<>();
+    private final Map<String, ItemStack[]> armor = new HashMap<>();
+    private final List<SGArena> arenas = new ArrayList<>();
     private int arenaSize = 0;
 
     private static TheSurvivalGames plugin;
@@ -225,7 +225,7 @@ public class ArenaManager {
     private void reloadArena(int i) {
         FileConfiguration arenaConfig = YamlConfiguration.loadConfiguration(new File(Bukkit.getServer().getWorldContainer(), arenas.get(i).getArenaWorld().getName()));
         List<String> spawnLocsString = arenaConfig.getStringList("spawn-points");
-        List<Location> spawnLocs = new ArrayList<Location>();
+        List<Location> spawnLocs = new ArrayList<>();
         for (String aSpawnLocsString : spawnLocsString) {
             spawnLocs.add(deserializeLoc(aSpawnLocsString));
         }

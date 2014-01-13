@@ -27,14 +27,14 @@ public class SGArena {
     private final World world;
     public Location lobby = null;
     public Location center;
-    public List<Location> locs = new ArrayList<Location>(0);
-    public final List<BlockState> t2 = new ArrayList<BlockState>();
+    public List<Location> locs = new ArrayList<>(0);
+    public final List<BlockState> t2 = new ArrayList<>();
 
     public int maxPlayers;
     private int minPlayers;
 
-    private final List<String> players = new CopyOnWriteArrayList<String>();
-    private final List<String> spectators = new CopyOnWriteArrayList<String>();
+    private final List<String> players = new CopyOnWriteArrayList<>();
+    private final List<String> spectators = new CopyOnWriteArrayList<>();
 
     /**
      * Name: ArenaState.java Edited: 8 December 2013

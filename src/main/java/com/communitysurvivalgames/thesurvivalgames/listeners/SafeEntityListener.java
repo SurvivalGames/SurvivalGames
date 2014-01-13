@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SafeEntityListener implements Listener {
 
-    private static final List<String> safe = new ArrayList<String>();
+    private static final List<String> safe = new ArrayList<>();
 
     @EventHandler
     public void onDamage(EntityDamageEvent e) {

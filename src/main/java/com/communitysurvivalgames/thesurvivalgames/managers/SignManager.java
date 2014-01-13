@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SignManager {
     private static final SignManager sm = new SignManager();
-    public List<JSign> signs = new ArrayList<JSign>();
+    public List<JSign> signs = new ArrayList<>();
 
     private SignManager() {
 

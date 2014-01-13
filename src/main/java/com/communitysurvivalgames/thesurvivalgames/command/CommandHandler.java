@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class CommandHandler implements CommandExecutor {
 
-    private static final Map<String, SubCommand> commands = new HashMap<String, SubCommand>();
+    private static final Map<String, SubCommand> commands = new HashMap<>();
 
     /**
      * Registers a command

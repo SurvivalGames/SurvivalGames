@@ -18,10 +18,10 @@ import java.util.UUID;
 public class PartyManager {
 
     private static final PartyManager pm = new PartyManager();
-    private static final java.util.Map<String, java.util.UUID> players = new HashMap<String, UUID>();
-    private static final java.util.Map<java.util.UUID, Party> parties = new HashMap<UUID, Party>();
-    private static final java.util.Map<String, java.util.UUID> invites = new HashMap<String, UUID>();
-    private static final Set<String> partyChat = new HashSet<String>();
+    private static final java.util.Map<String, java.util.UUID> players = new HashMap<>();
+    private static final java.util.Map<java.util.UUID, Party> parties = new HashMap<>();
+    private static final java.util.Map<String, java.util.UUID> invites = new HashMap<>();
+    private static final Set<String> partyChat = new HashSet<>();
     private static int partySize;
 
     /**

@@ -138,7 +138,7 @@ public class TheSurvivalGames extends JavaPlugin {
      */
     @Override
     public List<Class<?>> getDatabaseClasses() {
-        List<Class<?>> list = new ArrayList<Class<?>>();
+        @SuppressWarnings("Convert2Diamond") List<Class<?>> list = new ArrayList<>();
         list.add(PlayerData.class);
         list.add(JSign.class);
         return list;

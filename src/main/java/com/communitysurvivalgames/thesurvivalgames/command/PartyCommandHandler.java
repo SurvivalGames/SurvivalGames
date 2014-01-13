@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class PartyCommandHandler implements CommandExecutor {
 
-    private static final Map<String, SubCommand> commands = new HashMap<String, SubCommand>();
+    private static final Map<String, SubCommand> commands = new HashMap<>();
 
     /**
      * Registers a command

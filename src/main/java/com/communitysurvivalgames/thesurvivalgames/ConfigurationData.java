@@ -11,7 +11,7 @@ import java.util.Map;
 public class ConfigurationData {
     private final TheSurvivalGames plugin;
     private FileConfiguration config;
-    private final Map<String, SignLayout> signLayouts = new HashMap<String, SignLayout>();
+    private final Map<String, SignLayout> signLayouts = new HashMap<>();
 
     public ConfigurationData(TheSurvivalGames plugin) {
         this.plugin = plugin;
