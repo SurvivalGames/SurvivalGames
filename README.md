@@ -201,6 +201,6 @@ Email us :
 
 Or visit our website, **http://communitysurvivalgames.com/**
 
-Start developing ! See you then !
+Start developing ! See you then ! 
 
 
