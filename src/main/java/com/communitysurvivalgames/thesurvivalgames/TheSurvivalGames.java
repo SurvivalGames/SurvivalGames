@@ -38,11 +38,12 @@ public class TheSurvivalGames extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        /*
-         * QuartzTest quartzTest = new QuartzTest(); configurationData = new
-         * ConfigurationData(this); setupDatabase();
-         */
-       
+
+        // QuartzTest quartzTest = new QuartzTest();
+
+        configurationData = new ConfigurationData(this);
+        setupDatabase();
+      
         File i18N = new File(getDataFolder(), "I18N.yml");
         if (!i18N.exists()) {
             saveResource("I18N.yml", false);
