@@ -19,7 +19,8 @@ public class Kit {
 		this.kitName = kitName;
 		this.kitIcon = new ItemStack(kitIcon);
 		this.items = items;
-		
+		this.kitIconLore = kitIconLore;
+
 		ItemMeta meta = this.kitIcon.getItemMeta();
 		List<String> lore = new ArrayList<String>();
 		lore.add(kitIconLore);
@@ -30,12 +31,16 @@ public class Kit {
 	public String getName() {
 		return kitName;
 	}
-	
-	public ItemStack getIcon(){
+
+	public ItemStack getIcon() {
 		return kitIcon;
 	}
-	
-	public List<KitItem> getItems(){
+
+	public List<KitItem> getItems() {
 		return items;
+	}
+
+	public String getKistIconLore() {
+		return kitIconLore;
 	}
 }
