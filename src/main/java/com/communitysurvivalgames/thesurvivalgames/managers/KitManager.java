@@ -4,16 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
 import com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 public class KitManager {
 	private static KitManager km = new KitManager();
@@ -26,12 +23,12 @@ public class KitManager {
 
 	public void loadKits() {
 
-		String[] files = TheSurvivalGames.getPlugin().getDataFolder().list();
+        String[] files = TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder().list();
 
 		do {
 			for (int i = 0; i < files.length; i++) {
-				if (files[i].startsWith("kit_")) {
-					FileConfiguration kit = YamlConfiguration.loadConfiguration(new File(TheSurvivalGames.getPlugin().getDataFolder(), files[i]));
+                if (files[i].startsWith("kit_")) {
+                    FileConfiguration kit = YamlConfiguration.loadConfiguration(new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder(), files[i]));
 					//TODO Load kits here im to lazy now gonna do it later
 				}
 			}
@@ -49,18 +46,18 @@ public class KitManager {
 				} catch (ArenaNotFoundException e) {
 					e.printStackTrace();
 				}
-				event.setWillClose(true);
-			}
-		}, TheSurvivalGames.getPlugin());
+                event.setWillClose(true);
+            }
+        }, TheSurvivalGames.getPlugin(TheSurvivalGames.class));
 		int index = 0;
 		for (Kit k : kits) {
 			index++;
-			menu.setOption(index, k.getIcon(), k.getName(), k.getIconLore());
-		}
-	}
+            menu.setOption(index, k.getIcon(), k.getName(), k.getIconLore());
+        }
+    }
 
-	public void saveDefaultKits() {
-		TheSurvivalGames.getPlugin().saveResource("kit_knight", false);
+    public void saveDefaultKits() {
+        TheSurvivalGames.getPlugin(TheSurvivalGames.class).saveResource("kit_knight", false);
 	}
 
 	public Kit getKit(String name) {
