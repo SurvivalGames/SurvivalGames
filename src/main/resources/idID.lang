@@ -52,6 +52,7 @@ LOL_NOPE = Anda belum bisa pergi sekarang.
 NO_HELP = Halaman bantuan itu tidak ditemukan
 NO_PAGE = Itu bukan halaman yang sah
 COMMAND_HELP_1 = - /sg create : Membangun sebuah arena
+COMMAND_HELP_69 = - /sg remove [ID arena] : Menghapus sebuah arena
 COMMAND_HELP_2 = - /sg setradius [ID arena][Radius] = Menetapkan radius sebuah arena
 COMMAND_HELP_3 = - /sg setlobby [ID arena] : Menetapkan lobi sebuah arena
 COMMAND_HELP_4 = - /sg setgamespawn [Nomor] : Menetapkan tempat spawn di sebuah tempat spesifik
