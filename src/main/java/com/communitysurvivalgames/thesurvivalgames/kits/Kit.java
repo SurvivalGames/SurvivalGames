@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class Kit {
 
@@ -21,11 +20,6 @@ public class Kit {
 		this.items = items;
 		this.kitIconLore = kitIconLore;
 
-		ItemMeta meta = this.kitIcon.getItemMeta();
-		List<String> lore = new ArrayList<String>();
-		lore.add(kitIconLore);
-		meta.setLore(lore);
-		this.kitIcon.setItemMeta(meta);
 	}
 
 	public String getName() {
@@ -40,7 +34,7 @@ public class Kit {
 		return items;
 	}
 
-	public String getKistIconLore() {
+	public String getIconLore() {
 		return kitIconLore;
 	}
 }
