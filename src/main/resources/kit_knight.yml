@@ -1,0 +1,15 @@
+#####################
+## Kit Config File ##
+##     Knight      ##
+#####################
+
+# Kit name
+name: Knight
+
+# Kit icon
+icon: SWORD_GOLDEN
+
+#Icon Lore
+iconLore: The Knight Kit is awesome because it is the only kit.
+
+## Working on the rest
