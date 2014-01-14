@@ -15,6 +15,7 @@ public class KitItem {
 
 	public KitItem(Material type) {
 		item = new ItemStack(type);
+		itemMeta = item.getItemMeta();
 	}
 
 	public ItemStack getItem() {
