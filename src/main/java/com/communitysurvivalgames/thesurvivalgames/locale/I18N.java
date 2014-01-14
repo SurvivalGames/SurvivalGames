@@ -1,8 +1,5 @@
 package com.communitysurvivalgames.thesurvivalgames.locale;
 
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import org.bukkit.Bukkit;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,12 +7,14 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.logging.Level;
+import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import org.bukkit.Bukkit;
 
 public class I18N {
     private static final Properties locales = new Properties();
     private static final Properties fallback = new Properties();
-    private static final File dir = TheSurvivalGames.getPlugin().getDataFolder();
-    private static final HashMap<String, String> localeFiles = new HashMap<>();      //
+    private static final File dir = TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder();
+  private static final HashMap<String, String> localeFiles = new HashMap<>();      //
     private static final HashMap<Integer, String> localeIndices = new HashMap<>();  // TODO updated but never queried
     private static Locale currentLocale = Locale.enUS;                                             //
 

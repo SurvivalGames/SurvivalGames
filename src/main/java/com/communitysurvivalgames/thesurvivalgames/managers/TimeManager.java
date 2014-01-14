@@ -44,8 +44,8 @@ public class TimeManager {
                 }
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 60 * 20L));
-    }
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 60 * 20L));
+   }
 
     public void countdown() {
         Countdown c = new Countdown(a, 1, 10, "Game", "seconds", new CodeExecutor() {
@@ -62,8 +62,8 @@ public class TimeManager {
                 countdownDm();
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 20L));
-    }
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 20L));
+  }
 
     public void countdownDm() {
         Countdown c = new Countdown(a, 5, 30, "DeathMatch", "minutes", new CodeExecutor() {
@@ -77,7 +77,7 @@ public class TimeManager {
                 commenceDm();
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 5 * 60 * 20L));
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 5 * 60 * 20L));
     }
 
     void commenceDm() {
@@ -90,7 +90,7 @@ public class TimeManager {
                 countdownEnd();
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 20L));
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 20L));
     }
 
     void countdownEnd() {
@@ -101,7 +101,7 @@ public class TimeManager {
                 //tp out of arena, rollback, pick up all items and arrows
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(), c, 0L, 60 * 20L));
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 60 * 20L));
     }
 
 }

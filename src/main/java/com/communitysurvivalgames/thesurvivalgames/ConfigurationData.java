@@ -1,20 +1,18 @@
 package com.communitysurvivalgames.thesurvivalgames;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import com.communitysurvivalgames.thesurvivalgames.signs.SignLayout;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class ConfigurationData {
-    private final TheSurvivalGames plugin;
-    private FileConfiguration config;
+    private final TheSurvivalGames plugin = TheSurvivalGames.getPlugin(TheSurvivalGames.class);
+  private FileConfiguration config;
     private final Map<String, SignLayout> signLayouts = new HashMap<>();
 
-    public ConfigurationData(TheSurvivalGames plugin) {
-        this.plugin = plugin;
+    public ConfigurationData() {
         this.config = plugin.getConfig();
     }
 

@@ -1,21 +1,21 @@
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import com.avaje.ebean.validation.NotEmpty;
 import com.avaje.ebean.validation.NotNull;
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.signs.SignLayout;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "lobby_teleportsigns")
@@ -62,8 +62,8 @@ public class JSign {
         if (location.getWorld().getChunkAt(location).isLoaded()) {
             Block b = location.getBlock();
             if ((b.getState() instanceof Sign)) {
-                SignLayout layout = TheSurvivalGames.getPlugin().getPluginConfig().getLayout(this.layout);
-                if (layout != null) {
+                SignLayout layout = TheSurvivalGames.getPlugin(TheSurvivalGames.class).getPluginConfig().getLayout(this.layout);
+              if (layout != null) {
                     Sign s = (Sign) b.getState();
                     List<String> jau;
                     try {
@@ -205,4 +205,3 @@ public class JSign {
 
 
 }
-

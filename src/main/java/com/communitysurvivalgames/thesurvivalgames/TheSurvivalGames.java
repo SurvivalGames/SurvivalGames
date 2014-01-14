@@ -33,17 +33,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class TheSurvivalGames extends JavaPlugin {
 
-    private static TheSurvivalGames plugin;
-    private ConfigurationData configurationData;
+
+   private ConfigurationData configurationData;
 
     @Override
     public void onEnable() {
-        plugin = this;
 
-        QuartzTest quartzTest = new QuartzTest();
 
-        configurationData = new ConfigurationData(this);
-        setupDatabase();
+       QuartzTest quartzTest = new QuartzTest();
+
+        configurationData = new ConfigurationData();
+     setupDatabase();
       
         File i18N = new File(getDataFolder(), "I18N.yml");
         if (!i18N.exists()) {
@@ -115,7 +115,7 @@ public class TheSurvivalGames extends JavaPlugin {
         pm.registerEvents(new DoubleJump(this), this);
 
         SignManager.getSignManager().signs = getDatabase().find(JSign.class).findList();
-        Scoreboard.registerScoreboard(this);
+        Scoreboard.registerScoreboard();
     }
 
     /**
@@ -165,10 +165,6 @@ public class TheSurvivalGames extends JavaPlugin {
         return configurationData;
     }
 
-    /**
-     * Only to be used if 100% needed
-     */
-    public static TheSurvivalGames getPlugin() {
-        return plugin;
-    }
+
+
 }

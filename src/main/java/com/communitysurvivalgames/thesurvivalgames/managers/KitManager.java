@@ -12,7 +12,7 @@ public class KitManager {
 	}
 
 	public void loadKits() {
-		File kitsFolder = new File(TheSurvivalGames.getPlugin().getDataFolder(), "kits");
+        File kitsFolder = new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder(), "kits");
 		if (!(kitsFolder.list().length > 0))
 			saveDefaultKits();
 	}

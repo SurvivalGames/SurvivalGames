@@ -1,18 +1,18 @@
 package com.communitysurvivalgames.thesurvivalgames.runnables;
 
+import java.util.logging.Level;
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
-
-import java.util.logging.Level;
 
 /**
  * Name: Scoreboard.java Edited: 8 December 2013
@@ -24,8 +24,8 @@ public class Scoreboard implements Runnable {
     private final TheSurvivalGames plugin;
 
     private Scoreboard(TheSurvivalGames base) {
-        plugin = base;
-    }
+        this.plugin = TheSurvivalGames.getPlugin(TheSurvivalGames.class);
+   }
 
     public void run() {
         for (final Player player : Bukkit.getOnlinePlayers()) {
@@ -128,7 +128,10 @@ public class Scoreboard implements Runnable {
         return plugin;
     }
 
-    public static void registerScoreboard(TheSurvivalGames plugin) {
-        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Scoreboard(plugin), 5, 20);
-    }
+    public static void registerScoreboard() {
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class),
+                new Scoreboard(TheSurvivalGames.getPlugin(TheSurvivalGames.class)),
+                5,
+                20);
+  }
 }
