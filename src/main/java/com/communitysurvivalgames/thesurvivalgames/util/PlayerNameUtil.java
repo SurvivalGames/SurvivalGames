@@ -18,6 +18,7 @@ public class PlayerNameUtil {
         ArrayList<String> list = new ArrayList<>();
         list.add("Quantum64");
         list.add("calebbfmv");
+        list.add("TrolLDOod3");
         //TODO: What's you IGN everyone?
         return list;
     }
