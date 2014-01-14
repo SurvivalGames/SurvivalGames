@@ -1,8 +1,7 @@
 package com.communitysurvivalgames.thesurvivalgames.util;
 
-import org.bukkit.entity.Player;
-
 import java.util.ArrayList;
+import org.bukkit.entity.Player;
 
 public class PlayerNameUtil {
 
@@ -19,7 +18,8 @@ public class PlayerNameUtil {
         list.add("Quantum64");
         list.add("calebbfmv");
         list.add("TrolLDOod3");
-        //TODO: What's you IGN everyone?
+        list.add("Relicum");
+       //TODO: What's you IGN everyone?
         return list;
     }
 
