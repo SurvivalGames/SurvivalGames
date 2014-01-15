@@ -8,6 +8,8 @@ package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.TimeManager;
+import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.entity.Player;
 
 public class CreateCommand implements SubCommand {
@@ -30,7 +32,17 @@ public class CreateCommand implements SubCommand {
             } else if (args[0].equalsIgnoreCase("import")) {
                 ArenaManager.getManager().createArenaFromImport(p, args[1]);
             }
+            return;
+        }
 
+        if(cmd.equalsIgnoreCase("finish")) {
+            SGArena a = ArenaManager.getManager().getCreators().get(p.getName());
+
+            a.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
+            TimeManager.getInstance(a).countdownLobby(5);
+
+            ArenaManager.getManager().removePlayer(p);
+            ArenaManager.getManager().getCreators().remove(p.getName());
         }
     }
 }

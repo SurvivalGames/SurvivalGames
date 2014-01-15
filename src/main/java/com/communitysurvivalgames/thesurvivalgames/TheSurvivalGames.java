@@ -5,11 +5,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.PersistenceException;
-
 import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.*;
@@ -24,12 +19,16 @@ import com.communitysurvivalgames.thesurvivalgames.runnables.QuartzTest;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
 import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
 import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
-
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import javax.persistence.PersistenceException;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TheSurvivalGames extends JavaPlugin {
 
@@ -93,6 +92,7 @@ public class TheSurvivalGames extends JavaPlugin {
         CommandHandler.register("setspawn", new SetCommand());
         CommandHandler.register("stop", new StopCommand());
         CommandHandler.register("start", new StartCommand());
+        CommandHandler.register("finish", new CreateCommand());
 
         PartyCommandHandler.register("chat", new ChatCommand());
         PartyCommandHandler.register("decline", new DeclineCommand());

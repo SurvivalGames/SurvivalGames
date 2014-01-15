@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 import org.bukkit.*;
@@ -19,6 +20,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 public class ArenaManager {
 
@@ -99,7 +101,12 @@ public class ArenaManager {
             return;
         }
 
-        if (!a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)) {
+        if(isInGame(p)) {
+            p.sendMessage(error + I18N.getLocaleString("NOT_JOINABLE"));
+            return;
+        }
+
+        if (a.getState() != null && !a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)) {
             // set player to spectator
             return;
         }
@@ -152,6 +159,10 @@ public class ArenaManager {
         p.teleport(locs.get(p.getName()));
         locs.remove(p.getName());
 
+        for(PotionEffect effect : p.getActivePotionEffects()) {
+            p.removePotionEffect(effect.getType());
+        }
+
         p.setFireTicks(0);
     }
 
@@ -170,10 +181,8 @@ public class ArenaManager {
 
             @Override
             public void run() {
-
                 SGArena a = new SGArena(num, MultiworldManager.getInstance().createRandomWorld(worldName));
                 arenas.add(a);
-                a.getPlayers().add(creator.getName());
 
                 creators.put(creator.getName(), a);
 

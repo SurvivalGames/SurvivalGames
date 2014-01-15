@@ -48,6 +48,7 @@ CANT_FORCE = You can't change force anything yet.
 ARENA_END = This arena has been forced to end.
 LEFT_ARENA = You have left the arena
 LOL_NOPE = You can't leave. Yet.
+NOT_JOINABLE = You're not allowed to join multiple games
 
 # SG Command Help Menu - NOTE: Please do not translate commands themselves, only the help that follows
 NO_HELP = That help page doesn't exist
