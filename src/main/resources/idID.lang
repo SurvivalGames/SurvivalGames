@@ -45,8 +45,9 @@ CHANGED_STATE = Keadaan telah dirubah.
 NOT_VALID = Itu bukan arena yang sah
 CANT_FORCE = Anda tidak bisa merubah paksa apapun sekarang.
 ARENA_END = Arena ini telah dipaksa untuk selesai.
-LEFT_ARENA = Anda telah meninggalkan arena.
+LEFT_ARENA = Anda telah meninggalkan arena
 LOL_NOPE = Anda belum bisa pergi sekarang.
+NOT_JOINABLE = Anda tidak diperbolehkan untuk memasuki lebih dari satu arena
 
 # SG Command Help Menu - CATATAN : Jangan terjemah perintah-perintah itu, hanya penjelasannya yang mengikuti.
 NO_HELP = Halaman bantuan itu tidak ditemukan
