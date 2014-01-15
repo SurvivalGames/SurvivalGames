@@ -26,12 +26,12 @@ public class KitManager {
         String[] files = TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder().list();
 
 		do {
-			for (int i = 0; i < files.length; i++) {
-                if (files[i].startsWith("kit_")) {
-                    FileConfiguration kit = YamlConfiguration.loadConfiguration(new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder(), files[i]));
-					//TODO Load kits here im to lazy now gonna do it later
-				}
-			}
+            for (String file : files) {
+                if (file.startsWith("kit_")) {
+                    FileConfiguration kit = YamlConfiguration.loadConfiguration(new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder(), file));
+                    // TODO Load kits here im to lazy now gonna do it later
+                }
+            }
 
 			if (kits.size() == 0)
 				saveDefaultKits();
@@ -56,11 +56,11 @@ public class KitManager {
         }
     }
 
-    public void saveDefaultKits() {
+    void saveDefaultKits() {
         TheSurvivalGames.getPlugin(TheSurvivalGames.class).saveResource("kit_knight", false);
 	}
 
-	public Kit getKit(String name) {
+    Kit getKit(String name) {
 		for (Kit k : kits) {
 			if (k.getName().equalsIgnoreCase(name))
 				return k;

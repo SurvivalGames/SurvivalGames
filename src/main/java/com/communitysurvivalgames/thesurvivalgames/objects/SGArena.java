@@ -5,18 +5,19 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.TimeManager;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SGArena {
 
@@ -35,6 +36,10 @@ public class SGArena {
 
     private final List<String> players = new CopyOnWriteArrayList<>();
     private final List<String> spectators = new CopyOnWriteArrayList<>();
+
+    public void setPlayerKit(Player player, Kit kit) {
+
+    }
 
     /**
      * Name: ArenaState.java Edited: 8 December 2013
