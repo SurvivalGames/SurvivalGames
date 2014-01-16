@@ -5,11 +5,39 @@
  */
 package com.communitysurvivalgames.thesurvivalgames;
 
+import java.io.File;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.PersistenceException;
+
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.*;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.*;
-import com.communitysurvivalgames.thesurvivalgames.listeners.*;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.CreateCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.RemoveCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SetCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.StartCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.StopCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.UserCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.ChatCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.DeclineCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.InviteCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.ListCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.PromoteCommand;
+import com.communitysurvivalgames.thesurvivalgames.listeners.BlockListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.ChatListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.EntityDamageListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.PlayerQuitListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.SetupListener;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SignManager;
@@ -19,16 +47,6 @@ import com.communitysurvivalgames.thesurvivalgames.runnables.QuartzTest;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
 import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
 import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import javax.persistence.PersistenceException;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TheSurvivalGames extends JavaPlugin {
 
@@ -58,6 +76,16 @@ public class TheSurvivalGames extends JavaPlugin {
         saveResource("enUS.lang", true);
         saveResource("idID.lang", true);
         saveResource("esES.lang", true);
+        saveResource("ptPT.lang", true);
+        
+        //We need to juke out the server to allow us to register non MC enchants
+        try {
+            Field f = Enchantment.class.getDeclaredField("acceptingNew");
+            f.setAccessible(true);
+            f.set(null, true);
+        } catch (Exception e) {
+            //This will fire on /reload but it shouldn't crash the server because we ignore it here
+        }
 
         registerAll();
         ArenaManager am = new ArenaManager(this);
