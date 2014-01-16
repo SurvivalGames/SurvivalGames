@@ -9,6 +9,7 @@ import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.managers.TimeManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.Bukkit;
@@ -46,7 +47,7 @@ public class StartCommand implements SubCommand {
                     return;
                 }
                 a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
-                TimeManager.getInstance(a).countdownLobby(1);
+                SGApi.getTimeManager().countdownLobby(1);
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
                 return;
             }
@@ -57,7 +58,7 @@ public class StartCommand implements SubCommand {
                     return;
                 }
                 a.setState(SGArena.ArenaState.IN_GAME);
-                TimeManager.getInstance(a).countdown();
+                SGApi.getTimeManager().countdown();
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
                 return;
             }
@@ -78,7 +79,7 @@ public class StartCommand implements SubCommand {
                     return;
                 }
                 a.setState(SGArena.ArenaState.DEATHMATCH);
-                TimeManager.getInstance(a).countdownDm();
+                SGApi.getTimeManager().countdownDm();
                 p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
             }
         }

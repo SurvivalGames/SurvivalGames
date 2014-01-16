@@ -49,7 +49,7 @@ public class ArenaManager {
     /**
      * The constructor for a new reference of the singleton
      */
-    private ArenaManager() {
+    public ArenaManager() {
     }
 
     /**
@@ -181,7 +181,7 @@ public class ArenaManager {
 
             @Override
             public void run() {
-                SGArena a = new SGArena(num, MultiworldManager.getInstance().createRandomWorld(worldName));
+                SGArena a = new SGArena(num, SGApi.getMultiWorld().createRandomWorld(worldName));
                 arenas.add(a);
 
                 creators.put(creator.getName(), a);
@@ -203,7 +203,7 @@ public class ArenaManager {
                 arenaSize++;
 
                 SGArena a;
-                a = new SGArena(num, MultiworldManager.getInstance().copyFromInternet(creator, worldName));
+                a = new SGArena(num, SGApi.getMultiWorld().copyFromInternet(creator, worldName));
                 arenas.add(a);
             }
         });
@@ -219,7 +219,7 @@ public class ArenaManager {
                 int num = arenaSize + 1;
                 arenaSize++;
 
-                SGArena a = new SGArena(num, MultiworldManager.getInstance().importWorldFromFolder(creator, worldName));
+                SGArena a = new SGArena(num, SGApi.getMultiWorld().importWorldFromFolder(creator, worldName));
                 arenas.add(a);
             }
         });

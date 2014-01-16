@@ -11,6 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.managers.TimeManager;
 
 import org.bukkit.Bukkit;
@@ -176,7 +177,7 @@ public class SGArena {
         setState(ArenaState.POST_GAME);
         //rollback
         setState(ArenaState.WAITING_FOR_PLAYERS);
-        TimeManager.getInstance(this).countdownLobby(5);
+        SGApi.getTimeManager().countdownLobby(5);
     }
 
     /**
