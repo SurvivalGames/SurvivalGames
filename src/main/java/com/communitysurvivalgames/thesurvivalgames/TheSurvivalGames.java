@@ -32,6 +32,9 @@ import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.Dec
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.InviteCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.ListCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.PromoteCommand;
+import com.communitysurvivalgames.thesurvivalgames.enchantment.DedicationEnchantment;
+import com.communitysurvivalgames.thesurvivalgames.enchantment.ShockingEnchantment;
+import com.communitysurvivalgames.thesurvivalgames.enchantment.UnenchantableEnchantment;
 import com.communitysurvivalgames.thesurvivalgames.listeners.BlockListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.ChatListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.EntityDamageListener;
@@ -141,6 +144,10 @@ public class TheSurvivalGames extends JavaPlugin {
         pm.registerEvents(new SetupListener(), this);
         pm.registerEvents(new EntityDamageListener(), this);
         pm.registerEvents(new DoubleJump(this), this);
+        
+        Enchantment.registerEnchantment(new DedicationEnchantment(120));
+        Enchantment.registerEnchantment(new ShockingEnchantment(121));
+        Enchantment.registerEnchantment(new UnenchantableEnchantment(122));
 
         SignManager.getSignManager().signs = getDatabase().find(JSign.class).findList();
         Scoreboard.registerScoreboard();

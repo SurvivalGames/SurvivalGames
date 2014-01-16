@@ -1,5 +1,4 @@
 package com.communitysurvivalgames.thesurvivalgames.util;
-
 import java.lang.reflect.Method;
 
 import org.bukkit.FireworkEffect;
@@ -9,15 +8,15 @@ import org.bukkit.Location;
 import org.bukkit.World;
 
 public class FireworkEffectPlayer {
-
+	
 	private static FireworkEffectPlayer fp = new FireworkEffectPlayer();
-
-	private Method world_getHandle = null;
-	private Method nms_world_broadcastEntityEffect = null;
-	private Method firework_getHandle = null;
-
-	public void playFirework(World world, Location loc, FireworkEffect fe) throws Exception {
-		// Bukkity load (CraftFirework)
+    
+    private Method world_getHandle = null;
+    private Method nms_world_broadcastEntityEffect = null;
+    private Method firework_getHandle = null;
+    
+    public void playFirework(World world, Location loc, FireworkEffect fe) throws Exception {
+        // Bukkity load (CraftFirework)
 		Firework fw = (Firework) world.spawn(loc, Firework.class);
 		// the net.minecraft.server.World
 		Object nms_world = null;
