@@ -13,19 +13,18 @@ import java.net.URL;
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.util.FileUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-public class MultiworldManager {
+public class MultiWorld {
 
-    private static final MultiworldManager wm = new MultiworldManager();
+    private static final MultiWorld wm = new MultiWorld();
 
-    private MultiworldManager() {
+    private MultiWorld() {
     }
 
-    public static MultiworldManager getInstance() {
+    public static MultiWorld getInstance() {
         return wm;
     }
 
@@ -37,7 +36,8 @@ public class MultiworldManager {
         new SGWorld(name).remove();
     }
 
-    public World copyFromInternet(final Player sender, final String worldName) {//TODO: Translate
+    public World copyFromInternet(final Player sender, final String worldName) {// TODO:
+                                                                                // Translate
 
         String url = "http://communitysurvivalgames.com/worlds/" + worldName + ".zip";
         if (!FileUtil.exists(url)) {
@@ -47,7 +47,7 @@ public class MultiworldManager {
         }
         try {
             FileUtil.copyURLToFile(new URL(url), new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder().getAbsolutePath(), "SG_ARENA_TMP.zip"));
-       } catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             sender.sendMessage("Bad world name! Are you using special characters?");
             return null;
         } catch (IOException e) {
@@ -56,7 +56,7 @@ public class MultiworldManager {
         }
         FileUtil.unZipIt(new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder().getAbsolutePath(), "SG_ARENA_TMP.zip").getAbsolutePath(),
                 new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName).getAbsolutePath());
-      if (!checkIfIsWorld(new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName))) {
+        if (!checkIfIsWorld(new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName))) {
             sender.sendMessage("The downloaded world was not a world at all!");
             return null;
         }
@@ -77,7 +77,7 @@ public class MultiworldManager {
     }
 
     public World createRandomWorld(final String worldName) {
-        //TODO
+        // TODO
         return Bukkit.getWorld(worldName);
     }
 

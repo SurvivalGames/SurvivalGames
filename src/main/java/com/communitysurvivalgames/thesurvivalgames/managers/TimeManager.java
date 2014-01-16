@@ -18,14 +18,9 @@ import org.bukkit.Bukkit;
 public class TimeManager {
 
     private static SGArena a;
-    private static final TimeManager tm = new TimeManager();
 
-    private TimeManager() {
-    }
+    public TimeManager() {
 
-    public static TimeManager getInstance(SGArena arena) {
-        a = arena;
-        return tm;
     }
 
     public void countdownLobby(int n) {
@@ -45,7 +40,7 @@ public class TimeManager {
             }
         });
         c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 60 * 20L));
-   }
+    }
 
     public void countdown() {
         Countdown c = new Countdown(a, 1, 10, "Game", "seconds", new CodeExecutor() {
@@ -63,7 +58,7 @@ public class TimeManager {
             }
         });
         c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 20L));
-  }
+    }
 
     public void countdownDm() {
         Countdown c = new Countdown(a, 5, 30, "DeathMatch", "minutes", new CodeExecutor() {
@@ -72,7 +67,7 @@ public class TimeManager {
                 a.broadcast(I18N.getLocaleString("DM_STARTING"));
                 a.setState(SGArena.ArenaState.DEATHMATCH);
                 SafeEntityListener.getPlayers().addAll(a.getPlayers());
-                //tp to deathmatch
+                // tp to deathmatch
 
                 commenceDm();
             }
@@ -98,7 +93,7 @@ public class TimeManager {
             @Override
             public void runCode() {
                 a.broadcast(I18N.getLocaleString("END") + " TIED_GAME");
-                //tp out of arena, rollback, pick up all items and arrows
+                // tp out of arena, rollback, pick up all items and arrows
             }
         });
         c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 60 * 20L));
