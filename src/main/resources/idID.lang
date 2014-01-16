@@ -167,3 +167,4 @@ GAME_STARTING = Permainan akan segera dimulai ! Bersiaplah !
 DM_STARTING = Deathmatch akan segera dimulai ! Bersiaplah !
 START = Sekarang anda sudah bisa membunuh pemain lain, mulailah bertarung !
 END = Permainan telah selesai, pemenangnya adalah :
+NOT_HAPPY = Anda tidak bisa lari dari deathmatch, penakut !
