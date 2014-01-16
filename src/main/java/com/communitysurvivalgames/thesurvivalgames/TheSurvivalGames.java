@@ -62,6 +62,12 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		configurationData = new ConfigurationData();
 		setupDatabase();
+		
+		//TODO Add more languages!
+		saveResource("enUS.lang", true);
+		saveResource("idID.lang", true);
+		saveResource("esES.lang", true);
+		saveResource("ptPT.lang", true);
 
 		File i18N = new File(getDataFolder(), "I18N.yml");
 		if (!i18N.exists()) {
@@ -73,11 +79,6 @@ public class TheSurvivalGames extends JavaPlugin {
 		I18N.setupLocale();
 		I18N.setLocale(lang.getString("language"));
 
-		//TODO Add more languages!
-		saveResource("enUS.lang", true);
-		saveResource("idID.lang", true);
-		saveResource("esES.lang", true);
-		saveResource("ptPT.lang", true);
 
 		//We need to juke out the server to allow us to register non MC enchants
 		try {
