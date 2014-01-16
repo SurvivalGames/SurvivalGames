@@ -1,5 +1,8 @@
 The Survival Games
 ==================
+
+**CORE**
+
 **[ANNOUNCEMENT|AgentTroll]**
 Team members may get a copy of the latest build. [![Build Status](https://travis-ci.org/SurvivalGamesDevTeam/TheSurvivalGames.png?branch=master)](https://travis-ci.org/SurvivalGamesDevTeam/TheSurvivalGames)
 
