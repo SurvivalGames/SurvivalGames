@@ -35,30 +35,13 @@ public class ArenaManager {
     private final List<SGArena> arenas = new ArrayList<>();
     private int arenaSize = 0;
 
-    private static TheSurvivalGames plugin;
 
     /**
      * Initialize the singleton with a SurvivalGames plugin field
-     *
-     * @param sg TheSurvivalGames plugin reference
+     * 
      */
-    public ArenaManager(TheSurvivalGames sg) {
-        ArenaManager.plugin = sg;
-    }
+    public ArenaManager() {
 
-    /**
-     * The constructor for a new reference of the singleton
-     */
-    private ArenaManager() {
-    }
-
-    /**
-     * Gets the reference of the singlton
-     *
-     * @return The reference of the ArenaManager
-     */
-    public static ArenaManager getManager() {
-        return am;
     }
 
     /**
@@ -121,8 +104,8 @@ public class ArenaManager {
 
         p.teleport(a.lobby);
 
-        //Ding!
-        for (Player player : plugin.getServer().getOnlinePlayers()) {
+        // Ding!
+        for (Player player : SGApi.getPlugin().getServer().getOnlinePlayers()) {
             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
         }
     }
@@ -181,14 +164,14 @@ public class ArenaManager {
 
             @Override
             public void run() {
-                SGArena a = new SGArena(num, MultiworldManager.getInstance().createRandomWorld(worldName));
+                SGArena a = new SGArena(num, MultiWorld.getInstance().createRandomWorld(worldName));
                 arenas.add(a);
 
                 creators.put(creator.getName(), a);
 
-                //TODO Create new file configuration with default values here
+                // TODO Create new file configuration with default values here
 
-                plugin.saveConfig();
+                SGApi.getPlugin().saveConfig();
             }
         });
 
@@ -203,7 +186,7 @@ public class ArenaManager {
                 arenaSize++;
 
                 SGArena a;
-                a = new SGArena(num, MultiworldManager.getInstance().copyFromInternet(creator, worldName));
+                a = new SGArena(num, MultiWorld.getInstance().copyFromInternet(creator, worldName));
                 arenas.add(a);
             }
         });
@@ -219,7 +202,7 @@ public class ArenaManager {
                 int num = arenaSize + 1;
                 arenaSize++;
 
-                SGArena a = new SGArena(num, MultiworldManager.getInstance().importWorldFromFolder(creator, worldName));
+                SGArena a = new SGArena(num, MultiWorld.getInstance().importWorldFromFolder(creator, worldName));
                 arenas.add(a);
             }
         });
@@ -262,11 +245,11 @@ public class ArenaManager {
         }
         arenas.remove(a);
 
-        plugin.getConfig().set("Arenas." + i, null);
-        List<Integer> list = plugin.getConfig().getIntegerList("Arenas.Arenas");
+        SGApi.getPlugin().getConfig().set("Arenas." + i, null);
+        List<Integer> list = SGApi.getPlugin().getConfig().getIntegerList("Arenas.Arenas");
         list.remove(i);
-        plugin.getConfig().set("Arenas.Arenas", list);
-        plugin.saveConfig();
+        SGApi.getPlugin().getConfig().set("Arenas.Arenas", list);
+        SGApi.getPlugin().saveConfig();
     }
 
     /**
@@ -290,11 +273,11 @@ public class ArenaManager {
     public void loadGames() {
         arenaSize = 0;
 
-        if (plugin.getConfig().getIntegerList("Arenas.Arenas").isEmpty()) {
+        if (SGApi.getPlugin().getConfig().getIntegerList("Arenas.Arenas").isEmpty()) {
             return;
         }
 
-        for (int i : plugin.getConfig().getIntegerList("Arenas.Arenas")) {
+        for (int i : SGApi.getPlugin().getConfig().getIntegerList("Arenas.Arenas")) {
             reloadArena(i);
         }
     }

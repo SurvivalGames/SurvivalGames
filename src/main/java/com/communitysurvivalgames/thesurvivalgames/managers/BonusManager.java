@@ -1,34 +1,28 @@
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class BonusManager {
 
     private final ArrayList<Bonus> bonus = new ArrayList<>();
-    private static final BonusManager bonusManager = new BonusManager();
-
-    public static BonusManager getManager() {
-        return bonusManager;
-    }
 
     public void registerAll() {
-        register("Who's in charge NOW?!", new String[]{"Kill an Administrator in the survival games"}, 100);
-        register("Hope you weren't recording!", new String[]{"Kill a YouTuber in the survival games"}, 500);
-        register("Slow Reflexes", new String[]{"Die within the first 60 seconds of a SG match."}, 20);
-        register("Slowpokes!", new String[]{"Win a SG game using TNT"}, 75);
-        register("High Five!", new String[]{"Kill s player with your fists"}, 300);
-        register("Fallout 4", new String[]{"Place 10 TNT within 10 secconds"}, 200);
-        register("I Need to AXE You Something", new String[]{"Win a SG Match using axes as your only weapon."}, 200);
-        register("Rainbow Chicken Dance", new String[]{"Win a SG match by killing the last player with raw chicken"}, 1000);
-        register("Y U KILL UR CREATOR", new String[]{"Kill a developer in an SG match"}, 700);
-        register("Are you God?", new String[]{"Kill Quantum64 in a SG match"}, Integer.MAX_VALUE);
-        //TODO More!
-        //TODO Translate these?  Do we need to?
+        register("Who's in charge NOW?!", new String[] { "Kill an Administrator in the survival games" }, 100);
+        register("Hope you weren't recording!", new String[] { "Kill a YouTuber in the survival games" }, 500);
+        register("Slow Reflexes", new String[] { "Die within the first 60 seconds of a SG match." }, 20);
+        register("Slowpokes!", new String[] { "Win a SG game using TNT" }, 75);
+        register("High Five!", new String[] { "Kill s player with your fists" }, 300);
+        register("Fallout 4", new String[] { "Place 10 TNT within 10 secconds" }, 200);
+        register("I Need to AXE You Something", new String[] { "Win a SG Match using axes as your only weapon." }, 200);
+        register("Rainbow Chicken Dance", new String[] { "Win a SG match by killing the last player with raw chicken" }, 1000);
+        register("Y U KILL UR CREATOR", new String[] { "Kill a developer in an SG match" }, 700);
+        register("Are you God?", new String[] { "Kill Quantum64 in a SG match" }, Integer.MAX_VALUE);
+        // TODO More!
+        // TODO Translate these? Do we need to?
     }
 
     void register(String name, String[] lore, int points) {
