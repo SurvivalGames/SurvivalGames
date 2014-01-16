@@ -71,7 +71,7 @@ public class FireworkEffectPlayer {
 		return null;
 	}
 
-	public FireworkEffectPlayer getFireworkEffectPlayer() {
+	public static FireworkEffectPlayer getFireworkEffectPlayer() {
 		return fp;
 
 	}
