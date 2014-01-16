@@ -128,7 +128,7 @@ public class Scoreboard implements Runnable {
         return plugin;
     }
 
-    public static void registerScoreboard() {
+	public static void registerScoreboard() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class),
                 new Scoreboard(TheSurvivalGames.getPlugin(TheSurvivalGames.class)),
                 5,

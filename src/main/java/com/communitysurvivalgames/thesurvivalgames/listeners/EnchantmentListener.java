@@ -18,13 +18,17 @@ public class EnchantmentListener implements Listener {
 			if (r.nextInt(1) == 0) {
 				e.getEnchantsToAdd().put(Enchantment.DAMAGE_ALL, 1);
 			} else {
-				int rnd = r.nextInt(5);
-				if (rnd == 0) {
+				int rnd = r.nextInt(3);
+				if (rnd == 0 || rnd == 3) {
 					e.getEnchantsToAdd().put(Enchantment.DAMAGE_ALL, 2);
 				}
 
 				if (rnd == 1) {
 					e.getEnchantsToAdd().put(Enchantment.KNOCKBACK, 1);
+				}
+				
+				if(rnd == 2) {
+					e.getEnchantsToAdd().put(Enchantment.getByName("Shocking"), 1);
 				}
 			}
 		}

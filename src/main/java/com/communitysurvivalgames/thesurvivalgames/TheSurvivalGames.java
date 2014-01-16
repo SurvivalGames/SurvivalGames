@@ -37,6 +37,7 @@ import com.communitysurvivalgames.thesurvivalgames.enchantment.ShockingEnchantme
 import com.communitysurvivalgames.thesurvivalgames.enchantment.UnenchantableEnchantment;
 import com.communitysurvivalgames.thesurvivalgames.listeners.BlockListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.ChatListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.EnchantmentListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.EntityDamageListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.PlayerQuitListener;
@@ -142,6 +143,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new SetupListener(), this);
 		pm.registerEvents(new EntityDamageListener(), this);
 		pm.registerEvents(new DoubleJump(this), this);
+		pm.registerEvents(new EnchantmentListener(), this);
 
 		Enchantment.registerEnchantment(new DedicationEnchantment(120));
 		Enchantment.registerEnchantment(new ShockingEnchantment(121));

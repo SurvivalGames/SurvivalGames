@@ -64,6 +64,19 @@ public class EntityDamageListener implements Listener {
 		}
 
 		Entity entity = event.getDamager();
+		if (entity instanceof Player) {
+			Player damager = (Player) entity;
+			if (damager.getItemInHand().containsEnchantment(new ShockingEnchantment(121))) {
+				FireworkEffect fEffect = FireworkEffect.builder().flicker(false).withColor(Color.BLACK).withFade(Color.RED).with(Type.BALL).trail(true).build();
+				try {
+					FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(event.getEntity().getWorld(), event.getEntity().getLocation(), fEffect);
+				} catch (Exception e) {
+					//If the firework dosen't work... to bad 
+				}
+				Vector v = event.getEntity().getVelocity();
+				event.getEntity().setVelocity(v.add(new Vector(0, Math.abs(v.getY() - (v.getY() - 0.15)), 0)));
+			}
+		}
 		if (event.getEntity() instanceof Player) {
 			Player damaged = (Player) event.getEntity();
 			if (ArenaManager.getManager().isInGame(damaged)) {
@@ -77,19 +90,7 @@ public class EntityDamageListener implements Listener {
 					damaged.getWorld().strikeLightning(damaged.getLocation());
 					damaged.getWorld().strikeLightning(damaged.getLocation());
 				}
-				if (entity instanceof Player) {
-					Player damager = (Player) entity;
-					if (damager.getItemInHand().containsEnchantment(new ShockingEnchantment(121))) {
-						FireworkEffect fEffect = FireworkEffect.builder().flicker(false).withColor(Color.BLACK).withFade(Color.RED).with(Type.BALL).trail(true).build();
-						try {
-							FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(damaged.getWorld(), damaged.getLocation(), fEffect);
-						} catch (Exception e) {
-							//If the firework dosen't work... to bad 
-						}
-						Vector v = damaged.getVelocity();
-						damaged.setVelocity(v.add(new Vector(0, Math.abs(v.getY() - (v.getY() - 0.15)), 0)));
-					}
-				}
+
 				if ((damaged.getHealth() - event.getDamage()) <= 0) {
 					event.setCancelled(true);
 					damaged.setHealth(20);
