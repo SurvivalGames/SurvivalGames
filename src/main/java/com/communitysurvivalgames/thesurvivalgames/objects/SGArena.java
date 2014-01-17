@@ -11,6 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -24,8 +25,8 @@ public class SGArena {
     private String displayName;
 
     private World world;
-  public Location lobby = null;
-    public Location center;
+    public Location lobby = null;
+   public Location center;
     public List<Location> locs = new ArrayList<>(0);
     public final List<BlockState> t2 = new ArrayList<>();
 
@@ -88,12 +89,12 @@ public class SGArena {
 
     /**
      * Constructs a new arena based off of a Location and an ID
-     *
+     * 
      * @param id The ID the arena will have
      */
     public void createArena(int id, World world) {
-      this.id = id;
-        this.world = world;
+        this.id = id;
+      this.world = world;
     }
 
     public SGArena() {
@@ -101,9 +102,9 @@ public class SGArena {
 
     /**
      * Makes sure that the fields aren't null on startup
-     *
-     * @param list       The locatins for game spawns
-     * @param lob        The lobby spawn
+     * 
+     * @param list The locatins for game spawns
+     * @param lob The lobby spawn
      * @param maxPlayers The max players for the arena
      * @param minPlayers The min players needed for the game to start
      */
@@ -126,7 +127,7 @@ public class SGArena {
 
     /**
      * Sends all the players a message
-     *
+     * 
      * @param message The message to send, do not include prefix
      */
     public void broadcast(String message) {
@@ -160,9 +161,9 @@ public class SGArena {
             broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("END") + " " + players.get(0));
         } else {
             broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("ARENA_END"));
- }
+        }
 
-        for (String s : players) {
+     for (String s : players) {
             Player p;
             if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
                 SGApi.getArenaManager().removePlayer(p);
@@ -173,17 +174,17 @@ public class SGArena {
             if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
                 SGApi.getArenaManager().removePlayer(p);
             }
-      }
+        }
 
-        setState(ArenaState.POST_GAME);
-        //rollback
+  setState(ArenaState.POST_GAME);
+        // rollback
         setState(ArenaState.WAITING_FOR_PLAYERS);
         SGApi.getTimeManager().countdownLobby(5);
     }
 
     /**
      * Sets the state of the SG arena
-     *
+     * 
      * @param state - The new state
      */
     public void setState(ArenaState state) {
@@ -192,7 +193,7 @@ public class SGArena {
 
     /**
      * Gets the ID of the arena
-     *
+     * 
      * @return The ID of the arena
      */
     public int getId() {
@@ -201,7 +202,7 @@ public class SGArena {
 
     /**
      * Gets the list of players in the arena
-     *
+     * 
      * @return List of players in the arena
      */
     public List<String> getPlayers() {
@@ -210,7 +211,7 @@ public class SGArena {
 
     /**
      * Adds the next spawn into the list of spawns
-     *
+     * 
      * @param loc The location of the spawn
      */
     public void nextSpawn(Location loc) {
@@ -219,7 +220,7 @@ public class SGArena {
 
     /**
      * Gets the current state of the arena
-     *
+     * 
      * @return The current state
      */
     public ArenaState getState() {
@@ -228,7 +229,7 @@ public class SGArena {
 
     /**
      * Gets the max number of players the arena will hold
-     *
+     * 
      * @return Number of players
      */
     public int getMaxPlayers() {
@@ -237,7 +238,7 @@ public class SGArena {
 
     /**
      * Gets the min number of players for the arena to start
-     *
+     * 
      * @return Number of players
      */
     public int getMinPlayers() {

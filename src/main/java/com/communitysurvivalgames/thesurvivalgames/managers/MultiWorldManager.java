@@ -11,9 +11,9 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.util.UnTAR;
+
 import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
@@ -45,8 +45,8 @@ public class MultiWorldManager {
          * ); return null; }
          */
         try {
-            FileUtils.copyURLToFile(new URL(url), new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder().getAbsolutePath(), "SG_ARENA_TMP.tar"));
-        } catch (MalformedURLException e) {
+            FileUtils.copyURLToFile(new URL(url), new File(SGApi.getPlugin().getDataFolder().getAbsolutePath(), "SG_ARENA_TMP.tar"));
+       } catch (MalformedURLException e) {
             sender.sendMessage("Bad world name! Are you using special characters?");
             return null;
         } catch (IOException e) {
@@ -54,8 +54,7 @@ public class MultiWorldManager {
             return null;
         }
         try {
-            UnTAR.unTar(new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder(), "SG_ARENA_TMP.tar"), new File(Bukkit.getServer().getWorldContainer()
-                                                                                                                                         .getAbsolutePath(), worldName));
+            UnTAR.unTar(new File(SGApi.getPlugin().getDataFolder(), "SG_ARENA_TMP.tar"), new File(Bukkit.getServer().getWorldContainer()                                                                                                                                       .getAbsolutePath(), worldName));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
