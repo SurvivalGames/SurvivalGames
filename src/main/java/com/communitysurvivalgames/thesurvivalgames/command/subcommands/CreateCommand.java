@@ -9,6 +9,7 @@ import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.managers.TimeManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.entity.Player;
 
