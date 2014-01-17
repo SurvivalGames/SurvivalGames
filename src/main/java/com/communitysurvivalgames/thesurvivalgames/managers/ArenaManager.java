@@ -49,8 +49,8 @@ public class ArenaManager {
     /**
      * The constructor for a new reference of the singleton
      */
-    private ArenaManager() {
-    }
+    public ArenaManager() {
+   }
 
     /**
      * Gets the reference of the singlton
@@ -177,12 +177,15 @@ public class ArenaManager {
 
         creator.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
 
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Runnable() {
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
-            @Override
+           @Override
             public void run() {
-                SGArena a = new SGArena(num, MultiworldManager.getInstance().createRandomWorld(worldName));
-                arenas.add(a);
+
+                // todo this is only a temp solution to create a new arena
+                SGArena a = new SGArena();
+                a.createArena(num, SGApi.getMultiWorldManager().createRandomWorld(worldName));
+             arenas.add(a);
 
                 creators.put(creator.getName(), a);
 
@@ -195,16 +198,16 @@ public class ArenaManager {
     }
 
     public void createArenaFromDownload(final Player creator, final String worldName) {
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Runnable() {
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
-            @Override
+        @Override
             public void run() {
                 int num = arenaSize + 1;
                 arenaSize++;
 
-                SGArena a;
-                a = new SGArena(num, MultiworldManager.getInstance().copyFromInternet(creator, worldName));
-                arenas.add(a);
+                SGArena a = new SGArena();
+                a.createArena(num, SGApi.getMultiWorldManager().copyFromInternet(creator, worldName));
+       arenas.add(a);
             }
         });
 
@@ -218,8 +221,8 @@ public class ArenaManager {
             public void run() {
                 int num = arenaSize + 1;
                 arenaSize++;
-
-                SGArena a = new SGArena(num, MultiworldManager.getInstance().importWorldFromFolder(creator, worldName));
+                SGArena a = new SGArena();
+                a.createArena(num, SGApi.getMultiWorldManager().importWorldFromFolder(creator, worldName));
                 arenas.add(a);
             }
         });

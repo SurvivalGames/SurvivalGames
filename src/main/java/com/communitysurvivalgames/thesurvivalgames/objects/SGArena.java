@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
-import com.communitysurvivalgames.thesurvivalgames.managers.TimeManager;
-
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -25,8 +23,8 @@ public class SGArena {
     private int id = 0;
     private String displayName;
 
-    private final World world;
-    public Location lobby = null;
+    private World world;
+  public Location lobby = null;
     public Location center;
     public List<Location> locs = new ArrayList<>(0);
     public final List<BlockState> t2 = new ArrayList<>();
@@ -43,7 +41,8 @@ public class SGArena {
 
     /**
      * Name: ArenaState.java Edited: 8 December 2013
-     *
+     * 
+     * 
      * @version 1.0.0
      */
     public enum ArenaState {
@@ -92,9 +91,12 @@ public class SGArena {
      *
      * @param id The ID the arena will have
      */
-    public SGArena(int id, World world) {
-        this.id = id;
+    public void createArena(int id, World world) {
+      this.id = id;
         this.world = world;
+    }
+
+    public SGArena() {
     }
 
     /**
@@ -131,7 +133,7 @@ public class SGArena {
         for (String s : players) {
             Player p = Bukkit.getServer().getPlayerExact(s);
             if (p != null) {
-                p.sendMessage(ArenaManager.getManager().prefix + message);
+                p.sendMessage(SGApi.getArenaManager().prefix + message);
             }
         }
     }
@@ -155,28 +157,28 @@ public class SGArena {
      */
     public void end() {
         if (players.size() == 1) {
-            broadcast(ArenaManager.getManager().prefix + I18N.getLocaleString("END") + " " + players.get(0));
+            broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("END") + " " + players.get(0));
         } else {
-            broadcast(ArenaManager.getManager().prefix + I18N.getLocaleString("ARENA_END"));
-        }
+            broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("ARENA_END"));
+ }
 
         for (String s : players) {
             Player p;
             if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
-                ArenaManager.getManager().removePlayer(p);
+                SGApi.getArenaManager().removePlayer(p);
             }
         }
         for (String s : spectators) {
             Player p;
             if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
-                ArenaManager.getManager().removePlayer(p);
+                SGApi.getArenaManager().removePlayer(p);
             }
-        }
+      }
 
         setState(ArenaState.POST_GAME);
         //rollback
         setState(ArenaState.WAITING_FOR_PLAYERS);
-        TimeManager.getInstance(this).countdownLobby(5);
+        SGApi.getTimeManager().countdownLobby(5);
     }
 
     /**

@@ -3,33 +3,28 @@ package com.communitysurvivalgames.thesurvivalgames.managers;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
 import com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class KitManager {
-    private static KitManager km = new KitManager();
     private List<Kit> kits = new ArrayList<Kit>();
     private IconMenu menu;
 
-    public static KitManager getKitManager() {
-        return km;
-    }
-
     public void loadKits() {
 
-        String[] files = TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder().list();
+        String[] files = SGApi.getPlugin().getDataFolder().list();
 
-        do {
+       do {
             for (String file : files) {
                 if (file.startsWith("kit_")) {
-                    FileConfiguration kit = YamlConfiguration.loadConfiguration(new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder(), file));
+                    FileConfiguration kit = YamlConfiguration.loadConfiguration(new File(SGApi.getPlugin().getDataFolder(), file));
                     // TODO Load kits here im to lazy now gonna do it later
-                }
+             }
             }
 
             if (kits.size() == 0)
@@ -47,16 +42,16 @@ public class KitManager {
                 }
                 event.setWillClose(true);
             }
-        }, TheSurvivalGames.getPlugin(TheSurvivalGames.class));
+        }, SGApi.getPlugin());
         int index = 0;
-        for (Kit k : kits) {
+   for (Kit k : kits) {
             index++;
             menu.setOption(index, k.getIcon(), k.getName(), k.getIconLore());
         }
     }
 
     void saveDefaultKits() {
-        TheSurvivalGames.getPlugin(TheSurvivalGames.class).saveResource("kit_knight", false);
+        SGApi.getPlugin().saveResource("kit_knight", false);
     }
 
     Kit getKit(String name) {

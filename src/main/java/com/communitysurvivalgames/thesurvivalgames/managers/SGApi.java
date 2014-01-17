@@ -12,7 +12,7 @@ public class SGApi {
     private static ArenaManager arenaManager;
     private static BonusManager bonusManager;
     private static KitManager kitManager;
-    private static MultiWorld multiWorld;
+    private static MultiWorldManager multiWorldManager;
     private static SignManager signManager;
     private static TimeManager timeManager;
     private static PartyManager partyManager;
@@ -36,10 +36,10 @@ public class SGApi {
         return kitManager;
     }
 
-    public static MultiWorld getMultiWorld() {
-        if (multiWorld == null)
-            kitManager = new KitManager();
-        return multiWorld;
+    public static MultiWorldManager getMultiWorldManager() {
+        if (multiWorldManager == null)
+            multiWorldManager = new MultiWorldManager();
+        return multiWorldManager;
     }
 
     public static SignManager getSignManager() {
