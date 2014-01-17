@@ -6,11 +6,13 @@
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -57,8 +59,16 @@ public class MultiWorld {
             sender.sendMessage("World downloading failed, try again later or something");
             return null;
         }
-        UnTAR.unTar(new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder(), "SG_ARENA_TMP.tar"),
-                new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName));
+        try {
+			UnTAR.unTar(new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder(), "SG_ARENA_TMP.tar"),
+			        new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ArchiveException e) {
+			e.printStackTrace();
+		}
         if (!checkIfIsWorld(new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName))) {
             sender.sendMessage("The downloaded world was not a world at all!");
             return null;
