@@ -10,12 +10,15 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-import com.communitysurvivalgames.thesurvivalgames.util.FileUtil;
+
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+
+import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import com.communitysurvivalgames.thesurvivalgames.util.UnTAR;
 
 public class MultiWorld {
 
@@ -40,13 +43,13 @@ public class MultiWorld {
                                                                                 // Translate
 
         String url = "http://communitysurvivalgames.com/worlds/" + worldName + ".zip";
-        if (!FileUtil.exists(url)) {
+        /*if (!FileUtil.exists(url)) {
             sender.sendMessage("That arena dosen't seem to be in our database!  :(");
             sender.sendMessage("Look for worlds we do have at: http://communitysurvivalgames.com/worlds/");
             return null;
-        }
+        }*/
         try {
-            FileUtil.copyURLToFile(new URL(url), new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder().getAbsolutePath(), "SG_ARENA_TMP.zip"));
+            FileUtils.copyURLToFile(new URL(url), new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder().getAbsolutePath(), "SG_ARENA_TMP.tar"));
         } catch (MalformedURLException e) {
             sender.sendMessage("Bad world name! Are you using special characters?");
             return null;
@@ -54,8 +57,8 @@ public class MultiWorld {
             sender.sendMessage("World downloading failed, try again later or something");
             return null;
         }
-        FileUtil.unZipIt(new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder().getAbsolutePath(), "SG_ARENA_TMP.zip").getAbsolutePath(),
-                new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName).getAbsolutePath());
+        UnTAR.unTar(new File(TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder(), "SG_ARENA_TMP.tar"),
+                new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName));
         if (!checkIfIsWorld(new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName))) {
             sender.sendMessage("The downloaded world was not a world at all!");
             return null;
