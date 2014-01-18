@@ -1,33 +1,14 @@
 package com.communitysurvivalgames.thesurvivalgames.enchantment;
 
+import org.bukkit.ChatColor;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 
-public class DedicationEnchantment extends Enchantment {
+public class DedicationEnchantment extends SGEnchantment {
 
     public DedicationEnchantment(int id) {
         super(id);
-    }
-
-    @Override
-    public boolean canEnchantItem(ItemStack item) {
-        return true;
-    }
-
-    @Override
-    public boolean conflictsWith(Enchantment other) {
-        return false;
-    }
-
-    @Override
-    public EnchantmentTarget getItemTarget() {
-        return EnchantmentTarget.WEAPON;
-    }
-
-    @Override
-    public int getMaxLevel() {
-        return 1;
     }
 
     @Override
@@ -35,8 +16,7 @@ public class DedicationEnchantment extends Enchantment {
         return "Dedication";
     }
 
-    @Override
-    public int getStartLevel() {
-        return 1;
-    }
+	public String getLore(int lvl) {
+		return ChatColor.GRAY + "Dedication " + RomanNumeral.convert(lvl);
+	}
 }
