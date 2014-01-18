@@ -196,6 +196,8 @@ Trolldood3 (AgentTroll) ``` http://dev.bukkit.org/profiles/Trolldood3/ ```
 
 Quantum64 ``` http://dev.bukkit.org/profiles/Quantum64/ ```
 
+Relicum ``` http://dev.bukkit.org/profiles/Relicum/ ```
+
 Email us :
 
 **survivalgamesdevteam@gmail.com**

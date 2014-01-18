@@ -9,6 +9,7 @@ import java.util.UUID;
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+
 import org.bukkit.entity.Player;
 
 public class ChatCommand implements SubCommand {
