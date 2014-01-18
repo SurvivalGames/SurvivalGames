@@ -5,14 +5,15 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
+import java.util.UUID;
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
-import java.util.UUID;
 
 public class LeaveCommand implements SubCommand {
 
@@ -23,15 +24,15 @@ public class LeaveCommand implements SubCommand {
      */
     public void execute(String cmd, Player sender, String[] args) {
         if (cmd.equalsIgnoreCase("leave")) {
-            UUID id = PartyManager.getPartyManager().getPlayers().get(sender.getName());
-            if (id != null) {
-                Party party = PartyManager.getPartyManager().getParties().get(id);
-                if (party.getLeader().equalsIgnoreCase(sender.getName())) {
+            UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());
+           if (id != null) {
+                Party party = SGApi.getPartyManager().getParties().get(id);
+              if (party.getLeader().equalsIgnoreCase(sender.getName())) {
                     PartyManager.endParty(party.getLeader(), id);
                 } else {
                     party.removeMember(sender.getName());
-                    PartyManager.getPartyManager().getPlayers().remove(sender.getName());
-                    if (party.hasNoMembers()) {
+                    SGApi.getPartyManager().getPlayers().remove(sender.getName());
+                if (party.hasNoMembers()) {
                         PartyManager.endParty(party.getLeader(), id);
                     }
                     for (String member : party.getMembers()) {

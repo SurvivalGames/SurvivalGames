@@ -5,14 +5,14 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
+import java.util.UUID;
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
-import java.util.UUID;
 
 public class ListCommand implements SubCommand {
 
@@ -27,10 +27,10 @@ public class ListCommand implements SubCommand {
         }
         if ((cmd.equalsIgnoreCase("list"))) {
 
-            UUID id = PartyManager.getPartyManager().getPlayers().get(sender.getName());
-            if (id != null) {
-                Party party = PartyManager.getPartyManager().getParties().get(id);
-                String list = org.bukkit.ChatColor.GOLD + party.getLeader() + " ";
+            UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());
+           if (id != null) {
+                Party party = SGApi.getPartyManager().getParties().get(id);
+              String list = org.bukkit.ChatColor.GOLD + party.getLeader() + " ";
                 for (String member : party.getMembers()) {
                     if (member != null) {
                         Player player = Bukkit.getServer().getPlayer(member);
@@ -59,10 +59,10 @@ public class ListCommand implements SubCommand {
     private static void executeAdmin(Player sender, String args) {
         Player p = Bukkit.getServer().getPlayer(args);
         if (p != null) {
-            UUID id = PartyManager.getPartyManager().getPlayers().get(p.getName());
-            if (id != null) {
-                Party party = PartyManager.getPartyManager().getParties().get(id);
-                String list = org.bukkit.ChatColor.GOLD + party.getLeader() + " ";
+            UUID id = SGApi.getPartyManager().getPlayers().get(p.getName());
+        if (id != null) {
+                Party party = SGApi.getPartyManager().getParties().get(id);
+        String list = org.bukkit.ChatColor.GOLD + party.getLeader() + " ";
                 for (String member : party.getMembers()) {
                     if (member != null) {
                         Player player = Bukkit.getServer().getPlayer(member);

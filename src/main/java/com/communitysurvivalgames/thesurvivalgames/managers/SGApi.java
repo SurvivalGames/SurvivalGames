@@ -7,6 +7,23 @@ package com.communitysurvivalgames.thesurvivalgames.managers;
 
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 
+/**
+ * SGApi The main class for getting references to other classes and objects
+ * <p>
+ * All Objects and classes and objects should no longer be using the singleton
+ * patter. To many singletons in a project will result in large uses of memory
+ * and is big cause of memory leaks if not used correctly.
+ * </p>
+ * <p>
+ * To access another Manager just call it using the static methods provided. Eg
+ * {@link com.communitysurvivalgames.thesurvivalgames.managers.KitManager}
+ * SGApi.getKitManager() will return you the kit manager. DO NOT then store this
+ * in a field in your class.(See relicum for the reasons)
+ * </p>
+ * 
+ * @author TheCommunitySurvivalGames
+ * @version 0.1
+ */
 public class SGApi {
 
     private static ArenaManager arenaManager;

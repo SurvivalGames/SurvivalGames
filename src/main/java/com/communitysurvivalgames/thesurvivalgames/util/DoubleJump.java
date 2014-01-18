@@ -1,8 +1,7 @@
 package com.communitysurvivalgames.thesurvivalgames.util;
 
-
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -30,8 +29,9 @@ public class DoubleJump implements Listener {
 
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
-        if ((event.getPlayer().hasPermission("doublejump.use")) && (event.getPlayer().getGameMode() != GameMode.CREATIVE) && (event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR)) {
-            if (ArenaManager.getManager().isInGame(event.getPlayer()) && plugin.getPluginConfig().allowDoubleJumpIG())
+        if ((event.getPlayer().hasPermission("doublejump.use")) && (event.getPlayer().getGameMode() != GameMode.CREATIVE)
+                && (event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR)) {
+            if (SGApi.getArenaManager().isInGame(event.getPlayer()) && plugin.getPluginConfig().allowDoubleJumpIG())
                 event.getPlayer().setAllowFlight(true);
             if (plugin.getPluginConfig().allowDoubleJump()) {
                 event.getPlayer().setAllowFlight(true);

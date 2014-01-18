@@ -5,14 +5,14 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
+import java.util.UUID;
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
-import java.util.UUID;
 
 public class PromoteCommand implements SubCommand {
 
@@ -24,10 +24,10 @@ public class PromoteCommand implements SubCommand {
      */
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 2) && (args[0].equalsIgnoreCase("promote"))) {
-            UUID id = PartyManager.getPartyManager().getPlayers().get(sender.getName());
-            if (id != null) {
-                Party party = PartyManager.getPartyManager().getParties().get(id);
-                if (party.getLeader().equalsIgnoreCase(sender.getName())) {
+            UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());
+           if (id != null) {
+                Party party = SGApi.getPartyManager().getParties().get(id);
+              if (party.getLeader().equalsIgnoreCase(sender.getName())) {
                     for (String member : party.getMembers()) {
                         if ((member != null) && (member.equalsIgnoreCase(args[0]))) {
                             Player p = Bukkit.getServer().getPlayer(args[0]);

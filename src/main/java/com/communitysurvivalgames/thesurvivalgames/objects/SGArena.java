@@ -11,7 +11,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -26,7 +25,7 @@ public class SGArena {
 
     private World world;
     public Location lobby = null;
-   public Location center;
+    public Location center;
     public List<Location> locs = new ArrayList<>(0);
     public final List<BlockState> t2 = new ArrayList<>();
 
@@ -94,7 +93,7 @@ public class SGArena {
      */
     public void createArena(int id, World world) {
         this.id = id;
-      this.world = world;
+        this.world = world;
     }
 
     public SGArena() {
@@ -163,7 +162,7 @@ public class SGArena {
             broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("ARENA_END"));
         }
 
-     for (String s : players) {
+        for (String s : players) {
             Player p;
             if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
                 SGApi.getArenaManager().removePlayer(p);
@@ -176,7 +175,7 @@ public class SGArena {
             }
         }
 
-  setState(ArenaState.POST_GAME);
+        setState(ArenaState.POST_GAME);
         // rollback
         setState(ArenaState.WAITING_FOR_PLAYERS);
         SGApi.getTimeManager().countdownLobby(5);

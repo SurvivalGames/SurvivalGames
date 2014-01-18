@@ -1,7 +1,7 @@
 package com.communitysurvivalgames.thesurvivalgames.util.items;
 
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import org.bukkit.*;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.block.BlockFace;
@@ -28,12 +28,13 @@ public class CarePackage implements Listener {
         final Player p = event.getPlayer();
         final Location careLocation = p.getLocation();
         if (p.getItemInHand().getData().getItemType() == Material.NETHER_STAR && p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Care Package")) {
-            if (ArenaManager.getManager().isInGame(p)) {
+            if (SGApi.getArenaManager().isInGame(p)) {
                 p.getInventory().remove(Material.NETHER_STAR);
                 Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
                     @Override
                     public void run() {
-                        plugin.getServer().broadcastMessage(ChatColor.WHITE + "CARE PACKAGE INCOMING: (" + ChatColor.YELLOW + careLocation.getX() + ChatColor.WHITE + "," + ChatColor.YELLOW + careLocation.getY() + ChatColor.WHITE + "," + ChatColor.YELLOW + careLocation.getZ() + ChatColor.WHITE + ")");
+                        plugin.getServer().broadcastMessage(ChatColor.WHITE + "CARE PACKAGE INCOMING: (" + ChatColor.YELLOW + careLocation.getX() + ChatColor.WHITE + ","
+                                + ChatColor.YELLOW + careLocation.getY() + ChatColor.WHITE + "," + ChatColor.YELLOW + careLocation.getZ() + ChatColor.WHITE + ")");
                         careLocation.getBlock().getRelative(BlockFace.DOWN).setType(Material.BEACON);
                         Location locTmp;
                         for (int x = -1; x < 1; x++) {
@@ -43,7 +44,8 @@ public class CarePackage implements Listener {
                             }
                         }
                         try {
-                            Thread.sleep(500);// -_- How else do you want me to make the runnable wait?
+                            Thread.sleep(500);// -_- How else do you want me to
+                                              // make the runnable wait?
                         } catch (InterruptedException ignored) {
                         }
                         Location fLoc;
@@ -60,7 +62,9 @@ public class CarePackage implements Listener {
                             fwm.setPower(rp);
                             fw.setFireworkMeta(fwm);
                             try {
-                                Thread.sleep(350);// -_- How else do you want me to get the runnable to	wait? Nested runnables
+                                Thread.sleep(350);// -_- How else do you want me
+                                                  // to get the runnable to
+                                                  // wait? Nested runnables
                             } catch (InterruptedException ignored) {
                             }
                         }

@@ -6,7 +6,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SafeEntityListener;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
@@ -14,6 +13,8 @@ import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.runnables.CodeExecutor;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Countdown;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 public class TimeManager {
 
@@ -30,8 +31,8 @@ public class TimeManager {
                 a.broadcast(I18N.getLocaleString("GAME_STARTING"));
                 a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
                 for (int i = 0; i <= a.maxPlayers; i++) {
-                    org.bukkit.entity.Player p = Bukkit.getPlayerExact(a.getPlayers().get(i));
-                    org.bukkit.Location loc = a.locs.get(i);
+                    Player p = Bukkit.getPlayerExact(a.getPlayers().get(i));
+                    Location loc = a.locs.get(i);
                     p.teleport(loc);
                     MoveListener.getPlayers().add(a.getPlayers().get(i));
 
@@ -39,7 +40,7 @@ public class TimeManager {
                 }
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 60 * 20L));
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 60 * 20L));
     }
 
     public void countdown() {
@@ -57,7 +58,7 @@ public class TimeManager {
                 countdownDm();
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 20L));
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 20L));
     }
 
     public void countdownDm() {
@@ -72,7 +73,7 @@ public class TimeManager {
                 commenceDm();
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 5 * 60 * 20L));
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 5 * 60 * 20L));
     }
 
     void commenceDm() {
@@ -85,7 +86,7 @@ public class TimeManager {
                 countdownEnd();
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 20L));
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 20L));
     }
 
     void countdownEnd() {
@@ -96,7 +97,7 @@ public class TimeManager {
                 // tp out of arena, rollback, pick up all items and arrows
             }
         });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), c, 0L, 60 * 20L));
+        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 60 * 20L));
     }
 
 }

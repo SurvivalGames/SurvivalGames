@@ -9,21 +9,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.PersistenceException;
-
 import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.*;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.*;
 import com.communitysurvivalgames.thesurvivalgames.listeners.*;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
-import com.communitysurvivalgames.thesurvivalgames.managers.SignManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.JSign;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
 import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
 import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
-
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -38,6 +35,8 @@ public class TheSurvivalGames extends JavaPlugin {
     public void onEnable() {
 
         // QuartzTest quartzTest = new QuartzTest();
+
+        SGApi.init(this);
 
         configurationData = new ConfigurationData();
         setupDatabase();
@@ -58,8 +57,8 @@ public class TheSurvivalGames extends JavaPlugin {
         saveResource("esES.lang", true);
 
         registerAll();
-        ArenaManager am = new ArenaManager(this);
-        am.loadGames();
+
+        SGApi.getArenaManager().loadGames();
 
         getLogger().info(I18N.getLocaleString("BEEN_ENABLED"));
         getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
@@ -111,7 +110,7 @@ public class TheSurvivalGames extends JavaPlugin {
         pm.registerEvents(new EntityDamageListener(), this);
         pm.registerEvents(new DoubleJump(this), this);
 
-        SignManager.getSignManager().signs = getDatabase().find(JSign.class).findList();
+        SGApi.getSignManager().signs = getDatabase().find(JSign.class).findList();
         Scoreboard.registerScoreboard();
     }
 

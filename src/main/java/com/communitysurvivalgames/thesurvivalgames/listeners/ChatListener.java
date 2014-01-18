@@ -5,7 +5,9 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
-import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
+import java.util.UUID;
+import java.util.logging.Level;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,23 +15,20 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.UUID;
-import java.util.logging.Level;
-
 public class ChatListener implements Listener {
 
     /**
      * Formats chat and detects if the player is using party chat, if so, it
      * will only send messages to the people in that player's party
-     *
+     * 
      * @param event The event being called
      */
     @EventHandler
     public void onPlayerChat(org.bukkit.event.player.AsyncPlayerChatEvent event) {
-        if (PartyManager.getPartyManager().getPartyChat().contains(event.getPlayer().getName())) {
-            UUID id = PartyManager.getPartyManager().getPlayers().get(event.getPlayer().getName());
+        if (SGApi.getPartyManager().getPartyChat().contains(event.getPlayer().getName())) {
+            UUID id = SGApi.getPartyManager().getPlayers().get(event.getPlayer().getName());
             if (id != null) {
-                Party party = PartyManager.getPartyManager().getParties().get(id);
+                Party party = SGApi.getPartyManager().getParties().get(id);
                 if (party != null) {
                     String[] members = party.getMembers();
                     for (String member : members) {
@@ -46,7 +45,7 @@ public class ChatListener implements Listener {
                     }
                 }
                 event.setCancelled(true);
-                Bukkit.getLogger().log(Level.INFO, "[P] {0}: {1}", new Object[]{event.getPlayer().getDisplayName(), event.getMessage()});
+                Bukkit.getLogger().log(Level.INFO, "[P] {0}: {1}", new Object[] { event.getPlayer().getDisplayName(), event.getMessage() });
 
                 org.bukkit.entity.Player[] playerList = org.bukkit.Bukkit.getServer().getOnlinePlayers();
                 int playersNum = org.bukkit.Bukkit.getServer().getOnlinePlayers().length;
@@ -58,10 +57,12 @@ public class ChatListener implements Listener {
                     }
                 }
             } else {
-                PartyManager.getPartyManager().getPartyChat().remove(event.getPlayer().getName());
+                SGApi.getPartyManager().getPartyChat().remove(event.getPlayer().getName());
             }
         } else {
-            // We'll add chat formatting here later, it will include the player's "Rank" weather that be admin or a youtuber, as wall as the player's "Points"
+            // We'll add chat formatting here later, it will include the
+            // player's "Rank" weather that be admin or a youtuber, as wall as
+            // the player's "Points"
         }
     }
 }

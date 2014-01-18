@@ -9,7 +9,7 @@ package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,13 +18,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.BlockIterator;
 
 public class SetCommand implements SubCommand {
-    //TODO permissions
+    // TODO permissions
 
     /**
      * The create command. DO NOT CALL DIRECTLY. Only use in CommandHandler
-     *
-     * @param cmd  The command that was executed
-     * @param p    The player that executed the command
+     * 
+     * @param cmd The command that was executed
+     * @param p The player that executed the command
      * @param args The arguments after the command
      */
     @Override
@@ -35,39 +35,39 @@ public class SetCommand implements SubCommand {
                 try {
                     i = Integer.parseInt(args[0]);
                 } catch (NumberFormatException x) {
-                    p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_NUMBER"));
+                    p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_NUMBER"));
                     return;
                 }
 
                 SGArena a;
                 try {
-                    a = ArenaManager.getManager().getArena(i);
+                    a = SGApi.getArenaManager().getArena(i);
                 } catch (ArenaNotFoundException e) {
                     Bukkit.getLogger().severe(e.getMessage());
                     return;
                 }
                 a.lobby = p.getLocation();
 
-                p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_LOBBY") + " " + a.getId());
+                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_LOBBY") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setdeathmatch")) {
                 int i;
                 try {
                     i = Integer.parseInt(args[0]);
                 } catch (NumberFormatException x) {
-                    p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_NUMBER"));
+                    p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_NUMBER"));
                     return;
                 }
 
                 SGArena a;
                 try {
-                    a = ArenaManager.getManager().getArena(i);
+                    a = SGApi.getArenaManager().getArena(i);
                 } catch (ArenaNotFoundException e) {
                     Bukkit.getLogger().severe(e.getMessage());
                     return;
                 }
                 a.lobby = p.getLocation();
 
-                p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("CREATING_DM") + " " + a.getId());
+                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_DM") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setmaxplayers")) {
                 int i;
                 int amount;
@@ -75,31 +75,31 @@ public class SetCommand implements SubCommand {
                     i = Integer.parseInt(args[0]);
                     amount = Integer.parseInt(args[1]);
                 } catch (NumberFormatException x) {
-                    p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_NUMBER"));
+                    p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_NUMBER"));
                     return;
                 }
 
                 SGArena a;
                 try {
-                    a = ArenaManager.getManager().getArena(i);
+                    a = SGApi.getArenaManager().getArena(i);
                 } catch (ArenaNotFoundException e) {
                     Bukkit.getLogger().severe(e.getMessage());
                     return;
                 }
                 a.maxPlayers = amount;
 
-                p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("SET_MAXPLAYERS") + " " + a.getId());
+                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_MAXPLAYERS") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setchest")) {
                 int i;
                 try {
                     i = Integer.parseInt(args[1]);
                 } catch (NumberFormatException x) {
-                    p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_NUMBER"));
+                    p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_NUMBER"));
                     return;
                 }
                 SGArena a;
                 try {
-                    a = ArenaManager.getManager().getArena(i);
+                    a = SGApi.getArenaManager().getArena(i);
                 } catch (ArenaNotFoundException e) {
                     Bukkit.getLogger().severe(e.getMessage());
                     return;
@@ -120,7 +120,7 @@ public class SetCommand implements SubCommand {
                     }
                 }
 
-                p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("SET_CHEST") + " " + a.getId());
+                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_CHEST") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setgamespawn")) {
                 int i;
                 int spawn;
@@ -128,22 +128,22 @@ public class SetCommand implements SubCommand {
                     spawn = Integer.parseInt(args[0]);
                     i = Integer.parseInt(args[1]);
                 } catch (NumberFormatException x) {
-                    p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NOT_NUMBER"));
+                    p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_NUMBER"));
                     return;
                 }
                 SGArena a;
                 try {
-                    a = ArenaManager.getManager().getArena(i);
+                    a = SGApi.getArenaManager().getArena(i);
                 } catch (ArenaNotFoundException e) {
                     Bukkit.getLogger().severe(e.getMessage());
                     return;
                 }
                 a.locs.set(spawn - 1, p.getLocation());
 
-                p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("SET_SPAWN") + " " + a.getId());
+                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_SPAWN") + " " + a.getId());
             }
         } catch (ArrayIndexOutOfBoundsException x) {
-            p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("INVALID_ARGUMENTS"));
+            p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("INVALID_ARGUMENTS"));
         }
     }
 }

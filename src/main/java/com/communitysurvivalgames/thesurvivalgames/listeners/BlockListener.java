@@ -6,7 +6,7 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -19,7 +19,7 @@ public class BlockListener implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (ArenaManager.getManager().isInGame(event.getPlayer())) {
+        if (SGApi.getArenaManager().isInGame(event.getPlayer())) {
             if (event.getBlock().getType().equals(Material.TNT)) {
                 event.getPlayer().getWorld().spawnEntity(event.getBlock().getLocation(), EntityType.PRIMED_TNT);
             }

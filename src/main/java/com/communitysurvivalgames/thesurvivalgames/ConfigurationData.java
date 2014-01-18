@@ -3,13 +3,14 @@ package com.communitysurvivalgames.thesurvivalgames;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.signs.SignLayout;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class ConfigurationData {
-    private final TheSurvivalGames plugin = TheSurvivalGames.getPlugin(TheSurvivalGames.class);
-  private FileConfiguration config;
+    private final TheSurvivalGames plugin = SGApi.getPlugin();
+    private FileConfiguration config;
     private final Map<String, SignLayout> signLayouts = new HashMap<>();
 
     public ConfigurationData() {
@@ -53,7 +54,7 @@ public class ConfigurationData {
         return this.config;
     }
 
-    //CONFIG VALUES START HERE
+    // CONFIG VALUES START HERE
 
     public boolean allowDoubleJump() {
         return this.config.getBoolean("allow-double-jump");

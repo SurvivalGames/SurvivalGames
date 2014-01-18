@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -57,7 +57,7 @@ public class Scoreboard implements Runnable {
 
     private void updateScoreboard(Player player, boolean complete) {
         final Objective objective = player.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
-        if (!ArenaManager.getManager().isInGame(player)) {
+        if (!SGApi.getArenaManager().isInGame(player)) {
             objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("WELCOME") + ", " + player.getDisplayName()));
             sendScore(objective, "&a&l" + I18N.getLocaleString("POINTS"), 11, complete);
             sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "   ", 10, complete);
@@ -74,7 +74,7 @@ public class Scoreboard implements Runnable {
         }
         SGArena arena;
         try {
-            arena = ArenaManager.getManager().getArena(player);
+            arena = SGApi.getArenaManager().getArena(player);
         } catch (ArenaNotFoundException e) {
             Bukkit.getLogger().severe(e.getMessage());
             return;

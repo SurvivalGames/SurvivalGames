@@ -5,8 +5,10 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command;
 
+import java.util.HashMap;
+import java.util.Map;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
@@ -14,19 +16,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class CommandHandler implements CommandExecutor {
 
     private static final Map<String, SubCommand> commands = new HashMap<>();
 
     /**
      * Registers a command
-     *
-     * @param cmd   The command to register
+     * 
+     * @param cmd The command to register
      * @param clazz The class to register the command to. Must implement
-     *              SubCommand.
+     *        SubCommand.
      */
     public static void register(String cmd, SubCommand clazz) {
         try {
@@ -44,7 +43,7 @@ public class CommandHandler implements CommandExecutor {
 
     /**
      * Gets the SubCommand represnted by a specific Command
-     *
+     * 
      * @param cmd The name of the command to get
      * @return The SubCommand of the command
      */
@@ -58,11 +57,11 @@ public class CommandHandler implements CommandExecutor {
 
     /**
      * The main executor for the SubCommands. DO NOT CALL.
-     *
-     * @param sender       The CommandSender that executed the command
-     * @param command      The Command executed
+     * 
+     * @param sender The CommandSender that executed the command
+     * @param command The Command executed
      * @param commandLabel The command's label
-     * @param args         The arguments after the command seperated by a space
+     * @param args The arguments after the command seperated by a space
      * @return Whether or not the command was executed successfully
      */
     @Override
@@ -71,42 +70,42 @@ public class CommandHandler implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("sg") && sender instanceof Player) {
             if (args.length == 5) {
                 try {
-                    getCommand(args[0]).execute(args[0], (Player) sender, new String[]{args[1], args[2], args[3], args[4]});
+                    getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2], args[3], args[4] });
                     return true;
                 } catch (CommandException e) {
-                    sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
+                    sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
                     return true;
                 }
             } else if (args.length == 4) {
                 try {
-                    getCommand(args[0]).execute(args[0], (Player) sender, new String[]{args[1], args[2], args[3]});
+                    getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2], args[3] });
                     return true;
                 } catch (CommandException e) {
-                    sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
+                    sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
                     return true;
                 }
             } else if (args.length == 3) {
                 try {
-                    getCommand(args[0]).execute(args[0], (Player) sender, new String[]{args[1], args[2]});
+                    getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2] });
                     return true;
                 } catch (CommandException e) {
-                    sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
+                    sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
                     return true;
                 }
             } else if (args.length == 2) {
                 try {
-                    getCommand(args[0]).execute(args[0], (Player) sender, new String[]{args[1]});
+                    getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1] });
                     return true;
                 } catch (CommandException e) {
-                    sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
+                    sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
                     return true;
                 }
             } else if (args.length == 1) {
                 try {
-                    getCommand(args[0]).execute(args[0], (Player) sender, new String[]{});
+                    getCommand(args[0]).execute(args[0], (Player) sender, new String[] {});
                     return true;
                 } catch (CommandException e) {
-                    sender.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("NO_COMMAND"));
+                    sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
                     return true;
                 }
             } else if (args.length == 0) {

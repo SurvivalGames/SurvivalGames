@@ -5,14 +5,15 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
+import java.util.UUID;
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
-import java.util.UUID;
 
 public class KickCommand implements SubCommand {
 
@@ -23,15 +24,15 @@ public class KickCommand implements SubCommand {
      */
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 1) && (args[0].equalsIgnoreCase("kick"))) {
-            UUID id = PartyManager.getPartyManager().getPlayers().get(sender.getName());
-            if (id != null) {
-                Party party = PartyManager.getPartyManager().getParties().get(id);
-                if (party.getLeader().equalsIgnoreCase(sender.getName())) {
+            UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());
+           if (id != null) {
+                Party party = SGApi.getPartyManager().getParties().get(id);
+              if (party.getLeader().equalsIgnoreCase(sender.getName())) {
                     for (String members : party.getMembers()) {
                         if ((members != null) && (members.equalsIgnoreCase(args[0]))) {
                             party.removeMember(args[0]);
-                            PartyManager.getPartyManager().getPlayers().remove(args[0]);
-                            sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString("KICKED_FROM_PARTY"));
+                            SGApi.getPartyManager().getPlayers().remove(args[0]);
+                        sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString("KICKED_FROM_PARTY"));
                             Player p = Bukkit.getServer().getPlayer(args[0]);
                             if (p != null) {
                                 p.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("KICKED_FROM_PARTY_2"));
