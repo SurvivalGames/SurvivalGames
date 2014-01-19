@@ -16,13 +16,14 @@ public class ConfigurationData {
     private final List<String> allowed;
 
     public ConfigurationData() {
-
-        this.allowed = SGApi.getPlugin().getConfig().getStringList("breaks-allowed");
+        loadConfig();
+       this.allowed = SGApi.getPlugin().getConfig().getStringList("breaks-allowed");
    }
 
     void loadConfig() {
         this.plugin.saveDefaultConfig();
-        this.config = this.plugin.getConfig();
+        this.plugin.reloadConfig();
+      this.config = this.plugin.getConfig();
         loadLayouts();
     }
 

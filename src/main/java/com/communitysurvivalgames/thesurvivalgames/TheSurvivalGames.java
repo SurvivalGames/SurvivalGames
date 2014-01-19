@@ -42,7 +42,7 @@ public class TheSurvivalGames extends JavaPlugin {
         ConfigurationSerialization.registerClass(SerializedLocation.class);
         ConfigurationSerialization.registerClass(Arena.class);
         SGApi.init(this);
-      // QuartzTest quartzTest = new QuartzTest();
+        // QuartzTest quartzTest = new QuartzTest();
 
         configurationData = new ConfigurationData();
 
@@ -51,7 +51,7 @@ public class TheSurvivalGames extends JavaPlugin {
         saveResource("idID.lang", true);
         saveResource("esES.lang", true);
 
-      setupDatabase();
+        setupDatabase();
 
         File i18N = new File(getDataFolder(), "I18N.yml");
         if (!i18N.exists()) {
@@ -63,12 +63,9 @@ public class TheSurvivalGames extends JavaPlugin {
         I18N.setupLocale();
         I18N.setLocale(lang.getString("language"));
 
-
-
-    registerAll();
+        registerAll();
 
         SGApi.getArenaManager().loadGames();
-
         getLogger().info(I18N.getLocaleString("BEEN_ENABLED"));
         getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
         saveDefaultConfig();
@@ -125,7 +122,7 @@ public class TheSurvivalGames extends JavaPlugin {
         Scoreboard.registerScoreboard();
     }
 
-   /**
+    /**
      * Setup Persistence Databases and Install DDL if there are none
      */
     private void setupDatabase() {
