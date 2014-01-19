@@ -9,7 +9,6 @@ package com.communitysurvivalgames.thesurvivalgames.listeners;
 import java.util.ArrayList;
 import java.util.List;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;

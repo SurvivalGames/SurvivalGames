@@ -17,6 +17,7 @@ import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.*;
 import com.communitysurvivalgames.thesurvivalgames.listeners.*;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.objects.Arena;
 import com.communitysurvivalgames.thesurvivalgames.objects.JSign;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
@@ -39,10 +40,12 @@ public class TheSurvivalGames extends JavaPlugin {
     public void onEnable() {
 
         ConfigurationSerialization.registerClass(SerializedLocation.class);
+        ConfigurationSerialization.registerClass(Arena.class);
 
        // QuartzTest quartzTest = new QuartzTest();
 
         SGApi.init(this);
+        saveDefaultConfig();
 
         configurationData = new ConfigurationData();
         setupDatabase();

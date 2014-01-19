@@ -47,14 +47,6 @@ public class ConfigurationData {
         return this.signLayouts.get(layout);
     }
 
-    public TheSurvivalGames getPlugin() {
-        return this.plugin;
-    }
-
-    public FileConfiguration getConfig() {
-        return this.config;
-    }
-
     // CONFIG VALUES START HERE
 
     public boolean allowDoubleJump() {
