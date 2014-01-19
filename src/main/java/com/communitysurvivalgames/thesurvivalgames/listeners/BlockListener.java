@@ -6,7 +6,10 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -16,8 +19,20 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 public class BlockListener implements Listener {
+    // TODO This is a list of blocks that can be broken in game
+    // Might need to list each type of leaf or grass will have to check will
+    // impliment later
+    final List<Material> allowed;
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    public BlockListener() {
+
+        allowed = new ArrayList<>();
+        for (String s : SGApi.getPlugin().getConfig().getStringList("breaks-allowed")) {
+            allowed.add(Material.valueOf(s));
+        }
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onBlockPlace(BlockPlaceEvent event) {
         if (SGApi.getArenaManager().isInGame(event.getPlayer())) {
             if (event.getBlock().getType().equals(Material.TNT)) {
@@ -31,7 +46,7 @@ public class BlockListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onBlockBreak(BlockBreakEvent event) {
         if (!event.getPlayer().hasPermission("sg.build")) {
             event.setCancelled(true);

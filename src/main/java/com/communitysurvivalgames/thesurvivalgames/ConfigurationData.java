@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.signs.SignLayout;
+
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -75,5 +76,14 @@ public class ConfigurationData {
     public List<String> getWelcomeMessage() {
         return this.config.getStringList("welcome-message");
     }
+
+    /**
+     * Get list of blocks that can be broken in game
+     * 
+     * @return the list
+     */
+    public List<String> getAllowedBlockBreaks() {
+        return this.config.getStringList("breaks-allowed");
+   }
 
 }
