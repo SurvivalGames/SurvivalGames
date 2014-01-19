@@ -31,6 +31,7 @@ public class SerializedLocation implements ConfigurationSerializable {
     private final float yaw;
     private final float pitch;
     private final String world;
+    private final String type;
 
     /**
      * Instantiates a new Serialized location.
@@ -42,28 +43,30 @@ public class SerializedLocation implements ConfigurationSerializable {
      * @param yaw the yaw
      * @param pitch the pitch
      */
-    public SerializedLocation(String world, int x, int y, int z, float yaw, float pitch) {
-        this.x = x;
+    public SerializedLocation(String world, int x, int y, int z, float yaw, float pitch, LocationType locationType) {
+       this.x = x;
         this.y = y;
         this.z = z;
         this.world = world;
         this.yaw = yaw;
         this.pitch = pitch;
-    }
+        this.type = locationType.name();
+   }
 
     /**
      * Instantiates a new Serialized location.
      * 
      * @param location the location
      */
-    public SerializedLocation(Location location) {
-        this.x = location.getBlockX();
+    public SerializedLocation(Location location, LocationType locationType) {
+      this.x = location.getBlockX();
         this.y = location.getBlockY();
         this.z = location.getBlockZ();
         this.world = location.getWorld().getName();
         this.yaw = location.getYaw();
         this.pitch = location.getPitch();
-    }
+        this.type = locationType.name();
+ }
 
     /**
      * Deserialize serialized location. <b>Should never need to call this
@@ -73,20 +76,20 @@ public class SerializedLocation implements ConfigurationSerializable {
      * @return the serialized location
      */
     public static SerializedLocation deserialize(Map<String, Object> map) {
-        Object xObject = map.get("xpos"), yObject = map.get("ypos"), zObject = map.get("zpos"), worldObject = map.get("world"), yawObject = map.get("yawpos"), pitchObject = map.get("pitchpos");
-        if (xObject == null || yObject == null || zObject == null || worldObject == null || !(xObject instanceof Integer) || !(yObject instanceof Integer)
+        Object xObject = map.get("xpos"), yObject = map.get("ypos"), zObject = map.get("zpos"), worldObject = map.get("world"), yawObject = map.get("yawpos"), pitchObject = map.get("pitchpos"), pType = map.get("type");
+  if (xObject == null || yObject == null || zObject == null || worldObject == null || !(xObject instanceof Integer) || !(yObject instanceof Integer)
                 || !(zObject instanceof Integer)) {
             return null;
         }
         Integer x = (Integer) xObject, y = (Integer) yObject, z = (Integer) zObject;
         Double yaw = (Double) yawObject, pitch = (Double) pitchObject;
         String worldString = worldObject.toString();
-
-        return new SerializedLocation(worldString, x, y, z, yaw.floatValue(), pitch.floatValue());
+        LocationType ty = LocationType.valueOf((String) pType);
+        return new SerializedLocation(worldString, x, y, z, yaw.floatValue(), pitch.floatValue(), ty);
 
     }
 
-    /**
+   /**
      * Gets {@link org.bukkit.Location}
      * 
      * @return the location
@@ -120,6 +123,7 @@ public class SerializedLocation implements ConfigurationSerializable {
         map.put("zpos", z);
         map.put("yawpos", yaw);
         map.put("pitchpos", pitch);
+        map.put("type", type);
         return map;
     }
 
@@ -175,6 +179,16 @@ public class SerializedLocation implements ConfigurationSerializable {
      */
     public float getPitch() {
         return pitch;
+    }
+
+    /**
+     * Get {@link com.communitysurvivalgames.thesurvivalgames.util.LocationType}
+     * of this {@link org.bukkit.Location}
+     * 
+     * @return the location type
+     */
+    public LocationType getLocationType() {
+        return LocationType.valueOf(this.type);
     }
 
     /**
