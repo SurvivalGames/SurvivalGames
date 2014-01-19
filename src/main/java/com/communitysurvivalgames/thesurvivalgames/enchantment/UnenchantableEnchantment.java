@@ -1,7 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.enchantment;
 
 import org.bukkit.ChatColor;
-import org.bukkit.enchantments.Enchantment;
 
 public class UnenchantableEnchantment extends SGEnchantment {
 
@@ -11,9 +10,10 @@ public class UnenchantableEnchantment extends SGEnchantment {
 
     @Override
     public String getName() {
-        return "Un-Enchantable";
+        return "UNENCHANTABLE";
     }
     
+	@Override
 	public String getLore(int lvl) {
 		return ChatColor.GRAY + "Un-Enchantable " + RomanNumeral.convert(lvl);
 	}

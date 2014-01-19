@@ -3,13 +3,26 @@
 ##     Knight      ##
 #####################
 
+# Valid item names can be found here: http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
+
 # Kit name
 name: Knight
 
-# Kit icon
-icon: SWORD_GOLDEN
+#Kit type
+type: Classic
 
-#Icon Lore
+# Kit icon - Must use valid item name
+icon: GOLD_SWORD
+
+# Icon Lore
 iconLore: The Knight Kit is awesome because it is the only kit.
 
-## Working on the rest
+# Items
+items:
+    # Kit Level
+    lvl1:
+        item1:
+            name: 'Knight's Wooden Sword (Lvl 1)'
+            item: WOODEN_SWORD
+            enchantments:
+                - UNENCHANTABLE

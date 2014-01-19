@@ -38,4 +38,8 @@ public class SGEnchantment extends Enchantment {
     public int getStartLevel() {
         return 1;
     }
+    
+    public String getLore(int lvl) {
+    	return "null";
+    }
 }

@@ -9,9 +9,10 @@ public class ShockingEnchantment extends SGEnchantment {
 
 	@Override
 	public String getName() {
-		return "Shocking";
+		return "SHOCKING";
 	}
 
+	@Override
 	public String getLore(int lvl) {
 		return ChatColor.GRAY + "Shocking " + RomanNumeral.convert(lvl);
 	}
