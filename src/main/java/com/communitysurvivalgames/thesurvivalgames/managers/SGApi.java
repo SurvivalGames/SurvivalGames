@@ -34,6 +34,7 @@ public class SGApi {
     private static TimeManager timeManager;
     private static PartyManager partyManager;
     private static TheSurvivalGames plugin;
+    private static ScheduleManager scheduler;
 
     /**
      * Gets arena manager.
@@ -77,6 +78,17 @@ public class SGApi {
         if (multiWorldManager == null)
             multiWorldManager = new MultiWorldManager();
         return multiWorldManager;
+    }
+
+    /**
+     * Get MultiThread Manager
+     * 
+     * @return the schedule manager
+     */
+    public static ScheduleManager getScheduler() {
+        if (scheduler == null)
+            scheduler = new ScheduleManager();
+        return scheduler;
     }
 
     /**
