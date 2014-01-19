@@ -9,6 +9,7 @@ package com.communitysurvivalgames.thesurvivalgames.listeners;
 import java.util.ArrayList;
 import java.util.List;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -26,8 +27,8 @@ public class BlockListener implements Listener {
     public BlockListener() {
 
         allowed = new ArrayList<>();
-        for (String s : SGApi.getPlugin().getConfig().getStringList("breaks-allowed")) {
-            allowed.add(Material.valueOf(s));
+        for (String s : SGApi.getPlugin().getPluginConfig().getAllowedBlockBreaks()) {
+           allowed.add(Material.valueOf(s));
         }
     }
 

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.logging.Level;
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+
 import org.bukkit.Bukkit;
 
 public class I18N {
@@ -16,15 +17,15 @@ public class I18N {
     private static final File dir = TheSurvivalGames.getPlugin(TheSurvivalGames.class).getDataFolder();
   private static final HashMap<String, String> localeFiles = new HashMap<>();      //
     private static final HashMap<Integer, String> localeIndices = new HashMap<>();  // TODO updated but never queried
-    private static Locale currentLocale = Locale.enUS;                                             //
+    private static _Locale currentLocale = _Locale.enUS; //
 
-    public enum Locale {
+    public enum _Locale {
         enUS, idID, nwNO
     }
 
     /**
      * Gets the locale properties and stores loads it to locales
-     *
+     * 
      * @param file The locale file
      */
     private static void getLocaleProperties(String file) {
@@ -92,13 +93,14 @@ public class I18N {
     public static void setLocale(String locale) {
         if (locale == null) {
             locale = "enUS";
-            currentLocale = Locale.enUS;
+            currentLocale = _Locale.enUS;
+
         } else {
             try {
-                currentLocale = Locale.valueOf(locale);
+                currentLocale = _Locale.valueOf(locale);
             } catch (IllegalArgumentException e) {
-                Bukkit.getLogger().severe("[i18n] Unknown locale " + locale + ". Loaded enUs");
-                currentLocale = Locale.enUS;
+              Bukkit.getLogger().severe("[i18n] Unknown locale " + locale + ". Loaded enUs");
+                currentLocale = _Locale.enUS;
             }
         }
         getLocaleProperties(locale);

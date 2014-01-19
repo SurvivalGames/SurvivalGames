@@ -6,6 +6,7 @@ import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundExcept
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -23,8 +24,8 @@ public class Scoreboard implements Runnable {
     private final TheSurvivalGames plugin;
 
     private Scoreboard(TheSurvivalGames base) {
-        this.plugin = TheSurvivalGames.getPlugin(TheSurvivalGames.class);
-    }
+        this.plugin = SGApi.getPlugin();
+   }
 
     public void run() {
         for (final Player player : Bukkit.getOnlinePlayers()) {

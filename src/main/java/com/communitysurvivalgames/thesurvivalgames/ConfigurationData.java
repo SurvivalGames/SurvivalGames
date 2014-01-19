@@ -13,14 +13,15 @@ public class ConfigurationData {
     private final TheSurvivalGames plugin = SGApi.getPlugin();
     private FileConfiguration config;
     private final Map<String, SignLayout> signLayouts = new HashMap<>();
+    private final List<String> allowed;
 
     public ConfigurationData() {
-        this.config = plugin.getConfig();
-    }
+
+        this.allowed = SGApi.getPlugin().getConfig().getStringList("breaks-allowed");
+   }
 
     void loadConfig() {
         this.plugin.saveDefaultConfig();
-        this.plugin.reloadConfig();
         this.config = this.plugin.getConfig();
         loadLayouts();
     }
@@ -75,7 +76,7 @@ public class ConfigurationData {
      * @return the list
      */
     public List<String> getAllowedBlockBreaks() {
-        return this.config.getStringList("breaks-allowed");
+        return this.allowed;
    }
 
 }

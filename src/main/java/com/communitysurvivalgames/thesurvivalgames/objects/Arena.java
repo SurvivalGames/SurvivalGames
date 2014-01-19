@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.Getter;
 import lombok.experimental.Builder;
+import com.communitysurvivalgames.thesurvivalgames.util.LocationType;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 
@@ -40,11 +41,19 @@ public class Arena implements ConfigurationSerializable {
     private int minPlayers;
 
     /**
-     * Creates a Map representation of this class.
-     * <p/>
-     * This class must provide a method to restore this class, as defined in the
-     * {@link org.bukkit.configuration.serialization.ConfigurationSerializable}
-     * interface javadocs.
+     * The Location type.
+     */
+    @Getter
+    private LocationType locationType;
+
+    /**
+     * The Arena status.
+     */
+    @Getter
+    private ArenaStatus arenaStatus;
+
+    /**
+     * Serialize the Object
      * 
      * @return Map containing the current state of this class
      */
@@ -55,12 +64,20 @@ public class Arena implements ConfigurationSerializable {
         map.put("world", getWorld());
         map.put("max", getMaxPlayers());
         map.put("min", getMinPlayers());
+        map.put("type", getLocationType().name());
+        map.put("status", getArenaStatus().name());
         return map;
     }
 
+    /**
+     * Deserialize arena. You should not be using this method directly
+     * 
+     * @param map the map
+     * @return the arena
+     */
     public static Arena deserialize(Map<String, Object> map) {
-        Object oName = map.get("name"), oWorld = map.get("world"), oMin = map.get("min"), oMax = map.get("max");
-        if (oName == null || oWorld == null || oMin == null || oMax == null) {
+        Object oName = map.get("name"), oWorld = map.get("world"), oMin = map.get("min"), oMax = map.get("max"), oType = map.get("type"), oStatus = map.get("status");
+        if (oName == null || oWorld == null || oMin == null || oMax == null || oType == null || oStatus == null) {
             return null;
         }
 
@@ -68,7 +85,8 @@ public class Arena implements ConfigurationSerializable {
         String w = (String) oWorld;
         Integer mi = (Integer) (oMin);
         Integer mx = (Integer) oMax;
-
-        return Arena.arena().name(n).world(w).minPlayers(mi).maxPlayers(mx).build();
+        LocationType lt = LocationType.valueOf((String) oType);
+        ArenaStatus st = ArenaStatus.valueOf((String) oStatus);
+        return Arena.arena().name(n).world(w).minPlayers(mi).maxPlayers(mx).locationType(lt).build();
     }
 }
