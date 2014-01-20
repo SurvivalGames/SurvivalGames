@@ -95,6 +95,10 @@ public class MultiWorldManager {
         // TODO
         return Bukkit.getWorld(worldName);
     }
+    
+    public World getWorlds() {
+        return worlds;
+    }
 
     private static boolean checkIfIsWorld(File worldFolder) {
         if (worldFolder.isDirectory()) {
