@@ -26,4 +26,11 @@ public interface IMetable {
      * @return the material
      */
     Material getMaterial();
+
+    /**
+     * Gets id thats unique for this item
+     * 
+     * @return the id
+     */
+    Integer getId();
 }
