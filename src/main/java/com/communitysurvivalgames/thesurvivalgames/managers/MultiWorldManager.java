@@ -11,6 +11,8 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.util.UnTAR;
 
@@ -21,21 +23,28 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 public class MultiWorldManager {
+    
+    List<SGWorld> worlds = new ArrayList<SGWorld>();
 
     public MultiWorldManager() {
     }
 
     World createWorld(String name) {
-        return new SGWorld(name).create();
+        SGWorld world = new SGWorld(name).create();
+        worlds.add(world);
+        return world;
     }
 
     public void deleteWorld(String name) {
-        new SGWorld(name).remove();
+        SGWorld world = new SGWorld(name);
+        if(worlds.contains(world)) {
+            worlds.remove(world);
+            world.remove();
+        }
     }
 
     public World copyFromInternet(final Player sender, final String worldName) {// TODO:
                                                                                 // Translate
-
         String url = "http://communitysurvivalgames.com/worlds/" + worldName + ".zip";
         /*
          * if (!FileUtil.exists(url)) {
