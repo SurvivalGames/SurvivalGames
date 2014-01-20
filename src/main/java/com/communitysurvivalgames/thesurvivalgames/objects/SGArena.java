@@ -5,12 +5,14 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -26,14 +28,31 @@ public class SGArena {
     private World world;
     public Location lobby = null;
     public Location center;
+    public List<String> voted = new ArrayList<>();
     public List<Location> locs = new ArrayList<>(0);
-    public final List<BlockState> t2 = new ArrayList<>();
+    public List<BlockState> t2 = new ArrayList<>();
+    public Map<MapHash, Integer> votes = new HashMap<>();
 
     public int maxPlayers;
     private int minPlayers;
 
     private final List<String> players = new CopyOnWriteArrayList<>();
     private final List<String> spectators = new CopyOnWriteArrayList<>();
+
+    private class MapHash {
+        private final int id;
+        private final SGWorld w;
+        public MapHash(SGWorld w, int id) {
+            this.w = w;
+            this.id = id;
+        }
+        public SGWorld getWorld() {
+            return w;
+        }
+        public int getId() {
+            return id;
+        }
+    }
 
     public void setPlayerKit(Player player, Kit kit) {
 
@@ -206,6 +225,26 @@ public class SGArena {
      */
     public List<String> getPlayers() {
         return this.players;
+    }
+
+    /**
+     * Makes a player vote
+     * 
+     * @param p the voter
+     * @param i the map number
+     */ 
+    public void vote(Player p, int i) {
+        if(currentState != ArenaState.WAITING_FOR_PLAYERS) {
+            p.sendMessage(error + I18N.getLocaleString("NOT_VOTING"));
+            return;
+        }         
+        
+        for(Map.Entry<MapHash, Integer> e : votes) {
+            if(e.getKey().getId() == i) {
+                votes.put(e.getKey().getWorld(), votes.get(e.getKey()) + 1);
+            }
+        }
+        voted.add(p.getName());
     }
 
     /**
