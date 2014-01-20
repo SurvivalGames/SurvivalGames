@@ -8,7 +8,7 @@ package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import org.bukkit.entity.Player;
 
 public class LeaveCommand implements SubCommand {
@@ -16,11 +16,11 @@ public class LeaveCommand implements SubCommand {
     @Override
     public void execute(String cmd, Player p, String[] args) {
         if (cmd.equalsIgnoreCase("leave")) {
-            if (ArenaManager.getManager().isInGame(p)) {
-                ArenaManager.getManager().removePlayer(p);
-                p.sendMessage(ArenaManager.getManager().prefix + I18N.getLocaleString("LEFT_ARENA"));
+            if (SGApi.getArenaManager().isInGame(p)) {
+                SGApi.getArenaManager().removePlayer(p);
+                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("LEFT_ARENA"));
             } else {
-                p.sendMessage(ArenaManager.getManager().error + I18N.getLocaleString("LOL_NOPE"));
+                p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("LOL_NOPE"));
             }
         }
     }

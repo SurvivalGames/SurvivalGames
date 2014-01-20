@@ -5,45 +5,54 @@
  */
 package com.communitysurvivalgames.thesurvivalgames;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.PersistenceException;
+
 import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.*;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.*;
 import com.communitysurvivalgames.thesurvivalgames.listeners.*;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
-import com.communitysurvivalgames.thesurvivalgames.managers.SignManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.objects.Arena;
 import com.communitysurvivalgames.thesurvivalgames.objects.JSign;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
-import com.communitysurvivalgames.thesurvivalgames.runnables.QuartzTest;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
 import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
+import com.communitysurvivalgames.thesurvivalgames.util.SerializedLocation;
 import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.persistence.PersistenceException;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 public class TheSurvivalGames extends JavaPlugin {
 
-
-   private ConfigurationData configurationData;
+    private ConfigurationData configurationData;
 
     @Override
     public void onEnable() {
 
+        ConfigurationSerialization.registerClass(SerializedLocation.class);
+        ConfigurationSerialization.registerClass(Arena.class);
 
-       QuartzTest quartzTest = new QuartzTest();
+        SGApi.init(this);
 
         configurationData = new ConfigurationData();
-     setupDatabase();
-      
+
+        // TODO Add more languages!
+        saveResource("enUS.lang", true);
+        saveResource("idID.lang", true);
+        saveResource("esES.lang", true);
+
+        setupDatabase();
+
         File i18N = new File(getDataFolder(), "I18N.yml");
         if (!i18N.exists()) {
             saveResource("I18N.yml", false);
@@ -54,26 +63,21 @@ public class TheSurvivalGames extends JavaPlugin {
         I18N.setupLocale();
         I18N.setLocale(lang.getString("language"));
 
-        //TODO Add more languages!
-        saveResource("enUS.lang", true);
-        saveResource("idID.lang", true);
-        saveResource("esES.lang", true);
-
         registerAll();
-        ArenaManager am = new ArenaManager(this);
-        am.loadGames();
 
+        SGApi.getArenaManager().loadGames();
         getLogger().info(I18N.getLocaleString("BEEN_ENABLED"));
         getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
         saveDefaultConfig();
-
 
     }
 
     @Override
     public void onDisable() {
         getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
-    }
+        SGApi.getScheduler().shutdownAll();
+
+   }
 
     void registerAll() {
         getCommand("sg").setExecutor(new CommandHandler());
@@ -114,7 +118,9 @@ public class TheSurvivalGames extends JavaPlugin {
         pm.registerEvents(new EntityDamageListener(), this);
         pm.registerEvents(new DoubleJump(this), this);
 
-        SignManager.getSignManager().signs = getDatabase().find(JSign.class).findList();
+        // Throws NPE's
+        // SGApi.getSignManager().signs =
+        // getDatabase().find(JSign.class).findList();
         Scoreboard.registerScoreboard();
     }
 
@@ -137,12 +143,13 @@ public class TheSurvivalGames extends JavaPlugin {
 
     /**
      * Gets Persistence Database classes WARNING: DO NOT EDIT
-     *
+     * 
      * @return The list of classes for the database
      */
     @Override
     public List<Class<?>> getDatabaseClasses() {
-        @SuppressWarnings("Convert2Diamond") List<Class<?>> list = new ArrayList<>();
+        @SuppressWarnings("Convert2Diamond")
+        List<Class<?>> list = new ArrayList<>();
         list.add(PlayerData.class);
         list.add(JSign.class);
         return list;
@@ -164,7 +171,5 @@ public class TheSurvivalGames extends JavaPlugin {
     public ConfigurationData getPluginConfig() {
         return configurationData;
     }
-
-
 
 }

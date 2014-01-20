@@ -8,9 +8,8 @@ import com.avaje.ebean.validation.NotEmpty;
 import com.avaje.ebean.validation.NotNull;
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.signs.SignLayout;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -34,7 +33,6 @@ public class JSign {
     private double y;
     @NotNull
     private double z;
-
 
     public JSign() {
     }
@@ -63,11 +61,11 @@ public class JSign {
             Block b = location.getBlock();
             if ((b.getState() instanceof Sign)) {
                 SignLayout layout = TheSurvivalGames.getPlugin(TheSurvivalGames.class).getPluginConfig().getLayout(this.layout);
-              if (layout != null) {
+                if (layout != null) {
                     Sign s = (Sign) b.getState();
                     List<String> jau;
                     try {
-                        jau = layout.parseLayout(ArenaManager.getManager().getArena(arena));
+                        jau = layout.parseLayout(SGApi.getArenaManager().getArena(arena));
                     } catch (ArenaNotFoundException e) {
                         Bukkit.getLogger().severe("[ArenaSigns] The arena could not be found on sign " + id);
                         return;
@@ -200,8 +198,8 @@ public class JSign {
     }
 
     public String toString() {
-        return "TeleportSign(id=" + getId() + ", server=" + getArena() + ", layout=" + getLayout() + ", worldName=" + getWorldName() + ", x=" + getX() + ", y=" + getY() + ", z=" + getZ() + ")";
+        return "TeleportSign(id=" + getId() + ", server=" + getArena() + ", layout=" + getLayout() + ", worldName=" + getWorldName() + ", x=" + getX() + ", y=" + getY() + ", z="
+                + getZ() + ")";
     }
-
 
 }

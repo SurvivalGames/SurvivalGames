@@ -17,15 +17,18 @@ public class PlayerNameUtil {
         ArrayList<String> list = new ArrayList<>();
         list.add("Quantum64");
         list.add("calebbfmv");
-        list.add("TrolLDOod3");
+        list.add("Trolldood3");
         list.add("Relicum");
+        list.add("sam4215");
        //TODO: What's you IGN everyone?
+       //AgentTroll - Trolldude3 
         return list;
     }
 
     public static ArrayList<String> getAwesomePeople() {
         ArrayList<String> list = new ArrayList<>();
-        list.add("Jonthespartan29"); //TODO XD
+        list.add("Jonthespartan29");
+        list.add("GregoriusMC"); //TODO XD
         return list;
     }
 

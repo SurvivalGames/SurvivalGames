@@ -10,11 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -26,44 +24,22 @@ public class ArenaManager {
 
     public final String prefix = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.GOLD;
     public final String error = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.RED;
-
     private final Map<String, SGArena> creators = new HashMap<>();
     private final Map<String, Location> locs = new HashMap<>();
-    private static final ArenaManager am = new ArenaManager();
     private final Map<String, ItemStack[]> inv = new HashMap<>();
     private final Map<String, ItemStack[]> armor = new HashMap<>();
     private final List<SGArena> arenas = new ArrayList<>();
     private int arenaSize = 0;
 
-    private static TheSurvivalGames plugin;
-
-    /**
-     * Initialize the singleton with a SurvivalGames plugin field
-     *
-     * @param sg TheSurvivalGames plugin reference
-     */
-    public ArenaManager(TheSurvivalGames sg) {
-        ArenaManager.plugin = sg;
-    }
-
     /**
      * The constructor for a new reference of the singleton
      */
-    private ArenaManager() {
-    }
-
-    /**
-     * Gets the reference of the singlton
-     *
-     * @return The reference of the ArenaManager
-     */
-    public static ArenaManager getManager() {
-        return am;
+    public ArenaManager() {
     }
 
     /**
      * Gets an arena from an integer ID
-     *
+     * 
      * @param i The ID to get the Arena from
      * @return The arena from which the ID represents. May be null.
      * @throws ArenaNotFoundException
@@ -88,7 +64,7 @@ public class ArenaManager {
 
     /**
      * Adds a player to the specified arena
-     *
+     * 
      * @param p The player to be added
      * @param i The arena ID in which the player will be added to.
      */
@@ -101,7 +77,7 @@ public class ArenaManager {
             return;
         }
 
-        if(isInGame(p)) {
+        if (isInGame(p)) {
             p.sendMessage(error + I18N.getLocaleString("NOT_JOINABLE"));
             return;
         }
@@ -121,15 +97,15 @@ public class ArenaManager {
 
         p.teleport(a.lobby);
 
-        //Ding!
-        for (Player player : plugin.getServer().getOnlinePlayers()) {
+        // Ding!
+        for (Player player : SGApi.getPlugin().getServer().getOnlinePlayers()) {
             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
         }
     }
 
     /**
      * Removes the player from an arena
-     *
+     * 
      * @param p The player to remove from an arena
      */
     public void removePlayer(Player p) {
@@ -159,7 +135,7 @@ public class ArenaManager {
         p.teleport(locs.get(p.getName()));
         locs.remove(p.getName());
 
-        for(PotionEffect effect : p.getActivePotionEffects()) {
+        for (PotionEffect effect : p.getActivePotionEffects()) {
             p.removePotionEffect(effect.getType());
         }
 
@@ -168,7 +144,7 @@ public class ArenaManager {
 
     /**
      * Creates a new arena
-     *
+     * 
      * @param creator The creator attributed with making the arena
      */
     public void createArena(final Player creator, final String worldName) {
@@ -177,33 +153,36 @@ public class ArenaManager {
 
         creator.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
 
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Runnable() {
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
             @Override
             public void run() {
-                SGArena a = new SGArena(num, MultiworldManager.getInstance().createRandomWorld(worldName));
+
+                // todo this is only a temp solution to create a new arena
+                SGArena a = new SGArena();
+                a.createArena(num, SGApi.getMultiWorldManager().createRandomWorld(worldName));
                 arenas.add(a);
 
                 creators.put(creator.getName(), a);
 
-                //TODO Create new file configuration with default values here
+                // TODO Create new file configuration with default values here
 
-                plugin.saveConfig();
+                SGApi.getPlugin().saveConfig();
             }
         });
 
     }
 
     public void createArenaFromDownload(final Player creator, final String worldName) {
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Runnable() {
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
             @Override
             public void run() {
                 int num = arenaSize + 1;
                 arenaSize++;
 
-                SGArena a;
-                a = new SGArena(num, MultiworldManager.getInstance().copyFromInternet(creator, worldName));
+                SGArena a = new SGArena();
+                a.createArena(num, SGApi.getMultiWorldManager().copyFromInternet(creator, worldName));
                 arenas.add(a);
             }
         });
@@ -212,14 +191,14 @@ public class ArenaManager {
 
     public void createArenaFromImport(final Player creator, final String worldName) {
 
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Runnable() {
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
             @Override
             public void run() {
                 int num = arenaSize + 1;
                 arenaSize++;
-
-                SGArena a = new SGArena(num, MultiworldManager.getInstance().importWorldFromFolder(creator, worldName));
+                SGArena a = new SGArena();
+                a.createArena(num, SGApi.getMultiWorldManager().importWorldFromFolder(creator, worldName));
                 arenas.add(a);
             }
         });
@@ -228,7 +207,7 @@ public class ArenaManager {
 
     /**
      * Stores an existing arena in the list, for example after reloads
-     *
+     * 
      * @param i The location the arena spawn will be at
      */
     private void reloadArena(int i) {
@@ -249,7 +228,7 @@ public class ArenaManager {
 
     /**
      * Removes an arena from memory
-     *
+     * 
      * @param i The ID of the arena to be removed
      */
     public void removeArena(int i) {
@@ -262,16 +241,16 @@ public class ArenaManager {
         }
         arenas.remove(a);
 
-        plugin.getConfig().set("Arenas." + i, null);
-        List<Integer> list = plugin.getConfig().getIntegerList("Arenas.Arenas");
+        SGApi.getPlugin().getConfig().set("Arenas." + i, null);
+        List<Integer> list = SGApi.getPlugin().getConfig().getIntegerList("Arenas.Arenas");
         list.remove(i);
-        plugin.getConfig().set("Arenas.Arenas", list);
-        plugin.saveConfig();
+        SGApi.getPlugin().getConfig().set("Arenas.Arenas", list);
+        SGApi.getPlugin().saveConfig();
     }
 
     /**
      * Gets whether the player is playing
-     *
+     * 
      * @param p The player that will be scanned
      * @return Whether the player is in a game
      */
@@ -290,18 +269,18 @@ public class ArenaManager {
     public void loadGames() {
         arenaSize = 0;
 
-        if (plugin.getConfig().getIntegerList("Arenas.Arenas").isEmpty()) {
+        if (SGApi.getPlugin().getConfig().getIntegerList("Arenas.Arenas").isEmpty()) {
             return;
         }
 
-        for (int i : plugin.getConfig().getIntegerList("Arenas.Arenas")) {
+        for (int i : SGApi.getPlugin().getConfig().getIntegerList("Arenas.Arenas")) {
             reloadArena(i);
         }
     }
 
     /**
      * Gets the HashMap that contains the creators
-     *
+     * 
      * @return The HashMap of creators
      */
     public Map<String, SGArena> getCreators() {
@@ -310,7 +289,7 @@ public class ArenaManager {
 
     /**
      * Serializes a location to a string
-     *
+     * 
      * @param l The location to serialize
      * @return The serialized location
      */
@@ -320,7 +299,7 @@ public class ArenaManager {
 
     /**
      * Gets a location from a string
-     *
+     * 
      * @param s The string to deserialize
      * @return The location represented from the string
      */

@@ -9,7 +9,7 @@ import java.util.Random;
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.util.PlayerVanishUtil;
 import org.bukkit.*;
 import org.bukkit.FireworkEffect.Type;
@@ -33,6 +33,9 @@ public class EntityDamageListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
+        // TODO You can't start off like this it will effect others using the
+        // Event Listener check its you event
+
         if (TheSurvivalGames.getPlugin(TheSurvivalGames.class).getPluginConfig().doBloodEffect()) {
             Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Runnable() {
                 @Override
@@ -51,7 +54,7 @@ public class EntityDamageListener implements Listener {
         Entity entity = event.getDamager();
         if (event.getEntity() instanceof Player) {
             Player damaged = (Player) event.getEntity();
-            if (ArenaManager.getManager().isInGame(damaged)) {
+            if (SGApi.getArenaManager().isInGame(damaged)) {
                 if (entity instanceof Snowball) {
                     event.setDamage(3);
                     damaged.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 600, 2, false));
@@ -79,17 +82,17 @@ public class EntityDamageListener implements Listener {
                     if (entity instanceof Player) {
                         Player damager = (Player) entity;
                         try {
-                            ArenaManager.getManager()
-                                        .getArena(damager)
-                                        .broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("KILLED_BY")
-                                                + " &e&l" + damager.getDisplayName() + " &r&6" + I18N.getLocaleString("WITH_A") + " &e&l" + damager.getInventory().getItemInHand()));
+                            SGApi.getArenaManager()
+                                 .getArena(damager)
+                                 .broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("KILLED_BY") + " &e&l"
+                                         + damager.getDisplayName() + " &r&6" + I18N.getLocaleString("WITH_A") + " &e&l" + damager.getInventory().getItemInHand()));
                         } catch (ArenaNotFoundException e) {
                             e.printStackTrace();
                         }
                     }
 
                     try {
-                        PlayerVanishUtil.hideAll(ArenaManager.getManager().getArena(damaged), damaged);
+                        PlayerVanishUtil.hideAll(SGApi.getArenaManager().getArena(damaged), damaged);
                     } catch (ArenaNotFoundException e) {
                         e.printStackTrace();
                     }

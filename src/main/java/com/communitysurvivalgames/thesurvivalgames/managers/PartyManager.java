@@ -5,55 +5,52 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
+import java.util.*;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.objects.Party;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import org.bukkit.entity.Player;
 
 public class PartyManager {
 
-    private static final PartyManager pm = new PartyManager();
-    private static final java.util.Map<String, java.util.UUID> players = new HashMap<>();
-    private static final java.util.Map<java.util.UUID, Party> parties = new HashMap<>();
-    private static final java.util.Map<String, java.util.UUID> invites = new HashMap<>();
-    private static final Set<String> partyChat = new HashSet<>();
+    private static final Map<String, UUID> partyPlayers = new HashMap<>();
+    private static final Map<UUID, Party> parties = new HashMap<>();
+    private static final Map<String, UUID> invites = new HashMap<>();
+   private static final Set<String> partyChat = new HashSet<>();
     private static int partySize;
 
     /**
-     * Gets the list of players in parties
-     *
-     * @return THe list of players
+     * Gets the list of partyPlayers in parties
+     * 
+     * @return THe list of partyPlayers
      */
-    public java.util.Map<String, java.util.UUID> getPlayers() {
-        return players;
-    }
+    public Map<String, UUID> getPlayers() {
+        return partyPlayers;
+  }
 
     /**
      * Gets the list of parties
-     *
+     * 
      * @return List of parties
      */
-    public java.util.Map<java.util.UUID, Party> getParties() {
-        return parties;
+    public Map<UUID, Party> getParties() {
+    return parties;
     }
 
     /**
      * Gets the list of current party invites
-     *
+     * 
      * @return The list of invites
      */
-    public java.util.Map<String, java.util.UUID> getInvites() {
+    public Map<String, UUID> getInvites() {
         return invites;
     }
 
     /**
-     * Gets the list of usernames of players currently in party chat
-     *
+     * Gets the list of usernames of partyPlayers currently in party chat
+     * 
      * @return List of usernames as a Set
      */
     public Set<String> getPartyChat() {
@@ -64,61 +61,64 @@ public class PartyManager {
      * @param player The player starting the party
      * @return UUID The UUID (Unique ID) of the new party
      */
-    public static java.util.UUID startParty(org.bukkit.entity.Player player) {
+    public static UUID startParty(Player player) {
         Party party = new Party(player.getName());
-        players.put(player.getName(), party.getID());
+        partyPlayers.put(player.getName(), party.getID());
         parties.put(party.getID(), party);
-        if (player != null) { //TODO problem-an NPE would be thrown before the statement is reached
-            player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
+        if (player != null) { // TODO problem-an NPE would be thrown before the
+                              // statement is reached
+    player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
         }
         return party.getID();
     }
 
     /**
      * Ends a party
-     *
+     * 
      * @param name Name of the player ending the party
-     * @param id   The UUID of the party to end
+     * @param id The UUID of the party to end
      */
     public static void endParty(String name, java.util.UUID id) {
         Party party = parties.get(id);
 
         for (String members : party.getMembers()) {
             if (members != null) {
-                org.bukkit.entity.Player player = Bukkit.getServer().getPlayer(members);
+                Player player = Bukkit.getServer().getPlayer(members);
                 if (player != null) {
                     player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
                 }
-                players.remove(members);
+                partyPlayers.remove(members);
             }
-        }
+      }
         party.removeAll();
-        org.bukkit.entity.Player player = Bukkit.getServer().getPlayer(name);
+        Player player = Bukkit.getServer().getPlayer(name);
         if (player != null) {
             player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
         }
-        players.remove(name);
+        partyPlayers.remove(name);
         parties.remove(id);
     }
 
     /**
      * Gets the max size of a party
-     *
+     * 
      * @return The max size
      */
     public static int getMaxPartySize() {
-        return partySize; //TODO Right now this will null pointer, this will be a config value when we get around to a config loader
+        return partySize; // TODO Right now this will null pointer, this will be
+                          // a config value when we get around to a config
+                          // loader
     }
 
     /**
      * Gets the party members of the party the player is in
-     *
+     * 
      * @param p The player to get the members of
      * @return null if the player is not in a party, a String separated by
      *         commas of usernames
      */
-    public String getParty(org.bukkit.entity.Player p) {
-        java.util.UUID id = players.get(p.getName());
+    public String getParty(Player p) {
+        UUID id = partyPlayers.get(p.getName());
         if (id != null) {
             Party party = parties.get(id);
             if (party != null) {
@@ -139,12 +139,12 @@ public class PartyManager {
 
     /**
      * Gets if the player is the party leader
-     *
+     * 
      * @param p The player to be checked
      * @return If the player is the leader
      */
-    public boolean isPartyLeader(org.bukkit.entity.Player p) {
-        java.util.UUID id = players.get(p.getName());
+    public boolean isPartyLeader(Player p) {
+        UUID id = partyPlayers.get(p.getName());
         if (id != null) {
             Party party = parties.get(id);
             if (party != null) {
@@ -156,12 +156,4 @@ public class PartyManager {
         return false;
     }
 
-    /**
-     * Gets the Party Manager
-     *
-     * @return The singleton of the party manager
-     */
-    public static PartyManager getPartyManager() {
-        return pm;
-    }
 }

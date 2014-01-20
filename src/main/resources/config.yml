@@ -50,3 +50,10 @@ signs:
       join: '&a[Join]'
       cantJoin: '&c[NotJoinable]'
       offline-int: '-'
+breaks-allowed:
+  - 'LEAVES'
+  - 'LEAVES_2'
+  - 'BROWN_MUSHROOM'
+  - 'RED_MUSHROOM'
+  - 'VINE'
+  - 'GRASS'

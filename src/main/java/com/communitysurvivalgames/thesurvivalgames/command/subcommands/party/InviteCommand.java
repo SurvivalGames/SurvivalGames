@@ -5,13 +5,13 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
+import java.util.UUID;
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-
-import java.util.UUID;
 
 public class InviteCommand implements SubCommand {
 
@@ -22,14 +22,14 @@ public class InviteCommand implements SubCommand {
      */
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 1) && (args[0].equalsIgnoreCase("invite"))) {
-            UUID partyID = PartyManager.getPartyManager().getPlayers().get(sender.getName());
-            if (partyID == null) {
+            UUID partyID = SGApi.getPartyManager().getPlayers().get(sender.getName());
+          if (partyID == null) {
                 partyID = PartyManager.startParty(sender);
 
                 sendInvite(sender, args[0], partyID);
-            } else if (PartyManager.getPartyManager().getParties().get(partyID).hasRoom()) {
-                if (PartyManager.getPartyManager().getParties().get(partyID).getLeader().equalsIgnoreCase(sender.getName())) {
-                    sendInvite(sender, args[0], partyID);
+            } else if (SGApi.getPartyManager().getParties().get(partyID).hasRoom()) {
+                if (SGApi.getPartyManager().getParties().get(partyID).getLeader().equalsIgnoreCase(sender.getName())) {
+                sendInvite(sender, args[0], partyID);
                 } else {
                     sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NOT_LEADER"));
                 }
@@ -52,24 +52,24 @@ public class InviteCommand implements SubCommand {
     private static void sendInvite(Player sender, String player, UUID id) {
         Player p = Bukkit.getServer().getPlayer(player);
         if (p != null) {
-            if (PartyManager.getPartyManager().getPlayers().get(p.getName()) != null) {
-                sender.sendMessage(org.bukkit.ChatColor.YELLOW + player + I18N.getLocaleString("IN_PARTY"));
-                if (PartyManager.getPartyManager().getParties().get(id).hasNoMembers()) {
-                    PartyManager.endParty(sender.getName(), id);
+            if (SGApi.getPartyManager().getPlayers().get(p.getName()) != null) {
+        sender.sendMessage(org.bukkit.ChatColor.YELLOW + player + I18N.getLocaleString("IN_PARTY"));
+                if (SGApi.getPartyManager().getParties().get(id).hasNoMembers()) {
+    PartyManager.endParty(sender.getName(), id);
                 }
                 return;
             }
-            if ((PartyManager.getPartyManager().getInvites().containsKey(p.getName())) && (PartyManager.getPartyManager().getInvites().containsValue(id))) {
+            if ((SGApi.getPartyManager().getInvites().containsKey(p.getName())) && (SGApi.getPartyManager().getInvites().containsValue(id))) {
                 sender.sendMessage(org.bukkit.ChatColor.YELLOW + player + I18N.getLocaleString("PENDING_INVITE"));
                 return;
             }
 
-            PartyManager.getPartyManager().getInvites().put(p.getName(), id);
+            SGApi.getPartyManager().getInvites().put(p.getName(), id);
             p.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("INVITED_TO_PARTY") + sender.getName());
             sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("YOU_INVITED") + player + I18N.getLocaleString("TO_JOIN_PARTY"));
         } else {
             sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("COULD_NOT_FIND_INVITE") + player);
-            if (PartyManager.getPartyManager().getParties().get(id).hasNoMembers()) {
+            if (SGApi.getPartyManager().getParties().get(id).hasNoMembers()) {
                 PartyManager.endParty(sender.getName(), id);
             }
         }

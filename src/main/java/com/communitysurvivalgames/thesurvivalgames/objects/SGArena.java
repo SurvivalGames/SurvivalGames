@@ -5,18 +5,19 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
+import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
-import com.communitysurvivalgames.thesurvivalgames.managers.TimeManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SGArena {
 
@@ -24,11 +25,13 @@ public class SGArena {
     private int id = 0;
     private String displayName;
 
-    private final World world;
+    private World world;
     public Location lobby = null;
     public Location center;
+    public List<String> voted = new ArrayList<>();
     public List<Location> locs = new ArrayList<>(0);
-    public final List<BlockState> t2 = new ArrayList<>();
+    public List<BlockState> t2 = new ArrayList<>();
+    public Map<MapHash, Integer> votes = new HashMap<>();
 
     public int maxPlayers;
     private int minPlayers;
@@ -36,9 +39,29 @@ public class SGArena {
     private final List<String> players = new CopyOnWriteArrayList<>();
     private final List<String> spectators = new CopyOnWriteArrayList<>();
 
+    private class MapHash {
+        private final int id;
+        private final SGWorld w;
+        public MapHash(SGWorld w, int id) {
+            this.w = w;
+            this.id = id;
+        }
+        public SGWorld getWorld() {
+            return w;
+        }
+        public int getId() {
+            return id;
+        }
+    }
+
+    public void setPlayerKit(Player player, Kit kit) {
+
+    }
+
     /**
      * Name: ArenaState.java Edited: 8 December 2013
-     *
+     * 
+     * 
      * @version 1.0.0
      */
     public enum ArenaState {
@@ -84,19 +107,22 @@ public class SGArena {
 
     /**
      * Constructs a new arena based off of a Location and an ID
-     *
+     * 
      * @param id The ID the arena will have
      */
-    public SGArena(int id, World world) {
+    public void createArena(int id, World world) {
         this.id = id;
         this.world = world;
     }
 
+    public SGArena() {
+    }
+
     /**
      * Makes sure that the fields aren't null on startup
-     *
-     * @param list       The locatins for game spawns
-     * @param lob        The lobby spawn
+     * 
+     * @param list The locatins for game spawns
+     * @param lob The lobby spawn
      * @param maxPlayers The max players for the arena
      * @param minPlayers The min players needed for the game to start
      */
@@ -119,14 +145,14 @@ public class SGArena {
 
     /**
      * Sends all the players a message
-     *
+     * 
      * @param message The message to send, do not include prefix
      */
     public void broadcast(String message) {
         for (String s : players) {
             Player p = Bukkit.getServer().getPlayerExact(s);
             if (p != null) {
-                p.sendMessage(ArenaManager.getManager().prefix + message);
+                p.sendMessage(SGApi.getArenaManager().prefix + message);
             }
         }
     }
@@ -150,33 +176,33 @@ public class SGArena {
      */
     public void end() {
         if (players.size() == 1) {
-            broadcast(ArenaManager.getManager().prefix + I18N.getLocaleString("END") + " " + players.get(0));
+            broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("END") + " " + players.get(0));
         } else {
-            broadcast(ArenaManager.getManager().prefix + I18N.getLocaleString("ARENA_END"));
+            broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("ARENA_END"));
         }
 
         for (String s : players) {
             Player p;
             if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
-                ArenaManager.getManager().removePlayer(p);
+                SGApi.getArenaManager().removePlayer(p);
             }
         }
         for (String s : spectators) {
             Player p;
             if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
-                ArenaManager.getManager().removePlayer(p);
+                SGApi.getArenaManager().removePlayer(p);
             }
         }
 
         setState(ArenaState.POST_GAME);
-        //rollback
+        // rollback
         setState(ArenaState.WAITING_FOR_PLAYERS);
-        TimeManager.getInstance(this).countdownLobby(5);
+        SGApi.getTimeManager().countdownLobby(5);
     }
 
     /**
      * Sets the state of the SG arena
-     *
+     * 
      * @param state - The new state
      */
     public void setState(ArenaState state) {
@@ -185,7 +211,7 @@ public class SGArena {
 
     /**
      * Gets the ID of the arena
-     *
+     * 
      * @return The ID of the arena
      */
     public int getId() {
@@ -194,7 +220,7 @@ public class SGArena {
 
     /**
      * Gets the list of players in the arena
-     *
+     * 
      * @return List of players in the arena
      */
     public List<String> getPlayers() {
@@ -202,8 +228,28 @@ public class SGArena {
     }
 
     /**
+     * Makes a player vote
+     * 
+     * @param p the voter
+     * @param i the map number
+     */ 
+    public void vote(Player p, int i) {
+        if(currentState != ArenaState.WAITING_FOR_PLAYERS) {
+            p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_VOTING"));
+            return;
+        }         
+        
+        for(Map.Entry<MapHash, Integer> e : votes.entrySet()) {
+            if(e.getKey().getId() == i) {
+                votes.put(new MapHash(e.getKey().getWorld(), i), votes.get(e.getValue()) + 1);
+            }
+        }
+        voted.add(p.getName());
+    }
+
+    /**
      * Adds the next spawn into the list of spawns
-     *
+     * 
      * @param loc The location of the spawn
      */
     public void nextSpawn(Location loc) {
@@ -212,7 +258,7 @@ public class SGArena {
 
     /**
      * Gets the current state of the arena
-     *
+     * 
      * @return The current state
      */
     public ArenaState getState() {
@@ -221,7 +267,7 @@ public class SGArena {
 
     /**
      * Gets the max number of players the arena will hold
-     *
+     * 
      * @return Number of players
      */
     public int getMaxPlayers() {
@@ -230,7 +276,7 @@ public class SGArena {
 
     /**
      * Gets the min number of players for the arena to start
-     *
+     * 
      * @return Number of players
      */
     public int getMinPlayers() {

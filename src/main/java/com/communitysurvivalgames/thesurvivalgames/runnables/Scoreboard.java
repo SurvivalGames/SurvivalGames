@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 import org.bukkit.Bukkit;
@@ -16,7 +16,7 @@ import org.bukkit.scoreboard.Score;
 
 /**
  * Name: Scoreboard.java Edited: 8 December 2013
- *
+ * 
  * @version 1.0.0
  */
 public class Scoreboard implements Runnable {
@@ -24,7 +24,7 @@ public class Scoreboard implements Runnable {
     private final TheSurvivalGames plugin;
 
     private Scoreboard(TheSurvivalGames base) {
-        this.plugin = TheSurvivalGames.getPlugin(TheSurvivalGames.class);
+        this.plugin = SGApi.getPlugin();
    }
 
     public void run() {
@@ -58,7 +58,7 @@ public class Scoreboard implements Runnable {
 
     private void updateScoreboard(Player player, boolean complete) {
         final Objective objective = player.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
-        if (!ArenaManager.getManager().isInGame(player)) {
+        if (!SGApi.getArenaManager().isInGame(player)) {
             objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("WELCOME") + ", " + player.getDisplayName()));
             sendScore(objective, "&a&l" + I18N.getLocaleString("POINTS"), 11, complete);
             sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "   ", 10, complete);
@@ -75,7 +75,7 @@ public class Scoreboard implements Runnable {
         }
         SGArena arena;
         try {
-            arena = ArenaManager.getManager().getArena(player);
+            arena = SGApi.getArenaManager().getArena(player);
         } catch (ArenaNotFoundException e) {
             Bukkit.getLogger().severe(e.getMessage());
             return;
@@ -92,7 +92,7 @@ public class Scoreboard implements Runnable {
             sendScore(objective, "&f" + arena.getPlayers().size() + "   ", 7, complete);
             sendScore(objective, "&f", 6, complete);
             sendScore(objective, "&4&l" + I18N.getLocaleString("CLASS"), 5, complete);
-            sendScore(objective, "*null*", 4, complete); //TODO
+            sendScore(objective, "*null*", 4, complete); // TODO
             sendScore(objective, "&c", 3, complete);
             sendScore(objective, "&a&l" + I18N.getLocaleString("POINTS"), 2, complete);
             sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "    ", 1, complete);
@@ -101,15 +101,17 @@ public class Scoreboard implements Runnable {
 
         objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("SURVIVAL_GAMES")));
 
-		/*
+        /*
          * sendScore(objective, "&bKills", arena.getKills(player), complete);
-		 * TODO sendScore(objective, "&alive", arena.getAlive(), complete); TODO
-		 * sendScore(objective, "&4Dead", arena.getDead(player), complete); TODO
-		 * sendScore(objective, "&7Spectating", arena.getSpectating(),
-		 * complete); TODO sendScore(objective, "&eTime", arena.getSpectating(),
-		 * complete); TODO
-		 */
-        //TODO Probably end up having something that switches the scoreboard back and forth about every ~5 to showing all players and their lives and this
+         * TODO sendScore(objective, "&alive", arena.getAlive(), complete); TODO
+         * sendScore(objective, "&4Dead", arena.getDead(player), complete); TODO
+         * sendScore(objective, "&7Spectating", arena.getSpectating(),
+         * complete); TODO sendScore(objective, "&eTime", arena.getSpectating(),
+         * complete); TODO
+         */
+        // TODO Probably end up having something that switches the scoreboard
+        // back and forth about every ~5 to showing all players and their lives
+        // and this
     }
 
     private static void sendScore(Objective objective, String title, int value, boolean complete) {
@@ -133,5 +135,5 @@ public class Scoreboard implements Runnable {
                 new Scoreboard(TheSurvivalGames.getPlugin(TheSurvivalGames.class)),
                 5,
                 20);
-  }
+    }
 }
