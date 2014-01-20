@@ -42,8 +42,7 @@ public class TheSurvivalGames extends JavaPlugin {
         ConfigurationSerialization.registerClass(SerializedLocation.class);
         ConfigurationSerialization.registerClass(Arena.class);
 
-
-       SGApi.init(this);
+        SGApi.init(this);
 
         configurationData = new ConfigurationData();
 
@@ -76,7 +75,9 @@ public class TheSurvivalGames extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
-    }
+        SGApi.getScheduler().shutdownAll();
+
+   }
 
     void registerAll() {
         getCommand("sg").setExecutor(new CommandHandler());

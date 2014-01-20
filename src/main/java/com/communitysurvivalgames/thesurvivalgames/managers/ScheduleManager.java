@@ -5,9 +5,7 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.*;
 
 /**
  * The type Schedule manager.
@@ -25,8 +23,16 @@ public class ScheduleManager {
      */
     public ScheduleManager() {
 
-        schedNumThreads = 6;
+        schedNumThreads = 2;
         scheduler = Executors.newScheduledThreadPool(schedNumThreads);
+        startExecutor();
+    }
+
+    private void startExecutor() {
+        if (executor.isShutdown()) {
+            executor = Executors.newFixedThreadPool(2);
+            System.out.println("Fixed Executor Starting");
+        }
     }
 
     /**
@@ -93,5 +99,70 @@ public class ScheduleManager {
      */
     public ScheduledExecutorService getScheduler() {
         return scheduler;
+    }
+
+    /**
+     * Get ExecutorService instance {@link java.util.concurrent.ExecutorService}
+     * 
+     * @return the executor service
+     */
+    public ExecutorService getExecutor() {
+        return executor;
+    }
+
+    /**
+     * Shutdown all thread pools and services
+     */
+    public void shutdownAll() {
+        this.executor.shutdown();
+        this.scheduler.shutdown();
+    }
+
+    /**
+     * Submit a Callable Task and receive the result back.
+     * <p>
+     * This {@link java.util.concurrent.Callable} will run straight away and
+     * return the result. Best used for quick tasks but there might be lots of
+     * them.
+     * <p>
+     * This will throw null if your callable returns null
+     * 
+     * @param callable the callable
+     * @return the object This is the object that your callable returns
+     */
+    public Object runNow(Callable callable) {
+
+        this.startExecutor();
+
+        Object result = null;
+        try {
+            result = executor.submit(callable).get();
+
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+
+        }
+        if (result == null)
+            return null;
+        else
+            return result;
+    }
+
+    /**
+     * Execute a Runnable straight away.
+     * <p>
+     * This takes a {@link java.lang.Runnable} and is managed by an
+     * {@link java.util.concurrent.ExecutorService} so it is queued if busy Used
+     * for quick repetitive tasks.
+     * 
+     * @param runnable the runnable
+     * @throws RejectedExecutionException the rejected execution exception
+     * @throws NullPointerException the null pointer exception
+     */
+    public void runNow(Runnable runnable) throws RejectedExecutionException, NullPointerException {
+
+        this.startExecutor();
+
+        executor.execute(runnable);
     }
 }

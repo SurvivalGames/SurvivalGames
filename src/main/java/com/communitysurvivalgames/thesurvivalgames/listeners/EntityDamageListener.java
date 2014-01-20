@@ -33,6 +33,9 @@ public class EntityDamageListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
+        // TODO You can't start off like this it will effect others using the
+        // Event Listener check its you event
+
         if (TheSurvivalGames.getPlugin(TheSurvivalGames.class).getPluginConfig().doBloodEffect()) {
             Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Runnable() {
                 @Override

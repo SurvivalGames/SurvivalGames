@@ -9,7 +9,6 @@ package com.communitysurvivalgames.thesurvivalgames.listeners;
 import java.util.ArrayList;
 import java.util.List;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -28,11 +27,11 @@ public class BlockListener implements Listener {
 
         allowed = new ArrayList<>();
         for (String s : SGApi.getPlugin().getPluginConfig().getAllowedBlockBreaks()) {
-           allowed.add(Material.valueOf(s));
+            allowed.add(Material.valueOf(s));
         }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onBlockPlace(BlockPlaceEvent event) {
         if (SGApi.getArenaManager().isInGame(event.getPlayer())) {
             if (event.getBlock().getType().equals(Material.TNT)) {
@@ -46,7 +45,7 @@ public class BlockListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onBlockBreak(BlockBreakEvent event) {
         if (!event.getPlayer().hasPermission("sg.build")) {
             event.setCancelled(true);
