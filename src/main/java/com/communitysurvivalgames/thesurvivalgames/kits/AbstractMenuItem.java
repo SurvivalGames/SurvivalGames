@@ -7,6 +7,7 @@ package com.communitysurvivalgames.thesurvivalgames.kits;
 
 import java.util.List;
 import com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.*;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -173,4 +174,9 @@ public class AbstractMenuItem implements ILore, IDisplayName, Selectable, Single
     public void setActivator(ActionActivator activator) {
         this.activators.add(activator);
     }
+
+    public void setMeta() {
+        this.item.setItemMeta(this.meta);
+    }
+
 }
