@@ -25,7 +25,8 @@ public class PlayerNameUtil {
 
     public static ArrayList<String> getAwesomePeople() {
         ArrayList<String> list = new ArrayList<>();
-        list.add("Jonthespartan29"); //TODO XD
+        list.add("Jonthespartan29");
+        list.add("GregoriusMC"); //TODO XD
         return list;
     }
 
