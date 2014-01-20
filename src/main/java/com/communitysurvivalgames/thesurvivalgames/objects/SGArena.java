@@ -235,7 +235,7 @@ public class SGArena {
      */ 
     public void vote(Player p, int i) {
         if(currentState != ArenaState.WAITING_FOR_PLAYERS) {
-            p.sendMessage(error + I18N.getLocaleString("NOT_VOTING"));
+            p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_VOTING"));
             return;
         }         
         
