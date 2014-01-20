@@ -19,6 +19,7 @@ public class PlayerNameUtil {
         list.add("calebbfmv");
         list.add("TrolLDOod3");
         list.add("Relicum");
+        list.add("sam4215");
        //TODO: What's you IGN everyone?
         return list;
     }
