@@ -1,6 +1,7 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import org.bukkit.entity.Player;
@@ -18,7 +19,11 @@ public class VoteCommand implements SubCommand {
                 return;
             }
             if(SGApi.getArenaManager().isInGame(p)) {
-                SGApi.getArenaManager().getArena(p).vote(p, map);
+                try {
+                    SGApi.getArenaManager().getArena(p).vote(p, map);
+                } catch (ArenaNotFoundException e) {
+                    e.printStackTrace();
+                }
             } else {
                 p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("LOL_NOPE"));
             }
