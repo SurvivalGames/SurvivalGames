@@ -30,9 +30,10 @@ public class MultiWorldManager {
     }
 
     World createWorld(String name) {
-        SGWorld world = new SGWorld(name).create();
+        SGWorld world = new SGWorld(name);
+        world.create();
         worlds.add(world);
-        return world;
+        return world.getWorld();
     }
 
     public void deleteWorld(String name) {
@@ -96,7 +97,7 @@ public class MultiWorldManager {
         return Bukkit.getWorld(worldName);
     }
     
-    public World getWorlds() {
+    public List<SGWorld> getWorlds() {
         return worlds;
     }
 
