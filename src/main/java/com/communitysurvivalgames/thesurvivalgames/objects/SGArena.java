@@ -239,9 +239,9 @@ public class SGArena {
             return;
         }         
         
-        for(Map.Entry<MapHash, Integer> e : votes) {
+        for(Map.Entry<MapHash, Integer> e : votes.entrySet()) {
             if(e.getKey().getId() == i) {
-                votes.put(e.getKey().getWorld(), votes.get(e.getKey()) + 1);
+                votes.put(new MapHash(e.getKey().getWorld(), i), votes.get(e.getValue()) + 1);
             }
         }
         voted.add(p.getName());
