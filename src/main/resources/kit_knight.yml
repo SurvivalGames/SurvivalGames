@@ -23,7 +23,7 @@ items:
     lvl1:
         item1:
             name: Knight's Wooden Sword (Lvl 1)
-            lore: "&2Strikes with the force of a... Butter Knife!
+            lore: "&2Strikes with the force of a... Butter Knife!"
             item: WOODEN_SWORD
             enchantments:
                 - UNENCHANTABLE;1
