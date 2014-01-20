@@ -22,7 +22,9 @@ items:
     # Kit Level
     lvl1:
         item1:
-            name: 'Knight's Wooden Sword (Lvl 1)'
+            name: Knight's Wooden Sword (Lvl 1)
+            lore: "&2Strikes with the force of a... Butter Knife!
             item: WOODEN_SWORD
             enchantments:
-                - UNENCHANTABLE
+                - UNENCHANTABLE;1
+            durabality: 100
