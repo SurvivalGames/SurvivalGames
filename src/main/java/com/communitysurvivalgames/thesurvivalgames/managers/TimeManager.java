@@ -6,12 +6,14 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
+import com.communitysurvivalgames.thesurvivalgames.event.GameStartEvent;
 import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SafeEntityListener;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.runnables.CodeExecutor;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Countdown;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -21,13 +23,14 @@ public class TimeManager {
     private static SGArena a;
 
     public TimeManager() {
-
+        // Wait a sec...
     }
 
     public void countdownLobby(int n) {
         Countdown c = new Countdown(a, 1, n, "Game", "minutes", new CodeExecutor() {
             @Override
             public void runCode() {
+                Bukkit.getPluginManager().callEvent(new GameStartEvent(a));
                 a.broadcast(I18N.getLocaleString("GAME_STARTING"));
                 a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
                 for (int i = 0; i <= a.maxPlayers; i++) {
@@ -47,6 +50,7 @@ public class TimeManager {
         Countdown c = new Countdown(a, 1, 10, "Game", "seconds", new CodeExecutor() {
             @Override
             public void runCode() {
+                
                 a.broadcast(I18N.getLocaleString("ODDS"));
                 a.setState(SGArena.ArenaState.IN_GAME);
                 for (String s : a.getPlayers()) {
