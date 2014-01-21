@@ -48,8 +48,8 @@ public class TheSurvivalGames extends JavaPlugin {
 
         SGApi.getScheduler();
 
-       // TODO Add more languages!
-        saveResource("enUS.lang", true);
+        // TODO Add more languages!
+       saveResource("enUS.lang", true);
         saveResource("idID.lang", true);
         saveResource("esES.lang", true);
 
@@ -78,12 +78,12 @@ public class TheSurvivalGames extends JavaPlugin {
     public void onDisable() {
         getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
 
-      SGApi.getScheduler().shutdownAll();
+        SGApi.getScheduler().shutdownAll();
 
-    }
+   }
 
- void registerAll() {
-        getCommand("sg").setExecutor(new CommandHandler());
+    void registerAll() {
+     getCommand("sg").setExecutor(new CommandHandler());
         getCommand("party").setExecutor(new PartyCommandHandler());
 
         CommandHandler.register("help", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.HelpCommand());
