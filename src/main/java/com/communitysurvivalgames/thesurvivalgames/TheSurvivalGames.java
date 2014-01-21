@@ -22,6 +22,7 @@ import com.communitysurvivalgames.thesurvivalgames.objects.JSign;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
 import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
+import com.communitysurvivalgames.thesurvivalgames.util.LocationChecker;
 import com.communitysurvivalgames.thesurvivalgames.util.SerializedLocation;
 import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
 
@@ -41,6 +42,7 @@ public class TheSurvivalGames extends JavaPlugin {
 
         ConfigurationSerialization.registerClass(SerializedLocation.class);
         ConfigurationSerialization.registerClass(Arena.class);
+        ConfigurationSerialization.registerClass(LocationChecker.class);
 
         SGApi.init(this);
 
