@@ -5,13 +5,9 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -20,11 +16,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ArenaManager {
 
     public final String prefix = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.GOLD;
     public final String error = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.RED;
-    private final Map<String, SGArena> creators = new HashMap<>();
+    private final Map<String, SGWorld> creators = new HashMap<>();
     private final Map<String, Location> locs = new HashMap<>();
     private final Map<String, ItemStack[]> inv = new HashMap<>();
     private final Map<String, ItemStack[]> armor = new HashMap<>();
@@ -159,11 +161,9 @@ public class ArenaManager {
             public void run() {
 
                 // todo this is only a temp solution to create a new arena
-                SGArena a = new SGArena();
-                a.createArena(num, SGApi.getMultiWorldManager().createRandomWorld(worldName));
-                arenas.add(a);
+                SGApi.getMultiWorldManager().createRandomWorld(worldName);
 
-                creators.put(creator.getName(), a);
+                creators.put(creator.getName(), new SGWorld(worldName, worldName));
 
                 // TODO Create new file configuration with default values here
 
@@ -181,9 +181,7 @@ public class ArenaManager {
                 int num = arenaSize + 1;
                 arenaSize++;
 
-                SGArena a = new SGArena();
-                a.createArena(num, SGApi.getMultiWorldManager().copyFromInternet(creator, worldName));
-                arenas.add(a);
+                SGApi.getMultiWorldManager().copyFromInternet(creator, worldName);
             }
         });
 
@@ -197,9 +195,7 @@ public class ArenaManager {
             public void run() {
                 int num = arenaSize + 1;
                 arenaSize++;
-                SGArena a = new SGArena();
-                a.createArena(num, SGApi.getMultiWorldManager().importWorldFromFolder(creator, worldName));
-                arenas.add(a);
+                SGApi.getMultiWorldManager().importWorldFromFolder(creator, worldName);
             }
         });
 
@@ -283,7 +279,7 @@ public class ArenaManager {
      * 
      * @return The HashMap of creators
      */
-    public Map<String, SGArena> getCreators() {
+    public Map<String, SGWorld> getCreators() {
         return creators;
     }
 

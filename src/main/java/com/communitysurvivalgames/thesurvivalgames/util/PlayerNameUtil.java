@@ -17,10 +17,11 @@ public class PlayerNameUtil {
         ArrayList<String> list = new ArrayList<>();
         list.add("Quantum64");
         list.add("calebbfmv");
-        list.add("TrolLDOod3");
+        list.add("Trolldood3");
         list.add("Relicum");
         list.add("sam4215");
        //TODO: What's you IGN everyone?
+       //AgentTroll - Trolldude3 
         return list;
     }
 

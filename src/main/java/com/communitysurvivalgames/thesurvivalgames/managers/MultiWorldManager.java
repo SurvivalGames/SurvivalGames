@@ -5,37 +5,52 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.util.UnTAR;
-
 import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MultiWorldManager {
+    
+    List<SGWorld> worlds = new ArrayList<SGWorld>();
 
     public MultiWorldManager() {
     }
 
     World createWorld(String name) {
-        return new SGWorld(name).create();
+        SGWorld world = new SGWorld(name, name);
+        world.create();
+        worlds.add(world);
+        return world.getWorld();
     }
 
     public void deleteWorld(String name) {
-        new SGWorld(name).remove();
+        SGWorld w = null;
+        for(SGWorld world : worlds) {
+            if(world.getWorld().getName().equalsIgnoreCase(name)) {
+                w = world;
+            }
+        }
+        if(worlds.contains(w)) {
+            worlds.remove(w);
+            w.remove();
+        }
     }
 
     public World copyFromInternet(final Player sender, final String worldName) {// TODO:
                                                                                 // Translate
-
         String url = "http://communitysurvivalgames.com/worlds/" + worldName + ".zip";
         /*
          * if (!FileUtil.exists(url)) {
@@ -85,6 +100,10 @@ public class MultiWorldManager {
     public World createRandomWorld(final String worldName) {
         // TODO
         return Bukkit.getWorld(worldName);
+    }
+    
+    public List<SGWorld> getWorlds() {
+        return worlds;
     }
 
     private static boolean checkIfIsWorld(File worldFolder) {

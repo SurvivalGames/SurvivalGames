@@ -47,7 +47,7 @@ NOT_VALID = That is not a valid arena
 CANT_FORCE = You can't change force anything yet.
 ARENA_END = This arena has been forced to end.
 LEFT_ARENA = You have left the arena
-LOL_NOPE = You can't leave. Yet.
+LOL_NOPE = You can't do that. Yet.
 NOT_JOINABLE = You're not allowed to join multiple games
 
 # SG Command Help Menu - NOTE: Please do not translate commands themselves, only the help that follows
@@ -170,3 +170,5 @@ DM_STARTING = Deathmatch countdown has commenced!
 START = You can now take damage, fight!
 END = The game has ended, the winner is:
 NOT_HAPPY = You can't escape the deathmatch, coward!
+NOT_VOTING = Voting not currently in session
+MAP_WINNER = Voting has ended, this map has won:

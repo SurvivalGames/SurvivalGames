@@ -10,32 +10,60 @@ import com.communitysurvivalgames.thesurvivalgames.event.GameStartEvent;
 import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SafeEntityListener;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.runnables.CodeExecutor;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Countdown;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class TimeManager {
 
     private static SGArena a;
 
-    public TimeManager() {
-        // Wait a sec...
+    public TimeManager(SGArena a) {
+        this.a = a;
     }
 
     public void countdownLobby(int n) {
+        // setup the voting
+        int i = 0;
+        List<MapHash> hashes = new ArrayList<>();
+        for(SGWorld world : SGApi.getMultiWorldManager().getWorlds()) {
+            if(world.getWorld().getPlayers().isEmpty() && i <= 5) {
+                MapHash hash = new MapHash(world, i);
+                hashes.add(hash);
+            }
+        }
+        for(MapHash hash : hashes) {
+            a.votes.put(hash, 0);
+        }
+
         Countdown c = new Countdown(a, 1, n, "Game", "minutes", new CodeExecutor() {
             @Override
             public void runCode() {
+                //handle votes
+                Map.Entry<MapHash, Integer> maxEntry = null;
+                for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
+                    if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
+                        maxEntry = entry;
+                    }
+                }
+                a.currentMap = maxEntry.getKey().getWorld();
+                a.broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("MAP_WINNER") + " " + a.currentMap.getWorld().getName());
+
                 Bukkit.getPluginManager().callEvent(new GameStartEvent(a));
                 a.broadcast(I18N.getLocaleString("GAME_STARTING"));
                 a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
                 for (int i = 0; i <= a.maxPlayers; i++) {
                     Player p = Bukkit.getPlayerExact(a.getPlayers().get(i));
-                    Location loc = a.locs.get(i);
+                    Location loc = a.currentMap.locs.get(i);
                     p.teleport(loc);
                     MoveListener.getPlayers().add(a.getPlayers().get(i));
 

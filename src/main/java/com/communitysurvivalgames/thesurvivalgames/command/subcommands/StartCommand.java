@@ -45,7 +45,7 @@ public class StartCommand implements SubCommand {
                     return;
                 }
                 a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
-                SGApi.getTimeManager().countdownLobby(1);
+                SGApi.getTimeManager(a).countdownLobby(1);
                 p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
                 return;
             }
@@ -56,7 +56,7 @@ public class StartCommand implements SubCommand {
                     return;
                 }
                 a.setState(SGArena.ArenaState.IN_GAME);
-                SGApi.getTimeManager().countdown();
+                SGApi.getTimeManager(a).countdown();
                 p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
                 return;
             }
@@ -77,7 +77,7 @@ public class StartCommand implements SubCommand {
                     return;
                 }
                 a.setState(SGArena.ArenaState.DEATHMATCH);
-                SGApi.getTimeManager().countdownDm();
+                SGApi.getTimeManager(a).countdownDm();
                 p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CHANGED_STATE"));
             }
         }
