@@ -6,6 +6,7 @@
 package com.communitysurvivalgames.thesurvivalgames.multiworld;
 
 import org.bukkit.*;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
@@ -19,6 +20,7 @@ public class SGWorld {
     private final String name;
     private final WorldCreator wc;
 
+    public List<BlockState> t2 = new ArrayList<>();
     private final String displayName;
     private Location center = null;
 
@@ -84,6 +86,10 @@ public class SGWorld {
             }
         }
         path.delete();
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     /**

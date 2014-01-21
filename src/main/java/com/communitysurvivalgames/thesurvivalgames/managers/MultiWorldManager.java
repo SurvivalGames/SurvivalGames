@@ -106,6 +106,15 @@ public class MultiWorldManager {
         return worlds;
     }
 
+    public SGWorld worldForName(String name) {
+        for(SGWorld world : getWorlds()) {
+            if(world.getDisplayName().equalsIgnoreCase(name)) {
+                return world;
+            }
+        }
+        return null;
+    }
+
     private static boolean checkIfIsWorld(File worldFolder) {
         if (worldFolder.isDirectory()) {
             File[] files = worldFolder.listFiles(new FilenameFilter() {
