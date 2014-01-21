@@ -5,6 +5,14 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
+import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import com.communitysurvivalgames.thesurvivalgames.util.UnTAR;
+import org.apache.commons.compress.archivers.ArchiveException;
+import org.apache.commons.io.FileUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
@@ -13,14 +21,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-import com.communitysurvivalgames.thesurvivalgames.util.UnTAR;
-
-import org.apache.commons.compress.archivers.ArchiveException;
-import org.apache.commons.io.FileUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
 
 public class MultiWorldManager {
     
@@ -30,17 +30,22 @@ public class MultiWorldManager {
     }
 
     World createWorld(String name) {
-        SGWorld world = new SGWorld(name);
+        SGWorld world = new SGWorld(name, name);
         world.create();
         worlds.add(world);
         return world.getWorld();
     }
 
     public void deleteWorld(String name) {
-        SGWorld world = new SGWorld(name);
-        if(worlds.contains(world)) {
-            worlds.remove(world);
-            world.remove();
+        SGWorld w = null;
+        for(SGWorld world : worlds) {
+            if(world.getWorld().getName().equalsIgnoreCase(name)) {
+                w = world;
+            }
+        }
+        if(worlds.contains(w)) {
+            worlds.remove(w);
+            w.remove();
         }
     }
 

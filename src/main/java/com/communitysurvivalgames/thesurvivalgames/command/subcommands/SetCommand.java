@@ -10,6 +10,7 @@ import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -47,6 +48,10 @@ public class SetCommand implements SubCommand {
                     return;
                 }
                 a.lobby = p.getLocation();
+
+                a.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
+                SGApi.getTimeManager(a).countdownLobby(5);
+                SGApi.getArenaManager().removePlayer(p);
 
                 p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_LOBBY") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setdeathmatch")) {
@@ -122,25 +127,23 @@ public class SetCommand implements SubCommand {
 
                 p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_CHEST") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setgamespawn")) {
-                int i;
                 int spawn;
                 try {
                     spawn = Integer.parseInt(args[0]);
-                    i = Integer.parseInt(args[1]);
                 } catch (NumberFormatException x) {
                     p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_NUMBER"));
                     return;
                 }
-                SGArena a;
-                try {
-                    a = SGApi.getArenaManager().getArena(i);
-                } catch (ArenaNotFoundException e) {
-                    Bukkit.getLogger().severe(e.getMessage());
-                    return;
-                }
-                a.locs.set(spawn - 1, p.getLocation());
 
-                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_SPAWN") + " " + a.getId());
+                SGWorld world = null;
+                for(SGWorld w : SGApi.getMultiWorldManager().getWorlds()) {
+                    if(w.getWorld().getName().equalsIgnoreCase(args[1])) {
+                        world = w;
+                    }
+                }
+                world.locs.set(spawn - 1, p.getLocation());
+
+                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_SPAWN") + " " + world.getWorld().getName());
             }
         } catch (ArrayIndexOutOfBoundsException x) {
             p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("INVALID_ARGUMENTS"));

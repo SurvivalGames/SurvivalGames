@@ -10,18 +10,36 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SGWorld {
 
+    public List<Location> locs = new ArrayList<>(0);
     private final String name;
     private final WorldCreator wc;
 
-    public SGWorld(String name) {
+    private final String displayName;
+    private Location center = null;
+
+    public SGWorld(String name, String map) {
         this.name = name;
+        displayName = map;
 
         wc = new WorldCreator(name);
         wc.environment(World.Environment.NORMAL);
         wc.type(WorldType.NORMAL);
+    }
+
+    public void init() {
+        for (Location l : locs) {
+            for (Location loc : locs) {
+                if (Math.abs(l.getBlockX()) - Math.abs(loc.getBlockX()) <= 2) {
+                    int radius = (int) (loc.distance(l) / 2);
+                    center = loc.subtract(radius, loc.getY(), loc.getZ());
+                }
+            }
+        }
     }
 
     public World getWorld() {
@@ -66,6 +84,15 @@ public class SGWorld {
             }
         }
         path.delete();
+    }
+
+    /**
+     * Adds the next spawn into the list of spawns
+     *
+     * @param loc The location of the spawn
+     */
+    public void nextSpawn(Location loc) {
+        locs.add(loc);
     }
 
 }

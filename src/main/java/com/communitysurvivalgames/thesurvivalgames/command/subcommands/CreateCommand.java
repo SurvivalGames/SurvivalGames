@@ -8,7 +8,7 @@ package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import org.bukkit.entity.Player;
 
 public class CreateCommand implements SubCommand {
@@ -47,12 +47,7 @@ public class CreateCommand implements SubCommand {
         }
 
         if (cmd.equalsIgnoreCase("finish")) {
-            SGArena a = SGApi.getArenaManager().getCreators().get(p.getName());
-
-            a.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
-            SGApi.getTimeManager().countdownLobby(5);
-
-            SGApi.getArenaManager().removePlayer(p);
+            SGWorld a = SGApi.getArenaManager().getCreators().get(p.getName());
             SGApi.getArenaManager().getCreators().remove(p.getName());
         }
     }

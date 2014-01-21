@@ -9,15 +9,17 @@ import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SGArena {
 
@@ -25,11 +27,11 @@ public class SGArena {
     private int id = 0;
     private String displayName;
 
-    private World world;
     public Location lobby = null;
-    public Location center;
+    public Location center;    //redo
+    public SGWorld currentMap;
+
     public List<String> voted = new ArrayList<>();
-    public List<Location> locs = new ArrayList<>(0);
     public List<BlockState> t2 = new ArrayList<>();
     public Map<MapHash, Integer> votes = new HashMap<>();
 
@@ -38,21 +40,6 @@ public class SGArena {
 
     private final List<String> players = new CopyOnWriteArrayList<>();
     private final List<String> spectators = new CopyOnWriteArrayList<>();
-
-    private class MapHash {
-        private final int id;
-        private final SGWorld w;
-        public MapHash(SGWorld w, int id) {
-            this.w = w;
-            this.id = id;
-        }
-        public SGWorld getWorld() {
-            return w;
-        }
-        public int getId() {
-            return id;
-        }
-    }
 
     public void setPlayerKit(Player player, Kit kit) {
 
@@ -110,9 +97,8 @@ public class SGArena {
      * 
      * @param id The ID the arena will have
      */
-    public void createArena(int id, World world) {
+    public void createArena(int id) {
         this.id = id;
-        this.world = world;
     }
 
     public SGArena() {
@@ -128,19 +114,9 @@ public class SGArena {
      */
     public void initialize(List<Location> list, Location lob, int maxPlayers, int minPlayers, String name) {
         this.lobby = lob;
-        this.locs = list;
         this.maxPlayers = maxPlayers;
         this.minPlayers = minPlayers;
         this.displayName = name;
-
-        for (Location l : locs) {
-            for (Location loc : locs) {
-                if (Math.abs(l.getBlockX()) - Math.abs(loc.getBlockX()) <= 2) {
-                    int radius = (int) (loc.distance(l) / 2);
-                    center = loc.subtract(radius, loc.getY(), loc.getZ());
-                }
-            }
-        }
     }
 
     /**
@@ -165,7 +141,7 @@ public class SGArena {
         for (String s : players) {
             Player p;
             if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
-                p.teleport(locs.get(i));
+                p.teleport(currentMap.locs.get(i));
                 i++;
             }
         }
@@ -193,11 +169,13 @@ public class SGArena {
                 SGApi.getArenaManager().removePlayer(p);
             }
         }
+        voted.clear();
+        votes.clear();
 
         setState(ArenaState.POST_GAME);
         // rollback
         setState(ArenaState.WAITING_FOR_PLAYERS);
-        SGApi.getTimeManager().countdownLobby(5);
+        SGApi.getTimeManager(this).countdownLobby(5);
     }
 
     /**
@@ -248,15 +226,6 @@ public class SGArena {
     }
 
     /**
-     * Adds the next spawn into the list of spawns
-     * 
-     * @param loc The location of the spawn
-     */
-    public void nextSpawn(Location loc) {
-        locs.add(loc);
-    }
-
-    /**
      * Gets the current state of the arena
      * 
      * @return The current state
@@ -292,7 +261,7 @@ public class SGArena {
     }
 
     public World getArenaWorld() {
-        return world;
+        return currentMap.getWorld();
     }
 
 }

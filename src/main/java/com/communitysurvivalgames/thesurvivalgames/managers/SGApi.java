@@ -6,6 +6,7 @@
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 /**
  * SGApi The main class for getting references to other classes and objects
@@ -105,9 +106,9 @@ public class SGApi {
      * 
      * @return the time manager
      */
-    public static TimeManager getTimeManager() {
+    public static TimeManager getTimeManager(SGArena a) {
         if (timeManager == null)
-            timeManager = new TimeManager();
+            timeManager = new TimeManager(a);
         return timeManager;
     }
 
