@@ -31,7 +31,7 @@ public class ArenaManager {
     private final Map<String, ItemStack[]> inv = new HashMap<>();
     private final Map<String, ItemStack[]> armor = new HashMap<>();
     private final List<SGArena> arenas = new ArrayList<>();
-    private int arenaSize = 0;
+    public int arenaSize = 0;
 
     /**
      * The constructor for a new reference of the singleton

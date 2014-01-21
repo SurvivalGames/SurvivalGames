@@ -40,13 +40,11 @@ public class SetCommand implements SubCommand {
                     return;
                 }
 
-                SGArena a;
-                try {
-                    a = SGApi.getArenaManager().getArena(i);
-                } catch (ArenaNotFoundException e) {
-                    Bukkit.getLogger().severe(e.getMessage());
-                    return;
-                }
+                SGArena a = new SGArena();
+                SGApi.getArenaManager().arenaSize++;
+                int id = SGApi.getArenaManager().arenaSize;
+                a.createArena(id);
+
                 a.lobby = p.getLocation();
 
                 a.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
@@ -102,30 +100,23 @@ public class SetCommand implements SubCommand {
                     p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_NUMBER"));
                     return;
                 }
-                SGArena a;
-                try {
-                    a = SGApi.getArenaManager().getArena(i);
-                } catch (ArenaNotFoundException e) {
-                    Bukkit.getLogger().severe(e.getMessage());
-                    return;
-                }
-
+                SGWorld world = SGApi.getMultiWorldManager().worldForName(args[1]);
                 BlockIterator bit = new BlockIterator(p, 6);
                 Block next;
                 while (bit.hasNext()) {
                     next = bit.next();
                     if (next.getType() == Material.CHEST) {
-                        if (args[0].equalsIgnoreCase("t2") && !a.t2.contains(next.getState())) {
-                            a.t2.add(next.getState());
-                        } else if (args[0].equalsIgnoreCase("t1") && a.t2.contains(next.getState())) {
-                            a.t2.remove(next.getState());
+                        if (args[0].equalsIgnoreCase("t2") && !world.t2.contains(next.getState())) {
+                            world.t2.add(next.getState());
+                        } else if (args[0].equalsIgnoreCase("t1") && world.t2.contains(next.getState())) {
+                            world.t2.remove(next.getState());
                         } else {
                             p.chat("/sg help");
                         }
                     }
                 }
 
-                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_CHEST") + " " + a.getId());
+                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_CHEST") + " " + world.getDisplayName());
             } else if (cmd.equalsIgnoreCase("setgamespawn")) {
                 int spawn;
                 try {
@@ -135,11 +126,9 @@ public class SetCommand implements SubCommand {
                     return;
                 }
 
-                SGWorld world = null;
-                for(SGWorld w : SGApi.getMultiWorldManager().getWorlds()) {
-                    if(w.getWorld().getName().equalsIgnoreCase(args[1])) {
-                        world = w;
-                    }
+                SGWorld world = SGApi.getMultiWorldManager().worldForName(args[1]);
+                if(world == null) {
+                    return;
                 }
                 world.locs.set(spawn - 1, p.getLocation());
 

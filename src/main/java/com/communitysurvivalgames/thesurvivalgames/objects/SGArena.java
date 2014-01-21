@@ -5,14 +5,15 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
+import com.communitysurvivalgames.thesurvivalgames.event.KitGivenEvent;
 import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
+import com.communitysurvivalgames.thesurvivalgames.kits.KitItem;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ public class SGArena {
     public SGWorld currentMap;
 
     public List<String> voted = new ArrayList<>();
-    public List<BlockState> t2 = new ArrayList<>();
     public Map<MapHash, Integer> votes = new HashMap<>();
 
     public int maxPlayers;
@@ -42,7 +42,10 @@ public class SGArena {
     private final List<String> spectators = new CopyOnWriteArrayList<>();
 
     public void setPlayerKit(Player player, Kit kit) {
-
+        Bukkit.getServer().getPluginManager().callEvent(new KitGivenEvent(player, kit));
+        for(KitItem item : kit.getItems()) {
+            player.getInventory().addItem(item.getItem());
+        }
     }
 
     /**
