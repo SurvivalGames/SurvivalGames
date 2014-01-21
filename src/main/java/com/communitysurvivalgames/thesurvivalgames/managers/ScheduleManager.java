@@ -16,7 +16,7 @@ public class ScheduleManager {
     private int repeatingThreads;
     private int loginNumThreads;
     private ScheduledExecutorService scheduler;
-    private ExecutorService executor = null;
+    private ExecutorService executor;
 
     /**
      * Instantiates a new Schedule manager.
@@ -29,7 +29,7 @@ public class ScheduleManager {
     }
 
     private void startExecutor() {
-        if (executor.isShutdown()) {
+        if (executor == null || executor.isShutdown()) {
             executor = Executors.newFixedThreadPool(2);
             System.out.println("Fixed Executor Starting");
         }
@@ -114,8 +114,16 @@ public class ScheduleManager {
      * Shutdown all thread pools and services
      */
     public void shutdownAll() {
+
         this.executor.shutdown();
-        this.scheduler.shutdown();
+        if (!this.scheduler.isShutdown()) {
+            this.scheduler.shutdown();
+        }
+        if (!this.executor.isShutdown()) {
+            this.executor.shutdown();
+        }
+
+        SGApi.getPlugin().getLogger().info("All threads have been successfully shutdown");
     }
 
     /**

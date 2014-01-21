@@ -46,16 +46,16 @@ public class MultiWorldManager {
          */
         try {
             FileUtils.copyURLToFile(new URL(url), new File(SGApi.getPlugin().getDataFolder().getAbsolutePath(), "SG_ARENA_TMP.tar"));
-       } catch (MalformedURLException e) {
-            sender.sendMessage("Bad world name! Are you using special characters?");
+        } catch (MalformedURLException e) {
+           sender.sendMessage("Bad world name! Are you using special characters?");
             return null;
         } catch (IOException e) {
             sender.sendMessage("World downloading failed, try again later or something");
             return null;
         }
         try {
-            UnTAR.unTar(new File(SGApi.getPlugin().getDataFolder(), "SG_ARENA_TMP.tar"), new File(Bukkit.getServer().getWorldContainer()                                                                                                                                       .getAbsolutePath(), worldName));
-        } catch (FileNotFoundException e) {
+            UnTAR.unTar(new File(SGApi.getPlugin().getDataFolder(), "SG_ARENA_TMP.tar"), new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName));
+      } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

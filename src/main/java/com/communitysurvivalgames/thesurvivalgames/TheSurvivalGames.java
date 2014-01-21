@@ -46,7 +46,9 @@ public class TheSurvivalGames extends JavaPlugin {
 
         configurationData = new ConfigurationData();
 
-        // TODO Add more languages!
+        SGApi.getScheduler();
+
+       // TODO Add more languages!
         saveResource("enUS.lang", true);
         saveResource("idID.lang", true);
         saveResource("esES.lang", true);
@@ -75,11 +77,12 @@ public class TheSurvivalGames extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
-        SGApi.getScheduler().shutdownAll();
 
-   }
+      SGApi.getScheduler().shutdownAll();
 
-    void registerAll() {
+    }
+
+ void registerAll() {
         getCommand("sg").setExecutor(new CommandHandler());
         getCommand("party").setExecutor(new PartyCommandHandler());
 
