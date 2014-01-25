@@ -102,6 +102,7 @@ public class TheSurvivalGames extends JavaPlugin {
         CommandHandler.register("stop", new StopCommand());
         CommandHandler.register("start", new StartCommand());
         CommandHandler.register("finish", new CreateCommand());
+        CommandHandler.register("vote", new VoteCommand());
 
         PartyCommandHandler.register("chat", new ChatCommand());
         PartyCommandHandler.register("decline", new DeclineCommand());
