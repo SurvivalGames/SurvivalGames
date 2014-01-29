@@ -163,7 +163,7 @@ public class SGArena {
             if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
                 SGApi.getArenaManager().removePlayer(p);
             }
-        }in
+        }
         for (String s : spectators) {
             Player p;
             if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
