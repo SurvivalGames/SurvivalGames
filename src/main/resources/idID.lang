@@ -170,3 +170,4 @@ END = Permainan telah selesai, pemenangnya adalah :
 NOT_HAPPY = Anda tidak bisa lari dari deathmatch, penakut !
 NOT_VOTING = Pemungutan suara sedang tidak berlangsung
 MAP_WINNER = Pemungutan suara telah selesai, peta ini telah menang :
+FINISHED = Peta telah selesai dibuat
