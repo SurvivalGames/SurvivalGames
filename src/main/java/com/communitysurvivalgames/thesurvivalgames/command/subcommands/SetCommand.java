@@ -40,37 +40,8 @@ public class SetCommand implements SubCommand {
                     return;
                 }
 
-                SGArena a = new SGArena();
-                SGApi.getArenaManager().arenaSize++;
-                int id = SGApi.getArenaManager().arenaSize;
-                a.createArena(id);
-
-                a.lobby = p.getLocation();
-
-                a.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
-                SGApi.getTimeManager(a).countdownLobby(5);
-                SGApi.getArenaManager().removePlayer(p);
-
+                SGArena a = SGApi.getArenaManager().createLobby(p);
                 p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_LOBBY") + " " + a.getId());
-            } else if (cmd.equalsIgnoreCase("setdeathmatch")) {
-                int i;
-                try {
-                    i = Integer.parseInt(args[0]);
-                } catch (NumberFormatException x) {
-                    p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_NUMBER"));
-                    return;
-                }
-
-                SGArena a;
-                try {
-                    a = SGApi.getArenaManager().getArena(i);
-                } catch (ArenaNotFoundException e) {
-                    Bukkit.getLogger().severe(e.getMessage());
-                    return;
-                }
-                a.lobby = p.getLocation();
-
-                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_DM") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setmaxplayers")) {
                 int i;
                 int amount;

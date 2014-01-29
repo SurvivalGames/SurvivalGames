@@ -172,3 +172,4 @@ END = The game has ended, the winner is:
 NOT_HAPPY = You can't escape the deathmatch, coward!
 NOT_VOTING = Voting not currently in session
 MAP_WINNER = Voting has ended, this map has won:
+FINISHED = Map successfully created
