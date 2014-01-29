@@ -49,6 +49,7 @@ public class CreateCommand implements SubCommand {
         if (cmd.equalsIgnoreCase("finish")) {
             SGWorld a = SGApi.getArenaManager().getCreators().get(p.getName());
             SGApi.getArenaManager().getCreators().remove(p.getName());
+            p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("FINISHED"));
         }
     }
 }
