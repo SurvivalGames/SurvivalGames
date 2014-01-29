@@ -33,7 +33,9 @@ public class SGWorld {
         wc.type(WorldType.NORMAL);
     }
 
-    public void init() {
+    public void init(List<Location> locs, List<BlockState> t2) {
+        this.locs = locs;
+        this.t2 = t2;
         for (Location l : locs) {
             for (Location loc : locs) {
                 if (Math.abs(l.getBlockX()) - Math.abs(loc.getBlockX()) <= 2) {
@@ -50,7 +52,15 @@ public class SGWorld {
 
     public World create() {
         if (Bukkit.getServer().getWorld(name) != null) {
-            return Bukkit.getServer().getWorld(name);
+            int i = 0;
+            while(true) {
+                String s = name + i;
+                if(Bukkit.getServer().getWorld(s) == null) {
+                    wc = new WorldCreator(s);
+                    break;
+                }
+                i++;
+            }
         }
 
         return wc.createWorld();
@@ -90,6 +100,10 @@ public class SGWorld {
 
     public String getDisplayName() {
         return displayName;
+    }
+    
+    public void setDisplayName(String name) {
+        this.displayName = name;
     }
 
     /**
