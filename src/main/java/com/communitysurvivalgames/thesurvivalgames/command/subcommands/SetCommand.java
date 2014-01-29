@@ -40,7 +40,7 @@ public class SetCommand implements SubCommand {
                     return;
                 }
 
-                SGApi.getArenaManager().createLobby(p);
+                SGArena a = SGApi.getArenaManager().createLobby(p);
                 p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_LOBBY") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setmaxplayers")) {
                 int i;
