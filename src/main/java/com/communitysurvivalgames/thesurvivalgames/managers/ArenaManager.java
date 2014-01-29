@@ -145,28 +145,35 @@ public class ArenaManager {
     }
 
     /**
+     * Creates a lobby
+     */
+    public void createLobby(Player p) {
+        SGArena a = new SGArena();
+        arenaSize++;
+        a.createArena(arenaSize);
+
+        a.lobby = p.getLocation();
+
+        a.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
+        SGApi.getTimeManager(a).countdownLobby(5);
+    }
+
+    /**
      * Creates a new arena
      * 
      * @param creator The creator attributed with making the arena
      */
     public void createArena(final Player creator, final String worldName) {
-        final int num = arenaSize + 1;
-        arenaSize++;
-
         creator.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
 
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
             @Override
             public void run() {
-
                 // todo this is only a temp solution to create a new arena
                 SGApi.getMultiWorldManager().createRandomWorld(worldName);
-
                 creators.put(creator.getName(), new SGWorld(worldName, worldName));
-
                 // TODO Create new file configuration with default values here
-
                 SGApi.getPlugin().saveConfig();
             }
         });
@@ -175,12 +182,8 @@ public class ArenaManager {
 
     public void createArenaFromDownload(final Player creator, final String worldName) {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
-
             @Override
             public void run() {
-                int num = arenaSize + 1;
-                arenaSize++;
-
                 SGApi.getMultiWorldManager().copyFromInternet(creator, worldName);
             }
         });
@@ -188,13 +191,9 @@ public class ArenaManager {
     }
 
     public void createArenaFromImport(final Player creator, final String worldName) {
-
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
-
             @Override
             public void run() {
-                int num = arenaSize + 1;
-                arenaSize++;
                 SGApi.getMultiWorldManager().importWorldFromFolder(creator, worldName);
             }
         });
@@ -208,18 +207,37 @@ public class ArenaManager {
      */
     private void reloadArena(int i) {
         FileConfiguration arenaConfig = YamlConfiguration.loadConfiguration(new File(Bukkit.getServer().getWorldContainer(), arenas.get(i).getArenaWorld().getName()));
-        List<String> spawnLocsString = arenaConfig.getStringList("spawn-points");
+        // TODO ^^ what the
+        Location lobby = deserializeLoc(arenaConfig.getString("lobby-spawn-point"));
+        int minPlayers = arenaConfig.getInt("min-players");
+        int maxPlayers = arenaConfig.getInt("max-players");
+        String arenaName = arenaConfig.getString("arena-name");
+        arenas.get(i).initialize(lobby, maxPlayers, minPlayers);
+    }
+    
+    /**
+     * Reloads a map
+     * 
+     * @param actualName the name of the world that holds the block
+     */
+    public void reloadMap(String actualName) {
+        FileConfiguration config = YamlConfiguration.loadConfiguration(new File(SGApi.getPlugin().getDataFolder(), actualName + ".yml"));
+        List<String> spawnLocsString = config.getStringList("spawn-points");
         List<Location> spawnLocs = new ArrayList<>();
         for (String aSpawnLocsString : spawnLocsString) {
             spawnLocs.add(deserializeLoc(aSpawnLocsString));
         }
-        Location lobby = deserializeLoc(arenaConfig.getString("lobby-spawn-point"));
-        Location deathmatch = deserializeLoc(arenaConfig.getString("deathmatch-spawn-point"));
-        int minPlayers = arenaConfig.getInt("min-players");
-        int maxPlayers = arenaConfig.getInt("max-players");
-        String arenaName = arenaConfig.getString("arena-name");
-        arenas.get(i).initialize(spawnLocs, lobby, maxPlayers, minPlayers, arenaName);
-
+        
+        List<BlockState> t2 = new ArrayList<>();
+        for(String s : config.getStringList("tier2")) {
+            t2.add(deserializeBlock(s).getState());
+        }
+        
+        World world = SGApi.getMultiWorldManager().createWorld(actualName);
+        SGWorld w = SGApi.getMultiWorldManager().worldForName(world.getName());
+        
+        w.setDisplayName(config.getString("map-name"));
+        w.init(spawnLocs, t2);
     }
 
     /**
@@ -272,6 +290,14 @@ public class ArenaManager {
         for (int i : SGApi.getPlugin().getConfig().getIntegerList("Arenas.Arenas")) {
             reloadArena(i);
         }
+        
+        if(SGApi.getPlugin().getConfig().getStringList("Arenas.Maps").isEmpty()) {
+            return;
+        }
+        
+        for(String s : SGApi.getPlugin().getConfig().getStringList("Arenas.Maps")) {
+            reloadMap(s);
+        }
     }
 
     /**
@@ -281,6 +307,15 @@ public class ArenaManager {
      */
     public Map<String, SGWorld> getCreators() {
         return creators;
+    }
+    
+    /**
+     * Get the arenas
+     * 
+     * @return the ArrayList of arenas
+     */
+    public List<SGArena> getArenas() {
+        return arenas;
     }
 
     /**
@@ -292,6 +327,10 @@ public class ArenaManager {
     public String serializeLoc(Location l) {
         return l.getWorld().getName() + "," + l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ();
     }
+    
+    public String serializeBlock(Block b) {
+        return b.getType() + ":" + serializeLoc(b.getLocation());
+    } 
 
     /**
      * Gets a location from a string
@@ -302,5 +341,10 @@ public class ArenaManager {
     private Location deserializeLoc(String s) {
         String[] st = s.split(",");
         return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), Integer.parseInt(st[3]));
+    }
+    
+    public Block deserializeBlock(String s) {
+        String [] = s.split(":");
+        return deserializeLoc(serializeLoc(new Location(Bukkit.getServer().getWorld(s[1]), Integer.parseInt(s[2]), Integer.parseInt(s[3]), Integer.parseInt(s[4])))).getBlock();
     }
 }
