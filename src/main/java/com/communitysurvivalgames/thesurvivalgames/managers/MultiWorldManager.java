@@ -30,7 +30,7 @@ public class MultiWorldManager {
     }
 
     World createWorld(String name) {
-        SGWorld world = new SGWorld(name);
+        SGWorld world = new SGWorld(name, name);
         world.create();
         worlds.add(world);
         return world.getWorld();
