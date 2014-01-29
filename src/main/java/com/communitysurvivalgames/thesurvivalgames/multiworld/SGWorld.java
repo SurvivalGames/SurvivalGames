@@ -106,6 +106,10 @@ public class SGWorld {
         this.displayName = name;
     }
 
+    public Location getCenter() {
+        return center;
+    }
+
     /**
      * Adds the next spawn into the list of spawns
      *
