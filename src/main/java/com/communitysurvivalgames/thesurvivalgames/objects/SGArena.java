@@ -29,7 +29,6 @@ public class SGArena {
     private String displayName;
 
     public Location lobby = null;
-    public Location center;    //redo
     public SGWorld currentMap;
 
     public List<String> voted = new ArrayList<>();
@@ -115,11 +114,10 @@ public class SGArena {
      * @param maxPlayers The max players for the arena
      * @param minPlayers The min players needed for the game to start
      */
-    public void initialize(List<Location> list, Location lob, int maxPlayers, int minPlayers, String name) {
+    public void initialize(Location lob, int maxPlayers, int minPlayers) {
         this.lobby = lob;
         this.maxPlayers = maxPlayers;
         this.minPlayers = minPlayers;
-        this.displayName = name;
     }
 
     /**
@@ -165,7 +163,7 @@ public class SGArena {
             if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
                 SGApi.getArenaManager().removePlayer(p);
             }
-        }
+        }in
         for (String s : spectators) {
             Player p;
             if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
