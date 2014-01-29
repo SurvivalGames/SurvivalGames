@@ -17,11 +17,11 @@ import java.util.List;
 public class SGWorld {
 
     public List<Location> locs = new ArrayList<>(0);
-    private final String name;
-    private final WorldCreator wc;
+    private String name;
+    private WorldCreator wc;
 
     public List<BlockState> t2 = new ArrayList<>();
-    private final String displayName;
+    private String displayName;
     private Location center = null;
 
     public SGWorld(String name, String map) {
