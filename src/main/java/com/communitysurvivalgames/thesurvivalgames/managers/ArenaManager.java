@@ -148,7 +148,7 @@ public class ArenaManager {
     /**
      * Creates a lobby
      */
-    public void createLobby(Player p) {
+    public SGArena createLobby(Player p) {
         SGArena a = new SGArena();
         arenaSize++;
         a.createArena(arenaSize);
@@ -157,6 +157,8 @@ public class ArenaManager {
 
         a.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
         SGApi.getTimeManager(a).countdownLobby(5);
+        
+        return a;
     }
 
     /**
@@ -344,8 +346,8 @@ public class ArenaManager {
         return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), Integer.parseInt(st[3]));
     }
     
-    public Block deserializeBlock(String s) {
-        String[] s = s.split(":");
+    public Block deserializeBlock(String st) {
+        String[] s = st.split(":");
         return deserializeLoc(serializeLoc(new Location(Bukkit.getServer().getWorld(s[1]), Integer.parseInt(s[2]), Integer.parseInt(s[3]), Integer.parseInt(s[4])))).getBlock();
     }
 }
