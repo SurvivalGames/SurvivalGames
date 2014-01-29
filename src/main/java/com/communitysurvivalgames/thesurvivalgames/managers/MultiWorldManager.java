@@ -30,19 +30,14 @@ public class MultiWorldManager {
     }
 
     World createWorld(String name) {
-        SGWorld world = new SGWorld(name, name);
+        SGWorld world = new SGWorld(name);
         world.create();
         worlds.add(world);
         return world.getWorld();
     }
 
     public void deleteWorld(String name) {
-        SGWorld w = null;
-        for(SGWorld world : worlds) {
-            if(world.getWorld().getName().equalsIgnoreCase(name)) {
-                w = world;
-            }
-        }
+        SGWorld w = worldForName(name);
         if(worlds.contains(w)) {
             worlds.remove(w);
             w.remove();
@@ -108,7 +103,7 @@ public class MultiWorldManager {
 
     public SGWorld worldForName(String name) {
         for(SGWorld world : getWorlds()) {
-            if(world.getDisplayName().equalsIgnoreCase(name)) {
+            if(world.getWorld().getName().equalsIgnoreCase(name)) {
                 return world;
             }
         }
