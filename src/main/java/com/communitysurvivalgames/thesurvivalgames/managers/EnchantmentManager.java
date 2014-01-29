@@ -13,13 +13,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.communitysurvivalgames.thesurvivalgames.enchantment.DedicationEnchantment;
 import com.communitysurvivalgames.thesurvivalgames.enchantment.SGEnchantment;
 import com.communitysurvivalgames.thesurvivalgames.enchantment.ShockingEnchantment;
+import com.communitysurvivalgames.thesurvivalgames.enchantment.UndroppableEnchantment;
 import com.communitysurvivalgames.thesurvivalgames.enchantment.UnenchantableEnchantment;
 
 public class EnchantmentManager {
 
-	ShockingEnchantment shocking = new ShockingEnchantment(120);
-	UnenchantableEnchantment unenchantable = new UnenchantableEnchantment(121);
-	DedicationEnchantment dedication = new DedicationEnchantment(122);
+	public static ShockingEnchantment shocking = new ShockingEnchantment(120);
+	public static UnenchantableEnchantment unenchantable = new UnenchantableEnchantment(121);
+	public static DedicationEnchantment dedication = new DedicationEnchantment(122);
+	public static UndroppableEnchantment undroppable = new UndroppableEnchantment(123);
 
 	public void registerAll() {
 		try {

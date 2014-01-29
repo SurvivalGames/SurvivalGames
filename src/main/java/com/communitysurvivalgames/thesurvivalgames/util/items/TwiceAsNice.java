@@ -8,7 +8,7 @@ package com.communitysurvivalgames.thesurvivalgames.util.items;
 import java.util.List;
 import java.util.Random;
 import lombok.experimental.Builder;
-import com.communitysurvivalgames.thesurvivalgames.callables.FireWorkEffect;
+import com.communitysurvivalgames.thesurvivalgames.callables.FireworkRandom;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -76,7 +76,7 @@ public class TwiceAsNice implements Listener {
             p.setVelocity(p.getLocation().getDirection().multiply(-recoilBack));
             snowball.setVelocity(p.getLocation().getDirection().multiply(3.0d));
             Firework fw = (Firework) snowball.getWorld().spawnEntity(snowball.getLocation(), EntityType.FIREWORK);
-            FireworkMeta fwm = (FireworkMeta) SGApi.getScheduler().runNow(new FireWorkEffect());
+            FireworkMeta fwm = (FireworkMeta) SGApi.getScheduler().runNow(new FireworkRandom());
             fw.setFireworkMeta(fwm);
             fw.detonate();
 

@@ -14,6 +14,8 @@ public class Kit {
 	private ItemStack kitIcon;
 	private List<KitItem> items = new ArrayList<KitItem>();
 
+	private List<Integer> abaility = new ArrayList<Integer>();
+
 	public Kit(String kitName, List<KitItem> items, Material kitIcon, String kitIconLore) {
 		this.kitName = kitName;
 		this.kitIcon = new ItemStack(kitIcon);
@@ -36,5 +38,9 @@ public class Kit {
 
 	public String getIconLore() {
 		return kitIconLore;
+	}
+
+	public List<Integer> getAbailityIds() {
+		return abaility;
 	}
 }

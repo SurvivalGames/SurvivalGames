@@ -27,117 +27,124 @@ import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
  */
 public class SGApi {
 
-    private static ArenaManager arenaManager;
-    private static BonusManager bonusManager;
-    private static KitManager kitManager;
-    private static MultiWorldManager multiWorldManager;
-    private static SignManager signManager;
-    private static TimeManager timeManager;
-    private static PartyManager partyManager;
-    private static TheSurvivalGames plugin;
-    private static ScheduleManager scheduler;
+	private static ArenaManager arenaManager;
+	private static BonusManager bonusManager;
+	private static KitManager kitManager;
+	private static MultiWorldManager multiWorldManager;
+	private static SignManager signManager;
+	private static TimeManager timeManager;
+	private static PartyManager partyManager;
+	private static TheSurvivalGames plugin;
+	private static ScheduleManager scheduler;
+	private static EnchantmentManager enchantmentManager;
 
-    /**
-     * Gets arena manager.
-     * 
-     * @return the arena manager
-     */
-    public static ArenaManager getArenaManager() {
-        if (arenaManager == null)
-            arenaManager = new ArenaManager();
-        return arenaManager;
-    }
+	/**
+	 * Gets arena manager.
+	 * 
+	 * @return the arena manager
+	 */
+	public static ArenaManager getArenaManager() {
+		if (arenaManager == null)
+			arenaManager = new ArenaManager();
+		return arenaManager;
+	}
 
-    /**
-     * Gets bonus manager.
-     * 
-     * @return the bonus manager
-     */
-    public static BonusManager getBonusManager() {
-        if (bonusManager == null)
-            bonusManager = new BonusManager();
-        return bonusManager;
-    }
+	/**
+	 * Gets bonus manager.
+	 * 
+	 * @return the bonus manager
+	 */
+	public static BonusManager getBonusManager() {
+		if (bonusManager == null)
+			bonusManager = new BonusManager();
+		return bonusManager;
+	}
 
-    /**
-     * Gets kit manager.
-     * 
-     * @return the kit manager
-     */
-    public static KitManager getKitManager() {
-        if (kitManager == null)
-            kitManager = new KitManager();
-        return kitManager;
-    }
+	/**
+	 * Gets kit manager.
+	 * 
+	 * @return the kit manager
+	 */
+	public static KitManager getKitManager() {
+		if (kitManager == null)
+			kitManager = new KitManager();
+		return kitManager;
+	}
 
-    /**
-     * Gets multi world manager.
-     * 
-     * @return the multi world manager
-     */
-    public static MultiWorldManager getMultiWorldManager() {
-        if (multiWorldManager == null)
-            multiWorldManager = new MultiWorldManager();
-        return multiWorldManager;
-    }
+	/**
+	 * Gets multi world manager.
+	 * 
+	 * @return the multi world manager
+	 */
+	public static MultiWorldManager getMultiWorldManager() {
+		if (multiWorldManager == null)
+			multiWorldManager = new MultiWorldManager();
+		return multiWorldManager;
+	}
 
-    /**
-     * Get MultiThread Manager
-     * 
-     * @return the schedule manager
-     */
-    public static ScheduleManager getScheduler() {
-        if (scheduler == null)
-            scheduler = new ScheduleManager();
-        return scheduler;
-    }
+	/**
+	 * Get MultiThread Manager
+	 * 
+	 * @return the schedule manager
+	 */
+	public static ScheduleManager getScheduler() {
+		if (scheduler == null)
+			scheduler = new ScheduleManager();
+		return scheduler;
+	}
 
-    /**
-     * Gets sign manager.
-     * 
-     * @return the sign manager
-     */
-    public static SignManager getSignManager() {
-        return signManager;
-    }
+	/**
+	 * Gets sign manager.
+	 * 
+	 * @return the sign manager
+	 */
+	public static SignManager getSignManager() {
+		return signManager;
+	}
 
-    /**
-     * Gets time manager.
-     * 
-     * @return the time manager
-     */
-    public static TimeManager getTimeManager(SGArena a) {
-        if (timeManager == null)
-            timeManager = new TimeManager(a);
-        return timeManager;
-    }
+	/**
+	 * Gets time manager.
+	 * 
+	 * @return the time manager
+	 */
+	public static TimeManager getTimeManager(SGArena a) {
+		if (timeManager == null)
+			timeManager = new TimeManager(a);
+		return timeManager;
+	}
 
-    /**
-     * Gets party manager.
-     * 
-     * @return the party manager
-     */
-    public static PartyManager getPartyManager() {
-        return partyManager;
-    }
+	public static EnchantmentManager getEnchantmentManager() {
+		if(enchantmentManager == null)
+			enchantmentManager = new EnchantmentManager();
+		return enchantmentManager;
+	}
 
-    /**
-     * Used to create an instance of the main plugin in onEnable
-     * 
-     * @param survivalGames the survival games
-     */
-    public static void init(TheSurvivalGames survivalGames) {
-        plugin = survivalGames;
-    }
+	/**
+	 * Gets party manager.
+	 * 
+	 * @return the party manager
+	 */
+	public static PartyManager getPartyManager() {
+		return partyManager;
+	}
 
-    /**
-     * Gets Main plugin.
-     * 
-     * @return the plugin
-     */
-    public static TheSurvivalGames getPlugin() {
-        return plugin;
+	/**
+	 * Used to create an instance of the main plugin in onEnable
+	 * 
+	 * @param survivalGames the survival games
+	 */
+	public static void init(TheSurvivalGames survivalGames) {
+		plugin = survivalGames;
+	}
 
-    }
+	/**
+	 * Gets Main plugin.
+	 * 
+	 * @return the plugin
+	 */
+	public static TheSurvivalGames getPlugin() {
+		return plugin;
+
+	}
 
 }

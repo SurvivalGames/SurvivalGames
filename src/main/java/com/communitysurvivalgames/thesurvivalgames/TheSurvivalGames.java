@@ -35,147 +35,147 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class TheSurvivalGames extends JavaPlugin {
 
-    private ConfigurationData configurationData;
+	private ConfigurationData configurationData;
 
-    @Override
-    public void onEnable() {
+	@Override
+	public void onEnable() {
 
-        ConfigurationSerialization.registerClass(SerializedLocation.class);
-        ConfigurationSerialization.registerClass(Arena.class);
-        ConfigurationSerialization.registerClass(LocationChecker.class);
+		ConfigurationSerialization.registerClass(SerializedLocation.class);
+		ConfigurationSerialization.registerClass(Arena.class);
+		ConfigurationSerialization.registerClass(LocationChecker.class);
 
-        SGApi.init(this);
+		SGApi.init(this);
 
-        configurationData = new ConfigurationData();
+		configurationData = new ConfigurationData();
 
-        SGApi.getScheduler();
+		SGApi.getScheduler();
 
-        // TODO Add more languages!
-       saveResource("enUS.lang", true);
-        saveResource("idID.lang", true);
-        saveResource("esES.lang", true);
+		// TODO Add more languages!
+		saveResource("enUS.lang", true);
+		saveResource("idID.lang", true);
+		saveResource("esES.lang", true);
 
-        setupDatabase();
+		setupDatabase();
 
-        File i18N = new File(getDataFolder(), "I18N.yml");
-        if (!i18N.exists()) {
-            saveResource("I18N.yml", false);
-        }
+		File i18N = new File(getDataFolder(), "I18N.yml");
+		if (!i18N.exists()) {
+			saveResource("I18N.yml", false);
+		}
 
-        FileConfiguration lang = YamlConfiguration.loadConfiguration(i18N);
+		FileConfiguration lang = YamlConfiguration.loadConfiguration(i18N);
 
-        I18N.setupLocale();
-        I18N.setLocale(lang.getString("language"));
+		I18N.setupLocale();
+		I18N.setLocale(lang.getString("language"));
 
-        registerAll();
+		registerAll();
 
-        SGApi.getArenaManager().loadGames();
-        getLogger().info(I18N.getLocaleString("BEEN_ENABLED"));
-        getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
-        saveDefaultConfig();
+		SGApi.getArenaManager().loadGames();
+		getLogger().info(I18N.getLocaleString("BEEN_ENABLED"));
+		getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
+		saveDefaultConfig();
 
-    }
+	}
 
-    @Override
-    public void onDisable() {
-        getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
+	@Override
+	public void onDisable() {
+		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
 
-        SGApi.getScheduler().shutdownAll();
+		SGApi.getScheduler().shutdownAll();
 
-   }
+	}
 
-    void registerAll() {
-     getCommand("sg").setExecutor(new CommandHandler());
-        getCommand("party").setExecutor(new PartyCommandHandler());
+	void registerAll() {
+		getCommand("sg").setExecutor(new CommandHandler());
+		getCommand("party").setExecutor(new PartyCommandHandler());
 
-        CommandHandler.register("help", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.HelpCommand());
-        CommandHandler.register("create", new CreateCommand());
-        CommandHandler.register("remove", new RemoveCommand());
-        CommandHandler.register("join", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.JoinCommand());
-        CommandHandler.register("leave", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.LeaveCommand());
-        CommandHandler.register("user", new UserCommand());
-        CommandHandler.register("setlobby", new SetCommand());
-        CommandHandler.register("setdeathmatch", new SetCommand());
-        CommandHandler.register("setmaxplayers", new SetCommand());
-        CommandHandler.register("setchest", new SetCommand());
-        CommandHandler.register("setspawn", new SetCommand());
-        CommandHandler.register("stop", new StopCommand());
-        CommandHandler.register("start", new StartCommand());
-        CommandHandler.register("finish", new CreateCommand());
-        CommandHandler.register("vote", new VoteCommand());
+		CommandHandler.register("help", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.HelpCommand());
+		CommandHandler.register("create", new CreateCommand());
+		CommandHandler.register("remove", new RemoveCommand());
+		CommandHandler.register("join", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.JoinCommand());
+		CommandHandler.register("leave", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.LeaveCommand());
+		CommandHandler.register("user", new UserCommand());
+		CommandHandler.register("setlobby", new SetCommand());
+		CommandHandler.register("setdeathmatch", new SetCommand());
+		CommandHandler.register("setmaxplayers", new SetCommand());
+		CommandHandler.register("setchest", new SetCommand());
+		CommandHandler.register("setspawn", new SetCommand());
+		CommandHandler.register("stop", new StopCommand());
+		CommandHandler.register("start", new StartCommand());
+		CommandHandler.register("finish", new CreateCommand());
+		CommandHandler.register("vote", new VoteCommand());
 
-        PartyCommandHandler.register("chat", new ChatCommand());
-        PartyCommandHandler.register("decline", new DeclineCommand());
-        PartyCommandHandler.register("help", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.HelpCommand());
-        PartyCommandHandler.register("invite", new InviteCommand());
-        PartyCommandHandler.register("join", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.JoinCommand());
-        PartyCommandHandler.register("leave", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.LeaveCommand());
-        PartyCommandHandler.register("list", new ListCommand());
-        PartyCommandHandler.register("promote", new PromoteCommand());
+		PartyCommandHandler.register("chat", new ChatCommand());
+		PartyCommandHandler.register("decline", new DeclineCommand());
+		PartyCommandHandler.register("help", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.HelpCommand());
+		PartyCommandHandler.register("invite", new InviteCommand());
+		PartyCommandHandler.register("join", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.JoinCommand());
+		PartyCommandHandler.register("leave", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.LeaveCommand());
+		PartyCommandHandler.register("list", new ListCommand());
+		PartyCommandHandler.register("promote", new PromoteCommand());
 
-        PluginManager pm = getServer().getPluginManager();
+		PluginManager pm = getServer().getPluginManager();
 
-        pm.registerEvents(new BlockListener(), this);
-        pm.registerEvents(new ChatListener(), this);
-        pm.registerEvents(new PlayerQuitListener(), this);
-        pm.registerEvents(new CarePackage(this), this);
-        pm.registerEvents(new MoveListener(), this);
-        pm.registerEvents(new SetupListener(), this);
-        pm.registerEvents(new EntityDamageListener(), this);
-        pm.registerEvents(new DoubleJump(this), this);
+		pm.registerEvents(new BlockListener(), this);
+		pm.registerEvents(new ChatListener(), this);
+		pm.registerEvents(new PlayerQuitListener(), this);
+		pm.registerEvents(new CarePackage(this), this);
+		pm.registerEvents(new MoveListener(), this);
+		pm.registerEvents(new SetupListener(), this);
+		pm.registerEvents(new EntityDamageListener(), this);
+		pm.registerEvents(new DoubleJump(this), this);
 
-        // Throws NPE's
-        // SGApi.getSignManager().signs =
-        // getDatabase().find(JSign.class).findList();
-        Scoreboard.registerScoreboard();
-    }
+		// Throws NPE's
+		// SGApi.getSignManager().signs =
+		// getDatabase().find(JSign.class).findList();
+		Scoreboard.registerScoreboard();
+	}
 
-    /**
-     * Setup Persistence Databases and Install DDL if there are none
-     */
-    private void setupDatabase() {
-        File ebean = new File(getDataFolder(), "ebean.properties");
-        if (!ebean.exists()) {
-            saveResource("ebean.properties", false);
-        }
-        try {
-            getDatabase().find(PlayerData.class).findRowCount();
-            getDatabase().find(JSign.class).findRowCount();
-        } catch (PersistenceException ex) {
-            System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
-            installDDL();
-        }
-    }
+	/**
+	 * Setup Persistence Databases and Install DDL if there are none
+	 */
+	private void setupDatabase() {
+		File ebean = new File(getDataFolder(), "ebean.properties");
+		if (!ebean.exists()) {
+			saveResource("ebean.properties", false);
+		}
+		try {
+			getDatabase().find(PlayerData.class).findRowCount();
+			getDatabase().find(JSign.class).findRowCount();
+		} catch (PersistenceException ex) {
+			System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
+			installDDL();
+		}
+	}
 
-    /**
-     * Gets Persistence Database classes WARNING: DO NOT EDIT
-     * 
-     * @return The list of classes for the database
-     */
-    @Override
-    public List<Class<?>> getDatabaseClasses() {
-        @SuppressWarnings("Convert2Diamond")
-        List<Class<?>> list = new ArrayList<>();
-        list.add(PlayerData.class);
-        list.add(JSign.class);
-        return list;
-    }
+	/**
+	 * Gets Persistence Database classes WARNING: DO NOT EDIT
+	 * 
+	 * @return The list of classes for the database
+	 */
+	@Override
+	public List<Class<?>> getDatabaseClasses() {
+		@SuppressWarnings("Convert2Diamond")
+		List<Class<?>> list = new ArrayList<>();
+		list.add(PlayerData.class);
+		list.add(JSign.class);
+		return list;
+	}
 
-    public PlayerData getPlayerData(Player player) {
-        PlayerData data = getDatabase().find(PlayerData.class).where().ieq("playerName", player.getName()).findUnique();
-        if (data == null) {
-            data = new PlayerData(player);
-        }
+	public PlayerData getPlayerData(Player player) {
+		PlayerData data = getDatabase().find(PlayerData.class).where().ieq("playerName", player.getName()).findUnique();
+		if (data == null) {
+			data = new PlayerData(player);
+		}
 
-        return data;
-    }
+		return data;
+	}
 
-    public void setPlayerData(PlayerData data) {
-        getDatabase().save(data);
-    }
+	public void setPlayerData(PlayerData data) {
+		getDatabase().save(data);
+	}
 
-    public ConfigurationData getPluginConfig() {
-        return configurationData;
-    }
+	public ConfigurationData getPluginConfig() {
+		return configurationData;
+	}
 
 }
