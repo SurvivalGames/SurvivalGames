@@ -32,7 +32,9 @@ public class MoveListener implements Listener {
 
         try {
             if (SGApi.getArenaManager().isInGame(e.getPlayer()) && SGApi.getArenaManager().getArena(e.getPlayer()).getState() == SGArena.ArenaState.DEATHMATCH
-                    && (Math.abs(e.getPlayer().getLocation().distanceSquared(SGApi.getArenaManager().getArena(e.getPlayer()).getArenaWorld().getCenter())) >= 0.5)) {
+                    && (Math.abs(e.getPlayer().getLocation().distanceSquared(
+                        SGApi.getMultiWorldManager().worldForName(
+                            SGApi.getArenaManager().getArena(e.getPlayer()).getArenaWorld().getName())) >= 0.5))) {
                 e.setTo(e.getFrom());
                 e.getPlayer().sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("NOT_HAPPY"));
             }
