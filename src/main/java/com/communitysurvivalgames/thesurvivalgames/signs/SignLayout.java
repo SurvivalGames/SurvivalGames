@@ -17,7 +17,7 @@ public class SignLayout {
     public List<String> parseLayout(SGArena sinfo) {
         @SuppressWarnings("Convert2Diamond") List<String> laa = new ArrayList<>();
         for (String line : this.lines) {
-            line = line.replace("%displayname%", sinfo.getDisplayName());
+            line = line.replace("%displayname%", sinfo.getId());
             line = line.replace("%numpl%", String.valueOf(sinfo.getPlayers().size()));
             line = line.replace("%maxpl%", String.valueOf(sinfo.getMaxPlayers()));
             laa.add(ChatColor.translateAlternateColorCodes('&', line));
