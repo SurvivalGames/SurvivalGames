@@ -26,7 +26,6 @@ public class SGArena {
 
 	private ArenaState currentState;
 	private int id = 0;
-	private String displayName;
 
 	public Location lobby = null;
 	public Location center; //redo
@@ -117,11 +116,10 @@ public class SGArena {
 	 * @param maxPlayers The max players for the arena
 	 * @param minPlayers The min players needed for the game to start
 	 */
-	public void initialize(List<Location> list, Location lob, int maxPlayers, int minPlayers, String name) {
+	public void initialize(Location lob, int maxPlayers, int minPlayers) {
 		this.lobby = lob;
 		this.maxPlayers = maxPlayers;
 		this.minPlayers = minPlayers;
-		this.displayName = name;
 	}
 
 	/**
