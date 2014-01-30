@@ -259,10 +259,6 @@ public class SGArena {
 		return spectators;
 	}
 
-	public String getDisplayName() {
-		return displayName;
-	}
-
 	public World getArenaWorld() {
 		return currentMap.getWorld();
 	}
