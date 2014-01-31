@@ -1,5 +1,5 @@
 ![SurvivalGames](http://i.imgur.com/mgG0cp2.jpg)
-[![Features](http://i.imgur.com/fNHYSr2.png)](http://example.com) [![Commands](http://i.imgur.com/hQ4xduo.png)](http://example.com) 
+[![Features](http://i.imgur.com/fNHYSr2.png)](http://example.com) [![Commands](http://i.imgur.com/hQ4xduo.png)](http://example.com) [![Permissions](http://i.imgur.com/WnpRVRw.png)](http://example.com) [![Setup](http://i.imgur.com/pa1un30.png)](http://example.com) [![Setup](http://i.imgur.com/sq8EpUW.png)](http://example.com)
 
 **[ANNOUNCEMENT|AgentTroll]**
 Team members may get a copy of the latest build. [![Build Status](https://travis-ci.org/SurvivalGamesDevTeam/TheSurvivalGames.png?branch=master)](https://travis-ci.org/SurvivalGamesDevTeam/TheSurvivalGames)
