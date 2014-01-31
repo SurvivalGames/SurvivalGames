@@ -1,4 +1,4 @@
-The Survival Games
+![SurvivalGames](http://i.imgur.com/mgG0cp2.jpg)
 =================
 
 **[ANNOUNCEMENT|AgentTroll]**
