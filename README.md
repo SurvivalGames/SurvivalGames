@@ -3,6 +3,10 @@
 
 [![Features](http://imgur.com/F2MBj0Y.png)](https://github.com/SurvivalGamesDevTeam/Builds/tree/master/com/communitysurvivalgames/thesurvivalgames/TheSurvivalGames/1.0.0)  Build Stats: [![Build Status](https://travis-ci.org/SurvivalGamesDevTeam/TheSurvivalGames.png?branch=master)](https://travis-ci.org/SurvivalGamesDevTeam/TheSurvivalGames)
 
+========
+
+**Announcements**
+
 **[ANNOUNCEMENT|Quantum64]**
 All developers should read the tutorial for developing on the new multilingual string system here:  https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/blob/master/I18N_TUTORIAL.md
 
