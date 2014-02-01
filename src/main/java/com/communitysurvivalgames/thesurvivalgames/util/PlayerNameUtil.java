@@ -16,7 +16,6 @@ public class PlayerNameUtil {
     public static ArrayList<String> getDevs() {
         ArrayList<String> list = new ArrayList<>();
         list.add("Quantum64");
-        list.add("calebbfmv");
         list.add("Trolldood3");
         list.add("Relicum");
         list.add("sam4215");
