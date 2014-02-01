@@ -3,7 +3,7 @@
  *
  * @version 1.0.0
  */
-package com.communitysurvivalgames.thesurvivalgames.command;
+package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
 import org.bukkit.entity.Player;
 

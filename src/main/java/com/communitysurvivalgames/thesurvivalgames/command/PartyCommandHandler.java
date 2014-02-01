@@ -1,5 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.command;
 
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.HelpCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import org.bukkit.command.Command;

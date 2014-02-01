@@ -1,11 +1,11 @@
-package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
+package com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg;
 
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.entity.Player;
 
-import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.util.CircleUtil;
 
 public class TestCommand implements SubCommand {

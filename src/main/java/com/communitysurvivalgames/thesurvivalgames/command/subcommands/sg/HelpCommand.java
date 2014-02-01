@@ -3,9 +3,9 @@
  *
  * @version 1.0.0
  */
-package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
+package com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg;
 
-import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import org.bukkit.ChatColor;

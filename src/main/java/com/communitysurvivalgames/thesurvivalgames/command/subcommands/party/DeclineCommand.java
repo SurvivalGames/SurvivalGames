@@ -6,7 +6,8 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
 import java.util.UUID;
-import com.communitysurvivalgames.thesurvivalgames.command.SubCommand;
+
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
