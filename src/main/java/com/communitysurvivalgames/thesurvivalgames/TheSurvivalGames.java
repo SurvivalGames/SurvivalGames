@@ -8,23 +8,8 @@ package com.communitysurvivalgames.thesurvivalgames;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.PersistenceException;
 
-import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
-import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.*;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.*;
-import com.communitysurvivalgames.thesurvivalgames.listeners.*;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.Arena;
-import com.communitysurvivalgames.thesurvivalgames.objects.JSign;
-import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
-import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
-import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
-import com.communitysurvivalgames.thesurvivalgames.util.LocationChecker;
-import com.communitysurvivalgames.thesurvivalgames.util.SerializedLocation;
-import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
+import javax.persistence.PersistenceException;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -32,6 +17,45 @@ import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.communitysurvivalgames.thesurvivalgames.ability.Archer;
+import com.communitysurvivalgames.thesurvivalgames.ability.Crafter;
+import com.communitysurvivalgames.thesurvivalgames.ability.Knight;
+import com.communitysurvivalgames.thesurvivalgames.ability.Pacman;
+import com.communitysurvivalgames.thesurvivalgames.ability.Toxicologist;
+import com.communitysurvivalgames.thesurvivalgames.ability.Zelda;
+import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
+import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.CreateCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.RemoveCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SetCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.StartCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.StopCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.TestCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.UserCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.VoteCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.ChatCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.DeclineCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.InviteCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.ListCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.PromoteCommand;
+import com.communitysurvivalgames.thesurvivalgames.listeners.BlockListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.ChatListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.EntityDamageListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.ItemDropListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.PlayerQuitListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.SetupListener;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.objects.JSign;
+import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
+import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
+import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
+import com.communitysurvivalgames.thesurvivalgames.util.LocationChecker;
+import com.communitysurvivalgames.thesurvivalgames.util.SerializedLocation;
+import com.communitysurvivalgames.thesurvivalgames.util.ThrowableSpawnEggs;
+import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
 
 public class TheSurvivalGames extends JavaPlugin {
 
@@ -41,7 +65,6 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void onEnable() {
 
 		ConfigurationSerialization.registerClass(SerializedLocation.class);
-		ConfigurationSerialization.registerClass(Arena.class);
 		ConfigurationSerialization.registerClass(LocationChecker.class);
 
 		SGApi.init(this);
@@ -103,6 +126,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		CommandHandler.register("start", new StartCommand());
 		CommandHandler.register("finish", new CreateCommand());
 		CommandHandler.register("vote", new VoteCommand());
+		CommandHandler.register("test", new TestCommand());
 
 		PartyCommandHandler.register("chat", new ChatCommand());
 		PartyCommandHandler.register("decline", new DeclineCommand());
@@ -123,11 +147,21 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new SetupListener(), this);
 		pm.registerEvents(new EntityDamageListener(), this);
 		pm.registerEvents(new DoubleJump(this), this);
+		pm.registerEvents(new ItemDropListener(), this);
+		pm.registerEvents(new ThrowableSpawnEggs(), this);
+		
+		pm.registerEvents(new Archer(), this);
+		pm.registerEvents(new Crafter(), this);
+		pm.registerEvents(new Knight(), this);
+		pm.registerEvents(new Pacman(), this);
+		pm.registerEvents(new Toxicologist(), this);
+		pm.registerEvents(new Zelda(), this);
 
 		// Throws NPE's
 		// SGApi.getSignManager().signs =
 		// getDatabase().find(JSign.class).findList();
 		Scoreboard.registerScoreboard();
+		SGApi.getEnchantmentManager().registerAll();
 	}
 
 	/**

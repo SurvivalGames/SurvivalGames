@@ -215,7 +215,7 @@ public class ArenaManager {
         int minPlayers = arenaConfig.getInt("min-players");
         int maxPlayers = arenaConfig.getInt("max-players");
         String arenaName = arenaConfig.getString("arena-name");
-        arenas.get(i).initialize(lobby, maxPlayers, minPlayers);
+        //arenas.get(i).initialize(lobby, maxPlayers, minPlayers);
     }
     
     /**

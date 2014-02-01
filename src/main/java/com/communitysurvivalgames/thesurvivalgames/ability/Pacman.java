@@ -2,16 +2,17 @@ package com.communitysurvivalgames.thesurvivalgames.ability;
 
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
-import org.bukkit.Material;
 import org.bukkit.FireworkEffect.Type;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
 
-public class Pacman extends SGAbility {
+public class Pacman extends SGAbility implements Listener {
 	public Pacman() {
 		super(5);
 	}
