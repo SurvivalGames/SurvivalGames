@@ -12,7 +12,7 @@ public class TestCommand implements SubCommand {
 
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
-			CircleUtil.playFireworkCircle(p, FireworkEffect.builder().withColor(Color.FUCHSIA).withFade(Color.BLUE).trail(true).flicker(false).with(Type.BALL).build(), Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+			CircleUtil.playFireworkRing(p, FireworkEffect.builder().withColor(Color.FUCHSIA).withFade(Color.BLUE).trail(true).flicker(false).with(Type.BALL).build(), Integer.parseInt(args[0]), Integer.parseInt(args[1]));
 	}
 
 }
