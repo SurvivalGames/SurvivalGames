@@ -14,7 +14,7 @@ public abstract class ConfigTemplate<T> {
     private File file = null;
     private FileConfiguration config = null;
 
-    public ConfigTemplate(String pattern, String path) {
+    public ConfigTemplate(String[] pattern, String path) {
         this.pattern = pattern;
         try {
             file = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + path);
@@ -39,7 +39,7 @@ public abstract class ConfigTemplate<T> {
     }
 
     public final T deserialize() {
-        T t;
+        T t = null;
         for(int i = 0; i <= pattern.length - 1; i++) {
             t = fromFile(i, config.get(pattern[i]));
         }
