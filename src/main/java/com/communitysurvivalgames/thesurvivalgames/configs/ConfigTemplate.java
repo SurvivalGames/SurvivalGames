@@ -26,7 +26,7 @@ public abstract class ConfigTemplate<T> {
         }
     }
 
-    public void serialize() {
+    public final void serialize() {
         for(int i = 0; i <= pattern.length - 1; i++) {
             config.set(pattern[i], toFile(i));
         }
@@ -38,7 +38,7 @@ public abstract class ConfigTemplate<T> {
         }
     }
 
-    public T deserialize() {
+    public final T deserialize() {
         T t;
         for(int i = 0; i <= pattern.length - 1; i++) {
             t = fromFile(i, config.get(pattern[i]);
