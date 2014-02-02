@@ -168,18 +168,15 @@ public class ArenaManager {
      * 
      * @param creator The creator attributed with making the arena
      */
-    public void createArena(final Player creator, final String worldName) {
+    public void createArena(final Player creator, final String worldName, final String display) {
         creator.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
 
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
-
             @Override
             public void run() {
                 // todo this is only a temp solution to create a new arena
-                SGApi.getMultiWorldManager().createRandomWorld(worldName);
+                SGApi.getMultiWorldManager().create(worldName, display);
                 creators.put(creator.getName(), new SGWorld(worldName, worldName));
-                // TODO Create new file configuration with default values here
-                SGApi.getPlugin().saveConfig();
             }
         });
 
@@ -219,12 +216,7 @@ public class ArenaManager {
             return;
         }
         arenas.remove(a);
-
-        SGApi.getPlugin().getConfig().set("Arenas." + i, null);
-        List<Integer> list = SGApi.getPlugin().getConfig().getIntegerList("Arenas.Arenas");
-        list.remove(i);
-        SGApi.getPlugin().getConfig().set("Arenas.Arenas", list);
-        SGApi.getPlugin().saveConfig();
+        new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + "/arenas/" + i + ".yml").delete();
     }
 
     /**
