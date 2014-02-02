@@ -341,7 +341,7 @@ public class ArenaManager {
      * @param s The string to deserialize
      * @return The location represented from the string
      */
-    private Location deserializeLoc(String s) {
+    public Location deserializeLoc(String s) {
         String[] st = s.split(",");
         return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), Integer.parseInt(st[3]));
     }
