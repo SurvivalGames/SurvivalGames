@@ -1,11 +1,10 @@
 package com.communitysurvivalgames.thesurvivalgames.configs;
 
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-
-import java.io.File;
-
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
 
 
 public abstract class ConfigTemplate<T> {
@@ -17,13 +16,18 @@ public abstract class ConfigTemplate<T> {
     public ConfigTemplate(String[] pattern, String path) {
         this.pattern = pattern;
         try {
-            file = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + path);
-            file.createNewFile();
+            this.file = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + path);
+            this.file.createNewFile();
 
-            config = YamlConfiguration.loadConfiguration(file);
+            this.config = YamlConfiguration.loadConfiguration(file);
         } catch (Exception x) {
             x.printStackTrace();
         }
+    }
+
+    public ConfigTemplate(File file) {
+        this.file = file;
+        this.config = YamlConfiguration.loadConfiguration(file);
     }
 
     public final void serialize() {

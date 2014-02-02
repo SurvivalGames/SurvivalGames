@@ -1,10 +1,10 @@
 package com.communitysurvivalgames.thesurvivalgames.kits;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Kit {
 
@@ -40,7 +40,7 @@ public class Kit {
 		return kitIconLore;
 	}
 
-	public List<Integer> getAbailityIds() {
+	public List<Integer> getAbilityIds() {
 		return abaility;
 	}
 }

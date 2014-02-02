@@ -13,7 +13,7 @@ public final class KitGivenEvent extends Event {
     /**
      * Constructs a new KitGivenEvent
      *
-     * @param player the player that recieved the kit
+     * @param player the player that received the kit
      * @param kit the kit given to the player
      */
     public KitGivenEvent(Player player, Kit kit) {

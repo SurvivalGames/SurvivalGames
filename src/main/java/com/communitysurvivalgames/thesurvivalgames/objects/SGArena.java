@@ -28,7 +28,6 @@ public class SGArena {
 	private int id = 0;
 
 	public Location lobby = null;
-	public Location center; //redo
 	public SGWorld currentMap;
 
 	public List<String> voted = new ArrayList<>();
@@ -36,10 +35,10 @@ public class SGArena {
 	public Map<String, Kit> kits = new HashMap<>();
 
 	public int maxPlayers;
-	private int minPlayers;
+	public int minPlayers;
 
-	private final List<String> players = new CopyOnWriteArrayList<>();
-	private final List<String> spectators = new CopyOnWriteArrayList<>();
+	public final List<String> players = new CopyOnWriteArrayList<>();
+	public final List<String> spectators = new CopyOnWriteArrayList<>();
 
 	public void setPlayerKit(Player player, Kit kit) {
 		Bukkit.getServer().getPluginManager().callEvent(new KitGivenEvent(player, kit));
@@ -110,8 +109,7 @@ public class SGArena {
 
 	/**
 	 * Makes sure that the fields aren't null on startup
-	 * 
-	 * @param list The locatins for game spawns
+	 *
 	 * @param lob The lobby spawn
 	 * @param maxPlayers The max players for the arena
 	 * @param minPlayers The min players needed for the game to start

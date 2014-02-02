@@ -13,16 +13,16 @@ public class PlayerKilledEvent extends Event {
 	 * Constructs a new KitGivenEvent
 	 *
 	 * @param player the player that recieved the kit
-	 * @param kit the kit given to the player
+	 * @param killer the killer
 	 */
 	public PlayerKilledEvent(Player player, Player killer) {
 		this.player = player;
 	}
 
 	/**
-	 * Gets the player that recieved the kit
+	 * Gets the player that died
 	 *
-	 * @return the player that recieved the kit
+	 * @return the player that died
 	 */
 	public Player getPlayer() {
 		return player;

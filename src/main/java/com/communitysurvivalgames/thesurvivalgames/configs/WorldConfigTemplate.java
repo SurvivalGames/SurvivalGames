@@ -2,22 +2,21 @@ package com.communitysurvivalgames.thesurvivalgames.configs;
 
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-
-import java.util.List;
-import java.util.ArrayList;
-
 import org.bukkit.Location;
 import org.bukkit.block.BlockState;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 	private SGWorld world;
 
 	private String cachedWorldName;
-	private String cachedDisplayName;
-	private SGWorld cachedWorldCreator;
+    private SGWorld cachedWorldCreator;
 
-	public WorldConfigTemplate() {
-		this(null);
+	public WorldConfigTemplate(File file) {
+		super(file);
 	}
 
 	public WorldConfigTemplate(SGWorld world) {
@@ -45,7 +44,6 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 			}
 			return list;
 		}
-		
 		return null;
 	}
 
@@ -56,8 +54,9 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 			this.cachedWorldName = String.valueOf(o);
 			break;
 		case 1:
-			this.cachedDisplayName = String.valueOf(o);
-			this.cachedWorldCreator = new SGWorld(this.cachedWorldName, this.cachedDisplayName);
+            String cachedDisplayName = String.valueOf(o);
+
+			this.cachedWorldCreator = new SGWorld(this.cachedWorldName, cachedDisplayName);
 			this.cachedWorldCreator.create();
 			SGApi.getMultiWorldManager().getWorlds().add(this.cachedWorldCreator);
 			break;

@@ -18,7 +18,7 @@ public class SGAbility {
 
 	public boolean hasAbility(Player p) {
 		try {
-			if (SGApi.getArenaManager().getArena(p).getKit(p).getAbailityIds().contains(id))
+			if (SGApi.getArenaManager().getArena(p).getKit(p).getAbilityIds().contains(id))
 				return true;
 		} catch (ArenaNotFoundException e) {
 			//?
