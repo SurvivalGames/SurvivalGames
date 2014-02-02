@@ -41,7 +41,7 @@ public abstract class ConfigTemplate<T> {
     public final T deserialize() {
         T t;
         for(int i = 0; i <= pattern.length - 1; i++) {
-            t = fromFile(i, config.get(pattern[i]);
+            t = fromFile(i, config.get(pattern[i]));
         }
 
         return t;
