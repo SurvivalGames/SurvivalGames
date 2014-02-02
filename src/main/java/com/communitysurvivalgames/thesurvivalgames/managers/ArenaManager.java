@@ -11,7 +11,7 @@ import com.communitysurvivalgames.thesurvivalgames.configs.WorldConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;a
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -99,6 +99,7 @@ public class ArenaManager {
         p.getInventory().clear();
         p.setExp(0);
 
+        locs.put(p.getName(), p.getLocation());
         p.teleport(a.lobby);
 
         // Ding!
