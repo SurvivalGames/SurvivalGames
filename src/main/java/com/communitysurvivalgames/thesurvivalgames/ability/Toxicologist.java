@@ -35,7 +35,7 @@ public class Toxicologist extends SGAbility implements Listener {
 			final Location loc = new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY() + 10, player.getLocation().getZ());
 			final Random rnd = new Random();
 			if (player.getItemInHand().getType() == Material.CLAY_BALL && player.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Toxen Bomb")) {
-				CircleUtil.playFireworkCircle(event.getPlayer(), FireworkEffect.builder().withColor(Color.SILVER).withFade(Color.GREEN).flicker(true).trail(false).build(), 5, 14);
+				CircleUtil.getCircleUtil().playFireworkCircle(event.getPlayer(), FireworkEffect.builder().withColor(Color.SILVER).withFade(Color.GREEN).flicker(true).trail(false).build(), 5, 14);
 				Bukkit.getScheduler().runTaskLater(SGApi.getPlugin(), new Runnable() {
 
 					@Override
