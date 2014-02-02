@@ -29,8 +29,8 @@ public class MultiWorldManager {
     public MultiWorldManager() {
     }
 
-    World createWorld(String name) {
-        SGWorld world = new SGWorld(name, name);
+    World createWorld(String name, String display) {
+        SGWorld world = new SGWorld(name, display);
         world.create();
         worlds.add(world);
         return world.getWorld();
