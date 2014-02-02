@@ -23,9 +23,10 @@ public class CreateCommand implements SubCommand {
     @Override
     public void execute(String cmd, Player p, String[] args) {
         if (cmd.equalsIgnoreCase("create") && p.hasPermission("sg.create")) {
-            if (args[0].equalsIgnoreCase("custom")) {
-                SGApi.getArenaManager().createArena(p, args[1]);
-                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_ARENA")); // TODO
+            try {
+                if (args[0].equalsIgnoreCase("custom")) {
+                    SGApi.getArenaManager().createArena(p, args[1], args[2]);
+                    p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_ARENA")); // TODO
                                                                                                         // This
                                                                                                         // should
                                                                                                         // be
@@ -38,12 +39,15 @@ public class CreateCommand implements SubCommand {
                                                                                                         // a
                                                                                                         // Runnable
                                                                                                         // now
-            } else if (args[0].equalsIgnoreCase("download")) {
-                SGApi.getArenaManager().createArenaFromDownload(p, args[1]);
-            } else if (args[0].equalsIgnoreCase("import")) {
-                SGApi.getArenaManager().createArenaFromImport(p, args[1]);
+                } else if (args[0].equalsIgnoreCase("download")) {
+                    SGApi.getArenaManager().createArenaFromDownload(p, args[1]);
+                } else if (args[0].equalsIgnoreCase("import")) {
+                    SGApi.getArenaManager().createArenaFromImport(p, args[1]);
+                }
+                return;
+            } catch (ArrayIndexOutOfBoundsExeception x) {
+                p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("INVALID_ARGUMENTS"));
             }
-            return;
         }
 
         if (cmd.equalsIgnoreCase("finish")) {
