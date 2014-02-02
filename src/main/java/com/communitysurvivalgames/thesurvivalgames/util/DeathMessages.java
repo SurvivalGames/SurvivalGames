@@ -57,7 +57,7 @@ public class DeathMessages {
 		}
 
 		if (dc == DamageCause.LIGHTNING) {
-			int i = rnd.nextInt(5);
+			int i = rnd.nextInt(6);
 			if (i == 0) {
 				return message + "was smitten";
 			}
@@ -73,6 +73,9 @@ public class DeathMessages {
 			if (i == 4) {
 				return message + "thought it would be fun to stick a flagpost in the air";
 			}
+			if (i == 5) {
+				return message + "was punished by Zeus";
+			}
 		}
 
 		if (dc == DamageCause.DROWNING) {
@@ -81,7 +84,7 @@ public class DeathMessages {
 				return message + "forgot how to swim";
 			}
 			if (i == 1) {
-				return message + "dosen't have gills";
+				return message + "doesn't have gills";
 			}
 			if (i == 2) {
 				return message + "remembered that Steves generally need air, not water";
@@ -100,12 +103,15 @@ public class DeathMessages {
 		}
 
 		if (dc == DamageCause.STARVATION) {
-			int i = rnd.nextInt(2);
+			int i = rnd.nextInt(3);
 			if (i == 0) {
 				return message + "should have made one more cookie";
 			}
 			if (i == 1) {
 				return message + "liked the zombie flesh... his food bar didn't";
+			}
+			if (i == 2) {
+				return message + "found out that the cake is a lie";
 			}
 		}
 
@@ -158,6 +164,6 @@ public class DeathMessages {
 			}
 		}
 
-		return message + "hit the cactus to hard, then blew up whilst attempting to swim in lava";
+		return message + "hit the cactus too hard, then blew up whilst attempting to swim in lava";
 	}
 }
