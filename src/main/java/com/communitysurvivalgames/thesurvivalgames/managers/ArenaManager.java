@@ -5,14 +5,15 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
+import com.communitysurvivalgames.thesurvivalgames.configs.ArenaConfigTemplate;
+import com.communitysurvivalgames.thesurvivalgames.configs.ConfigTemplate;
+import com.communitysurvivalgames.thesurvivalgames.configs.WorldConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.*;
-import org.bukkit.block.*;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -204,46 +205,6 @@ public class ArenaManager {
     }
 
     /**
-     * Stores an existing arena in the list, for example after reloads
-     * 
-     * @param i The location the arena spawn will be at
-     */
-    private void reloadArena(int i) {
-        FileConfiguration arenaConfig = YamlConfiguration.loadConfiguration(new File(Bukkit.getServer().getWorldContainer(), arenas.get(i).getArenaWorld().getName()));
-        // TODO ^^ what the
-        Location lobby = deserializeLoc(arenaConfig.getString("lobby-spawn-point"));
-        int minPlayers = arenaConfig.getInt("min-players");
-        int maxPlayers = arenaConfig.getInt("max-players");
-        String arenaName = arenaConfig.getString("arena-name");
-        //arenas.get(i).initialize(lobby, maxPlayers, minPlayers);
-    }
-    
-    /**
-     * Reloads a map
-     * 
-     * @param actualName the name of the world that holds the block
-     */
-    public void reloadMap(String actualName) {
-        FileConfiguration config = YamlConfiguration.loadConfiguration(new File(SGApi.getPlugin().getDataFolder(), actualName + ".yml"));
-        List<String> spawnLocsString = config.getStringList("spawn-points");
-        List<Location> spawnLocs = new ArrayList<>();
-        for (String aSpawnLocsString : spawnLocsString) {
-            spawnLocs.add(deserializeLoc(aSpawnLocsString));
-        }
-        
-        List<BlockState> t2 = new ArrayList<>();
-        for(String s : config.getStringList("tier2")) {
-            t2.add(deserializeBlock(s).getState());
-        }
-        
-        World world = SGApi.getMultiWorldManager().createWorld(actualName);
-        SGWorld w = SGApi.getMultiWorldManager().worldForName(world.getName());
-        
-        w.setDisplayName(config.getString("map-name"));
-        w.init(spawnLocs, t2);
-    }
-
-    /**
      * Removes an arena from memory
      * 
      * @param i The ID of the arena to be removed
@@ -284,22 +245,24 @@ public class ArenaManager {
      * Loads the game into memory after a shutdown or a relaod
      */
     public void loadGames() {
-        arenaSize = 0;
+        File arenas = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + "/arenas/");
+        File maps = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + "/maps/");
 
-        if (SGApi.getPlugin().getConfig().getIntegerList("Arenas.Arenas").isEmpty()) {
-            return;
+        if (maps.listFiles().length == 0) return;
+        for(File file : maps.listFiles()) {
+            ConfigTemplate<SGWorld> configTemplate = new WorldConfigTemplate(file);
+            SGWorld world = configTemplate.deserialize();
+            SGApi.getMultiWorldManager().getWorlds().add(world);
         }
 
-        for (int i : SGApi.getPlugin().getConfig().getIntegerList("Arenas.Arenas")) {
-            reloadArena(i);
-        }
-        
-        if(SGApi.getPlugin().getConfig().getStringList("Arenas.Maps").isEmpty()) {
-            return;
-        }
-        
-        for(String s : SGApi.getPlugin().getConfig().getStringList("Arenas.Maps")) {
-            reloadMap(s);
+        if(arenas.listFiles().length == 1) return;
+        for(File file : arenas.listFiles()) {
+            ConfigTemplate <SGArena> configTemplate = new ArenaConfigTemplate(file);
+            SGArena arena = configTemplate.deserialize();
+            this.arenas.add(arena);
+
+            arena.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
+            SGApi.getTimeManager(arena).countdownLobby(5);
         }
     }
 

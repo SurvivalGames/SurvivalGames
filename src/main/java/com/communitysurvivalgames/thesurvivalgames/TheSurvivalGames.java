@@ -5,12 +5,27 @@
  */
 package com.communitysurvivalgames.thesurvivalgames;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.PersistenceException;
-
+import com.communitysurvivalgames.thesurvivalgames.ability.*;
+import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
+import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.*;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.*;
+import com.communitysurvivalgames.thesurvivalgames.configs.ArenaConfigTemplate;
+import com.communitysurvivalgames.thesurvivalgames.configs.ConfigTemplate;
+import com.communitysurvivalgames.thesurvivalgames.configs.WorldConfigTemplate;
+import com.communitysurvivalgames.thesurvivalgames.listeners.*;
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import com.communitysurvivalgames.thesurvivalgames.objects.JSign;
+import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
+import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
+import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
+import com.communitysurvivalgames.thesurvivalgames.util.LocationChecker;
+import com.communitysurvivalgames.thesurvivalgames.util.SerializedLocation;
+import com.communitysurvivalgames.thesurvivalgames.util.ThrowableSpawnEggs;
+import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -18,44 +33,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.communitysurvivalgames.thesurvivalgames.ability.Archer;
-import com.communitysurvivalgames.thesurvivalgames.ability.Crafter;
-import com.communitysurvivalgames.thesurvivalgames.ability.Knight;
-import com.communitysurvivalgames.thesurvivalgames.ability.Pacman;
-import com.communitysurvivalgames.thesurvivalgames.ability.Toxicologist;
-import com.communitysurvivalgames.thesurvivalgames.ability.Zelda;
-import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
-import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.ChatCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.DeclineCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.InviteCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.ListCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.PromoteCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.CreateCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.RemoveCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.SetCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.StartCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.StopCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.TestCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.UserCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.VoteCommand;
-import com.communitysurvivalgames.thesurvivalgames.listeners.BlockListener;
-import com.communitysurvivalgames.thesurvivalgames.listeners.ChatListener;
-import com.communitysurvivalgames.thesurvivalgames.listeners.EntityDamageListener;
-import com.communitysurvivalgames.thesurvivalgames.listeners.ItemDropListener;
-import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
-import com.communitysurvivalgames.thesurvivalgames.listeners.PlayerQuitListener;
-import com.communitysurvivalgames.thesurvivalgames.listeners.SetupListener;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.JSign;
-import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
-import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
-import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
-import com.communitysurvivalgames.thesurvivalgames.util.LocationChecker;
-import com.communitysurvivalgames.thesurvivalgames.util.SerializedLocation;
-import com.communitysurvivalgames.thesurvivalgames.util.ThrowableSpawnEggs;
-import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
+import javax.persistence.PersistenceException;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TheSurvivalGames extends JavaPlugin {
 
@@ -103,8 +84,17 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void onDisable() {
 		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
 
-		SGApi.getScheduler().shutdownAll();
+        for(SGArena arena : SGApi.getArenaManager().getArenas()) {
+            ConfigTemplate<SGArena> configTemplate = new ArenaConfigTemplate(arena);
+            configTemplate.serialize();
+        }
 
+        for(SGWorld world : SGApi.getMultiWorldManager().getWorlds()) {
+            ConfigTemplate<SGWorld> configTemplate = new WorldConfigTemplate(world);
+            configTemplate.serialize();
+        }
+
+		SGApi.getScheduler().shutdownAll();
 	}
 
 	void registerAll() {

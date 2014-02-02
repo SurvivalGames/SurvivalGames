@@ -58,7 +58,6 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 
 			this.cachedWorldCreator = new SGWorld(this.cachedWorldName, cachedDisplayName);
 			this.cachedWorldCreator.create();
-			SGApi.getMultiWorldManager().getWorlds().add(this.cachedWorldCreator);
 			break;
 		case 2:
 			List<Location> locs = new ArrayList<>();
