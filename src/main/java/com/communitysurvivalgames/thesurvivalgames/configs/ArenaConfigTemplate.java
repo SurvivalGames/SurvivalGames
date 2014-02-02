@@ -133,6 +133,7 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
         Map<String, Kit> map = new HashMap<>();
         for(String s : list) {
             String[] sp = s.split(":");
+            //TODO
         }
         return map;
     }
