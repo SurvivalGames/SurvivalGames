@@ -9,6 +9,7 @@ import com.communitysurvivalgames.thesurvivalgames.kits.KitItem;
 import com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
 
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -27,11 +28,16 @@ public class KitManager {
 					Kit kit;
 					List<KitItem> kitItems = new ArrayList<KitItem>();
 					FileConfiguration kitData = YamlConfiguration.loadConfiguration(new File(SGApi.getPlugin().getDataFolder(), file));
-					
+
 					String kitName = kitData.getString("name");
 					String type = kitData.getString("type");
-					Material icon = Material.getMaterial("icon");
-					 
+					Material icon = Material.getMaterial(kitData.getString("icon"));
+					String iconLore = kitData.getString("iconLore");
+
+					ConfigurationSection cs = kitData.getConfigurationSection("items");
+					for (int i = 0; i < cs.getKeys(false).size(); i++) {
+						
+					}
 				}
 			}
 

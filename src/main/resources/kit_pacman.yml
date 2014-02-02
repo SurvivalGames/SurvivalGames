@@ -1,0 +1,31 @@
+#####################
+## Kit Config File ##
+##     Pacman      ##
+#####################
+
+# Valid item names can be found here: http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
+
+# Kit name
+name: Pacman
+
+#Kit type
+type: Game
+
+# Kit icon - Must use valid item name
+icon: GLOWSTONE_DUST
+
+# Icon Lore
+iconLore: Power Dots FTW
+
+# Items
+items:
+    # Kit Level
+    lvl1:
+        item1:
+            name: Power Orb
+            lore: "&3Speed, Strength, and... PRETTY LIGHTS"
+            item: GLOWSTONE_DUST
+            amount: 2
+            enchantments:
+                - UNENCHANTABLE;1
+            durabality: 100

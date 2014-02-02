@@ -40,7 +40,7 @@ public class TwiceAsNice implements Listener {
     private List<String> lore;
     private String displayName;
 
-    @SuppressWarnings("deprecated")
+    @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.LOWEST)
     public void playerJoin(final PlayerJoinEvent e) {
 
@@ -48,7 +48,7 @@ public class TwiceAsNice implements Listener {
         e.getPlayer().getInventory().setItem(0, it);
         e.getPlayer().closeInventory();
         SGApi.getPlugin().getServer().getScheduler().runTask(SGApi.getPlugin(), new Runnable() {
-            @Override
+			@Override
             public void run() {
 
                 e.getPlayer().updateInventory();
