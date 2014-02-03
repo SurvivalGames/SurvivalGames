@@ -11,7 +11,7 @@ import com.communitysurvivalgames.thesurvivalgames.configs.WorldConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;a
+import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
