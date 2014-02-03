@@ -8,6 +8,16 @@
 #                                                                                                          |___/ 
 # This is a community project, join in http://dev.bukkit.org/bukkit-plugins/the-survival-games/.
 
+#Bungeecord Mode
+bungeecord-mode: false
+
+#SETTINGS IF BUNGEECORD MODE IS TRUE
+
+#Define if the server should be a hub
+hub-server: false
+
+#END THOSE SETTINGS
+
 #Starting points per player:
 starting-points: 100
 
