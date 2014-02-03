@@ -29,9 +29,9 @@ public class ArenaManager {
     public final String prefix = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.GOLD;
     public final String error = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.RED;
     private final Map<String, SGWorld> creators = new HashMap<>();
-    private final Map<String, Location> locs = new HashMap<>();
-    private final Map<String, ItemStack[]> inv = new HashMap<>();
-    private final Map<String, ItemStack[]> armor = new HashMap<>();
+    public final Map<String, Location> locs = new HashMap<>();
+    public final Map<String, ItemStack[]> inv = new HashMap<>();
+    public final Map<String, ItemStack[]> armor = new HashMap<>();
     private final List<SGArena> arenas = new ArrayList<>();
     public int arenaSize = 0;
 
@@ -175,28 +175,28 @@ public class ArenaManager {
             @Override
             public void run() {
                 // todo this is only a temp solution to create a new arena
-                SGApi.getMultiWorldManager().create(worldName, display);
+                SGApi.getMultiWorldManager().createWorld(worldName, display);
                 creators.put(creator.getName(), new SGWorld(worldName, worldName));
             }
         });
 
     }
 
-    public void createArenaFromDownload(final Player creator, final String worldName) {
+    public void createArenaFromDownload(final Player creator, final String worldName, final String displayName) {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
             @Override
             public void run() {
-                SGApi.getMultiWorldManager().copyFromInternet(creator, worldName);
+                SGApi.getMultiWorldManager().copyFromInternet(creator, worldName, displayName);
             }
         });
 
     }
 
-    public void createArenaFromImport(final Player creator, final String worldName) {
+    public void createArenaFromImport(final Player creator, final String worldName, final String displayName) {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
             @Override
             public void run() {
-                SGApi.getMultiWorldManager().importWorldFromFolder(creator, worldName);
+                SGApi.getMultiWorldManager().importWorldFromFolder(creator, worldName, displayName);
             }
         });
 

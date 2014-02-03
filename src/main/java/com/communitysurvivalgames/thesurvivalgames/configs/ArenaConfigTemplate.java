@@ -124,7 +124,7 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
     public List<String> serializeKit() {
         List<String> list = new ArrayList<>();
         for(Map.Entry<String, Kit> entry : arena.kits.entrySet()) {
-            list.add(entry.getKey() + ":");  //TODO
+            list.add(entry.getKey() + ":" + entry.getValue().getName());
         }
         return list;
     }
@@ -133,7 +133,7 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
         Map<String, Kit> map = new HashMap<>();
         for(String s : list) {
             String[] sp = s.split(":");
-            //TODO
+            map.put(sp[0], SGApi.getKitManager().getKit(sp[1]));
         }
         return map;
     }

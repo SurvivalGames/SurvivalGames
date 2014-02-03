@@ -44,7 +44,7 @@ public class MultiWorldManager {
         }
     }
 
-    public World copyFromInternet(final Player sender, final String worldName) {// TODO:
+    public World copyFromInternet(final Player sender, final String worldName, final String display) {// TODO:
                                                                                 // Translate
         String url = "http://communitysurvivalgames.com/worlds/" + worldName + ".zip";
         /*
@@ -76,18 +76,17 @@ public class MultiWorldManager {
             sender.sendMessage("The downloaded world was not a world at all!");
             return null;
         }
-        createWorld(worldName);
+        createWorld(worldName, display);
 
         return Bukkit.getWorld(worldName);
     }
 
-    public World importWorldFromFolder(final Player sender, final String worldName) {
-
+    public World importWorldFromFolder(final Player sender, final String worldName, String display) {
         if (!checkIfIsWorld(new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName))) {
             sender.sendMessage("That's not a world :/");
             return null;
         }
-        createWorld(worldName);
+        createWorld(worldName, display);
 
         return Bukkit.getWorld(worldName);
     }

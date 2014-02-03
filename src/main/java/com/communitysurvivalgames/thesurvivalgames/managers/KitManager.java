@@ -1,31 +1,30 @@
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
 import com.communitysurvivalgames.thesurvivalgames.kits.KitItem;
 import com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
-
+import com.communitysurvivalgames.thesurvivalgames.util.ItemSerialization;
 import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KitManager {
 	private List<Kit> kits = new ArrayList<Kit>();
 	private IconMenu menu;
 
 	public void loadKits() {
-
 		String[] files = SGApi.getPlugin().getDataFolder().list();
-
 		do {
 			for (String file : files) {
 				if (file.startsWith("kit_")) {
-					Kit kit;
 					List<KitItem> kitItems = new ArrayList<KitItem>();
 					FileConfiguration kitData = YamlConfiguration.loadConfiguration(new File(SGApi.getPlugin().getDataFolder(), file));
 
@@ -33,11 +32,15 @@ public class KitManager {
 					String type = kitData.getString("type");
 					Material icon = Material.getMaterial(kitData.getString("icon"));
 					String iconLore = kitData.getString("iconLore");
+					String serializedInventory = kitData.getString("items");
 
-					ConfigurationSection cs = kitData.getConfigurationSection("items");
-					for (int i = 0; i < cs.getKeys(false).size(); i++) {
-						
-					}
+                    Inventory inventory = ItemSerialization.stringToInventory(serializedInventory);  // TODO temp solution for now
+                    List<KitItem> list = new ArrayList<>();
+                    for(ItemStack itemStack : inventory) {
+                        list.add(new KitItem(itemStack.getType()));
+                    }
+
+                    kits.add(new Kit(kitName, list, icon, iconLore));
 				}
 			}
 
@@ -68,7 +71,7 @@ public class KitManager {
 		SGApi.getPlugin().saveResource("kit_knight", false);
 	}
 
-	Kit getKit(String name) {
+	public Kit getKit(String name) {
 		for (Kit k : kits) {
 			if (k.getName().equalsIgnoreCase(name))
 				return k;
