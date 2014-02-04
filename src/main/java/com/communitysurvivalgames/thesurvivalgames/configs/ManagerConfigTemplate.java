@@ -79,23 +79,28 @@ public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
                     String[] strings = s.split(":");
                     SGApi.getArenaManager().getCreators().put(strings[0], SGApi.getMultiWorldManager().worldForName(strings[1]));
                 }
+                break;
             case 1:
                 for(String s : (List<String>) o) {
                     String[] strings = s.split(":");
                     SGApi.getArenaManager().locs.put(strings[0], SGApi.getArenaManager().deserializeLoc(strings[1]));
                 }
+                break;
             case 2:
                 for(String s : (List<String>) o) {
                     String[] strings = s.split(":");
                     SGApi.getArenaManager().inv.put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
                 }
+                break;
             case 3:
                 for(String s : (List<String>) o) {
                     String[] strings = s.split(":");
                     SGApi.getArenaManager().armor.put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
                 }
+                break;
             case 4:
                 SGApi.getArenaManager().arenaSize = Integer.valueOf(String.valueOf(o));
+                break;
         }
         return SGApi.getArenaManager();
     }
