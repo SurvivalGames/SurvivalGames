@@ -94,7 +94,7 @@ public class ArenaManager {
 
         p.sendMessage(prefix + "Type in /sg vote <ID> to vote for a map.");
         for(Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
-            p.sendMessage(ChatColor.GOLD + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN + entry.getValue();
+            p.sendMessage(ChatColor.GOLD + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN + entry.getValue());
         }
 
         a.getPlayers().add(p.getName());
