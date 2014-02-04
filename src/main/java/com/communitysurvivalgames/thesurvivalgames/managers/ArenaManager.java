@@ -11,6 +11,7 @@ import com.communitysurvivalgames.thesurvivalgames.configs.WorldConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -89,6 +90,11 @@ public class ArenaManager {
         if (a.getState() != null && !a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)) {
             // set player to spectator
             return;
+        }
+
+        p.sendMessage(prefix + "Type in /sg vote <ID> to vote for a map.");
+        for(Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
+            p.sendMessage(ChatColor.GOLD + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN + entry.getValue();
         }
 
         a.getPlayers().add(p.getName());
