@@ -20,7 +20,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
  * a Runnable but will return a result. This should really be called though
  * {@link com.communitysurvivalgames.thesurvivalgames.managers.ScheduleManager#executor}
  */
-public class FireWorkEffect implements Callable {
+public class RandomFirework implements Callable {
     /**
      * Computes a result, or throws an exception if unable to do so.
      * 

@@ -26,6 +26,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -35,7 +38,9 @@ import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.enchantment.ShockingEnchantment;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.managers.EnchantmentManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.util.DeathMessages;
 import com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
 import com.communitysurvivalgames.thesurvivalgames.util.PlayerVanishUtil;
 
@@ -96,32 +101,7 @@ public class EntityDamageListener implements Listener {
 
 				if ((damaged.getHealth() - event.getDamage()) <= 0) {
 					event.setCancelled(true);
-					damaged.setHealth(20);
-					damaged.setVelocity(new Vector(0, 0, 0.5));
-					damaged.setGameMode(GameMode.CREATIVE);
-					damaged.setAllowFlight(true);
-					damaged.setFlying(true);
-					damaged.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 9999999, 1, false)); // Just
-																													// for
-																													// effect
-
-					for (int i = 0; i < 4; i++)
-						fireworkIt(event.getDamager().getLocation());
-
-					if (entity instanceof Player) {
-						Player damager = (Player) entity;
-						try {
-							SGApi.getArenaManager().getArena(damager).broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("KILLED_BY") + " &e&l" + damager.getDisplayName() + " &r&6" + I18N.getLocaleString("WITH_A") + " &e&l" + damager.getInventory().getItemInHand()));
-						} catch (ArenaNotFoundException e) {
-							e.printStackTrace();
-						}
-					}
-
-					try {
-						PlayerVanishUtil.hideAll(SGApi.getArenaManager().getArena(damaged), damaged);
-					} catch (ArenaNotFoundException e) {
-						e.printStackTrace();
-					}
+					killPlayer(damaged, event.getDamager(), event.getCause());
 				}
 				return;
 			}
@@ -136,6 +116,56 @@ public class EntityDamageListener implements Listener {
 				TheSurvivalGames.getPlugin(TheSurvivalGames.class).getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("FAIL") + " &e&l" + event.getDamager()));
 			}
 		}
+	}
+
+	public void onEntityDamage(EntityDamageEvent event) {
+		Entity entity = event.getEntity();
+		if (entity instanceof Player) {
+			Player damaged = (Player) event.getEntity();
+			if ((damaged.getHealth() - event.getDamage()) <= 0) {
+				event.setCancelled(true);
+				killPlayer(damaged, null, event.getCause());
+			}
+		}
+	}
+
+	public void killPlayer(Player damaged, Entity entity, DamageCause dc) {
+		for (int i = 0; i < 4; i++)
+			fireworkIt(damaged.getLocation());
+
+		try {
+			PlayerVanishUtil.hideAll(SGApi.getArenaManager().getArena(damaged), damaged);
+		} catch (ArenaNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		if (entity == null) {
+			if (entity instanceof Player) {
+				Player damager = (Player) entity;
+				try {
+					SGApi.getArenaManager().getArena(damager).broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("KILLED_BY") + " &e&l" + damager.getDisplayName() + " &r&6" + I18N.getLocaleString("WITH_A") + " &e&l" + damager.getInventory().getItemInHand()));
+				} catch (ArenaNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+		} else {
+			String message = DeathMessages.getDeathMessage(damaged, dc);
+			try {
+				SGApi.getArenaManager().getArena(damaged).broadcast(message);
+			} catch (ArenaNotFoundException e) {}
+		}
+		for (ItemStack is : damaged.getInventory().getContents()) {
+			if (is.containsEnchantment(EnchantmentManager.undroppable))
+				return;
+			damaged.getWorld().dropItem(damaged.getLocation(), is);
+		}
+
+		damaged.setHealth(20);
+		damaged.setVelocity(new Vector(0, 0, 0.5));
+		damaged.setGameMode(GameMode.CREATIVE);
+		damaged.setAllowFlight(true);
+		damaged.setFlying(true);
+		damaged.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 9999999, 1, false));
 	}
 
 	public void fireworkIt(Location loc) {

@@ -29,6 +29,8 @@ import com.communitysurvivalgames.thesurvivalgames.util.LocationChecker;
 import com.communitysurvivalgames.thesurvivalgames.util.SerializedLocation;
 import com.communitysurvivalgames.thesurvivalgames.util.ThrowableSpawnEggs;
 import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
+
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -53,6 +55,11 @@ public class TheSurvivalGames extends JavaPlugin {
 		SGApi.init(this);
 
 		configurationData = new ConfigurationData();
+
+		if (!configurationData.isBungeecordMode() && configurationData.isHub()) {
+			Bukkit.getLogger().severe("How do you expect to have a hub server if you're not even running on Bungeecord Mode?");
+			getServer().getPluginManager().disablePlugin(this);
+		}
 
 		SGApi.getScheduler();
 
@@ -80,10 +87,11 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		registerAll();
 
-        ConfigTemplate<ArenaManager> configTemplate = new ManagerConfigTemplate(new File(getDataFolder().getAbsolutePath() + "/ArenaManager.yml"));
-        configTemplate.deserialize();
+		ConfigTemplate<ArenaManager> configTemplate = new ManagerConfigTemplate(new File(getDataFolder().getAbsolutePath() + "/ArenaManager.yml"));
+		configTemplate.deserialize();
 
-		SGApi.getArenaManager().loadGames();
+		if (!getPluginConfig().isHub())
+			SGApi.getArenaManager().loadGames();
 		getLogger().info(I18N.getLocaleString("BEEN_ENABLED"));
 		getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
 		saveDefaultConfig();
@@ -94,8 +102,8 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void onDisable() {
 		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
 
-        ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate();
-        template.serialize();
+		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate();
+		template.serialize();
 
 		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
 			ConfigTemplate<SGArena> configTemplate = new ArenaConfigTemplate(arena);
@@ -160,9 +168,6 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new Toxicologist(), this);
 		pm.registerEvents(new Zelda(), this);
 
-		// Throws NPE's
-		// SGApi.getSignManager().signs =
-		// getDatabase().find(JSign.class).findList();
 		Scoreboard.registerScoreboard();
 		SGApi.getEnchantmentManager().registerAll();
 	}
@@ -182,6 +187,8 @@ public class TheSurvivalGames extends JavaPlugin {
 			System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
 			installDDL();
 		}
+
+		SGApi.getSignManager().signs = getDatabase().find(JSign.class).findList();
 	}
 
 	/**
@@ -191,7 +198,6 @@ public class TheSurvivalGames extends JavaPlugin {
 	 */
 	@Override
 	public List<Class<?>> getDatabaseClasses() {
-		@SuppressWarnings("Convert2Diamond")
 		List<Class<?>> list = new ArrayList<>();
 		list.add(PlayerData.class);
 		list.add(JSign.class);
