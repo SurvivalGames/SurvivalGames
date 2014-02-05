@@ -1,5 +1,5 @@
 ![SurvivalGames](http://i.imgur.com/mgG0cp2.jpg)
-[![Features](http://i.imgur.com/fNHYSr2.png)](http://example.com) [![Commands](http://i.imgur.com/hQ4xduo.png)](http://example.com) [![Permissions](http://i.imgur.com/WnpRVRw.png)](http://example.com) [![Setup](http://i.imgur.com/pa1un30.png)](http://example.com) [![Website](http://i.imgur.com/cIhh8NE.png)](http://communitysurvivalgames.com)  [![dev.bukkit.org](http://i.imgur.com/XB3D4Wc.png)](http://dev.bukkit.org/bukkit-plugins/the-survival-games/)
+       [![Features](http://i.imgur.com/fNHYSr2.png)](http://example.com) [![Commands](http://i.imgur.com/hQ4xduo.png)](http://example.com) [![Permissions](http://i.imgur.com/WnpRVRw.png)](http://example.com) [![Setup](http://i.imgur.com/pa1un30.png)](http://example.com) [![Website](http://i.imgur.com/cIhh8NE.png)](http://communitysurvivalgames.com)  [![dev.bukkit.org](http://i.imgur.com/XB3D4Wc.png)](http://dev.bukkit.org/bukkit-plugins/the-survival-games/)
 
 [![Features](http://imgur.com/F2MBj0Y.png)](https://github.com/SurvivalGamesDevTeam/Builds/tree/master/com/communitysurvivalgames/thesurvivalgames/TheSurvivalGames/1.0.0)  
 Build Stats: [![Build Status](https://travis-ci.org/SurvivalGamesDevTeam/TheSurvivalGames.png?branch=master)](https://travis-ci.org/SurvivalGamesDevTeam/TheSurvivalGames)
