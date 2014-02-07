@@ -21,11 +21,5 @@ iconLore: Power Dots FTW
 items:
     # Kit Level
     lvl1:
-        item1:
-            name: Power Orb
-            lore: "&3Speed, Strength, and... PRETTY LIGHTS"
-            item: GLOWSTONE_DUST
-            amount: 2
-            enchantments:
-                - UNENCHANTABLE;1
-            durabality: 100
+        #Inventory to string
+        inventory: '1;0#t@GLOWSTONE_DUST:d@0:a@2:e@UNDROPPABLE@1:n@Power Orb:l@&3Speed - Strength - and... PRETTY LIGHTS,&1Pacman Kit - LvL1'

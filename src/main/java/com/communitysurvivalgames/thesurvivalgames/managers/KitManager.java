@@ -25,7 +25,6 @@ public class KitManager {
 		do {
 			for (String file : files) {
 				if (file.startsWith("kit_")) {
-					List<KitItem> kitItems = new ArrayList<KitItem>();
 					FileConfiguration kitData = YamlConfiguration.loadConfiguration(new File(SGApi.getPlugin().getDataFolder(), file));
 
 					String kitName = kitData.getString("name");
@@ -37,7 +36,9 @@ public class KitManager {
                     Inventory inventory = ItemSerialization.stringToInventory(serializedInventory);  // TODO temp solution for now
                     List<KitItem> list = new ArrayList<>();
                     for(ItemStack itemStack : inventory) {
-                        list.add(new KitItem(itemStack.getType()));
+                    	KitItem ki = new KitItem();
+                    	ki.setItem(itemStack);
+                        list.add(ki);
                     }
 
                     kits.add(new Kit(kitName, list, icon, iconLore));

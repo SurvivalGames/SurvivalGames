@@ -21,10 +21,5 @@ iconLore: The Knight Kit is awesome because you can wield the special sword.
 items:
     # Kit Level
     lvl1:
-        item1:
-            name: Knight's Wooden Sword (Lvl 1)
-            lore: "&2Strikes with the force of a... Butter Knife!"
-            item: WOODEN_SWORD
-            enchantments:
-                - UNENCHANTABLE;1
-            durabality: 100
+        #Inventory to string
+        inventory: '1;0#t@COOKIE:a@2:n@Cookie@l&2The awesome cookie,&1Knight Kit - LvL 1'
