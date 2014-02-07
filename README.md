@@ -28,8 +28,6 @@ Try to edit with an IDE before putting something on GitHub as much as possible, 
 
 =========
 
-http://CommunitySurvivalGames.com
-
 **Description**
 
 What is there to describe? This will be a community project, this is the description.
