@@ -23,3 +23,6 @@ items:
     lvl1:
         #Inventory to string
         inventory: '1;0#t@GLOWSTONE_DUST:d@0:a@2:e@UNDROPPABLE@1:n@Power Orb:l@&3Speed - Strength - and... PRETTY LIGHTS,&1Pacman Kit - LvL1'
+
+ability-ids:
+    - 5

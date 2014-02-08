@@ -23,3 +23,6 @@ items:
     lvl1:
         #Inventory to string
         inventory: '1;0#t@COOKIE:a@2:n@Cookie@l&2The awesome cookie,&1Knight Kit - LvL 1'
+
+ability-ids:
+    - 0

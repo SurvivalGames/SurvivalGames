@@ -1,10 +1,9 @@
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
-import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
-import com.communitysurvivalgames.thesurvivalgames.kits.KitItem;
-import com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
-import com.communitysurvivalgames.thesurvivalgames.util.ItemSerialization;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -12,9 +11,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
+import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
+import com.communitysurvivalgames.thesurvivalgames.kits.KitItem;
+import com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
+import com.communitysurvivalgames.thesurvivalgames.util.ItemSerialization;
 
 public class KitManager {
 	private List<Kit> kits = new ArrayList<Kit>();
@@ -41,7 +42,9 @@ public class KitManager {
                         list.add(ki);
                     }
 
-                    kits.add(new Kit(kitName, list, icon, iconLore));
+                    List<Integer> abilityIds = kitData.getIntegerList("ability-ids");
+                    
+                    kits.add(new Kit(kitName, list, icon, iconLore, abilityIds));
 				}
 			}
 

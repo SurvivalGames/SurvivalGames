@@ -14,14 +14,14 @@ public class Kit {
 	private ItemStack kitIcon;
 	private List<KitItem> items = new ArrayList<KitItem>();
 
-	private List<Integer> abaility = new ArrayList<Integer>();
+	private List<Integer> ability = new ArrayList<Integer>();
 
-	public Kit(String kitName, List<KitItem> items, Material kitIcon, String kitIconLore) {
+	public Kit(String kitName, List<KitItem> items, Material kitIcon, String kitIconLore, List<Integer> abilityIds) {
 		this.kitName = kitName;
 		this.kitIcon = new ItemStack(kitIcon);
 		this.items = items;
 		this.kitIconLore = kitIconLore;
-
+		this.ability = abilityIds;
 	}
 
 	public String getName() {
@@ -41,6 +41,6 @@ public class Kit {
 	}
 
 	public List<Integer> getAbilityIds() {
-		return abaility;
+		return ability;
 	}
 }
