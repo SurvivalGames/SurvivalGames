@@ -11,6 +11,7 @@ import java.util.Map;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
@@ -48,6 +49,7 @@ public class CommandHandler implements CommandExecutor {
      * 
      * @param cmd The name of the command to get
      * @return The SubCommand of the command
+     * @throws CommandException when the command was not found. Should be caught.
      */
     SubCommand getCommand(String cmd) throws CommandException {
         if (commands.containsKey(cmd)) {
@@ -64,60 +66,28 @@ public class CommandHandler implements CommandExecutor {
      * @param command The Command executed
      * @param commandLabel The command's label
      * @param args The arguments after the command seperated by a space
-     * @return Whether or not the command was executed successfully
+     * @return whether or not the command was executed successfully
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-
         if (command.getName().equalsIgnoreCase("sg") && sender instanceof Player) {
-            if (args.length == 5) {
+            if(args.length >= 1) {
+                String[] stringArray = new String[args.length];
+                for(int i = 1; i <= (args.length - 1); i++) {
+                    stringArray[i - 1] = args[i];
+                }
+                
                 try {
-                    getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2], args[3], args[4] });
+                    getCommand(args[0]).execute(args[0], (Player) sender, stringArray);
                     return true;
-                } catch (CommandException e) {
-                    sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
+                } catch (CommandException x) {
+                    p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
                     return true;
                 }
-            } else if (args.length == 4) {
-                try {
-                    getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2], args[3] });
-                    return true;
-                } catch (CommandException e) {
-                    sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
-                    return true;
-                }
-            } else if (args.length == 3) {
-                try {
-                    getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1], args[2] });
-                    return true;
-                } catch (CommandException e) {
-                    sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
-                    return true;
-                }
-            } else if (args.length == 2) {
-                try {
-                    getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1] });
-                    return true;
-                } catch (CommandException e) {
-                    sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
-                    return true;
-                }
-            } else if (args.length == 1) {
-                try {
-                    getCommand(args[0]).execute(args[0], (Player) sender, new String[] {});
-                    return true;
-                } catch (CommandException e) {
-                    sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
-                    return true;
-                }
-            } else if (args.length == 0) {
-                Bukkit.dispatchCommand(sender, "sg help");
-                return true;
             } else {
                 Bukkit.dispatchCommand(sender, "sg help");
                 return true;
             }
-
         } else if (!(sender instanceof Player)) {
             sender.sendMessage(I18N.getLocaleString("ONLY_PLAYERS"));
             return true;
