@@ -60,6 +60,7 @@ COMMAND_HELP_3 = - /sg setlobby [Arena ID]: Sets the lobby spawn
 COMMAND_HELP_4 = - /sg setgamespawn [Number]: Set the spawn ingame for the specific point
 COMMAND_HELP_5 = - /sg setnextspawn: Set the next spawn in line for the arena
 COMMAND_HELP_6 = - /sg setdeathmatch [Number]: Sets the deathmatch spawn at the point
+COMMAND_HELP_96 = - /sg finish: Finishes Map creation
 COMMAND_HELP_7 = - /sg setmaxplayers [Number]: Set the max arena capacity
 COMMAND_HELP_8 = - /sg setchest [T1/T2]: Set a specific chest tier
 COMMAND_HELP_9 = - /sg join [Arena ID]: Joins an arena
