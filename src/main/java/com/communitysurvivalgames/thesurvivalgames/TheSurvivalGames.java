@@ -167,6 +167,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new Pacman(), this);
 		pm.registerEvents(new Toxicologist(), this);
 		pm.registerEvents(new Zelda(), this);
+		pm.registerEvents(new Enchanter(), this);
 
 		Scoreboard.registerScoreboard();
 		SGApi.getEnchantmentManager().registerAll();
