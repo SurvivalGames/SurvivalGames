@@ -1,10 +1,9 @@
 package com.communitysurvivalgames.thesurvivalgames.kits;
 
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.bukkit.inventory.ItemStack;
 
 public class Kit {
 
@@ -16,9 +15,9 @@ public class Kit {
 
 	private List<Integer> ability = new ArrayList<Integer>();
 
-	public Kit(String kitName, List<KitItem> items, Material kitIcon, String kitIconLore, List<Integer> abilityIds) {
+	public Kit(String kitName, List<KitItem> items, ItemStack kitIcon, String kitIconLore, List<Integer> abilityIds) {
 		this.kitName = kitName;
-		this.kitIcon = new ItemStack(kitIcon);
+		this.kitIcon = kitIcon;
 		this.items = items;
 		this.kitIconLore = kitIconLore;
 		this.ability = abilityIds;

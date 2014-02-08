@@ -10,6 +10,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionType;
 
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
@@ -30,21 +32,32 @@ public class KitManager {
 
 					String kitName = kitData.getString("name");
 					String type = kitData.getString("type");
-					Material icon = Material.getMaterial(kitData.getString("icon"));
+					String[] iconU = kitData.getString("icon").split(":");
+					ItemStack icon = null;
+					if (iconU.length > 1) {
+						if (iconU[0].equalsIgnoreCase("@p")) {
+							icon = new ItemStack(Material.POTION);
+							Potion potion = new Potion(1);
+							potion.setType(PotionType.valueOf(iconU[1]));
+							potion.setSplash(Boolean.valueOf(iconU[2]));
+						}
+					} else {
+						icon = new ItemStack(Material.getMaterial(iconU[0]));
+					}
 					String iconLore = kitData.getString("iconLore");
 					String serializedInventory = kitData.getString("lvl1.inventory");
 
-                    Inventory inventory = ItemSerialization.stringToInventory(serializedInventory);  // TODO Not a temp solution, this is awesome!
-                    List<KitItem> list = new ArrayList<>();
-                    for(ItemStack itemStack : inventory) {
-                    	KitItem ki = new KitItem();
-                    	ki.setItem(itemStack);
-                        list.add(ki);
-                    }
+					Inventory inventory = ItemSerialization.stringToInventory(serializedInventory); // TODO Not a temp solution, this is awesome!
+					List<KitItem> list = new ArrayList<>();
+					for (ItemStack itemStack : inventory) {
+						KitItem ki = new KitItem();
+						ki.setItem(itemStack);
+						list.add(ki);
+					}
 
-                    List<Integer> abilityIds = kitData.getIntegerList("ability-ids");
-                    
-                    kits.add(new Kit(kitName, list, icon, iconLore, abilityIds));
+					List<Integer> abilityIds = kitData.getIntegerList("ability-ids");
+
+					kits.add(new Kit(kitName, list, icon, iconLore, abilityIds));
 				}
 			}
 
