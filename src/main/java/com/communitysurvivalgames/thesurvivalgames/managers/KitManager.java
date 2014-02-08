@@ -34,7 +34,7 @@ public class KitManager {
 					String iconLore = kitData.getString("iconLore");
 					String serializedInventory = kitData.getString("lvl1.inventory");
 
-                    Inventory inventory = ItemSerialization.stringToInventory(serializedInventory);  // TODO temp solution for now
+                    Inventory inventory = ItemSerialization.stringToInventory(serializedInventory);  // TODO Not a temp solution, this is awesome!
                     List<KitItem> list = new ArrayList<>();
                     for(ItemStack itemStack : inventory) {
                     	KitItem ki = new KitItem();
