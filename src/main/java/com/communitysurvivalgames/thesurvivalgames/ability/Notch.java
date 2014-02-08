@@ -8,13 +8,20 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 
+import com.communitysurvivalgames.thesurvivalgames.listeners.BlockListener;
 import com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
 
 public class Notch extends SGAbility implements Listener {
 
 	public Notch() {
 		super(7);
+	}
+
+	@EventHandler(priority = EventPriority.HIGH)
+	public void onBlockPlace(BlockPlaceEvent event) {
+		BlockListener.addBreakable(event.getBlock());
 	}
 
 	@EventHandler(priority = EventPriority.HIGH)

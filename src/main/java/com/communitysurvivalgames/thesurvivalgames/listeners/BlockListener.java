@@ -8,8 +8,9 @@ package com.communitysurvivalgames.thesurvivalgames.listeners;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,38 +18,44 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+
 public class BlockListener implements Listener {
-    // TODO This is a list of blocks that can be broken in game
-    // Might need to list each type of leaf or grass will have to check will
-    // impliment later
-    final List<Material> allowed;
 
-    public BlockListener() {
+	final List<Material> allowed;
+	static List<Block> breakable;
 
-        allowed = new ArrayList<>();
-        for (String s : SGApi.getPlugin().getPluginConfig().getAllowedBlockBreaks()) {
-            allowed.add(Material.valueOf(s));
-        }
-    }
+	public BlockListener() {
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onBlockPlace(BlockPlaceEvent event) {
-        if (SGApi.getArenaManager().isInGame(event.getPlayer())) {
-            if (event.getBlock().getType().equals(Material.TNT)) {
-                event.getPlayer().getWorld().spawnEntity(event.getBlock().getLocation(), EntityType.PRIMED_TNT);
-            }
-            event.setCancelled(true);
-        }
+		allowed = new ArrayList<>();
+		breakable = new ArrayList<Block>();
+		for (String s : SGApi.getPlugin().getPluginConfig().getAllowedBlockBreaks()) {
+			allowed.add(Material.valueOf(s));
+		}
+	}
 
-        if (!event.getPlayer().hasPermission("sg.build")) {
-            event.setCancelled(true);
-        }
-    }
+	public static void addBreakable(Block block) {
+		breakable.add(block);
+	}
 
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onBlockBreak(BlockBreakEvent event) {
-        if (!event.getPlayer().hasPermission("sg.build")) {
-            event.setCancelled(true);
-        }
-    }
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onBlockPlace(BlockPlaceEvent event) {
+		if (SGApi.getArenaManager().isInGame(event.getPlayer())) {
+			if (event.getBlock().getType().equals(Material.TNT)) {
+				event.getPlayer().getWorld().spawnEntity(event.getBlock().getLocation(), EntityType.PRIMED_TNT);
+			}
+			event.setCancelled(true);
+		}
+
+		if (!event.getPlayer().hasPermission("sg.build") || !(breakable.contains(event.getBlock()))) {
+			event.setCancelled(true);
+		}
+	}
+
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void onBlockBreak(BlockBreakEvent event) {
+		if (!event.getPlayer().hasPermission("sg.build") || !(event.getBlock().getType() == Material.DIAMOND_ORE)) {
+			event.setCancelled(true);
+		}
+	}
 }
