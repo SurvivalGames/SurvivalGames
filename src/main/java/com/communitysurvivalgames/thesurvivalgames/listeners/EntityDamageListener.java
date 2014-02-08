@@ -36,6 +36,7 @@ import org.bukkit.util.Vector;
 
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.enchantment.ShockingEnchantment;
+import com.communitysurvivalgames.thesurvivalgames.event.PlayerKilledEvent;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.EnchantmentManager;
@@ -130,6 +131,9 @@ public class EntityDamageListener implements Listener {
 	}
 
 	public void killPlayer(Player damaged, Entity entity, DamageCause dc) {
+		
+		Bukkit.getServer().getPluginManager().callEvent(new PlayerKilledEvent(damaged, entity));
+		
 		for (int i = 0; i < 4; i++)
 			fireworkIt(damaged.getLocation());
 

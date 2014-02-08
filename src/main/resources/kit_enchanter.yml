@@ -25,4 +25,4 @@ items:
         inventory: "1;0#t@ENCHANTMENT_TABLE:a@e:UNDROPPABLE@2:n@Portable Enchanter@l&4Right-click to open enchantment table%Single-use%&1Enchanter Kit - LvL 1"
 
 ability-ids:
-    - 2
+    - 6
