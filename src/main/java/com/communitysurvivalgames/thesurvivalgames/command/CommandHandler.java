@@ -81,7 +81,7 @@ public class CommandHandler implements CommandExecutor {
                     getCommand(args[0]).execute(args[0], (Player) sender, stringArray);
                     return true;
                 } catch (CommandException x) {
-                    p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
+                    sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
                     return true;
                 }
             } else {
