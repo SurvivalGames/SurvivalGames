@@ -84,7 +84,7 @@ public class ItemSerialization {
 					createdItemStack = true;
 					SpawnEgg se = new SpawnEgg();
 					se.setSpawnedType(EntityType.valueOf(itemAttribute[1]));
-					is = se.toItemStack();				
+					is = se.toItemStack();
 				} else if (itemAttribute[0].equals("d") && createdItemStack) {
 					is.setDurability(Short.valueOf(itemAttribute[1]));
 				} else if (itemAttribute[0].equals("a") && createdItemStack) {
@@ -105,6 +105,7 @@ public class ItemSerialization {
 					}
 					meta.setLore(lore);
 					is.setItemMeta(meta);
+				}
 
 			}
 			deserializedInventory.setItem(stackPosition, is);
