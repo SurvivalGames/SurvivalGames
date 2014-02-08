@@ -14,6 +14,7 @@ import com.communitysurvivalgames.thesurvivalgames.configs.ArenaConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.configs.ConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.configs.ManagerConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.configs.WorldConfigTemplate;
+import com.communitysurvivalgames.thesurvivalgames.kits.KitItem;
 import com.communitysurvivalgames.thesurvivalgames.listeners.*;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
@@ -51,6 +52,7 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void onEnable() {
 		ConfigurationSerialization.registerClass(SerializedLocation.class);
 		ConfigurationSerialization.registerClass(LocationChecker.class);
+        ConfigurationSerialization.registerClass(KitItem.class);
 
 		SGApi.init(this);
 
