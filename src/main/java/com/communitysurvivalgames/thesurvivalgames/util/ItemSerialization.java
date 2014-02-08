@@ -47,7 +47,7 @@ public class ItemSerialization {
 				if (is.getItemMeta().getLore().size() > 0) {
 					serializedItemStack += ":l@";
 					for (String l : is.getItemMeta().getLore()) {
-						serializedItemStack += l + ",";
+						serializedItemStack += l + "%";
 					}
 				}
 
@@ -92,7 +92,7 @@ public class ItemSerialization {
 				} else if (itemAttribute[0].equals("l") && createdItemStack) {
 					ItemMeta meta = is.getItemMeta();
 					List<String> lore = new ArrayList<String>();
-					String[] loreArray = itemAttribute[1].split(",");
+					String[] loreArray = itemAttribute[1].split("%");
 					for (String c : loreArray) {
 						lore.add(ChatColor.translateAlternateColorCodes('&', c));
 					}
