@@ -22,7 +22,7 @@ items:
     # Kit Level
     lvl1:
         #Inventory to string
-        inventory: "1;0#t@DIAMOND_ORE:a@2:n@Notch's Diamond Ore@l&4Wait... how am I gonna' mine this?%&1Notch Kit - LvL 1#t@STICK:a@2:n@The Sticks of the Pickaxe:@l&2THE STICKS OF THE PICKAXE%&1Notch Kit - LvL 1"
+        inventory: "2;0#t@DIAMOND_ORE:a@2:n@Notch's Diamond Ore@l&4Wait... how am I gonna' mine this?%&1Notch Kit - LvL 1;#t@STICK:a@2:n@The Sticks of the Pickaxe:@l&2THE STICKS OF THE PICKAXE%&1Notch Kit - LvL 1"
 
 ability-ids:
     - 7

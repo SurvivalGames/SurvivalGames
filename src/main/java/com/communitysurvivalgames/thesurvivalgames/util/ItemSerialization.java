@@ -9,9 +9,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.SpawnEgg;
 
 public class ItemSerialization {
 
@@ -78,6 +80,11 @@ public class ItemSerialization {
 				if (itemAttribute[0].equals("t")) {
 					is = new ItemStack(Material.getMaterial(itemAttribute[1]));
 					createdItemStack = true;
+				} else if (itemAttribute[0].equals("s") && createdItemStack) {
+					createdItemStack = true;
+					SpawnEgg se = new SpawnEgg();
+					se.setSpawnedType(EntityType.valueOf(itemAttribute[1]));
+					is = se.toItemStack();				
 				} else if (itemAttribute[0].equals("d") && createdItemStack) {
 					is.setDurability(Short.valueOf(itemAttribute[1]));
 				} else if (itemAttribute[0].equals("a") && createdItemStack) {
@@ -98,7 +105,7 @@ public class ItemSerialization {
 					}
 					meta.setLore(lore);
 					is.setItemMeta(meta);
-				}
+
 			}
 			deserializedInventory.setItem(stackPosition, is);
 		}
