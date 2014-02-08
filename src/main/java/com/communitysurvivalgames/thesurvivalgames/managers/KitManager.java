@@ -85,7 +85,14 @@ public class KitManager {
 	}
 
 	void saveDefaultKits() {
-		SGApi.getPlugin().saveResource("kit_knight", false);
+		SGApi.getPlugin().saveResource("kit_archer.yml", false);
+		SGApi.getPlugin().saveResource("kit_crafter.yml", false);
+		SGApi.getPlugin().saveResource("kit_enchanter.yml", false);
+		SGApi.getPlugin().saveResource("kit_knight.yml", false);
+		SGApi.getPlugin().saveResource("kit_notch.yml", false);
+		SGApi.getPlugin().saveResource("kit_pacman.yml", false);
+		SGApi.getPlugin().saveResource("kit_toxicologist.yml", false);
+		SGApi.getPlugin().saveResource("kit_zelda.yml", false);
 	}
 
 	public Kit getKit(String name) {
