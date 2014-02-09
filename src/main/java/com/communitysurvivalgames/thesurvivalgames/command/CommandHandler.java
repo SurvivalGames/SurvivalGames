@@ -92,7 +92,6 @@ public class CommandHandler implements CommandExecutor {
             sender.sendMessage(I18N.getLocaleString("ONLY_PLAYERS"));
             return true;
         }
-
         return false;
     }
 }
