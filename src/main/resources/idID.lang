@@ -59,6 +59,7 @@ COMMAND_HELP_3 = - /sg setlobby [ID arena] : Menetapkan lobi sebuah arena
 COMMAND_HELP_4 = - /sg setgamespawn [Nomor] : Menetapkan tempat spawn di sebuah tempat spesifik
 COMMAND_HELP_5 = - /sg setnextspawn : Menetapkan tempat spawn setelah yang pertama (dst.) untuk sebuah arena
 COMMAND_HELP_6 = - /sg setdeathmatch [Nomor] : Menetapkan tempat deathmatch
+COMMAND_HELP_96 = - /sg finish : Menyelesaikan pembuatan peta
 COMMAND_HELP_7 = - /sg setmaxplayers [Nomor] : Menetapkan jumlah maksimum pemain di sebuah arena
 COMMAND_HELP_8 = - /sg setchest [T1/T2] : Menetapkan golongan sebuah chest
 COMMAND_HELP_9 = - /sg join [ID arena] : Masuk ke sebuah arena
