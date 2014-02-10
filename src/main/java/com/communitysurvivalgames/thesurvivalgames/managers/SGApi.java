@@ -8,6 +8,9 @@ package com.communitysurvivalgames.thesurvivalgames.managers;
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
+import java.util.Map;
+import java.util.HashMap;
+
 /**
  * SGApi The main class for getting references to other classes and objects
  * <p>
@@ -32,7 +35,7 @@ public class SGApi {
 	private static KitManager kitManager;
 	private static MultiWorldManager multiWorldManager;
 	private static SignManager signManager;
-	private static TimeManager timeManager;
+	private static Map<SGArena, TimeManager> timeManager = new HashMap<>();
 	private static PartyManager partyManager;
 	private static TheSurvivalGames plugin;
 	private static ScheduleManager scheduler;
@@ -108,9 +111,10 @@ public class SGApi {
 	 * @return the time manager
 	 */
 	public static TimeManager getTimeManager(SGArena a) {
-		if (timeManager == null)
-			timeManager = new TimeManager(a);
-		return timeManager;
+                TimeManager manager = timeManager.get(a);
+		if (manager == null)
+			timeManager.put(a, new TimeManager(a));
+		return timeManager.get(a);
 	}
 
 	public static EnchantmentManager getEnchantmentManager() {
