@@ -18,7 +18,7 @@ import org.bukkit.material.SpawnEgg;
 public class ItemSerialization {
 
 	public static String inventoryToString(Inventory invInventory) {
-		String serialization = invInventory.getSize() + ";";
+		String serialization = 54 + ";";
 		for (int i = 0; i < invInventory.getSize(); i++) {
 			ItemStack is = invInventory.getItem(i);
 			if (is != null) {
@@ -62,8 +62,7 @@ public class ItemSerialization {
 	public static Inventory stringToInventory(String invString) {
 		String[] serializedBlocks = invString.split(";");
 		String invInfo = serializedBlocks[0];
-		//Inventory deserializedInventory = Bukkit.getServer().createInventory(null, (int) (Math.ceil(Integer.valueOf(invInfo)/9.0) * 9)); //Apparently you have to use a multiple of nine here
-		Inventory deserializedInventory = Bukkit.getServer().createInventory(null, 9); //Apparently you have to use a multiple of nine here
+		Inventory deserializedInventory = Bukkit.getServer().createInventory(null, Integer.valueOf(invInfo), "Hi");
 
 		for (int i = 1; i < serializedBlocks.length; i++) {
 			String[] serializedBlock = serializedBlocks[i].split("#");
