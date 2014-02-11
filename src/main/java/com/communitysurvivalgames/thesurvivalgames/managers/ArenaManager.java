@@ -183,6 +183,7 @@ public class ArenaManager {
 				// todo this is only a temp solution to create a new arena
 				SGApi.getMultiWorldManager().createWorld(worldName, display);
 				creators.put(creator.getName(), new SGWorld(worldName, worldName));
+				createLobby(creator);
 			}
 		});
 

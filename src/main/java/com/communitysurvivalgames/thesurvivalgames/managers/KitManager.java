@@ -44,8 +44,8 @@ public class KitManager {
 		}, SGApi.getPlugin());
 		int index = 0;
 		for (Kit k : kits) {
-			index++;
 			menu.setOption(index, k.getIcon(), k.getName(), k.getIconLore());
+			index++;
 		}
 	}
 
@@ -74,7 +74,7 @@ public class KitManager {
 				String serializedInventory = kitData.getString("items.lvl1.inventory");
 
 				Bukkit.getServer().getLogger().info("Attempting to read inventory string of " + kitName + ". If it errors here, its a problem with this kit.");
-				
+
 				Inventory inventory = ItemSerialization.stringToInventory(serializedInventory); // TODO Not a temp solution, this is awesome!
 				List<KitItem> list = new ArrayList<>();
 				for (ItemStack itemStack : inventory) {
@@ -100,7 +100,7 @@ public class KitManager {
 		SGApi.getPlugin().saveResource("kit_skeleton.yml", false);
 		SGApi.getPlugin().saveResource("kit_toxicologist.yml", false);
 		SGApi.getPlugin().saveResource("kit_zelda.yml", false);
-		
+
 		readKitsFromFiles();
 	}
 
