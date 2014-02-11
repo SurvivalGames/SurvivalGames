@@ -35,6 +35,7 @@ public class EnchantmentManager {
 		Enchantment.registerEnchantment(shocking);
 		Enchantment.registerEnchantment(unenchantable);
 		Enchantment.registerEnchantment(dedication);
+		Enchantment.registerEnchantment(undroppable);
 	}
 
 	public void enchantItemSG(EnchantItemEvent e) {

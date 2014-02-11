@@ -13,7 +13,7 @@ type: Classic
 
 # Kit icon - Must use valid item name
 # Potion format @p (declares potion) : Potion type (must use valid name) : true/false (is splash potion)
-icon: @p:POISON:true 
+icon: '@p:POISON:true'
 
 # Icon Lore
 iconLore: Master the art of throwing toxin

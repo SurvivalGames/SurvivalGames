@@ -22,7 +22,7 @@ items:
     # Kit Level
     lvl1:
         #Inventory to string
-        inventory: "1;0#t@WORKBENCH:a@e:UNDROPPABLE@2:n@Portable Crafter@l&4Right-click to open crafting table%Multi-use%&1Crafter Kit - LvL 1"
+        inventory: "1;0#t@WORKBENCH:a@1:@e:UNDROPPABLE@2:n@Portable Crafter@l&4Right-click to open crafting table%Multi-use%&1Crafter Kit - LvL 1"
 
 ability-ids:
     - 2

@@ -17,6 +17,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Egg;
+import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -55,18 +56,18 @@ public class EntityDamageListener implements Listener {
 	 */
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
-		// TODO You can't start off like this it will effect others using the
-		// Event Listener check its you event
 
-		if (TheSurvivalGames.getPlugin(TheSurvivalGames.class).getPluginConfig().doBloodEffect()) {
+		if (event.getEntity() instanceof EnderCrystal) {
+			event.setCancelled(true);
+			return;
+		}
+
+		if (SGApi.getPlugin().getPluginConfig().doBloodEffect()) {
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Runnable() {
 				@Override
 				public void run() {
 					for (int i = 0; i < event.getDamage(); i++) {
 						event.getDamager().getWorld().playEffect(event.getEntity().getLocation().add(0.0D, 0.8D, 0.0D), Effect.STEP_SOUND, Material.REDSTONE_WIRE);
-						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {}
 					}
 				}
 			});
@@ -131,9 +132,9 @@ public class EntityDamageListener implements Listener {
 	}
 
 	public void killPlayer(Player damaged, Entity entity, DamageCause dc) {
-		
+
 		Bukkit.getServer().getPluginManager().callEvent(new PlayerKilledEvent(damaged, entity));
-		
+
 		for (int i = 0; i < 4; i++)
 			fireworkIt(damaged.getLocation());
 
