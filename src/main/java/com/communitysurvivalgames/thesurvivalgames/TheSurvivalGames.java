@@ -78,7 +78,7 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void onEnable() {
 		ConfigurationSerialization.registerClass(SerializedLocation.class);
 		ConfigurationSerialization.registerClass(LocationChecker.class);
-        ConfigurationSerialization.registerClass(KitItem.class);
+                ConfigurationSerialization.registerClass(KitItem.class);
 
 		SGApi.init(this);
 
@@ -115,9 +115,8 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		registerAll();
 
-		//TODO This file in never created and throws null pointers
-		//ConfigTemplate<ArenaManager> configTemplate = new ManagerConfigTemplate(new File(getDataFolder().getAbsolutePath() + "/ArenaManager.yml"));
-		//configTemplate.deserialize();
+		ConfigTemplate<ArenaManager> configTemplate = new ManagerConfigTemplate();
+		configTemplate.deserialize();
 
 		if (!getPluginConfig().isHub())
 			SGApi.getArenaManager().loadGames();
@@ -131,7 +130,12 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void onDisable() {
 		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
 
-		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate();
+
+                File file = new File(getDataFolder(), "ArenaManager.yml");
+                if(!file.exists()) {
+                    try { file.createNewFile(); } catch (Exception x) {}
+                }
+		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate(file);
 		template.serialize();
 
 		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
