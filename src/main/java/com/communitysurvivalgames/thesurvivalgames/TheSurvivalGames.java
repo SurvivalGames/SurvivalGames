@@ -78,7 +78,7 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void onEnable() {
 		ConfigurationSerialization.registerClass(SerializedLocation.class);
 		ConfigurationSerialization.registerClass(LocationChecker.class);
-                ConfigurationSerialization.registerClass(KitItem.class);
+		ConfigurationSerialization.registerClass(KitItem.class);
 
 		SGApi.init(this);
 
@@ -88,7 +88,7 @@ public class TheSurvivalGames extends JavaPlugin {
 			Bukkit.getLogger().severe("How do you expect to have a hub server if you're not even running on Bungeecord Mode?");
 			getServer().getPluginManager().disablePlugin(this);
 		}
-		
+
 		new File(getDataFolder(), "maps").mkdirs();
 		new File(getDataFolder(), "arenas").mkdirs();
 
@@ -118,6 +118,13 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		registerAll();
 
+		File file = new File(getDataFolder(), "ArenaManager.yml");
+		if (!file.exists()) {
+			try {
+				file.createNewFile();
+			} catch (Exception x) {
+			}
+		}
 		ConfigTemplate<ArenaManager> configTemplate = new ManagerConfigTemplate();
 		configTemplate.deserialize();
 
@@ -133,12 +140,7 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void onDisable() {
 		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
 
-
-                File file = new File(getDataFolder(), "ArenaManager.yml");
-                if(!file.exists()) {
-                    try { file.createNewFile(); } catch (Exception x) {}
-                }
-		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate(file);
+		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate(new File(getDataFolder(), "ArenaManager.yml"));
 		template.serialize();
 
 		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
@@ -209,7 +211,7 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		Scoreboard.registerScoreboard();
 		SGApi.getEnchantmentManager().registerAll();
-		
+
 		SGApi.getKitManager().loadKits();
 	}
 
