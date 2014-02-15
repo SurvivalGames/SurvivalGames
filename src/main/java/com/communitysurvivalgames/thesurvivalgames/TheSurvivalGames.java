@@ -125,7 +125,7 @@ public class TheSurvivalGames extends JavaPlugin {
 			} catch (Exception x) {
 			}
 		}
-		ConfigTemplate<ArenaManager> configTemplate = new ManagerConfigTemplate();
+		ConfigTemplate<ArenaManager> configTemplate = new ManagerConfigTemplate(file);
 		configTemplate.deserialize();
 
 		if (!getPluginConfig().isHub())
@@ -140,7 +140,7 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void onDisable() {
 		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
 
-		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate(new File(getDataFolder(), "ArenaManager.yml"));
+		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate();
 		template.serialize();
 
 		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
