@@ -73,6 +73,7 @@ import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
 public class TheSurvivalGames extends JavaPlugin {
 
 	private ConfigurationData configurationData;
+        private File managerConfig = null;
 
 	@Override
 	public void onEnable() {
@@ -118,14 +119,14 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		registerAll();
 
-		File file = new File(getDataFolder(), "ArenaManager.yml");
+		managerConfig = new File(getDataFolder(), "ArenaManager.yml");
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
 			} catch (Exception x) {
 			}
 		}
-		ConfigTemplate<ArenaManager> configTemplate = new ManagerConfigTemplate(file);
+		ConfigTemplate<ArenaManager> configTemplate = new ManagerConfigTemplate();
 		configTemplate.deserialize();
 
 		if (!getPluginConfig().isHub())
@@ -140,7 +141,7 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void onDisable() {
 		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
 
-		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate();
+		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate(managerConfig);
 		template.serialize();
 
 		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
