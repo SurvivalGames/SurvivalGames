@@ -88,6 +88,9 @@ public class TheSurvivalGames extends JavaPlugin {
 			Bukkit.getLogger().severe("How do you expect to have a hub server if you're not even running on Bungeecord Mode?");
 			getServer().getPluginManager().disablePlugin(this);
 		}
+		
+		new File(getDataFolder(), "maps").mkdirs();
+		new File(getDataFolder(), "arenas").mkdirs();
 
 		SGApi.getScheduler();
 
