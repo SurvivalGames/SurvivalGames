@@ -73,7 +73,7 @@ import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
 public class TheSurvivalGames extends JavaPlugin {
 
 	private ConfigurationData configurationData;
-        private File managerConfig = null;
+	private File managerConfig = null;
 
 	@Override
 	public void onEnable() {
@@ -120,9 +120,9 @@ public class TheSurvivalGames extends JavaPlugin {
 		registerAll();
 
 		managerConfig = new File(getDataFolder(), "ArenaManager.yml");
-		if (!file.exists()) {
+		if (!managerConfig.exists()) {
 			try {
-				file.createNewFile();
+				managerConfig.createNewFile();
 			} catch (Exception x) {
 			}
 		}
