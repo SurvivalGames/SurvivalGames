@@ -61,8 +61,8 @@ public class TimeManager {
                 Bukkit.getPluginManager().callEvent(new GameStartEvent(a));
                 a.broadcast(I18N.getLocaleString("GAME_STARTING"));
                 a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
-                for (int i = 0; i <= a.maxPlayers; i++) {
-                    Player p = Bukkit.getPlayerExact(a.getPlayers().get(i));
+                for (String s : a.getPlayers()) {
+                    Player p = Bukkit.getPlayerExact(a);
                     Location loc = a.currentMap.locs.get(i);
                     p.teleport(loc);
                     MoveListener.getPlayers().add(a.getPlayers().get(i));
