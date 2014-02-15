@@ -5,22 +5,20 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
-import com.communitysurvivalgames.thesurvivalgames.event.KitGivenEvent;
-import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
-import com.communitysurvivalgames.thesurvivalgames.kits.KitItem;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+
+import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 
 public class SGArena {
 
@@ -32,7 +30,6 @@ public class SGArena {
 
 	public List<String> voted = new ArrayList<>();
 	public Map<MapHash, Integer> votes = new HashMap<>();
-	public Map<String, Kit> kits = new HashMap<>();
 
 	public int maxPlayers;
 	public int minPlayers;
@@ -40,13 +37,6 @@ public class SGArena {
 	public final List<String> players = new CopyOnWriteArrayList<>();
 	public final List<String> spectators = new CopyOnWriteArrayList<>();
 
-	public void setPlayerKit(Player player, Kit kit) {
-		Bukkit.getServer().getPluginManager().callEvent(new KitGivenEvent(player, kit));
-		for (KitItem item : kit.getItems()) {
-			kits.put(player.getName(), kit);
-			player.getInventory().addItem(item.getItem());
-		}
-	}
 
 	/**
 	 * Name: ArenaState.java Edited: 8 December 2013
@@ -259,10 +249,5 @@ public class SGArena {
 
 	public World getArenaWorld() {
 		return currentMap.getWorld();
-	}
-
-	public Kit getKit(Player p) {
-		return kits.get(p.getName());
-
 	}
 }

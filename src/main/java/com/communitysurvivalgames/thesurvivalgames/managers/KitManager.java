@@ -2,7 +2,9 @@ package com.communitysurvivalgames.thesurvivalgames.managers;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -14,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 
-import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
+import com.communitysurvivalgames.thesurvivalgames.event.KitGivenEvent;
 import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
 import com.communitysurvivalgames.thesurvivalgames.kits.KitItem;
 import com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
@@ -23,6 +25,7 @@ import com.communitysurvivalgames.thesurvivalgames.util.ItemSerialization;
 public class KitManager {
 	private List<Kit> kits = new ArrayList<Kit>();
 	private IconMenu menu;
+	private Map<String, Kit> playerKits = new HashMap<String, Kit>();
 
 	public void loadKits() {
 		readKitsFromFiles();
@@ -34,12 +37,9 @@ public class KitManager {
 			@Override
 			public void onOptionClick(IconMenu.OptionClickEvent event) {
 				event.getPlayer().sendMessage("You have chosen the " + event.getName() + " kit!");
-				try {
-					SGApi.getArenaManager().getArena(event.getPlayer()).setPlayerKit(event.getPlayer(), getKit(event.getName()));
-				} catch (ArenaNotFoundException e) {
-					Bukkit.getLogger().warning(event.getPlayer() + " attempted to select kit " + getKit(event.getName() + " but was not in a game lobby!"));
-				}
+				playerKits.put(event.getPlayer().getName(), getKit(event.getName()));
 				event.setWillClose(true);
+
 			}
 		}, SGApi.getPlugin());
 		int index = 0;
@@ -112,6 +112,10 @@ public class KitManager {
 		return kits.get(0);
 	}
 
+	public Kit getKit(Player p) {
+		return playerKits.get(p.getName());
+	}
+
 	public List<Kit> getKits() {
 		return kits;
 	}
@@ -119,4 +123,13 @@ public class KitManager {
 	public void displayKitSelectionMenu(Player p) {
 		menu.open(p);
 	}
+
+	public void setPlayerKit(Player player, Kit kit) {
+		Bukkit.getServer().getPluginManager().callEvent(new KitGivenEvent(player, kit));
+		for (KitItem item : kit.getItems()) {
+			playerKits.put(player.getName(), kit);
+			player.getInventory().addItem(item.getItem());
+		}
+	}
+
 }

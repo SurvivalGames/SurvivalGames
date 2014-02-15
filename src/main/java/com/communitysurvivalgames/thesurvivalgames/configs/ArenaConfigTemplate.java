@@ -46,7 +46,7 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
             case 5:
                 return serializeMaps();
             case 6:
-                return serializeKit();
+                //return serializeKit();
             case 7:
                 return arena.getMaxPlayers();
             case 8:
@@ -82,7 +82,7 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
                 this.cachedArena.votes = deserializeMaps((List<String>) o);
                 break;
             case 6:
-                this.cachedArena.kits = deserializeKit((List<String>) o);
+                //this.cachedArena.kits = deserializeKit((List<String>) o);
                 break;
             case 7:
                 this.cachedArena.maxPlayers = Integer.parseInt(String.valueOf(o));
@@ -122,11 +122,12 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
     }
 
     public List<String> serializeKit() {
-        List<String> list = new ArrayList<>();
-        for(Map.Entry<String, Kit> entry : arena.kits.entrySet()) {
-            list.add(entry.getKey() + ":" + entry.getValue().getName());
-        }
-        return list;
+    //    List<String> list = new ArrayList<>();
+    //    for(Map.Entry<String, Kit> entry : arena.kits.entrySet()) {
+    //        list.add(entry.getKey() + ":" + entry.getValue().getName());
+    //    }
+    //    return list;
+    	return null;
     }
 
     public Map<String, Kit> deserializeKit(List<String> list) {

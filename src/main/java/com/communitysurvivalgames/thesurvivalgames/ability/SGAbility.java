@@ -2,7 +2,6 @@ package com.communitysurvivalgames.thesurvivalgames.ability;
 
 import org.bukkit.entity.Player;
 
-import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public class SGAbility {
@@ -17,11 +16,10 @@ public class SGAbility {
 	}
 
 	public boolean hasAbility(Player p) {
-		try {
-			if (SGApi.getArenaManager().getArena(p).getKit(p).getAbilityIds().contains(id))
+		if (SGApi.getKitManager().getKit(p) != null) {
+			if (SGApi.getKitManager().getKit(p).getAbilityIds().contains(id)) {
 				return true;
-		} catch (ArenaNotFoundException e) {
-			//?
+			}
 		}
 		return false;
 	}
