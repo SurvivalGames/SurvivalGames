@@ -41,8 +41,15 @@ public class Zelda extends SGAbility implements Listener {
 		Player player = event.getPlayer();
 		if (this.hasAbility(player)) {
 			if (player.getItemInHand().getType() == Material.SPECKLED_MELON && player.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Zelda Heart")) {
+				ItemStack item = player.getItemInHand();
+				item.setAmount(1);
+				player.getInventory().remove(item);
+				if (player.getHealth() >= 14) {
+					player.setHealth(20);
+				}
 
-				player.setHealth(player.getHealth() + 6);
+				if (player.getHealth() < 14)
+					player.setHealth(player.getHealth() + 6);
 				FireworkEffect fEffect = FireworkEffect.builder().flicker(false).withColor(Color.YELLOW).withFade(Color.GREEN).with(Type.BALL).trail(true).build();
 				try {
 					FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(event.getPlayer().getWorld(), event.getPlayer().getLocation(), fEffect);

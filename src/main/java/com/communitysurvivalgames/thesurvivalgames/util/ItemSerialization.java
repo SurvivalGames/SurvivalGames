@@ -62,7 +62,7 @@ public class ItemSerialization {
 	public static Inventory stringToInventory(String invString) {
 		String[] serializedBlocks = invString.split(";");
 		String invInfo = serializedBlocks[0];
-		Inventory deserializedInventory = Bukkit.getServer().createInventory(null, Integer.valueOf(invInfo), "Hi");
+		Inventory deserializedInventory = Bukkit.getServer().createInventory(null, 54, "Hi");
 
 		for (int i = 1; i < serializedBlocks.length; i++) {
 			String[] serializedBlock = serializedBlocks[i].split("#");

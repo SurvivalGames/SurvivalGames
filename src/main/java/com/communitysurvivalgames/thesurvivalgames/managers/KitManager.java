@@ -37,7 +37,7 @@ public class KitManager {
 			@Override
 			public void onOptionClick(IconMenu.OptionClickEvent event) {
 				event.getPlayer().sendMessage("You have chosen the " + event.getName() + " kit!");
-				playerKits.put(event.getPlayer().getName(), getKit(event.getName()));
+				setPlayerKit(event.getPlayer(), getKit(event.getName()));
 				event.setWillClose(true);
 
 			}

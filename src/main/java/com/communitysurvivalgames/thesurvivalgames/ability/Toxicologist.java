@@ -30,28 +30,23 @@ public class Toxicologist extends SGAbility implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onInteract(final PlayerInteractEvent event) {
-		Player player = event.getPlayer();
+		final Player player = event.getPlayer();
 		if (this.hasAbility(player)) {
 			final Location loc = new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY() + 10, player.getLocation().getZ());
 			final Random rnd = new Random();
 			if (player.getItemInHand().getType() == Material.CLAY_BALL && player.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Toxin Bomb")) {
-				CircleUtil.getCircleUtil().playFireworkCircle(event.getPlayer(), FireworkEffect.builder().withColor(Color.SILVER).withFade(Color.GREEN).flicker(true).trail(false).build(), 5, 14);
+				CircleUtil.getCircleUtil().playFireworkCircle(event.getPlayer(), FireworkEffect.builder().withColor(Color.SILVER).withFade(Color.GREEN).flicker(true).trail(false).build(), 10, 10);
 				Bukkit.getScheduler().runTaskLater(SGApi.getPlugin(), new Runnable() {
 
 					@Override
 					public void run() {
-						for (int i = 0; i < 15; i++) {
+						for (int i = 0; i < 40; i++) {
 							Potion potion = new Potion(PotionType.POISON, 2);
 							potion.setSplash(true);
 							ItemStack itemStack = new ItemStack(Material.POTION);
 							potion.apply(itemStack);
-							Bukkit.getWorlds().get(0);
 							ThrownPotion thrownPotion = null;
-							try {
-								thrownPotion = (ThrownPotion) SGApi.getArenaManager().getArena(event.getPlayer()).getArenaWorld().spawnEntity(loc.add(rnd.nextInt(20) - 10, rnd.nextInt(20) - 10, rnd.nextInt(20) - 10), EntityType.SPLASH_POTION);
-							} catch (ArenaNotFoundException e) {
-								e.printStackTrace();
-							}
+							thrownPotion = (ThrownPotion) player.getLocation().getWorld().spawnEntity(event.getPlayer().getLocation().add(rnd.nextInt(20) - 10, rnd.nextInt(20) - 10, rnd.nextInt(20) - 10), EntityType.SPLASH_POTION);
 							thrownPotion.setItem(itemStack);
 						}
 					}

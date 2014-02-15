@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -24,9 +25,11 @@ public class Pacman extends SGAbility implements Listener {
 		Player player = event.getPlayer();
 		if (this.hasAbility(player)) {
 			if (player.getItemInHand().getType() == Material.GLOWSTONE_DUST && player.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Power Orb")) {
-
-				player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 2, 10));
-				player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 2, 10));
+				ItemStack item = player.getItemInHand();
+				item.setAmount(1);
+				player.getInventory().remove(item);
+				player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10, 2));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10, 2));
 				FireworkEffect fEffect = FireworkEffect.builder().flicker(false).withColor(Color.YELLOW).withFade(Color.YELLOW).with(Type.STAR).trail(false).build();
 				try {
 					FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(event.getPlayer().getWorld(), event.getPlayer().getLocation(), fEffect);

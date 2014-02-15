@@ -16,6 +16,17 @@ public class CircleUtil implements Listener {
 		return circleUtil;
 	}
 
+	public void playFireworkCircle(final Player player, Location fLoc, final FireworkEffect effect, int size, final int distance) {
+		Bukkit.getLogger().info("Called firework method");
+		int index = 0;
+		for (double t = 0; t < 2 * Math.PI; t += Math.toRadians(size)) {
+			index += 3;
+			Location l = fLoc.add(Math.cos(t) * distance, 0.5, Math.sin(t) * distance);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(player, l, effect), index);
+
+		}
+	}
+	
 	public void playFireworkCircle(final Player player, final FireworkEffect effect, int size, final int distance) {
 		Bukkit.getLogger().info("Called firework method");
 		int index = 0;
