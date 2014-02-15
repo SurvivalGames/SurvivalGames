@@ -21,6 +21,8 @@ public class BonusManager {
         register("Rainbow Chicken Dance", new String[] { "Win a SG match by killing the last player with raw chicken" }, 1000);
         register("Y U KILL UR CREATOR", new String[] { "Kill a developer in an SG match" }, 700);
         register("Are you God?", new String[] { "Kill Quantum64 in a SG match" }, Integer.MAX_VALUE);
+        register("Mommy, I'm famous!", new String[] { "Be the first person killed by a YouTuber" }, 400);
+
         // TODO More!
         // TODO Translate these? Do we need to?
     }
