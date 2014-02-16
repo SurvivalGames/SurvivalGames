@@ -164,6 +164,9 @@ public class ArenaManager {
 		a.lobby = p.getLocation();
 
 		a.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
+		
+		arenas.add(a);
+		
 		SGApi.getTimeManager(a).countdownLobby(5);
 
 		return a;
