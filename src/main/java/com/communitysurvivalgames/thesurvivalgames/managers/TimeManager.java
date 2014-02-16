@@ -61,16 +61,17 @@ public class TimeManager {
                 Bukkit.getPluginManager().callEvent(new GameStartEvent(a));
                 a.broadcast(I18N.getLocaleString("GAME_STARTING"));
                 a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
+                MoveListener.getPlayers().addAll(a.getPlayers());
+
                 int index = 0;
-                for (String s : a.getPlayers()) {
-                	index++;
+                for (String s : a.getPlayers()) {           
                     Player p = Bukkit.getPlayerExact(s);
                     Location loc = a.currentMap.locs.get(index);
-                    p.teleport(loc);
-                    MoveListener.getPlayers().add(a.getPlayers().get(index));
+                    p.teleport(loc);               
 
-                    countdown();
-                }
+                    index++;
+                }               
+                countdown();
             }
         });
         c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 60 * 20L));
