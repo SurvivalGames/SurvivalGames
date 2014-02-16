@@ -21,13 +21,18 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
     }
 
     public ArenaConfigTemplate(SGArena arena) {
-        super(new String[] {
+        super("/arenas/" + arena.getId() + ".yml");
+        this.arena = arena;
+    }
+
+    @Override
+    public String[] pattern() {
+        return new String[] {
             "Current-state", "Id", "Lobby",
             "Current-map", "Voted", "Votes",
             "Kits", "Max-players", "Min-players",
             "Players", "Spectators"
-        }, "/arenas/" + arena.getId() + ".yml");
-        this.arena = arena;
+        };
     }
 
     @Override
