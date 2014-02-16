@@ -160,6 +160,7 @@ public class ArenaManager {
 		SGArena a = new SGArena();
 		arenaSize++;
 		a.createArena(arenaSize);
+		arenas.add(a);
 
 		a.lobby = p.getLocation();
 
