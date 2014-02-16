@@ -26,7 +26,7 @@ public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
 
     @Override
     public String[] pattern() {
-        return new new String[] {
+        return new String[] {
             "Creators",
             "Locations",
             "Inventory",
