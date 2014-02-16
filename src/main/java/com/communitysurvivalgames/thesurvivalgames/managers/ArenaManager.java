@@ -160,7 +160,6 @@ public class ArenaManager {
 		SGArena a = new SGArena();
 		arenaSize++;
 		a.createArena(arenaSize);
-		arenas.add(a);
 
 		a.lobby = p.getLocation();
 
@@ -168,7 +167,7 @@ public class ArenaManager {
 		
 		arenas.add(a);
 		
-		SGApi.getTimeManager(a).countdownLobby(5);
+		SGApi.getTimeManager(a).countdownLobby(1);
 
 		return a;
 	}
