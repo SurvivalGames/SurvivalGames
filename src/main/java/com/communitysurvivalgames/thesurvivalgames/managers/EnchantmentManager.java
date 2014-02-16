@@ -32,6 +32,8 @@ public class EnchantmentManager {
 			e.printStackTrace();
 		}
 
+		if(Enchantment.getByName("SHOCKING") != null)
+			return;
 		Enchantment.registerEnchantment(shocking);
 		Enchantment.registerEnchantment(unenchantable);
 		Enchantment.registerEnchantment(dedication);
