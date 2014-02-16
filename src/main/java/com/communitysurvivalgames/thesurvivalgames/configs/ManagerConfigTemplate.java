@@ -21,13 +21,18 @@ public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
     }
 
     public ManagerConfigTemplate() {
-        super(new String[] {
+        super("ArenaManager.yml");
+    }
+
+    @Override
+    public String[] pattern() {
+        return new new String[] {
             "Creators",
             "Locations",
             "Inventory",
             "Armor",
             "Arena-size"
-        }, "ArenaManager.yml");
+        };
     }
 
     @Override
