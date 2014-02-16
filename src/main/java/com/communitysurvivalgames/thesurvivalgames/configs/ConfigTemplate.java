@@ -8,13 +8,10 @@ import java.io.File;
 
 
 public abstract class ConfigTemplate<T> {
-    private String[] pattern;
-
     private File file = null;
     private FileConfiguration config = null;
 
-    public ConfigTemplate(String[] pattern, String path) {
-        this.pattern = pattern;
+    public ConfigTemplate(String path) {
         try {
             this.file = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + path);
             this.file.createNewFile();
@@ -31,8 +28,8 @@ public abstract class ConfigTemplate<T> {
     }
 
     public final void serialize() {
-        for(int i = 0; i <= pattern.length - 1; i++) {
-            config.set(pattern[i], toFile(i));
+        for(int i = 0; i <= pattern().length - 1; i++) {
+            config.set(pattern()[i], toFile(i));
         }
 
         try {
@@ -44,8 +41,8 @@ public abstract class ConfigTemplate<T> {
 
     public final T deserialize() {
         T t = null;
-        for(int i = 0; i <= pattern.length - 1; i++) {
-            t = fromFile(i, config.get(pattern[i]));
+        for(int i = 0; i <= pattern().length - 1; i++) {
+            t = fromFile(i, config.get(pattern()[i]));
         }
 
         return t;
@@ -53,4 +50,5 @@ public abstract class ConfigTemplate<T> {
 
     public abstract Object toFile(int index);
     public abstract T fromFile(int index, Object o);
+    public abstract String[] pattern();
 }
