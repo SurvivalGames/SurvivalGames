@@ -20,8 +20,18 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 	}
 
 	public WorldConfigTemplate(SGWorld world) {
-		super(new String[] { "World-name", "Display-name", "Spawns", "Chests" }, "/maps/" + world.getWorld().getName() + ".yml");
+		super("/maps/" + world.getWorld().getName() + ".yml");
 		this.world = world;
+	}
+	
+	@Override
+	public String[] pattern() {
+		return new String[] { 
+			"World-name", 
+			"Display-name", 
+			"Spawns", 
+			"Chests" 
+		};
 	}
 
 	@Override
