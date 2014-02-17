@@ -174,3 +174,6 @@ NOT_HAPPY = You can't escape the deathmatch, coward!
 NOT_VOTING = Voting not currently in session
 MAP_WINNER = Voting has ended, this map has won:
 FINISHED = Map successfully created
+BOUNTY_SUCCESS_RECEIVED = Bounty received! Bountied for %amount by %sender
+BOUNTY_SUCCESS_SENT = Bounty sent! Bountied for %amount on %receiver
+BOUNTY_FAIL = Bounty failed :(
