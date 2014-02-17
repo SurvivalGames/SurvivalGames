@@ -46,7 +46,7 @@ public class ItemSerialization {
 
 				serializedItemStack += ":n@" + is.getItemMeta().getDisplayName();
 
-				if (is.getItemMeta().getLore().size() > 0) {
+				if (is.getItemMeta().getLore() != null) {
 					serializedItemStack += ":l@";
 					for (String l : is.getItemMeta().getLore()) {
 						serializedItemStack += l + "%";
