@@ -49,6 +49,10 @@ public abstract class ConfigTemplate<T> {
 		return t;
 	}
 
+	public void fixErrorsTheQuantum64Way() {
+		serialize();
+	}
+
 	public abstract Object toFile(int index);
 
 	public abstract T fromFile(int index, Object o);

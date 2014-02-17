@@ -16,97 +16,96 @@ import java.util.Map;
 
 public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
 
-    public ManagerConfigTemplate(File file) {
-        super(file);
-    }
+	public ManagerConfigTemplate(File file) {
+		super(file);
+	}
 
-    public ManagerConfigTemplate() {
-        super("ArenaManager.yml");
-    }
+	public ManagerConfigTemplate() {
+		super("ArenaManager.yml");
+	}
 
-    @Override
-    public String[] pattern() {
-        return new String[] {
-            "Creators",
-            "Locations",
-            "Inventory",
-            "Armor",
-            "Arena-size"
-        };
-    }
+	@Override
+	public String[] pattern() {
+		return new String[] { "Creators", "Locations", "Inventory", "Armor", "Arena-size" };
+	}
 
-    @Override
-    public Object toFile(int index) {
-        switch (index) {
-            case 0:
-                List<String> list = new ArrayList<>();
-                for(Map.Entry<String, SGWorld> entry : SGApi.getArenaManager().getCreators().entrySet()) {
-                    list.add(entry.getKey() + ":" + entry.getValue().getWorld().getName());
-                }
-                return list;
-            case 1:
-                List<String> stringList = new ArrayList<>();
-                for(Map.Entry<String, Location> entry : SGApi.getArenaManager().locs.entrySet()) {
-                    stringList.add(entry.getKey() + ":" + SGApi.getArenaManager().serializeLoc(entry.getValue()));
-                }
-                return stringList;
-            case 2:
-                List<String> stringArray = new ArrayList<>();
-                Inventory inventory = Bukkit.getServer().createInventory(null, 54, "Inv");
-                {
-                    for(Map.Entry<String, ItemStack[]> entry : SGApi.getArenaManager().inv.entrySet()) {
-                        inventory.setContents(entry.getValue());
-                        stringArray.add(entry.getKey() + ":" + ItemSerialization.inventoryToString(inventory));
-                    }
-                }
-                return stringArray;
-            case 3:
-                List<String> armorArray = new ArrayList<>();
-                Inventory inv = Bukkit.getServer().createInventory(null, 54, "Inv");
-                {
-                    for(Map.Entry<String, ItemStack[]> entry : SGApi.getArenaManager().armor.entrySet()) {
-                        inv.setContents(entry.getValue());
-                        armorArray.add(entry.getKey() + ":" + ItemSerialization.inventoryToString(inv));
-                    }
-                }
-                return armorArray;
-            case 4:
-                return SGApi.getArenaManager().arenaSize;
-        }
-        return null;
-    }
+	@Override
+	public Object toFile(int index) {
+		switch (index) {
+			case 0:
+			List<String> list = new ArrayList<>();
+			for (Map.Entry<String, SGWorld> entry : SGApi.getArenaManager().getCreators().entrySet()) {
+				list.add(entry.getKey() + ":" + entry.getValue().getWorld().getName());
+			}
+			return list;
+			case 1:
+			List<String> stringList = new ArrayList<>();
+			for (Map.Entry<String, Location> entry : SGApi.getArenaManager().locs.entrySet()) {
+				stringList.add(entry.getKey() + ":" + SGApi.getArenaManager().serializeLoc(entry.getValue()));
+			}
+			return stringList;
+			case 2:
+			List<String> stringArray = new ArrayList<>();
+			Inventory inventory = Bukkit.getServer().createInventory(null, 54, "Inv");
+			{
+				for (Map.Entry<String, ItemStack[]> entry : SGApi.getArenaManager().inv.entrySet()) {
+					inventory.setContents(entry.getValue());
+					stringArray.add(entry.getKey() + ":" + ItemSerialization.inventoryToString(inventory));
+				}
+			}
+			return stringArray;
+			case 3:
+			List<String> armorArray = new ArrayList<>();
+			Inventory inv = Bukkit.getServer().createInventory(null, 54, "Inv");
+			{
+				for (Map.Entry<String, ItemStack[]> entry : SGApi.getArenaManager().armor.entrySet()) {
+					inv.setContents(entry.getValue());
+					armorArray.add(entry.getKey() + ":" + ItemSerialization.inventoryToString(inv));
+				}
+			}
+			return armorArray;
+			case 4:
+			return SGApi.getArenaManager().arenaSize;
+		}
+		return null;
+	}
 
-    @Override
-    public ArenaManager fromFile(int index, Object o) {
-        switch (index) {
-            case 0:
-                for(String s : (List<String>) o) {
-                    String[] strings = s.split(":");
-                    SGApi.getArenaManager().getCreators().put(strings[0], SGApi.getMultiWorldManager().worldForName(strings[1]));
-                }
-                break;
-            case 1:
-                for(String s : (List<String>) o) {
-                    String[] strings = s.split(":");
-                    SGApi.getArenaManager().locs.put(strings[0], SGApi.getArenaManager().deserializeLoc(strings[1]));
-                }
-                break;
-            case 2:
-                for(String s : (List<String>) o) {
-                    String[] strings = s.split(":");
-                    SGApi.getArenaManager().inv.put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
-                }
-                break;
-            case 3:
-                for(String s : (List<String>) o) {
-                    String[] strings = s.split(":");
-                    SGApi.getArenaManager().armor.put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
-                }
-                break;
-            case 4:
-                SGApi.getArenaManager().arenaSize = Integer.valueOf(String.valueOf(o));
-                break;
-        }
-        return SGApi.getArenaManager();
-    }
+	@Override
+	public ArenaManager fromFile(int index, Object o) {
+		if (o == null) {
+			fixErrorsTheQuantum64Way();
+			Bukkit.getLogger().severe("Something went wrong :(  Restart the server and it shoudl be fine");
+			index = -1;
+		}
+		switch (index) {
+			case 0:
+			for (String s : (List<String>) o) {
+				String[] strings = s.split(":");
+				SGApi.getArenaManager().getCreators().put(strings[0], SGApi.getMultiWorldManager().worldForName(strings[1]));
+			}
+				break;
+			case 1:
+			for (String s : (List<String>) o) {
+				String[] strings = s.split(":");
+				SGApi.getArenaManager().locs.put(strings[0], SGApi.getArenaManager().deserializeLoc(strings[1]));
+			}
+				break;
+			case 2:
+			for (String s : (List<String>) o) {
+				String[] strings = s.split(":");
+				SGApi.getArenaManager().inv.put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
+			}
+				break;
+			case 3:
+			for (String s : (List<String>) o) {
+				String[] strings = s.split(":");
+				SGApi.getArenaManager().armor.put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
+			}
+				break;
+			case 4:
+			SGApi.getArenaManager().arenaSize = Integer.valueOf(String.valueOf(o));
+				break;
+		}
+		return SGApi.getArenaManager();
+	}
 }

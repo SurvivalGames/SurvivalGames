@@ -62,7 +62,7 @@ public class I18N {
         Properties tmp = new Properties();
         String[] list = dir.list();
         for (String file : list) {
-            if (file.matches("^\\w{4}$")) {
+            if (file.endsWith(".lang")) {
                 try {
                     if (!file.equalsIgnoreCase("enUS.lang")) {
                         tmp.clear();
