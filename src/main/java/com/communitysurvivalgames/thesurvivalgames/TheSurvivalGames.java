@@ -119,13 +119,6 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		registerAll();
 
-		managerConfig = new File(getDataFolder(), "ArenaManager.yml");
-		if (!managerConfig.exists()) {
-			try {
-				managerConfig.createNewFile();
-			} catch (Exception x) {
-			}
-		}
 		ConfigTemplate<ArenaManager> configTemplate = new ManagerConfigTemplate();
 		configTemplate.deserialize();
 
