@@ -39,7 +39,7 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
     public Object toFile(int keyPair) {
         switch (keyPair) {
             case 0:
-                return arena.getState().name();
+                return arena.getState().toString();
             case 1:
                 return arena.getId();
             case 2:
