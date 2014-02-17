@@ -13,7 +13,7 @@ public abstract class ConfigTemplate<T> {
 
     public ConfigTemplate(String path) {
         try {
-            this.file = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + path);
+            this.file = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + File.separator + path);
             this.file.createNewFile();
 
             this.config = YamlConfiguration.loadConfiguration(file);
