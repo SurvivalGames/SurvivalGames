@@ -36,6 +36,7 @@ public class SGApi {
 	private static MultiWorldManager multiWorldManager;
 	private static SignManager signManager;
 	private static Map<SGArena, TimeManager> timeManager = new HashMap<>();
+	private static Map<SGArena, BountyManager> bountyManager = new HashMap<>();
 	private static PartyManager partyManager;
 	private static TheSurvivalGames plugin;
 	private static ScheduleManager scheduler;
@@ -111,14 +112,26 @@ public class SGApi {
 	 * @return the time manager
 	 */
 	public static TimeManager getTimeManager(SGArena a) {
-                TimeManager manager = timeManager.get(a);
+		TimeManager manager = timeManager.get(a);
 		if (manager == null)
 			timeManager.put(a, new TimeManager(a));
 		return timeManager.get(a);
 	}
 
+	/**
+	 * Gets Bounty manager.
+	 * 
+	 * @return the bounty manager
+	 */
+	public static BountyManager getBountyManager(SGArena a) {
+		BountyManager manager = bountyManager.get(a);
+		if (manager == null)
+			bountyManager.put(a, new BountyManager(a));
+		return bountyManager.get(a);
+	}
+
 	public static EnchantmentManager getEnchantmentManager() {
-		if(enchantmentManager == null)
+		if (enchantmentManager == null)
 			enchantmentManager = new EnchantmentManager();
 		return enchantmentManager;
 	}
