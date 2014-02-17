@@ -16,13 +16,13 @@ public abstract class ConfigTemplate<T> {
 			if (this.file.createNewFile()) {
                             serialize();
                         }
-               }
+
 
 			this.config = YamlConfiguration.loadConfiguration(file);
 		} catch (Exception x) {
 			x.printStackTrace();
 		}
-	}
+    }
 
 	public ConfigTemplate(File file) {
 		this.file = file;
