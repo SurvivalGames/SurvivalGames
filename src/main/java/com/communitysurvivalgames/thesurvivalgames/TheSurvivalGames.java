@@ -134,7 +134,7 @@ public class TheSurvivalGames extends JavaPlugin {
 	public void onDisable() {
 		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
 
-		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate(managerConfig);
+		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate();
 		template.serialize();
 
 		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
