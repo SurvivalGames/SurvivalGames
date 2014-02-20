@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class TimeManager {
 
-    private static SGArena a;
+    private SGArena a;
 
     public TimeManager(SGArena a) {
         this.a = a;
