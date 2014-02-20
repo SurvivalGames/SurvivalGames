@@ -5,13 +5,12 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 public class CreateCommand implements SubCommand {
 
@@ -44,7 +43,6 @@ public class CreateCommand implements SubCommand {
 		}
 
 		if (cmd.equalsIgnoreCase("finish")) {
-			SGWorld a = SGApi.getArenaManager().getCreators().get(p.getName());
 			SGApi.getArenaManager().getCreators().remove(p.getName());
 			p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("FINISHED"));
 		}

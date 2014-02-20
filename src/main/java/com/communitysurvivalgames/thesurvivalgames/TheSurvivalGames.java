@@ -73,7 +73,6 @@ import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
 public class TheSurvivalGames extends JavaPlugin {
 
 	private ConfigurationData configurationData;
-	private File managerConfig = null;
 
 	@Override
 	public void onEnable() {

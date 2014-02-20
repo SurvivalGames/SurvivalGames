@@ -13,9 +13,9 @@ public class TestCommand implements SubCommand {
 
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
-		if (cmd.equalsIgnoreCase("firework"))
-			CircleUtil.getCircleUtil().playFireworkRing(p, FireworkEffect.builder().withColor(Color.FUCHSIA).withFade(Color.BLUE).trail(true).flicker(false).with(Type.BALL).build(), Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-		if (cmd.equalsIgnoreCase("kit"))
+		if (args[0].equalsIgnoreCase("firework"))
+			CircleUtil.getCircleUtil().playFireworkRing(p, FireworkEffect.builder().withColor(Color.FUCHSIA).withFade(Color.BLUE).trail(true).flicker(false).with(Type.BALL).build(), Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+		if (args[0].equalsIgnoreCase("kit"))
 			SGApi.getKitManager().displayKitSelectionMenu(p);
 	}
 
