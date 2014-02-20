@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -36,6 +37,10 @@ public class KitManager {
 		menu = new IconMenu("Select Your Kit", 18, new IconMenu.OptionClickEventHandler() {
 			@Override
 			public void onOptionClick(IconMenu.OptionClickEvent event) {
+				if (!(event.getPlayer().hasPermission("sg.kits.*") || event.getPlayer().hasPermission("sg.kits." + event.getName()))) {
+					event.getPlayer().sendMessage(ChatColor.RED + "Sorry, but you do not have permission to use this kit!");
+					return;
+				}
 				event.getPlayer().sendMessage("You have chosen the " + event.getName() + " kit!");
 				setPlayerKit(event.getPlayer(), getKit(event.getName()));
 				event.setWillClose(true);
