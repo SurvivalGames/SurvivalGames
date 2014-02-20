@@ -172,3 +172,6 @@ NOT_HAPPY = Anda tidak bisa lari dari deathmatch, penakut !
 NOT_VOTING = Pemungutan suara sedang tidak berlangsung
 MAP_WINNER = Pemungutan suara telah selesai, peta ini telah menang :
 FINISHED = Peta telah selesai dibuat
+BOUNTY_SUCCESS_RECEIVED = Bounty telah diterima ! Anda telah di-bounty oleh %sender untuk %amount
+BOUNTY_SUCCESS_SENT = Bounty telah dikirim ! Anda telah mem-bounty %reciever untuk %amount
+BOUNTY_FAIL = Bounty gagal ! :(
