@@ -35,7 +35,7 @@ That’s it!  Thanks for helping make out plugin go international!
 
 ***Translators Tutorial:***
 
-The language files are located in the main/src/resources/lang folder of out GitHub repository.  Find your language file, we will use Indonesian here as an example.  Download both your language file (idID) and the English file (enUS) and open both of them in your favorite text editor.  If you see no lines that begin with a “#” then everything has already been translated, but if you see a line that begins with a hashtag, find the corresponding label in the enUS file, and translate the text from English to your language after the equals sign, and also sans the hashtag.
+The language files are located in the main/src/resources folder of out GitHub repository.  Find your language file, we will use Indonesian here as an example.  Download both your language file (idID) and the English file (enUS) and open both of them in your favorite text editor.  If you see no lines that begin with a “#” then everything has already been translated, but if you see a line that begins with a hashtag, find the corresponding label in the enUS file, and translate the text from English to your language after the equals sign, and also sans the hashtag.
 
 Here is an example:
 
