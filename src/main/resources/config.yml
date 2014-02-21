@@ -27,6 +27,9 @@ allow-double-jump-IG: false
 #Allow Double-Jump in lobby
 allow-double-jump: true
 
+#Default points for new players
+default-points: 100
+
 #Arenas Config
 #Specify each arena's .yml file here
 arenas:
@@ -67,3 +70,4 @@ breaks-allowed:
   - 'RED_MUSHROOM'
   - 'VINE'
   - 'GRASS'
+  
