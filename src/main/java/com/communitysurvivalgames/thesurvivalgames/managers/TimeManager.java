@@ -61,7 +61,6 @@ public class TimeManager {
                 Bukkit.getPluginManager().callEvent(new GameStartEvent(a));
                 a.broadcast(I18N.getLocaleString("GAME_STARTING"));
                 a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
-                MoveListener.getPlayers().addAll(a.getPlayers());
 
                 int index = 0;
                 for (String s : a.getPlayers()) {           
@@ -72,6 +71,7 @@ public class TimeManager {
                     index++;
                 }               
                 countdown();
+                MoveListener.getPlayers().addAll(a.getPlayers());
             }
         });
         c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 60 * 20L));

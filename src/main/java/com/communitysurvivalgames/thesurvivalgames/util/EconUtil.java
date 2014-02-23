@@ -24,15 +24,14 @@ public class EconUtil {
 		SGApi.getPlugin().setPlayerData(pd);
 	}
 
-	public static EconomyResponse removePoints(Player p, int i) {
+	public static boolean removePoints(Player p, int i) {
 		if(econ){
-			economy.withdrawPlayer(p.getName(), i);
-			return economy.withdrawPlayer(p.getName(), i);
+			return economy.withdrawPlayer(p.getName(), i).transactionSuccess();
 		}
 		PlayerData pd = SGApi.getPlugin().getPlayerData(p);
 		pd.removePoints(i);
 		SGApi.getPlugin().setPlayerData(pd);
-		return null;
+		return true;
 	}
 
 	public static boolean setupEconomy() {

@@ -43,7 +43,7 @@ public class SponsorManager {
 			@Override
 			public void onOptionClick(final OptionClickEvent event) {
 				if (EconUtil.isHooked()) {
-					if (!EconUtil.removePoints(event.getPlayer(), 10).transactionSuccess()) {
+					if (!EconUtil.removePoints(event.getPlayer(), 10)) {
 						event.getPlayer().sendMessage(ChatColor.RED + "You cannot afford to buy that!");
 						return;
 					}
