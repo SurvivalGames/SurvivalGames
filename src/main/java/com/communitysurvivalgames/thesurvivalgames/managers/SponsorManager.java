@@ -247,7 +247,7 @@ public class SponsorManager {
 		for (int i = 0; i < items.size(); i++) {
 			players.setOption(i, items.get(i), items.get(i).getItemMeta().getDisplayName(), new String[] { ChatColor.translateAlternateColorCodes('&', "&e&lClick to sponsor this person!"), ChatColor.translateAlternateColorCodes('&', "&aNote: Health = Amount of emeralds") });
 		}
-		players.setOption(26, new ItemStack(Material.REDSTONE_BLOCK), ChatColor.RED + "Cancle", ChatColor.translateAlternateColorCodes('&', "&e&lExits out of this menu"));
+		players.setOption(26, new ItemStack(Material.REDSTONE_BLOCK), ChatColor.RED + "Cancel", ChatColor.translateAlternateColorCodes('&', "&e&lExits out of this menu"));
 		players.open(sender);
 	}
 }
