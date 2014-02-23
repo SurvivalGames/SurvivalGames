@@ -18,7 +18,7 @@ import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.util.CircleUtil;
+import com.communitysurvivalgames.thesurvivalgames.util.FireworkUtil;
 
 public class Toxicologist extends SGAbility implements Listener {
 
@@ -32,7 +32,7 @@ public class Toxicologist extends SGAbility implements Listener {
 		if (this.hasAbility(player)) {
 			final Random rnd = new Random();
 			if (player.getItemInHand().getType() == Material.CLAY_BALL && player.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Toxin Bomb")) {
-				CircleUtil.getCircleUtil().playFireworkCircle(event.getPlayer(), FireworkEffect.builder().withColor(Color.SILVER).withFade(Color.GREEN).flicker(true).trail(false).build(), 10, 10);
+				FireworkUtil.getCircleUtil().playFireworkCircle(event.getPlayer(), FireworkEffect.builder().withColor(Color.SILVER).withFade(Color.GREEN).flicker(true).trail(false).build(), 10, 10);
 				Bukkit.getScheduler().runTaskLater(SGApi.getPlugin(), new Runnable() {
 
 					@Override

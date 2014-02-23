@@ -41,6 +41,7 @@ public class SGApi {
 	private static TheSurvivalGames plugin;
 	private static ScheduleManager scheduler;
 	private static EnchantmentManager enchantmentManager;
+	private static Map<SGArena, SponsorManager> sponsorManager = new HashMap<>();
 
 	/**
 	 * Gets arena manager.
@@ -143,6 +144,16 @@ public class SGApi {
 	 */
 	public static PartyManager getPartyManager() {
 		return partyManager;
+	}
+
+	public static SponsorManager getSponsorManager(SGArena a) {
+		SponsorManager manager = sponsorManager.get(a);
+		if (manager == null) {
+			SponsorManager s = new SponsorManager(a);
+			sponsorManager.put(a, s);
+			
+		}
+		return sponsorManager.get(a);
 	}
 
 	/**

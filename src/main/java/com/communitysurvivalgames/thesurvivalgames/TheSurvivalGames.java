@@ -28,6 +28,7 @@ import com.communitysurvivalgames.thesurvivalgames.ability.Toxicologist;
 import com.communitysurvivalgames.thesurvivalgames.ability.Zelda;
 import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
+import com.communitysurvivalgames.thesurvivalgames.command.standalone.SponsorCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.ChatCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.DeclineCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.InviteCommand;
@@ -100,7 +101,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		saveResource("esES.lang", true);
 
 		setupDatabase();
-
+		
 		File i18N = new File(getDataFolder(), "I18N.yml");
 		if (!i18N.exists()) {
 			saveResource("I18N.yml", false);
@@ -152,6 +153,9 @@ public class TheSurvivalGames extends JavaPlugin {
 	void registerAll() {
 		getCommand("sg").setExecutor(new CommandHandler());
 		getCommand("party").setExecutor(new PartyCommandHandler());
+		
+		//I want the user based commands (ex. /kit /vote /sponsor) to not have the /sg prefix. Looks neater.   - Quantum64
+		getCommand("sponsor").setExecutor(new SponsorCommand());
 
 		CommandHandler.register("help", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.HelpCommand());
 		CommandHandler.register("create", new CreateCommand());

@@ -1,6 +1,7 @@
 package com.communitysurvivalgames.thesurvivalgames.util;
 
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -23,22 +24,28 @@ public class EconUtil {
 		SGApi.getPlugin().setPlayerData(pd);
 	}
 
-	public static void removePoints(Player p, int i) {
+	public static EconomyResponse removePoints(Player p, int i) {
 		if(econ){
 			economy.withdrawPlayer(p.getName(), i);
-			return;
+			return economy.withdrawPlayer(p.getName(), i);
 		}
 		PlayerData pd = SGApi.getPlugin().getPlayerData(p);
 		pd.removePoints(i);
 		SGApi.getPlugin().setPlayerData(pd);
+		return null;
 	}
 
-	public static void setupEconomy() {
+	public static boolean setupEconomy() {
 		RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
 		if (economyProvider != null) {
 			economy = economyProvider.getProvider();
 		}
 
 		econ = (economy != null);
+		return econ;
+	}
+	
+	public static boolean isHooked(){
+		return econ;
 	}
 }

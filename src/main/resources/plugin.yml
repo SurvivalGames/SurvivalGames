@@ -8,11 +8,14 @@ commands:
     sg: 
         usage: /sg <command>
         description: Base command for all SG related functions
-        aliases: [survival-games, sgames, hg] 
+        aliases: [survival-games, sgames, hg]
     party:
         usage: /party <command>
         description: Base command for all party related functions
-        aliases: [team, p] 
+        aliases: [team, p]
+    sponsor:
+        usage: /sponsor
+        description: Opens the sponsor menu
 permissions:
     sg.admin:
         description: Gives access to all SG commands.

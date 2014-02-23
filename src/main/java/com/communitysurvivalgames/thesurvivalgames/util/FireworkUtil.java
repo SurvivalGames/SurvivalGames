@@ -8,11 +8,11 @@ import org.bukkit.event.Listener;
 
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
-public class CircleUtil implements Listener {
+public class FireworkUtil implements Listener {
 
-	static CircleUtil circleUtil = new CircleUtil();
+	static FireworkUtil circleUtil = new FireworkUtil();
 
-	public static CircleUtil getCircleUtil() {
+	public static FireworkUtil getCircleUtil() {
 		return circleUtil;
 	}
 
@@ -22,7 +22,7 @@ public class CircleUtil implements Listener {
 		for (double t = 0; t < 2 * Math.PI; t += Math.toRadians(size)) {
 			index += 3;
 			Location l = fLoc.add(Math.cos(t) * distance, 0.5, Math.sin(t) * distance);
-			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(player, l, effect), index);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(l, effect), index);
 
 		}
 	}
@@ -33,7 +33,7 @@ public class CircleUtil implements Listener {
 		for (double t = 0; t < 2 * Math.PI; t += Math.toRadians(size)) {
 			index += 3;
 			Location l = player.getLocation().add(Math.cos(t) * distance, 0.5, Math.sin(t) * distance);
-			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(player, l, effect), index);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(l, effect), index);
 
 		}
 	}
@@ -44,24 +44,38 @@ public class CircleUtil implements Listener {
 		for (double t = 0; t < 2 * Math.PI; t += Math.toRadians(size)) {
 			index += 3;
 			Location l = player.getLocation().add(Math.cos(t) * distance, 0.5, Math.sin(t) * distance);
-			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(player, l, effect), index);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(l, effect), index);
 
 		}
 
 		for (double t = 0; t < 2 * Math.PI; t += Math.toRadians(size)) {
 			index += 3;
 			Location l = player.getLocation().add(Math.cos(t) * distance, 0.5, Math.sin(t) * distance);
-			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(player, l, effect), index);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(l, effect), index);
 		}
+	}
+	
+	public void playFireworkLine(Location top, Location bottom, final FireworkEffect effect, int number) {
+		Bukkit.getLogger().info("Called firework method");
+		//double interval = (top.getY() - bottom.getY()) / number;
+		double interval = 1;
+		int index = 0;
+		double currentY = top.getY();
+		for (int i = 0; i < number; i++) {
+			currentY -= interval;
+			Location l = new Location(top.getWorld(), top.getX(), bottom.getY() + currentY, top.getZ());
+			index += 3;
+			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(l, effect), index);
+
+		}
+
 	}
 
 	public class PlayFireworkEffect implements Runnable {
-		Player player;
 		Location fLoc;
 		FireworkEffect effect;
 
-		public PlayFireworkEffect(Player player, Location fLoc, FireworkEffect fEffect) {
-			this.player = player;
+		public PlayFireworkEffect(Location fLoc, FireworkEffect fEffect) {
 			this.fLoc = fLoc;
 			this.effect = fEffect;
 		}
@@ -69,7 +83,7 @@ public class CircleUtil implements Listener {
 		@Override
 		public void run() {
 			try {
-				FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(player.getWorld(), fLoc, effect);
+				FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(fLoc.getWorld(), fLoc, effect);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
