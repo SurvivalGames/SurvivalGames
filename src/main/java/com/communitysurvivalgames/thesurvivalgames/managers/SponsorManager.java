@@ -21,7 +21,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.Potion;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
@@ -66,7 +65,7 @@ public class SponsorManager {
 						chest.getInventory().setItem(13, event.getItem());
 						FireworkEffect fChestEffect = FireworkEffect.builder().withTrail().flicker(false).with(Type.STAR).withColor(Color.RED).withColor(Color.BLUE).withColor(Color.YELLOW).withColor(Color.GREEN).build();
 						try {
-							FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(loc.getWorld(), new Location(loc.getWorld(), loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()), fChestEffect);
+							FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(loc.getWorld(), new Location(loc.getWorld(), loc.getBlockX() + 0.5, loc.getBlockY(), loc.getBlockZ() + 0.5), fChestEffect);
 						} catch (Exception e) {
 							//If the firework dosen't work.... To bad
 						}
@@ -181,7 +180,7 @@ public class SponsorManager {
 		tmp = new ItemStack(Material.DIAMOND_LEGGINGS);
 		tmp.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 		sponsor.setOption(35, tmp, ChatColor.translateAlternateColorCodes('&', "&6Desolation"), new String[] { ChatColor.translateAlternateColorCodes('&', "&2For the Godlike Warriors"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$97") : ChatColor.translateAlternateColorCodes('&', "&e&l97 Points") });
-		
+
 		/////////////////
 		//     Food    //
 		/////////////////
@@ -194,7 +193,7 @@ public class SponsorManager {
 		sponsor.setOption(42, new ItemStack(Material.GOLDEN_APPLE, 2), ChatColor.translateAlternateColorCodes('&', "&6Golden Apple"), new String[] { ChatColor.translateAlternateColorCodes('&', "&eExtra hearts for days"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$60") : ChatColor.translateAlternateColorCodes('&', "&e&l60 Points") });
 		sponsor.setOption(43, new ItemStack(Material.GOLDEN_APPLE, 1, (short) 1), ChatColor.translateAlternateColorCodes('&', "&6Golden Apple - T2"), new String[] { ChatColor.translateAlternateColorCodes('&', "&eNOTCH AAAPPPLLLLEEEEE"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$150") : ChatColor.translateAlternateColorCodes('&', "&e&l150 Points") });
 		sponsor.setOption(44, new ItemStack(Material.GOLDEN_CARROT, 10), ChatColor.translateAlternateColorCodes('&', "&6Golden Carrot"), new String[] { ChatColor.translateAlternateColorCodes('&', "&eUltimant food pack"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$75") : ChatColor.translateAlternateColorCodes('&', "&e&l175 Points") });
-		
+
 		/////////////////
 		//   Potions   //
 		/////////////////
@@ -240,7 +239,7 @@ public class SponsorManager {
 		potionItem = new ItemStack(Material.POTION);
 		p.apply(potionItem);
 		sponsor.setOption(52, potionItem, ChatColor.translateAlternateColorCodes('&', "&6Invisibility - T2"), new String[] { ChatColor.translateAlternateColorCodes('&', "&6Can't see me now muahahah"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$40") : ChatColor.translateAlternateColorCodes('&', "&e&l40 Points") });
-		
+
 		players = new IconMenu("Select the player to sponsor", 27, new IconMenu.OptionClickEventHandler() {
 
 			@Override
