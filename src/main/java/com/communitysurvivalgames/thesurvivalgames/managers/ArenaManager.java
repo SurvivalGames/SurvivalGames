@@ -177,22 +177,21 @@ public class ArenaManager {
 	 * 
 	 * @param creator The creator attributed with making the arena
 	 */
-	public void createArena(final Player creator, final String worldName, final String display) {
+	public void createWorld(final Player creator, final String worldName, final String display) {
 		creator.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
 
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 			@Override
 			public void run() {
 				// todo this is only a temp solution to create a new arena
-				SGApi.getMultiWorldManager().createWorld(worldName, display);
-				creators.put(creator.getName(), new SGWorld(worldName, worldName));
-				createLobby(creator);
+				SGWorld world = SGApi.getMultiWorldManager().createWorld(worldName, display);
+				creators.put(creator.getName(), world);
 			}
 		});
 
 	}
 
-	public void createArenaFromDownload(final Player creator, final String worldName, final String displayName) {
+	public void createWorldFromDownload(final Player creator, final String worldName, final String displayName) {
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 			@Override
 			public void run() {
@@ -202,7 +201,7 @@ public class ArenaManager {
 
 	}
 
-	public void createArenaFromImport(final Player creator, final String worldName, final String displayName) {
+	public void createWorldFromImport(final Player creator, final String worldName, final String displayName) {
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 			@Override
 			public void run() {

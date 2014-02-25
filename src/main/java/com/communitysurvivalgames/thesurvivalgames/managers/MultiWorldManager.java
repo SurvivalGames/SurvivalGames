@@ -29,11 +29,11 @@ public class MultiWorldManager {
     public MultiWorldManager() {
     }
 
-    World createWorld(String name, String display) {
+    SGWorld createWorld(String name, String display) {
         SGWorld world = new SGWorld(name, display);
         world.create();
         worlds.add(world);
-        return world.getWorld();
+        return world;
     }
 
     public void deleteWorld(String name) {

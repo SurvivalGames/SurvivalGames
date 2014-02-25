@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SGWorld {
 
-    public List<Location> locs = new ArrayList<>(0);
+    public List<Location> locs = new ArrayList<>();
     private String name;
     private WorldCreator wc;
 
@@ -117,6 +117,7 @@ public class SGWorld {
      */
     public void nextSpawn(Location loc) {
         locs.add(loc);
+        Bukkit.getLogger().info("Registered spawn point - List: " + locs.toString() + " Loc: " + loc.toString());
     }
 
 }

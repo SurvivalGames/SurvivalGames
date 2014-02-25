@@ -29,12 +29,12 @@ public class CreateCommand implements SubCommand {
 		if (cmd.equalsIgnoreCase("create") && p.hasPermission("sg.create")) {
 			try {
 				if (args[0].equalsIgnoreCase("custom")) {
-					SGApi.getArenaManager().createArena(p, args[1], args[2]);
+					SGApi.getArenaManager().createWorld(p, args[1], args[2]);
 					p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_ARENA"));
 				} else if (args[0].equalsIgnoreCase("download")) {
-					SGApi.getArenaManager().createArenaFromDownload(p, args[1], args[2]);
+					SGApi.getArenaManager().createWorldFromDownload(p, args[1], args[2]);
 				} else if (args[0].equalsIgnoreCase("import")) {
-					SGApi.getArenaManager().createArenaFromImport(p, args[1], args[2]);
+					SGApi.getArenaManager().createWorldFromImport(p, args[1], args[2]);
 				}
 				return;
 			} catch (ArrayIndexOutOfBoundsException x) {

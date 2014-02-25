@@ -65,6 +65,7 @@ public class TimeManager {
                 int index = 0;
                 for (String s : a.getPlayers()) {           
                     Player p = Bukkit.getPlayerExact(s);
+                    Bukkit.getLogger().info("List: " + a.currentMap.locs.toString());
                     Location loc = a.currentMap.locs.get(index);
                     p.teleport(loc);               
 
