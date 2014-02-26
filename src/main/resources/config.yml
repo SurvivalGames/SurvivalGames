@@ -8,51 +8,51 @@
 #                                                                                                          |___/ 
 # This is a community project, join in http://dev.bukkit.org/bukkit-plugins/the-survival-games/.
 
-#Bungeecord Mode
+# Bungeecord Mode
 bungeecord-mode: false
 
-#SETTINGS IF BUNGEECORD MODE IS TRUE
+# SETTINGS IF BUNGEECORD MODE IS TRUE
 
-#Define if the server should be a hub
+# Define if the server should be a hub
 hub-server: false
 
-#END THOSE SETTINGS
+# END THOSE SETTINGS
 
-#Starting points per player:
+# Starting points per player:
 starting-points: 100
 
-#Allow Double-Jump in game
+# Allow Double-Jump in game
 allow-double-jump-IG: false
 
-#Allow Double-Jump in lobby
+# Allow Double-Jump in lobby
 allow-double-jump: true
 
-#Default points for new players
+# Default points for new players
 default-points: 100
 
-#Arenas Config
-#Specify each arena's .yml file here
+# Arenas Config
+# Specify each arena's .yml file here
 arenas:
   - testArena.yml
   - testArena2.yml
 
-#Welcome Message
+# Welcome message
 welcome-message:
   - '&eHi there, and welcome to'
   - '&a&lThe Survival Games Server'
   - '&2Read the book in your inventory for more information'
-#Signs config
+# Signs config
 signs:
-  #placeholders:
-  #%numpl% = online players
-  #%maxpl% = max players
-  #%motd% = motd
-  #%displayname% = displayname
-  #%isonline% whether the server is online or offline
+  # placeholders:
+  # %numpl% = online players
+  # %maxpl% = max players
+  # %motd% = motd
+  # %displayname% = displayname
+  # %isonline% whether the server is online or offline
   
-  #"inventory" is a reserved layout name! Don't use it
+  # "inventory" is a reserved layout name! Don't use it
   layouts:
-    #you can change the default layout but don't delete it!
+    # you can change the default layout but don't delete it!
     default:
       teleport: true
       layout:
@@ -63,6 +63,7 @@ signs:
       join: '&a[Join]'
       cantJoin: '&c[NotJoinable]'
       offline-int: '-'
+# For a list of materials, refer to : http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
 breaks-allowed:
   - 'LEAVES'
   - 'LEAVES_2'
@@ -70,4 +71,8 @@ breaks-allowed:
   - 'RED_MUSHROOM'
   - 'VINE'
   - 'GRASS'
+  - 'WHEAT'
+  - 'WEB'
+  - 'CARROT'
+  - 'POTATO'
   
