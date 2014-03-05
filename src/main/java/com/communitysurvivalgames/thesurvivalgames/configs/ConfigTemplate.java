@@ -1,32 +1,47 @@
 package com.communitysurvivalgames.thesurvivalgames.configs;
 
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import java.io.File;
+import java.io.IOException;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.File;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public abstract class ConfigTemplate<T> {
 	private File file = null;
 	private FileConfiguration config = null;
 
 	public ConfigTemplate(String path) {
+
+		boolean b = false;
+
+		this.file = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + File.separator + path);
+
+		if (!this.file.exists()) {
+			try {
+				b = this.file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		this.config = YamlConfiguration.loadConfiguration(file);
 		try {
-			this.file = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + File.separator + path);
-			if (this.file.createNewFile()) {
-                            serialize();
-                        }
-
-
-			this.config = YamlConfiguration.loadConfiguration(file);
-		} catch (Exception x) {
+			config.save(file);
+		} catch (IOException x) {
 			x.printStackTrace();
 		}
-    }
+	}
 
 	public ConfigTemplate(File file) {
 		this.file = file;
 		this.config = YamlConfiguration.loadConfiguration(file);
+		try {
+			config.save(file);
+		} catch (Exception x) {
+			x.printStackTrace();
+		}
 	}
 
 	public final void serialize() {

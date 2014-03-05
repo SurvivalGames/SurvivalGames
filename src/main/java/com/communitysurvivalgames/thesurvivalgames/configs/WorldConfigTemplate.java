@@ -2,6 +2,8 @@ package com.communitysurvivalgames.thesurvivalgames.configs;
 
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.BlockState;
 
@@ -20,7 +22,7 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 	}
 
 	public WorldConfigTemplate(SGWorld world) {
-		super("/maps/" + world.getWorld().getName() + ".yml");
+		super("maps/" + world.getWorld().getName() + ".yml");
 		this.world = world;
 	}
 	
@@ -38,7 +40,7 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 	public Object toFile(int keyPair) {
 		switch (keyPair) {
 		case 0:
-			return this.world.getWorld().getName();
+			return this.world.getName();
 		case 1:
 			return this.world.getDisplayName();
 		case 2:

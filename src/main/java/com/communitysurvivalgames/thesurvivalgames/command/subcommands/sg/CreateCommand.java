@@ -29,7 +29,7 @@ public class CreateCommand implements SubCommand {
 		if (cmd.equalsIgnoreCase("create") && p.hasPermission("sg.create")) {
 			try {
 				if (args[0].equalsIgnoreCase("custom")) {
-					SGApi.getArenaManager().createWorld(p, args[1], args[2]);
+					SGApi.getArenaManager().createWorld(p, args[1], args[1]);
 					p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_ARENA"));
 				} else if (args[0].equalsIgnoreCase("download")) {
 					SGApi.getArenaManager().createWorldFromDownload(p, args[1], args[2]);

@@ -26,7 +26,7 @@ public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
 
 	@Override
 	public String[] pattern() {
-		return new String[] { "Creators", "Locations", "Inventory", "Armor", "Arena-size" };
+		return new String[] { "Creators", "Locations", "Inventory", "Armor" };
 	}
 
 	@Override
@@ -64,8 +64,6 @@ public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
 				}
 			}
 			return armorArray;
-			case 4:
-			return SGApi.getArenaManager().arenaSize;
 		}
 		return null;
 	}
@@ -101,9 +99,6 @@ public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
 				String[] strings = s.split(":");
 				SGApi.getArenaManager().armor.put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
 			}
-				break;
-			case 4:
-			SGApi.getArenaManager().arenaSize = Integer.valueOf(String.valueOf(o));
 				break;
 		}
 		return SGApi.getArenaManager();

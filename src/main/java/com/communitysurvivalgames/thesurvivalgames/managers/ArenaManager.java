@@ -34,7 +34,6 @@ public class ArenaManager {
 	public final Map<String, ItemStack[]> inv = new HashMap<>();
 	public final Map<String, ItemStack[]> armor = new HashMap<>();
 	private final List<SGArena> arenas = new ArrayList<>();
-	public int arenaSize = 0;
 
 	/**
 	 * The constructor for a new reference of the singleton
@@ -158,15 +157,18 @@ public class ArenaManager {
 	 */
 	public SGArena createLobby(Player p) {
 		SGArena a = new SGArena();
-		arenaSize++;
-		a.createArena(arenaSize);
+		
+		int s = arenas.size();
+		s += 1;
+
+		a.createArena(s);
 
 		a.lobby = p.getLocation();
 
 		a.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
-		
+
 		arenas.add(a);
-		
+
 		SGApi.getTimeManager(a).countdownLobby(1);
 
 		return a;
@@ -183,7 +185,7 @@ public class ArenaManager {
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 			@Override
 			public void run() {
-				// todo this is only a temp solution to create a new arena
+				// todo this is only a temp solution to create a new map
 				SGWorld world = SGApi.getMultiWorldManager().createWorld(worldName, display);
 				creators.put(creator.getName(), world);
 			}
@@ -251,7 +253,7 @@ public class ArenaManager {
 		File maps = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + "/maps/");
 
 		if (SGApi.getPlugin().getPluginConfig().isBungeecordMode()) {
-			if (maps.listFiles().length > 1 || arenas.listFiles().length > 1) {
+			if (arenas.listFiles().length > 1) {
 				Bukkit.getLogger().severe("You cannot have mutiple arenas on Bngeecord mode");
 				Bukkit.getPluginManager().disablePlugin(SGApi.getPlugin());
 			}
@@ -262,6 +264,7 @@ public class ArenaManager {
 		for (File file : maps.listFiles()) {
 			ConfigTemplate<SGWorld> configTemplate = new WorldConfigTemplate(file);
 			SGWorld world = configTemplate.deserialize();
+			Bukkit.getLogger().info("Loaded map! " + world.toString());
 			SGApi.getMultiWorldManager().getWorlds().add(world);
 		}
 
@@ -270,6 +273,7 @@ public class ArenaManager {
 		for (File file : arenas.listFiles()) {
 			ConfigTemplate<SGArena> configTemplate = new ArenaConfigTemplate(file);
 			SGArena arena = configTemplate.deserialize();
+			Bukkit.getLogger().info("Loaded arena! " + arena.toString());
 			this.arenas.add(arena);
 
 			arena.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);

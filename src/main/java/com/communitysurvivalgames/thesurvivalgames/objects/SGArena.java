@@ -37,7 +37,6 @@ public class SGArena {
 	public final List<String> players = new CopyOnWriteArrayList<>();
 	public final List<String> spectators = new CopyOnWriteArrayList<>();
 
-
 	/**
 	 * Name: ArenaState.java Edited: 8 December 2013
 	 * 
@@ -249,5 +248,13 @@ public class SGArena {
 
 	public World getArenaWorld() {
 		return currentMap.getWorld();
+	}
+	
+	public SGWorld getCurrentMap(){
+		return currentMap;	
+	}
+
+	public String toString() {
+		return "SGArena.java - Id: " + this.getId() + " State: " + this.getState() + " " + "Players: " + this.players;
 	}
 }

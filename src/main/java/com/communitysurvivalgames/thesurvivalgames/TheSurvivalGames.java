@@ -29,6 +29,7 @@ import com.communitysurvivalgames.thesurvivalgames.ability.Zelda;
 import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.PartyCommandHandler;
 import com.communitysurvivalgames.thesurvivalgames.command.standalone.SponsorCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.standalone.TpxCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.ChatCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.DeclineCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.InviteCommand;
@@ -119,6 +120,7 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		registerAll();
 
+		saveResource("ArenaManager.yml", false);
 		ConfigTemplate<ArenaManager> configTemplate = new ManagerConfigTemplate();
 		configTemplate.deserialize();
 
@@ -138,11 +140,13 @@ public class TheSurvivalGames extends JavaPlugin {
 		template.serialize();
 
 		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
+			Bukkit.getLogger().info("Attemping to save arena: " + arena.toString());
 			ConfigTemplate<SGArena> configTemplate = new ArenaConfigTemplate(arena);
 			configTemplate.serialize();
 		}
 
 		for (SGWorld world : SGApi.getMultiWorldManager().getWorlds()) {
+			Bukkit.getLogger().info("Attempting to save world: " + world);
 			ConfigTemplate<SGWorld> configTemplate = new WorldConfigTemplate(world);
 			configTemplate.serialize();
 		}
@@ -156,6 +160,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		
 		//I want the user based commands (ex. /kit /vote /sponsor) to not have the /sg prefix. Looks neater.   - Quantum64
 		getCommand("sponsor").setExecutor(new SponsorCommand());
+		getCommand("tpx").setExecutor(new TpxCommand());
 
 		CommandHandler.register("help", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.HelpCommand());
 		CommandHandler.register("create", new CreateCommand());
@@ -163,7 +168,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		CommandHandler.register("join", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.JoinCommand());
 		CommandHandler.register("leave", new com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.LeaveCommand());
 		CommandHandler.register("user", new UserCommand());
-		CommandHandler.register("setlobby", new SetCommand());
+		CommandHandler.register("createlobby", new SetCommand());
 		CommandHandler.register("setdeathmatch", new SetCommand());
 		CommandHandler.register("setmaxplayers", new SetCommand());
 		CommandHandler.register("setchest", new SetCommand());
