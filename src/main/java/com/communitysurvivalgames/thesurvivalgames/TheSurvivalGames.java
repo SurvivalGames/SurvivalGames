@@ -25,6 +25,7 @@ import com.communitysurvivalgames.thesurvivalgames.ability.Enchanter;
 import com.communitysurvivalgames.thesurvivalgames.ability.Knight;
 import com.communitysurvivalgames.thesurvivalgames.ability.Notch;
 import com.communitysurvivalgames.thesurvivalgames.ability.Pacman;
+import com.communitysurvivalgames.thesurvivalgames.ability.Skeleton;
 import com.communitysurvivalgames.thesurvivalgames.ability.Toxicologist;
 import com.communitysurvivalgames.thesurvivalgames.ability.Zelda;
 import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;

@@ -224,21 +224,21 @@ public class SponsorManager {
 		p = new Potion(PotionType.STRENGTH, 1);
 		potionItem = new ItemStack(Material.POTION);
 		p.apply(potionItem);
-		sponsor.setOption(46, potionItem, ChatColor.translateAlternateColorCodes('&', "&6Strength - T1"), new String[] { ChatColor.translateAlternateColorCodes('&', "&6Fight like a real warrior!"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$30") : ChatColor.translateAlternateColorCodes('&', "&e&l30 Points") });
+		sponsor.setOption(50, potionItem, ChatColor.translateAlternateColorCodes('&', "&6Strength - T1"), new String[] { ChatColor.translateAlternateColorCodes('&', "&6Fight like a real warrior!"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$30") : ChatColor.translateAlternateColorCodes('&', "&e&l30 Points") });
 		p = new Potion(PotionType.INSTANT_DAMAGE, 2);
 		p.splash();
 		potionItem = new ItemStack(Material.POTION);
 		p.apply(potionItem);
-		sponsor.setOption(50, potionItem, ChatColor.translateAlternateColorCodes('&', "&6Instant Damage - T2"), new String[] { ChatColor.translateAlternateColorCodes('&', "&6Splash potion of harming"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$20") : ChatColor.translateAlternateColorCodes('&', "&e&l20 Points") });
+		sponsor.setOption(51, potionItem, ChatColor.translateAlternateColorCodes('&', "&6Instant Damage - T2"), new String[] { ChatColor.translateAlternateColorCodes('&', "&6Splash potion of harming"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$20") : ChatColor.translateAlternateColorCodes('&', "&e&l20 Points") });
 		p = new Potion(PotionType.POISON, 2);
 		p.splash();
 		potionItem = new ItemStack(Material.POTION);
 		p.apply(potionItem);
-		sponsor.setOption(51, potionItem, ChatColor.translateAlternateColorCodes('&', "&6Poison - T2"), new String[] { ChatColor.translateAlternateColorCodes('&', "&6Call it a day for anyone chasing you"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$35") : ChatColor.translateAlternateColorCodes('&', "&e&l35 Points") });
+		sponsor.setOption(52, potionItem, ChatColor.translateAlternateColorCodes('&', "&6Poison - T2"), new String[] { ChatColor.translateAlternateColorCodes('&', "&6Call it a day for anyone chasing you"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$35") : ChatColor.translateAlternateColorCodes('&', "&e&l35 Points") });
 		p = new Potion(PotionType.INVISIBILITY, 2);
 		potionItem = new ItemStack(Material.POTION);
 		p.apply(potionItem);
-		sponsor.setOption(52, potionItem, ChatColor.translateAlternateColorCodes('&', "&6Invisibility - T2"), new String[] { ChatColor.translateAlternateColorCodes('&', "&6Can't see me now muahahah"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$40") : ChatColor.translateAlternateColorCodes('&', "&e&l40 Points") });
+		sponsor.setOption(53, potionItem, ChatColor.translateAlternateColorCodes('&', "&6Invisibility - T2"), new String[] { ChatColor.translateAlternateColorCodes('&', "&6Can't see me now muahahah"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$40") : ChatColor.translateAlternateColorCodes('&', "&e&l40 Points") });
 
 		players = new IconMenu("Select the player to sponsor", 27, new IconMenu.OptionClickEventHandler() {
 

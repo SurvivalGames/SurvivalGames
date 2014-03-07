@@ -2,6 +2,8 @@ package com.communitysurvivalgames.thesurvivalgames.managers;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +27,7 @@ import com.communitysurvivalgames.thesurvivalgames.util.ItemSerialization;
 
 public class KitManager {
 	private List<Kit> kits = new ArrayList<Kit>();
-	private IconMenu menu;
+	private List<IconMenu> menus = new ArrayList<IconMenu>();
 	private Map<String, Kit> playerKits = new HashMap<String, Kit>();
 
 	public void loadKits() {
@@ -34,23 +36,62 @@ public class KitManager {
 		if (kits.size() == 0)
 			saveDefaultKits();
 
-		menu = new IconMenu("Select Your Kit", 18, new IconMenu.OptionClickEventHandler() {
-			@Override
-			public void onOptionClick(IconMenu.OptionClickEvent event) {
-				if (!(event.getPlayer().hasPermission("sg.kits.*") || event.getPlayer().hasPermission("sg.kits." + event.getName()) || event.getPlayer().isOp())) {
-					event.getPlayer().sendMessage(ChatColor.RED + "Sorry, but you do not have permission to use this kit!");
-					return;
-				}
-				event.getPlayer().sendMessage("You have chosen the " + event.getName() + " kit!");
-				setPlayerKit(event.getPlayer(), getKit(event.getName()));
-				event.setWillClose(true);
+		for (int i = 0; i < 9; i++) {
+			menus.add(new IconMenu("Select Your Kit - " + i, 54, new IconMenu.OptionClickEventHandler() {
+				@Override
+				public void onOptionClick(IconMenu.OptionClickEvent event) {
+					if (event.getName().startsWith("Page")) {
+						displayKitSelectionMenu(event.getPlayer(), (Integer.parseInt(event.getName().charAt(5) + "") - 1));
+						return;
+					}
+					if (!(event.getPlayer().hasPermission("sg.kits.*") || event.getPlayer().hasPermission("sg.kits." + event.getName()) || event.getPlayer().isOp())) {
+						event.getPlayer().sendMessage(ChatColor.RED + "Sorry, but you do not have permission to use this kit!");
+						return;
+					}
+					event.getPlayer().sendMessage("You have chosen the " + event.getName() + " kit!");
+					setPlayerKit(event.getPlayer(), getKit(event.getName()));
+					event.setWillClose(true);
 
-			}
-		}, SGApi.getPlugin());
+				}
+			}, SGApi.getPlugin()));
+		}
+		//TODO Is this really the best way to go about this?
+		int menu = 0;
+		int row = 0;
 		int index = 0;
+		String currentC = kits.get(0).getType();
+
 		for (Kit k : kits) {
-			menu.setOption(index, k.getIcon(), k.getName(), k.getIconLore());
+			if (!currentC.equalsIgnoreCase(k.getType()) || index == 8) {
+				currentC = k.getType();
+				index = 0;
+				row++;
+				if (row == 5) {
+					row = 0;
+					menu++;
+					if (menu == 9) {
+						Bukkit.getLogger().severe("You can't have more that 486 kits!  (Are you insane?");
+					}
+				}
+			}
+
+			menus.get(menu).setOption((row * 9) + index, k.getIcon(), k.getName(), k.getIconLore());
 			index++;
+
+			//kits1.setOption(index, k.getIcon(), k.getName(), k.getIconLore());
+			//index++;
+		}
+
+		for (int i = 0; i < 9; i++) {
+			menus.get(i).setOption(45, new ItemStack(Material.PAPER), "Page 1", "Click to go to page 1!");
+			menus.get(i).setOption(46, new ItemStack(Material.PAPER), "Page 2", "Click to go to page 2!");
+			menus.get(i).setOption(47, new ItemStack(Material.PAPER), "Page 3", "Click to go to page 3!");
+			menus.get(i).setOption(48, new ItemStack(Material.PAPER), "Page 4", "Click to go to page 4!");
+			menus.get(i).setOption(49, new ItemStack(Material.PAPER), "Page 5", "Click to go to page 5!");
+			menus.get(i).setOption(50, new ItemStack(Material.PAPER), "Page 6", "Click to go to page 6!");
+			menus.get(i).setOption(51, new ItemStack(Material.PAPER), "Page 7", "Click to go to page 7!");
+			menus.get(i).setOption(52, new ItemStack(Material.PAPER), "Page 8", "Click to go to page 8!");
+			menus.get(i).setOption(53, new ItemStack(Material.PAPER), "Page 9", "Click to go to page 9!");
 		}
 	}
 
@@ -90,9 +131,19 @@ public class KitManager {
 
 				List<Integer> abilityIds = kitData.getIntegerList("ability-ids");
 
-				kits.add(new Kit(kitName, list, icon, iconLore, abilityIds));
+				kits.add(new Kit(kitName, type, list, icon, iconLore, abilityIds));
 			}
 		}
+
+		Bukkit.getLogger().info("Sorted: " + kits);
+
+		Collections.sort(kits, new Comparator<Kit>() {
+			public int compare(Kit o1, Kit o2) {
+				return o1.getType().compareTo(o2.getType());
+			}
+		});
+
+		Bukkit.getLogger().info("Into: " + kits);
 	}
 
 	void saveDefaultKits() {
@@ -125,8 +176,18 @@ public class KitManager {
 		return kits;
 	}
 
-	public void displayKitSelectionMenu(Player p) {
-		menu.open(p);
+	public void displayDefaultKitSelectionMenu(Player p) {
+		menus.get(0).open(p);
+	}
+
+	public void displayKitSelectionMenu(final Player p, final int i) {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+			@Override
+			public void run() {
+				menus.get(i).open(p);
+
+			}
+		});
 	}
 
 	public void setPlayerKit(Player player, Kit kit) {

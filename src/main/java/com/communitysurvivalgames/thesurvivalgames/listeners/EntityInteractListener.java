@@ -12,7 +12,7 @@ public class EntityInteractListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onInteract(PlayerInteractEntityEvent event) {
 		if (event.getRightClicked() instanceof EnderCrystal) {
-			SGApi.getKitManager().displayKitSelectionMenu(event.getPlayer());
+			SGApi.getKitManager().displayDefaultKitSelectionMenu(event.getPlayer());
 		}
 	}
 }
