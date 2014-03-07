@@ -14,13 +14,11 @@ public abstract class ConfigTemplate<T> {
 
 	public ConfigTemplate(String path) {
 
-		boolean b = false;
-
 		this.file = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + File.separator + path);
 
 		if (!this.file.exists()) {
 			try {
-				b = this.file.createNewFile();
+				this.file.createNewFile();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

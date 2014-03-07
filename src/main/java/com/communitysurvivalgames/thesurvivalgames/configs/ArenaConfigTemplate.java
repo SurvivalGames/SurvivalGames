@@ -33,13 +33,16 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 
 	@Override
 	public Object toFile(int keyPair) {
-		Bukkit.getLogger().info("Attemping to save arena: " + arena.toString() + " with a keypair of " + keyPair);
+		Bukkit.getLogger().info("Attemping to save prop: " + arena.toString() + " with a keypair of " + keyPair);
 		switch (keyPair) {
 		case 0:
+			Bukkit.getLogger().info(arena.getState().toString());
 			return arena.getState().toString();
 		case 1:
+			Bukkit.getLogger().info(arena.getId() + "");
 			return arena.getId();
 		case 2:
+			Bukkit.getLogger().info(SGApi.getArenaManager().serializeLoc(arena.lobby));
 			return SGApi.getArenaManager().serializeLoc(arena.lobby);
 		case 3:
 			if(arena.getCurrentMap() == null){
@@ -64,9 +67,10 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 
 	@Override
 	public SGArena fromFile(int index, Object o) {
-		this.cachedArena = new SGArena();
+		Bukkit.getLogger().info("Attempting to load arnea prop: " + o + " with a keypair of " + index);
 		switch (index) {
 		case 0:
+			this.cachedArena = new SGArena(); //This should only be called once.  Here?
 			this.cachedArena.setState(SGArena.ArenaState.valueOf(String.valueOf(o)));
 			break;
 		case 1:
