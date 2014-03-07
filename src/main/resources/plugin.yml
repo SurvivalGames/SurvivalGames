@@ -18,7 +18,7 @@ commands:
         description: Opens the sponsor menu
     tpx:
         usage: /tpx <dim id>
-        description: Teleport to the spawn of a certin world id
+        description: Teleport to the spawn of a certain world id
 permissions:
     sg.admin:
         description: Gives access to all SG commands.
