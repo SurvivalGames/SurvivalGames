@@ -17,7 +17,7 @@ commands:
         usage: /sponsor
         description: Opens the sponsor menu
     tpx:
-        usage: /tpx <dim id>
+        usage: /tpx <dim name>
         description: Teleport to the spawn of a certain world id
 permissions:
     sg.admin:
