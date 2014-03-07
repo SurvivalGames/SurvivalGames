@@ -19,9 +19,11 @@ public class Knight extends SGAbility implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onGameStart(GameStartEvent event) {
 		for (String p : event.getArena().getPlayers()) {
-			Player player = Bukkit.getPlayer(p);
-			player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 99999, 1, false));
-			player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 2, false));
+			if (hasAbility(p)) {
+				Player player = Bukkit.getPlayer(p);
+				player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 99999, 1, false));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 2, false));
+			}
 		}
 	}
 }

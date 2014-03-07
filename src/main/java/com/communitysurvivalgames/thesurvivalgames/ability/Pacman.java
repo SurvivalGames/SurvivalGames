@@ -28,8 +28,8 @@ public class Pacman extends SGAbility implements Listener {
 				ItemStack item = player.getItemInHand();
 				item.setAmount(1);
 				player.getInventory().remove(item);
-				player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10, 2));
-				player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10, 2));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 200, 2));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 2));
 				FireworkEffect fEffect = FireworkEffect.builder().flicker(false).withColor(Color.YELLOW).withFade(Color.YELLOW).with(Type.STAR).trail(false).build();
 				try {
 					FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(event.getPlayer().getWorld(), event.getPlayer().getLocation(), fEffect);

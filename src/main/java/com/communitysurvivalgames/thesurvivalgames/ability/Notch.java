@@ -21,6 +21,8 @@ public class Notch extends SGAbility implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onBlockPlace(BlockPlaceEvent event) {
+		if(!event.getBlock().getType().equals(Material.DIAMOND_ORE))
+			return;
 		BlockListener.addBreakable(event.getBlock());
 	}
 

@@ -23,6 +23,7 @@ import com.communitysurvivalgames.thesurvivalgames.ability.Archer;
 import com.communitysurvivalgames.thesurvivalgames.ability.Crafter;
 import com.communitysurvivalgames.thesurvivalgames.ability.Enchanter;
 import com.communitysurvivalgames.thesurvivalgames.ability.Knight;
+import com.communitysurvivalgames.thesurvivalgames.ability.Notch;
 import com.communitysurvivalgames.thesurvivalgames.ability.Pacman;
 import com.communitysurvivalgames.thesurvivalgames.ability.Toxicologist;
 import com.communitysurvivalgames.thesurvivalgames.ability.Zelda;
@@ -205,11 +206,14 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		pm.registerEvents(new Archer(), this);
 		pm.registerEvents(new Crafter(), this);
+		pm.registerEvents(new Enchanter(), this);
 		pm.registerEvents(new Knight(), this);
+		pm.registerEvents(new Notch(), this);
 		pm.registerEvents(new Pacman(), this);
+		pm.registerEvents(new Skeleton(), this);
 		pm.registerEvents(new Toxicologist(), this);
 		pm.registerEvents(new Zelda(), this);
-		pm.registerEvents(new Enchanter(), this);
+
 
 		Scoreboard.registerScoreboard();
 		SGApi.getEnchantmentManager().registerAll();

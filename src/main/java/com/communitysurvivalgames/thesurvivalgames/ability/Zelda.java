@@ -31,8 +31,10 @@ public class Zelda extends SGAbility implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onGameStart(GameStartEvent event) {
 		for (String p : event.getArena().getPlayers()) {
-			Player player = Bukkit.getPlayer(p);
-			player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 99999, 5, false));
+			if (hasAbility(p)) {
+				Player player = Bukkit.getPlayer(p);
+				player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 99999, 5, false));
+			}
 		}
 	}
 
