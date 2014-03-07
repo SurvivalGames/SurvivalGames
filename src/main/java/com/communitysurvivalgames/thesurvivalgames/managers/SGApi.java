@@ -143,6 +143,8 @@ public class SGApi {
 	 * @return the party manager
 	 */
 	public static PartyManager getPartyManager() {
+		if(partyManager == null)
+			partyManager = new PartyManager();
 		return partyManager;
 	}
 
