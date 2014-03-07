@@ -64,7 +64,7 @@ public class Scoreboard implements Runnable {
             sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "   ", 10, complete);
             sendScore(objective, "&r", 9, complete);
             sendScore(objective, "&e&l" + I18N.getLocaleString("RANK"), 8, complete);
-            sendScore(objective, "&f" + getPlugin().getPlayerData(player).getRank(), 7, complete);
+            sendScore(objective, getPlugin().getPlayerData(player).getRank(), 7, complete);
             sendScore(objective, "&0", 6, complete);
             sendScore(objective, "&4&l" + I18N.getLocaleString("KILLS"), 5, complete);
             sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getKills() + "  ", 4, complete);

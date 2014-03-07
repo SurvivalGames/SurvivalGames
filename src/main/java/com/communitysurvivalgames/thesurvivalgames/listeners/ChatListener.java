@@ -7,13 +7,17 @@ package com.communitysurvivalgames.thesurvivalgames.listeners;
 
 import java.util.UUID;
 import java.util.logging.Level;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.Party;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.objects.Party;
+import com.communitysurvivalgames.thesurvivalgames.util.PlayerNameUtil;
 
 public class ChatListener implements Listener {
 
@@ -24,7 +28,7 @@ public class ChatListener implements Listener {
      * @param event The event being called
      */
     @EventHandler
-    public void onPlayerChat(org.bukkit.event.player.AsyncPlayerChatEvent event) {
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
         if (SGApi.getPartyManager().getPartyChat().contains(event.getPlayer().getName())) {
             UUID id = SGApi.getPartyManager().getPlayers().get(event.getPlayer().getName());
             if (id != null) {
@@ -60,9 +64,9 @@ public class ChatListener implements Listener {
                 SGApi.getPartyManager().getPartyChat().remove(event.getPlayer().getName());
             }
         } else {
-            // We'll add chat formatting here later, it will include the
-            // player's "Rank" weather that be admin or a youtuber, as wall as
-            // the player's "Points"
+        	String prefix = PlayerNameUtil.getDevs().contains(event.getPlayer().getName()) ? ChatColor.LIGHT_PURPLE + "" + ChatColor.MAGIC + "iiii" + ChatColor.YELLOW + ChatColor.BOLD + "Developer" + ChatColor.LIGHT_PURPLE + ChatColor.MAGIC + "iiii": ChatColor.translateAlternateColorCodes('&', SGApi.getPlugin().getPlayerData(event.getPlayer()).getRank());
+        	String name = PlayerNameUtil.getDevs().contains(event.getPlayer().getName()) ? ChatColor.translateAlternateColorCodes('&', "&r&a" + event.getPlayer().getDisplayName() + "&r") : ChatColor.translateAlternateColorCodes('&', "&r" + event.getPlayer().getDisplayName());
+        	event.setFormat(ChatColor.GRAY + "[" + SGApi.getPlugin().getPlayerData(event.getPlayer()).getKills() + "] " + "[" + prefix + "] " + name + ": " + event.getMessage());
         }
     }
 }

@@ -103,7 +103,7 @@ public class PlayerData {
         this.points = 0;
         this.rank = "&7[M]";
         if (PlayerNameUtil.getDevs().contains(p.getName()) || PlayerNameUtil.getAwesomePeople().contains(p.getName())) {
-            this.setRank("&dOMG&eITS");
+            this.setRank("&d&lDeveloper");
         }
     }
 
