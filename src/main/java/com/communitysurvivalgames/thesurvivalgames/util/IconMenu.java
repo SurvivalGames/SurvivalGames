@@ -1,19 +1,25 @@
 package com.communitysurvivalgames.thesurvivalgames.util;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.Plugin;
+
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public class IconMenu implements Listener {
 
@@ -21,6 +27,8 @@ public class IconMenu implements Listener {
 	private int size;
 	private OptionClickEventHandler handler;
 	private Plugin plugin;
+
+	private Map<String, Integer> tasks = new HashMap<String, Integer>();
 
 	private String[] optionNames;
 	private ItemStack[] optionIcons;
@@ -42,13 +50,24 @@ public class IconMenu implements Listener {
 	}
 
 	public void open(Player player) {
-		Inventory inventory = Bukkit.createInventory(player, size, name);
+		final Inventory inventory = Bukkit.createInventory(player, size, name);
 		for (int i = 0; i < optionIcons.length; i++) {
 			if (optionIcons[i] != null) {
 				inventory.setItem(i, optionIcons[i]);
 			}
 		}
 		player.openInventory(inventory);
+		tasks.put(player.getName(), Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), new Runnable() {
+
+			@Override
+			public void run() {
+				for (int i = 0; i < optionIcons.length; i++) {
+					if (optionIcons[i] != null) {
+						inventory.setItem(i, optionIcons[i]);
+					}
+				}
+			}
+		}, 20L, 20L));
 	}
 
 	public void destroy() {
@@ -80,6 +99,14 @@ public class IconMenu implements Listener {
 					destroy();
 				}
 			}
+		}
+	}
+
+	@EventHandler(priority = EventPriority.HIGH)
+	public void onInventoryClose(InventoryCloseEvent event) {
+		if (event.getInventory().getTitle().equals(name)) {
+			Bukkit.getScheduler().cancelTask(tasks.get(event.getPlayer().getName()));
+			tasks.remove(event.getPlayer().getName());
 		}
 	}
 
@@ -142,10 +169,9 @@ public class IconMenu implements Listener {
 			return item;
 		}
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(name);
+		im.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
 		im.setLore(Arrays.asList(lore));
 		item.setItemMeta(im);
 		return item;
 	}
-
 }

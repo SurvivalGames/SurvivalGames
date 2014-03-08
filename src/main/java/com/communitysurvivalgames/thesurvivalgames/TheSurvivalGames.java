@@ -63,7 +63,6 @@ import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-import com.communitysurvivalgames.thesurvivalgames.objects.JSign;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.proxy.BungeecordListener;
@@ -104,7 +103,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		saveResource("esES.lang", true);
 
 		setupDatabase();
-		
+
 		File i18N = new File(getDataFolder(), "I18N.yml");
 		if (!i18N.exists()) {
 			saveResource("I18N.yml", false);
@@ -159,7 +158,7 @@ public class TheSurvivalGames extends JavaPlugin {
 	void registerAll() {
 		getCommand("sg").setExecutor(new CommandHandler());
 		getCommand("party").setExecutor(new PartyCommandHandler());
-		
+
 		//I want the user based commands (ex. /kit /vote /sponsor) to not have the /sg prefix. Looks neater.   - Quantum64
 		getCommand("sponsor").setExecutor(new SponsorCommand());
 		getCommand("tpx").setExecutor(new TpxCommand());
@@ -215,7 +214,6 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new Toxicologist(), this);
 		pm.registerEvents(new Zelda(), this);
 
-
 		Scoreboard.registerScoreboard();
 		SGApi.getEnchantmentManager().registerAll();
 
@@ -232,7 +230,6 @@ public class TheSurvivalGames extends JavaPlugin {
 		}
 		try {
 			getDatabase().find(PlayerData.class).findRowCount();
-			getDatabase().find(JSign.class).findRowCount();
 		} catch (PersistenceException ex) {
 			System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
 			installDDL();
@@ -250,7 +247,6 @@ public class TheSurvivalGames extends JavaPlugin {
 	public List<Class<?>> getDatabaseClasses() {
 		List<Class<?>> list = new ArrayList<>();
 		list.add(PlayerData.class);
-		list.add(JSign.class);
 		return list;
 	}
 
@@ -258,8 +254,8 @@ public class TheSurvivalGames extends JavaPlugin {
 		PlayerData data = getDatabase().find(PlayerData.class).where().ieq("playerName", player.getName()).findUnique();
 		if (data == null) {
 			data = new PlayerData(player);
+			setPlayerData(data);
 		}
-
 		return data;
 	}
 

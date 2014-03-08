@@ -45,7 +45,15 @@ public class SGArena {
 	 */
 	public enum ArenaState {
 
-		WAITING_FOR_PLAYERS, STARTING_COUNTDOWN, IN_GAME, DEATHMATCH, POST_GAME;
+		WAITING_FOR_PLAYERS("Waiting for players", "WAITING_FOR_PLAYERS"), STARTING_COUNTDOWN("Starting Countdown", "STARTING_COUNTDOWN"), IN_GAME("In Game", "IN_GAME"), DEATHMATCH("Deathmatch", "DEATHMATCH"), POST_GAME("Restarting", "POST_GAME");
+
+		String name;
+		String trueName;
+
+		ArenaState(String s, String t) {
+			name = s;
+			trueName = t;
+		}
 
 		public boolean isConvertable(SGArena arena, ArenaState a) {
 			if (a.equals(WAITING_FOR_PLAYERS)) {
@@ -81,6 +89,14 @@ public class SGArena {
 			}
 
 			return true;
+		}
+
+		public String toString() {
+			return name;
+		}
+
+		public String getTrueName() {
+			return trueName;
 		}
 	}
 
@@ -249,9 +265,9 @@ public class SGArena {
 	public World getArenaWorld() {
 		return currentMap.getWorld();
 	}
-	
-	public SGWorld getCurrentMap(){
-		return currentMap;	
+
+	public SGWorld getCurrentMap() {
+		return currentMap;
 	}
 
 	public String toString() {

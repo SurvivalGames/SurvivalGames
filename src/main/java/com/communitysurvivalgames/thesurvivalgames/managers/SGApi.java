@@ -34,7 +34,6 @@ public class SGApi {
 	private static BonusManager bonusManager;
 	private static KitManager kitManager;
 	private static MultiWorldManager multiWorldManager;
-	private static SignManager signManager;
 	private static Map<SGArena, TimeManager> timeManager = new HashMap<>();
 	private static Map<SGArena, BountyManager> bountyManager = new HashMap<>();
 	private static PartyManager partyManager;
@@ -96,15 +95,6 @@ public class SGApi {
 		if (scheduler == null)
 			scheduler = new ScheduleManager();
 		return scheduler;
-	}
-
-	/**
-	 * Gets sign manager.
-	 * 
-	 * @return the sign manager
-	 */
-	public static SignManager getSignManager() {
-		return signManager;
 	}
 
 	/**

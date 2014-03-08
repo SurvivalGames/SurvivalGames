@@ -187,7 +187,7 @@ public class KitManager {
 				menus.get(i).open(p);
 
 			}
-		});
+		}, 2L);
 	}
 
 	public void setPlayerKit(Player player, Kit kit) {

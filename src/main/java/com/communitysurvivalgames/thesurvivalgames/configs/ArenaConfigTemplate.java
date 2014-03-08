@@ -36,8 +36,8 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 		Bukkit.getLogger().info("Attemping to save prop: " + arena.toString() + " with a keypair of " + keyPair);
 		switch (keyPair) {
 		case 0:
-			Bukkit.getLogger().info(arena.getState().toString());
-			return arena.getState().toString();
+			Bukkit.getLogger().info(arena.getState().getTrueName());
+			return arena.getState().getTrueName();
 		case 1:
 			Bukkit.getLogger().info(arena.getId() + "");
 			return arena.getId();
