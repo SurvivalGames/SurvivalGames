@@ -41,6 +41,7 @@ public class SGApi {
 	private static ScheduleManager scheduler;
 	private static EnchantmentManager enchantmentManager;
 	private static Map<SGArena, SponsorManager> sponsorManager = new HashMap<>();
+	private static RollbackManager rollbackManager;
 
 	/**
 	 * Gets arena manager.
@@ -133,7 +134,7 @@ public class SGApi {
 	 * @return the party manager
 	 */
 	public static PartyManager getPartyManager() {
-		if(partyManager == null)
+		if (partyManager == null)
 			partyManager = new PartyManager();
 		return partyManager;
 	}
@@ -143,9 +144,15 @@ public class SGApi {
 		if (manager == null) {
 			SponsorManager s = new SponsorManager(a);
 			sponsorManager.put(a, s);
-			
+
 		}
 		return sponsorManager.get(a);
+	}
+
+	public static RollbackManager getRollbackManager() {
+		if(rollbackManager == null)
+			rollbackManager = new RollbackManager();
+		return rollbackManager;
 	}
 
 	/**

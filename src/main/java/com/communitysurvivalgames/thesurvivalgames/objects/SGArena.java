@@ -19,6 +19,7 @@ import org.bukkit.entity.Player;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import com.communitysurvivalgames.thesurvivalgames.rollback.ChangedBlock;
 
 public class SGArena {
 
@@ -36,6 +37,8 @@ public class SGArena {
 
 	public final List<String> players = new CopyOnWriteArrayList<>();
 	public final List<String> spectators = new CopyOnWriteArrayList<>();
+	
+	public List<ChangedBlock> changedBlocks = new ArrayList<ChangedBlock>();
 
 	/**
 	 * Name: ArenaState.java Edited: 8 December 2013
@@ -123,6 +126,8 @@ public class SGArena {
 		this.lobby = lob;
 		this.maxPlayers = maxPlayers;
 		this.minPlayers = minPlayers;
+		
+		restart();
 	}
 
 	/**
@@ -179,9 +184,8 @@ public class SGArena {
 		votes.clear();
 
 		setState(ArenaState.POST_GAME);
-		// rollback
-		setState(ArenaState.WAITING_FOR_PLAYERS);
-		SGApi.getTimeManager(this).countdownLobby(5);
+		SGApi.getRollbackManager().rollbackArena(this);
+		
 	}
 
 	/**
@@ -272,5 +276,15 @@ public class SGArena {
 
 	public String toString() {
 		return "SGArena.java - Id: " + this.getId() + " State: " + this.getState() + " " + "Players: " + this.players;
+	}
+
+	public void restart() {
+		this.players.clear();
+		this.spectators.clear();
+		this.changedBlocks.clear();
+		
+		this.setState(ArenaState.WAITING_FOR_PLAYERS);
+		
+		SGApi.getTimeManager(this).countdownLobby(5);
 	}
 }
