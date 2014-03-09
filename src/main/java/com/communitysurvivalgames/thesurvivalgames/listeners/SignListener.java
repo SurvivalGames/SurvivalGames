@@ -26,7 +26,7 @@ public class SignListener implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.HIGH)
-	private void onClick(PlayerInteractEvent event) {
+	public void onClick(PlayerInteractEvent event) {
 		if (event.getClickedBlock().getState() instanceof Sign) {
 			Sign sign = (Sign) event.getClickedBlock().getState();
 			if (sign.getLines()[0].equals(ChatColor.BLUE + "[SGJoin]")) {
