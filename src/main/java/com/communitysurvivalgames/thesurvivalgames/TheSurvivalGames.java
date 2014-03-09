@@ -59,6 +59,7 @@ import com.communitysurvivalgames.thesurvivalgames.listeners.ItemDropListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.PlayerQuitListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SetupListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.SignListener;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
@@ -203,6 +204,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new ItemDropListener(), this);
 		pm.registerEvents(new ThrowableSpawnEggs(), this);
 		pm.registerEvents(new EntityInteractListener(), this);
+		pm.registerEvents(new SignListener(), this);
 
 		pm.registerEvents(new Archer(), this);
 		pm.registerEvents(new Crafter(), this);

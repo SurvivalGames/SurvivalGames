@@ -9,6 +9,7 @@ package com.communitysurvivalgames.thesurvivalgames.listeners;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -50,23 +51,25 @@ public class BlockListener implements Listener {
 			event.setCancelled(true);
 		}
 
-		if (!event.getPlayer().hasPermission("sg.build") || !(breakable.contains(event.getBlock()))) {
+		if (Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()) == event.getPlayer().getWorld() && !event.getPlayer().isOp()) {
 			event.setCancelled(true);
 		}
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onBlockBreak(BlockBreakEvent event) {
-		if (allowed.contains(event.getBlock().getType())) {
-			try {
-				SGArena a = SGApi.getArenaManager().getArena(event.getPlayer());
-				a.changedBlocks.add(new ChangedBlock(event.getBlock().getWorld().getName(), event.getBlock().getType(), event.getBlock().getData(), Material.AIR, Byte.parseByte(0 + ""), event.getBlock().getX(), event.getBlock().getY(), event.getBlock().getZ()));
-				return;
-			} catch (ArenaNotFoundException ignored) {
-			}
-		}
 
-		if (!event.getPlayer().hasPermission("sg.build") || !(event.getBlock().getType() == Material.DIAMOND_ORE || !event.getPlayer().isOp())) {
+		try {
+			SGArena a = SGApi.getArenaManager().getArena(event.getPlayer());
+			if (allowed.contains(event.getBlock().getType())) {
+				a.changedBlocks.add(new ChangedBlock(event.getBlock().getWorld().getName(), event.getBlock().getType(), event.getBlock().getData(), Material.AIR, Byte.parseByte(0 + ""), event.getBlock().getX(), event.getBlock().getY(), event.getBlock().getZ()));
+			} else {
+				event.setCancelled(true);
+			}
+			return;
+		} catch (ArenaNotFoundException ignored) {}
+
+		if (Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()) == event.getPlayer().getWorld() && !event.getPlayer().isOp()) {
 			event.setCancelled(true);
 		}
 	}
