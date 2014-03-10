@@ -154,18 +154,31 @@ Care Package, a renamed firework which when right-clicked sends a firework up in
 
 ```
 /sg create (creates arena)
-/sg remove <arena number> removes an arena
+
+/sg remove <arena number> (removes an arena)
+
 /sg setlobby <arena number> (sets lobby spawn point)
+
 /sg setgamespawn <spawn point number> (max can be set in config, default 48)> <arena number>
+
 /sg setdeathmatch <spawn point number> (max can be set in config, default 48)> <arena number>
+
 /sg setmaxplayers <max players> <arena number>
+
 /sg setchest t1 / t2 <arena number> (set chest tiers, by default all are t1s)
+
 /sg join <arena number> (only available before joining any other game)
+
 /sg vote <map number> (vote for map in lobby phase only)
+
 /sg bounty <player> <points> (set a bounty on a player)
+
 /sg sponsor <player> <points> (sponsor a player with items)
+
 /sg leave (leave an arena)
+
 /sg start <arena number> <the state to put the game into> (force starts the state the game needs to go into e.g. player is in-game and does /sg forcestart 2 dm for a deathmatch force start)
+
 /sg stop <arena number> (force stops a game)
 ```
 ========
@@ -173,12 +186,19 @@ Care Package, a renamed firework which when right-clicked sends a firework up in
 **Permissions**
 
 ```
-survivalgames.admin (access to all survivalgames.player commands and survivalgames.mod commands as well as the arena setup commands)
-survivalgames.mod (access to all survivalgames.player commands and also /sg forcestart and /sg forcestop)
-survivalgames.player (access to joining arenas, showing available arenas, voting for maps, spectating, boutying and sponsoring)
-survivalgames.vote.worth.<number> (how much a vote is worth, survivalgames.player will have 1 by default but it can be given to other players for example donators so that they can have a better chance of having their map selected)
-survivalgames.join.<arena name> (permission to join an arena, when set to false players cannot join the arena (useful for donator only arenas + staff only testing)
-survivalgames.join.* (access to join all arenas)
+sg.admin (access to all survivalgames.player commands and survivalgames.mod commands as well as the arena setup commands)
+
+sg.mod (access to all survivalgames.player commands and also /sg forcestart and /sg forcestop)
+
+sg.player (access to joining arenas, showing available arenas, voting for maps, spectating, boutying and sponsoring)
+
+sg.vote.worth.<number> (how much a vote is worth, survivalgames.player will have 1 by default but it can be given to other players for example donators so that they can have a better chance of having their map selected)
+
+sg.join.<arena name> (permission to join an arena, when set to false players cannot join the arena (useful for donator only arenas + staff only testing)
+
+sg.join.* (access to join all arenas)
+
+sg.create (create an arena)
 ```
 
 ========
@@ -187,11 +207,11 @@ survivalgames.join.* (access to join all arenas)
 
 You can PM someone on BukkitDev:
 
-TheEpicButterStudios **(Recommended)** ``` http://dev.bukkit.org/profiles/TheEpicButterStudios/ ```
+Quantum64 **(Recommended)** ``` http://dev.bukkit.org/profiles/Quantum64/ ```
+
+TheEpicButterStudios ``` http://dev.bukkit.org/profiles/TheEpicButterStudios/ ```
 
 Trolldood3 (AgentTroll) ``` http://dev.bukkit.org/profiles/Trolldood3/ ```
-
-Quantum64 ``` http://dev.bukkit.org/profiles/Quantum64/ ```
 
 Relicum ``` http://dev.bukkit.org/profiles/Relicum/ ```
 
