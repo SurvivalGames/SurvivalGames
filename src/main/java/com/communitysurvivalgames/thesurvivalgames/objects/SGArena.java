@@ -40,7 +40,7 @@ public class SGArena {
 
 	public final List<String> players = new CopyOnWriteArrayList<>();
 	public final List<String> spectators = new CopyOnWriteArrayList<>();
-	
+
 	public List<ChangedBlock> changedBlocks = new ArrayList<ChangedBlock>();
 	public List<Chest> looted = new ArrayList<Chest>();
 	public List<DoubleChest> dLooted = new ArrayList<DoubleChest>();
@@ -131,7 +131,7 @@ public class SGArena {
 		this.lobby = lob;
 		this.maxPlayers = maxPlayers;
 		this.minPlayers = minPlayers;
-		
+
 		restart();
 	}
 
@@ -190,7 +190,7 @@ public class SGArena {
 
 		setState(ArenaState.POST_GAME);
 		SGApi.getRollbackManager().rollbackArena(this);
-		
+
 	}
 
 	/**
@@ -232,12 +232,20 @@ public class SGArena {
 			return;
 		}
 
+		MapHash voteWorld = null;
 		for (Map.Entry<MapHash, Integer> e : votes.entrySet()) {
 			if (e.getKey().getId() == i) {
-				votes.put(new MapHash(e.getKey().getWorld(), i), votes.get(e.getValue()) + 1);
+				Bukkit.getLogger().info("Attempting to vote for world: " + e.getKey().getWorld() + " with a value of: " + e.getValue() + " and an input number of: " + i);
+				voteWorld = e.getKey();
 			}
 		}
+		if (voteWorld == null)
+			return;
+		votes.put(voteWorld, votes.get(voteWorld) + 1);
 		this.broadcast(ChatColor.GOLD + p.getDisplayName() + " has voted! Use /vote to cast your vote!");
+		for (Map.Entry<MapHash, Integer> entry : votes.entrySet()) {
+			broadcast(ChatColor.GOLD.toString() + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN.toString() + entry.getValue());
+		}
 		voted.add(p.getName());
 	}
 
@@ -290,9 +298,9 @@ public class SGArena {
 		this.changedBlocks.clear();
 		this.looted.clear();
 		this.dLooted.clear();
-		
+
 		this.setState(ArenaState.WAITING_FOR_PLAYERS);
-		
+
 		SGApi.getTimeManager(this).countdownLobby(5);
 	}
 }

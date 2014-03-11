@@ -91,6 +91,11 @@ public class ArenaManager {
 			return;
 		}
 
+		p.sendMessage(prefix + "Type in /sg vote <ID> to vote for a map.");
+		for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
+			p.sendMessage(ChatColor.GOLD.toString() + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN.toString() + entry.getValue());
+		}
+
 		a.getPlayers().add(p.getName());
 		inv.put(p.getName(), p.getInventory().getContents());
 		armor.put(p.getName(), p.getInventory().getArmorContents());

@@ -31,15 +31,16 @@ public class Scoreboard implements Runnable {
 		for (final Player player : Bukkit.getOnlinePlayers()) {
 			final Objective objective = player.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
 
-			if (objective == null) {
-				createScoreboard(player);
-			} else {
-				updateScoreboard(player, false);
-			}
+			//if (objective == null) {
+			createScoreboard(player);
+			//} else {
+			//	updateScoreboard(player, false);
+			//}
 		}
 	}
 
 	private void createScoreboard(Player player) {
+		player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 		org.bukkit.scoreboard.Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective objective = scoreboard.registerNewObjective("Global", "dummy");
 		objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("WELCOME") + ", " + player.getDisplayName()));
@@ -82,7 +83,7 @@ public class Scoreboard implements Runnable {
 			Bukkit.getLogger().severe(e.getMessage());
 			return;
 		}
-		if (arena.getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS) {
+		if (arena.getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS || arena.getState() == SGArena.ArenaState.STARTING_COUNTDOWN) {
 			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("WAITING_FOR_PLAYERS")));
 			sendScore(objective, "&e" + I18N.getLocaleString("MAX_PLAYERS"), 14, complete);
 			sendScore(objective, "&f" + arena.getMaxPlayers() + " ", 13, complete);
@@ -114,10 +115,10 @@ public class Scoreboard implements Runnable {
 	private static void sendScore(Objective objective, String title, int value, boolean complete) {
 
 		final Score score = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.translateAlternateColorCodes('&', title)));
-
 		if (complete && value == 0) {
 			// Have to use this because the score wouldn't send otherwise
 			score.setScore(-1);
+			return;
 		}
 
 		score.setScore(value);

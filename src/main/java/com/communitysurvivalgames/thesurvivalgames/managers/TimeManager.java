@@ -41,8 +41,8 @@ public class TimeManager {
 				continue;
 			}
 
-			world.setInLobby(true);
 			if (world.getWorld().getPlayers().isEmpty() && i <= 5) {
+				world.setInLobby(true);
 				MapHash hash = new MapHash(world, i);
 				hashes.add(hash);
 				i++;
@@ -72,6 +72,7 @@ public class TimeManager {
 				for (MapHash m : a.votes.keySet()) {
 					m.getWorld().setInLobby(false);
 				}
+				a.votes.clear();
 				a.broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("MAP_WINNER") + " " + a.currentMap.getWorld().getName());
 
 				Bukkit.getPluginManager().callEvent(new GameStartEvent(a));
