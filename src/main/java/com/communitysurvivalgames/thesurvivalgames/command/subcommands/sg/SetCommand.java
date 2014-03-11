@@ -53,8 +53,26 @@ public class SetCommand implements SubCommand {
                     return;
                 }
                 a.maxPlayers = amount;
+            } else if (cmd.equalsIgnoreCase("setminplayers")) {
+                int i;
+                int amount;
+                try {
+                    i = Integer.parseInt(args[0]);
+                    amount = Integer.parseInt(args[1]);
+                } catch (NumberFormatException x) {
+                    p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_NUMBER"));
+                    return;
+                }
 
-                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_MAXPLAYERS") + " " + a.getId());
+                SGArena a;
+                try {
+                    a = SGApi.getArenaManager().getArena(i);
+                } catch (ArenaNotFoundException e) {
+                    Bukkit.getLogger().severe(e.getMessage());
+                    return;
+                }
+                a.minPlayers = amount;
+                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("Set min players for: ") + " " + a.getId());
             } else if (cmd.equalsIgnoreCase("setchest")) {
                 int i;
                 try {
