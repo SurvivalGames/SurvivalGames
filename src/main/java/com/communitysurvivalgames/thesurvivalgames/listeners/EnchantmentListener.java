@@ -1,12 +1,5 @@
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
-import java.util.Random;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.enchantment.EnchantItemEvent;
 
 public class EnchantmentListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)

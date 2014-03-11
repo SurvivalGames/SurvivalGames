@@ -5,13 +5,9 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
-import java.util.UUID;
-import com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.Party;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerQuitEvent;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.PartyManager;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.Party;
 
 public class PlayerQuitListener implements Listener {
 

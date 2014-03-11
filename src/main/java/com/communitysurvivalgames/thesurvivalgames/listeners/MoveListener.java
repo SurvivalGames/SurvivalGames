@@ -6,16 +6,10 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
-import java.util.ArrayList;
-import java.util.List;
-import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-import org.bukkit.Location;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class MoveListener implements Listener {
 

@@ -1,15 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.locale;
 
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import org.bukkit.Bukkit;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Properties;
-import java.util.logging.Level;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public class I18N {
     private static final Properties locales = new Properties();

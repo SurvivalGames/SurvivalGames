@@ -5,11 +5,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.util;
 
-import java.util.HashMap;
-import java.util.Map;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import org.bukkit.configuration.serialization.SerializableAs;
-import org.bukkit.util.Vector;
 
 /**
  * The type LocationChecker. Checks if a location is in a

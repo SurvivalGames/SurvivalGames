@@ -1,12 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.command.standalone;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
-import com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.command.CommandHandler;
 
 public class TpxCommand extends CommandHandler {
 	@Override

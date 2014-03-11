@@ -5,25 +5,14 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import com.communitysurvivalgames.thesurvivalgames.configs.ArenaConfigTemplate;
-import com.communitysurvivalgames.thesurvivalgames.configs.ConfigTemplate;
-import com.communitysurvivalgames.thesurvivalgames.configs.WorldConfigTemplate;
-import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-import org.bukkit.*;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.configs.ArenaConfigTemplate;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.configs.ConfigTemplate;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.configs.WorldConfigTemplate;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class ArenaManager {
 

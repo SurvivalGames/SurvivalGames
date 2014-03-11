@@ -5,9 +5,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.configs;
 
-import java.util.Map;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import org.bukkit.configuration.serialization.SerializableAs;
 
 @SerializableAs("PlayersData")
 public class PlayersData implements ConfigurationSerializable {

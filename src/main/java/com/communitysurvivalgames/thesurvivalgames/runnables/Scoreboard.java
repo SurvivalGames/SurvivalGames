@@ -1,18 +1,10 @@
 package com.communitysurvivalgames.thesurvivalgames.runnables;
 
-import java.util.logging.Level;
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 /**
  * Name: Scoreboard.java Edited: 8 December 2013

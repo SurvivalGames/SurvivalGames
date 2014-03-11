@@ -5,46 +5,16 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
-import java.util.Random;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.Effect;
-import org.bukkit.FireworkEffect;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.entity.Egg;
-import org.bukkit.entity.EnderCrystal;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Firework;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Snowball;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
-
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import com.communitysurvivalgames.thesurvivalgames.enchantment.ShockingEnchantment;
-import com.communitysurvivalgames.thesurvivalgames.event.PlayerKilledEvent;
-import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.EnchantmentManager;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.util.DeathMessages;
-import com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
-import com.communitysurvivalgames.thesurvivalgames.util.PlayerVanishUtil;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.enchantment.ShockingEnchantment;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.event.PlayerKilledEvent;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.EnchantmentManager;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.DeathMessages;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.PlayerVanishUtil;
 
 public class EntityDamageListener implements Listener {
 

@@ -1,6 +1,5 @@
 package com.communitysurvivalgames.thesurvivalgames.enchantment;
 
-import org.bukkit.ChatColor;
 
 public class ShockingEnchantment extends SGEnchantment {
 	public ShockingEnchantment(int id) {

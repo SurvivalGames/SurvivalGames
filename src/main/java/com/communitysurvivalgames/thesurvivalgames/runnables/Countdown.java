@@ -5,9 +5,8 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.runnables;
 
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-import org.bukkit.Bukkit;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class Countdown implements Runnable {
 

@@ -5,8 +5,7 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.multiworld;
 
-import com.communitysurvivalgames.thesurvivalgames.configs.FileLoader;
-import org.bukkit.configuration.file.FileConfiguration;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.configs.FileLoader;
 
 public class WorldDefaults {
 

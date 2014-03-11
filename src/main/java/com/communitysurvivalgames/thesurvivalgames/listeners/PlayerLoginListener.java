@@ -1,16 +1,8 @@
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.util.EconUtil;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.EconUtil;
 
 class PlayerLoginListener implements Listener {
 	private final TheSurvivalGames plugin;

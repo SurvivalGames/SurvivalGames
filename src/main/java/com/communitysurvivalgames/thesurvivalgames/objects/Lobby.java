@@ -5,7 +5,7 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
-import com.communitysurvivalgames.thesurvivalgames.util.LocationChecker;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.LocationChecker;
 
 public class Lobby {
 

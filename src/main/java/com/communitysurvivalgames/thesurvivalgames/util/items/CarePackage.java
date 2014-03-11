@@ -1,20 +1,7 @@
 package com.communitysurvivalgames.thesurvivalgames.util.items;
 
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import org.bukkit.*;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.Chest;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Firework;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.FireworkMeta;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public class CarePackage implements Listener {
     private final TheSurvivalGames plugin;

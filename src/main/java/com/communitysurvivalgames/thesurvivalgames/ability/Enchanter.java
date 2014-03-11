@@ -1,19 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.ability;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.Material;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.Inventory;
-
-import com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
 
 public class Enchanter extends SGAbility implements Listener {
 

@@ -5,12 +5,9 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public class CreateCommand implements SubCommand {
 

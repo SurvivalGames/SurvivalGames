@@ -5,14 +5,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.multiworld;
 
-import org.bukkit.*;
-import org.bukkit.block.BlockState;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SGWorld {
 

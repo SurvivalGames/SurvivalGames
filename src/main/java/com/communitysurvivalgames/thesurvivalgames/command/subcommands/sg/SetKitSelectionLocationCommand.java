@@ -1,9 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg;
 
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
 
 public class SetKitSelectionLocationCommand implements SubCommand {
 

@@ -5,10 +5,8 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 
 public class HelpCommand implements SubCommand {
 

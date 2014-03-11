@@ -1,13 +1,8 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg;
 
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.entity.Player;
-
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.util.FireworkUtil;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.FireworkUtil;
 
 public class TestCommand implements SubCommand {
 

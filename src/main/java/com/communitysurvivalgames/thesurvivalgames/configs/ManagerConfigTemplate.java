@@ -1,18 +1,9 @@
 package com.communitysurvivalgames.thesurvivalgames.configs;
 
-import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-import com.communitysurvivalgames.thesurvivalgames.util.ItemSerialization;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.ItemSerialization;
 
 public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
 

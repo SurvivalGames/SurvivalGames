@@ -5,19 +5,9 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandException;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public class CommandHandler implements CommandExecutor {
 

@@ -5,8 +5,7 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
-import lombok.Data;
-import com.communitysurvivalgames.thesurvivalgames.util.PlayerType;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.PlayerType;
 
 /**
  * Gamer Lightweight storage of an player involved in a game. Records this

@@ -1,19 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.ability;
 
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-
-import com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
 
 public class Pacman extends SGAbility implements Listener {
 	public Pacman() {

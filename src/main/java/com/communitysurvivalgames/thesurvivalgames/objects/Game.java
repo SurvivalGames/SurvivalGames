@@ -5,8 +5,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
-import java.util.List;
-import lombok.Data;
 
 /**
  * Game Instance of a Game Used to manage the game in real time The Object on

@@ -1,16 +1,7 @@
 package com.communitysurvivalgames.thesurvivalgames.command;
 
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.HelpCommand;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandException;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
-import java.util.HashMap;
-import java.util.Map;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 
 public class PartyCommandHandler implements CommandExecutor {
 

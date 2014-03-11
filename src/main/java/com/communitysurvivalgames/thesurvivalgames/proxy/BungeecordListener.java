@@ -1,15 +1,7 @@
 package com.communitysurvivalgames.thesurvivalgames.proxy;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.messaging.PluginMessageListener;
-
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.ServerStatus;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.ServerStatus;
 
 public class BungeecordListener implements PluginMessageListener {
 

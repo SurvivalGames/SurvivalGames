@@ -1,16 +1,5 @@
 package com.communitysurvivalgames.thesurvivalgames.kits;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import org.bukkit.configuration.serialization.SerializableAs;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 @SerializableAs("KitItem")
 public class KitItem implements ConfigurationSerializable {
 	private ItemStack item;

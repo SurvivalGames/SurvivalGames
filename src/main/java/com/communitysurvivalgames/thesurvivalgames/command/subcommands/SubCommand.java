@@ -5,7 +5,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands;
 
-import org.bukkit.entity.Player;
 
 public interface SubCommand {
 

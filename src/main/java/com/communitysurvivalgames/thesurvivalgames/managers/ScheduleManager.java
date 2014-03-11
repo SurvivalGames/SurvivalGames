@@ -5,7 +5,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import java.util.concurrent.*;
 
 /**
  * The type Schedule manager.

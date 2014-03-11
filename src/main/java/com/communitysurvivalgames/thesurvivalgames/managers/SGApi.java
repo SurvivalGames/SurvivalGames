@@ -5,11 +5,8 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-
-import java.util.Map;
-import java.util.HashMap;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 /**
  * SGApi The main class for getting references to other classes and objects

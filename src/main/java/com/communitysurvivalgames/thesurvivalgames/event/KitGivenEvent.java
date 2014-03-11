@@ -1,9 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.event;
 
-import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
-import org.bukkit.event.HandlerList;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.kits.Kit;
  
 public final class KitGivenEvent extends Event {
     private static final HandlerList handlers = new HandlerList();

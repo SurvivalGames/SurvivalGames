@@ -5,12 +5,7 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.configs;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 /**
  * Used to load and save {@link org.bukkit.configuration.file.FileConfiguration}

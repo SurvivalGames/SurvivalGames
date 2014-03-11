@@ -1,8 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import java.util.ArrayList;
-import java.util.List;
-import com.communitysurvivalgames.thesurvivalgames.objects.JSign;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.JSign;
 
 public class SignManager {
 

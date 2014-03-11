@@ -5,15 +5,10 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.party;
 
-import java.util.UUID;
-
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.Party;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.Party;
 
 public class ListCommand implements SubCommand {
 

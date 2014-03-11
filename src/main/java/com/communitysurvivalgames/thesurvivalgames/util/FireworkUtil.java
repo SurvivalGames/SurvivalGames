@@ -1,12 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.util;
 
-import org.bukkit.Bukkit;
-import org.bukkit.FireworkEffect;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
-
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public class FireworkUtil implements Listener {
 

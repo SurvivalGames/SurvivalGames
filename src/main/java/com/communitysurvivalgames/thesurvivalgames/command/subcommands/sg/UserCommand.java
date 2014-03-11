@@ -1,10 +1,8 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg;
 
-import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 
 public class UserCommand implements SubCommand {
 

@@ -5,16 +5,12 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.kits;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.*;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.ActionActivator;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.IDisplayName;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.ILore;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.IPermissible;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.Selectable;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.SingleAction;
 
 /**
  * The type Abstract icon menu item

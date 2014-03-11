@@ -5,22 +5,8 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-import com.communitysurvivalgames.thesurvivalgames.util.UnTAR;
-import org.apache.commons.compress.archivers.ArchiveException;
-import org.apache.commons.io.FileUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.UnTAR;
 
 public class MultiWorldManager {
     

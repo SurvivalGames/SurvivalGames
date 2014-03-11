@@ -1,14 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.ability;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-
-import com.communitysurvivalgames.thesurvivalgames.event.GameStartEvent;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.event.GameStartEvent;
 
 public class Knight extends SGAbility implements Listener {
 

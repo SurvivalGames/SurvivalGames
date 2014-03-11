@@ -1,17 +1,7 @@
 package com.communitysurvivalgames.thesurvivalgames.ability;
 
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.Material;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-
-import com.communitysurvivalgames.thesurvivalgames.listeners.BlockListener;
-import com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.listeners.BlockListener;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
 
 public class Notch extends SGAbility implements Listener {
 

@@ -1,13 +1,7 @@
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
-import org.bukkit.ChatColor;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerDropItemEvent;
-
-import com.communitysurvivalgames.thesurvivalgames.managers.EnchantmentManager;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.EnchantmentManager;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public class ItemDropListener implements Listener {
 

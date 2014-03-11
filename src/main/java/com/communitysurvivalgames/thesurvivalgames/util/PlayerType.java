@@ -5,7 +5,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.util;
 
-import org.bukkit.ChatColor;
 
 public enum PlayerType {
 

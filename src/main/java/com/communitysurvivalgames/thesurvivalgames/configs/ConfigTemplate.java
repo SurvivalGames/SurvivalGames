@@ -1,12 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.configs;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public abstract class ConfigTemplate<T> {
 	private File file = null;

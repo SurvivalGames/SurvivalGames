@@ -5,8 +5,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.util.items.interfaces;
 
-import java.util.List;
-import org.bukkit.enchantments.Enchantment;
 
 /**
  * The interface I enhanceable.

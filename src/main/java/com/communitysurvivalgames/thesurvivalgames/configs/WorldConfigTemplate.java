@@ -1,15 +1,7 @@
 package com.communitysurvivalgames.thesurvivalgames.configs;
 
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.block.BlockState;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 
 public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 	private SGWorld world;

@@ -5,19 +5,9 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
-import java.util.UUID;
-import java.util.logging.Level;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.Party;
-import com.communitysurvivalgames.thesurvivalgames.util.PlayerNameUtil;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.Party;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.PlayerNameUtil;
 
 public class ChatListener implements Listener {
 

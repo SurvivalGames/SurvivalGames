@@ -1,15 +1,7 @@
 //PLEASE DON'T EDIT THIS CLASS - Quantum64
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
-import com.avaje.ebean.validation.NotEmpty;
-import com.avaje.ebean.validation.NotNull;
-import com.communitysurvivalgames.thesurvivalgames.util.PlayerNameUtil;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.PlayerNameUtil;
 
 @Entity()
 @Table(name = "sg_player")

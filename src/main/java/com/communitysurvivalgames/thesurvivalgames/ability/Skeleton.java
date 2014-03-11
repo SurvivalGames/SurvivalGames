@@ -1,16 +1,5 @@
 package com.communitysurvivalgames.thesurvivalgames.ability;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityShootBowEvent;
 
 public class Skeleton extends SGAbility implements Listener {
 

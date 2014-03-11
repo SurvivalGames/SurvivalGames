@@ -1,16 +1,8 @@
 package com.communitysurvivalgames.thesurvivalgames.configs;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.bukkit.Bukkit;
-
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 	private SGArena arena;

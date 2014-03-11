@@ -1,20 +1,10 @@
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.event.enchantment.EnchantItemEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import com.communitysurvivalgames.thesurvivalgames.enchantment.DedicationEnchantment;
-import com.communitysurvivalgames.thesurvivalgames.enchantment.SGEnchantment;
-import com.communitysurvivalgames.thesurvivalgames.enchantment.ShockingEnchantment;
-import com.communitysurvivalgames.thesurvivalgames.enchantment.UndroppableEnchantment;
-import com.communitysurvivalgames.thesurvivalgames.enchantment.UnenchantableEnchantment;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.enchantment.DedicationEnchantment;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.enchantment.SGEnchantment;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.enchantment.ShockingEnchantment;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.enchantment.UndroppableEnchantment;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.enchantment.UnenchantableEnchantment;
 
 public class EnchantmentManager {
 

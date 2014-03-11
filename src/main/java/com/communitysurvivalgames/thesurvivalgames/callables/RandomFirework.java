@@ -5,13 +5,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.callables;
 
-import java.util.Random;
-import java.util.concurrent.Callable;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.Material;
-import org.bukkit.inventory.meta.FireworkMeta;
 
 /**
  * Creates a random Firework effect.

@@ -1,7 +1,5 @@
 package com.communitysurvivalgames.thesurvivalgames.util;
 
-import java.util.ArrayList;
-import org.bukkit.entity.Player;
 
 public class PlayerNameUtil {
 

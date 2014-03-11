@@ -6,22 +6,15 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import com.communitysurvivalgames.thesurvivalgames.event.GameStartEvent;
-import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
-import com.communitysurvivalgames.thesurvivalgames.listeners.SafeEntityListener;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-import com.communitysurvivalgames.thesurvivalgames.runnables.CodeExecutor;
-import com.communitysurvivalgames.thesurvivalgames.runnables.Countdown;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.event.GameStartEvent;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.listeners.SafeEntityListener;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.runnables.CodeExecutor;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.runnables.Countdown;
 
 public class TimeManager {
 

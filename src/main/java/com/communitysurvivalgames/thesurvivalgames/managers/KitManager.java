@@ -1,29 +1,10 @@
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.Potion;
-import org.bukkit.potion.PotionType;
-
-import com.communitysurvivalgames.thesurvivalgames.event.KitGivenEvent;
-import com.communitysurvivalgames.thesurvivalgames.kits.Kit;
-import com.communitysurvivalgames.thesurvivalgames.kits.KitItem;
-import com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
-import com.communitysurvivalgames.thesurvivalgames.util.ItemSerialization;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.event.KitGivenEvent;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.kits.Kit;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.kits.KitItem;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.ItemSerialization;
 
 public class KitManager {
 	private List<Kit> kits = new ArrayList<Kit>();

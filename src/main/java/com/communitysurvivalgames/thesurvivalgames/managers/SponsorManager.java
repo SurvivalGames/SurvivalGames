@@ -1,34 +1,11 @@
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.potion.Potion;
-import org.bukkit.potion.PotionType;
-
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-import com.communitysurvivalgames.thesurvivalgames.util.EconUtil;
-import com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
-import com.communitysurvivalgames.thesurvivalgames.util.FireworkUtil;
-import com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
-import com.communitysurvivalgames.thesurvivalgames.util.IconMenu.OptionClickEvent;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.EconUtil;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.FireworkUtil;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.IconMenu.OptionClickEvent;
 
 public class SponsorManager {
 	private final IconMenu players;

@@ -1,11 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.signs;
 
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-import org.bukkit.ChatColor;
-
-import java.beans.ConstructorProperties;
-import java.util.ArrayList;
-import java.util.List;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class SignLayout {
     private final String name;

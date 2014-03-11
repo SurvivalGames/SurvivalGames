@@ -1,9 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.event;
 
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-
-import org.bukkit.event.Event;
-import org.bukkit.event.HandlerList;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class GameStartEvent extends Event {
     private static final HandlerList handlers = new HandlerList();

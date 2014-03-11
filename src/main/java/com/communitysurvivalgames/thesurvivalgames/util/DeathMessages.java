@@ -1,10 +1,5 @@
 package com.communitysurvivalgames.thesurvivalgames.util;
 
-import java.util.Random;
-
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 public class DeathMessages {
 	public static String getDeathMessage(Player p, DamageCause dc) {

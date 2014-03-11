@@ -5,8 +5,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.util.items.interfaces;
 
-import org.bukkit.Material;
-import org.bukkit.inventory.meta.ItemMeta;
 
 /**
  * The interface I metable.

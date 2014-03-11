@@ -5,14 +5,9 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.util.items;
 
-import java.util.List;
-import com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.IDisplayName;
-import com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.IEnhanceable;
-import com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.ILore;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.IDisplayName;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.IEnhanceable;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.items.interfaces.ILore;
 
 public abstract class AbstractItem implements IDisplayName, ILore, IEnhanceable {
 

@@ -1,20 +1,5 @@
 package com.communitysurvivalgames.thesurvivalgames.util;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.bukkit.entity.Egg;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Sheep;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerEggThrowEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.SpawnEgg;
 
 public class ThrowableSpawnEggs implements Listener {
 

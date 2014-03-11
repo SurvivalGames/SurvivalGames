@@ -1,6 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
-import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 
 public class MapHash {
     private final int id;

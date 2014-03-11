@@ -1,11 +1,8 @@
 package com.communitysurvivalgames.thesurvivalgames.ability;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
-import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class SGAbility {
 	int id;

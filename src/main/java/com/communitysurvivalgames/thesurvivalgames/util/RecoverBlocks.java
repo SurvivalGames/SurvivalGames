@@ -1,12 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.util;
 
-import java.util.List;
-
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public class RecoverBlocks {
 	public static void recover(List<Block> blocks, final List<Material> replace) {

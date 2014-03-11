@@ -1,8 +1,5 @@
 package com.communitysurvivalgames.thesurvivalgames.enchantment;
 
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.enchantments.EnchantmentTarget;
-import org.bukkit.inventory.ItemStack;
 
 public class SGEnchantment extends Enchantment {
     public SGEnchantment(int id) {

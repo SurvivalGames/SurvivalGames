@@ -1,19 +1,9 @@
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-
-import com.communitysurvivalgames.thesurvivalgames.event.GameEndEvent;
-import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
-import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-import com.communitysurvivalgames.thesurvivalgames.util.EconUtil;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.event.GameEndEvent;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.util.EconUtil;
 
 public class BountyManager implements Listener {
 

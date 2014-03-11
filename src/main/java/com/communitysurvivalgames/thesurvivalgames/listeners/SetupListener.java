@@ -5,12 +5,8 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 
 public class SetupListener implements Listener {
 

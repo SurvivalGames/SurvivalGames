@@ -1,9 +1,7 @@
 package com.communitysurvivalgames.thesurvivalgames.util;
 
-import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
-import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
+import src.main.java.com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 // NOT NOT EDIT THIS FILE RELICUM IS RECODING IT //
 public class PlayerVanishUtil {
