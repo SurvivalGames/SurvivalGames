@@ -16,12 +16,14 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
-class RailGun implements Listener {
+public class RailGun implements Listener {
     int timer, id = 0;
     private final Random gen = new Random();
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
+    	if(event.getItem() == null)
+    		return;
         if (event.getItem().getType() == Material.DIAMOND_HOE)
             try {
                 for (Block loc : getLineOfSigt(event.getPlayer())) {

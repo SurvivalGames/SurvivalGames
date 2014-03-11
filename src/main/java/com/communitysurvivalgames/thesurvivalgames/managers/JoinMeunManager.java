@@ -46,6 +46,7 @@ public class JoinMeunManager {
 			// 26-53 non-joinable
 			@Override
 			public void run() {
+				menu.clear();
 				List<SGArena> arenas = cloneThoseArenas();
 				int index = 0;
 				for (SGArena a : arenas) {

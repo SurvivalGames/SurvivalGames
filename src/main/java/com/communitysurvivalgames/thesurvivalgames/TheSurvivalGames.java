@@ -53,6 +53,7 @@ import com.communitysurvivalgames.thesurvivalgames.configs.WorldConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.kits.KitItem;
 import com.communitysurvivalgames.thesurvivalgames.listeners.BlockListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.ChatListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.ChestListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.EntityDamageListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.EntityInteractListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.ItemDropListener;
@@ -73,6 +74,7 @@ import com.communitysurvivalgames.thesurvivalgames.util.LocationChecker;
 import com.communitysurvivalgames.thesurvivalgames.util.SerializedLocation;
 import com.communitysurvivalgames.thesurvivalgames.util.ThrowableSpawnEggs;
 import com.communitysurvivalgames.thesurvivalgames.util.items.CarePackage;
+import com.communitysurvivalgames.thesurvivalgames.util.items.RailGun;
 
 public class TheSurvivalGames extends JavaPlugin {
 
@@ -173,6 +175,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		CommandHandler.register("createlobby", new SetCommand());
 		CommandHandler.register("setdeathmatch", new SetCommand());
 		CommandHandler.register("setmaxplayers", new SetCommand());
+		CommandHandler.register("setminplayers", new SetCommand());
 		CommandHandler.register("setchest", new SetCommand());
 		CommandHandler.register("setspawn", new SetCommand());
 		CommandHandler.register("stop", new StopCommand());
@@ -205,6 +208,8 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new ThrowableSpawnEggs(), this);
 		pm.registerEvents(new EntityInteractListener(), this);
 		pm.registerEvents(new SignListener(), this);
+		pm.registerEvents(new ChestListener(), this);
+		pm.registerEvents(new RailGun(), this);
 
 		pm.registerEvents(new Archer(), this);
 		pm.registerEvents(new Crafter(), this);

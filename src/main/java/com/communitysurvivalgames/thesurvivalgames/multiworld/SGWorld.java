@@ -5,14 +5,19 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.multiworld;
 
-import org.bukkit.*;
-import org.bukkit.block.BlockState;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
+import org.bukkit.block.BlockState;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 
 public class SGWorld {
 
@@ -23,6 +28,8 @@ public class SGWorld {
 	public List<BlockState> t2 = new ArrayList<>();
 	private String displayName;
 	private Location center = null;
+
+	private boolean inLobby;
 
 	public SGWorld(String name, String map) {
 		this.name = name;
@@ -112,6 +119,14 @@ public class SGWorld {
 
 	public String getName() {
 		return name;
+	}
+
+	public boolean isInLobby() {
+		return inLobby;
+	}
+
+	public void setInLobby(boolean b) {
+		inLobby = b;
 	}
 
 	/**

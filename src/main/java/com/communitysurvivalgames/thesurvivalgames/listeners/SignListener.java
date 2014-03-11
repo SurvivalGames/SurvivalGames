@@ -14,6 +14,10 @@ import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 public class SignListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onSignChange(SignChangeEvent event) {
+		if(event.getBlock() == null)
+			return;
+		if(event.getBlock().getState() == null)
+			return;
 		if (event.getLines()[0].equals("[SGJoin]")) {
 			event.setLine(0, ChatColor.BLUE + "[SGJoin]");
 			return;
@@ -27,6 +31,10 @@ public class SignListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onClick(PlayerInteractEvent event) {
+		if(event.getClickedBlock() == null)
+			return;
+		if(event.getClickedBlock().getState() == null)
+			return;
 		if (event.getClickedBlock().getState() instanceof Sign) {
 			Sign sign = (Sign) event.getClickedBlock().getState();
 			if (sign.getLines()[0].equals(ChatColor.BLUE + "[SGJoin]")) {

@@ -12,8 +12,11 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Chest;
+import org.bukkit.block.DoubleChest;
 import org.bukkit.entity.Player;
 
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
@@ -39,6 +42,8 @@ public class SGArena {
 	public final List<String> spectators = new CopyOnWriteArrayList<>();
 	
 	public List<ChangedBlock> changedBlocks = new ArrayList<ChangedBlock>();
+	public List<Chest> looted = new ArrayList<Chest>();
+	public List<DoubleChest> dLooted = new ArrayList<DoubleChest>();
 
 	/**
 	 * Name: ArenaState.java Edited: 8 December 2013
@@ -232,6 +237,7 @@ public class SGArena {
 				votes.put(new MapHash(e.getKey().getWorld(), i), votes.get(e.getValue()) + 1);
 			}
 		}
+		this.broadcast(ChatColor.GOLD + p.getDisplayName() + " has voted! Use /vote to cast your vote!");
 		voted.add(p.getName());
 	}
 
@@ -282,6 +288,8 @@ public class SGArena {
 		this.players.clear();
 		this.spectators.clear();
 		this.changedBlocks.clear();
+		this.looted.clear();
+		this.dLooted.clear();
 		
 		this.setState(ArenaState.WAITING_FOR_PLAYERS);
 		

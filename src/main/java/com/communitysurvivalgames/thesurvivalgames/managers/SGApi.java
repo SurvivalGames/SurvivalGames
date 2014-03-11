@@ -5,11 +5,11 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
-
-import java.util.Map;
-import java.util.HashMap;
 
 /**
  * SGApi The main class for getting references to other classes and objects
@@ -42,6 +42,7 @@ public class SGApi {
 	private static EnchantmentManager enchantmentManager;
 	private static Map<SGArena, SponsorManager> sponsorManager = new HashMap<>();
 	private static RollbackManager rollbackManager;
+	private static ChestManager chestManager;
 
 	/**
 	 * Gets arena manager.
@@ -153,6 +154,12 @@ public class SGApi {
 		if(rollbackManager == null)
 			rollbackManager = new RollbackManager();
 		return rollbackManager;
+	}
+	
+	public static ChestManager getChestManager(){
+		if (chestManager == null)
+			chestManager = new ChestManager();
+		return chestManager;
 	}
 
 	/**

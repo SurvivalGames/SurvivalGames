@@ -16,6 +16,7 @@ import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.runnables.CodeExecutor;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Countdown;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -25,115 +26,130 @@ import java.util.Map;
 
 public class TimeManager {
 
-    private SGArena a;
+	private SGArena a;
 
-    public TimeManager(SGArena a) {
-        this.a = a;
-    }
+	public TimeManager(SGArena a) {
+		this.a = a;
+	}
 
-    public void countdownLobby(int n) {
-        // setup the voting
-        int i = 0;
-        List<MapHash> hashes = new ArrayList<>();
-        for(SGWorld world : SGApi.getMultiWorldManager().getWorlds()) {
-            if(world.getWorld().getPlayers().isEmpty() && i <= 5) {
-                MapHash hash = new MapHash(world, i);
-                hashes.add(hash);
-            }
-        }
-        for(MapHash hash : hashes) {
-            a.votes.put(hash, 0);
-        }
+	public void countdownLobby(int n) {
+		// setup the voting
+		int i = 0;
+		List<MapHash> hashes = new ArrayList<>();
+		for (SGWorld world : SGApi.getMultiWorldManager().getWorlds()) {
+			if (world.isInLobby()) {
+				continue;
+			}
 
-        Countdown c = new Countdown(a, 1, n, "Game", "minutes", new CodeExecutor() {
-            @Override
-            public void runCode() {
-                //handle votes
-                Map.Entry<MapHash, Integer> maxEntry = null;
-                for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
-                    if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
-                        maxEntry = entry;
-                    }
-                }
-                a.currentMap = maxEntry.getKey().getWorld();
-                a.broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("MAP_WINNER") + " " + a.currentMap.getWorld().getName());
+			world.setInLobby(true);
+			if (world.getWorld().getPlayers().isEmpty() && i <= 5) {
+				MapHash hash = new MapHash(world, i);
+				hashes.add(hash);
+				i++;
+			}
+		}
+		for (MapHash hash : hashes) {
+			a.votes.put(hash, 0);
+		}
+		
+		a.broadcast("Type in /sg vote <ID> to vote for a map.");
+		for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
+			a.broadcast(ChatColor.GOLD.toString() + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN.toString() + entry.getValue());
+		}
 
-                Bukkit.getPluginManager().callEvent(new GameStartEvent(a));
-                a.broadcast(I18N.getLocaleString("GAME_STARTING"));
-                a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
+		Countdown c = new Countdown(a, 1, n, "Game", "minutes", new CodeExecutor() {
+			@Override
+			public void runCode() {
+				//handle votes
+				Map.Entry<MapHash, Integer> maxEntry = null;
+				for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
+					if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
+						maxEntry = entry;
+					}
+				}
+				a.currentMap = maxEntry.getKey().getWorld();
+				a.votes.remove(maxEntry);
+				for (MapHash m : a.votes.keySet()) {
+					m.getWorld().setInLobby(false);
+				}
+				a.broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("MAP_WINNER") + " " + a.currentMap.getWorld().getName());
 
-                int index = 0;
-                for (String s : a.getPlayers()) {           
-                    Player p = Bukkit.getPlayerExact(s);
-                    Bukkit.getLogger().info("List: " + a.currentMap.locs.toString());
-                    Location loc = a.currentMap.locs.get(index);
-                    p.teleport(loc);               
+				Bukkit.getPluginManager().callEvent(new GameStartEvent(a));
+				a.broadcast(I18N.getLocaleString("GAME_STARTING"));
+				a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
 
-                    index++;
-                }               
-                countdown();
-                MoveListener.getPlayers().addAll(a.getPlayers());
-            }
-        });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 60 * 20L));
-    }
+				int index = 0;
+				for (String s : a.getPlayers()) {
+					Player p = Bukkit.getPlayerExact(s);
+					Bukkit.getLogger().info("List: " + a.currentMap.locs.toString());
+					Location loc = a.currentMap.locs.get(index);
+					p.teleport(loc);
 
-    public void countdown() {
-        Countdown c = new Countdown(a, 1, 10, "Game", "seconds", new CodeExecutor() {
-            @Override
-            public void runCode() {
-                
-                a.broadcast(I18N.getLocaleString("ODDS"));
-                a.setState(SGArena.ArenaState.IN_GAME);
-                for (String s : a.getPlayers()) {
-                    if (MoveListener.getPlayers().contains(s)) {
-                        MoveListener.getPlayers().remove(s);
-                    }
-                }
+					index++;
+				}
+				countdown();
+				MoveListener.getPlayers().addAll(a.getPlayers());
+			}
+		});
+		c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 60 * 20L));
+	}
 
-                countdownDm();
-            }
-        });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 20L));
-    }
+	public void countdown() {
+		Countdown c = new Countdown(a, 1, 10, "Game", "seconds", new CodeExecutor() {
+			@Override
+			public void runCode() {
 
-    public void countdownDm() {
-        Countdown c = new Countdown(a, 5, 30, "DeathMatch", "minutes", new CodeExecutor() {
-            @Override
-            public void runCode() {
-                a.broadcast(I18N.getLocaleString("DM_STARTING"));
-                a.setState(SGArena.ArenaState.DEATHMATCH);
-                SafeEntityListener.getPlayers().addAll(a.getPlayers());
-                // tp to deathmatch
+				a.broadcast(I18N.getLocaleString("ODDS"));
+				a.setState(SGArena.ArenaState.IN_GAME);
+				for (String s : a.getPlayers()) {
+					if (MoveListener.getPlayers().contains(s)) {
+						MoveListener.getPlayers().remove(s);
+					}
+				}
 
-                commenceDm();
-            }
-        });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 5 * 60 * 20L));
-    }
+				countdownDm();
+			}
+		});
+		c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 20L));
+	}
 
-    void commenceDm() {
-        Countdown c = new Countdown(a, 1, 10, "DeathMatch", "seconds", new CodeExecutor() {
-            @Override
-            public void runCode() {
-                a.broadcast(I18N.getLocaleString("START"));
-                SafeEntityListener.getPlayers().removeAll(a.getPlayers());
+	public void countdownDm() {
+		Countdown c = new Countdown(a, 5, 30, "DeathMatch", "minutes", new CodeExecutor() {
+			@Override
+			public void runCode() {
+				a.broadcast(I18N.getLocaleString("DM_STARTING"));
+				a.setState(SGArena.ArenaState.DEATHMATCH);
+				SafeEntityListener.getPlayers().addAll(a.getPlayers());
+				// tp to deathmatch
 
-                countdownEnd();
-            }
-        });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 20L));
-    }
+				commenceDm();
+			}
+		});
+		c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 5 * 60 * 20L));
+	}
 
-    void countdownEnd() {
-        Countdown c = new Countdown(a, 1, 5, "EndGame", "minutes", new CodeExecutor() {
-            @Override
-            public void runCode() {
-                a.broadcast(I18N.getLocaleString("END") + " TIED_GAME");
-                // tp out of arena, rollback, pick up all items and arrows
-            }
-        });
-        c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 60 * 20L));
-    }
+	void commenceDm() {
+		Countdown c = new Countdown(a, 1, 10, "DeathMatch", "seconds", new CodeExecutor() {
+			@Override
+			public void runCode() {
+				a.broadcast(I18N.getLocaleString("START"));
+				SafeEntityListener.getPlayers().removeAll(a.getPlayers());
+
+				countdownEnd();
+			}
+		});
+		c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 20L));
+	}
+
+	void countdownEnd() {
+		Countdown c = new Countdown(a, 1, 5, "EndGame", "minutes", new CodeExecutor() {
+			@Override
+			public void runCode() {
+				a.broadcast(I18N.getLocaleString("END") + " TIED_GAME");
+				// tp out of arena, rollback, pick up all items and arrows
+			}
+		});
+		c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 60 * 20L));
+	}
 
 }

@@ -23,7 +23,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 
+import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import com.communitysurvivalgames.thesurvivalgames.rollback.ChangedBlock;
 import com.communitysurvivalgames.thesurvivalgames.util.EconUtil;
 import com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
 import com.communitysurvivalgames.thesurvivalgames.util.FireworkUtil;
@@ -68,6 +70,12 @@ public class SponsorManager {
 							FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(loc.getWorld(), new Location(loc.getWorld(), loc.getBlockX() + 0.5, loc.getBlockY(), loc.getBlockZ() + 0.5), fChestEffect);
 						} catch (Exception e) {
 							//If the firework dosen't work.... To bad
+						}
+						try {
+							SGArena a = SGApi.getArenaManager().getArena(event.getPlayer());
+							a.looted.add(chest);
+							a.changedBlocks.add(new ChangedBlock(event.getPlayer().getWorld().getName(), Material.AIR, (byte) 0, Material.CHEST, chest.getBlock().getData(), chest.getBlock().getX(), chest.getBlock().getY(), chest.getBlock().getZ()));
+						} catch (ArenaNotFoundException ignored) {
 						}
 					}
 				}, 155L);

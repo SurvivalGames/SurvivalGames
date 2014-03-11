@@ -91,11 +91,6 @@ public class ArenaManager {
 			return;
 		}
 
-		p.sendMessage(prefix + "Type in /sg vote <ID> to vote for a map.");
-		for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
-			p.sendMessage(ChatColor.GOLD.toString() + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN.toString() + entry.getValue());
-		}
-
 		a.getPlayers().add(p.getName());
 		inv.put(p.getName(), p.getInventory().getContents());
 		armor.put(p.getName(), p.getInventory().getArmorContents());
@@ -157,7 +152,7 @@ public class ArenaManager {
 	 */
 	public SGArena createLobby(Player p) {
 		SGArena a = new SGArena();
-		
+
 		int s = arenas.size();
 		s += 1;
 
@@ -187,6 +182,7 @@ public class ArenaManager {
 			public void run() {
 				// todo this is only a temp solution to create a new map
 				SGWorld world = SGApi.getMultiWorldManager().createWorld(worldName, display);
+				creator.teleport(new Location(world.getWorld(), world.getWorld().getSpawnLocation().getX(), world.getWorld().getSpawnLocation().getY(), world.getWorld().getSpawnLocation().getZ()));
 				creators.put(creator.getName(), world);
 			}
 		});
