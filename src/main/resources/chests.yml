@@ -13,6 +13,7 @@ lvlup-probability: 65
 
 # Format:
 # The acceptable item name, number of items possible to fill slot, item data value
+# For a list of acceptable item names, refer to : http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
 t1Chest:
      lvl1:
          - WOODEN_SWORD,1
