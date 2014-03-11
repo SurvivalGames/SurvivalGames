@@ -53,11 +53,11 @@ Indonesian File (idID):
 
 ```HELLO_WORLD = Halo Dunia!```
 
-You would then save the file and preferably submit a Pull Request on GitHub, but files can also be emailed to: communitysurvivalgamesdevteam@gmail.com
+You would then save the file and preferably submit a Pull Request on GitHub, but files can also be emailed to: survivalgamesdevteam@gmail.com
 
 TOOLS SUCH AS GOOGLE TRANSLATE ARE UNACCEPTABLE!!!
 
-You should check your language file every once in awhile to see if there are any new lines to be translated.
+You should check your language file every once in a while to see if there are any new lines to be translated.
 
 That’s it!  Thanks for helping make out plugin go international!
 
