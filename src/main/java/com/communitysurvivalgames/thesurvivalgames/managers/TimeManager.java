@@ -51,7 +51,7 @@ public class TimeManager {
 		for (MapHash hash : hashes) {
 			a.votes.put(hash, 0);
 		}
-		
+
 		a.broadcast("Type in /sg vote <ID> to vote for a map.");
 		for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
 			a.broadcast(ChatColor.GOLD.toString() + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN.toString() + entry.getValue());
@@ -107,6 +107,19 @@ public class TimeManager {
 						MoveListener.getPlayers().remove(s);
 					}
 				}
+
+				a.broadcast(ChatColor.GOLD + "You will get your kit in 10 seconds!");
+				
+				Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+
+					@Override
+					public void run() {
+						for (String s : a.getPlayers()) {
+							SGApi.getKitManager().giveKit(Bukkit.getPlayer(s));
+							a.broadcast(ChatColor.GOLD + "You got your kit!");
+						}
+					}
+				}, 200L);
 
 				countdownDm();
 			}

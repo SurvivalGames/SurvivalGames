@@ -87,7 +87,11 @@ public class ArenaManager {
 		}
 
 		if (a.getState() != null && !a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)) {
-			// set player to spectator
+			a.spectators.add(p.getName());
+			p.setGameMode(GameMode.CREATIVE);
+			p.setCanPickupItems(false);
+			p.setAllowFlight(true);
+			p.setFlying(true);
 			return;
 		}
 
@@ -111,6 +115,9 @@ public class ArenaManager {
 		for (Player player : SGApi.getPlugin().getServer().getOnlinePlayers()) {
 			player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
 		}
+
+		if (a.getPlayers().size() >= a.minPlayers)
+			SGApi.getTimeManager(a).countdownLobby(2);
 	}
 
 	/**
@@ -121,7 +128,7 @@ public class ArenaManager {
 	public void removePlayer(Player p) {
 		SGArena a = null;
 		for (SGArena arena : arenas) {
-			if (arena.getPlayers().contains(p.getName())) {
+			if (arena.getPlayers().contains(p.getName()) || arena.getSpectators().contains(p.getName())) {
 				a = arena;
 			}
 		}
@@ -137,9 +144,6 @@ public class ArenaManager {
 		p.getInventory().clear();
 		p.getInventory().setArmorContents(null);
 
-		p.getInventory().setContents(inv.get(p.getName()));
-		p.getInventory().setArmorContents(armor.get(p.getName()));
-
 		inv.remove(p.getName());
 		armor.remove(p.getName());
 		p.teleport(locs.get(p.getName()));
@@ -150,6 +154,20 @@ public class ArenaManager {
 		}
 
 		p.setFireTicks(0);
+		p.getInventory().setContents(inv.get(p.getName()));
+		p.getInventory().setArmorContents(armor.get(p.getName()));
+	}
+
+	/**
+	 * Player disconnects in game :/
+	 * 
+	 * We can't get the player's inventory here to shoot out the items.  Oh well.
+	 */
+	public void playerDisconnect(Player p) {
+		try {
+			SGApi.getArenaManager().getArena(p).deathWithQuit(p);
+		} catch (ArenaNotFoundException e) {
+		}
 	}
 
 	/**
@@ -278,8 +296,11 @@ public class ArenaManager {
 			this.arenas.add(arena);
 
 			arena.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
-			SGApi.getTimeManager(arena).countdownLobby(5);
 		}
+	}
+
+	public void playerKilled(Player p, SGArena a) {
+		a.death(p);
 	}
 
 	/**

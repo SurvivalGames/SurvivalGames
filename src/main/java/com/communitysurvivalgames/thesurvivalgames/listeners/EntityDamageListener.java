@@ -144,11 +144,12 @@ public class EntityDamageListener implements Listener {
 			e.printStackTrace();
 		}
 
-		if (entity == null) {
+		if (entity != null) {
 			if (entity instanceof Player) {
 				Player damager = (Player) entity;
 				try {
 					SGApi.getArenaManager().getArena(damager).broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("KILLED_BY") + " &e&l" + damager.getDisplayName() + " &r&6" + I18N.getLocaleString("WITH_A") + " &e&l" + damager.getInventory().getItemInHand()));
+					SGApi.getArenaManager().getArena(damager).addKill(damager);
 				} catch (ArenaNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -171,6 +172,11 @@ public class EntityDamageListener implements Listener {
 		damaged.setAllowFlight(true);
 		damaged.setFlying(true);
 		damaged.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 9999999, 1, false));
+		
+		try {
+			SGApi.getArenaManager().playerKilled(damaged, SGApi.getArenaManager().getArena(damaged));
+		} catch (ArenaNotFoundException e) {
+		}
 	}
 
 	public void fireworkIt(Location loc) {

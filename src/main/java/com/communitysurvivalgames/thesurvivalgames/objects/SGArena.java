@@ -32,14 +32,17 @@ public class SGArena {
 	public Location lobby = null;
 	public SGWorld currentMap;
 
-	public List<String> voted = new ArrayList<>();
 	public Map<MapHash, Integer> votes = new HashMap<>();
+	public Map<String, Integer> kills = new HashMap<String, Integer>();
 
 	public int maxPlayers;
 	public int minPlayers;
+	public int dead;
 
 	public final List<String> players = new CopyOnWriteArrayList<>();
 	public final List<String> spectators = new CopyOnWriteArrayList<>();
+
+	public List<String> voted = new ArrayList<>();
 
 	public List<ChangedBlock> changedBlocks = new ArrayList<ChangedBlock>();
 	public List<Chest> looted = new ArrayList<Chest>();
@@ -169,6 +172,12 @@ public class SGArena {
 	public void end() {
 		if (players.size() == 1) {
 			broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("END") + " " + players.get(0));
+			Player winner = Bukkit.getPlayer(players.get(0));
+			PlayerData data = SGApi.getPlugin().getPlayerData(winner);
+			data.addWin();
+			data.addPoints(100);
+			SGApi.getPlugin().setPlayerData(data);
+			winner.sendMessage(ChatColor.GOLD + "Plus 100 coins!");
 		} else {
 			broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("ARENA_END"));
 		}
@@ -191,6 +200,7 @@ public class SGArena {
 		setState(ArenaState.POST_GAME);
 		SGApi.getRollbackManager().rollbackArena(this);
 
+		//Auto restarts after rollback
 	}
 
 	/**
@@ -229,6 +239,11 @@ public class SGArena {
 	public void vote(Player p, int i) {
 		if (currentState != ArenaState.WAITING_FOR_PLAYERS) {
 			p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_VOTING"));
+			return;
+		}
+
+		if (voted.contains(p)) {
+			p.sendMessage(ChatColor.RED + "You have alredy voted!");
 			return;
 		}
 
@@ -292,15 +307,43 @@ public class SGArena {
 		return "SGArena.java - Id: " + this.getId() + " State: " + this.getState() + " " + "Players: " + this.players;
 	}
 
+	public void death(Player p) {
+		dead++;
+		getPlayers().remove(p.getName());
+		getSpectators().add(p.getName());
+		if (players.size() == 1)
+			end();
+	}
+
+	public void deathWithQuit(Player p) {
+		dead++;
+		getPlayers().remove(p.getName());
+		if (players.size() == 1)
+			end();
+	}
+
+	public void addKill(Player p) {
+		if (kills.get(p.getName()) == null) {
+			kills.put(p.getName(), 0);
+		}
+		kills.put(p.getName(), kills.get(p.getName()) + 1);
+
+		PlayerData data = SGApi.getPlugin().getPlayerData(p);
+		data.addKill();
+		data.addPoints(10);
+		p.sendMessage(ChatColor.GOLD + "Plus 10 points!");
+		SGApi.getPlugin().setPlayerData(data);
+	}
+
 	public void restart() {
 		this.players.clear();
 		this.spectators.clear();
 		this.changedBlocks.clear();
 		this.looted.clear();
 		this.dLooted.clear();
+		this.dead = 0;
+		this.kills.clear();
 
 		this.setState(ArenaState.WAITING_FOR_PLAYERS);
-
-		SGApi.getTimeManager(this).countdownLobby(5);
 	}
 }

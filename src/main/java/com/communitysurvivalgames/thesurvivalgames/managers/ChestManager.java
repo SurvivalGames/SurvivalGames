@@ -50,6 +50,7 @@ public class ChestManager {
 						if (r.nextInt(100) < lvlup) {
 							if (r.nextInt(100) < lvlup) {
 								chest.getInventory().setItem(i, getRandomItemStack(1, 5));
+								continue;
 							}
 							chest.getInventory().setItem(i, getRandomItemStack(1, 4));
 							continue;
@@ -67,7 +68,7 @@ public class ChestManager {
 	}
 
 	public void fillDoubleChest(SGArena a, DoubleChest chest) {
-		if (a.looted.contains(chest))
+		if (a.dLooted.contains(chest))
 			return;
 		a.dLooted.add(chest);
 		for (int i = 0; i < 54; i++) {
@@ -77,6 +78,7 @@ public class ChestManager {
 						if (r.nextInt(100) < lvlup) {
 							if (r.nextInt(100) < lvlup) {
 								chest.getInventory().setItem(i, getRandomItemStack(1, 5));
+								continue;
 							}
 							chest.getInventory().setItem(i, getRandomItemStack(1, 4));
 							continue;

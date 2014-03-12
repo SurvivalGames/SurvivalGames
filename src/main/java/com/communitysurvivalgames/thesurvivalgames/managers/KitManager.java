@@ -192,9 +192,17 @@ public class KitManager {
 
 	public void setPlayerKit(Player player, Kit kit) {
 		Bukkit.getServer().getPluginManager().callEvent(new KitGivenEvent(player, kit));
+		playerKits.put(player.getName(), kit);
+	}
+
+	public void giveKit(Player p) {
+		Kit kit = playerKits.get(p.getName());
+		if (kit == null) {
+			p.sendMessage(ChatColor.RED + "You did not select a kit so no kit will be given to you.");
+			return;
+		}
 		for (KitItem item : kit.getItems()) {
-			playerKits.put(player.getName(), kit);
-			player.getInventory().addItem(item.getItem());
+			p.getInventory().addItem(item.getItem());
 		}
 	}
 

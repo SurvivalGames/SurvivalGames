@@ -27,7 +27,7 @@ public class PlayerQuitListener implements Listener {
         org.bukkit.entity.Player p = event.getPlayer();
         if (p != null) {
             if (SGApi.getArenaManager().isInGame(p)) {
-                SGApi.getArenaManager().removePlayer(p);
+                SGApi.getArenaManager().playerDisconnect(p);
             }
             UUID id = SGApi.getPartyManager().getPlayers().get(p.getName());
             if (id != null) {
