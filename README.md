@@ -203,6 +203,14 @@ sg.create (create an arena)
 
 ========
 
+**SGDevTeam in the Social Media**
+
+***Twitter*** : https://twitter.com/SGDevTeam (**@SGDevTeam**)
+
+***Instagram*** : http://instagram.com/SGDevTeam#
+
+========
+
 **Get Involved**
 
 You can PM someone on BukkitDev:

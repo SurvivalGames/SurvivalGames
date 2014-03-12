@@ -36,6 +36,7 @@ welcome-message:
   - '&a&lThe Survival Games Server'
   - '&2Read the book in your inventory for more information'
 
+# Please enter acceptable item names, which can be found in http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
 breaks-allowed:
   - 'LEAVES'
   - 'LEAVES_2'
