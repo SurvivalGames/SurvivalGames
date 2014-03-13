@@ -57,6 +57,7 @@ import com.communitysurvivalgames.thesurvivalgames.listeners.ChestListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.EntityDamageListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.EntityInteractListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.ItemDropListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.MobSpawnListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.PlayerQuitListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SetupListener;
@@ -210,6 +211,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new SignListener(), this);
 		pm.registerEvents(new ChestListener(), this);
 		pm.registerEvents(new RailGun(), this);
+		pm.registerEvents(new MobSpawnListener(), this);
 
 		pm.registerEvents(new Archer(), this);
 		pm.registerEvents(new Crafter(), this);

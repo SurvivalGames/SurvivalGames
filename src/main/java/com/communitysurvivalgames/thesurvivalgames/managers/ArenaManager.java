@@ -13,6 +13,8 @@ import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import com.communitysurvivalgames.thesurvivalgames.util.PlayerVanishUtil;
+
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -126,6 +128,7 @@ public class ArenaManager {
 	 * @param p The player to remove from an arena
 	 */
 	public void removePlayer(Player p) {
+		PlayerVanishUtil.showAll(p);
 		SGArena a = null;
 		for (SGArena arena : arenas) {
 			if (arena.getPlayers().contains(p.getName()) || arena.getSpectators().contains(p.getName())) {
@@ -139,7 +142,9 @@ public class ArenaManager {
 
 		if (a.getSpectators().contains(p.getName()))
 			a.getSpectators().remove(p.getName());
-		a.getPlayers().remove(p.getName());
+		else {
+			a.getPlayers().remove(p.getName());
+		}
 
 		p.getInventory().clear();
 		p.getInventory().setArmorContents(null);
@@ -166,8 +171,7 @@ public class ArenaManager {
 	public void playerDisconnect(Player p) {
 		try {
 			SGApi.getArenaManager().getArena(p).deathWithQuit(p);
-		} catch (ArenaNotFoundException e) {
-		}
+		} catch (ArenaNotFoundException e) {}
 	}
 
 	/**
@@ -186,7 +190,7 @@ public class ArenaManager {
 		arenas.add(a);
 
 		a.restart();
-		
+
 		return a;
 	}
 

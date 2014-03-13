@@ -4,6 +4,7 @@ import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubComman
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class UserCommand implements SubCommand {
@@ -26,7 +27,7 @@ public class UserCommand implements SubCommand {
 			}
 		} else if (args[1].equalsIgnoreCase("rank")) {
 			if (args[2].equalsIgnoreCase("set")) {
-				data.setRank(args[2].toUpperCase());
+				data.setRank(ChatColor.translateAlternateColorCodes('&', args[3]));
 				SGApi.getPlugin().setPlayerData(data);
 			}
 		}
