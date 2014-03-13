@@ -95,11 +95,11 @@ public class DeathMessages {
 		}
 
 		if (dc == DamageCause.THORNS) {
-
+			return message + "forgot that spikes hurt";
 		}
 
 		if (dc == DamageCause.VOID) {
-
+			return message + "attempted to leave this world";
 		}
 
 		if (dc == DamageCause.STARVATION) {

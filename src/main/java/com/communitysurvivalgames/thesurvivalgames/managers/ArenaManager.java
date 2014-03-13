@@ -183,12 +183,10 @@ public class ArenaManager {
 
 		a.lobby = p.getLocation();
 
-		a.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
-
 		arenas.add(a);
 
-		SGApi.getTimeManager(a).countdownLobby(1);
-
+		a.restart();
+		
 		return a;
 	}
 
@@ -295,7 +293,7 @@ public class ArenaManager {
 			Bukkit.getLogger().info("Loaded arena! " + arena.toString());
 			this.arenas.add(arena);
 
-			arena.setState(SGArena.ArenaState.WAITING_FOR_PLAYERS);
+			arena.restart();
 		}
 	}
 
