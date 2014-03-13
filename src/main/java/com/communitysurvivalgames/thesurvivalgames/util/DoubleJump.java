@@ -23,7 +23,7 @@ public class DoubleJump implements Listener {
 
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent e) {
-		if ((e.getEntity() instanceof Player) && (e.getCause() == EntityDamageEvent.DamageCause.FALL)){
+		if ((e.getEntity() instanceof Player) && (e.getCause() == EntityDamageEvent.DamageCause.FALL)) {
 			if (SGApi.getArenaManager().isInGame((Player) e.getEntity()) && plugin.getPluginConfig().allowDoubleJumpIG()) {
 				e.setCancelled(true);
 				return;
@@ -36,9 +36,10 @@ public class DoubleJump implements Listener {
 
 	@EventHandler
 	public void onMove(PlayerMoveEvent event) {
-		if ((event.getPlayer().hasPermission("doublejump.use")) && (event.getPlayer().getGameMode() != GameMode.CREATIVE) && (event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR)) {
-			if (SGApi.getArenaManager().isInGame(event.getPlayer()) && plugin.getPluginConfig().allowDoubleJumpIG()) {
-				event.getPlayer().setAllowFlight(true);
+		if ((event.getPlayer().getGameMode() != GameMode.CREATIVE) && (event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR)) {
+			if (SGApi.getArenaManager().isInGame(event.getPlayer())) {
+				if (plugin.getPluginConfig().allowDoubleJumpIG())
+					event.getPlayer().setAllowFlight(true);
 				return;
 			}
 			if (plugin.getPluginConfig().allowDoubleJump()) {
@@ -50,7 +51,7 @@ public class DoubleJump implements Listener {
 	@EventHandler
 	public void onFly(PlayerToggleFlightEvent event) {
 		Player player = event.getPlayer();
-		if ((player.hasPermission("doublejump.use")) && (player.getGameMode() != GameMode.CREATIVE)) {
+		if ((player.getGameMode() != GameMode.CREATIVE)) {
 			event.setCancelled(true);
 			player.setAllowFlight(false);
 			player.setFlying(false);

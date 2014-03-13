@@ -126,8 +126,20 @@ public class EntityDamageListener implements Listener {
 		if (entity instanceof Player) {
 			Player damaged = (Player) event.getEntity();
 			if ((damaged.getHealth() - event.getDamage()) <= 0) {
+				if (SGApi.getArenaManager().isInGame(damaged)) {
+					killPlayer(damaged, null, event.getCause());
+				} else {
+					event.setCancelled(true);
+					damaged.setHealth(20);
+					damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 1, false));
+					damaged.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 40, 1, false));
+					damaged.setVelocity(new Vector(0, 0, 0.5));
+					for (int i = 0; i < 4; i++)
+						fireworkIt(damaged.getLocation());
+					TheSurvivalGames.getPlugin(TheSurvivalGames.class).getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("FAIL") + " &e&l" + event.getCause().toString()));
+				}
 				event.setCancelled(true);
-				killPlayer(damaged, null, event.getCause());
+
 			}
 		}
 	}
@@ -163,7 +175,7 @@ public class EntityDamageListener implements Listener {
 		}
 		for (ItemStack is : damaged.getInventory().getContents()) {
 			if (is.containsEnchantment(EnchantmentManager.undroppable))
-				return;
+				continue;
 			damaged.getWorld().dropItem(damaged.getLocation(), is);
 		}
 
@@ -173,11 +185,10 @@ public class EntityDamageListener implements Listener {
 		damaged.setAllowFlight(true);
 		damaged.setFlying(true);
 		damaged.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 9999999, 1, false));
-		
+
 		try {
 			SGApi.getArenaManager().playerKilled(damaged, SGApi.getArenaManager().getArena(damaged));
-		} catch (ArenaNotFoundException e) {
-		}
+		} catch (ArenaNotFoundException e) {}
 	}
 
 	public void fireworkIt(Location loc) {
