@@ -29,25 +29,25 @@ public class CreateCommand implements SubCommand {
 		if (cmd.equalsIgnoreCase("create") && p.hasPermission("sg.create")) {
 			try {
 				if (args.length == 0) {
-					p.sendMessage("Fromat: /sg create <import type> Nworld name>");
+					p.sendMessage("Format: /sg create <import type> <world name>");
 					return;
 				}
 				if (args[0].equalsIgnoreCase("custom")) {
 					if (args.length == 1) {
-						p.sendMessage("Fromat: /sg create <import type> Nworld name>");
+						p.sendMessage("Format: /sg create <import type> <world name>");
 						return;
 					}
 					SGApi.getArenaManager().createWorld(p, args[1], args[1]);
 					p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_ARENA"));
 				} else if (args[0].equalsIgnoreCase("download")) {
 					if (args.length == 1 || args.length == 2) {
-						p.sendMessage("Fromat: /sg create <import type> Nworld name>");
+						p.sendMessage("Format: /sg create <import type> <world name>");
 						return;
 					}
 					SGApi.getArenaManager().createWorldFromDownload(p, args[1], args[2]);
 				} else if (args[0].equalsIgnoreCase("import")) {
 					if (args.length == 1 || args.length == 2) {
-						p.sendMessage("Fromat: /sg create <import type> Nworld name>");
+						p.sendMessage("Format: /sg create <import type> <world name>");
 						return;
 					}
 					SGApi.getArenaManager().createWorldFromImport(p, args[1], args[2]);
