@@ -11,6 +11,8 @@ public class RemoveCommand implements SubCommand {
 
     @Override
     public void execute(String cmd, Player p, String[] args) {
+    	if(!p.hasPermission("sg.remove") || !p.isOp())
+    		return;
 		if (SGApi.getPlugin().getPluginConfig().isBungeecordMode()) {
 			Bukkit.getLogger().severe("You're running the server in Bungeecord mode, yet you are not running Bungeecord at all... people these days");
 		}

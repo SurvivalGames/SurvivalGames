@@ -151,7 +151,10 @@ public class ArenaManager {
 
 		inv.remove(p.getName());
 		armor.remove(p.getName());
-		p.teleport(locs.get(p.getName()));
+		//p.teleport(locs.get(p.getName()));
+		p.teleport(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()).getSpawnLocation());
+		p.setGameMode(GameMode.SURVIVAL);
+		p.getActivePotionEffects().clear();
 		locs.remove(p.getName());
 
 		for (PotionEffect effect : p.getActivePotionEffects()) {

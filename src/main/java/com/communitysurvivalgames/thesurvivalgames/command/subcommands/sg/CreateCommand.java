@@ -23,10 +23,12 @@ public class CreateCommand implements SubCommand {
 	 */
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
+		if (!p.hasPermission("sg.create") || !p.isOp())
+			return;
 		if (SGApi.getPlugin().getPluginConfig().isBungeecordMode()) {
 			Bukkit.getLogger().severe("You're running the server in Bungeecord mode, yet you are not running Bungeecord at all... people these days");
 		}
-		if (cmd.equalsIgnoreCase("create") && p.hasPermission("sg.create")) {
+		if (cmd.equalsIgnoreCase("create")) {
 			try {
 				if (args.length == 0) {
 					p.sendMessage("Format: /sg create <import type> <world name>");

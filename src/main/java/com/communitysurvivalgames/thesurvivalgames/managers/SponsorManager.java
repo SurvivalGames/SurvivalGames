@@ -52,8 +52,8 @@ public class SponsorManager {
 				}
 				Player sponsored = Bukkit.getPlayer(inMenu.get(event.getPlayer().getName()));
 				inMenu.remove(event.getPlayer().getName());
-				final Location loc = event.getPlayer().getLocation();
-				final Location nloc = event.getPlayer().getLocation();
+				final Location loc = Bukkit.getPlayer(event.getName()).getLocation();
+				final Location nloc = Bukkit.getPlayer(event.getName()).getLocation();
 				a.broadcast(ChatColor.RED + "" + ChatColor.BOLD + "Look up, " + ChatColor.GRAY + ChatColor.BOLD + sponsored.getDisplayName() + ChatColor.RED + "" + ChatColor.BOLD + ", you have been sponsored!");
 				FireworkEffect fEffect = FireworkEffect.builder().withColor(Color.SILVER).withFade(Color.WHITE).trail(true).flicker(false).with(Type.BALL).build();
 				FireworkUtil.getCircleUtil().playFireworkLine(nloc.add(0, 50, 0), loc, fEffect, 50);

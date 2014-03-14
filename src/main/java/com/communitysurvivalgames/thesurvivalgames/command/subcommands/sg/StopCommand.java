@@ -17,6 +17,8 @@ import org.bukkit.entity.Player;
 public class StopCommand implements SubCommand {
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
+		if(!p.hasPermission("sg.stop") || !p.isOp())
+			return;
 		if (cmd.equalsIgnoreCase("stop")) {
 			int i;
 			try {

@@ -178,6 +178,7 @@ public class SGArena {
 			data.addPoints(100);
 			SGApi.getPlugin().setPlayerData(data);
 			winner.sendMessage(ChatColor.GOLD + "Plus 100 coins!");
+			SGApi.getArenaManager().removePlayer(winner);
 		} else {
 			broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("ARENA_END"));
 		}
@@ -311,6 +312,9 @@ public class SGArena {
 		dead++;
 		getPlayers().remove(p.getName());
 		getSpectators().add(p.getName());
+		Bukkit.getLogger().info(p.getName() + "died!");
+		Bukkit.getLogger().info("Players: " + getPlayers(););
+		Bukkit.getLogger().info("Specs: " + getSpectators());
 		if (players.size() == 1)
 			end();
 	}

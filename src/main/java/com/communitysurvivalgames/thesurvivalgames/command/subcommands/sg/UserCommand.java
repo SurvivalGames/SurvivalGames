@@ -11,6 +11,8 @@ public class UserCommand implements SubCommand {
 
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
+		if(!p.hasPermission("sg.user") || !p.isOp())
+			return;
 		// TODO Something is getting Null Pointered here every single time -
 		// probably SQL save function, can't be sure
 		PlayerData data = SGApi.getPlugin().getPlayerData(Bukkit.getPlayer(args[0]));

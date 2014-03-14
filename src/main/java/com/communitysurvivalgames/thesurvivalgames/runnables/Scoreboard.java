@@ -95,9 +95,10 @@ public class Scoreboard implements Runnable {
 			sendScore(objective, "&f" + arena.getPlayers().size() + "   ", 7, complete);
 			sendScore(objective, "&f", 6, complete);
 			sendScore(objective, "&4&l" + I18N.getLocaleString("CLASS"), 5, complete);
-			if(SGApi.getKitManager().getKit(player) == null)
+			if (SGApi.getKitManager().getKit(player) == null)
 				sendScore(objective, "Select a kit!", 4, complete);
-			sendScore(objective, SGApi.getKitManager().getKit(player).getName(), 4, complete);
+			else
+				sendScore(objective, SGApi.getKitManager().getKit(player).getName(), 4, complete);
 			sendScore(objective, "&c", 3, complete);
 			sendScore(objective, "&a&l" + I18N.getLocaleString("POINTS"), 2, complete);
 			sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "    ", 1, complete);
@@ -106,7 +107,7 @@ public class Scoreboard implements Runnable {
 
 		objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("SURVIVAL_GAMES")));
 
-		sendScore(objective, "&bKills", arena.kills.get(player.getName()), complete);
+		//sendScore(objective, "&bKills", arena.kills.get(player.getName()), complete);
 		sendScore(objective, "&Alive", arena.getPlayers().size(), complete);
 		sendScore(objective, "&4Dead", arena.dead, complete);
 		sendScore(objective, "&7Spectating", arena.getSpectators().size(), complete);

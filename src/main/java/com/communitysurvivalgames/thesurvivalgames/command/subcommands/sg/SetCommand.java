@@ -30,6 +30,8 @@ public class SetCommand implements SubCommand {
 	 */
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
+		if(!p.hasPermission("sg.set") || !p.isOp())
+			return;
 		try {
 			if (cmd.equalsIgnoreCase("createlobby") && p.hasPermission("sg.create")) {
 				SGArena a = SGApi.getArenaManager().createLobby(p);
