@@ -162,8 +162,8 @@ public class ArenaManager {
 		}
 
 		p.setFireTicks(0);
-		p.getInventory().setContents(inv.get(p.getName()));
-		p.getInventory().setArmorContents(armor.get(p.getName()));
+		//p.getInventory().setContents(inv.get(p.getName()));
+		//p.getInventory().setArmorContents(armor.get(p.getName()));
 	}
 
 	/**

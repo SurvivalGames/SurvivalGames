@@ -108,7 +108,7 @@ public class Scoreboard implements Runnable {
 		objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("SURVIVAL_GAMES")));
 
 		//sendScore(objective, "&bKills", arena.kills.get(player.getName()), complete);
-		sendScore(objective, "&Alive", arena.getPlayers().size(), complete);
+		sendScore(objective, "&aAlive", arena.getPlayers().size(), complete);
 		sendScore(objective, "&4Dead", arena.dead, complete);
 		sendScore(objective, "&7Spectating", arena.getSpectators().size(), complete);
 
@@ -117,12 +117,6 @@ public class Scoreboard implements Runnable {
 	private static void sendScore(Objective objective, String title, int value, boolean complete) {
 
 		final Score score = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.translateAlternateColorCodes('&', title)));
-		if (complete && value == 0) {
-			// Have to use this because the score wouldn't send otherwise
-			score.setScore(-1);
-			return;
-		}
-
 		score.setScore(value);
 	}
 
