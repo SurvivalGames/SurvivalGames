@@ -185,6 +185,8 @@ public class EntityDamageListener implements Listener {
 			} catch (ArenaNotFoundException e) {}
 		}
 		for (ItemStack is : damaged.getInventory().getContents()) {
+			if(is == null)
+				continue;
 			if (is.containsEnchantment(EnchantmentManager.undroppable))
 				continue;
 			damaged.getWorld().dropItem(damaged.getLocation(), is);
