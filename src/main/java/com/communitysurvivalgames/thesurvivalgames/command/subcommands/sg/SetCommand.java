@@ -55,6 +55,7 @@ public class SetCommand implements SubCommand {
 					return;
 				}
 				a.maxPlayers = amount;
+                                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("Set min players for: ") + " " + a.getId());
 			} else if (cmd.equalsIgnoreCase("setminplayers")) {
 				int i;
 				int amount;
