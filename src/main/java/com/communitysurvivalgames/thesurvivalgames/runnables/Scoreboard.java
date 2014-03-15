@@ -43,7 +43,7 @@ public class Scoreboard implements Runnable {
 		player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 		org.bukkit.scoreboard.Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective objective = scoreboard.registerNewObjective("Global", "dummy");
-		objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("WELCOME") + ", " + player.getDisplayName()));
+		objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("WELCOME") + ", " + player.getName()));
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		if (player.isOnline()) {
 			try {
@@ -62,7 +62,7 @@ public class Scoreboard implements Runnable {
 		if (!SGApi.getArenaManager().isInGame(player)) {
 			if (player.getWorld() != Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))
 				return;
-			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("WELCOME") + ", " + player.getDisplayName()));
+			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("WELCOME") + ", " + player.getName()));
 			sendScore(objective, "&a&l" + I18N.getLocaleString("POINTS"), 11, complete);
 			sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "   ", 10, complete);
 			sendScore(objective, "&r", 9, complete);

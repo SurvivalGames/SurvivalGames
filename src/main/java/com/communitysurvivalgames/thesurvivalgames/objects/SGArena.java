@@ -184,16 +184,10 @@ public class SGArena {
 		}
 
 		for (String s : players) {
-			Player p;
-			if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
-				SGApi.getArenaManager().removePlayer(p);
-			}
+				SGApi.getArenaManager().removePlayer(Bukkit.getPlayer(s));
 		}
 		for (String s : spectators) {
-			Player p;
-			if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
-				SGApi.getArenaManager().removePlayer(p);
-			}
+				SGApi.getArenaManager().removePlayer(Bukkit.getPlayer(s));
 		}
 		voted.clear();
 		votes.clear();
