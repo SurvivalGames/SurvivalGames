@@ -38,12 +38,17 @@ public class DoubleJump implements Listener {
 	public void onMove(PlayerMoveEvent event) {
 		if ((event.getPlayer().getGameMode() != GameMode.CREATIVE) && (event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR)) {
 			if (SGApi.getArenaManager().isInGame(event.getPlayer())) {
-				if (plugin.getPluginConfig().allowDoubleJumpIG())
+				if (plugin.getPluginConfig().allowDoubleJumpIG()) {
 					event.getPlayer().setAllowFlight(true);
+				} else {
+					event.getPlayer().setAllowFlight(false);
+				}
 				return;
 			}
 			if (plugin.getPluginConfig().allowDoubleJump()) {
 				event.getPlayer().setAllowFlight(true);
+			} else {
+				event.getPlayer().setAllowFlight(false);
 			}
 		}
 	}

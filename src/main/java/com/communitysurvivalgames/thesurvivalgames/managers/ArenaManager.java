@@ -135,10 +135,6 @@ public class ArenaManager {
 				a = arena;
 			}
 		}
-		if (a == null || !a.getPlayers().contains(p.getName())) {
-			p.sendMessage("Invalid operation!");
-			return;
-		}
 
 		if (a.getSpectators().contains(p.getName()))
 			a.getSpectators().remove(p.getName());
@@ -155,6 +151,11 @@ public class ArenaManager {
 		p.teleport(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()).getSpawnLocation());
 		p.setGameMode(GameMode.SURVIVAL);
 		p.getActivePotionEffects().clear();
+		p.setAllowFlight(false);
+		p.setFlying(false);
+		p.setCanPickupItems(true);
+		p.setHealth(20);
+		
 		locs.remove(p.getName());
 
 		for (PotionEffect effect : p.getActivePotionEffects()) {
@@ -263,6 +264,10 @@ public class ArenaManager {
 	public boolean isInGame(Player p) {
 		for (SGArena a : arenas) {
 			if (a.getPlayers().contains(p.getName())) {
+				return true;
+			}
+			
+			if (a.getSpectators().contains(p.getName())) {
 				return true;
 			}
 		}

@@ -150,6 +150,13 @@ public class SGArena {
 				p.sendMessage(SGApi.getArenaManager().prefix + message);
 			}
 		}
+		
+		for (String s : spectators) {
+			Player p = Bukkit.getServer().getPlayerExact(s);
+			if (p != null) {
+				p.sendMessage(SGApi.getArenaManager().prefix + message);
+			}
+		}
 	}
 
 	/**
@@ -159,7 +166,7 @@ public class SGArena {
 		int i = 0;
 		for (String s : players) {
 			Player p;
-			if ((p = Bukkit.getServer().getPlayerExact(s)) != null) {
+			if ((p = Bukkit.getServer().getPlayer(s)) != null) {
 				p.teleport(currentMap.locs.get(i));
 				i++;
 			}

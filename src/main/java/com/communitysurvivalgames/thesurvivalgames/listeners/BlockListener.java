@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -45,6 +46,10 @@ public class BlockListener implements Listener {
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onBlockPlace(BlockPlaceEvent event) {
 		if (SGApi.getArenaManager().isInGame(event.getPlayer())) {
+			if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
+				event.setCancelled(true);
+				return;
+			}
 			if (event.getBlock().getType().equals(Material.TNT)) {
 				event.getPlayer().getWorld().spawnEntity(event.getBlock().getLocation(), EntityType.PRIMED_TNT);
 			}
@@ -58,7 +63,10 @@ public class BlockListener implements Listener {
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onBlockBreak(BlockBreakEvent event) {
-
+		if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
+			event.setCancelled(true);
+			return;
+		}
 		try {
 			SGArena a = SGApi.getArenaManager().getArena(event.getPlayer());
 			if (allowed.contains(event.getBlock().getType())) {
