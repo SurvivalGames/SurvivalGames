@@ -24,8 +24,9 @@ public class DoubleJump implements Listener {
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent e) {
 		if ((e.getEntity() instanceof Player) && (e.getCause() == EntityDamageEvent.DamageCause.FALL)) {
-			if (SGApi.getArenaManager().isInGame((Player) e.getEntity()) && plugin.getPluginConfig().allowDoubleJumpIG()) {
-				e.setCancelled(true);
+			if (SGApi.getArenaManager().isInGame((Player) e.getEntity())) {
+				if (plugin.getPluginConfig().allowDoubleJumpIG())
+					e.setCancelled(true);
 				return;
 			}
 			if (plugin.getPluginConfig().allowDoubleJump()) {
