@@ -101,7 +101,7 @@ public class PlayerData {
         this.playerName = p.getName();
         this.kills = 0;
         this.points = 0;
-        this.rank = "&7[M]";
+        this.rank = "&7M";
         if (PlayerNameUtil.getDevs().contains(p.getName()) || PlayerNameUtil.getAwesomePeople().contains(p.getName())) {
             this.setRank("&d&lDeveloper");
         }
