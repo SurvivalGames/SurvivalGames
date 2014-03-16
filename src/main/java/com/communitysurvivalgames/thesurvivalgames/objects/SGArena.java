@@ -13,8 +13,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.FireworkEffect.Type;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
 import org.bukkit.entity.Player;
@@ -23,6 +26,7 @@ import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.rollback.ChangedBlock;
+import com.communitysurvivalgames.thesurvivalgames.util.FireworkUtil;
 
 public class SGArena {
 
@@ -47,6 +51,8 @@ public class SGArena {
 	public List<ChangedBlock> changedBlocks = new ArrayList<ChangedBlock>();
 	public List<Chest> looted = new ArrayList<Chest>();
 	public List<DoubleChest> dLooted = new ArrayList<DoubleChest>();
+
+	public boolean countdown = false;
 
 	/**
 	 * Name: ArenaState.java Edited: 8 December 2013
@@ -150,7 +156,7 @@ public class SGArena {
 				p.sendMessage(SGApi.getArenaManager().prefix + message);
 			}
 		}
-		
+
 		for (String s : spectators) {
 			Player p = Bukkit.getServer().getPlayerExact(s);
 			if (p != null) {
@@ -186,21 +192,29 @@ public class SGArena {
 			SGApi.getPlugin().setPlayerData(data);
 			winner.sendMessage(ChatColor.GOLD + "Plus 100 coins!");
 			SGApi.getArenaManager().removePlayer(winner);
+
+			FireworkUtil.getCircleUtil().playFireworkCircle(winner, FireworkEffect.builder().with(Type.BALL).withColor(Color.RED).withColor(Color.GREEN).withColor(Color.BLUE).withColor(Color.YELLOW).withTrail().build(), 10, 10);
 		} else {
 			broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("ARENA_END"));
 		}
+		
+		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
-		for (String s : players) {
-				SGApi.getArenaManager().removePlayer(Bukkit.getPlayer(s));
-		}
-		for (String s : spectators) {
-				SGApi.getArenaManager().removePlayer(Bukkit.getPlayer(s));
-		}
-		voted.clear();
-		votes.clear();
+			@Override
+			public void run() {
+				for (String s : players) {
+					SGApi.getArenaManager().removePlayer(Bukkit.getPlayer(s));
+				}
+				for (String s : spectators) {
+					SGApi.getArenaManager().removePlayer(Bukkit.getPlayer(s));
+				}
+				voted.clear();
+				votes.clear();
 
-		setState(ArenaState.POST_GAME);
-		SGApi.getRollbackManager().rollbackArena(this);
+				setState(ArenaState.POST_GAME);
+				SGApi.getRollbackManager().rollbackArena(getThis());
+			}
+		}, 200L);
 
 		//Auto restarts after rollback
 	}
@@ -348,7 +362,12 @@ public class SGArena {
 		this.dLooted.clear();
 		this.dead = 0;
 		this.kills.clear();
+		countdown = false;
 
 		this.setState(ArenaState.WAITING_FOR_PLAYERS);
+	}
+
+	SGArena getThis() {
+		return this;
 	}
 }

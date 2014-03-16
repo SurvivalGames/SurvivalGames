@@ -77,6 +77,16 @@ public class EntityDamageListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
 
+		if (event.getEntity() instanceof EnderCrystal) {
+			event.setCancelled(true);
+			return;
+		}
+
+		if (event.getEntity().getWorld() == Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld())) {
+			event.setCancelled(true);
+			return;
+		}
+
 		if (SGApi.getPlugin().getPluginConfig().doBloodEffect()) {
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Runnable() {
 				@Override
@@ -91,6 +101,13 @@ public class EntityDamageListener implements Listener {
 		Entity entity = event.getDamager();
 		if (entity instanceof Player) {
 			Player damager = (Player) entity;
+			try {
+				if (SGApi.getArenaManager().getArena(damager).spectators.contains(damager.getName())) {
+					event.setCancelled(true);
+					return;
+				}
+			} catch (ArenaNotFoundException e1) {
+			}
 			if (damager.getItemInHand().containsEnchantment(new ShockingEnchantment(120))) {
 				FireworkEffect fEffect = FireworkEffect.builder().flicker(false).withColor(Color.BLACK).withFade(Color.RED).with(Type.BALL).trail(true).build();
 				try {
@@ -154,11 +171,6 @@ public class EntityDamageListener implements Listener {
 				} catch (ArenaNotFoundException ignored) {}
 				return;
 			}
-		}
-
-		if (event.getEntity() instanceof EnderCrystal) {
-			event.setCancelled(true);
-			return;
 		}
 
 		Entity entity = event.getEntity();

@@ -118,8 +118,10 @@ public class ArenaManager {
 			player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
 		}
 
-		if (a.getPlayers().size() >= a.minPlayers)
+		if (a.getPlayers().size() == a.minPlayers && a.countdown == false) {
+			a.countdown = true;
 			SGApi.getTimeManager(a).countdownLobby(2);
+		}
 	}
 
 	/**
@@ -155,7 +157,7 @@ public class ArenaManager {
 		p.setFlying(false);
 		p.setCanPickupItems(true);
 		p.setHealth(20);
-		
+
 		locs.remove(p.getName());
 
 		for (PotionEffect effect : p.getActivePotionEffects()) {
@@ -266,7 +268,7 @@ public class ArenaManager {
 			if (a.getPlayers().contains(p.getName())) {
 				return true;
 			}
-			
+
 			if (a.getSpectators().contains(p.getName())) {
 				return true;
 			}
