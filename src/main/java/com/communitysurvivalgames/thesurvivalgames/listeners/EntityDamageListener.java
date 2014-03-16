@@ -106,8 +106,7 @@ public class EntityDamageListener implements Listener {
 					event.setCancelled(true);
 					return;
 				}
-			} catch (ArenaNotFoundException e1) {
-			}
+			} catch (ArenaNotFoundException e1) {}
 			if (damager.getItemInHand().containsEnchantment(new ShockingEnchantment(120))) {
 				FireworkEffect fEffect = FireworkEffect.builder().flicker(false).withColor(Color.BLACK).withFade(Color.RED).with(Type.BALL).trail(true).build();
 				try {
@@ -166,10 +165,11 @@ public class EntityDamageListener implements Listener {
 		if (event.getEntity() instanceof Player) {
 			if (SGApi.getArenaManager().isInGame((Player) event.getEntity())) {
 				try {
-					if (SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS || SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.STARTING_COUNTDOWN)
+					if (SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS || SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.STARTING_COUNTDOWN) {
 						event.setCancelled(true);
+						return;
+					}
 				} catch (ArenaNotFoundException ignored) {}
-				return;
 			}
 		}
 
