@@ -75,7 +75,7 @@ public class StartCommand implements SubCommand {
 
             if (args[1].equals("dm") && p.hasPermission("sg.gamestate.dm")) {
                 if (!a.getState().equals(SGArena.ArenaState.IN_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.IN_GAME)) {
-                    p.sendMessage(SGApi.getArenaManager().error + "You can't change force anything yet.");
+                    p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("CANT_FORCE"));
                     return;
                 }
                 a.setState(SGArena.ArenaState.DEATHMATCH);
