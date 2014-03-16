@@ -314,6 +314,10 @@ public class ArenaManager {
 	public void playerKilled(Player p, SGArena a) {
 		a.death(p);
 	}
+	
+	public void playerDeathAndLeave(Player p, SGArena a) {
+		a.deathAndLeave(p);
+	}
 
 	/**
 	 * Gets the HashMap that contains the creators

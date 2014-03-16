@@ -19,7 +19,7 @@ public class LeaveCommand implements SubCommand {
         if (cmd.equalsIgnoreCase("leave")) {
             if (SGApi.getArenaManager().isInGame(p)) {
                 try {
-					SGApi.getArenaManager().playerKilled(p, SGApi.getArenaManager().getArena(p));
+					SGApi.getArenaManager().playerDeathAndLeave(p, SGApi.getArenaManager().getArena(p));
 				} catch (ArenaNotFoundException e) {
 	                p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("LOL_NOPE"));
 	                return;

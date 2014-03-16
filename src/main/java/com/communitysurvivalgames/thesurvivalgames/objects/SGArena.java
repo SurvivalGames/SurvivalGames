@@ -326,9 +326,14 @@ public class SGArena {
 		dead++;
 		getPlayers().remove(p.getName());
 		getSpectators().add(p.getName());
-		Bukkit.getLogger().info(p.getName() + "died!");
-		Bukkit.getLogger().info("Players: " + getPlayers());
-		Bukkit.getLogger().info("Specs: " + getSpectators());
+		if (players.size() == 1)
+			end();
+	}
+	
+	public void deathAndLeave(Player p) {
+		dead++;
+		getPlayers().remove(p.getName());
+		SGApi.getArenaManager().removePlayer(p);
 		if (players.size() == 1)
 			end();
 	}
