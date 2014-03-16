@@ -191,7 +191,6 @@ public class SGArena {
 			data.addPoints(100);
 			SGApi.getPlugin().setPlayerData(data);
 			winner.sendMessage(ChatColor.GOLD + "Plus 100 coins!");
-			SGApi.getArenaManager().removePlayer(winner);
 
 			FireworkUtil.getCircleUtil().playFireworkCircle(winner, FireworkEffect.builder().with(Type.BALL).withColor(Color.RED).withColor(Color.GREEN).withColor(Color.BLUE).withColor(Color.YELLOW).withTrail().build(), 10, 10);
 		} else {
