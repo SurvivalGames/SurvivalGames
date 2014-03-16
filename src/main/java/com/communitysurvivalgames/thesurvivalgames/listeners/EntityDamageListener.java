@@ -65,14 +65,81 @@ public class EntityDamageListener implements Listener {
 
 		if (event.getEntity() instanceof Player) {
 			if (SGApi.getArenaManager().isInGame((Player) event.getEntity())) {
-				event.setCancelled(true);
+				try {
+					if (SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS || SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.STARTING_COUNTDOWN)
+						event.setCancelled(true);
+				} catch (ArenaNotFoundException e) {}
 				return;
 			}
 		}
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
+
+		if (SGApi.getPlugin().getPluginConfig().doBloodEffect()) {
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Runnable() {
+				@Override
+				public void run() {
+					for (int i = 0; i < event.getDamage(); i++) {
+						event.getDamager().getWorld().playEffect(event.getEntity().getLocation().add(0.0D, 0.8D, 0.0D), Effect.STEP_SOUND, Material.REDSTONE_WIRE);
+					}
+				}
+			});
+		}
+
+		Entity entity = event.getDamager();
+		if (entity instanceof Player) {
+			Player damager = (Player) entity;
+			if (damager.getItemInHand().containsEnchantment(new ShockingEnchantment(120))) {
+				FireworkEffect fEffect = FireworkEffect.builder().flicker(false).withColor(Color.BLACK).withFade(Color.RED).with(Type.BALL).trail(true).build();
+				try {
+					FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(event.getEntity().getWorld(), event.getEntity().getLocation(), fEffect);
+				} catch (Exception e) {
+					//If the firework dosen't work... to bad 
+				}
+				Vector v = event.getEntity().getVelocity();
+				event.getEntity().setVelocity(v.add(new Vector(0, Math.abs(v.getY() - (v.getY() - 0.15)), 0)));
+			}
+		}
+		if (event.getEntity() instanceof Player) {
+			Player damaged = (Player) event.getEntity();
+			if (SGApi.getArenaManager().isInGame(damaged)) {
+				if (entity instanceof Snowball) {
+					event.setDamage(3);
+					damaged.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 600, 2, false));
+					damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1, false));
+				}
+				if (entity instanceof Egg) {
+					event.setDamage(16);
+					damaged.getWorld().strikeLightning(damaged.getLocation());
+					damaged.getWorld().strikeLightning(damaged.getLocation());
+				}
+
+				if ((damaged.getHealth() - event.getDamage()) <= 0) {
+					event.setCancelled(true);
+					killPlayer(damaged, event.getDamager(), event.getCause());
+				}
+				return;
+			}
+			if ((damaged.getHealth() - event.getDamage()) <= 0) {
+				event.setCancelled(true);
+				damaged.setHealth(20);
+				damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 1, false));
+				damaged.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 40, 1, false));
+				damaged.setVelocity(new Vector(0, 0, 0.5));
+				for (int i = 0; i < 4; i++)
+					fireworkIt(event.getDamager().getLocation());
+				TheSurvivalGames.getPlugin(TheSurvivalGames.class).getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("FAIL") + " &e&l" + event.getDamager()));
+			}
+		}
+		return;
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onEntityDamage(EntityDamageEvent event) {
+		if (event.getCause() == DamageCause.ENTITY_ATTACK)
+			return;
 
 		if (event.getEntity().getWorld() == Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld())) {
 			event.setCancelled(true);
@@ -82,78 +149,15 @@ public class EntityDamageListener implements Listener {
 		if (event.getEntity() instanceof Player) {
 			if (SGApi.getArenaManager().isInGame((Player) event.getEntity())) {
 				try {
-					if(SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS || SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.STARTING_COUNTDOWN)
-					event.setCancelled(true);
-				} catch (ArenaNotFoundException ignored) {
-				}
+					if (SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS || SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.STARTING_COUNTDOWN)
+						event.setCancelled(true);
+				} catch (ArenaNotFoundException ignored) {}
 				return;
 			}
 		}
 
 		if (event.getEntity() instanceof EnderCrystal) {
 			event.setCancelled(true);
-			return;
-		}
-
-		if (event instanceof EntityDamageByEntityEvent) {
-			final EntityDamageByEntityEvent dEvent = (EntityDamageByEntityEvent) event;
-
-			if (SGApi.getPlugin().getPluginConfig().doBloodEffect()) {
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Runnable() {
-					@Override
-					public void run() {
-						for (int i = 0; i < dEvent.getDamage(); i++) {
-							dEvent.getDamager().getWorld().playEffect(dEvent.getEntity().getLocation().add(0.0D, 0.8D, 0.0D), Effect.STEP_SOUND, Material.REDSTONE_WIRE);
-						}
-					}
-				});
-			}
-
-			Entity entity = dEvent.getDamager();
-			if (entity instanceof Player) {
-				Player damager = (Player) entity;
-				if (damager.getItemInHand().containsEnchantment(new ShockingEnchantment(120))) {
-					FireworkEffect fEffect = FireworkEffect.builder().flicker(false).withColor(Color.BLACK).withFade(Color.RED).with(Type.BALL).trail(true).build();
-					try {
-						FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(event.getEntity().getWorld(), event.getEntity().getLocation(), fEffect);
-					} catch (Exception e) {
-						//If the firework dosen't work... to bad 
-					}
-					Vector v = event.getEntity().getVelocity();
-					event.getEntity().setVelocity(v.add(new Vector(0, Math.abs(v.getY() - (v.getY() - 0.15)), 0)));
-				}
-				if (event.getEntity() instanceof Player) {
-					Player damaged = (Player) event.getEntity();
-					if (SGApi.getArenaManager().isInGame(damaged)) {
-						if (entity instanceof Snowball) {
-							event.setDamage(3);
-							damaged.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 600, 2, false));
-							damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1, false));
-						}
-						if (entity instanceof Egg) {
-							event.setDamage(16);
-							damaged.getWorld().strikeLightning(damaged.getLocation());
-							damaged.getWorld().strikeLightning(damaged.getLocation());
-						}
-
-						if ((damaged.getHealth() - event.getDamage()) <= 0) {
-							event.setCancelled(true);
-							killPlayer(damaged, dEvent.getDamager(), event.getCause());
-						}
-						return;
-					}
-					if ((damaged.getHealth() - event.getDamage()) <= 0) {
-						event.setCancelled(true);
-						damaged.setHealth(20);
-						damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 1, false));
-						damaged.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 40, 1, false));
-						damaged.setVelocity(new Vector(0, 0, 0.5));
-						for (int i = 0; i < 4; i++)
-							fireworkIt(dEvent.getDamager().getLocation());
-						TheSurvivalGames.getPlugin(TheSurvivalGames.class).getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("FAIL") + " &e&l" + dEvent.getDamager()));
-					}
-				}
-			}
 			return;
 		}
 
