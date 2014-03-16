@@ -77,8 +77,7 @@ public class SetCommand implements SubCommand {
 				a.minPlayers = amount;
 				p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("Set min players for: ") + " " + a.getId());
 			} else if (cmd.equalsIgnoreCase("setchest")) {
-				try{
-						SGWorld world = SGApi.getMultiWorldManager().worldForName(args[1]);
+				SGWorld world = SGApi.getMultiWorldManager().worldForName(args[1]);
 				BlockIterator bit = new BlockIterator(p, 6);
 				Block next;
 				while (bit.hasNext()) {
@@ -92,9 +91,6 @@ public class SetCommand implements SubCommand {
 							p.chat("/sg help");
 						}
 					}
-					
-				} catch (Exception exe)
-				    p.chat("That didn't work.")
 			
 				}
 
