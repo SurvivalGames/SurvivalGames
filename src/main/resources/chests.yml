@@ -16,7 +16,7 @@ lvlup-probability: 65
 # For a list of acceptable item names, refer to : http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
 t1Chest:
      lvl1:
-         - WOODEN_SWORD,1
+         - WOOD_SWORD,1
          - LEATHER_HELMET,1
          - LEATHER_CHESTPLATE,1
          - LEATHER_LEGGINGS,1
@@ -29,7 +29,7 @@ t1Chest:
          - APPLE,3
          - ARROW,5
      lvl2:
-         - WOODEN_SWORD,1
+         - WOOD_SWORD,1
          - GOLD_HELMET,1
          - GOLD_CHESTPLATE,1
          - GOLD_LEGGINGS,1
