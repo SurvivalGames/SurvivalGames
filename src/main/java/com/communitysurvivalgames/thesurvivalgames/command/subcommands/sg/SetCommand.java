@@ -6,6 +6,7 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg;
 
+
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
@@ -18,8 +19,10 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BlockIterator;
 
+
 public class SetCommand implements SubCommand {
 	// TODO permissions
+
 
 	/**
 	 * The create command. DO NOT CALL DIRECTLY. Only use in CommandHandler
@@ -47,6 +50,7 @@ public class SetCommand implements SubCommand {
 					return;
 				}
 
+
 				SGArena a;
 				try {
 					a = SGApi.getArenaManager().getArena(i);
@@ -66,6 +70,7 @@ public class SetCommand implements SubCommand {
 					p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_NUMBER"));
 					return;
 				}
+
 
 				SGArena a;
 				try {
@@ -91,8 +96,8 @@ public class SetCommand implements SubCommand {
 							p.chat("/sg help");
 						}
 					}
-			
 				}
+
 
 				p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_CHEST") + " " + world.getDisplayName());
 			} else if (cmd.equalsIgnoreCase("setgamespawn")) {
@@ -104,11 +109,13 @@ public class SetCommand implements SubCommand {
 					return;
 				}
 
+
 				SGWorld world = SGApi.getMultiWorldManager().worldForName(args[1]);
 				if (world == null) {
 					return;
 				}
 				world.locs.set(spawn - 1, p.getLocation());
+
 
 				p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_SPAWN") + " " + world.getWorld().getName());
 			}
@@ -117,3 +124,4 @@ public class SetCommand implements SubCommand {
 		}
 	}
 }
+
