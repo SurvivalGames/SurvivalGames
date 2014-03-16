@@ -7,6 +7,7 @@
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg;
 
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
+import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import org.bukkit.entity.Player;
@@ -17,7 +18,12 @@ public class LeaveCommand implements SubCommand {
     public void execute(String cmd, Player p, String[] args) {
         if (cmd.equalsIgnoreCase("leave")) {
             if (SGApi.getArenaManager().isInGame(p)) {
-                SGApi.getArenaManager().removePlayer(p);
+                try {
+					SGApi.getArenaManager().playerKilled(p, SGApi.getArenaManager().getArena(p));
+				} catch (ArenaNotFoundException e) {
+	                p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("LOL_NOPE"));
+	                return;
+				}
                 p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("LEFT_ARENA"));
             } else {
                 p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("LOL_NOPE"));
