@@ -252,7 +252,7 @@ public class SGArena {
 	 * @param i the map number
 	 */
 	public void vote(Player p, int i) {
-		if (currentState != ArenaState.WAITING_FOR_PLAYERS || currentState != ArenaState.PRE_COUNTDOWN) {
+		if (currentState != ArenaState.WAITING_FOR_PLAYERS && currentState != ArenaState.PRE_COUNTDOWN) {
 			p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_VOTING"));
 			return;
 		}

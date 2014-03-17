@@ -52,7 +52,7 @@ public class JoinMeunManager {
 				for (SGArena a : arenas) {
 					if (index == 5)
 						break;
-					if (a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)) {
+					if (a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS) || a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
 						menu.setOption(11 + index, new ItemStack(Material.EMERALD_BLOCK, a.getPlayers().size()), "SG - Arena " + a.getId(), new String[] { ChatColor.BLACK + "", ChatColor.YELLOW + "Players: " + ChatColor.WHITE + a.getPlayers().size(), ChatColor.YELLOW + "Status: " + ChatColor.GREEN + a.getState().toString(), ChatColor.AQUA + "", ChatColor.WHITE + "" + ChatColor.UNDERLINE + "Click to Join!" });
 						index++;
 					}
