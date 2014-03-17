@@ -257,7 +257,7 @@ public class SGArena {
 			return;
 		}
 
-		if (voted.contains(p)) {
+		if (voted.contains(p.getName())) {
 			p.sendMessage(ChatColor.RED + "You have alredy voted!");
 			return;
 		}
@@ -364,6 +364,8 @@ public class SGArena {
 		this.changedBlocks.clear();
 		this.looted.clear();
 		this.dLooted.clear();
+		this.voted.clear();
+		this.votes.clear();
 		this.dead = 0;
 		this.kills.clear();
 		countdown = false;

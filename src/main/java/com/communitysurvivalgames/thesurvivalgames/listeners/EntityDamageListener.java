@@ -66,8 +66,11 @@ public class EntityDamageListener implements Listener {
 		if (event.getEntity() instanceof Player) {
 			if (SGApi.getArenaManager().isInGame((Player) event.getEntity())) {
 				try {
-					if (SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS || SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.STARTING_COUNTDOWN)
+					if (SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS || SGApi.getArenaManager().getArena((Player) event.getEntity()).getState() == SGArena.ArenaState.STARTING_COUNTDOWN) {
+						Player p = (Player) event.getEntity();
+						p.setExhaustion(0);
 						event.setCancelled(true);
+					}
 				} catch (ArenaNotFoundException e) {}
 				return;
 			}

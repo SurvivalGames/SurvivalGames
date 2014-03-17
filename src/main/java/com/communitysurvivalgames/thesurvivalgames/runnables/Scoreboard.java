@@ -104,7 +104,7 @@ public class Scoreboard implements Runnable {
 			sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "    ", 1, complete);
 			return;
 		}
-		
+
 		if (arena.getState() == SGArena.ArenaState.PRE_COUNTDOWN) {
 			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("Starting in: " + SGApi.getTimeManager(arena).g.count) + " " + SGApi.getTimeManager(arena).g.s[1]));
 			sendScore(objective, "&e" + I18N.getLocaleString("MAX_PLAYERS"), 14, complete);
