@@ -83,8 +83,30 @@ public class Scoreboard implements Runnable {
 			Bukkit.getLogger().severe(e.getMessage());
 			return;
 		}
-		if (arena.getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS || arena.getState() == SGArena.ArenaState.STARTING_COUNTDOWN) {
+		if (arena.getState() == SGArena.ArenaState.WAITING_FOR_PLAYERS) {
 			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("WAITING_FOR_PLAYERS")));
+			sendScore(objective, "&e" + I18N.getLocaleString("MAX_PLAYERS"), 14, complete);
+			sendScore(objective, "&f" + arena.getMaxPlayers() + " ", 13, complete);
+			sendScore(objective, "&0", 12, complete);
+			sendScore(objective, "&e" + I18N.getLocaleString("MIN_PLAYERS"), 11, complete);
+			sendScore(objective, "&f" + arena.getMinPlayers() + "  ", 10, complete);
+			sendScore(objective, "&r", 9, complete);
+			sendScore(objective, "&e" + I18N.getLocaleString("PLAYERS"), 8, complete);
+			sendScore(objective, "&f" + arena.getPlayers().size() + "   ", 7, complete);
+			sendScore(objective, "&f", 6, complete);
+			sendScore(objective, "&4&l" + I18N.getLocaleString("CLASS"), 5, complete);
+			if (SGApi.getKitManager().getKit(player) == null)
+				sendScore(objective, "Select a kit!", 4, complete);
+			else
+				sendScore(objective, SGApi.getKitManager().getKit(player).getName(), 4, complete);
+			sendScore(objective, "&c", 3, complete);
+			sendScore(objective, "&a&l" + I18N.getLocaleString("POINTS"), 2, complete);
+			sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "    ", 1, complete);
+			return;
+		}
+		
+		if (arena.getState() == SGArena.ArenaState.PRE_COUNTDOWN) {
+			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("Starting in: " + SGApi.getTimeManager(arena).g.count) + " " + SGApi.getTimeManager(arena).g.s[1]));
 			sendScore(objective, "&e" + I18N.getLocaleString("MAX_PLAYERS"), 14, complete);
 			sendScore(objective, "&f" + arena.getMaxPlayers() + " ", 13, complete);
 			sendScore(objective, "&0", 12, complete);

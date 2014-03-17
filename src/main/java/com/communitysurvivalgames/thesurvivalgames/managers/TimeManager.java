@@ -32,6 +32,12 @@ public class TimeManager {
 		this.a = a;
 	}
 
+	public Countdown g;
+	public Countdown cg;
+	public Countdown dm;
+	public Countdown cdm;
+	public Countdown end;
+
 	public void countdownLobby(int n) {
 		// setup the voting
 		int i = 0;
@@ -57,7 +63,9 @@ public class TimeManager {
 			a.broadcast(ChatColor.GOLD.toString() + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN.toString() + entry.getValue());
 		}
 
-		Countdown c = new Countdown(a, 1, n, "Game", "minutes", new CodeExecutor() {
+		a.setState(SGArena.ArenaState.PRE_COUNTDOWN);
+		
+		g = new Countdown(a, 1, n, "Game", "minutes", new CodeExecutor() {
 			@Override
 			public void runCode() {
 				//handle votes
@@ -92,11 +100,11 @@ public class TimeManager {
 				MoveListener.getPlayers().addAll(a.getPlayers());
 			}
 		});
-		c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 60 * 20L));
+		g.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), g, 0L, 60 * 20L));
 	}
 
 	public void countdown() {
-		Countdown c = new Countdown(a, 1, 10, "Game", "seconds", new CodeExecutor() {
+		cg = new Countdown(a, 1, 10, "Game", "seconds", new CodeExecutor() {
 			@Override
 			public void runCode() {
 
@@ -109,7 +117,7 @@ public class TimeManager {
 				}
 
 				a.broadcast(ChatColor.GOLD + "You will get your kit in 10 seconds!");
-				
+
 				Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
 					@Override
@@ -124,11 +132,11 @@ public class TimeManager {
 				countdownDm();
 			}
 		});
-		c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 20L));
+		cg.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), cg, 0L, 20L));
 	}
 
 	public void countdownDm() {
-		Countdown c = new Countdown(a, 5, 30, "DeathMatch", "minutes", new CodeExecutor() {
+		dm = new Countdown(a, 5, 30, "DeathMatch", "minutes", new CodeExecutor() {
 			@Override
 			public void runCode() {
 				a.broadcast(I18N.getLocaleString("DM_STARTING"));
@@ -139,7 +147,7 @@ public class TimeManager {
 				commenceDm();
 			}
 		});
-		c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 5 * 60 * 20L));
+		dm.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), dm, 0L, 5 * 60 * 20L));
 	}
 
 	void commenceDm() {
@@ -152,18 +160,30 @@ public class TimeManager {
 				countdownEnd();
 			}
 		});
-		c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 20L));
+		c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), cdm, 0L, 20L));
 	}
 
 	void countdownEnd() {
-		Countdown c = new Countdown(a, 1, 5, "EndGame", "minutes", new CodeExecutor() {
+		end = new Countdown(a, 1, 5, "EndGame", "minutes", new CodeExecutor() {
 			@Override
 			public void runCode() {
 				a.broadcast(I18N.getLocaleString("END") + " TIED_GAME");
 				// tp out of arena, rollback, pick up all items and arrows
 			}
 		});
-		c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), c, 0L, 60 * 20L));
+		end.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), end, 0L, 60 * 20L));
 	}
 
+	public void forceReset() {
+		if (g != null)
+			Bukkit.getScheduler().cancelTask(g.getId());
+		if (cg != null)
+			Bukkit.getScheduler().cancelTask(cg.getId());
+		if (dm != null)
+			Bukkit.getScheduler().cancelTask(dm.getId());
+		if (cdm != null)
+			Bukkit.getScheduler().cancelTask(cdm.getId());
+		if (end != null)
+			Bukkit.getScheduler().cancelTask(end.getId());
+	}
 }

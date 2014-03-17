@@ -62,7 +62,7 @@ public class SGArena {
 	 */
 	public enum ArenaState {
 
-		WAITING_FOR_PLAYERS("Waiting for players", "WAITING_FOR_PLAYERS"), STARTING_COUNTDOWN("Starting Countdown", "STARTING_COUNTDOWN"), IN_GAME("In Game", "IN_GAME"), DEATHMATCH("Deathmatch", "DEATHMATCH"), POST_GAME("Restarting", "POST_GAME");
+		WAITING_FOR_PLAYERS("Waiting for players", "WAITING_FOR_PLAYERS"), PRE_COUNTDOWN("Starting soon", "PRE_COUNTDOWN"), STARTING_COUNTDOWN("Starting Countdown", "STARTING_COUNTDOWN"), IN_GAME("In Game", "IN_GAME"), DEATHMATCH("Deathmatch", "DEATHMATCH"), POST_GAME("Restarting", "POST_GAME");
 
 		String name;
 		String trueName;
@@ -367,6 +367,8 @@ public class SGArena {
 		this.dead = 0;
 		this.kills.clear();
 		countdown = false;
+		
+		SGApi.getTimeManager(this).forceReset();
 
 		this.setState(ArenaState.WAITING_FOR_PLAYERS);
 	}
