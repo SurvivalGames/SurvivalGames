@@ -88,7 +88,7 @@ public class ArenaManager {
 			return;
 		}
 
-		if (a.getState() != null && !a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)) {
+		if (!a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS) && !a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
 			a.spectators.add(p.getName());
 			p.setGameMode(GameMode.CREATIVE);
 			p.setCanPickupItems(false);
