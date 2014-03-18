@@ -70,7 +70,6 @@ public class EntityDamageListener implements Listener {
 						Player p = (Player) event.getEntity();
 						p.setExhaustion(0);
 						p.setFoodLevel(20);
-						event.setCancelled(true);
 					}
 				} catch (ArenaNotFoundException e) {}
 				return;
@@ -105,12 +104,6 @@ public class EntityDamageListener implements Listener {
 		Entity entity = event.getDamager();
 		if (entity instanceof Player) {
 			Player damager = (Player) entity;
-			try {
-				if (SGApi.getArenaManager().getArena(damager).spectators.contains(damager.getName())) {
-					event.setCancelled(true);
-					return;
-				}
-			} catch (ArenaNotFoundException e1) {}
 			if (damager.getItemInHand().containsEnchantment(new ShockingEnchantment(120))) {
 				FireworkEffect fEffect = FireworkEffect.builder().flicker(false).withColor(Color.BLACK).withFade(Color.RED).with(Type.BALL).trail(true).build();
 				try {
@@ -124,6 +117,17 @@ public class EntityDamageListener implements Listener {
 		}
 		if (event.getEntity() instanceof Player) {
 			Player damaged = (Player) event.getEntity();
+
+			Entity eentity = event.getDamager();
+			if (eentity instanceof Player) {
+				Player damager = (Player) eentity;
+				try {
+					if (SGApi.getArenaManager().getArena(damaged).spectators.contains(damager.getName())) {
+						event.setCancelled(true);
+						return;
+					}
+				} catch (ArenaNotFoundException e1) {}
+			}
 			if (SGApi.getArenaManager().isInGame(damaged)) {
 				if (entity instanceof Snowball) {
 					event.setDamage(3);
