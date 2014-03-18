@@ -64,6 +64,9 @@ public class ArenaManager {
 			if (a.getPlayers().contains(p.getName())) {
 				return a;
 			}
+			if (a.getSpectators().contains(p.getName())) {
+				return a;
+			}
 		}
 		throw new ArenaNotFoundException("Could not find given arena with given Player: " + p.getDisplayName());
 	}
@@ -314,7 +317,7 @@ public class ArenaManager {
 	public void playerKilled(Player p, SGArena a) {
 		a.death(p);
 	}
-	
+
 	public void playerDeathAndLeave(Player p, SGArena a) {
 		a.deathAndLeave(p);
 	}
