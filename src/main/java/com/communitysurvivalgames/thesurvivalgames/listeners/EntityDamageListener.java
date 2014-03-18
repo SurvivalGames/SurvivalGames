@@ -247,6 +247,8 @@ public class EntityDamageListener implements Listener {
 		for (ItemStack is : damaged.getInventory().getContents()) {
 			//if (is.containsEnchantment(EnchantmentManager.undroppable))
 			//	continue;
+			if(is == null)
+				continue;
 			damaged.getWorld().dropItem(damaged.getLocation(), is);
 		}
 		damaged.getInventory().clear();
