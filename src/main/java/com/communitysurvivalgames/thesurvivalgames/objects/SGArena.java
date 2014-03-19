@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.bukkit.Bukkit;
@@ -273,7 +274,8 @@ public class SGArena {
 			return;
 		votes.put(voteWorld, votes.get(voteWorld) + 1);
 		this.broadcast(ChatColor.GOLD + p.getDisplayName() + " has voted! Use /vote to cast your vote!");
-		for (Map.Entry<MapHash, Integer> entry : votes.entrySet()) {
+		Map<MapHash, Integer> sorted = new TreeMap<MapHash, Integer>(votes);
+		for (Map.Entry<MapHash, Integer> entry : sorted.entrySet()) {
 			broadcast(ChatColor.GOLD.toString() + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN.toString() + entry.getValue());
 		}
 		voted.add(p.getName());
