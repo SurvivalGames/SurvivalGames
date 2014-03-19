@@ -33,59 +33,64 @@ public class DownloadMap {
 	}
 
 	public void begin() {
-		try {
-			fl = new File(SGApi.getPlugin().getDataFolder(), jobName + ".zip");
-			dl = new URL("http://communitysurvivalgames.com/plugindata/sg_maps/" + jobName + ".zip");
-			os = new FileOutputStream(fl);
-			sender.sendMessage(ChatColor.YELLOW + "Attemption to open a connection with http://communitysurvivalgames.com");
-			is = dl.openStream();
-			sender.sendMessage(ChatColor.YELLOW + "Connection opened");
-			String bytes = dl.openConnection().getHeaderField("Content-Length");
-			progressListener = new ProgressListener(sender, bytes);
-
-			DownloadCountingOutputStream dcount = new DownloadCountingOutputStream(os);
-			dcount.setListener(progressListener);
-
-			IOUtils.copy(is, dcount);
-			
-			sender.sendMessage(ChatColor.YELLOW + "File Downloaded!");
-		} catch (Exception e) {
-			Bukkit.getLogger().severe(e.getMessage());
-			sender.sendMessage(ChatColor.RED + e.getMessage());
-			return;
-		} finally {
-			if (os != null) {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+			public void run() {
 				try {
-					os.close();
-				} catch (IOException e) {
-					Bukkit.getLogger().severe("Failed to close output stream for downloaded map");
-				}
-			}
-			if (is != null) {
-				try {
-					is.close();
-				} catch (IOException e) {
-					Bukkit.getLogger().severe("Failed to close input stream for downloaded map");
-				}
-			}
-		}
+					fl = new File(SGApi.getPlugin().getDataFolder(), jobName + ".zip");
+					dl = new URL("https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/raw/gh-pages/plugindata/sg_maps/" + jobName + ".zip");
+					os = new FileOutputStream(fl);
+					sender.sendMessage(ChatColor.YELLOW + "Attemption to open a connection with https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/raw/gh-pages/plugindata/sg_maps/");
+					is = dl.openStream();
+					sender.sendMessage(ChatColor.YELLOW + "Connection opened");
+					String bytes = dl.openConnection().getHeaderField("Content-Length");
+					progressListener = new ProgressListener(sender, bytes);
 
-		sender.sendMessage(ChatColor.YELLOW + "Attemption to unzip file " + jobName + ".zip");
-		UnZip unZip = new UnZip((SGApi.getPlugin().getDataFolder() + File.separator + jobName + ".zip"), Bukkit.getWorldContainer().getAbsolutePath());
-		unZip.begin();
-		sender.sendMessage(ChatColor.YELLOW + "File unziped!");
-		
-		sender.sendMessage(ChatColor.YELLOW + "Reading map config file!");
-		File file = new File(Bukkit.getWorldContainer(), jobName + ".yml");
-		ConfigTemplate<SGWorld> configTemplate = new WorldConfigTemplate(file);
-		SGWorld world = configTemplate.deserialize();
-		sender.sendMessage(ChatColor.YELLOW + "Loaded map: " + world.getDisplayName());
-		Bukkit.getLogger().info("Loaded map! " + world.toString());
-		sender.sendMessage(ChatColor.YELLOW + "World files loaded!");
-		SGApi.getMultiWorldManager().getWorlds().add(world);
-		
-		sender.sendMessage(ChatColor.YELLOW + "Your map was installed!");
-		
-		file.delete();
+					DownloadCountingOutputStream dcount = new DownloadCountingOutputStream(os);
+					dcount.setListener(progressListener);
+
+					IOUtils.copy(is, dcount);
+
+					sender.sendMessage(ChatColor.YELLOW + "File Downloaded!");
+				} catch (Exception e) {
+					Bukkit.getLogger().severe(e.getMessage());
+					sender.sendMessage(ChatColor.RED + e.getMessage());
+					return;
+				} finally {
+					if (os != null) {
+						try {
+							os.close();
+						} catch (IOException e) {
+							Bukkit.getLogger().severe("Failed to close output stream for downloaded map");
+						}
+					}
+					if (is != null) {
+						try {
+							is.close();
+						} catch (IOException e) {
+							Bukkit.getLogger().severe("Failed to close input stream for downloaded map");
+						}
+					}
+				}
+
+				sender.sendMessage(ChatColor.YELLOW + "Attemption to unzip file " + jobName + ".zip");
+				UnZip unZip = new UnZip((SGApi.getPlugin().getDataFolder() + File.separator + jobName + ".zip"), Bukkit.getWorldContainer().getAbsolutePath());
+				unZip.begin();
+				sender.sendMessage(ChatColor.YELLOW + "File unziped!");
+
+				sender.sendMessage(ChatColor.YELLOW + "Reading map config file!");
+				File file = new File(Bukkit.getWorldContainer(), jobName + ".yml");
+				ConfigTemplate<SGWorld> configTemplate = new WorldConfigTemplate(file);
+				SGWorld world = configTemplate.deserialize();
+				sender.sendMessage(ChatColor.YELLOW + "Loaded map: " + world.getDisplayName());
+				Bukkit.getLogger().info("Loaded map! " + world.toString());
+				sender.sendMessage(ChatColor.YELLOW + "World files loaded!");
+				SGApi.getMultiWorldManager().getWorlds().add(world);
+
+				sender.sendMessage(ChatColor.YELLOW + "Your map was installed!");
+
+				file.delete();
+			}
+		});
+
 	}
 }

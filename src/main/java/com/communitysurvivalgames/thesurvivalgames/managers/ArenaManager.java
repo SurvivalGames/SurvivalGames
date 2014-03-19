@@ -225,13 +225,8 @@ public class ArenaManager {
 	}
 
 	public void createWorldFromDownload(final Player creator, final String worldName, final String displayName) {
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
-			@Override
-			public void run() {
-				DownloadMap dl = new DownloadMap(creator, worldName);
-				dl.begin();
-			}
-		});
+
+		new DownloadMap(creator, worldName).begin();
 
 	}
 
