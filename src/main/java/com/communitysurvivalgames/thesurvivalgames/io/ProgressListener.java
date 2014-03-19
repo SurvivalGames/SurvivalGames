@@ -9,8 +9,9 @@ import org.bukkit.entity.Player;
 public class ProgressListener implements ActionListener {
 
 	Player p;
+	int i = 0;
 	String bytes;
-	
+
 	public ProgressListener(Player p, String b) {
 		this.p = p;
 		this.bytes = b;
@@ -18,6 +19,10 @@ public class ProgressListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		p.sendMessage(ChatColor.YELLOW + "Downloading map progress: Downloaded " + ChatColor.RED + ((DownloadCountingOutputStream) e.getSource()).getByteCount() + "/" + bytes + ChatColor.YELLOW + " bytes");
+		i++;
+		if (i == 512) {
+			i = 0;
+			p.sendMessage(ChatColor.YELLOW + "Downloading map progress: Downloaded " + ChatColor.RED + ((DownloadCountingOutputStream) e.getSource()).getByteCount() + "/" + bytes + ChatColor.YELLOW + " bytes");
+		}
 	}
 }
