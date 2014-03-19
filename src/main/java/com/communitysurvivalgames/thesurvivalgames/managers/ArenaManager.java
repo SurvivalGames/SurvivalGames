@@ -9,6 +9,7 @@ import com.communitysurvivalgames.thesurvivalgames.configs.ArenaConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.configs.ConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.configs.WorldConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
+import com.communitysurvivalgames.thesurvivalgames.io.DownloadMap;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
@@ -227,7 +228,7 @@ public class ArenaManager {
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 			@Override
 			public void run() {
-				SGApi.getMultiWorldManager().copyFromInternet(creator, worldName, displayName);
+				DownloadMap dl = new DownloadMap(creator, worldName);
 			}
 		});
 

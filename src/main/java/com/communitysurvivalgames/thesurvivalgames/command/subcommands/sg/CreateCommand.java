@@ -46,13 +46,13 @@ public class CreateCommand implements SubCommand {
 						p.sendMessage("Format: /sg create <import type> <world name>");
 						return;
 					}
-					SGApi.getArenaManager().createWorldFromDownload(p, args[1], args[2]);
+					SGApi.getArenaManager().createWorldFromDownload(p, args[1], args[1]);
 				} else if (args[0].equalsIgnoreCase("import")) {
 					if (args.length == 1 || args.length == 2) {
 						p.sendMessage("Format: /sg create <import type> <world name>");
 						return;
 					}
-					SGApi.getArenaManager().createWorldFromImport(p, args[1], args[2]);
+					SGApi.getArenaManager().createWorldFromImport(p, args[1], args[1]);
 				}
 				return;
 			} catch (ArrayIndexOutOfBoundsException x) {
