@@ -37,7 +37,7 @@ public class DownloadMap {
 			public void run() {
 				try {
 					fl = new File(SGApi.getPlugin().getDataFolder(), jobName + ".zip");
-					dl = new URL("https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/raw/gh-pages/plugindata/sg_maps/" + jobName + ".zip");
+					dl = new URL("http://communitysurvivalgames.com/plugindata/sg_worlds/" + jobName + ".zip");
 					os = new FileOutputStream(fl);
 					sender.sendMessage(ChatColor.YELLOW + "Attemption to open a connection with https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/raw/gh-pages/plugindata/sg_maps/");
 					is = dl.openStream();
