@@ -19,14 +19,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class TimeManager {
 
@@ -63,8 +59,7 @@ public class TimeManager {
 		}
 
 		a.broadcast("Type in /sg vote <ID> to vote for a map.");
-		Map<MapHash, Integer> sorted = new TreeMap<MapHash, Integer>(a.votes);
-		for (Map.Entry<MapHash, Integer> entry : sorted.entrySet()) {
+		for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
 			a.broadcast(ChatColor.GOLD.toString() + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN.toString() + entry.getValue());
 		}
 
