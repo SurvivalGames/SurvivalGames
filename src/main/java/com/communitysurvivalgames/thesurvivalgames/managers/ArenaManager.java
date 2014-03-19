@@ -229,6 +229,7 @@ public class ArenaManager {
 			@Override
 			public void run() {
 				DownloadMap dl = new DownloadMap(creator, worldName);
+				dl.begin();
 			}
 		});
 
