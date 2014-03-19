@@ -64,12 +64,12 @@ public class BlockListener implements Listener {
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onBlockBreak(BlockBreakEvent event) {
-		if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
-			event.setCancelled(true);
-			return;
-		}
 		try {
 			SGArena a = SGApi.getArenaManager().getArena(event.getPlayer());
+			if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
+				event.setCancelled(true);
+				return;
+			}
 			if (allowed.contains(event.getBlock().getType())) {
 				a.changedBlocks.add(new ChangedBlock(event.getBlock().getWorld().getName(), event.getBlock().getType(), event.getBlock().getData(), Material.AIR, Byte.parseByte(0 + ""), event.getBlock().getX(), event.getBlock().getY(), event.getBlock().getZ()));
 			} else {
