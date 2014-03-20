@@ -11,7 +11,7 @@ public class RemoveKitSelectionLocationCommand implements SubCommand {
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
 		for (Entity e : p.getNearbyEntities(20, 20, 20)) {
-			if(e instanceof EnderCrystal){
+			if (e instanceof EnderCrystal) {
 				e.remove();
 			}
 		}
