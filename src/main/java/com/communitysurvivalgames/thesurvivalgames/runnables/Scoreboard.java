@@ -106,7 +106,7 @@ public class Scoreboard implements Runnable {
 		}
 
 		if (arena.getState() == SGArena.ArenaState.PRE_COUNTDOWN) {
-			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("Starting in: " + SGApi.getTimeManager(arena).g.count + 1) + " " + SGApi.getTimeManager(arena).g.s[1]));
+			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("Starting in: " + SGApi.getTimeManager(arena).g.timeToString()) + " " + SGApi.getTimeManager(arena).g.s[1]));
 			sendScore(objective, "&e" + I18N.getLocaleString("MAX_PLAYERS"), 14, complete);
 			sendScore(objective, "&f" + arena.getMaxPlayers() + " ", 13, complete);
 			sendScore(objective, "&0", 12, complete);

@@ -50,6 +50,11 @@ public class Countdown implements Runnable {
 		return id;
 	}
 
+	public String timeToString() {
+		int time = count + 1;
+		return time + "";
+	}
+
 	/**
 	 * The overrided method to run
 	 */
