@@ -39,6 +39,7 @@ import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.Lis
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.party.PromoteCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.CreateCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.RemoveCommand;
+import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.RemoveKitSelectionLocationCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.SetCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.SetKitSelectionLocationCommand;
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg.StartCommand;
@@ -185,6 +186,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		CommandHandler.register("vote", new VoteCommand());
 		CommandHandler.register("test", new TestCommand());
 		CommandHandler.register("setkitselectionlocation", new SetKitSelectionLocationCommand());
+		CommandHandler.register("removekitselectionlocation", new RemoveKitSelectionLocationCommand());
 
 		PartyCommandHandler.register("chat", new ChatCommand());
 		PartyCommandHandler.register("decline", new DeclineCommand());
