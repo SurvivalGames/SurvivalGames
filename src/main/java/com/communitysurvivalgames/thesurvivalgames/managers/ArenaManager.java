@@ -138,7 +138,22 @@ public class ArenaManager {
 		
 		try {
 			if(this.getArena(p).getState().equals(SGArena.ArenaState.PRE_COUNTDOWN) || this.getArena(p).getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)){
+				getArena(p).getPlayers().remove(p.getName());
 				
+				p.teleport(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()).getSpawnLocation());
+				p.setGameMode(GameMode.SURVIVAL);
+				p.getActivePotionEffects().clear();
+				p.setAllowFlight(false);
+				p.setFlying(false);
+				p.setCanPickupItems(true);
+				p.setHealth(20);
+				p.setFoodLevel(20);
+
+				for (PotionEffect effect : p.getActivePotionEffects()) {
+					p.removePotionEffect(effect.getType());
+				}
+
+				p.setFireTicks(0);
 			}
 		} catch (ArenaNotFoundException e) {
 			p.teleport(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()).getSpawnLocation());
