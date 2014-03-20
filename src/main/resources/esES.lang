@@ -9,7 +9,7 @@ PLAYER = Jugador
 
 # Enabled #
 BEEN_ENABLED = se ha habilitado!
-COMMUNITY_PROJECT = es un proyecto comunitario, unirse en http://dev.bukkit.org/bukkit-plugins/the-survival-games/
+COMMUNITY_PROJECT = es un proyecto comunitario, entra en  http://dev.bukkit.org/bukkit-plugins/the-survival-games/
 BEEN_DISABLED = se deshabilitó.
-SURVIVAL_GAMES = Juegos de supervivencia
+SURVIVAL_GAMES = Juegos del hambre
 # Rest indev
