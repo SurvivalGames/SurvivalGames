@@ -228,26 +228,27 @@ public class EntityDamageListener implements Listener {
 				}
 			}
 
-			damaged.setHealth(20);
-			damaged.setVelocity(new Vector(0, 0, 0.5));
-			damaged.setGameMode(GameMode.CREATIVE);
-			damaged.setAllowFlight(true);
-			damaged.setFlying(true);
-			damaged.setCanPickupItems(false);
-
-			try {
-				SGApi.getArenaManager().playerKilled(damaged, SGApi.getArenaManager().getArena(damaged));
-			} catch (ArenaNotFoundException e) {}
 		} else {
 			String message = DeathMessages.getDeathMessage(damaged, dc);
 			try {
 				SGApi.getArenaManager().getArena(damaged).broadcast(message);
 			} catch (ArenaNotFoundException e) {}
 		}
+
+		damaged.setHealth(20);
+		damaged.setVelocity(new Vector(0, 0, 0.5));
+		damaged.setGameMode(GameMode.CREATIVE);
+		damaged.setAllowFlight(true);
+		damaged.setFlying(true);
+		damaged.setCanPickupItems(false);
+
+		try {
+			SGApi.getArenaManager().playerKilled(damaged, SGApi.getArenaManager().getArena(damaged));
+		} catch (ArenaNotFoundException e) {}
 		for (ItemStack is : damaged.getInventory().getContents()) {
 			//if (is.containsEnchantment(EnchantmentManager.undroppable))
 			//	continue;
-			if(is == null)
+			if (is == null)
 				continue;
 			damaged.getWorld().dropItem(damaged.getLocation(), is);
 		}
