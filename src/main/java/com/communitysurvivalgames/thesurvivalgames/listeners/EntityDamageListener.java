@@ -59,7 +59,11 @@ public class EntityDamageListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onHungerCHange(FoodLevelChangeEvent event) {
 		if (event.getEntity().getWorld() == Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld())) {
-			event.setCancelled(true);
+			if (event.getEntity() instanceof Player) {
+				Player p = (Player) event.getEntity();
+				p.setExhaustion(0);
+				p.setFoodLevel(20);
+			}
 			return;
 		}
 
