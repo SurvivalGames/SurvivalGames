@@ -380,8 +380,7 @@ public class ArenaManager {
 	 * @return The serialized location
 	 */
 	public String serializeLoc(Location l) {
-		return l.getWorld().getName() + "," + l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ() + 
-			"," + l.getYaw() + "," + l.getPitch();
+		return l.getWorld().getName() + "," + l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ();
 	}
 
 	public String serializeBlock(Block b) {
@@ -396,8 +395,7 @@ public class ArenaManager {
 	 */
 	public Location deserializeLoc(String s) {
 		String[] st = s.split(",");
-		return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), 
-			Integer.parseInt(st[3]), Float.parseFloat(st[4), Float.parseFloat(st[5));
+		return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), Integer.parseInt(st[3]);
 	}
 
 	public Block deserializeBlock(String st) {
