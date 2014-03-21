@@ -37,11 +37,11 @@ public class SignListener implements Listener {
 			return;
 		if (event.getClickedBlock().getState() instanceof Sign) {
 			Sign sign = (Sign) event.getClickedBlock().getState();
-			if (sign.getLines()[0].equals(ChatColor.stripColor("[SGJoin]"))) {
+			if (sign.getLines()[0].equals(ChatColor.BLUE + "[SGJoin]")) {
 				JoinMeunManager.getMenuManager().displayMenu(event.getPlayer());
 				return;
 			}
-			if (sign.getLines()[0].equals(ChatColor.stripColor("[SGKit]"))) {
+			if (sign.getLines()[0].equals(ChatColor.BLUE + "[SGKit]")) {
 				SGApi.getKitManager().displayDefaultKitSelectionMenu(event.getPlayer());
 				return;
 			}
