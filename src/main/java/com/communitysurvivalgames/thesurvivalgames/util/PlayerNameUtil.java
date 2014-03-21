@@ -19,17 +19,20 @@ public class PlayerNameUtil {
         list.add("Trolldood3");
         list.add("Relicum");
         list.add("sam4215");
+        list.add("Jonthespartan29");
+        list.add("GregoriusMC");
        //TODO: What's your IGN everyone?
+       //Quantum64 - Jonthespartan29
+       //TheEpicButterStudion - sam4215
+       //GregoriusMC - GregPlaysMC
        //AgentTroll - Trolldude3
         return list;
     }
 
     public static ArrayList<String> getAwesomePeople() {
         ArrayList<String> list = new ArrayList<>();
-        list.add("Jonthespartan29");
-        list.add("GregoriusMC");
         //TODO: What's your IGN everyone ?
-        //GregoriusMC - GregPlaysMC
+
         return list;
     }
 
