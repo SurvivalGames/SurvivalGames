@@ -395,7 +395,7 @@ public class ArenaManager {
 	 */
 	public Location deserializeLoc(String s) {
 		String[] st = s.split(",");
-		return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), Integer.parseInt(st[3]);
+		return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), Integer.parseInt(st[3]));
 	}
 
 	public Block deserializeBlock(String st) {
