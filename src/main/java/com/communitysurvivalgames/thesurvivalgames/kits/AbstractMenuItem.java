@@ -229,7 +229,7 @@ public class AbstractMenuItem implements ILore, IDisplayName, Selectable, Single
         if (this.permission != null) {
             return true;
         }
-        return false;
+        return true;
     }
 
     /**
