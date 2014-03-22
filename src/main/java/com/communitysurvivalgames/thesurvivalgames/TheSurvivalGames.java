@@ -67,6 +67,7 @@ import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import com.communitysurvivalgames.thesurvivalgames.net.WebServer;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.proxy.BungeecordListener;
@@ -89,6 +90,8 @@ public class TheSurvivalGames extends JavaPlugin {
 		ConfigurationSerialization.registerClass(KitItem.class);
 
 		SGApi.init(this);
+
+		saveDefaultConfig();
 
 		configurationData = new ConfigurationData();
 
@@ -132,10 +135,12 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		if (!getPluginConfig().isHub())
 			SGApi.getArenaManager().loadGames();
+		
+		WebServer.load();
+		
+		
 		getLogger().info(I18N.getLocaleString("BEEN_ENABLED"));
 		getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
-		saveDefaultConfig();
-
 	}
 
 	@Override
