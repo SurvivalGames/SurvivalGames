@@ -20,7 +20,7 @@ public class PlayerNameUtil {
         list.add("Relicum");
         list.add("sam4215");
         list.add("Jonthespartan29");
-        list.add("GregoriusMC");
+        list.add("GregPlaysMC");
        //TODO: What's your IGN everyone?
        //Quantum64 - Jonthespartan29
        //TheEpicButterStudion - sam4215
