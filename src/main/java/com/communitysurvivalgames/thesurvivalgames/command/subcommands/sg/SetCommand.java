@@ -6,7 +6,6 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg;
 
-
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
@@ -19,10 +18,8 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BlockIterator;
 
-
 public class SetCommand implements SubCommand {
 	// TODO permissions
-
 
 	/**
 	 * The create command. DO NOT CALL DIRECTLY. Only use in CommandHandler
@@ -33,10 +30,10 @@ public class SetCommand implements SubCommand {
 	 */
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
-		if(!p.hasPermission("sg.set") || !p.isOp())
+		if (!p.hasPermission("sg.set") || !p.isOp())
 			return;
 		try {
-			if (cmd.equalsIgnoreCase("createlobby") && p.hasPermission("sg.create")) {
+			if (cmd.equalsIgnoreCase("createlobby")) {
 				SGArena a = SGApi.getArenaManager().createLobby(p);
 				p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_LOBBY") + " " + a.getId());
 			} else if (cmd.equalsIgnoreCase("setmaxplayers")) {
@@ -50,7 +47,6 @@ public class SetCommand implements SubCommand {
 					return;
 				}
 
-
 				SGArena a;
 				try {
 					a = SGApi.getArenaManager().getArena(i);
@@ -59,7 +55,7 @@ public class SetCommand implements SubCommand {
 					return;
 				}
 				a.maxPlayers = amount;
-                                p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("Set min players for: ") + " " + a.getId());
+				p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("Set min players for: ") + " " + a.getId());
 			} else if (cmd.equalsIgnoreCase("setminplayers")) {
 				int i;
 				int amount;
@@ -70,7 +66,6 @@ public class SetCommand implements SubCommand {
 					p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NOT_NUMBER"));
 					return;
 				}
-
 
 				SGArena a;
 				try {
@@ -98,7 +93,6 @@ public class SetCommand implements SubCommand {
 					}
 				}
 
-
 				p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_CHEST") + " " + world.getDisplayName());
 			} else if (cmd.equalsIgnoreCase("setgamespawn")) {
 				int spawn;
@@ -109,13 +103,11 @@ public class SetCommand implements SubCommand {
 					return;
 				}
 
-
 				SGWorld world = SGApi.getMultiWorldManager().worldForName(args[1]);
 				if (world == null) {
 					return;
 				}
 				world.locs.set(spawn - 1, p.getLocation());
-
 
 				p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("SET_SPAWN") + " " + world.getWorld().getName());
 			}
@@ -124,4 +116,3 @@ public class SetCommand implements SubCommand {
 		}
 	}
 }
-

@@ -22,7 +22,7 @@ public class WebServer extends AbstractHandler {
 	}
 
 	public static void load() {
-		Server server = new Server(8080);
+		Server server = new Server(8123);
 		server.setHandler(new WebServer());
 
 		int maxconnections = 5;
