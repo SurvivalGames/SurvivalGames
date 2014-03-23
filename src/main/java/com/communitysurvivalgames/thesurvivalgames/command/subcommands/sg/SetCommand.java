@@ -13,6 +13,7 @@ import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -30,8 +31,9 @@ public class SetCommand implements SubCommand {
 	 */
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
-		if (!p.hasPermission("sg.set") || !p.isOp())
-			return;
+		if (!p.hasPermission("sg.set") && !p.isOp()) {
+			p.sendMessage(ChatColor.RED + "You do not have the permission for [SG.SET]");
+		}
 		try {
 			if (cmd.equalsIgnoreCase("createlobby")) {
 				SGArena a = SGApi.getArenaManager().createLobby(p);
