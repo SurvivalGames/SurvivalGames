@@ -1,4 +1,4 @@
-package com.communitysurvivalgames.thesurvivalgames.net;
+/*package com.communitysurvivalgames.thesurvivalgames.net;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
@@ -25,4 +25,4 @@ public class WebServer {
 			e.printStackTrace();
 		}
 	}
-}
+}*/

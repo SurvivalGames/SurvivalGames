@@ -1,43 +1,38 @@
-package com.communitysurvivalgames.thesurvivalgames.net;
+/*package com.communitysurvivalgames.thesurvivalgames.net;
 
-import java.io.IOException;
 import org.eclipse.jetty.websocket.api.Session;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketError;
-import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
+import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
-import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 
 @WebSocket
-public class SGWebSocketHandler {
+public class SGWebSocketHandler extends WebSocketAdapter {
 
-    @OnWebSocketClose
-    public void onClose(int statusCode, String reason) {
-        System.out.println("Close: statusCode=" + statusCode + ", reason=" + reason);
-    }
+	  @Override
+	    public void onWebSocketConnect(Session sess)
+	    {
+	        super.onWebSocketConnect(sess);
+	        System.out.println("Socket Connected: " + sess);
+	    }
+	    
+	    @Override
+	    public void onWebSocketText(String message)
+	    {
+	        super.onWebSocketText(message);
+	        System.out.println("Received TEXT message: " + message);
+	    }
+	    
+	    @Override
+	    public void onWebSocketClose(int statusCode, String reason)
+	    {
+	        super.onWebSocketClose(statusCode,reason);
+	        System.out.println("Socket Closed: [" + statusCode + "] " + reason);
+	    }
+	    
+	    @Override
+	    public void onWebSocketError(Throwable cause)
+	    {
+	        super.onWebSocketError(cause);
+	        cause.printStackTrace(System.err);
+	    }
 
-    @OnWebSocketError
-    public void onError(Throwable t) {
-        System.out.println("Error: " + t.getMessage());
-    }
-
-    @OnWebSocketConnect
-    public void onConnect(Session session) {
-        System.out.println("Connect: " + session.getRemoteAddress().getAddress());
-        try {
-            session.getRemote().sendString("Hello Webbrowser");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @OnWebSocketMessage
-    public void onMessage(String message) {
-        System.out.println("Message: " + message);
-    }
-
-	public void configure(WebSocketServletFactory factory) {
-		
-	}
-}
+}*/

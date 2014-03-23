@@ -1,4 +1,4 @@
-package com.communitysurvivalgames.thesurvivalgames.net;
+/*package com.communitysurvivalgames.thesurvivalgames.net;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -14,4 +14,4 @@ public class SGWebSocketServlet extends WebSocketServlet {
     public void configure(WebSocketServletFactory factory) {
         factory.register(SGWebSocketHandler.class);
     }
-}
+}*/
