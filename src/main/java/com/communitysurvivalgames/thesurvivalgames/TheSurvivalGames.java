@@ -192,6 +192,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		CommandHandler.register("test", new TestCommand());
 		CommandHandler.register("setkitselectionlocation", new SetKitSelectionLocationCommand());
 		CommandHandler.register("removekitselectionlocation", new RemoveKitSelectionLocationCommand());
+		CommandHandler.register("bounty", new BountyCommand());
 
 		PartyCommandHandler.register("chat", new ChatCommand());
 		PartyCommandHandler.register("decline", new DeclineCommand());
