@@ -30,6 +30,9 @@ default-points: 100
 # World to display the scoreboard and prevent block breaking
 hub-world: world
 
+#Time in minutes until DM starts
+dm-time: 10
+
 # Welcome message
 welcome-message:
   - '&eHi there, and welcome to'
