@@ -4,7 +4,6 @@
 
 # Percentage chance that any given slot in a chest will be filled
 # Chance out of 100
-
 slot-probability: 20
 
 # Percentage chance that a next level item will be selected to fill a slot
