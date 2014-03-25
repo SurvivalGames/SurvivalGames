@@ -5,6 +5,24 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+
 import com.communitysurvivalgames.thesurvivalgames.configs.ArenaConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.configs.ConfigTemplate;
 import com.communitysurvivalgames.thesurvivalgames.configs.WorldConfigTemplate;
@@ -15,18 +33,6 @@ import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.util.PlayerVanishUtil;
-
-import org.bukkit.*;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ArenaManager {
 
@@ -100,8 +106,23 @@ public class ArenaManager {
 			p.setFlying(true);
 			return;
 		}
+		if (a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS) || a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
+			p.sendMessage(prefix + "Type in /sg vote <ID> to vote for a map.");
+		}
 
-		p.sendMessage(prefix + "Type in /sg vote <ID> to vote for a map.");
+		if (SGApi.getPlugin().getPluginConfig().getUseServers()) {
+			p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
+			p.sendMessage(ChatColor.AQUA + "");
+			p.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Wan to to here LIVE music, announcers, and sound effects?");
+			p.sendMessage(ChatColor.AQUA + "");
+			p.sendMessage(ChatColor.GREEN + "" + ChatColor.AQUA + "Click this link:");
+			p.sendMessage(ChatColor.WHITE + "" + ChatColor.UNDERLINE + "http://" + SGApi.getPlugin().getPluginConfig().getServerIP() + ":8080/index.html?name=" + p.getName() + "&sessionId=" + new Random().nextInt(10000));
+			p.sendMessage(ChatColor.AQUA + "");
+			p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Simply leave your browser window open in the background, turn up your speakers, and we'll do the rest!");
+			p.sendMessage(ChatColor.AQUA + "");
+			p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
+		}
+
 		for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
 			p.sendMessage(ChatColor.GOLD.toString() + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN.toString() + entry.getValue());
 		}
@@ -135,11 +156,11 @@ public class ArenaManager {
 	 */
 	public void removePlayer(Player p) {
 		PlayerVanishUtil.showAll(p);
-		
+
 		try {
-			if(this.getArena(p).getState().equals(SGArena.ArenaState.PRE_COUNTDOWN) || this.getArena(p).getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)){
+			if (this.getArena(p).getState().equals(SGArena.ArenaState.PRE_COUNTDOWN) || this.getArena(p).getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)) {
 				getArena(p).getPlayers().remove(p.getName());
-				
+
 				p.teleport(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()).getSpawnLocation());
 				p.setGameMode(GameMode.SURVIVAL);
 				p.getActivePotionEffects().clear();
@@ -400,7 +421,6 @@ public class ArenaManager {
 
 	public Block deserializeBlock(String st) {
 		String[] s = st.split(":");
-		return deserializeLoc(serializeLoc(new Location(Bukkit.getServer().getWorld(s[1]), 
-			Integer.parseInt(s[2]), Integer.parseInt(s[3]), Integer.parseInt(s[4])))).getBlock();
+		return deserializeLoc(serializeLoc(new Location(Bukkit.getServer().getWorld(s[1]), Integer.parseInt(s[2]), Integer.parseInt(s[3]), Integer.parseInt(s[4])))).getBlock();
 	}
 }

@@ -139,15 +139,17 @@ public class TheSurvivalGames extends JavaPlugin {
 		if (!getPluginConfig().isHub())
 			SGApi.getArenaManager().loadGames();
 		
-		WebServer.load();
-		try {
-			WebsocketServer.runServer();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (getPluginConfig().getUseServers()) {
+			try {
+				WebServer.runServer();
+				WebsocketServer.runServer();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		
+
 		getLogger().info(I18N.getLocaleString("BEEN_ENABLED"));
 		getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
 	}

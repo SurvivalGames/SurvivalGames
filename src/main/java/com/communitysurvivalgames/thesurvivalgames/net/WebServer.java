@@ -11,7 +11,7 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public class WebServer {
-	public static void load() {
+	public static void runServer() {
 		Server server = new Server(8080);
 
 		ResourceHandler resource_handler = new ResourceHandler();
