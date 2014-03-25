@@ -109,15 +109,15 @@ public class TheSurvivalGames extends JavaPlugin {
 		SGApi.getScheduler();
 
 		// TODO Add more languages!
-		saveResource("enUS.lang", true);
-		saveResource("idID.lang", true);
-		saveResource("esES.lang", true);
+		saveResource("locale/enUS.lang", true);
+		saveResource("locale/idID.lang", true);
+		saveResource("locale/esES.lang", true);
 
 		setupDatabase();
 
-		File i18N = new File(getDataFolder(), "I18N.yml");
+		File i18N = new File(getDataFolder(), "locale/I18N.yml");
 		if (!i18N.exists()) {
-			saveResource("I18N.yml", false);
+			saveResource("locale/I18N.yml", false);
 		}
 
 		FileConfiguration lang = YamlConfiguration.loadConfiguration(i18N);

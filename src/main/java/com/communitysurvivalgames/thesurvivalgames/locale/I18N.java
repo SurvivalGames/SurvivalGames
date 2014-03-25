@@ -14,7 +14,7 @@ import java.util.logging.Level;
 public class I18N {
     private static final Properties locales = new Properties();
     private static final Properties fallback = new Properties();
-    private static final File dir = SGApi.getPlugin().getDataFolder();
+    private static final File dir = new File(SGApi.getPlugin().getDataFolder(), "locale");
     private static final HashMap<String, String> localeFiles = new HashMap<>();
     private static final HashMap<Integer, String> localeIndices = new HashMap<>();
     private static _Locale currentLocale = _Locale.enUS; //

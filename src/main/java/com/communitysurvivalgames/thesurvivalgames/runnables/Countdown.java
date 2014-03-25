@@ -79,9 +79,9 @@ public class Countdown implements Runnable {
 			ce.runCode();
 			return;
 		}
-		a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + count + " " + s[1]);
 		count -= amount;
 		if (sounds)
 			SoundEffectsManager.playToArena(a, count + "");
+		a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + count + " " + s[1]);
 	}
 }

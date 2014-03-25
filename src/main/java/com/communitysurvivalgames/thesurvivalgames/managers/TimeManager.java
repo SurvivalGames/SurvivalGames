@@ -134,7 +134,7 @@ public class TimeManager {
 
 				countdownDm();
 			}
-		});
+		}, true);
 		cg.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), cg, 0L, 20L));
 	}
 
@@ -149,7 +149,7 @@ public class TimeManager {
 
 				commenceDm();
 			}
-		}, true);
+		});
 		dm.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), dm, 0L, 5 * 60 * 20L));
 	}
 

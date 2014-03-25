@@ -31,10 +31,9 @@ public class KitManager {
 	private Map<String, Kit> playerKits = new HashMap<String, Kit>();
 
 	public void loadKits() {
-		readKitsFromFiles();
 
-		if (kits.size() == 0)
-			saveDefaultKits();
+		saveDefaultKits();
+		readKitsFromFiles();
 
 		for (int i = 0; i < 9; i++) {
 			menus.add(new IconMenu("Select Your Kit - " + i, 54, new IconMenu.OptionClickEventHandler() {
@@ -70,7 +69,7 @@ public class KitManager {
 					row = 0;
 					menu++;
 					if (menu == 9) {
-						Bukkit.getLogger().severe("You can't have more that 486 kits!  (Are you insane?");
+						Bukkit.getLogger().severe("You can't have more that 486 kits!  (Are you insane?)");
 					}
 				}
 			}
@@ -96,11 +95,11 @@ public class KitManager {
 	}
 
 	public void readKitsFromFiles() {
-		String[] files = SGApi.getPlugin().getDataFolder().list();
+		String[] files = new File(SGApi.getPlugin().getDataFolder(), "kits").list();
 
 		for (String file : files) {
 			if (file.startsWith("kit_")) {
-				FileConfiguration kitData = YamlConfiguration.loadConfiguration(new File(SGApi.getPlugin().getDataFolder(), file));
+				FileConfiguration kitData = YamlConfiguration.loadConfiguration(new File(SGApi.getPlugin().getDataFolder(), "kits/" + file));
 
 				String kitName = kitData.getString("name");
 				String type = kitData.getString("type");
@@ -147,15 +146,15 @@ public class KitManager {
 	}
 
 	void saveDefaultKits() {
-		SGApi.getPlugin().saveResource("kit_archer.yml", false);
-		SGApi.getPlugin().saveResource("kit_crafter.yml", false);
-		SGApi.getPlugin().saveResource("kit_enchanter.yml", false);
-		SGApi.getPlugin().saveResource("kit_knight.yml", false);
-		SGApi.getPlugin().saveResource("kit_notch.yml", false);
-		SGApi.getPlugin().saveResource("kit_pacman.yml", false);
-		SGApi.getPlugin().saveResource("kit_skeleton.yml", false);
-		SGApi.getPlugin().saveResource("kit_toxicologist.yml", false);
-		SGApi.getPlugin().saveResource("kit_zelda.yml", false);
+		SGApi.getPlugin().saveResource("kits/kit_archer.yml", false);
+		SGApi.getPlugin().saveResource("kits/kit_crafter.yml", false);
+		SGApi.getPlugin().saveResource("kits/kit_enchanter.yml", false);
+		SGApi.getPlugin().saveResource("kits/kit_knight.yml", false);
+		SGApi.getPlugin().saveResource("kits/kit_notch.yml", false);
+		SGApi.getPlugin().saveResource("kits/kit_pacman.yml", false);
+		SGApi.getPlugin().saveResource("kits/kit_skeleton.yml", false);
+		SGApi.getPlugin().saveResource("kits/kit_toxicologist.yml", false);
+		SGApi.getPlugin().saveResource("kits/kit_zelda.yml", false);
 
 		readKitsFromFiles();
 	}
