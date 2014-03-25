@@ -7,6 +7,13 @@
  *
  *  MIT License
  */
+ 
+ /*
+ *
+ * The MIT License give us (The SG Dev team) permission to "distribute" this code in any way needed.
+ * So heh - It's cool
+ *
+ */
 
 (function() {
   // setup
