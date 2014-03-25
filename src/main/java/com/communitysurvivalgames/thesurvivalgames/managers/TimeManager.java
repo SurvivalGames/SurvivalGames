@@ -11,6 +11,7 @@ import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SafeEntityListener;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import com.communitysurvivalgames.thesurvivalgames.net.SoundEffectsManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.runnables.CodeExecutor;
@@ -108,6 +109,8 @@ public class TimeManager {
 			@Override
 			public void runCode() {
 
+				SoundEffectsManager.playToArena(a, "play");
+				
 				a.broadcast(I18N.getLocaleString("ODDS"));
 				a.setState(SGArena.ArenaState.IN_GAME);
 				for (String s : a.getPlayers()) {
@@ -146,7 +149,7 @@ public class TimeManager {
 
 				commenceDm();
 			}
-		});
+		}, true);
 		dm.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), dm, 0L, 5 * 60 * 20L));
 	}
 

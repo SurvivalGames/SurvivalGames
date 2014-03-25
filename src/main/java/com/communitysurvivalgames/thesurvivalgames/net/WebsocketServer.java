@@ -25,12 +25,12 @@ public class WebsocketServer extends WebSocketServer {
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
 		WebsocketSessionManager.getSessionManager().openSession(conn.getRemoteSocketAddress().getAddress().getHostAddress());
-		Bukkit.getLogger().info(conn.getRemoteSocketAddress().getAddress().getHostAddress() + " has connected to the Websocket server!");
+		Bukkit.getLogger().info(conn.getRemoteSocketAddress().getAddress().getHostName() + " has connected to the Websocket server!");
 	}
 
 	@Override
 	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-		WebsocketSessionManager.getSessionManager().openSession(conn.getRemoteSocketAddress().getAddress().getHostAddress());
+		WebsocketSessionManager.getSessionManager().endSession(conn.getRemoteSocketAddress().getAddress().getHostAddress());
 		Bukkit.getLogger().info(conn + " has disconnected form the Websocket server");
 	}
 
@@ -72,6 +72,7 @@ public class WebsocketServer extends WebSocketServer {
 		synchronized (con) {
 			for (WebSocket c : con) {
 				if (c.getRemoteSocketAddress().getAddress().getHostAddress().equalsIgnoreCase(session.getHost())) {
+					Bukkit.getLogger().info("Send data pavket: " + data);
 					c.send(data);
 				}
 			}

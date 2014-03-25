@@ -6,6 +6,9 @@
 package com.communitysurvivalgames.thesurvivalgames.runnables;
 
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.net.SoundEffectsManager;
+import com.communitysurvivalgames.thesurvivalgames.net.WebsocketServer;
+import com.communitysurvivalgames.thesurvivalgames.net.WebsocketSessionManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import org.bukkit.Bukkit;
 
@@ -17,6 +20,7 @@ public class Countdown implements Runnable {
 	public final String[] s = new String[2];
 	private CodeExecutor ce = null;
 	private int id = 0;
+	private boolean sounds = false;
 
 	/**
 	 * Constructs a new countdown for this arena
@@ -35,6 +39,16 @@ public class Countdown implements Runnable {
 		s[0] = stage;
 		s[1] = unit;
 		this.ce = ce;
+	}
+
+	public Countdown(SGArena a, int amount, int count, String stage, String unit, CodeExecutor ce, boolean playSounds) {
+		this.a = a;
+		this.amount = amount;
+		this.count = count;
+		s[0] = stage;
+		s[1] = unit;
+		this.ce = ce;
+		this.sounds = true;
 	}
 
 	/**
@@ -67,5 +81,7 @@ public class Countdown implements Runnable {
 		}
 		a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + count + " " + s[1]);
 		count -= amount;
+		if (sounds)
+			SoundEffectsManager.playToArena(a, count + "");
 	}
 }
