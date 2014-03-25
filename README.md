@@ -6,7 +6,7 @@ Build Stats: [![Build Status](https://travis-ci.org/SurvivalGamesDevTeam/TheSurv
 
 ======== 
 
-**Announcements** 
+**Announcements**
 
 **[ANNOUNCEMENT|Quantum64]**
 All developers should read the tutorial for developing on the new multilingual string system here:  https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/blob/master/I18N_TUTORIAL.md
