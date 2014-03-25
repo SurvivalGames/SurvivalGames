@@ -1,10 +1,11 @@
-var ws = new WebSocket("ws://74.132.14.29:8887/");
+var name = window.location
+document.session.name.value = name
+
+var text = document.session.name.value
+
+var ws = new WebSocket("ws://" + window.location.hostname + ":8887/");
 
 ws.onopen = function () {
-    var name = window.location
-    document.session.name.value = name
-
-    var text = document.session.name.value
 
     if (name != null) {
         document.write("Connected to websocket server! <br>");
