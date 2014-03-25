@@ -1,57 +1,67 @@
 package com.communitysurvivalgames.thesurvivalgames.net;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
+import java.util.Collection;
+
 import org.bukkit.Bukkit;
-import org.jwebsocket.api.WebSocketPacket;
-import org.jwebsocket.factory.JWebSocketFactory;
-import org.jwebsocket.kit.WebSocketServerEvent;
-import org.jwebsocket.listener.WebSocketServerTokenEvent;
-import org.jwebsocket.listener.WebSocketServerTokenListener;
-import org.jwebsocket.server.TokenServer;
-import org.jwebsocket.token.Token;
+import org.java_websocket.WebSocket;
+import org.java_websocket.WebSocketImpl;
+import org.java_websocket.handshake.ClientHandshake;
+import org.java_websocket.server.WebSocketServer;
 
-public class WebsocketServer implements WebSocketServerTokenListener {
-	private TokenServer tokenServer;
-
-	public TokenServer getTokenServer() {
-		return tokenServer;
+public class WebsocketServer extends WebSocketServer {
+	public WebsocketServer(int port) throws UnknownHostException {
+		super(new InetSocketAddress(port));
 	}
 
-	public void init() {
-		try {
-			JWebSocketFactory.start();
-			tokenServer = JWebSocketFactory.getTokenServer();
-			if (tokenServer != null) {
-				Bukkit.getLogger().info("Websocket token server was found!  (thats good!");
-			} else {
-				Bukkit.getLogger().severe("Websocket token server was not found (awwww");
-			}
+	public WebsocketServer(InetSocketAddress address) {
+		super(address);
+	}
 
-		} catch (Exception e) {
-			e.printStackTrace();
+	@Override
+	public void onOpen(WebSocket conn, ClientHandshake handshake) {
+		WebsocketSessionManager.getSessionManager().openSession(conn.getRemoteSocketAddress().getAddress().getHostAddress());
+		Bukkit.getLogger().info(conn.getRemoteSocketAddress().getAddress().getHostAddress() + " has connected to the Websocket server!");
+	}
+
+	@Override
+	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
+		WebsocketSessionManager.getSessionManager().openSession(conn.getRemoteSocketAddress().getAddress().getHostAddress());
+		Bukkit.getLogger().info(conn + " has disconnected form the Websocket server");
+	}
+
+	@Override
+	public void onMessage(WebSocket conn, String message) {
+		Bukkit.getLogger().info("Recieve Websocket packet - " + conn + ":" + message);
+		if (message.split(":")[0].equalsIgnoreCase("name")) {
+			WebsocketSessionManager.getSessionManager().addSessionUsername(conn.getRemoteSocketAddress().getAddress().getHostAddress(), message.split(":")[1]);
 		}
 	}
 
-	@Override
-	public void processClosed(WebSocketServerEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public static void runServer() throws InterruptedException, IOException {
+		WebSocketImpl.DEBUG = true;
+		int port = 8887;
+		WebsocketServer s = new WebsocketServer(port);
+		s.start();
+		Bukkit.getLogger().info("Websocket server started on port: " + s.getPort());
 	}
 
 	@Override
-	public void processOpened(WebSocketServerEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void onError(WebSocket conn, Exception ex) {
+		ex.printStackTrace();
+		if (conn != null) {
+			// some errors like port binding failed may not be assignable to a specific websocket
+		}
 	}
 
-	@Override
-	public void processPacket(WebSocketServerEvent arg0, WebSocketPacket arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void processToken(WebSocketServerTokenEvent arg0, Token arg1) {
-		// TODO Auto-generated method stub
-
+	public void sendToAll(String data) {
+		Collection<WebSocket> con = connections();
+		synchronized (con) {
+			for (WebSocket c : con) {
+				c.send(data);
+			}
+		}
 	}
 }

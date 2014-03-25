@@ -6,6 +6,7 @@
 package com.communitysurvivalgames.thesurvivalgames;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,8 +139,13 @@ public class TheSurvivalGames extends JavaPlugin {
 			SGApi.getArenaManager().loadGames();
 		
 		//WebServer.load();
-		//WebsocketServer wsServer = new WebsocketServer();
-		//wsServer.init();
+		try {
+			WebsocketServer.runServer();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		getLogger().info(I18N.getLocaleString("BEEN_ENABLED"));
 		getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
