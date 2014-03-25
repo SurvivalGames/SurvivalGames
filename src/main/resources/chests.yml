@@ -9,7 +9,7 @@ slot-probability: 20
 
 # Percentage chance that a next level item will be selected to fill a slot
 # Chance out of 100
-lvlup-probability: 65
+lvlup-probability: 35
 
 # Format:
 # The acceptable item name, number of items possible to fill slot, item data value
@@ -24,8 +24,6 @@ t1Chest:
          - PORK,3
          - RAW_FISH,3
          - RAW_FISH,3,1
-         - RAW_FISH,3,2
-         - RAW_FISH,3,3
          - APPLE,3
          - ARROW,5
      lvl2:
@@ -46,22 +44,22 @@ t1Chest:
      lvl3:
          - GOLD_SWORD,1
          - MELON,9
-         - IRON_HELMET,1
-         - IRON_CHESTPLATE,1
-         - IRON_LEGGINGS,1
-         - IRON_BOOTS,1
          - CHAINMAIL_HELMET,1
          - CHAINMAIL_CHESTPLATE,1
          - CHAINMAIL_LEGGINGS,1
          - CHAINMAIL_BOOTS,2
          - FLINT_AND_STEEL,1
          - GOLD_SWORD,1
+         - BOW,1
+         - IRON_INGOT,1
+         - GOLD_INGOT,1
      lvl4:
-         - IRON_SWORD,1
+         - IRON_HELMET,1
+         - IRON_CHESTPLATE,1
+         - IRON_LEGGINGS,1
+         - IRON_BOOTS,1
+         - STICK,1
      lvl5:
-         - DIAMOND_SWORD,1
-         - DIAMOND_HELMET,1
-         - DIAMOND_CHESTPLATE,1
-         - DIAMOND_LEGGINGS,1
-         - DIAMOND_BOOTS,1
+         - DIAMOND,1
          - PUMPKIN_PIE,4
+         - IRON_SWORD,1
