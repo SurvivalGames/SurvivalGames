@@ -64,6 +64,7 @@ import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.PlayerQuitListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SetupListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SignListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.SoundEffectsListener;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
@@ -138,7 +139,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		if (!getPluginConfig().isHub())
 			SGApi.getArenaManager().loadGames();
 		
-		//WebServer.load();
+		WebServer.load();
 		try {
 			WebsocketServer.runServer();
 		} catch (InterruptedException e) {
@@ -227,6 +228,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new ChestListener(), this);
 		pm.registerEvents(new RailGun(), this);
 		pm.registerEvents(new MobSpawnListener(), this);
+		pm.registerEvents(new SoundEffectsListener(), this);
 
 		pm.registerEvents(new Archer(), this);
 		pm.registerEvents(new Crafter(), this);

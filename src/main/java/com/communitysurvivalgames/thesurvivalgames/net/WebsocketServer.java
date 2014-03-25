@@ -12,6 +12,8 @@ import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
 public class WebsocketServer extends WebSocketServer {
+	public static WebsocketServer s;
+
 	public WebsocketServer(int port) throws UnknownHostException {
 		super(new InetSocketAddress(port));
 	}
@@ -43,7 +45,7 @@ public class WebsocketServer extends WebSocketServer {
 	public static void runServer() throws InterruptedException, IOException {
 		WebSocketImpl.DEBUG = true;
 		int port = 8887;
-		WebsocketServer s = new WebsocketServer(port);
+		s = new WebsocketServer(port);
 		s.start();
 		Bukkit.getLogger().info("Websocket server started on port: " + s.getPort());
 	}
@@ -61,6 +63,17 @@ public class WebsocketServer extends WebSocketServer {
 		synchronized (con) {
 			for (WebSocket c : con) {
 				c.send(data);
+			}
+		}
+	}
+
+	public void sendData(WebsocketSession session, String data) {
+		Collection<WebSocket> con = connections();
+		synchronized (con) {
+			for (WebSocket c : con) {
+				if (c.getRemoteSocketAddress().getAddress().getHostAddress().equalsIgnoreCase(session.getHost())) {
+					c.send(data);
+				}
 			}
 		}
 	}

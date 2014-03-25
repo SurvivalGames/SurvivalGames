@@ -16,6 +16,10 @@ public class WebsocketSession {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String toString() {
 		return "WebsocketSession.java - Host: " + host + " Name: " + name;
 	}

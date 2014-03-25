@@ -43,19 +43,21 @@ public class WebsocketSessionManager {
 	}
 
 	public WebsocketSession getSessionByName(String name) {
-		for (WebsocketSession s : sessions) {
-			if (s.name == name)
-				return s;
+		for (int i = 0; i < sessions.size(); i++) {
+			Bukkit.getLogger().info("Session gotten:" + sessions.get(i));
+			if (sessions.get(i).getName().equalsIgnoreCase(name))
+				return sessions.get(i);
 		}
 		return null;
 	}
 
 	public void addSessionUsername(String host, String name) {
-		Bukkit.getLogger().info("Attemption to update session with data: " + name);
+		Bukkit.getLogger().info("Attemption to update session with data: " + name + " and a host of: " + host);
 		for (int i = 0; i < sessions.size(); i++) {
-			if (sessions.get(i).getHost() == host)
-				sessions.get(i).name = name;
-			Bukkit.getLogger().info("Updated Websocket session information: " + sessions.get(i));
+			if (sessions.get(i).getHost().equalsIgnoreCase(host)) {
+				sessions.get(i).setName(name);
+				Bukkit.getLogger().info("Updated Websocket session information: " + sessions.get(i));
+			}
 		}
 	}
 }
