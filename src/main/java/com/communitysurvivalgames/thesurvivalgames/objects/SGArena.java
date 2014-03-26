@@ -51,6 +51,8 @@ public class SGArena {
 	public List<ChangedBlock> changedBlocks = new ArrayList<ChangedBlock>();
 	public List<Chest> looted = new ArrayList<Chest>();
 	public List<DoubleChest> dLooted = new ArrayList<DoubleChest>();
+	
+	public boolean firstBlood = false;
 
 	public boolean countdown = false;
 
@@ -368,7 +370,8 @@ public class SGArena {
 		this.votes.clear();
 		this.dead = 0;
 		this.kills.clear();
-		countdown = false;
+		this.countdown = false;
+		this.firstBlood = false;
 		
 		SGApi.getTimeManager(this).forceReset();
 

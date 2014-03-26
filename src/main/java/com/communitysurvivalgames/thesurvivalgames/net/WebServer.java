@@ -37,6 +37,7 @@ public class WebServer {
 		pl.saveResource("httdocs/sounds/10.ogg", false);
 		pl.saveResource("httdocs/sounds/play.ogg", false);
 		pl.saveResource("httdocs/sounds/headshot.ogg", false);
+		pl.saveResource("httdocs/sounds/firstblood.ogg", false);
 		
 		resource_handler.setResourceBase(new File(SGApi.getPlugin().getDataFolder(), "httdocs").getAbsolutePath());
 

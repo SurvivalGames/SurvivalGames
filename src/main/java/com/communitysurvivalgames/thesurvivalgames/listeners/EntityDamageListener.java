@@ -42,6 +42,7 @@ import com.communitysurvivalgames.thesurvivalgames.event.PlayerKilledEvent;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.net.SoundEffectsManager;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.util.DeathMessages;
 import com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
@@ -220,6 +221,12 @@ public class EntityDamageListener implements Listener {
 			if (entity instanceof Player) {
 				Player damager = (Player) entity;
 				try {
+					if (!SGApi.getArenaManager().getArena(damager).firstBlood) {
+						SGApi.getArenaManager().getArena(damager).firstBlood = true;
+						SoundEffectsManager.playToArena(SGApi.getArenaManager().getArena(damager), "firstblood");
+					} else {
+
+					}
 					if (damager.getInventory().getItemInHand() != null) {
 						String name = damager.getInventory().getItemInHand().getItemMeta().hasDisplayName() ? damager.getInventory().getItemInHand().getItemMeta().getDisplayName() : damager.getInventory().getItemInHand().getType().toString().replace("_", " ").toLowerCase();
 						SGApi.getArenaManager().getArena(damager).broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("KILLED_BY") + " &e&l" + damager.getDisplayName() + " &r&6" + I18N.getLocaleString("WITH_A") + " &e&l" + name));

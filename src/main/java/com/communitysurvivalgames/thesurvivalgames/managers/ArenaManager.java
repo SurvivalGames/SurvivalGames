@@ -111,16 +111,16 @@ public class ArenaManager {
 		}
 
 		if (SGApi.getPlugin().getPluginConfig().getUseServers()) {
-			p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
+			p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
 			p.sendMessage(ChatColor.AQUA + "");
-			p.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Wan to to here LIVE music, announcers, and sound effects?");
+			p.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Want to here LIVE music, announcers, and sound effects?");
 			p.sendMessage(ChatColor.AQUA + "");
-			p.sendMessage(ChatColor.GREEN + "" + ChatColor.AQUA + "Click this link:");
+			p.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "Click this link:");
 			p.sendMessage(ChatColor.WHITE + "" + ChatColor.UNDERLINE + "http://" + SGApi.getPlugin().getPluginConfig().getServerIP() + ":8080/index.html?name=" + p.getName() + "&sessionId=" + new Random().nextInt(10000));
 			p.sendMessage(ChatColor.AQUA + "");
 			p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Simply leave your browser window open in the background, turn up your speakers, and we'll do the rest!");
 			p.sendMessage(ChatColor.AQUA + "");
-			p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
+			p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
 		}
 
 		for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
