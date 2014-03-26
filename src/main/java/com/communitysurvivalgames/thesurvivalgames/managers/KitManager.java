@@ -40,8 +40,6 @@ public class KitManager {
 				@Override
 				public void onOptionClick(IconMenu.OptionClickEvent event) {
 					if (event.getName().startsWith("Page")) {
-						displayKitSelectionMenu(event.getPlayer(), (Integer.parseInt(event.getName().charAt(5) + "") - 1));
-						return;
 					}
 					if (!(event.getPlayer().hasPermission("sg.kits.*") || event.getPlayer().hasPermission("sg.kits." + event.getName()) || event.getPlayer().isOp())) {
 						event.getPlayer().sendMessage(ChatColor.RED + "Sorry, but you do not have permission to use this kit!");
@@ -156,7 +154,8 @@ public class KitManager {
 		SGApi.getPlugin().saveResource("kits/kit_toxicologist.yml", false);
 		SGApi.getPlugin().saveResource("kits/kit_zelda.yml", false);
 
-		readKitsFromFiles();
+						displayKitSelectionMenu(event.getPlayer(), (Integer.parseInt(event.getName().charAt(5) + "") - 1));
+						return;
 	}
 
 	public Kit getKit(String name) {
