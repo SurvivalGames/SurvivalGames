@@ -58,7 +58,7 @@ public class EntityDamageListener implements Listener {
 	 */
 
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onHungerCHange(FoodLevelChangeEvent event) {
+	public void onHungerChange(FoodLevelChangeEvent event) {
 		if (event.getEntity().getWorld() == Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld())) {
 			if (event.getEntity() instanceof Player) {
 				Player p = (Player) event.getEntity();
@@ -127,6 +127,14 @@ public class EntityDamageListener implements Listener {
 			if (eentity instanceof Player) {
 				Player damager = (Player) eentity;
 				try {
+					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damaged)).gameTime.count > 20) {
+						SoundEffectsManager.music.put(damaged.getName(), "godown");
+						SoundEffectsManager.playToPlayer(damaged, "godown");
+					}
+					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damager)).gameTime.count > 20) {
+						SoundEffectsManager.music.put(damager.getName(), "godown");
+						SoundEffectsManager.playToPlayer(damager, "godown");
+					}
 					if (SGApi.getArenaManager().getArena(damaged).spectators.contains(damager.getName())) {
 						event.setCancelled(true);
 						return;
@@ -221,11 +229,46 @@ public class EntityDamageListener implements Listener {
 			if (entity instanceof Player) {
 				Player damager = (Player) entity;
 				try {
+					boolean shouldWaitDamager = false;
+					boolean shouldWaitDamaged = false;
+					if (SoundEffectsManager.music.containsKey(damaged.getName())) {
+						SoundEffectsManager.music.remove(damaged.getName());
+						SoundEffectsManager.playToPlayer(damaged, "stop");
+						SoundEffectsManager.playToPlayer(damaged, "stinger" + new Random().nextInt(7));
+						shouldWaitDamaged = true;
+					}
+					if (SoundEffectsManager.music.containsKey(damager.getName())) {
+						SoundEffectsManager.music.remove(damager.getName());
+						SoundEffectsManager.playToPlayer(damager, "stop");
+						SoundEffectsManager.playToPlayer(damager, "stinger" + new Random().nextInt(7));
+						shouldWaitDamager = true;
+					}
 					if (!SGApi.getArenaManager().getArena(damager).firstBlood) {
 						SGApi.getArenaManager().getArena(damager).firstBlood = true;
 						SoundEffectsManager.playToArena(SGApi.getArenaManager().getArena(damager), "firstblood");
 					} else {
+						if (shouldWaitDamaged) {
+							Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
+								@Override
+								public void run() {
+
+								}
+							}, 20L);
+						} else {
+
+						}
+						if (shouldWaitDamager) {
+							Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+
+								@Override
+								public void run() {
+
+								}
+							}, 20L);
+						} else {
+
+						}
 					}
 					if (damager.getInventory().getItemInHand() != null) {
 						String name = damager.getInventory().getItemInHand().getItemMeta().hasDisplayName() ? damager.getInventory().getItemInHand().getItemMeta().getDisplayName() : damager.getInventory().getItemInHand().getType().toString().replace("_", " ").toLowerCase();
@@ -257,13 +300,17 @@ public class EntityDamageListener implements Listener {
 			SGApi.getArenaManager().playerKilled(damaged, SGApi.getArenaManager().getArena(damaged));
 		} catch (ArenaNotFoundException e) {}
 		for (ItemStack is : damaged.getInventory().getContents()) {
-			//if (is.containsEnchantment(EnchantmentManager.undroppable))
-			//	continue;
+			if (is == null)
+				continue;
+			damaged.getWorld().dropItem(damaged.getLocation(), is);
+		}
+		for (ItemStack is : damaged.getInventory().getArmorContents()) {
 			if (is == null)
 				continue;
 			damaged.getWorld().dropItem(damaged.getLocation(), is);
 		}
 		damaged.getInventory().clear();
+		damaged.getInventory().setArmorContents(null);
 	}
 
 	public void fireworkIt(Location loc) {
