@@ -153,9 +153,6 @@ public class KitManager {
 		SGApi.getPlugin().saveResource("kits/kit_skeleton.yml", false);
 		SGApi.getPlugin().saveResource("kits/kit_toxicologist.yml", false);
 		SGApi.getPlugin().saveResource("kits/kit_zelda.yml", false);
-
-						displayKitSelectionMenu(event.getPlayer(), (Integer.parseInt(event.getName().charAt(5) + "") - 1));
-						return;
 	}
 
 	public Kit getKit(String name) {
