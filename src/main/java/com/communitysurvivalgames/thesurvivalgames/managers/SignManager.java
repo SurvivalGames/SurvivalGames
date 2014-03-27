@@ -21,13 +21,16 @@ public class SignManager {
 
 	private Map<Sign, String> signs = new HashMap<Sign, String>();
 	private FileConfiguration config;
-	
+
 	public SignManager() {
 
 		SGApi.getPlugin().saveResource("signs.yml", false);
 
 		config = YamlConfiguration.loadConfiguration(new File(SGApi.getPlugin().getDataFolder(), "signs.yml"));
 		ConfigurationSection signConfig = config.getConfigurationSection("signs");
+		if (signConfig == null) {
+			return;
+		}
 		for (String s : signConfig.getKeys(false)) {
 			ConfigurationSection currentSign = signConfig.getConfigurationSection(s);
 			Location loc = SGApi.getArenaManager().deserializeLoc(currentSign.getString("loc"));
@@ -87,8 +90,8 @@ public class SignManager {
 			e.printStackTrace();
 		}
 	}
-	
-	public Map<Sign, String> getSigns(){
+
+	public Map<Sign, String> getSigns() {
 		return signs;
 	}
 }
