@@ -22,9 +22,21 @@ public class WebServer {
 		new File(SGApi.getPlugin().getDataFolder(), "httdocs").mkdirs();
 		
 		TheSurvivalGames pl = SGApi.getPlugin();
-		pl.saveResource("httdocs/index.html", false);
+		//SERVER FILES
+		pl.saveResource("httdocs/index.html", true);
 		pl.saveResource("httdocs/howler.js", false);
-		pl.saveResource("httdocs/websocket.js", false);
+		pl.saveResource("httdocs/websocket.js", true);
+		
+		//SFX
+		pl.saveResource("httdocs/sounds/stinger0.ogg", false);
+		pl.saveResource("httdocs/sounds/stinger1.ogg", false);
+		pl.saveResource("httdocs/sounds/stinger2.ogg", false);
+		pl.saveResource("httdocs/sounds/stinger3.ogg", false);
+		pl.saveResource("httdocs/sounds/stinger4.ogg", false);
+		pl.saveResource("httdocs/sounds/stinger5.ogg", false);
+		pl.saveResource("httdocs/sounds/stinger6.ogg", false);
+		
+		//ANNOUNCERS
 		pl.saveResource("httdocs/sounds/1.ogg", false);
 		pl.saveResource("httdocs/sounds/2.ogg", false);
 		pl.saveResource("httdocs/sounds/3.ogg", false);
@@ -34,10 +46,12 @@ public class WebServer {
 		pl.saveResource("httdocs/sounds/7.ogg", false);
 		pl.saveResource("httdocs/sounds/8.ogg", false);
 		pl.saveResource("httdocs/sounds/9.ogg", false);
-		pl.saveResource("httdocs/sounds/10.ogg", false);
 		pl.saveResource("httdocs/sounds/play.ogg", false);
 		pl.saveResource("httdocs/sounds/headshot.ogg", false);
 		pl.saveResource("httdocs/sounds/firstblood.ogg", false);
+		
+		//MUSIC
+		pl.saveResource("httdocs/sounds/godown.ogg", false);
 		
 		resource_handler.setResourceBase(new File(SGApi.getPlugin().getDataFolder(), "httdocs").getAbsolutePath());
 
