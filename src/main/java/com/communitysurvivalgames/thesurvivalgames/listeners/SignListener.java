@@ -14,9 +14,11 @@ import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 public class SignListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onSignChange(SignChangeEvent event) {
-		if(event.getBlock() == null)
+		if (event.getBlock() == null)
 			return;
-		if(event.getBlock().getState() == null)
+		if (event.getBlock().getState() == null)
+			return;
+		if(event.getLines()[0] == null)
 			return;
 		if (event.getLines()[0].equals("[SGJoin]")) {
 			event.setLine(0, ChatColor.BLUE + "[SGJoin]");
@@ -27,13 +29,20 @@ public class SignListener implements Listener {
 			event.setLine(0, ChatColor.BLUE + "[SGKit]");
 			return;
 		}
+		
+		if (event.getLines()[0].equals("[SGSign]")) {
+			if(event.getLines()[1] == null)
+				return;
+			SGApi.getSignManager().addSign((Sign) event.getBlock().getState(), Integer.parseInt(event.getLines()[1]));
+			return;
+		}
 	}
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onClick(PlayerInteractEvent event) {
-		if(event.getClickedBlock() == null)
+		if (event.getClickedBlock() == null)
 			return;
-		if(event.getClickedBlock().getState() == null)
+		if (event.getClickedBlock().getState() == null)
 			return;
 		if (event.getClickedBlock().getState() instanceof Sign) {
 			Sign sign = (Sign) event.getClickedBlock().getState();
@@ -43,6 +52,10 @@ public class SignListener implements Listener {
 			}
 			if (sign.getLines()[0].equals(ChatColor.BLUE + "[SGKit]")) {
 				SGApi.getKitManager().displayDefaultKitSelectionMenu(event.getPlayer());
+				return;
+			}
+			if (sign.getLines()[0].equals(ChatColor.GREEN + "[Join]") || sign.getLines()[0].equals(ChatColor.YELLOW + "[Spectate]")) {
+				SGApi.getArenaManager().addPlayer(event.getPlayer(), Integer.parseInt(SGApi.getSignManager().getSigns().get(sign)));
 				return;
 			}
 		}

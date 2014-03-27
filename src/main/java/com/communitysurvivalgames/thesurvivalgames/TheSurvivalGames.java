@@ -107,6 +107,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		new File(getDataFolder(), "arenas").mkdirs();
 
 		SGApi.getScheduler();
+		SGApi.getSignManager();
 
 		// TODO Add more languages!
 		saveResource("locale/enUS.lang", true);

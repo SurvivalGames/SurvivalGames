@@ -43,6 +43,7 @@ public class SGApi {
 	private static Map<SGArena, SponsorManager> sponsorManager = new HashMap<>();
 	private static RollbackManager rollbackManager;
 	private static ChestManager chestManager;
+	private static SignManager signManager;
 
 	/**
 	 * Gets arena manager.
@@ -151,15 +152,21 @@ public class SGApi {
 	}
 
 	public static RollbackManager getRollbackManager() {
-		if(rollbackManager == null)
+		if (rollbackManager == null)
 			rollbackManager = new RollbackManager();
 		return rollbackManager;
 	}
-	
-	public static ChestManager getChestManager(){
+
+	public static ChestManager getChestManager() {
 		if (chestManager == null)
 			chestManager = new ChestManager();
 		return chestManager;
+	}
+
+	public static SignManager getSignManager() {
+		if(signManager == null)
+			signManager = new SignManager();
+		return signManager;
 	}
 
 	/**
