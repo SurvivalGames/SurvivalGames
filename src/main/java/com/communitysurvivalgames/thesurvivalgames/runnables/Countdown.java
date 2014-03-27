@@ -20,7 +20,7 @@ public class Countdown implements Runnable {
 	public final String[] s = new String[2];
 	private CodeExecutor ce = null;
 	private int id = 0;
-	private boolean sounds = false;
+	private String data = "null";
 
 	/**
 	 * Constructs a new countdown for this arena
@@ -41,14 +41,14 @@ public class Countdown implements Runnable {
 		this.ce = ce;
 	}
 
-	public Countdown(SGArena a, int amount, int count, String stage, String unit, CodeExecutor ce, boolean playSounds) {
+	public Countdown(SGArena a, int amount, int count, String stage, String unit, CodeExecutor ce, String data) {
 		this.a = a;
 		this.amount = amount;
 		this.count = count;
 		s[0] = stage;
 		s[1] = unit;
 		this.ce = ce;
-		this.sounds = true;
+		this.data = data;
 	}
 
 	/**
@@ -79,9 +79,10 @@ public class Countdown implements Runnable {
 			ce.runCode();
 			return;
 		}
-		count -= amount;
-		if (sounds)
+		if (data.equalsIgnoreCase("sounds"))
 			SoundEffectsManager.playToArena(a, count + "");
-		a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + count + " " + s[1]);
+		if (!data.equalsIgnoreCase("nocount"))
+			a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + count + " " + s[1]);
+		count -= amount;
 	}
 }

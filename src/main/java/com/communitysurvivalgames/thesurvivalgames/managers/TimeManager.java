@@ -33,6 +33,7 @@ public class TimeManager {
 		this.a = a;
 	}
 
+	public Countdown gameTime;
 	public Countdown g;
 	public Countdown cg;
 	public Countdown dm;
@@ -65,7 +66,7 @@ public class TimeManager {
 		}
 
 		a.setState(SGArena.ArenaState.PRE_COUNTDOWN);
-		
+
 		g = new Countdown(a, 1, n, "Game", "minutes", new CodeExecutor() {
 			@Override
 			public void runCode() {
@@ -110,7 +111,7 @@ public class TimeManager {
 			public void runCode() {
 
 				SoundEffectsManager.playToArena(a, "play");
-				
+
 				a.broadcast(I18N.getLocaleString("ODDS"));
 				a.setState(SGArena.ArenaState.IN_GAME);
 				for (String s : a.getPlayers()) {
@@ -134,8 +135,17 @@ public class TimeManager {
 
 				countdownDm();
 			}
-		}, true);
+		}, "sounds");
 		cg.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), cg, 0L, 20L));
+	}
+
+	public void countupGame() {
+		gameTime = new Countdown(a, -1, 1, "GameTime", "seconds", new CodeExecutor() {
+			@Override
+			public void runCode() {
+				//Ignored			
+			}
+		}, "nocount");
 	}
 
 	public void countdownDm() {
@@ -188,5 +198,7 @@ public class TimeManager {
 			Bukkit.getScheduler().cancelTask(cdm.getId());
 		if (end != null)
 			Bukkit.getScheduler().cancelTask(end.getId());
+		if (gameTime != null)
+			Bukkit.getScheduler().cancelTask(gameTime.getId());
 	}
 }
