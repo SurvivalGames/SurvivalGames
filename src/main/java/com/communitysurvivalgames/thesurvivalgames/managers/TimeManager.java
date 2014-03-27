@@ -132,7 +132,7 @@ public class TimeManager {
 						}
 					}
 				}, 200L);
-
+				countupGame();
 				countdownDm();
 			}
 		}, "sounds");
@@ -146,6 +146,7 @@ public class TimeManager {
 				//Ignored			
 			}
 		}, "nocount");
+		gameTime.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), gameTime, 0L, 20L));
 	}
 
 	public void countdownDm() {

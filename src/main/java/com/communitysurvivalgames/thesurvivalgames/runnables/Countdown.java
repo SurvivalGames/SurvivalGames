@@ -74,7 +74,7 @@ public class Countdown implements Runnable {
 	 */
 	@Override
 	public void run() {
-		if (count == 0) {
+		if (count <= 0) {
 			Bukkit.getServer().getScheduler().cancelTask(this.id);
 			ce.runCode();
 			return;

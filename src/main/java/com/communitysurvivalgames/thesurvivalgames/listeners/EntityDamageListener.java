@@ -127,17 +127,24 @@ public class EntityDamageListener implements Listener {
 			if (eentity instanceof Player) {
 				Player damager = (Player) eentity;
 				try {
-					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damaged)).gameTime.count > 20) {
-						SoundEffectsManager.music.put(damaged.getName(), "godown");
-						SoundEffectsManager.playToPlayer(damaged, "godown");
-					}
-					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damager)).gameTime.count > 20) {
-						SoundEffectsManager.music.put(damager.getName(), "godown");
-						SoundEffectsManager.playToPlayer(damager, "godown");
-					}
+
 					if (SGApi.getArenaManager().getArena(damaged).spectators.contains(damager.getName())) {
 						event.setCancelled(true);
 						return;
+					}
+					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damaged)).gameTime.count > 20) {
+						if (!SoundEffectsManager.music.containsKey(damaged.getName())) {
+							Bukkit.getLogger().info("Played godown");
+							SoundEffectsManager.music.put(damaged.getName(), "godown");
+							SoundEffectsManager.playToPlayer(damaged, "godown");
+						}
+					}
+					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damager)).gameTime.count > 20) {
+						if (!SoundEffectsManager.music.containsKey(damager.getName())) {
+							Bukkit.getLogger().info("Played godown");
+							SoundEffectsManager.music.put(damager.getName(), "godown");
+							SoundEffectsManager.playToPlayer(damager, "godown");
+						}
 					}
 				} catch (ArenaNotFoundException e1) {}
 			}
