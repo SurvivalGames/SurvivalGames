@@ -15,19 +15,21 @@ public class ItemDropListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onItemDrop(PlayerDropItemEvent event) {
-		SGApi.getEnchantmentManager();
+		try {
+			if (SGApi.getArenaManager().getArena(event.getPlayer()).spectators.contains(event.getPlayer()))
+				event.setCancelled(true);
+		} catch (ArenaNotFoundException ignored) {}
 		if (event.getItemDrop().getItemStack().containsEnchantment(EnchantmentManager.undroppable)) {
 			event.setCancelled(true);
 			event.getPlayer().sendMessage(ChatColor.RED + "You cannot drop that item!");
 		}
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onItemPickup(PlayerPickupItemEvent event) {
 		try {
-			if(SGApi.getArenaManager().getArena(event.getPlayer()).spectators.contains(event.getPlayer()))
+			if (SGApi.getArenaManager().getArena(event.getPlayer()).spectators.contains(event.getPlayer()))
 				event.setCancelled(true);
-		} catch (ArenaNotFoundException ignored) {
-		}
+		} catch (ArenaNotFoundException ignored) {}
 	}
 }
