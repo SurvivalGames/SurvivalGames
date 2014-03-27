@@ -79,6 +79,7 @@
                 <exclude>META-INF/*.SF</exclude>
                 <exclude>META-INF/*.DSA</exclude>
                 <exclude>META-INF/*.RSA</exclude>
+                <exclude>about.html</exclude>
               </excludes>
             </filter>
           </filters>
@@ -135,6 +136,12 @@
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
       <version>LATEST</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.milkbowl.vault</groupId>
+      <artifactId>Vault</artifactId>
+      <version>1.2.31</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
