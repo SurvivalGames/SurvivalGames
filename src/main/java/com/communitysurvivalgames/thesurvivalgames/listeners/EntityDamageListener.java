@@ -309,12 +309,12 @@ public class EntityDamageListener implements Listener {
 			SGApi.getArenaManager().playerKilled(damaged, SGApi.getArenaManager().getArena(damaged));
 		} catch (ArenaNotFoundException e) {}
 		for (ItemStack is : damaged.getInventory().getContents()) {
-			if (is == null)
+			if (is == null || is.getType() == Material.AIR)
 				continue;
 			damaged.getWorld().dropItem(damaged.getLocation(), is);
 		}
 		for (ItemStack is : damaged.getInventory().getArmorContents()) {
-			if (is == null)
+			if (is == null || is.getType() == Material.AIR)
 				continue;
 			damaged.getWorld().dropItem(damaged.getLocation(), is);
 		}
