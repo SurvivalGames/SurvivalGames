@@ -6,6 +6,7 @@
 package com.communitysurvivalgames.thesurvivalgames.runnables;
 
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.net.SoundEffectsManager;
 import com.communitysurvivalgames.thesurvivalgames.net.WebsocketServer;
 import com.communitysurvivalgames.thesurvivalgames.net.WebsocketSessionManager;
@@ -79,8 +80,11 @@ public class Countdown implements Runnable {
 			ce.runCode();
 			return;
 		}
-		if (data.equalsIgnoreCase("sounds"))
-			SoundEffectsManager.playToArena(a, count + "");
+		if (SGApi.getPlugin().getPluginConfig().getUseServers()) {
+			if (data.equalsIgnoreCase("sounds")) {
+				SoundEffectsManager.playToArena(a, count + "");
+			}
+		}
 		if (!data.equalsIgnoreCase("nocount"))
 			a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + count + " " + s[1]);
 		count -= amount;

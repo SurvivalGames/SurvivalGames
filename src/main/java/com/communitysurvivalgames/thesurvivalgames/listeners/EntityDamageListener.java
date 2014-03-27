@@ -250,31 +250,33 @@ public class EntityDamageListener implements Listener {
 						SoundEffectsManager.playToPlayer(damager, "stinger" + new Random().nextInt(7));
 						shouldWaitDamager = true;
 					}
-					if (!SGApi.getArenaManager().getArena(damager).firstBlood) {
-						SGApi.getArenaManager().getArena(damager).firstBlood = true;
-						SoundEffectsManager.playToArena(SGApi.getArenaManager().getArena(damager), "firstblood");
-					} else {
-						if (shouldWaitDamaged) {
-							Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
-
-								@Override
-								public void run() {
-
-								}
-							}, 20L);
+					if (SGApi.getPlugin().getPluginConfig().getUseServers()) {
+						if (!SGApi.getArenaManager().getArena(damager).firstBlood) {
+							SGApi.getArenaManager().getArena(damager).firstBlood = true;
+							SoundEffectsManager.playToArena(SGApi.getArenaManager().getArena(damager), "firstblood");
 						} else {
+							if (shouldWaitDamaged) {
+								Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
-						}
-						if (shouldWaitDamager) {
-							Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+									@Override
+									public void run() {
 
-								@Override
-								public void run() {
+									}
+								}, 20L);
+							} else {
 
-								}
-							}, 20L);
-						} else {
+							}
+							if (shouldWaitDamager) {
+								Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
+									@Override
+									public void run() {
+
+									}
+								}, 20L);
+							} else {
+
+							}
 						}
 					}
 					if (damager.getInventory().getItemInHand() != null) {

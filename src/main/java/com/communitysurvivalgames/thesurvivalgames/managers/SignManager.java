@@ -44,16 +44,17 @@ public class SignManager {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), new Runnable() {
 			@Override
 			public void run() {
-				for (int i = 0; i < signs.size(); i++) {
-					Sign sign = (Sign) signs.keySet().toArray()[i];
+				for (Sign sign : signs.keySet()) {
 					SGArena arena = null;
 
 					// LINE 1
 					try {
 						arena = SGApi.getArenaManager().getArena(Integer.parseInt(signs.get(sign)));
 					} catch (NumberFormatException e) {
+						Bukkit.getLogger().severe("Number format exception");
 						return;
 					} catch (ArenaNotFoundException e) {
+						Bukkit.getLogger().severe("Arena not found exception");
 						return;
 					}
 					if (arena.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS) || arena.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
