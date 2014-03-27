@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
@@ -16,7 +17,7 @@ public class ItemDropListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onItemDrop(PlayerDropItemEvent event) {
 		try {
-			if (SGApi.getArenaManager().getArena(event.getPlayer()).spectators.contains(event.getPlayer()))
+			if (SGApi.getArenaManager().getArena(event.getPlayer()).spectators.contains(event.getPlayer().getName()))
 				event.setCancelled(true);
 		} catch (ArenaNotFoundException ignored) {}
 		if (event.getItemDrop().getItemStack().containsEnchantment(EnchantmentManager.undroppable)) {
