@@ -159,7 +159,10 @@ public class ArenaManager {
 
 		try {
 			if (this.getArena(p).getState().equals(SGArena.ArenaState.PRE_COUNTDOWN) || this.getArena(p).getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)) {
-				getArena(p).getPlayers().remove(p.getName());
+				SGArena a = getArena(p);
+				a.getPlayers().remove(p.getName());
+				if(a.players.size() < a.getMinPlayers())
+					a.restart();
 
 				p.teleport(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()).getSpawnLocation());
 				p.setGameMode(GameMode.SURVIVAL);
@@ -175,6 +178,7 @@ public class ArenaManager {
 				}
 
 				p.setFireTicks(0);
+				return;
 			}
 		} catch (ArenaNotFoundException e) {
 			p.teleport(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()).getSpawnLocation());

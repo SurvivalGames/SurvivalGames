@@ -1,6 +1,5 @@
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
 import org.bukkit.entity.Player;
