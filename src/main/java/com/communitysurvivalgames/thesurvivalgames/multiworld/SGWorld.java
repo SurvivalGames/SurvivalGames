@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
+import org.bukkit.Difficulty;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
@@ -41,6 +42,7 @@ public class SGWorld {
 	}
 
 	public void init(List<Location> locs, List<BlockState> t2) {
+		Bukkit.getServer().getWorld(name).setDifficulty(Difficulty.EASY);
 		this.locs = locs;
 		this.t2 = t2;
 		for (Location l : locs) {
