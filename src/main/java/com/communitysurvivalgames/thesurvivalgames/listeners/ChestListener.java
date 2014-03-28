@@ -16,27 +16,29 @@ public class ChestListener implements Listener {
 	@EventHandler
 	public void onInventoryOpenEvent(InventoryOpenEvent e) {
 		if (e.getInventory().getHolder() instanceof Chest) {
-			Bukkit.getLogger().info("Clicked chest!");
 			Chest c = (Chest) e.getInventory().getHolder();
 			SGArena a;
 			try {
 				a = SGApi.getArenaManager().getArena((Player) e.getPlayer());
+				if (a.spectators.contains(e.getPlayer().getName())) {
+					e.setCancelled(true);
+					return;
+				}
 				SGApi.getChestManager().fillChest(a, c);
-				Bukkit.getLogger().info("Filled chest!");
-			} catch (ArenaNotFoundException e1) {
-			}
-			return;
+			} catch (ArenaNotFoundException e1) {}
 		}
-		
+
 		if (e.getInventory().getHolder() instanceof DoubleChest) {
 			DoubleChest c = (DoubleChest) e.getInventory().getHolder();
 			SGArena a;
 			try {
 				a = SGApi.getArenaManager().getArena((Player) e.getPlayer());
+				if (a.spectators.contains(e.getPlayer().getName())) {
+					e.setCancelled(true);
+					return;
+				}
 				SGApi.getChestManager().fillDoubleChest(a, c);
-			} catch (ArenaNotFoundException e1) {
-			}
-			return;
+			} catch (ArenaNotFoundException e1) {}
 		}
 	}
 }
