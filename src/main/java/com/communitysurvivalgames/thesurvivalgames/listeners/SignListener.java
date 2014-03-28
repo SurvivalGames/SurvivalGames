@@ -33,7 +33,7 @@ public class SignListener implements Listener {
 		if (event.getLines()[0].equals("[SGSign]")) {
 			if(event.getLines()[1] == null)
 				return;
-			SGApi.getSignManager().addSign((Sign) event.getBlock().getState(), Integer.parseInt(event.getLines()[1]));
+			SGApi.getSignManager().addSign(event.getBlock().getLocation(), Integer.parseInt(event.getLines()[1]));
 			return;
 		}
 	}
@@ -55,7 +55,7 @@ public class SignListener implements Listener {
 				return;
 			}
 			if (sign.getLines()[0].equals(ChatColor.GREEN + "[Join]") || sign.getLines()[0].equals(ChatColor.YELLOW + "[Spectate]")) {
-				SGApi.getArenaManager().addPlayer(event.getPlayer(), Integer.parseInt(SGApi.getSignManager().getSigns().get(sign)));
+				SGApi.getArenaManager().addPlayer(event.getPlayer(), Integer.parseInt(SGApi.getSignManager().getSigns().get(sign.getBlock().getLocation())));
 				return;
 			}
 		}

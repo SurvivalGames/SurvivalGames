@@ -19,7 +19,7 @@ import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 
 public class SignManager {
 
-	private Map<Sign, String> signs = new HashMap<Sign, String>();
+	private Map<Location, String> signs = new HashMap<Location, String>();
 	private FileConfiguration config;
 
 	public SignManager() {
@@ -34,28 +34,28 @@ public class SignManager {
 		for (String s : signConfig.getKeys(false)) {
 			ConfigurationSection currentSign = signConfig.getConfigurationSection(s);
 			Location loc = SGApi.getArenaManager().deserializeLoc(currentSign.getString("loc"));
-			Block block = loc.getWorld().getBlockAt(loc);
-			if (block.getState() != null && block.getState() instanceof Sign) {
-				Sign sign = (Sign) block.getState();
-				signs.put(sign, s);
-			}
+			signs.put(loc, s);
 		}
 
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), new Runnable() {
 			@Override
 			public void run() {
-				for (Sign sign : signs.keySet()) {
+				for (Location loc : signs.keySet()) {
+					Bukkit.getLogger().info("Retrieved: " + loc.getBlock().getState());
+					if(!(loc.getBlock().getState() instanceof Sign))
+						continue;
+					Sign sign = (Sign) loc.getBlock().getState();
+					Bukkit.getLogger().info("Got Sign: " + loc.getBlock().getState());
 					SGArena arena = null;
-
 					// LINE 1
 					try {
-						arena = SGApi.getArenaManager().getArena(Integer.parseInt(signs.get(sign)));
+						arena = SGApi.getArenaManager().getArena(Integer.parseInt(signs.get(loc)));
 					} catch (NumberFormatException e) {
 						Bukkit.getLogger().severe("Number format exception");
-						return;
+						continue;
 					} catch (ArenaNotFoundException e) {
 						Bukkit.getLogger().severe("Arena not found exception");
-						return;
+						continue;
 					}
 					if (arena.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS) || arena.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
 						sign.setLine(0, ChatColor.GREEN + "[Join]");
@@ -77,14 +77,15 @@ public class SignManager {
 					} else {
 						sign.setLine(3, arena.getCurrentMap().getDisplayName());
 					}
+					sign.update();
 				}
 			}
 		}, 20L, 20L);
 	}
 
-	public void addSign(Sign sign, int arenaId) {
+	public void addSign(Location sign, int arenaId) {
 		signs.put(sign, arenaId + "");
-		config.set("signs." + arenaId + ".loc", SGApi.getArenaManager().serializeLoc(sign.getLocation()));
+		config.set("signs." + arenaId + ".loc", SGApi.getArenaManager().serializeLoc(sign));
 		try {
 			config.save(new File(SGApi.getPlugin().getDataFolder(), "signs.yml"));
 		} catch (IOException e) {
@@ -92,7 +93,7 @@ public class SignManager {
 		}
 	}
 
-	public Map<Sign, String> getSigns() {
+	public Map<Location, String> getSigns() {
 		return signs;
 	}
 }
