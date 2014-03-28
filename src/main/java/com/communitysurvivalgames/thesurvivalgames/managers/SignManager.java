@@ -41,11 +41,9 @@ public class SignManager {
 			@Override
 			public void run() {
 				for (Location loc : signs.keySet()) {
-					Bukkit.getLogger().info("Retrieved: " + loc.getBlock().getState());
 					if(!(loc.getBlock().getState() instanceof Sign))
 						continue;
 					Sign sign = (Sign) loc.getBlock().getState();
-					Bukkit.getLogger().info("Got Sign: " + loc.getBlock().getState());
 					SGArena arena = null;
 					// LINE 1
 					try {
