@@ -1,28 +1,28 @@
 #####################
 ## Kit Config File ##
-##    Skeleton     ##
+##       Pig       ##
 #####################
 
 # Valid item names can be found here: http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
 
 # Kit name
-name: Skeleton
+name: Pig
 
 #Kit type
 type: Mob
 
 # Kit icon - Must use valid item name
-icon: BONE
+icon: PROK
 
 # Icon Lore
-iconLore: Unlimited arrows, low damage (Oh, and spawn eggs too)
+iconLore: Oink oink?
 
 # Items
 items:
     # Kit Level
     lvl1:
         #Inventory to string
-        inventory: "2;0#t@BOW:a@1:e@ARROW_INFINITE@1:n@The Skeletal Wind@l&2The Skeleton's Bow%&1Skeleton Kit - LvL 1;1#s@SKELETON:a@2:n@The Skeleton's Skeleton Spawn Egg:n@&1Skeleton Kit - LvL 1"
+        inventory: "2;0#t@PORK:a@1:e@LOOT_BONUS_MOBS@50:n@Oink?@l&dOink! Oink!%&1Pig Kit - LvL 1"
 
 ability-ids:
-    - 8
+    - 9
