@@ -75,8 +75,7 @@ public class SponsorManager {
 							SGArena a = SGApi.getArenaManager().getArena(event.getPlayer());
 							a.looted.add(chest);
 							a.changedBlocks.add(new ChangedBlock(event.getPlayer().getWorld().getName(), Material.AIR, (byte) 0, Material.CHEST, chest.getBlock().getData(), chest.getBlock().getX(), chest.getBlock().getY(), chest.getBlock().getZ()));
-						} catch (ArenaNotFoundException ignored) {
-						}
+						} catch (ArenaNotFoundException ignored) {}
 					}
 				}, 155L);
 				event.setWillClose(true);
@@ -273,6 +272,13 @@ public class SponsorManager {
 	public void sponsor(Player sender) {
 		List<ItemStack> items = new ArrayList<ItemStack>();
 		for (String s : a.getPlayers()) {
+			try {
+				if (SGApi.getArenaManager().getArena(Bukkit.getPlayer(s)).spectators.contains(s)) {
+					continue;
+				}
+			} catch (ArenaNotFoundException e) {
+				continue;
+			}
 			ItemStack item = new ItemStack(Material.EMERALD, (int) Bukkit.getPlayer(s).getHealth());
 			ItemMeta meta = item.getItemMeta();
 			meta.setDisplayName(s);
