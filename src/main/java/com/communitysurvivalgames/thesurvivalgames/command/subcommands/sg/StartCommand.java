@@ -24,7 +24,7 @@ public class StartCommand implements SubCommand {
      */
     @Override
     public void execute(String cmd, Player p, String[] args) {
-    	if(!p.isOp() || !p.hasPermission("sg.start"))
+    	if(!p.isOp() && !p.hasPermission("sg.start"))
     		return;
         if (cmd.equalsIgnoreCase("start") && args.length == 2 && p.hasPermission("sg.gamestate.start")) {
             int id = 0;
