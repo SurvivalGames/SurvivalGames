@@ -75,7 +75,7 @@ public class Countdown implements Runnable {
 	 */
 	@Override
 	public void run() {
-		if (count == 0) {
+		if (count <= 0) {
 			Bukkit.getServer().getScheduler().cancelTask(this.id);
 			ce.runCode();
 			return;
@@ -83,10 +83,10 @@ public class Countdown implements Runnable {
 		count -= amount;
 		if (SGApi.getPlugin().getPluginConfig().getUseServers()) {
 			if (data.equalsIgnoreCase("sounds")) {
-				SoundEffectsManager.playToArena(a, count + "");
+				SoundEffectsManager.playToArena(a, (count + 1) + "");
 			}
 		}
 		if (!data.equalsIgnoreCase("nocount"))
-			a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + count + " " + s[1]);
+			a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + (count + 1) + " " + s[1]);
 	}
 }
