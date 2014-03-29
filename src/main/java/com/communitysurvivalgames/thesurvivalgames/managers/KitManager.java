@@ -146,16 +146,16 @@ public class KitManager {
 	}
 
 	void saveDefaultKits() {
-		SGApi.getPlugin().saveResource("kits/kit_archer.yml", false);
-		SGApi.getPlugin().saveResource("kits/kit_crafter.yml", false);
-		SGApi.getPlugin().saveResource("kits/kit_enchanter.yml", false);
-		SGApi.getPlugin().saveResource("kits/kit_knight.yml", false);
-		SGApi.getPlugin().saveResource("kits/kit_notch.yml", false);
-		SGApi.getPlugin().saveResource("kits/kit_pacman.yml", false);
-		SGApi.getPlugin().saveResource("kits/kit_pig.yml", false);
-		SGApi.getPlugin().saveResource("kits/kit_skeleton.yml", false);
-		SGApi.getPlugin().saveResource("kits/kit_toxicologist.yml", false);
-		SGApi.getPlugin().saveResource("kits/kit_zelda.yml", false);
+		SGApi.getPlugin().saveResource("kits/kit_archer.yml", true);
+		SGApi.getPlugin().saveResource("kits/kit_crafter.yml", true);
+		SGApi.getPlugin().saveResource("kits/kit_enchanter.yml", true);
+		SGApi.getPlugin().saveResource("kits/kit_knight.yml", true);
+		SGApi.getPlugin().saveResource("kits/kit_notch.yml", true);
+		SGApi.getPlugin().saveResource("kits/kit_pacman.yml", true);
+		SGApi.getPlugin().saveResource("kits/kit_pig.yml", true);
+		SGApi.getPlugin().saveResource("kits/kit_skeleton.yml", true);
+		SGApi.getPlugin().saveResource("kits/kit_toxicologist.yml", true);
+		SGApi.getPlugin().saveResource("kits/kit_zelda.yml", true);
 	}
 
 	public Kit getKit(String name) {

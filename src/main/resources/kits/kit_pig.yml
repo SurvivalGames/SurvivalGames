@@ -12,7 +12,7 @@ name: Pig
 type: Mob
 
 # Kit icon - Must use valid item name
-icon: PROK
+icon: PORK
 
 # Icon Lore
 iconLore: Oink oink?
