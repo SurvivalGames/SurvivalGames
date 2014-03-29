@@ -26,9 +26,9 @@ public class Enchanter extends SGAbility implements Listener {
 		Player player = event.getPlayer();
 		if (this.hasAbility(player)) {
 			if (event.getPlayer().getItemInHand().getType() == Material.ENCHANTMENT_TABLE) {
+				this.removeOneFromHand(player);
 				Inventory inv = Bukkit.getServer().createInventory(null, InventoryType.ENCHANTING);
 				event.getPlayer().openInventory(inv);
-				event.getPlayer().getInventory().remove(Material.ENCHANTMENT_TABLE);
 				FireworkEffect fEffect = FireworkEffect.builder().flicker(false).withColor(Color.PURPLE).withFade(Color.NAVY).with(Type.BURST).trail(false).build();
 				try {
 					FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(event.getPlayer().getWorld(), event.getPlayer().getLocation(), fEffect);

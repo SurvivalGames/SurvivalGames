@@ -43,9 +43,7 @@ public class Zelda extends SGAbility implements Listener {
 		Player player = event.getPlayer();
 		if (this.hasAbility(player)) {
 			if (player.getItemInHand().getType() == Material.SPECKLED_MELON && player.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Zelda Heart")) {
-				ItemStack item = player.getItemInHand();
-				item.setAmount(1);
-				player.getInventory().remove(item);
+				this.removeOneFromHand(player);
 				if (player.getHealth() >= 14) {
 					player.setHealth(20);
 				}
@@ -64,14 +62,19 @@ public class Zelda extends SGAbility implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onKill(PlayerKilledEvent event) {
-		ItemStack zeldaHeart = new ItemStack(Material.SPECKLED_MELON);
-		ItemMeta meta = zeldaHeart.getItemMeta();
-		meta.setDisplayName("Zelda Heart");
-		List<String> lore = new ArrayList<String>();
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&3Heal when right clicked - hearts from the dead"));
-		lore.add(ChatColor.translateAlternateColorCodes('&', "&1Zelda Kit - LvL1"));
-		meta.setLore(lore);
-		zeldaHeart.setItemMeta(meta);
-		event.getPlayer().getWorld().dropItem(event.getPlayer().getLocation(), zeldaHeart);
+		if(!(event.getKiller() instanceof Player))
+			return;
+		Player p = (Player) event.getKiller();
+		if (hasAbility(p)) {
+			ItemStack zeldaHeart = new ItemStack(Material.SPECKLED_MELON);
+			ItemMeta meta = zeldaHeart.getItemMeta();
+			meta.setDisplayName("Zelda Heart");
+			List<String> lore = new ArrayList<String>();
+			lore.add(ChatColor.translateAlternateColorCodes('&', "&3Heal when right clicked - hearts from the dead"));
+			lore.add(ChatColor.translateAlternateColorCodes('&', "&1Zelda Kit - LvL1"));
+			meta.setLore(lore);
+			zeldaHeart.setItemMeta(meta);
+			event.getPlayer().getWorld().dropItem(event.getPlayer().getLocation(), zeldaHeart);
+		}
 	}
 }

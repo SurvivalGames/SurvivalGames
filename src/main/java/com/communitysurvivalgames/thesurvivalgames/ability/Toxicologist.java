@@ -5,6 +5,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -30,8 +31,10 @@ public class Toxicologist extends SGAbility implements Listener {
 	public void onInteract(final PlayerInteractEvent event) {
 		final Player player = event.getPlayer();
 		if (this.hasAbility(player)) {
+			final Location loc = player.getLocation();
 			final Random rnd = new Random();
 			if (player.getItemInHand().getType() == Material.CLAY_BALL && player.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Toxin Bomb")) {
+				this.removeOneFromHand(player);
 				FireworkUtil.getCircleUtil().playFireworkCircle(event.getPlayer(), FireworkEffect.builder().withColor(Color.SILVER).withFade(Color.GREEN).flicker(true).trail(false).build(), 10, 10);
 				Bukkit.getScheduler().runTaskLater(SGApi.getPlugin(), new Runnable() {
 
@@ -43,7 +46,7 @@ public class Toxicologist extends SGAbility implements Listener {
 							ItemStack itemStack = new ItemStack(Material.POTION);
 							potion.apply(itemStack);
 							ThrownPotion thrownPotion = null;
-							thrownPotion = (ThrownPotion) player.getLocation().getWorld().spawnEntity(event.getPlayer().getLocation().add(rnd.nextInt(20) - 10, rnd.nextInt(20) - 10, rnd.nextInt(20) - 10), EntityType.SPLASH_POTION);
+							thrownPotion = (ThrownPotion) loc.getWorld().spawnEntity(loc.add(rnd.nextInt(20) - 10, rnd.nextInt(20) - 10, rnd.nextInt(20) - 10), EntityType.SPLASH_POTION);
 							thrownPotion.setItem(itemStack);
 						}
 					}

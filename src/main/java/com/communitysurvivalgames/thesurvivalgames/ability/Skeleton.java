@@ -23,7 +23,7 @@ public class Skeleton extends SGAbility implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void entityDamagedByEntityt(EntityDamageByEntityEvent event) {
 		if (arrows.contains(event.getDamager())) {
-			arrows.remove(event.getEntity());
+			arrows.remove(event.getDamager());
 			event.setDamage(4);
 		}
 	}

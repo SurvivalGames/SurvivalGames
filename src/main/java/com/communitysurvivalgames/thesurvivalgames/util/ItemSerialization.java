@@ -90,7 +90,9 @@ public class ItemSerialization {
 				} else if (itemAttribute[0].equals("a") && createdItemStack) {
 					is.setAmount(Integer.valueOf(itemAttribute[1]));
 				} else if (itemAttribute[0].equals("e") && createdItemStack) {
-					is.addEnchantment(Enchantment.getByName(itemAttribute[1]), Integer.valueOf(itemAttribute[2]));
+					ItemMeta meta = is.getItemMeta();
+					meta.addEnchant(Enchantment.getByName(itemAttribute[1]), Integer.valueOf(itemAttribute[2]), true);
+					is.setItemMeta(meta);
 				} else if (itemAttribute[0].equals("n") && createdItemStack) {
 					ItemMeta meta = is.getItemMeta();
 					meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', itemAttribute[1]));

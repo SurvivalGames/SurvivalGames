@@ -2,6 +2,7 @@ package com.communitysurvivalgames.thesurvivalgames.ability;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
@@ -48,5 +49,16 @@ public class SGAbility {
 			return false;
 		}
 		return false;
+	}
+
+	public void removeOneFromHand(Player p) {
+		ItemStack item = p.getInventory().getItemInHand();
+		
+		int slot = p.getInventory().getHeldItemSlot();
+		int amount = item.getAmount() - 1;
+		
+		item.setAmount(amount);
+		
+		p.getInventory().setItemInHand(item);
 	}
 }

@@ -24,14 +24,15 @@ public class Archer extends SGAbility implements Listener {
 		for (String p : event.getArena().getPlayers()) {
 			final Player player = Bukkit.getPlayer(p);
 			if (hasAbility(player)) {
-				Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), new Runnable() {
+				for (int i = 0; i < 32; i++) {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
-					@Override
-					public void run() {
-						if (!player.getInventory().contains(Material.ARROW, 3))
+						@Override
+						public void run() {
 							player.getInventory().addItem(new ItemStack(Material.ARROW));
-					}
-				}, 20L, 20L);
+						}
+					}, i * 20L);
+				}
 			}
 		}
 	}

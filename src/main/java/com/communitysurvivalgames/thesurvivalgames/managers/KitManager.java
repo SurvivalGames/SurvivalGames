@@ -152,6 +152,7 @@ public class KitManager {
 		SGApi.getPlugin().saveResource("kits/kit_knight.yml", false);
 		SGApi.getPlugin().saveResource("kits/kit_notch.yml", false);
 		SGApi.getPlugin().saveResource("kits/kit_pacman.yml", false);
+		SGApi.getPlugin().saveResource("kits/kit_pig.yml", false);
 		SGApi.getPlugin().saveResource("kits/kit_skeleton.yml", false);
 		SGApi.getPlugin().saveResource("kits/kit_toxicologist.yml", false);
 		SGApi.getPlugin().saveResource("kits/kit_zelda.yml", false);
