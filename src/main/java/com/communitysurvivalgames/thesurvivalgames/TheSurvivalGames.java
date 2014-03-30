@@ -26,6 +26,7 @@ import com.communitysurvivalgames.thesurvivalgames.ability.Enchanter;
 import com.communitysurvivalgames.thesurvivalgames.ability.Knight;
 import com.communitysurvivalgames.thesurvivalgames.ability.Notch;
 import com.communitysurvivalgames.thesurvivalgames.ability.Pacman;
+import com.communitysurvivalgames.thesurvivalgames.ability.Pig;
 import com.communitysurvivalgames.thesurvivalgames.ability.Skeleton;
 import com.communitysurvivalgames.thesurvivalgames.ability.Toxicologist;
 import com.communitysurvivalgames.thesurvivalgames.ability.Zelda;
@@ -239,6 +240,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new Knight(), this);
 		pm.registerEvents(new Notch(), this);
 		pm.registerEvents(new Pacman(), this);
+		pm.registerEvents(new Pig(), this);
 		pm.registerEvents(new Skeleton(), this);
 		pm.registerEvents(new Toxicologist(), this);
 		pm.registerEvents(new Zelda(), this);
