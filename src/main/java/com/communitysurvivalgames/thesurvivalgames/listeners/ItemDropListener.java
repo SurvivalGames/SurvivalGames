@@ -29,7 +29,7 @@ public class ItemDropListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onItemPickup(PlayerPickupItemEvent event) {
 		try {
-			if (SGApi.getArenaManager().getArena(event.getPlayer()).spectators.contains(event.getPlayer()))
+			if (SGApi.getArenaManager().getArena(event.getPlayer()).spectators.contains(event.getPlayer().getName()))
 				event.setCancelled(true);
 		} catch (ArenaNotFoundException ignored) {}
 	}
