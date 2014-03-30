@@ -71,7 +71,7 @@ public class SignManager {
 
 					//LINE 4
 					if (arena.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS) || arena.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
-						sign.setLine(3, "Voteing for Map");
+						sign.setLine(3, "Voting for Map");
 					} else {
 						sign.setLine(3, arena.getCurrentMap().getDisplayName());
 					}
