@@ -22,10 +22,18 @@ public class WebServer {
 		new File(SGApi.getPlugin().getDataFolder(), "httdocs").mkdirs();
 		
 		TheSurvivalGames pl = SGApi.getPlugin();
-		//SERVER FILES
+		//HTML FILES
 		pl.saveResource("httdocs/index.html", true);
-		pl.saveResource("httdocs/howler.js", false);
-		pl.saveResource("httdocs/websocket.js", true);
+		
+		//SCRIPTS
+		pl.saveResource("httdocs/js/howler.js", false);
+		pl.saveResource("httdocs/js/websocket.js", true);
+		pl.saveResource("httdocs/js/bootstrap.js", false);
+		pl.saveResource("httdocs/js/jquery.js", false);
+		pl.saveResource("httdocs/js/jquery-ui.js", false);
+		
+		//STYLE SHEETS
+		pl.saveResource("httdocs/css/style.css", false);
 		
 		//SFX
 		pl.saveResource("httdocs/sounds/stinger0.ogg", false);

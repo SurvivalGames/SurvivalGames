@@ -1,7 +1,15 @@
-var name = window.location
-document.session.name.value = name
-var text = document.session.name.value
+var name = window.location;
+document.session.name.value = name;
+var text = document.session.name.value;
 var ws = new WebSocket("ws://" + window.location.hostname + ":8887/");
+var defaultVolume = 25;
+
+$(function(){
+	$("#jslider").slider({max: 50, min: 0, animate: "fast", value: defaultVolume, slide: function(event, ui) {
+            $('#volumelabel').text("Volume: " + ui.value * 2 + "%");
+            defaultVolume = ui.value;
+        }});
+});
 var godownmix = new Howl({
 	urls : [ 'sounds/godown.ogg' ]
 })
@@ -9,9 +17,7 @@ var godownmix = new Howl({
 ws.onopen = function() {
 
 	if (name != null) {
-		document.write("Connected to websocket server! <br>");
 		ws.send("name:" + delineate(text));
-		document.write("Sent data: name:" + delineate(text) + "<br>");
 	}
 
 };
