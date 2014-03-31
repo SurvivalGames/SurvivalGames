@@ -186,7 +186,7 @@ public class SGArena {
 	 */
 	public void end() {
 		if (players.size() == 1) {
-			broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("END") + " " + players.get(0));
+			broadcast(I18N.getLocaleString("END") + " " + players.get(0));
 			Player winner = Bukkit.getPlayer(players.get(0));
 			PlayerData data = SGApi.getPlugin().getPlayerData(winner);
 			data.addWin();
