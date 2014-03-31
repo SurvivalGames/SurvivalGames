@@ -3,9 +3,8 @@ document.session.name.value = name;
 var text = document.session.name.value;
 //var ws = new WebSocket("ws://" + window.location.hostname + ":8887/");
 var defaultVolume = 25;
-$(function() {  
-    $( "#jslider" ).slider();  
-});  
+
+document.getElementById('player').innerHTML += delineate(text);
 
 var godownmix = new Howl({
 	urls : [ 'sounds/godown.ogg' ]
