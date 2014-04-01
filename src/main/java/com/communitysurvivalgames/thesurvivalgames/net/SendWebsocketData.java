@@ -51,7 +51,7 @@ public class SendWebsocketData {
 			return;
 		}
 		WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "arena:" + a.getId());
-		WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "state:" + a.getState();
+		WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "state:" + a.getState());
 		WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "max:" + a.getMaxPlayers());
 		WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "min:" + a.getMinPlayers());
 		WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "players:" + a.getId());
