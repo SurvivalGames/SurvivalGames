@@ -16,16 +16,33 @@ ws.onopen = function() {
 };
 
 ws.onmessage = function(evt) {
-	if (evt.data == "godown") {
+    var split = evt.data.split(':');
+	if (split[0] == 'points'){
+	    $('#points').html(split[1]);
+	}
+	if (split[0] == 'kills'){
+	    $('#kills').html(split[1]);
+	}
+	if (split[0] == 'wins'){
+	    $('#wins').html(split[1]);
+	}
+	if (split[0] == 'rank'){
+	    $('#rank').html(split[1]);
+	}
+	if (split[0] == 'music'){
+	if (split[1] == 'godown') {
 		godownmix.play();
 		return;
+	}
 	}
 	if (evt.data == "stop") {
 		godownmix.stop();
 	}
-	var sound = new Howl({
-		urls : [ 'sounds/' + evt.data + '.ogg' ]
-	}).play();
+	if(split[0] == 'sound') {
+	    var sound = new Howl({
+	    	urls : [ 'sounds/' + split[1] + '.ogg' ]
+	    }).play();
+	}
 };
 
 ws.onclose = function() {
