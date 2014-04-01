@@ -1,5 +1,5 @@
 var name = window.location;
-document.session.name.value = name;
+window.document.session.name.value = name;
 var text = document.session.name.value;
 var ws = new WebSocket("ws://" + delineate2(text) + ":8887/");
 var name = delineate(text);
