@@ -42,11 +42,7 @@ public class WebsocketServer extends WebSocketServer {
 		Bukkit.getLogger().info("Recieve Websocket packet - " + conn + ":" + message);
 		if (message.split(":")[0].equalsIgnoreCase("name")) {
 			WebsocketSessionManager.getSessionManager().addSessionUsername(conn.getRemoteSocketAddress().getAddress().getHostAddress(), message.split(":")[1]);
-			PlayerData data = SGApi.getPlugin().getPlayerData(Bukkit.getPlayer(message.split(":")[1]));
-			conn.send("points:" + data.getPoints());
-			conn.send("kills:" + data.getKills());
-			conn.send("wins:" + data.getWins());
-			conn.send("rank:" + data.getRank());
+			SendWebsocketData.updateArenaStatusForPlayer(Bukkit.getPlayer(message.split(":")[1]));
 		}
 	}
 

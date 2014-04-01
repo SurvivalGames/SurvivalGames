@@ -42,7 +42,7 @@ import com.communitysurvivalgames.thesurvivalgames.event.PlayerKilledEvent;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.net.SoundEffectsManager;
+import com.communitysurvivalgames.thesurvivalgames.net.SendWebsocketData;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.util.DeathMessages;
 import com.communitysurvivalgames.thesurvivalgames.util.FireworkEffectPlayer;
@@ -133,17 +133,17 @@ public class EntityDamageListener implements Listener {
 						return;
 					}
 					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damaged)).gameTime.count > 20) {
-						if (!SoundEffectsManager.music.containsKey(damaged.getName())) {
+						if (!SendWebsocketData.music.containsKey(damaged.getName())) {
 							Bukkit.getLogger().info("Played godown");
-							SoundEffectsManager.music.put(damaged.getName(), "godown");
-							SoundEffectsManager.playToPlayer(damaged, "godown");
+							SendWebsocketData.music.put(damaged.getName(), "godown");
+							SendWebsocketData.playToPlayer(damaged, "godown");
 						}
 					}
 					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damager)).gameTime.count > 20) {
-						if (!SoundEffectsManager.music.containsKey(damager.getName())) {
+						if (!SendWebsocketData.music.containsKey(damager.getName())) {
 							Bukkit.getLogger().info("Played godown");
-							SoundEffectsManager.music.put(damager.getName(), "godown");
-							SoundEffectsManager.playToPlayer(damager, "godown");
+							SendWebsocketData.music.put(damager.getName(), "godown");
+							SendWebsocketData.playToPlayer(damager, "godown");
 						}
 					}
 				} catch (ArenaNotFoundException e1) {}
@@ -238,22 +238,22 @@ public class EntityDamageListener implements Listener {
 				try {
 					boolean shouldWaitDamager = false;
 					boolean shouldWaitDamaged = false;
-					if (SoundEffectsManager.music.containsKey(damaged.getName())) {
-						SoundEffectsManager.music.remove(damaged.getName());
-						SoundEffectsManager.playToPlayer(damaged, "stop");
-						SoundEffectsManager.playToPlayer(damaged, "stinger" + new Random().nextInt(7));
+					if (SendWebsocketData.music.containsKey(damaged.getName())) {
+						SendWebsocketData.music.remove(damaged.getName());
+						SendWebsocketData.playToPlayer(damaged, "stop");
+						SendWebsocketData.playToPlayer(damaged, "stinger" + new Random().nextInt(7));
 						shouldWaitDamaged = true;
 					}
-					if (SoundEffectsManager.music.containsKey(damager.getName())) {
-						SoundEffectsManager.music.remove(damager.getName());
-						SoundEffectsManager.playToPlayer(damager, "stop");
-						SoundEffectsManager.playToPlayer(damager, "stinger" + new Random().nextInt(7));
+					if (SendWebsocketData.music.containsKey(damager.getName())) {
+						SendWebsocketData.music.remove(damager.getName());
+						SendWebsocketData.playToPlayer(damager, "stop");
+						SendWebsocketData.playToPlayer(damager, "stinger" + new Random().nextInt(7));
 						shouldWaitDamager = true;
 					}
 					if (SGApi.getPlugin().getPluginConfig().getUseServers()) {
 						if (!SGApi.getArenaManager().getArena(damager).firstBlood) {
 							SGApi.getArenaManager().getArena(damager).firstBlood = true;
-							SoundEffectsManager.playToArena(SGApi.getArenaManager().getArena(damager), "firstblood");
+							SendWebsocketData.playToArena(SGApi.getArenaManager().getArena(damager), "firstblood");
 						} else {
 							if (shouldWaitDamaged) {
 								Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {

@@ -25,6 +25,7 @@ import org.bukkit.entity.Player;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import com.communitysurvivalgames.thesurvivalgames.net.SendWebsocketData;
 import com.communitysurvivalgames.thesurvivalgames.rollback.ChangedBlock;
 import com.communitysurvivalgames.thesurvivalgames.util.FireworkUtil;
 
@@ -51,7 +52,7 @@ public class SGArena {
 	public List<ChangedBlock> changedBlocks = new ArrayList<ChangedBlock>();
 	public List<Chest> looted = new ArrayList<Chest>();
 	public List<DoubleChest> dLooted = new ArrayList<DoubleChest>();
-	
+
 	public boolean firstBlood = false;
 
 	public boolean countdown = false;
@@ -185,6 +186,14 @@ public class SGArena {
 	 * Ends the arena
 	 */
 	public void end() {
+		for (String s : players) {
+			Player p = Bukkit.getPlayer(s);
+			SendWebsocketData.updateArenaStatusForPlayer(p);
+		}
+		for (String s : spectators) {
+			Player p = Bukkit.getPlayer(s);
+			SendWebsocketData.updateArenaStatusForPlayer(p);
+		}
 		if (players.size() == 1) {
 			broadcast(I18N.getLocaleString("END") + " " + players.get(0));
 			Player winner = Bukkit.getPlayer(players.get(0));
@@ -198,7 +207,7 @@ public class SGArena {
 		} else {
 			broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("ARENA_END"));
 		}
-		
+
 		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
 			@Override
@@ -325,13 +334,21 @@ public class SGArena {
 	}
 
 	public void death(Player p) {
+		for (String s : players) {
+			Player player = Bukkit.getPlayer(s);
+			SendWebsocketData.updateArenaStatusForPlayer(player);
+		}
+		for (String s : spectators) {
+			Player player = Bukkit.getPlayer(s);
+			SendWebsocketData.updateArenaStatusForPlayer(player);
+		}
 		dead++;
 		getPlayers().remove(p.getName());
 		getSpectators().add(p.getName());
 		if (players.size() == 1)
 			end();
 	}
-	
+
 	public void deathAndLeave(Player p) {
 		dead++;
 		getPlayers().remove(p.getName());
@@ -372,7 +389,7 @@ public class SGArena {
 		this.kills.clear();
 		this.countdown = false;
 		this.firstBlood = false;
-		
+
 		SGApi.getTimeManager(this).forceReset();
 
 		this.setState(ArenaState.WAITING_FOR_PLAYERS);

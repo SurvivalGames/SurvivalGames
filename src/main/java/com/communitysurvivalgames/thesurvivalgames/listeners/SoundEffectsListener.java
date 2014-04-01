@@ -9,7 +9,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
-import com.communitysurvivalgames.thesurvivalgames.net.SoundEffectsManager;
+import com.communitysurvivalgames.thesurvivalgames.net.SendWebsocketData;
 import com.communitysurvivalgames.thesurvivalgames.net.WebsocketServer;
 import com.communitysurvivalgames.thesurvivalgames.net.WebsocketSessionManager;
 
@@ -22,7 +22,7 @@ public class SoundEffectsListener implements Listener {
 				Player p = (Player) a.getShooter();
 				Bukkit.getLogger().info("Player " + p.getName() + " hit something with an arrow, so I think I'll play a sound");
 				Bukkit.getLogger().info("Got a session: " + WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()));
-				SoundEffectsManager.playToPlayer(p, "headshot");
+				SendWebsocketData.playToPlayer(p, "headshot");
 			}
 		}
 	}

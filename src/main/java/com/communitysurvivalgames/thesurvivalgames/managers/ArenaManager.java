@@ -30,6 +30,7 @@ import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundExcept
 import com.communitysurvivalgames.thesurvivalgames.io.DownloadMap;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
+import com.communitysurvivalgames.thesurvivalgames.net.SendWebsocketData;
 import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.util.PlayerVanishUtil;
@@ -128,6 +129,14 @@ public class ArenaManager {
 		}
 
 		a.getPlayers().add(p.getName());
+		for (String s : a.players) {
+			Player player = Bukkit.getPlayer(s);
+			SendWebsocketData.updateArenaStatusForPlayer(player);
+		}
+		for (String s : a.spectators) {
+			Player player = Bukkit.getPlayer(s);
+			SendWebsocketData.updateArenaStatusForPlayer(player);
+		}
 		inv.put(p.getName(), p.getInventory().getContents());
 		armor.put(p.getName(), p.getInventory().getArmorContents());
 
@@ -161,7 +170,7 @@ public class ArenaManager {
 			if (this.getArena(p).getState().equals(SGArena.ArenaState.PRE_COUNTDOWN) || this.getArena(p).getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)) {
 				SGArena a = getArena(p);
 				a.getPlayers().remove(p.getName());
-				if(a.players.size() < a.getMinPlayers())
+				if (a.players.size() < a.getMinPlayers())
 					a.restart();
 
 				p.teleport(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()).getSpawnLocation());
