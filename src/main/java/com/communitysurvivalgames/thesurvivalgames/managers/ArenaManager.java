@@ -117,7 +117,7 @@ public class ArenaManager {
 			p.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Want to here LIVE music, announcers, and sound effects?");
 			p.sendMessage(ChatColor.AQUA + "");
 			p.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "Click this link:");
-			p.sendMessage(ChatColor.WHITE + "" + ChatColor.UNDERLINE + "http://" + SGApi.getPlugin().getPluginConfig().getServerIP() + ":8080/index.html?name=" + p.getName() + "&sessionId=" + new Random().nextInt(10000));
+			p.sendMessage(ChatColor.WHITE + "" + ChatColor.UNDERLINE + "http://communitysurvivalgames.com/index.html?name=" + p.getName() + "&session=" + SGApi.getPlugin().getPluginConfig().getServerIP());
 			p.sendMessage(ChatColor.AQUA + "");
 			p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Simply leave your browser window open in the background, turn up your speakers, and we'll do the rest!");
 			p.sendMessage(ChatColor.AQUA + "");
