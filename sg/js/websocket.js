@@ -32,6 +32,9 @@ ws.onmessage = function(evt) {
 	if (split[0] == 'arena'){
 	    $('#arena').html(split[1]);
 	}
+	if (split[0] == 'state'){
+	    $('#state').html(split[1]);
+	}
 	if (split[0] == 'max'){
 	    $('#max').html(split[1]);
 	}
