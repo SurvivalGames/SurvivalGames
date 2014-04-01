@@ -91,7 +91,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		ConfigurationSerialization.registerClass(SerializedLocation.class);
 		ConfigurationSerialization.registerClass(LocationChecker.class);
 		ConfigurationSerialization.registerClass(KitItem.class);
-        //Relicum Commit Test 2
+
 		SGApi.init(this);
 
 		saveDefaultConfig();
