@@ -11,6 +11,9 @@ import org.java_websocket.WebSocketImpl;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
+import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
+import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
+
 public class WebsocketServer extends WebSocketServer {
 	public static WebsocketServer s;
 
@@ -39,6 +42,11 @@ public class WebsocketServer extends WebSocketServer {
 		Bukkit.getLogger().info("Recieve Websocket packet - " + conn + ":" + message);
 		if (message.split(":")[0].equalsIgnoreCase("name")) {
 			WebsocketSessionManager.getSessionManager().addSessionUsername(conn.getRemoteSocketAddress().getAddress().getHostAddress(), message.split(":")[1]);
+			PlayerData data = SGApi.getPlugin().getPlayerData(Bukkit.getPlayer(message.split(":")[1]));
+			conn.send("points:" + data.getPoints());
+			conn.send("kills:" + data.getKills());
+			conn.send("wins:" + data.getWins());
+			conn.send("rank:" + data.getRank());
 		}
 	}
 
