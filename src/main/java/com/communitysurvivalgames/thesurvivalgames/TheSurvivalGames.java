@@ -70,7 +70,6 @@ import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
-import com.communitysurvivalgames.thesurvivalgames.net.WebServer;
 import com.communitysurvivalgames.thesurvivalgames.net.WebsocketServer;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
@@ -143,7 +142,6 @@ public class TheSurvivalGames extends JavaPlugin {
 		
 		if (getPluginConfig().getUseServers()) {
 			try {
-				WebServer.runServer();
 				WebsocketServer.runServer();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

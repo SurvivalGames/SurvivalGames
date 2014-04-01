@@ -30,7 +30,6 @@
 				<includes>
 					<include>locale/</include>
 					<include>kits/</include>
-					<include>httdocs/</include>
 					<include>*.yml</include>
 					<include>*.properties</include>
 					<include>*.lang</include>
@@ -165,16 +164,6 @@
 			<groupId>net.lingala.zip4j</groupId>
 			<artifactId>zip4j</artifactId>
 			<version>1.3.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>9.1.3.v20140225</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty.aggregate</groupId>
-			<artifactId>jetty-all-server</artifactId>
-			<version>7.0.2.RC0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.java-websocket</groupId>

@@ -17,7 +17,7 @@ public class SendWebsocketData {
 
 	public static void playToPlayer(Player p, String data) {
 		if (WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()) != null) {
-			WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), data);
+			WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "sound:" + data);
 		}
 	}
 
@@ -25,7 +25,7 @@ public class SendWebsocketData {
 		for (String s : arena.getPlayers()) {
 			Player p = Bukkit.getPlayer(s);
 			if (WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()) != null) {
-				WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), data);
+				WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "sound:" + data);
 			}
 		}
 	}
@@ -33,7 +33,7 @@ public class SendWebsocketData {
 	public static void playToAll(String data) {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			if (WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()) != null) {
-				WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), data);
+				WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "sound:" + data);
 			}
 		}
 	}
