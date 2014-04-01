@@ -29,6 +29,27 @@ ws.onmessage = function(evt) {
 	if (split[0] == 'rank'){
 	    $('#rank').html(split[1]);
 	}
+	if (split[0] == 'arena'){
+	    $('#arena').html(split[1]);
+	}
+	if (split[0] == 'max'){
+	    $('#max').html(split[1]);
+	}
+	if (split[0] == 'min'){
+	    $('#min').html(split[1]);
+	}
+	if (split[0] == 'players'){
+	    $('#players').html(split[1]);
+	}
+	if (split[0] == 'alive'){
+	    $('#alive').html(split[1]);
+	}
+	if (split[0] == 'dead'){
+	    $('#dead').html(split[1]);
+	}
+	if (split[0] == 'specs'){
+	    $('#specs').html(split[1]);
+	}
 	if (split[0] == 'music'){
 	if (split[1] == 'godown') {
 		godownmix.play();
