@@ -4,11 +4,10 @@ var text = document.session.name.value;
 var ws = new WebSocket("ws://" + delineate2(text) + ":8887/");
 var name = delineate(text);
 var defaultVolume = 25;
-
-var godownmix = new Howl({
-	urls : [ 'sounds/godown.ogg' ]
-})
-
+var music = null;
+SC.initialize({
+    client_id: "bb067fb8593f7d0acbc5af49998ddf8c", //This is the public key...  Don't get any ideas heh ;)
+  });
 
 ws.onopen = function() {
 	ws.send("name:" + delineate(text));
@@ -54,13 +53,17 @@ ws.onmessage = function(evt) {
 	    $('#specs').html(split[1]);
 	}
 	if (split[0] == 'music'){
-	if (split[1] == 'godown') {
-		godownmix.play();
-		return;
-	}
+		SC.stream("/tracks/" + split[1], {
+            autoPlay: false
+        }, function (sound) {
+            music = sound;
+            music.play();
+        });
 	}
 	if (evt.data == "stop") {
-		godownmix.stop();
+	    if(music != null) {
+		    music.stop();
+		}
 	}
 	if(split[0] == 'sound') {
 	    var sound = new Howl({

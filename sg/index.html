@@ -1,109 +1,117 @@
-﻿<!doctype html>  
+﻿<!doctype html>
+
 <head>
-   <meta charset="UTF-8">
-   <title>CMSG Player Page</title>
-   <link rel="icon" href="images/favicon.gif" type="image/x-icon"/>
- <!--[if lt IE 9]>
- <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+    <meta charset="UTF-8">
+    <title>CMSG Player Page</title>
+    <link rel="icon" href="images/favicon.gif" type="image/x-icon" />
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-   <link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon"/> 
-   <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-   <link href="css/simple-slider.css" rel="stylesheet" type="text/css" />
-   <link href="css/simple-slider-volume.css" rel="stylesheet" type="text/css" />  
-   <script src="js/jquery.js"></script>
-   <script src="js/simple-slider.js"></script>
-   <script src="js/howler.js"></script>
+    <link rel="shortcut icon" href="images/favicon.gif" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link href="css/simple-slider.css" rel="stylesheet" type="text/css" />
+    <link href="css/simple-slider-volume.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.js"></script>
+    <script src="js/simple-slider.js"></script>
+    <script src="js/howler.js"></script>
+    <script src="//connect.soundcloud.com/sdk.js"></script>
 
-<!--[if lt IE 7]>
-<style type="text/css">
-	.gallery span { behavior: url(iepngfix.htc); cursor: pointer; }
-	.gallery li { background: url(images/drop-shadow.gif) no-repeat center bottom; }
-</style>
-<![endif]-->
+    <!--[if lt IE 7]>
+        <style type="text/css">
+	        .gallery span { behavior: url(iepngfix.htc); cursor: pointer; }
+	        .gallery li { background: url(images/drop-shadow.gif) no-repeat center bottom; }
+        </style>
+    <![endif]-->
 
 </head>
+
 <body>
-   <FORM NAME="session">
-       <INPUT TYPE="hidden" NAME="name">
-   </FORM>
+    <FORM NAME="session">
+        <INPUT TYPE="hidden" NAME="name">
+    </FORM>
     <script src="js/websocket.js"></script>
-<!--start header-->
-<header>
-   <div class="container1">
-      <!--start title-->
-      <h1 class="fontface" id="title"><span class="orange">Sur</span><span class="pink">viv</span><span class="purple">al G</span><span class="blue ">am</span><span class="green ">es</span></h1>
-	  <h2 class="fontface"  id="title2"><span class="white">on </span><span class="white2" id="serverName"> a CMSG server</span></h2>
-      <!--end title-->
-      <!--start menu-->
-   </div>
-   <div class="bottom"> </div>
-   <!--end menu-->
-   <!--end header-->
-</header>
+    <!--start header-->
+    <header>
+        <div class="container1">
+            <!--start title-->
+            <h1 class="fontface" id="title"><span class="orange">Sur</span><span class="pink">viv</span><span class="purple">al G</span><span class="blue ">am</span><span class="green ">es</span></h1>
+            <h2 class="fontface" id="title2"><span class="white">on </span><span class="white2" id="serverName"> a CMSG server</span></h2>
+            <!--end title-->
+            <!--start menu-->
+        </div>
+        <div class="bottom"></div>
+        <!--end menu-->
+        <!--end header-->
+    </header>
 
- <div id="container">
-   <!--start intro-->
-   <section id="intro">
-     <div class="quote">
-      <section class="welcome">
-      <h2 class="fontface"><span>The SG Jukebox</span></h2> 
-	  <h3>You are now listening to live music, sounds, and announcers from the server you are currently playing on</h3>
-	  <p>Volume:</p>
-	  <div class = "volume">
-	     <input type="text" data-slider="true" data-slider-theme="volume">
-	  </div>
-     </div>
-   </section>
-   <!--end intro-->
-   
-      <section id="intro">
-     <div class="quote">
-     <h2 class="fontface"><span class="green">Info about </span><span class="green" id="player">you</span></h2> 
-	 <h2>Points: <span class="green" id="points">0</span></h2>
-	 <h2>Wins: <span class="orange" id="wins">0</span></h2>
-	 <h2>Kills: <span class="pink" id="kills">0</span></h2>
-	 <h2>Rank: <span class="blue" id="rank">0</span></h2>
-     </div>
-      </section>
-   
-	 <section id="intro">
-     <div class="quote">
-     <h2 class="fontface"><span class="blue">Current Game</span></h2> 
-     </div>
-      </section>
-      <div class="group3">
-      <h2>Game Info</h2>
-      <p>
-	  Arena ID: <span id="arena"></span><br>
-	  Game State: <span id="state"></span><br>
-	  Max Players: <span id="max"></span><br>
-	  Min Players: <span id="min"><span></span><br>
-	  Players: <span id="players"></span><br>
-	  </p>
-      </div>
-      <div class="group3">
-      <h2>Alive</h2>
-      <p><span id="alive"></span></p>
-      </div>
-      <div class="group3">
-      <h2>Dead</h2>
-      <p><span id="dead"></span></p>
-      </div>
-      <div class="group3">
-      <h2>Specs</h2>
-      <p><span id="specs"></span></p>
-      </div>
-   </div>
+    <div id="container">
+        <!--start intro-->
+        <section id="intro">
+            <div class="quote">
+                <section class="welcome">
+                    <h2 class="fontface"><span>The SG Jukebox</span></h2> 
+                    <h3>You are now listening to live music, sounds, and announcers from the server you are currently playing on</h3>
+                    <p>Volume:</p>
+                    <div class="volume">
+                        <input type="text" data-slider="true" data-slider-theme="volume">
+                    </div>
+            </div>
+            </section>
+            <!--end intro-->
 
-   <!--start footer-->
-   <footer>
+            <section id="intro">
+                <div class="quote">
+                    <h2 class="fontface"><span class="green">Info about </span><span class="green" id="player">you</span></h2> 
+                    <h2>Points: <span class="green" id="points">0</span></h2>
+                    <h2>Wins: <span class="orange" id="wins">0</span></h2>
+                    <h2>Kills: <span class="pink" id="kills">0</span></h2>
+                    <h2>Rank: <span class="blue" id="rank">0</span></h2>
+                </div>
+            </section>
 
-   <div class="container1">
-     <p> Copyright © 2014 | Community Survival Games Team</p> 
-   </div>
-   
-   </footer>
-   <!--end footer-->
- </body>
+            <section id="intro">
+                <div class="quote">
+                    <h2 class="fontface"><span class="blue">Current Game</span></h2> 
+                </div>
+            </section>
+            <div class="group3">
+                <h2>Game Info</h2>
+                <p>
+                    Arena ID: <span id="arena"></span>
+                    <br>Game State: <span id="state"></span>
+                    <br>Max Players: <span id="max"></span>
+                    <br>Min Players: <span id="min"><span></span>
+                    <br>Players: <span id="players"></span>
+                    <br>
+                </p>
+            </div>
+            <div class="group3">
+                <h2>Alive</h2>
+                <p><span id="alive"></span>
+                </p>
+            </div>
+            <div class="group3">
+                <h2>Dead</h2>
+                <p><span id="dead"></span>
+                </p>
+            </div>
+            <div class="group3">
+                <h2>Specs</h2>
+                <p><span id="specs"></span>
+                </p>
+            </div>
+    </div>
+
+    <!--start footer-->
+    <footer>
+
+        <div class="container1">
+            <p>Copyright © 2014 | Community Survival Games Team</p>
+        </div>
+
+    </footer>
+    <!--end footer-->
+</body>
+
 </html>
