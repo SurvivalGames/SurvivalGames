@@ -146,7 +146,8 @@ public class ArenaManager {
 
 		locs.put(p.getName(), p.getLocation());
 		p.teleport(a.lobby);
-
+		p.setExhaustion(0);
+		p.setFoodLevel(20);
 		// Ding!
 		for (Player player : SGApi.getPlugin().getServer().getOnlinePlayers()) {
 			player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
@@ -231,7 +232,8 @@ public class ArenaManager {
 		p.setFlying(false);
 		p.setCanPickupItems(true);
 		p.setHealth(20);
-
+		p.setExhaustion(0);
+		p.setFoodLevel(20);
 		locs.remove(p.getName());
 
 		for (PotionEffect effect : p.getActivePotionEffects()) {
