@@ -124,7 +124,6 @@ public class ArenaManager {
 			p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
 			
 			//TODO Temp
-			SendWebsocketData.playMusicToPlayer(p, String.valueOf(108555391));
 		}
 
 		for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
@@ -178,7 +177,11 @@ public class ArenaManager {
 				a.getPlayers().remove(p.getName());
 				if (a.players.size() < a.getMinPlayers())
 					a.restart();
-
+				if (a.getSpectators().contains(p.getName()))
+					a.getSpectators().remove(p.getName());
+				else {
+					a.getPlayers().remove(p.getName());
+				}
 				p.teleport(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()).getSpawnLocation());
 				p.setGameMode(GameMode.SURVIVAL);
 				p.getActivePotionEffects().clear();
@@ -217,12 +220,6 @@ public class ArenaManager {
 			if (arena.getPlayers().contains(p.getName()) || arena.getSpectators().contains(p.getName())) {
 				a = arena;
 			}
-		}
-
-		if (a.getSpectators().contains(p.getName()))
-			a.getSpectators().remove(p.getName());
-		else {
-			a.getPlayers().remove(p.getName());
 		}
 
 		p.getInventory().clear();

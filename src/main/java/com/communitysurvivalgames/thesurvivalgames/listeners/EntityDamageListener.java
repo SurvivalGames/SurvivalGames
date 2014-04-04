@@ -122,11 +122,11 @@ public class EntityDamageListener implements Listener {
 					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damaged)).gameTime.count > 30) {
 						if (!SendWebsocketData.music.containsKey(damaged.getName()) || SendWebsocketData.music.get(damaged.getName()).equalsIgnoreCase("ambient")) {
 							SendWebsocketData.music.put(damaged.getName(), "battle");
-							SendWebsocketData.playToPlayer(damaged, SendWebsocketData.getRandomMusic("battle-music"));
+							SendWebsocketData.playMusicToPlayer(damaged, SendWebsocketData.getRandomMusic("battle-music"));
 						}
 						if (!SendWebsocketData.music.containsKey(damaged.getName()) || SendWebsocketData.music.get(damaged.getName()).equalsIgnoreCase("ambient")) {
 							SendWebsocketData.music.put(damager.getName(), "battle");
-							SendWebsocketData.playToPlayer(damaged, SendWebsocketData.getRandomMusic("battle-music"));
+							SendWebsocketData.playMusicToPlayer(damaged, SendWebsocketData.getRandomMusic("battle-music"));
 						}
 					}
 				} catch (ArenaNotFoundException e1) {}
