@@ -153,7 +153,7 @@ public class TimeManager {
 	}
 
 	public void countdownDm() {
-		dm = new Countdown(a, 2, SGApi.getPlugin().getPluginConfig().getDmTime(), "DeathMatch", "minutes", new CodeExecutor() {
+		dm = new Countdown(a, 1, SGApi.getPlugin().getPluginConfig().getDmTime(), "DeathMatch", "minutes", new CodeExecutor() {
 			@Override
 			public void runCode() {
 				a.broadcast(I18N.getLocaleString("DM_STARTING"));
