@@ -245,6 +245,16 @@ public class ArenaManager {
 		}
 
 		p.setFireTicks(0);
+		
+		if(a == null)
+			return;
+		
+		if (a.getSpectators().contains(p.getName()))
+			a.getSpectators().remove(p.getName());
+		else {
+			a.getPlayers().remove(p.getName());
+		}
+		
 		//p.getInventory().setContents(inv.get(p.getName()));
 		//p.getInventory().setArmorContents(armor.get(p.getName()));
 	}

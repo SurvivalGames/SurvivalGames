@@ -159,8 +159,11 @@ public class TimeManager {
 				a.broadcast(I18N.getLocaleString("DM_STARTING"));
 				a.setState(SGArena.ArenaState.DEATHMATCH);
 				SafeEntityListener.getPlayers().addAll(a.getPlayers());
-				// tp to deathmatch
-
+				for (int i = 0; i < a.getPlayers().size(); i++) {
+					String s = a.getPlayers().get(i);
+					Player p = Bukkit.getPlayer(s);
+					p.teleport(a.getCurrentMap().locs.get(i));
+				}
 				commenceDm();
 			}
 		});
