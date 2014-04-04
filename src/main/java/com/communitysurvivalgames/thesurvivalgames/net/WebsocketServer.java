@@ -72,6 +72,8 @@ public class WebsocketServer extends WebSocketServer {
 	}
 
 	public void sendData(WebsocketSession session, String data) {
+		if(session == null)
+			return;
 		Collection<WebSocket> con = connections();
 		synchronized (con) {
 			for (WebSocket c : con) {

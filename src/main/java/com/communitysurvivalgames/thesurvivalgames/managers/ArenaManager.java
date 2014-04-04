@@ -101,6 +101,7 @@ public class ArenaManager {
 
 		if (!a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS) && !a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
 			a.spectators.add(p.getName());
+			p.teleport(a.getCurrentMap().locs.get(0));
 			p.setGameMode(GameMode.CREATIVE);
 			p.setCanPickupItems(false);
 			p.setAllowFlight(true);
