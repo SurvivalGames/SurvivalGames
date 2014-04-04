@@ -119,18 +119,14 @@ public class EntityDamageListener implements Listener {
 						event.setCancelled(true);
 						return;
 					}
-					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damaged)).gameTime.count > 20) {
-						if (!SendWebsocketData.music.containsKey(damaged.getName())) {
-							Bukkit.getLogger().info("Played godown");
-							SendWebsocketData.music.put(damaged.getName(), "godown");
-							SendWebsocketData.playToPlayer(damaged, "godown");
+					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damaged)).gameTime.count > 30) {
+						if (!SendWebsocketData.music.containsKey(damaged.getName()) || SendWebsocketData.music.get(damaged.getName()).equalsIgnoreCase("ambient")) {
+							SendWebsocketData.music.put(damaged.getName(), "battle");
+							SendWebsocketData.playToPlayer(damaged, SendWebsocketData.getRandomMusic("battle-music"));
 						}
-					}
-					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damager)).gameTime.count > 20) {
-						if (!SendWebsocketData.music.containsKey(damager.getName())) {
-							Bukkit.getLogger().info("Played godown");
-							SendWebsocketData.music.put(damager.getName(), "godown");
-							SendWebsocketData.playToPlayer(damager, "godown");
+						if (!SendWebsocketData.music.containsKey(damaged.getName()) || SendWebsocketData.music.get(damaged.getName()).equalsIgnoreCase("ambient")) {
+							SendWebsocketData.music.put(damager.getName(), "battle");
+							SendWebsocketData.playToPlayer(damaged, SendWebsocketData.getRandomMusic("battle-music"));
 						}
 					}
 				} catch (ArenaNotFoundException e1) {}

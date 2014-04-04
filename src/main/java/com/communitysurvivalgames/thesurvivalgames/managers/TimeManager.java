@@ -98,6 +98,9 @@ public class TimeManager {
 
 					index++;
 				}
+				for (String s : a.getPlayers()) {
+					SendWebsocketData.stopMusic(Bukkit.getPlayer(s));
+				}
 				countdown();
 				MoveListener.getPlayers().addAll(a.getPlayers());
 			}

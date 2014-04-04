@@ -22,7 +22,7 @@ public class SoundEffectsListener implements Listener {
 				Player p = (Player) a.getShooter();
 				Bukkit.getLogger().info("Player " + p.getName() + " hit something with an arrow, so I think I'll play a sound");
 				Bukkit.getLogger().info("Got a session: " + WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()));
-				SendWebsocketData.playToPlayer(p, "headshot");
+				//SendWebsocketData.playToPlayer(p, "headshot");
 			}
 		}
 	}

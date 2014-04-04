@@ -122,6 +122,9 @@ public class ArenaManager {
 			p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Simply leave your browser window open in the background, turn up your speakers, and we'll do the rest!");
 			p.sendMessage(ChatColor.AQUA + "");
 			p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
+			
+			//TODO Temp
+			SendWebsocketData.playMusicToPlayer(p, String.valueOf(108555391));
 		}
 
 		for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
@@ -152,6 +155,8 @@ public class ArenaManager {
 		for (Player player : SGApi.getPlugin().getServer().getOnlinePlayers()) {
 			player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
 		}
+		SendWebsocketData.stopMusic(p);
+		SendWebsocketData.playMusicToPlayer(p, SendWebsocketData.getRandomMusic("lobby-music"));
 
 		if (a.getPlayers().size() == a.minPlayers && a.countdown == false) {
 			a.countdown = true;
@@ -205,6 +210,7 @@ public class ArenaManager {
 			}
 
 			p.setFireTicks(0);
+			SendWebsocketData.stopMusic(p);
 		}
 		SGArena a = null;
 		for (SGArena arena : arenas) {
