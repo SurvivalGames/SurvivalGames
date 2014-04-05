@@ -6,6 +6,7 @@ import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundExcept
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import com.communitysurvivalgames.thesurvivalgames.util.EconUtil;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -126,7 +127,7 @@ public class Scoreboard implements Runnable {
 				sendScore(objective, SGApi.getKitManager().getKit(player).getName(), 4, complete);
 			sendScore(objective, "&c", 3, complete);
 			sendScore(objective, "&a&l" + I18N.getLocaleString("POINTS"), 2, complete);
-			sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "    ", 1, complete);
+			sendScore(objective, "&6&l" + EconUtil.getPoints(player) + "    ", 1, complete);
 			return;
 
 		}

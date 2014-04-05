@@ -3,6 +3,7 @@ main: com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames
 version: 1.0.0
 author: The Community!
 database: true
+softdepend: [Vault]
 
 commands:
     sg: 

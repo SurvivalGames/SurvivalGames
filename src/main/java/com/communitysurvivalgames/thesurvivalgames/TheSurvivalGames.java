@@ -12,12 +12,16 @@ import java.util.List;
 
 import javax.persistence.PersistenceException;
 
+import net.milkbowl.vault.chat.Chat;
+import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.communitysurvivalgames.thesurvivalgames.ability.Archer;
@@ -62,6 +66,7 @@ import com.communitysurvivalgames.thesurvivalgames.listeners.EntityInteractListe
 import com.communitysurvivalgames.thesurvivalgames.listeners.ItemDropListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.MobSpawnListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
+import com.communitysurvivalgames.thesurvivalgames.listeners.PlayerLoginListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.PlayerQuitListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SetupListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SignListener;
@@ -85,6 +90,8 @@ import com.communitysurvivalgames.thesurvivalgames.util.items.RailGun;
 public class TheSurvivalGames extends JavaPlugin {
 
 	private ConfigurationData configurationData;
+	private Economy econ = null;
+	private Chat chat = null;
 
 	@Override
 	public void onEnable() {
@@ -114,6 +121,8 @@ public class TheSurvivalGames extends JavaPlugin {
 		saveResource("locale/idID.lang", true);
 		saveResource("locale/esES.lang", true);
 
+		setupEconomy();
+		setupChat();
 		setupDatabase();
 
 		File i18N = new File(getDataFolder(), "locale/I18N.yml");
@@ -139,7 +148,7 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		if (!getPluginConfig().isHub())
 			SGApi.getArenaManager().loadGames();
-		
+
 		if (getPluginConfig().getUseServers()) {
 			try {
 				WebsocketServer.runServer();
@@ -230,6 +239,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new ChestListener(), this);
 		pm.registerEvents(new RailGun(), this);
 		pm.registerEvents(new MobSpawnListener(), this);
+		pm.registerEvents(new PlayerLoginListener(), this);
 		pm.registerEvents(new SoundEffectsListener(), this);
 
 		pm.registerEvents(new Archer(), this);
@@ -296,4 +306,41 @@ public class TheSurvivalGames extends JavaPlugin {
 		return configurationData;
 	}
 
+	private boolean setupChat() {
+		RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
+		if (chatProvider != null) {
+			chat = chatProvider.getProvider();
+		}
+
+		return (chat != null);
+	}
+
+	private boolean setupEconomy() {
+		RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+		if (economyProvider != null) {
+			econ = economyProvider.getProvider();
+		}
+
+		return (econ != null);
+	}
+
+	public Economy getEcon() {
+		return econ;
+	}
+
+	public Chat getChat() {
+		return chat;
+	}
+
+	public boolean useEcon() {
+		return (econ != null);
+	}
+
+	public boolean useChat() {
+		return (chat != null);
+	}
+
+	public String getPrefix(Player p) {
+		return chat.getPlayerPrefix(p);
+	}
 }

@@ -27,6 +27,7 @@ import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.net.SendWebsocketData;
 import com.communitysurvivalgames.thesurvivalgames.rollback.ChangedBlock;
+import com.communitysurvivalgames.thesurvivalgames.util.EconUtil;
 import com.communitysurvivalgames.thesurvivalgames.util.FireworkUtil;
 
 public class SGArena {
@@ -199,8 +200,8 @@ public class SGArena {
 			Player winner = Bukkit.getPlayer(players.get(0));
 			PlayerData data = SGApi.getPlugin().getPlayerData(winner);
 			data.addWin();
-			data.addPoints(100);
 			SGApi.getPlugin().setPlayerData(data);
+			EconUtil.addPoints(winner, 100);
 			winner.sendMessage(ChatColor.GOLD + "Plus 100 coins!");
 
 			FireworkUtil.getCircleUtil().playFireworkCircle(winner, FireworkEffect.builder().with(Type.BALL).withColor(Color.RED).withColor(Color.GREEN).withColor(Color.BLUE).withColor(Color.YELLOW).withTrail().build(), 10, 10);
@@ -372,9 +373,9 @@ public class SGArena {
 
 		PlayerData data = SGApi.getPlugin().getPlayerData(p);
 		data.addKill();
-		data.addPoints(10);
-		p.sendMessage(ChatColor.GOLD + "Plus 10 points!");
 		SGApi.getPlugin().setPlayerData(data);
+		p.sendMessage(ChatColor.GOLD + "Plus 10 points!");
+		EconUtil.addPoints(p, 10);
 	}
 
 	public void restart() {

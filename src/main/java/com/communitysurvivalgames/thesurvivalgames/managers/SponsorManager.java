@@ -44,12 +44,15 @@ public class SponsorManager {
 
 			@Override
 			public void onOptionClick(final OptionClickEvent event) {
-				if (EconUtil.isHooked()) {
-					if (!EconUtil.removePoints(event.getPlayer(), 10)) {
-						event.getPlayer().sendMessage(ChatColor.RED + "You cannot afford to buy that!");
-						return;
-					}
+
+				int price = Integer.parseInt(event.getItem().getItemMeta().getLore().get(1).replaceAll("[^0-9]", ""));
+
+				if (!EconUtil.removePoints(event.getPlayer(), price)) {
+					event.getPlayer().sendMessage(ChatColor.RED + "You cannot afford to buy that!");
+					event.setWillClose(true);
+					return;
 				}
+
 				Player sponsored = Bukkit.getPlayer(inMenu.get(event.getPlayer().getName()));
 				inMenu.remove(event.getPlayer().getName());
 				final Location loc = sponsored.getLocation();
@@ -62,6 +65,7 @@ public class SponsorManager {
 					@Override
 					public void run() {
 						Block block = loc.getWorld().getBlockAt(loc);
+						Material m = block.getType();
 						block.setType(Material.CHEST);
 						Chest chest = (Chest) block.getState();
 						chest.getInventory().setItem(13, event.getItem());
@@ -74,7 +78,7 @@ public class SponsorManager {
 						try {
 							SGArena a = SGApi.getArenaManager().getArena(event.getPlayer());
 							a.looted.add(chest);
-							a.changedBlocks.add(new ChangedBlock(event.getPlayer().getWorld().getName(), Material.AIR, (byte) 0, Material.CHEST, chest.getBlock().getData(), chest.getBlock().getX(), chest.getBlock().getY(), chest.getBlock().getZ()));
+							a.changedBlocks.add(new ChangedBlock(event.getPlayer().getWorld().getName(), m, (byte) 0, Material.CHEST, chest.getBlock().getData(), chest.getBlock().getX(), chest.getBlock().getY(), chest.getBlock().getZ()));
 						} catch (ArenaNotFoundException ignored) {}
 					}
 				}, 155L);

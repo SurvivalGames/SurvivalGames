@@ -54,6 +54,8 @@ public class PlayerData {
     }
 
     public void setRank(String rank) {
+    	if(rank.length() > 16)
+    		rank = rank.substring(0, 16);
         this.rank = rank;
     }
 
