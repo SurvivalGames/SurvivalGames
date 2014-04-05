@@ -22,6 +22,7 @@ import org.bukkit.scoreboard.Score;
 public class Scoreboard implements Runnable {
 
 	private final TheSurvivalGames plugin;
+	private boolean count = false;
 
 	private Scoreboard(TheSurvivalGames base) {
 		this.plugin = SGApi.getPlugin();
@@ -58,6 +59,7 @@ public class Scoreboard implements Runnable {
 	}
 
 	private void updateScoreboard(Player player, boolean complete) {
+		count = !count;
 		final Objective objective = player.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
 		if (!SGApi.getArenaManager().isInGame(player)) {
 			if (player.getWorld() != Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))
@@ -107,6 +109,7 @@ public class Scoreboard implements Runnable {
 
 		if (arena.getState() == SGArena.ArenaState.PRE_COUNTDOWN) {
 			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("Starting in: " + SGApi.getTimeManager(arena).g.timeToString()) + " " + SGApi.getTimeManager(arena).g.s[1]));
+
 			sendScore(objective, "&e" + I18N.getLocaleString("MAX_PLAYERS"), 14, complete);
 			sendScore(objective, "&f" + arena.getMaxPlayers() + " ", 13, complete);
 			sendScore(objective, "&0", 12, complete);
@@ -125,8 +128,8 @@ public class Scoreboard implements Runnable {
 			sendScore(objective, "&a&l" + I18N.getLocaleString("POINTS"), 2, complete);
 			sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "    ", 1, complete);
 			return;
-		}
 
+		}
 		objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("SURVIVAL_GAMES")));
 
 		//sendScore(objective, "&bKills", arena.kills.get(player.getName()), complete);
@@ -138,6 +141,8 @@ public class Scoreboard implements Runnable {
 
 	private static void sendScore(Objective objective, String title, int value, boolean complete) {
 
+		@SuppressWarnings("deprecation")
+		//f bukkit
 		final Score score = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.translateAlternateColorCodes('&', title)));
 		score.setScore(value);
 	}
@@ -147,6 +152,6 @@ public class Scoreboard implements Runnable {
 	}
 
 	public static void registerScoreboard() {
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Scoreboard(TheSurvivalGames.getPlugin(TheSurvivalGames.class)), 5, 20);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Scoreboard(TheSurvivalGames.getPlugin(TheSurvivalGames.class)), 5, 100);
 	}
 }

@@ -11,9 +11,6 @@ import org.java_websocket.WebSocketImpl;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
-import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
-import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
-
 public class WebsocketServer extends WebSocketServer {
 	public static WebsocketServer s;
 

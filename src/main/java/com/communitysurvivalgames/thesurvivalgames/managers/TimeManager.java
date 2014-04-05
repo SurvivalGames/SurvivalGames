@@ -167,7 +167,7 @@ public class TimeManager {
 				commenceDm();
 			}
 		});
-		dm.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), dm, 0L, 5 * 60 * 20L));
+		dm.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), dm, 0L, 60 * 20L));
 	}
 
 	void commenceDm() {

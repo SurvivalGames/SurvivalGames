@@ -106,6 +106,7 @@ public class ArenaManager {
 			p.setCanPickupItems(false);
 			p.setAllowFlight(true);
 			p.setFlying(true);
+			PlayerVanishUtil.hideAll(p);
 			return;
 		}
 		if (a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS) || a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
@@ -156,6 +157,7 @@ public class ArenaManager {
 		for (Player player : SGApi.getPlugin().getServer().getOnlinePlayers()) {
 			player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
 		}
+	
 		SendWebsocketData.stopMusic(p);
 		SendWebsocketData.playMusicToPlayer(p, SendWebsocketData.getRandomMusic("lobby-music"));
 

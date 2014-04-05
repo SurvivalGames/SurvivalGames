@@ -56,6 +56,9 @@ public class WebsocketSessionManager {
 		for (int i = 0; i < sessions.size(); i++) {
 			if (sessions.get(i).getHost().equalsIgnoreCase(host)) {
 				sessions.get(i).setName(name);
+				if (Bukkit.getPlayer(name) == null) {
+					WebsocketServer.s.sendData(sessions.get(i), "nullPlayer");
+				}
 				Bukkit.getLogger().info("Updated Websocket session information: " + sessions.get(i));
 			}
 		}
