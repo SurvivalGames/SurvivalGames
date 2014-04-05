@@ -150,6 +150,7 @@ public class ArenaManager {
 		locs.put(p.getName(), p.getLocation());
 		p.teleport(a.lobby);
 		p.setExhaustion(0);
+		p.setGameMode(GameMode.SURVIVAL);
 		p.setFoodLevel(20);
 		// Ding!
 		for (Player player : SGApi.getPlugin().getServer().getOnlinePlayers()) {
