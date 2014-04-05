@@ -1,10 +1,11 @@
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.event.inventory.InventoryCreativeEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
@@ -30,6 +31,15 @@ public class ItemDropListener implements Listener {
 	public void onItemPickup(PlayerPickupItemEvent event) {
 		try {
 			if (SGApi.getArenaManager().getArena(event.getPlayer()).spectators.contains(event.getPlayer().getName()))
+				event.setCancelled(true);
+		} catch (ArenaNotFoundException ignored) {}
+	}
+
+	@EventHandler(priority = EventPriority.HIGH)
+	public void onCreative(InventoryCreativeEvent event) {
+		try {
+			Player p = (Player) event.getWhoClicked();
+			if (SGApi.getArenaManager().getArena(p).spectators.contains(p.getName()))
 				event.setCancelled(true);
 		} catch (ArenaNotFoundException ignored) {}
 	}
