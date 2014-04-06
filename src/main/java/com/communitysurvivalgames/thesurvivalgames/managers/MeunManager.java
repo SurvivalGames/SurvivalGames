@@ -83,14 +83,14 @@ public class MeunManager {
 		///Vote Menu///
 		///////////////
 
-		voteMenu = new IconMenu("Vote for a map", 54, false, new IconMenu.OptionClickEventHandler() {
+		voteMenu = new IconMenu("Vote for a map", 9, false, new IconMenu.OptionClickEventHandler() {
 
 			@Override
 			public void onOptionClick(OptionClickEvent event) {
 				if (event.getItem().getType() == Material.EMPTY_MAP) {
 					try {
 						try {
-							SGApi.getArenaManager().getArena(event.getPlayer()).vote(event.getPlayer(), event.getItem().getItemMeta().getLore().get(0).charAt(4));
+							SGApi.getArenaManager().getArena(event.getPlayer()).vote(event.getPlayer(), Integer.parseInt(event.getItem().getItemMeta().getLore().get(0).charAt(4) + ""));
 						} catch (ArenaNotFoundException ignored) {}
 						event.setWillClose(true);
 					} catch (NumberFormatException e) {
@@ -111,8 +111,8 @@ public class MeunManager {
 			SGArena arena = SGApi.getArenaManager().getArena(p);
 			int i = 0;
 			for (Map.Entry<MapHash, Integer> entry : arena.votes.entrySet()) {
-				i++;
 				voteMenu.setOption(i, new ItemStack(Material.EMPTY_MAP), entry.getKey().getWorld().getDisplayName(), new String[] { "Map " + entry.getKey().getId(), "Current Votes: " + entry.getValue() });
+				i++;
 			}
 		} catch (ArenaNotFoundException e) {
 			return;

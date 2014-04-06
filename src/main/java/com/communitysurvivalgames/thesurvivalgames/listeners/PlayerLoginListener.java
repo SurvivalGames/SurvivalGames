@@ -83,18 +83,14 @@ public class PlayerLoginListener implements Listener {
 						MeunManager.getMenuManager().displayJoinMenu(event.getPlayer());
 						return;
 					}
-					if (event.getItem().getType().equals(Material.EMERALD)) {
-						try {
-							if (SGApi.getArenaManager().getArena(event.getPlayer()).getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
-								MeunManager.getMenuManager().displayVoteMenu(event.getPlayer());
-								return;
-							}
-						} catch (ArenaNotFoundException e) {
-							return;
-						}
-					}
 				}
 			}
+		}
+		if (event.getItem().getType().equals(Material.EMERALD)) {
+			if (SGApi.getArenaManager().isInGame(event.getPlayer())) {
+				MeunManager.getMenuManager().displayVoteMenu(event.getPlayer());
+			}
+			return;
 		}
 	}
 
