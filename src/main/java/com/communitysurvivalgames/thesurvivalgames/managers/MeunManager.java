@@ -26,6 +26,9 @@ public class MeunManager {
 	}
 
 	public MeunManager() {
+		///////////////
+		///Join Menu///
+		///////////////
 		joinMenu = new IconMenu("Join an arena", 54, new IconMenu.OptionClickEventHandler() {
 
 			@Override
@@ -70,6 +73,8 @@ public class MeunManager {
 				}
 			}
 		}, 20L, 20L);
+		
+		
 	}
 
 	public void displayJoinMenu(Player p) {

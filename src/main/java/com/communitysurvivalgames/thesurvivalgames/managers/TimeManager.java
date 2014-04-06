@@ -22,6 +22,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,7 @@ public class TimeManager {
 		// setup the voting
 		int i = 0;
 		List<MapHash> hashes = new ArrayList<>();
+		Collections.shuffle(SGApi.getMultiWorldManager().getWorlds());
 		for (SGWorld world : SGApi.getMultiWorldManager().getWorlds()) {
 			if (world.isInLobby()) {
 				continue;
