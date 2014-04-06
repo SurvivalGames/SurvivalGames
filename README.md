@@ -29,7 +29,7 @@ Try to edit with an IDE before putting something on GitHub as much as possible, 
 =========
 
 **Description**
-Description is faulty, so I erased it. See the wiki.
+Description is faulty, so I erased it. See the [![wiki](https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/wiki)]
 
 =========
 **Permissions**
