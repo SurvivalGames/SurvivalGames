@@ -67,7 +67,7 @@ public class Scoreboard implements Runnable {
 				return;
 			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("WELCOME") + ", " + player.getName()));
 			sendScore(objective, "&a&l" + I18N.getLocaleString("POINTS"), 11, complete);
-			sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "   ", 10, complete);
+			sendScore(objective, "&6&l" + EconUtil.getPoints(player) + "   ", 10, complete);
 			sendScore(objective, "&r", 9, complete);
 			sendScore(objective, "&e&l" + I18N.getLocaleString("RANK"), 8, complete);
 			sendScore(objective, getPlugin().getPlayerData(player).getRank(), 7, complete);
@@ -104,7 +104,7 @@ public class Scoreboard implements Runnable {
 				sendScore(objective, SGApi.getKitManager().getKit(player).getName(), 4, complete);
 			sendScore(objective, "&c", 3, complete);
 			sendScore(objective, "&a&l" + I18N.getLocaleString("POINTS"), 2, complete);
-			sendScore(objective, "&6&l" + getPlugin().getPlayerData(player).getPoints() + "    ", 1, complete);
+			sendScore(objective, "&6&l" + EconUtil.getPoints(player) + "    ", 1, complete);
 			return;
 		}
 
