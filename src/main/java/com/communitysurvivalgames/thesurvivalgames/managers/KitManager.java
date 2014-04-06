@@ -199,6 +199,7 @@ public class KitManager {
 			p.sendMessage(ChatColor.RED + "You did not select a kit so no kit will be given to you.");
 			return;
 		}
+		p.sendMessage(ChatColor.GOLD + "You got your kit!");
 		for (KitItem item : kit.getItems()) {
 			p.getInventory().addItem(item.getItem());
 		}

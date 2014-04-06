@@ -131,7 +131,6 @@ public class TimeManager {
 					public void run() {
 						for (String s : a.getPlayers()) {
 							SGApi.getKitManager().giveKit(Bukkit.getPlayer(s));
-							a.broadcast(ChatColor.GOLD + "You got your kit!");
 						}
 					}
 				}, 200L);
