@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import com.communitysurvivalgames.thesurvivalgames.managers.JoinMeunManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.MeunManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 
 public class SignListener implements Listener {
@@ -47,7 +47,7 @@ public class SignListener implements Listener {
 		if (event.getClickedBlock().getState() instanceof Sign) {
 			Sign sign = (Sign) event.getClickedBlock().getState();
 			if (sign.getLines()[0].equals(ChatColor.BLUE + "[SGJoin]")) {
-				JoinMeunManager.getMenuManager().displayMenu(event.getPlayer());
+				MeunManager.getMenuManager().displayMenu(event.getPlayer());
 				return;
 			}
 			if (sign.getLines()[0].equals(ChatColor.BLUE + "[SGKit]")) {

@@ -15,17 +15,17 @@ import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
 import com.communitysurvivalgames.thesurvivalgames.util.IconMenu.OptionClickEvent;
 
-public class JoinMeunManager {
-	static JoinMeunManager menuManager;
+public class MeunManager {
+	static MeunManager menuManager;
 	private IconMenu menu;
 
-	public static JoinMeunManager getMenuManager() {
+	public static MeunManager getMenuManager() {
 		if (menuManager == null)
-			menuManager = new JoinMeunManager();
+			menuManager = new MeunManager();
 		return menuManager;
 	}
 
-	public JoinMeunManager() {
+	public MeunManager() {
 		menu = new IconMenu("Join an arena", 54, new IconMenu.OptionClickEventHandler() {
 
 			@Override

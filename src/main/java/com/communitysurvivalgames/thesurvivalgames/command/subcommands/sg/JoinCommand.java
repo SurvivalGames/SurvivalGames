@@ -8,7 +8,7 @@ package com.communitysurvivalgames.thesurvivalgames.command.subcommands.sg;
 import org.bukkit.entity.Player;
 
 import com.communitysurvivalgames.thesurvivalgames.command.subcommands.SubCommand;
-import com.communitysurvivalgames.thesurvivalgames.managers.JoinMeunManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.MeunManager;
 
 public class JoinCommand implements SubCommand {
 
@@ -22,7 +22,7 @@ public class JoinCommand implements SubCommand {
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
 		if (cmd.equalsIgnoreCase("join")) {
-			JoinMeunManager.getMenuManager().displayMenu(p);
+			MeunManager.getMenuManager().displayMenu(p);
 		}
 	}
 }
