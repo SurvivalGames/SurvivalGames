@@ -69,7 +69,11 @@ public class TimeManager {
 		ItemStack emerald = new ItemStack(Material.EMERALD);
 		ItemMeta meta = emerald.getItemMeta();
 		meta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD + "Click to vote for a map");
-		
+		emerald.setItemMeta(meta);
+		for (String s : a.players) {
+			Bukkit.getPlayer(s).getInventory().setItem(0, emerald);
+		}
+
 		a.broadcast("Use the emerald in your inventory to vote!");
 		a.broadcastVotes();
 
@@ -200,7 +204,7 @@ public class TimeManager {
 		});
 		end.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), end, 0L, 60 * 20L));
 	}
-	
+
 	public void forceReset() {
 		if (g != null)
 			Bukkit.getScheduler().cancelTask(g.getId());
