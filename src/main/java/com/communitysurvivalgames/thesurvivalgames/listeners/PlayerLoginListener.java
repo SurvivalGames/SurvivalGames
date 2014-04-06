@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -26,17 +27,6 @@ public class PlayerLoginListener implements Listener {
 			@Override
 			public void run() {
 				event.setJoinMessage(null);
-				event.getPlayer().getInventory().clear();
-				ItemStack compass = new ItemStack(Material.COMPASS);
-				ItemMeta compassmeta = compass.getItemMeta();
-				compassmeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Click to join a SG game");
-				compass.setItemMeta(compassmeta);
-				ItemStack clock = new ItemStack(Material.WATCH);
-				ItemMeta clockmeta = compass.getItemMeta();
-				clockmeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Click to connect to the soundserver");
-				clock.setItemMeta(clockmeta);
-				event.getPlayer().getInventory().setItem(8, clock);
-				event.getPlayer().getInventory().setItem(0, compass);
 				for (String s : SGApi.getPlugin().getPluginConfig().getWelcomeMessage()) {
 					event.getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', s));
 				}
@@ -79,4 +69,22 @@ public class PlayerLoginListener implements Listener {
 			}
 		}
 	}
+
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onWorldChange(final PlayerChangedWorldEvent event) {
+		if (event.getPlayer().getWorld().getName() == SGApi.getPlugin().getPluginConfig().getHubWorld()) {
+			event.getPlayer().getInventory().clear();
+			ItemStack compass = new ItemStack(Material.COMPASS);
+			ItemMeta compassmeta = compass.getItemMeta();
+			compassmeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Click to join a SG game");
+			compass.setItemMeta(compassmeta);
+			ItemStack clock = new ItemStack(Material.WATCH);
+			ItemMeta clockmeta = compass.getItemMeta();
+			clockmeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Click to connect to the soundserver");
+			clock.setItemMeta(clockmeta);
+			event.getPlayer().getInventory().setItem(8, clock);
+			event.getPlayer().getInventory().setItem(0, compass);
+		}
+	}
+
 }
