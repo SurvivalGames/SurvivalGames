@@ -47,7 +47,7 @@ public class SignListener implements Listener {
 		if (event.getClickedBlock().getState() instanceof Sign) {
 			Sign sign = (Sign) event.getClickedBlock().getState();
 			if (sign.getLines()[0].equals(ChatColor.BLUE + "[SGJoin]")) {
-				MeunManager.getMenuManager().displayMenu(event.getPlayer());
+				MeunManager.getMenuManager().displayJoinMenu(event.getPlayer());
 				return;
 			}
 			if (sign.getLines()[0].equals(ChatColor.BLUE + "[SGKit]")) {

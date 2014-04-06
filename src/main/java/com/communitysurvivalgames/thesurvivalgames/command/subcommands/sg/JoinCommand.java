@@ -22,7 +22,7 @@ public class JoinCommand implements SubCommand {
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
 		if (cmd.equalsIgnoreCase("join")) {
-			MeunManager.getMenuManager().displayMenu(p);
+			MeunManager.getMenuManager().displayJoinMenu(p);
 		}
 	}
 }

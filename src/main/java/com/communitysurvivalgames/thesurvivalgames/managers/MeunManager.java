@@ -17,7 +17,7 @@ import com.communitysurvivalgames.thesurvivalgames.util.IconMenu.OptionClickEven
 
 public class MeunManager {
 	static MeunManager menuManager;
-	private IconMenu menu;
+	private IconMenu joinMenu;
 
 	public static MeunManager getMenuManager() {
 		if (menuManager == null)
@@ -26,7 +26,7 @@ public class MeunManager {
 	}
 
 	public MeunManager() {
-		menu = new IconMenu("Join an arena", 54, new IconMenu.OptionClickEventHandler() {
+		joinMenu = new IconMenu("Join an arena", 54, new IconMenu.OptionClickEventHandler() {
 
 			@Override
 			public void onOptionClick(OptionClickEvent event) {
@@ -46,14 +46,14 @@ public class MeunManager {
 			// 26-53 non-joinable
 			@Override
 			public void run() {
-				menu.clear();
+				joinMenu.clear();
 				List<SGArena> arenas = cloneThoseArenas();
 				int index = 0;
 				for (SGArena a : arenas) {
 					if (index == 5)
 						break;
 					if (a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS) || a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
-						menu.setOption(11 + index, new ItemStack(Material.EMERALD_BLOCK, a.getPlayers().size()), "SG - Arena " + a.getId(), new String[] { ChatColor.BLACK + "", ChatColor.YELLOW + "Players: " + ChatColor.WHITE + a.getPlayers().size(), ChatColor.YELLOW + "Status: " + ChatColor.GREEN + a.getState().toString(), ChatColor.AQUA + "", ChatColor.WHITE + "" + ChatColor.UNDERLINE + "Click to Join!" });
+						joinMenu.setOption(11 + index, new ItemStack(Material.EMERALD_BLOCK, a.getPlayers().size()), "SG - Arena " + a.getId(), new String[] { ChatColor.BLACK + "", ChatColor.YELLOW + "Players: " + ChatColor.WHITE + a.getPlayers().size(), ChatColor.YELLOW + "Status: " + ChatColor.GREEN + a.getState().toString(), ChatColor.AQUA + "", ChatColor.WHITE + "" + ChatColor.UNDERLINE + "Click to Join!" });
 						index++;
 					}
 
@@ -63,7 +63,7 @@ public class MeunManager {
 					if (index == 27)
 						break;
 					if (a.getState().equals(SGArena.ArenaState.IN_GAME) || a.getState().equals(SGArena.ArenaState.DEATHMATCH)) {
-						menu.setOption(26 + index, new ItemStack(Material.GOLD_BLOCK, a.getPlayers().size()), "SG - Arena " + a.getId(), new String[] { ChatColor.BLACK + "", ChatColor.YELLOW + "Players: " + ChatColor.WHITE + a.getPlayers().size(), ChatColor.YELLOW + "Status: " + ChatColor.GREEN + a.getState().toString(), ChatColor.AQUA + "", ChatColor.WHITE + "" + ChatColor.UNDERLINE + "Click to Spectate!" });
+						joinMenu.setOption(26 + index, new ItemStack(Material.GOLD_BLOCK, a.getPlayers().size()), "SG - Arena " + a.getId(), new String[] { ChatColor.BLACK + "", ChatColor.YELLOW + "Players: " + ChatColor.WHITE + a.getPlayers().size(), ChatColor.YELLOW + "Status: " + ChatColor.GREEN + a.getState().toString(), ChatColor.AQUA + "", ChatColor.WHITE + "" + ChatColor.UNDERLINE + "Click to Spectate!" });
 						index++;
 					}
 
@@ -72,8 +72,8 @@ public class MeunManager {
 		}, 20L, 20L);
 	}
 
-	public void displayMenu(Player p) {
-		menu.open(p);
+	public void displayJoinMenu(Player p) {
+		joinMenu.open(p);
 	}
 
 	private List<SGArena> cloneThoseArenas() {

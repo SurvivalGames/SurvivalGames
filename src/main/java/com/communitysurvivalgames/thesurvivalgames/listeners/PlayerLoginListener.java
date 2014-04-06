@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.communitysurvivalgames.thesurvivalgames.managers.JoinMeunManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.MeunManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.util.EconUtil;
@@ -60,24 +60,26 @@ public class PlayerLoginListener implements Listener {
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onInteract(final PlayerInteractEvent event) {
-		if (!SGApi.getArenaManager().isInGame(event.getPlayer())) {
-			if (event.getItem() != null) {
-				if (event.getItem().getType().equals(Material.WATCH)) {
-					Player p = event.getPlayer();
-					p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
-					p.sendMessage(ChatColor.AQUA + "");
-					p.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Want to here LIVE music, announcers, and sound effects?");
-					p.sendMessage(ChatColor.AQUA + "");
-					p.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "Click this link:");
-					p.sendMessage(ChatColor.WHITE + "" + ChatColor.UNDERLINE + "http://communitysurvivalgames.com/sg/index.html?name=" + p.getName() + "&session=" + SGApi.getPlugin().getPluginConfig().getServerIP());
-					p.sendMessage(ChatColor.AQUA + "");
-					p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Simply leave your browser window open in the background, turn up your speakers, and we'll do the rest!");
-					p.sendMessage(ChatColor.AQUA + "");
-					p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
-					return;
-				}
-				if (event.getItem().getType().equals(Material.COMPASS)) {
-					JoinMeunManager.getMenuManager().displayMenu(event.getPlayer());
+		if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
+			if (!SGApi.getArenaManager().isInGame(event.getPlayer())) {
+				if (event.getItem() != null) {
+					if (event.getItem().getType().equals(Material.WATCH)) {
+						Player p = event.getPlayer();
+						p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
+						p.sendMessage(ChatColor.AQUA + "");
+						p.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Want to here LIVE music, announcers, and sound effects?");
+						p.sendMessage(ChatColor.AQUA + "");
+						p.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "Click this link:");
+						p.sendMessage(ChatColor.WHITE + "" + ChatColor.UNDERLINE + "http://communitysurvivalgames.com/sg/index.html?name=" + p.getName() + "&session=" + SGApi.getPlugin().getPluginConfig().getServerIP());
+						p.sendMessage(ChatColor.AQUA + "");
+						p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Simply leave your browser window open in the background, turn up your speakers, and we'll do the rest!");
+						p.sendMessage(ChatColor.AQUA + "");
+						p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
+						return;
+					}
+					if (event.getItem().getType().equals(Material.COMPASS)) {
+						MeunManager.getMenuManager().displayJoinMenu(event.getPlayer());
+					}
 				}
 			}
 		}
