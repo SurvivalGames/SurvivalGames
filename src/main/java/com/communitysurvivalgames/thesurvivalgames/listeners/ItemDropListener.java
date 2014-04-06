@@ -1,5 +1,6 @@
 package com.communitysurvivalgames.thesurvivalgames.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,6 +18,10 @@ public class ItemDropListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onItemDrop(PlayerDropItemEvent event) {
+		if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
+			event.setCancelled(true);
+			return;
+		}
 		try {
 			if (SGApi.getArenaManager().getArena(event.getPlayer()).spectators.contains(event.getPlayer().getName()))
 				event.setCancelled(true);
