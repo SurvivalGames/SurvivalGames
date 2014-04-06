@@ -40,7 +40,7 @@ public class SponsorManager {
 
 	public SponsorManager(final SGArena a) {
 		this.a = a;
-		sponsor = new IconMenu("Select an item to sponsor", 54, new IconMenu.OptionClickEventHandler() {
+		sponsor = new IconMenu("Select an item to sponsor", 54, false, new IconMenu.OptionClickEventHandler() {
 
 			@Override
 			public void onOptionClick(final OptionClickEvent event) {
@@ -251,7 +251,7 @@ public class SponsorManager {
 		p.apply(potionItem);
 		sponsor.setOption(53, potionItem, ChatColor.translateAlternateColorCodes('&', "&6Invisibility - T2"), new String[] { ChatColor.translateAlternateColorCodes('&', "&6Can't see me now muahahah"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$40") : ChatColor.translateAlternateColorCodes('&', "&e&l40 Points") });
 
-		players = new IconMenu("Select the player to sponsor", 27, new IconMenu.OptionClickEventHandler() {
+		players = new IconMenu("Select the player to sponsor", 27, false, new IconMenu.OptionClickEventHandler() {
 
 			@Override
 			public void onOptionClick(final OptionClickEvent event) {
@@ -294,6 +294,7 @@ public class SponsorManager {
 				return Integer.compare(o1.getAmount(), o2.getAmount());
 			}
 		});
+		players.clearOptions();
 		for (int i = 0; i < items.size(); i++) {
 			players.setOption(i, items.get(i), items.get(i).getItemMeta().getDisplayName(), new String[] { ChatColor.translateAlternateColorCodes('&', "&e&lClick to sponsor this person!"), ChatColor.translateAlternateColorCodes('&', "&aNote: Health = Amount of emeralds") });
 		}

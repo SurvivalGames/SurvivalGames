@@ -109,7 +109,8 @@ public class ArenaManager {
 			PlayerVanishUtil.hideAll(p);
 			return;
 		}
-		if (a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS) || a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
+		if (a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
+			a.broadcastVotes();
 			p.sendMessage(prefix + "Type in /sg vote <ID> to vote for a map.");
 		}
 
@@ -126,10 +127,6 @@ public class ArenaManager {
 			p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
 			
 			//TODO Temp
-		}
-
-		for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
-			p.sendMessage(ChatColor.GOLD.toString() + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN.toString() + entry.getValue());
 		}
 
 		a.getPlayers().add(p.getName());
@@ -194,7 +191,8 @@ public class ArenaManager {
 				p.setCanPickupItems(true);
 				p.setHealth(20);
 				p.setFoodLevel(20);
-
+				p.getInventory().clear();
+				p.getInventory().setArmorContents(null);
 				for (PotionEffect effect : p.getActivePotionEffects()) {
 					p.removePotionEffect(effect.getType());
 				}

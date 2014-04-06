@@ -6,6 +6,7 @@
 package com.communitysurvivalgames.thesurvivalgames.objects;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -168,6 +169,22 @@ public class SGArena {
 			}
 		}
 	}
+	
+	public void broadcastNoPrefix(String message) {
+		for (String s : players) {
+			Player p = Bukkit.getServer().getPlayerExact(s);
+			if (p != null) {
+				p.sendMessage(message);
+			}
+		}
+
+		for (String s : spectators) {
+			Player p = Bukkit.getServer().getPlayerExact(s);
+			if (p != null) {
+				p.sendMessage(message);
+			}
+		}
+	}
 
 	/**
 	 * Puts the arena into deathmatch
@@ -285,10 +302,19 @@ public class SGArena {
 			return;
 		votes.put(voteWorld, votes.get(voteWorld) + 1);
 		this.broadcast(ChatColor.GOLD + p.getDisplayName() + " has voted! Use /vote to cast your vote!");
-		for (Map.Entry<MapHash, Integer> entry : votes.entrySet()) {
-			broadcast(ChatColor.GOLD.toString() + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN.toString() + entry.getValue());
-		}
+		broadcastVotes();
 		voted.add(p.getName());
+	}
+
+	public void broadcastVotes() {
+		List<String> voteStrings = new ArrayList<String>();
+		for (Map.Entry<MapHash, Integer> entry : votes.entrySet()) {
+			voteStrings.add(ChatColor.GREEN.toString() + ChatColor.BOLD.toString() + entry.getKey().getId() + ": " + ChatColor.AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ChatColor.DARK_RED + ChatColor.BOLD + " --> " + ChatColor.YELLOW.toString() + ChatColor.BOLD.toString() + entry.getValue());
+		}
+		Collections.sort(voteStrings);
+		for (String s : voteStrings) {
+			broadcast(s);
+		}
 	}
 
 	/**

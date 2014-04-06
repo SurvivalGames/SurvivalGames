@@ -36,7 +36,7 @@ public class KitManager {
 		readKitsFromFiles();
 
 		for (int i = 0; i < 9; i++) {
-			menus.add(new IconMenu("Select Your Kit - " + i, 54, new IconMenu.OptionClickEventHandler() {
+			menus.add(new IconMenu("Select Your Kit - " + i, 54, false, new IconMenu.OptionClickEventHandler() {
 				@Override
 				public void onOptionClick(IconMenu.OptionClickEvent event) {
 					if (event.getName().startsWith("Page")) {

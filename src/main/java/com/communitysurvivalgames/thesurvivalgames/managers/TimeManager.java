@@ -6,6 +6,19 @@
  */
 package com.communitysurvivalgames.thesurvivalgames.managers;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
 import com.communitysurvivalgames.thesurvivalgames.event.GameStartEvent;
 import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SafeEntityListener;
@@ -16,15 +29,6 @@ import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.runnables.CodeExecutor;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Countdown;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 public class TimeManager {
 
@@ -62,10 +66,12 @@ public class TimeManager {
 			a.votes.put(hash, 0);
 		}
 
-		a.broadcast("Type in /sg vote <ID> to vote for a map.");
-		for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
-			a.broadcast(ChatColor.GOLD.toString() + entry.getKey().getId() + ". " + ChatColor.DARK_AQUA.toString() + entry.getKey().getWorld().getDisplayName() + ": " + ChatColor.GREEN.toString() + entry.getValue());
-		}
+		ItemStack emerald = new ItemStack(Material.EMERALD);
+		ItemMeta meta = emerald.getItemMeta();
+		meta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD + "Click to vote for a map");
+		
+		a.broadcast("Use the emerald in your inventory to vote!");
+		a.broadcastVotes();
 
 		a.setState(SGArena.ArenaState.PRE_COUNTDOWN);
 
@@ -194,7 +200,7 @@ public class TimeManager {
 		});
 		end.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), end, 0L, 60 * 20L));
 	}
-
+	
 	public void forceReset() {
 		if (g != null)
 			Bukkit.getScheduler().cancelTask(g.getId());

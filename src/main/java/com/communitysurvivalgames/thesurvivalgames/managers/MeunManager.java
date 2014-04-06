@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,6 +12,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
+import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.util.IconMenu;
 import com.communitysurvivalgames.thesurvivalgames.util.IconMenu.OptionClickEvent;
@@ -18,6 +21,7 @@ import com.communitysurvivalgames.thesurvivalgames.util.IconMenu.OptionClickEven
 public class MeunManager {
 	static MeunManager menuManager;
 	private IconMenu joinMenu;
+	private IconMenu voteMenu;
 
 	public static MeunManager getMenuManager() {
 		if (menuManager == null)
@@ -29,7 +33,7 @@ public class MeunManager {
 		///////////////
 		///Join Menu///
 		///////////////
-		joinMenu = new IconMenu("Join an arena", 54, new IconMenu.OptionClickEventHandler() {
+		joinMenu = new IconMenu("Join an arena", 54, true, new IconMenu.OptionClickEventHandler() {
 
 			@Override
 			public void onOptionClick(OptionClickEvent event) {
@@ -43,6 +47,7 @@ public class MeunManager {
 				}
 			}
 		}, SGApi.getPlugin());
+
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), new Runnable() {
 
 			// 11-15 joinable
@@ -73,12 +78,46 @@ public class MeunManager {
 				}
 			}
 		}, 20L, 20L);
-		
-		
+
+		///////////////
+		///Vote Menu///
+		///////////////
+
+		voteMenu = new IconMenu("Vote for a map", 54, false, new IconMenu.OptionClickEventHandler() {
+
+			@Override
+			public void onOptionClick(OptionClickEvent event) {
+				if (event.getItem().getType() == Material.EMPTY_MAP) {
+					try {
+						try {
+							SGApi.getArenaManager().getArena(event.getPlayer()).vote(event.getPlayer(), event.getItem().getItemMeta().getLore().get(0).charAt(4));
+						} catch (ArenaNotFoundException ignored) {}
+						event.setWillClose(true);
+					} catch (NumberFormatException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}, SGApi.getPlugin());
 	}
 
 	public void displayJoinMenu(Player p) {
 		joinMenu.open(p);
+	}
+
+	public void displayVoteMenu(Player p) {
+		voteMenu.clearOptions();
+		try {
+			SGArena arena = SGApi.getArenaManager().getArena(p);
+			int i = 0;
+			for (Map.Entry<MapHash, Integer> entry : arena.votes.entrySet()) {
+				i++;
+				voteMenu.setOption(i, new ItemStack(Material.EMPTY_MAP), entry.getKey().getWorld().getDisplayName(), new String[] { "Map " + entry.getKey().getId(), "Current Votes: " + entry.getValue() });
+			}
+		} catch (ArenaNotFoundException e) {
+			return;
+		}
+		voteMenu.open(p);
 	}
 
 	private List<SGArena> cloneThoseArenas() {

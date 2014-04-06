@@ -27,19 +27,21 @@ public class IconMenu implements Listener {
 	private int size;
 	private OptionClickEventHandler handler;
 	private Plugin plugin;
+	private boolean update;
 
 	private Map<String, Integer> tasks = new HashMap<String, Integer>();
 
 	private String[] optionNames;
 	private ItemStack[] optionIcons;
 
-	public IconMenu(String name, int size, OptionClickEventHandler handler, Plugin plugin) {
+	public IconMenu(String name, int size, boolean update, OptionClickEventHandler handler, Plugin plugin) {
 		this.name = name;
 		this.size = size;
 		this.handler = handler;
 		this.plugin = plugin;
 		this.optionNames = new String[size];
 		this.optionIcons = new ItemStack[size];
+		this.update = update;
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
@@ -47,6 +49,13 @@ public class IconMenu implements Listener {
 		optionNames[position] = name;
 		optionIcons[position] = setItemNameAndLore(icon, name, info);
 		return this;
+	}
+
+	public void clearOptions() {
+		for (int i = 0; i < optionNames.length; i++) {
+			this.optionNames = new String[size];
+			this.optionIcons = new ItemStack[size];
+		}
 	}
 
 	public void open(Player player) {
@@ -57,17 +66,19 @@ public class IconMenu implements Listener {
 			}
 		}
 		player.openInventory(inventory);
-		tasks.put(player.getName(), Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), new Runnable() {
+		if (update) {
+			tasks.put(player.getName(), Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), new Runnable() {
 
-			@Override
-			public void run() {
-				for (int i = 0; i < optionIcons.length; i++) {
-					if (optionIcons[i] != null) {
-						inventory.setItem(i, optionIcons[i]);
+				@Override
+				public void run() {
+					for (int i = 0; i < optionIcons.length; i++) {
+						if (optionIcons[i] != null) {
+							inventory.setItem(i, optionIcons[i]);
+						}
 					}
 				}
-			}
-		}, 20L, 20L));
+			}, 20L, 20L));
+		}
 	}
 
 	public void destroy() {
@@ -110,8 +121,10 @@ public class IconMenu implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onInventoryClose(InventoryCloseEvent event) {
 		if (event.getInventory().getTitle().equals(name)) {
-			Bukkit.getScheduler().cancelTask(tasks.get(event.getPlayer().getName()));
-			tasks.remove(event.getPlayer().getName());
+			if (update) {
+				Bukkit.getScheduler().cancelTask(tasks.get(event.getPlayer().getName()));
+				tasks.remove(event.getPlayer().getName());
+			}
 		}
 	}
 
