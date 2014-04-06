@@ -127,7 +127,7 @@ public class Scoreboard implements Runnable {
 				sendScore(objective, SGApi.getKitManager().getKit(player).getName(), 4, complete);
 			sendScore(objective, "&c", 3, complete);
 			sendScore(objective, "&a&l" + I18N.getLocaleString("POINTS"), 2, complete);
-			sendScore(objective, "&6&l" + EconUtil.getPoints(player) + "    ", 1, complete);
+			sendScore(objective, "&6&l" + EconUtil.getPoints(player) + "    ", 1, complete);//test
 			return;
 
 		}

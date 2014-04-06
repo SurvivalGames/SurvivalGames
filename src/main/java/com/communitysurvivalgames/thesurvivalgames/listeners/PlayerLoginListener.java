@@ -34,7 +34,7 @@ public class PlayerLoginListener implements Listener {
 				ItemStack clock = new ItemStack(Material.WATCH);
 				ItemMeta clockmeta = compass.getItemMeta();
 				clockmeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Click to connect to the soundserver");
-				compass.setItemMeta(clockmeta);
+				clock.setItemMeta(clockmeta);
 				event.getPlayer().getInventory().setItem(8, clock);
 				event.getPlayer().getInventory().setItem(0, compass);
 				for (String s : SGApi.getPlugin().getPluginConfig().getWelcomeMessage()) {
@@ -73,7 +73,7 @@ public class PlayerLoginListener implements Listener {
 					p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
 					return;
 				}
-				if (event.getItem().equals(Material.COMPASS)) {
+				if (event.getItem().getType().equals(Material.COMPASS)) {
 					JoinMeunManager.getMenuManager().displayMenu(event.getPlayer());
 				}
 			}
