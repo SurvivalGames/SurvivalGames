@@ -58,21 +58,19 @@ t1Chest:
          - CHAINMAIL_LEGGINGS,1
          - CHAINMAIL_BOOTS,1
          - EXP_BOTTLE,5
-         - GOLD_SWORD,1
          - BOW,1
          - IRON_INGOT,1
          - GOLD_INGOT,1
          - IRON_AXE,1
          - STICK,1
          - WEB,1
-         - MUSHROOM_SOUP,1
          - TNT,1
      lvl4:
          - IRON_HELMET,1
          - IRON_CHESTPLATE,1
          - IRON_LEGGINGS,1
          - IRON_BOOTS,1
-         - CAKE, 1
+         - CAKE,1
      lvl5:
          - DIAMOND,1
          - PUMPKIN_PIE,4
