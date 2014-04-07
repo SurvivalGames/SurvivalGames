@@ -16,6 +16,7 @@ import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -80,6 +81,9 @@ import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.proxy.BungeecordListener;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
+import com.communitysurvivalgames.thesurvivalgames.tracking.AnalyticsConfigData;
+import com.communitysurvivalgames.thesurvivalgames.tracking.JGoogleAnalyticsTracker;
+import com.communitysurvivalgames.thesurvivalgames.tracking.JGoogleAnalyticsTracker.GoogleAnalyticsVersion;
 import com.communitysurvivalgames.thesurvivalgames.util.DoubleJump;
 import com.communitysurvivalgames.thesurvivalgames.util.LocationChecker;
 import com.communitysurvivalgames.thesurvivalgames.util.SerializedLocation;
@@ -92,6 +96,7 @@ public class TheSurvivalGames extends JavaPlugin {
 	private ConfigurationData configurationData;
 	private Economy econ = null;
 	private Chat chat = null;
+	private JGoogleAnalyticsTracker tracker;
 
 	@Override
 	public void onEnable() {
@@ -159,6 +164,13 @@ public class TheSurvivalGames extends JavaPlugin {
 			}
 		}
 
+		AnalyticsConfigData config = new AnalyticsConfigData("UA-49716599-1");
+		config.setUserAgent("Java/" + System.getProperty("java.version") + " : Bukkit/" + Bukkit.getVersion() + " (" + System.getProperty("os.name") + "; " + System.getProperty("os.arch") + ")");
+		config.setFlashVersion("9.0 r24");
+		tracker = new JGoogleAnalyticsTracker(config, GoogleAnalyticsVersion.V_4_7_2);
+		tracker.setEnabled(true);
+		tracker.trackEvent("Server Start", "Motd: " + ChatColor.stripColor(Bukkit.getMotd()) + ", Max Players: " + Bukkit.getMaxPlayers() + ", Version: " + Bukkit.getVersion() + " running on " + Bukkit.getBukkitVersion() + ", Java: " + System.getProperty("java.version"));
+		
 		getLogger().info(I18N.getLocaleString("BEEN_ENABLED"));
 		getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
 	}
@@ -342,5 +354,9 @@ public class TheSurvivalGames extends JavaPlugin {
 
 	public String getPrefix(Player p) {
 		return chat.getPlayerPrefix(p);
+	}
+
+	public JGoogleAnalyticsTracker getTracker() {
+		return tracker;
 	}
 }
