@@ -53,7 +53,9 @@ public class PlayerLoginListener implements Listener {
 						SGApi.getPlugin().setPlayerData(data);
 					}
 				}
+		        SGApi.getPlugin().getTracker().trackEvent("Player Login", event.getPlayer().getName());
 			}
+			
 		}, 10L);
 
 	}
