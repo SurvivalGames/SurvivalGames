@@ -37,5 +37,6 @@ public class PlayerQuitListener implements Listener {
                 }
             }
         }
+        SGApi.getPlugin().getTracker().trackEvent("Player Disconnect", event.getPlayer().getName());
     }
 }

@@ -218,6 +218,7 @@ public class SGArena {
 			PlayerData data = SGApi.getPlugin().getPlayerData(winner);
 			data.addWin();
 			SGApi.getPlugin().setPlayerData(data);
+	        SGApi.getPlugin().getTracker().trackEvent("Player Win", winner.getName());
 			EconUtil.addPoints(winner, 100);
 			winner.sendMessage(ChatColor.GOLD + "Plus 100 coins!");
 
@@ -372,6 +373,7 @@ public class SGArena {
 		dead++;
 		getPlayers().remove(p.getName());
 		getSpectators().add(p.getName());
+        SGApi.getPlugin().getTracker().trackEvent("Player Death", p.getName());
 		if (players.size() == 1)
 			end();
 	}
@@ -380,6 +382,7 @@ public class SGArena {
 		dead++;
 		getPlayers().remove(p.getName());
 		SGApi.getArenaManager().removePlayer(p);
+        SGApi.getPlugin().getTracker().trackEvent("Player Death", p.getName());
 		if (players.size() == 1)
 			end();
 	}
@@ -401,6 +404,7 @@ public class SGArena {
 		data.addKill();
 		SGApi.getPlugin().setPlayerData(data);
 		p.sendMessage(ChatColor.GOLD + "Plus 10 points!");
+        SGApi.getPlugin().getTracker().trackEvent("Player Kill", p.getName());
 		EconUtil.addPoints(p, 10);
 	}
 
