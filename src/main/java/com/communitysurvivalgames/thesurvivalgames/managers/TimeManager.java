@@ -106,6 +106,7 @@ public class TimeManager {
 					Player p = Bukkit.getPlayerExact(s);
 					Bukkit.getLogger().info("List: " + a.currentMap.locs.toString());
 					Location loc = a.currentMap.locs.get(index);
+					p.getInventory().clear();
 					p.teleport(loc);
 
 					index++;
