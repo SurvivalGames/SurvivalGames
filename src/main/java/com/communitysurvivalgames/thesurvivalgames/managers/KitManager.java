@@ -43,13 +43,14 @@ public class KitManager {
 						displayKitSelectionMenu(event.getPlayer(), (Integer.parseInt(event.getName().charAt(5) + "") - 1));
 						return;
 					}
-					if (!(event.getPlayer().hasPermission("sg.kits.*") || event.getPlayer().hasPermission("sg.kits." + event.getName()) || event.getPlayer().isOp())) {
-						event.getPlayer().sendMessage(ChatColor.RED + "Sorry, but you do not have permission to use this kit!");
+					if (event.getPlayer().hasPermission("sg.kits.*") || event.getPlayer().hasPermission("sg.kits." + event.getName()) || event.getPlayer().isOp()) {
+						event.getPlayer().sendMessage("You have chosen the " + event.getName() + " kit!");
+						setPlayerKit(event.getPlayer(), getKit(event.getName()));
+						event.setWillClose(true);
 						return;
 					}
-					event.getPlayer().sendMessage("You have chosen the " + event.getName() + " kit!");
-					setPlayerKit(event.getPlayer(), getKit(event.getName()));
 					event.setWillClose(true);
+					event.getPlayer().sendMessage(ChatColor.RED + "Sorry, but you do not have permission to use this kit!");
 
 				}
 			}, SGApi.getPlugin()));
