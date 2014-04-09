@@ -16,6 +16,7 @@ import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundExcept
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
+import com.communitysurvivalgames.thesurvivalgames.util.EconUtil;
 
 public class SendWebsocketData {
 	public static Map<String, String> music = new HashMap<String, String>();
@@ -71,7 +72,7 @@ public class SendWebsocketData {
 			@Override
 			public void run() {
 				PlayerData data = SGApi.getPlugin().getPlayerData(p);
-				WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "points:" + data.getPoints());
+				WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "points:" + EconUtil.getPoints(p));
 				WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "kills:" + data.getKills());
 				WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "wins:" + data.getWins());
 				WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "rank:" + ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', data.getRank())));
