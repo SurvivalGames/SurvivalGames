@@ -37,19 +37,17 @@ Description is faulty, so I erased it. See the [![wiki](https://github.com/Survi
 **Permissions**
 
 ```
-sg.admin (access to all survivalgames.player commands and survivalgames.mod commands as well as the arena setup commands)
+sg.create Allows the player to create maps.
 
-sg.mod (access to all survivalgames.player commands and also /sg forcestart and /sg forcestop)
+sg.remove Allows the player to remove a map.
 
-sg.player (access to joining arenas, showing available arenas, voting for maps, spectating, boutying and sponsoring)
+sg.set Allows the player to create arenas, set min and max players, and create kit selection locations.
 
-sg.vote.worth.<number> (how much a vote is worth, survivalgames.player will have 1 by default but it can be given to other players for example donators so that they can have a better chance of having their map selected)
+sg.start Allows the player to force start the arena.
 
-sg.join.<arena name> (permission to join an arena, when set to false players cannot join the arena (useful for donator only arenas + staff only testing)
+sg.stop Allows the player to force stop an arena.
 
-sg.join.* (access to join all arenas)
-
-sg.create (create an arena)
+sg.user Allows the player to edit a user's status.
 ```
 
 ========
