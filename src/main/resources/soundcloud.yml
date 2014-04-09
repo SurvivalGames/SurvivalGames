@@ -29,7 +29,7 @@ lobby-music:
 
 # Ingame music for when the player is "alone" - typically quite scary and tense
 ambient-music:
-    # Hostile Waters - By Øystein Jørgensen
+    # Hostile Waters - By ï¿½ystein Jï¿½rgensen
     - 140939255
     # Hatred Echoing Through the Trees - By Dark Ambient Forest
     - 52633412
@@ -58,3 +58,5 @@ battle-music:
     - 43793529
     # Hyperblast-Redux - By UT3
     - 43791895
+    # Break The House - By Kevin Drew
+    - 125118989
