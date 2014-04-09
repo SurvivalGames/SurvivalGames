@@ -14,12 +14,14 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
@@ -92,6 +94,15 @@ public class BlockListener implements Listener {
 	public void onEntityExplode(EntityExplodeEvent event) {
 		if (event.getEntityType().equals(EntityType.PRIMED_TNT)) {
 			event.blockList().clear();
+		}
+	}
+
+	@EventHandler(priority = EventPriority.HIGH)
+	public void onHangingBreak(HangingBreakByEntityEvent event) {
+		if (event.getEntity() instanceof Player) {
+			if (SGApi.getArenaManager().isInGame((Player) event.getEntity())) {
+				event.setCancelled(true);
+			}
 		}
 	}
 }
