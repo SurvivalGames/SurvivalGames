@@ -20,6 +20,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.inventory.ItemStack;
 
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
@@ -53,6 +54,10 @@ public class BlockListener implements Listener {
 			}
 			if (event.getBlock().getType().equals(Material.TNT)) {
 				event.getPlayer().getWorld().spawnEntity(event.getBlock().getLocation(), EntityType.PRIMED_TNT);
+				ItemStack item = event.getPlayer().getInventory().getItemInHand();
+				int amount = item.getAmount() - 1;
+				item.setAmount(amount);
+				event.getPlayer().getInventory().setItemInHand(item);
 			}
 			event.setCancelled(true);
 		}
