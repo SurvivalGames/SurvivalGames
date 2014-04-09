@@ -29,7 +29,7 @@ lobby-music:
 
 # Ingame music for when the player is "alone" - typically quite scary and tense
 ambient-music:
-    # Hostile Waters - By �ystein J�rgensen
+    # Hostile Waters - By Oeystein Joergensen
     - 140939255
     # Hatred Echoing Through the Trees - By Dark Ambient Forest
     - 52633412
