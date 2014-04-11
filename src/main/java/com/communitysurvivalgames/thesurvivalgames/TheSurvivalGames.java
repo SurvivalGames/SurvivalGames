@@ -74,6 +74,7 @@ import com.communitysurvivalgames.thesurvivalgames.listeners.SignListener;
 import com.communitysurvivalgames.thesurvivalgames.listeners.SoundEffectsListener;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
 import com.communitysurvivalgames.thesurvivalgames.managers.ArenaManager;
+import com.communitysurvivalgames.thesurvivalgames.managers.ItemManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.multiworld.SGWorld;
 import com.communitysurvivalgames.thesurvivalgames.net.WebsocketServer;
@@ -266,6 +267,8 @@ public class TheSurvivalGames extends JavaPlugin {
 		pm.registerEvents(new Zelda(), this);
 
 		Scoreboard.registerScoreboard();
+		ItemManager.register();
+		
 		SGApi.getEnchantmentManager().registerAll();
 
 		SGApi.getKitManager().loadKits();
