@@ -70,51 +70,12 @@ public class FakeBlockUtil {
 				}
 				Location a;
 				for (int i = 0; i < 5; i++) {
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(0, i, 0), Material.NETHER_BRICK, (byte) 0);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(-1, i, 0), Material.WALL_SIGN, (byte) 4);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(0, i, 1), Material.NETHER_BRICK, (byte) 0);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(-1, i, 1), Material.WALL_SIGN, (byte) 4);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(0, i, -1), Material.NETHER_BRICK, (byte) 0);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(-1, i, -1), Material.WALL_SIGN, (byte) 4);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(0, i, 2), Material.NETHER_BRICK, (byte) 0);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(-1, i, 2), Material.WALL_SIGN, (byte) 4);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(0, i, -2), Material.NETHER_BRICK, (byte) 0);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(-1, i, -2), Material.WALL_SIGN, (byte) 4);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(0, i, 3), Material.NETHER_BRICK, (byte) 0);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(-1, i, 3), Material.WALL_SIGN, (byte) 4);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(0, i, -3), Material.NETHER_BRICK, (byte) 0);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(-1, i, -3), Material.WALL_SIGN, (byte) 4);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(0, i, 4), Material.NETHER_BRICK, (byte) 0);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(-1, i, 4), Material.WALL_SIGN, (byte) 4);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(0, i, -4), Material.NETHER_BRICK, (byte) 0);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(-1, i, -4), Material.WALL_SIGN, (byte) 4);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(0, i, 5), Material.NETHER_BRICK, (byte) 0);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(-1, i, 5), Material.WALL_SIGN, (byte) 4);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(0, i, -5), Material.NETHER_BRICK, (byte) 0);
-					a = new Location(w, cx + 11, cy, cz);
-					player.sendBlockChange(a.add(-1, i, -5), Material.WALL_SIGN, (byte) 4);
-
+					for (int c = -5; c < 5; c++) {
+						a = new Location(w, cx + 11, cy, cz);
+						player.sendBlockChange(a.add(0, i, c), Material.NETHER_BRICK, (byte) 0);
+						a = new Location(w, cx + 11, cy, cz);
+						player.sendBlockChange(a.add(-1, i, c), Material.WALL_SIGN, (byte) 4);
+					}
 				}
 			}
 		});
