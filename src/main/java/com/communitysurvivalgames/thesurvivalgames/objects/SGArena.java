@@ -374,7 +374,7 @@ public class SGArena {
 		getPlayers().remove(p.getName());
 		getSpectators().add(p.getName());
         SGApi.getPlugin().getTracker().trackEvent("Player Death", p.getName());
-		if (players.size() == 1)
+		if (players.size() <= 1)
 			end();
 	}
 
@@ -383,14 +383,14 @@ public class SGArena {
 		getPlayers().remove(p.getName());
 		SGApi.getArenaManager().removePlayer(p);
         SGApi.getPlugin().getTracker().trackEvent("Player Death", p.getName());
-		if (players.size() == 1)
+		if (players.size() <= 1)
 			end();
 	}
 
 	public void deathWithQuit(Player p) {
 		dead++;
 		getPlayers().remove(p.getName());
-		if (players.size() == 1)
+		if (players.size() <= 1)
 			end();
 	}
 
