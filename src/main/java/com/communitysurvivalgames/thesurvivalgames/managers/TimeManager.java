@@ -14,10 +14,9 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import com.communitysurvivalgames.thesurvivalgames.event.GameStartEvent;
 import com.communitysurvivalgames.thesurvivalgames.listeners.MoveListener;
@@ -66,12 +65,9 @@ public class TimeManager {
 			a.votes.put(hash, 0);
 		}
 
-		ItemStack emerald = new ItemStack(Material.EMERALD);
-		ItemMeta meta = emerald.getItemMeta();
-		meta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD + "Click to vote for a map");
-		emerald.setItemMeta(meta);
+		
 		for (String s : a.players) {
-			Bukkit.getPlayer(s).getInventory().setItem(0, emerald);
+			ItemManager.instance.gem.givePlayerItem(Bukkit.getPlayer(s));
 		}
 
 		a.broadcast("Use the emerald in your inventory to vote!");
@@ -133,6 +129,8 @@ public class TimeManager {
 				for (String s : a.getPlayers()) {
 					if (MoveListener.getPlayers().contains(s)) {
 						MoveListener.getPlayers().remove(s);
+						Bukkit.getPlayer(s).addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 500, 10));
+						Bukkit.getPlayer(s).addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 250, 2));
 					}
 				}
 
