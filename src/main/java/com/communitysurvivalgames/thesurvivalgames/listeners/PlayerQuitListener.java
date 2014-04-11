@@ -37,6 +37,8 @@ public class PlayerQuitListener implements Listener {
                 }
             }
         }
+        MoveListener.getPlayers().remove(event.getPlayer().getName());
+        event.getPlayer().damage(1000L);
         SGApi.getPlugin().getTracker().trackEvent("Player Disconnect", event.getPlayer().getName());
     }
 }

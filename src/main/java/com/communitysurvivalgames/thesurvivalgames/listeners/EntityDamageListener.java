@@ -165,7 +165,7 @@ public class EntityDamageListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onEntityDamage(EntityDamageEvent event) {
-		if (event.getCause() == DamageCause.ENTITY_ATTACK)
+		if (event.getCause() == DamageCause.ENTITY_ATTACK || event.getCause() == DamageCause.CUSTOM)
 			return;
 
 		if (event.getEntity().getWorld() == Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld())) {
