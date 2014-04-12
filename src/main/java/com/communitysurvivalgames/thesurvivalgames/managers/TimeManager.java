@@ -129,8 +129,9 @@ public class TimeManager {
 				for (String s : a.getPlayers()) {
 					if (MoveListener.getPlayers().contains(s)) {
 						MoveListener.getPlayers().remove(s);
-						Bukkit.getPlayer(s).addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 500, 10));
+						Bukkit.getPlayer(s).addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 500, 9));
 						Bukkit.getPlayer(s).addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 250, 2));
+						Bukkit.getPlayer(s).addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 20, 50));
 					}
 				}
 
