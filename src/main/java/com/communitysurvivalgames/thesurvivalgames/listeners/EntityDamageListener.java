@@ -288,7 +288,6 @@ public class EntityDamageListener implements Listener {
 		damaged.setAllowFlight(true);
 		damaged.setFlying(true);
 		damaged.setCanPickupItems(false);
-		ItemManager.instance.star.givePlayerItem(damaged);
 		
 		try {
 			SGApi.getArenaManager().playerKilled(damaged, SGApi.getArenaManager().getArena(damaged));
@@ -305,6 +304,7 @@ public class EntityDamageListener implements Listener {
 		}
 		damaged.getInventory().clear();
 		damaged.getInventory().setArmorContents(null);
+		ItemManager.instance.star.givePlayerItem(damaged);
 	}
 
 	public void fireworkIt(Location loc) {
