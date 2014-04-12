@@ -227,6 +227,10 @@ public class SGArena {
 			broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("ARENA_END"));
 		}
 
+		
+		setState(ArenaState.WAITING_FOR_PLAYERS);
+		SGApi.getRollbackManager().rollbackArena(getThis());
+		
 		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
 			@Override
@@ -240,8 +244,6 @@ public class SGArena {
 				voted.clear();
 				votes.clear();
 
-				setState(ArenaState.POST_GAME);
-				SGApi.getRollbackManager().rollbackArena(getThis());
 			}
 		}, 200L);
 
