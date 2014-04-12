@@ -179,10 +179,20 @@ public class TheSurvivalGames extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
-
+		
 		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate();
 		template.serialize();
 
+		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
+			arena.end();
+		}
+
+		Bukkit.getLogger().info("Hanging main thread for 7sec in an attempt to let arenas rollback");
+		try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e) {
+		}
+		
 		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
 			Bukkit.getLogger().info("Attemping to save arena: " + arena.toString());
 			ConfigTemplate<SGArena> configTemplate = new ArenaConfigTemplate(arena);
