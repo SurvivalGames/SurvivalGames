@@ -110,7 +110,7 @@ public class ArenaManager {
 			return;
 		}
 		if (a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
-			a.broadcastVotes();
+			//a.broadcastVotes();
 			p.sendMessage(prefix + "Type in /sg vote <ID> to vote for a map.");
 		}
 
