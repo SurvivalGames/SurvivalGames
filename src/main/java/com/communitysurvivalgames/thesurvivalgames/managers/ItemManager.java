@@ -19,9 +19,10 @@ public class ItemManager implements Listener {
 
 	public static ItemManager instance;
 
-	SGItem clock;
-	SGItem compass;
-	SGItem gem;
+	public SGItem clock;
+	public SGItem compass;
+	public SGItem gem;
+	public SGItem star;
 
 	public ItemManager() {
 
@@ -39,6 +40,12 @@ public class ItemManager implements Listener {
 		ItemMeta clockmeta = clockItem.getItemMeta();
 		clockmeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Click to connect to the soundserver");
 		clockItem.setItemMeta(clockmeta);
+		
+		ItemStack starItem = new ItemStack(Material.NETHER_STAR);
+		ItemMeta starmeta = starItem.getItemMeta();
+		starmeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "Click to spectate a player");
+		starItem.setItemMeta(starmeta);
+		
 		clock = new SGItem(clockItem, 8, true, false, new SingleExecutor() {
 
 			@Override
@@ -70,6 +77,14 @@ public class ItemManager implements Listener {
 			@Override
 			public void use(Player player) {
 				MeunManager.getMenuManager().displayVoteMenu(player);
+			}
+		});
+		
+		star = new SGItem(starItem, 0, false, true, new SingleExecutor() {
+
+			@Override
+			public void use(Player player) {
+				MeunManager.getMenuManager().displaySpecMenu(player);
 			}
 		});
 	}

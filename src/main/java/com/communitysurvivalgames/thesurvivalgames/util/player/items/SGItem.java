@@ -51,6 +51,7 @@ public class SGItem implements Listener {
 
 	public void givePlayerItem(Player p) {
 		p.getInventory().setItem(slot, item);
+		p.updateInventory();
 	}
 
 	@EventHandler(priority = EventPriority.HIGH)

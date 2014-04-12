@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.objects.MapHash;
@@ -22,6 +23,7 @@ public class MeunManager {
 	static MeunManager menuManager;
 	private IconMenu joinMenu;
 	private IconMenu voteMenu;
+	private IconMenu specMenu;
 
 	public static MeunManager getMenuManager() {
 		if (menuManager == null)
@@ -99,6 +101,23 @@ public class MeunManager {
 				}
 			}
 		}, SGApi.getPlugin());
+
+		///////////////
+		///Spec Menu///
+		///////////////
+
+		specMenu = new IconMenu("Select the player to spectate", 27, false, new IconMenu.OptionClickEventHandler() {
+
+			@Override
+			public void onOptionClick(final OptionClickEvent event) {
+				if (event.getItem().getType() == Material.REDSTONE_BLOCK) {
+					event.setWillClose(true);
+					return;
+				}
+				event.getPlayer().teleport(Bukkit.getPlayer(event.getItem().getItemMeta().getDisplayName()));
+				event.setWillClose(true);
+			}
+		}, SGApi.getPlugin());
 	}
 
 	public void displayJoinMenu(Player p) {
@@ -118,6 +137,41 @@ public class MeunManager {
 			return;
 		}
 		voteMenu.open(p);
+	}
+
+	public void displaySpecMenu(Player player) {
+		SGArena a;
+		try {
+			a = SGApi.getArenaManager().getArena(player);
+		} catch (ArenaNotFoundException e1) {
+			return;
+		}
+		List<ItemStack> items = new ArrayList<ItemStack>();
+		for (String s : a.getPlayers()) {
+			try {
+				if (SGApi.getArenaManager().getArena(Bukkit.getPlayer(s)).spectators.contains(s)) {
+					continue;
+				}
+			} catch (ArenaNotFoundException e) {
+				continue;
+			}
+			ItemStack item = new ItemStack(Material.EMERALD, (int) Bukkit.getPlayer(s).getHealth());
+			ItemMeta meta = item.getItemMeta();
+			meta.setDisplayName(s);
+			item.setItemMeta(meta);
+			items.add(item);
+		}
+		Collections.sort(items, new Comparator<ItemStack>() {
+			public int compare(ItemStack o1, ItemStack o2) {
+				return Integer.compare(o1.getAmount(), o2.getAmount());
+			}
+		});
+		specMenu.clearOptions();
+		for (int i = 0; i < items.size(); i++) {
+			specMenu.setOption(i, items.get(i), items.get(i).getItemMeta().getDisplayName(), new String[] { ChatColor.translateAlternateColorCodes('&', "&e&lClick to teleport to this person!"), ChatColor.translateAlternateColorCodes('&', "&aNote: Health = Amount of emeralds") });
+		}
+		specMenu.setOption(26, new ItemStack(Material.REDSTONE_BLOCK), ChatColor.RED + "Cancel", ChatColor.translateAlternateColorCodes('&', "&e&lExits out of this menu"));
+		specMenu.open(player);
 	}
 
 	private List<SGArena> cloneThoseArenas() {

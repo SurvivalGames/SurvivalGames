@@ -169,7 +169,7 @@ public class TimeManager {
 			public void runCode() {
 				a.broadcast(I18N.getLocaleString("DM_STARTING"));
 				a.setState(SGArena.ArenaState.DEATHMATCH);
-				SafeEntityListener.getPlayers().addAll(a.getPlayers());
+				MoveListener.getPlayers().addAll(a.getPlayers());
 				for (int i = 0; i < a.getPlayers().size(); i++) {
 					String s = a.getPlayers().get(i);
 					Player p = Bukkit.getPlayer(s);
@@ -186,7 +186,7 @@ public class TimeManager {
 			@Override
 			public void runCode() {
 				a.broadcast(I18N.getLocaleString("START"));
-				SafeEntityListener.getPlayers().removeAll(a.getPlayers());
+				MoveListener.getPlayers().removeAll(a.getPlayers());
 
 				countdownEnd();
 			}

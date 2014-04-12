@@ -41,6 +41,7 @@ import com.communitysurvivalgames.thesurvivalgames.enchantment.ShockingEnchantme
 import com.communitysurvivalgames.thesurvivalgames.event.PlayerKilledEvent;
 import com.communitysurvivalgames.thesurvivalgames.exception.ArenaNotFoundException;
 import com.communitysurvivalgames.thesurvivalgames.locale.I18N;
+import com.communitysurvivalgames.thesurvivalgames.managers.ItemManager;
 import com.communitysurvivalgames.thesurvivalgames.managers.SGApi;
 import com.communitysurvivalgames.thesurvivalgames.net.SendWebsocketData;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
@@ -287,7 +288,8 @@ public class EntityDamageListener implements Listener {
 		damaged.setAllowFlight(true);
 		damaged.setFlying(true);
 		damaged.setCanPickupItems(false);
-
+		ItemManager.instance.star.givePlayerItem(damaged);
+		
 		try {
 			SGApi.getArenaManager().playerKilled(damaged, SGApi.getArenaManager().getArena(damaged));
 		} catch (ArenaNotFoundException e) {}
