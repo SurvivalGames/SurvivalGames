@@ -24,7 +24,7 @@ public class Pig extends SGAbility implements Listener {
 	public void onInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		if (this.hasAbility(player)) {
-			if (player.getItemInHand().getType() == Material.PORK && player.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Oink?")) {
+			if (player.getItemInHand().getType() == Material.PORK && player.getItemInHand().hasItemMeta() && player.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Oink?")) {
 				this.removeOneFromHand(player);
 				for (int i = 0; i < 15; i++) {
 					Entity e = player.getWorld().spawnEntity(player.getLocation(), EntityType.PIG);
