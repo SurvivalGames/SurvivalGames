@@ -112,6 +112,7 @@ public class ArenaManager {
 		if (a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
 			//a.broadcastVotes();
 			p.sendMessage(prefix + "Type in /sg vote <ID> to vote for a map.");
+			ItemManager.instance.gem.givePlayerItem(p);
 		}
 
 		if (SGApi.getPlugin().getPluginConfig().getUseServers()) {
