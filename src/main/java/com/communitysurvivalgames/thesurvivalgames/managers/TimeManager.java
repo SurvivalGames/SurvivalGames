@@ -169,12 +169,12 @@ public class TimeManager {
 			public void runCode() {
 				a.broadcast(I18N.getLocaleString("DM_STARTING"));
 				a.setState(SGArena.ArenaState.DEATHMATCH);
-				MoveListener.getPlayers().addAll(a.getPlayers());
 				for (int i = 0; i < a.getPlayers().size(); i++) {
 					String s = a.getPlayers().get(i);
 					Player p = Bukkit.getPlayer(s);
 					p.teleport(a.getCurrentMap().locs.get(i));
 				}
+				MoveListener.getPlayers().addAll(a.getPlayers());
 				commenceDm();
 			}
 		});
@@ -182,7 +182,7 @@ public class TimeManager {
 	}
 
 	void commenceDm() {
-		Countdown c = new Countdown(a, 1, 10, "DeathMatch", "seconds", new CodeExecutor() {
+		cdm = new Countdown(a, 1, 10, "DeathMatch", "seconds", new CodeExecutor() {
 			@Override
 			public void runCode() {
 				a.broadcast(I18N.getLocaleString("START"));
@@ -191,7 +191,7 @@ public class TimeManager {
 				countdownEnd();
 			}
 		});
-		c.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), cdm, 0L, 20L));
+		cdm.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), cdm, 0L, 20L));
 	}
 
 	void countdownEnd() {
