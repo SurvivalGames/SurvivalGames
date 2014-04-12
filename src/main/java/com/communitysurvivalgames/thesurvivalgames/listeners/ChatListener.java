@@ -70,7 +70,7 @@ public class ChatListener implements Listener {
 		} else {
 			String prefix = PlayerNameUtil.getDevs().contains(event.getPlayer().getName()) ? ChatColor.translateAlternateColorCodes('&', "&0&l&kiiii&4&lD&6&le&e&lv&2&le&a&ll&b&lo&9&lp&5&le&1&lr&0&l&kiiii") : ChatColor.translateAlternateColorCodes('&', SGApi.getPlugin().getPlayerData(event.getPlayer()).getRank());
 			String name = PlayerNameUtil.getDevs().contains(event.getPlayer().getName()) ? ChatColor.translateAlternateColorCodes('&', "&r&a" + event.getPlayer().getDisplayName() + "&r") : ChatColor.translateAlternateColorCodes('&', "&r" + event.getPlayer().getDisplayName());
-			event.setFormat(ChatColor.GRAY + "[" + SGApi.getPlugin().getPlayerData(event.getPlayer()).getKills() + "] " + "[" + prefix + ChatColor.GRAY + "] " + name + ": " + event.getMessage());
+			event.setFormat(ChatColor.GRAY + "[" + SGApi.getPlugin().getPlayerData(event.getPlayer()).getKills() + "] " + prefix + ChatColor.GRAY + " " + name + ": " + event.getMessage());
 		}
 	}
 }
