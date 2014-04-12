@@ -47,7 +47,7 @@ server-ip: localhost
 welcome-message:
   - '&eHi there, and welcome to'
   - '&a&lThe Survival Games Server'
-  - '&2Read the book in your inventory for more information'
+  - '&2Click the compass to join a game. Click the clock to connect to the soundserver.'
 
 # Please enter acceptable item names, which can be found in http://jd.bukkit.org/rb/apidocs/org/bukkit/Material.html
 breaks-allowed:
