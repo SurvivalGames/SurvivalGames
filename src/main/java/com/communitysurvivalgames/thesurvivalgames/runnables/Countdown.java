@@ -86,7 +86,15 @@ public class Countdown implements Runnable {
 				SendWebsocketData.playToArena(a, (count + 1) + "");
 			}
 		}
-		if (!data.equalsIgnoreCase("nocount"))
-			a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + (count + 1) + " " + s[1]);
+		if (data.equalsIgnoreCase("nocount") || !data.equalsIgnoreCase("check")) {
+			return;
+		}
+		if (data.equalsIgnoreCase("check")) {
+			if (a.getPlayers().size() == 0) {
+				Bukkit.getServer().getScheduler().cancelTask(this.id);
+				a.end();
+			}
+		}
+		a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + (count + 1) + " " + s[1]);
 	}
 }

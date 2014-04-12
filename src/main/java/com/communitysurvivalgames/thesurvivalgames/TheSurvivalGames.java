@@ -17,6 +17,8 @@ import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -81,6 +83,7 @@ import com.communitysurvivalgames.thesurvivalgames.net.WebsocketServer;
 import com.communitysurvivalgames.thesurvivalgames.objects.PlayerData;
 import com.communitysurvivalgames.thesurvivalgames.objects.SGArena;
 import com.communitysurvivalgames.thesurvivalgames.proxy.BungeecordListener;
+import com.communitysurvivalgames.thesurvivalgames.rollback.ChangedBlock;
 import com.communitysurvivalgames.thesurvivalgames.runnables.Scoreboard;
 import com.communitysurvivalgames.thesurvivalgames.tracking.AnalyticsConfigData;
 import com.communitysurvivalgames.thesurvivalgames.tracking.JGoogleAnalyticsTracker;
@@ -184,15 +187,18 @@ public class TheSurvivalGames extends JavaPlugin {
 		template.serialize();
 
 		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
-			arena.end();
+			List<ChangedBlock> data = arena.changedBlocks;
+
+			for (int i = 0; i < data.size(); i++) {
+				Bukkit.getLogger().info("Resetting block: " + data.get(i).getPrevid().toString());
+				Location l = new Location(Bukkit.getWorld(data.get(i).getWorld()), data.get(i).getX(), data.get(i).getY(), data.get(i).getZ());
+				Block b = l.getBlock();
+				b.setType(data.get(i).getPrevid());
+				b.setData(data.get(i).getPrevdata());
+				b.getState().update();
+			}
 		}
 
-		Bukkit.getLogger().info("Hanging main thread for 7sec in an attempt to let arenas rollback");
-		try {
-			Thread.sleep(7000);
-		} catch (InterruptedException e) {
-		}
-		
 		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
 			Bukkit.getLogger().info("Attemping to save arena: " + arena.toString());
 			ConfigTemplate<SGArena> configTemplate = new ArenaConfigTemplate(arena);

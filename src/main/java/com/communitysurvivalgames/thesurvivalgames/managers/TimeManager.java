@@ -65,7 +65,6 @@ public class TimeManager {
 			a.votes.put(hash, 0);
 		}
 
-		
 		for (String s : a.players) {
 			ItemManager.instance.gem.givePlayerItem(Bukkit.getPlayer(s));
 		}
@@ -159,7 +158,7 @@ public class TimeManager {
 			public void runCode() {
 				//Ignored			
 			}
-		}, "nocount");
+		}, "check");
 		gameTime.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), gameTime, 0L, 20L));
 	}
 
