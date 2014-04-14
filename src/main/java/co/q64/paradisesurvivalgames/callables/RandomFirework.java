@@ -5,13 +5,14 @@
  */
 package co.q64.paradisesurvivalgames.callables;
 
-import java.util.Random;
-import java.util.concurrent.Callable;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.inventory.meta.FireworkMeta;
+
+import java.util.Random;
+import java.util.concurrent.Callable;
 
 /**
  * Creates a random Firework effect.
@@ -23,7 +24,7 @@ import org.bukkit.inventory.meta.FireworkMeta;
 public class RandomFirework implements Callable {
     /**
      * Computes a result, or throws an exception if unable to do so.
-     * 
+     * Relicum Test Commit
      * @return computed result
      * @throws Exception if unable to compute a result
      */
