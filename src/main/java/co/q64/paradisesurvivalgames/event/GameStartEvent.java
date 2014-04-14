@@ -1,0 +1,47 @@
+package co.q64.paradisesurvivalgames.event;
+
+import co.q64.paradisesurvivalgames.objects.SGArena;
+
+import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
+
+public class GameStartEvent extends Event {
+    private static final HandlerList handlers = new HandlerList();
+    SGArena arena = null;
+
+    /**
+     * Constructs a new GameStartEvent
+     *
+     * @param arena the {@link SGArena} that started
+     */
+    public GameStartEvent(SGArena arena) {
+        this.arena = arena;    
+    }
+
+    /**
+     * Gets the {@link SGArena} that started
+     *
+     * @return the {@link SGArena} that stared
+     */
+    public SGArena getArena() {
+        return arena;
+    }
+
+    /**
+     * Gets the {@link HandlerList} for the event
+     *
+     * @return the {@link HandlerList} for the event
+     */
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    /**
+     * Gets the handlers for the event
+     *
+     * @return the handlers
+     */
+    public HandlerList getHandlers() {
+        return handlers;
+    }
+}
