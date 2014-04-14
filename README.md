@@ -54,24 +54,4 @@ sg.user Allows the player to edit a user's status.
 
 ========
 
-**Get Involved**
-
-You can PM someone on BukkitDev:
-
-Quantum64 **(Recommended)** ``` http://dev.bukkit.org/profiles/Quantum64/ ```
-
-TheEpicButterStudios ``` http://dev.bukkit.org/profiles/TheEpicButterStudios/ ```
-
-Trolldood3 (AgentTroll) ``` http://dev.bukkit.org/profiles/Trolldood3/ ```
-
-Relicum ``` http://dev.bukkit.org/profiles/Relicum/ ```
-
-Email us :
-
-**survivalgamesdevteam@gmail.com**
-
-Or visit our website, **http://communitysurvivalgames.com/**
-
-Start developing ! See you then !
-
 
