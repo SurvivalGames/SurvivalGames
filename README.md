@@ -2,7 +2,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Features](https://raw.githubusercontent.com/SurvivalGamesDevTeam/TheSurvivalGames/gh-pages/wiki/image/Features.png)](https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/wiki) [![Commands](https://raw.githubusercontent.com/SurvivalGamesDevTeam/TheSurvivalGames/gh-pages/wiki/image/Commands.png)](https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/wiki/Commands) [![Permissions](https://raw.githubusercontent.com/SurvivalGamesDevTeam/TheSurvivalGames/gh-pages/wiki/image/Permissions.png)](https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/wiki/Permissions) [![Setup](https://raw.githubusercontent.com/SurvivalGamesDevTeam/TheSurvivalGames/gh-pages/wiki/image/Setup.png)](https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/wiki/Setup) [![Website](http://raw.githubusercontent.com/SurvivalGamesDevTeam/TheSurvivalGames/gh-pages/wiki/image/Website.png)](http://communitysurvivalgames.com)  [![dev.bukkit.org](http://raw.githubusercontent.com/SurvivalGamesDevTeam/TheSurvivalGames/gh-pages/wiki/image/DBO.png)](http://dev.bukkit.org/bukkit-plugins/the-survival-games/)
 
 [![Features](http://imgur.com/F2MBj0Y.png)](https://github.com/SurvivalGamesDevTeam/Builds/tree/master/com/communitysurvivalgames/thesurvivalgames/TheSurvivalGames/1.0.0)  
-Build Stats: [![Build Status](https://travis-ci.org/SurvivalGamesDevTeam/TheSurvivalGames.png?branch=master)](https://travis-ci.org/ParadiseMC/ParadiseSurvivalGames)
+Build Stats: [![Build Status](https://travis-ci.org/ParadiseMC/ParadiseSurvivalGames.png?branch=master)](https://travis-ci.org/ParadiseMC/ParadiseSurvivalGames)
 
 ======== 
 
