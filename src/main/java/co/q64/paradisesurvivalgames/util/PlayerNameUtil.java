@@ -1,7 +1,8 @@
 package co.q64.paradisesurvivalgames.util;
 
-import java.util.ArrayList;
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
 
 public class PlayerNameUtil {
 
@@ -21,11 +22,11 @@ public class PlayerNameUtil {
         list.add("sam4215");
         list.add("Jonthespartan29");
         list.add("GregPlaysMC");
-       //TODO: What's your IGN everyone?
-       //Quantum64 - Jonthespartan29
-       //TheEpicButterStudion - sam4215
-       //GregoriusMC - GregPlaysMC
-       //AgentTroll - Trolldude3
+        //TODO: What's your IGN everyone?
+        //Quantum64 - Jonthespartan29
+        //TheEpicButterStudion - sam4215
+        //GregoriusMC - GregPlaysMC
+        //AgentTroll - Trolldude3
         return list;
     }
 

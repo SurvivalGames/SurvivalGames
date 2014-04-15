@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.command.subcommands;
 
 import org.bukkit.entity.Player;

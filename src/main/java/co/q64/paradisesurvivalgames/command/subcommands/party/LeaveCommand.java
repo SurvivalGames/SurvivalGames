@@ -3,18 +3,18 @@
  *
  * @version 1.0.0
  */
-package co.q64.paradisesurvivalgames.command.subcommands.party;
 
-import java.util.UUID;
+package co.q64.paradisesurvivalgames.command.subcommands.party;
 
 import co.q64.paradisesurvivalgames.command.subcommands.SubCommand;
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.managers.PartyManager;
 import co.q64.paradisesurvivalgames.managers.SGApi;
 import co.q64.paradisesurvivalgames.objects.Party;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class LeaveCommand implements SubCommand {
 
@@ -26,21 +26,22 @@ public class LeaveCommand implements SubCommand {
     public void execute(String cmd, Player sender, String[] args) {
         if (cmd.equalsIgnoreCase("leave")) {
             UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());
-           if (id != null) {
+            if (id != null) {
                 Party party = SGApi.getPartyManager().getParties().get(id);
-              if (party.getLeader().equalsIgnoreCase(sender.getName())) {
+                if (party.getLeader().equalsIgnoreCase(sender.getName())) {
                     PartyManager.endParty(party.getLeader(), id);
                 } else {
                     party.removeMember(sender.getName());
                     SGApi.getPartyManager().getPlayers().remove(sender.getName());
-                if (party.hasNoMembers()) {
+                    if (party.hasNoMembers()) {
                         PartyManager.endParty(party.getLeader(), id);
                     }
                     for (String member : party.getMembers()) {
                         if (member != null) {
                             Player p = Bukkit.getServer().getPlayer(member);
                             if (p != null) {
-                                p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + I18N.getLocaleString("LEFT_PARTY"));
+                                p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + I18N.getLocaleString
+                                        ("LEFT_PARTY"));
                             }
                         }
                     }

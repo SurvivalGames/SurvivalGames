@@ -3,25 +3,21 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.managers;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.*;
 
 /**
  * The type Schedule manager.
  */
 public class ScheduleManager {
 
-    private int schedNumThreads;
-    private int repeatingThreads;
-    private int loginNumThreads;
+    private int                      schedNumThreads;
+    private int                      repeatingThreads;
+    private int                      loginNumThreads;
     private ScheduledExecutorService scheduler;
-    private ExecutorService executor;
+    private ExecutorService          executor;
 
     /**
      * Instantiates a new Schedule manager.
@@ -42,7 +38,7 @@ public class ScheduleManager {
 
     /**
      * Gets sched num threads.
-     * 
+     *
      * @return the sched num threads
      */
     public int getSchedNumThreads() {
@@ -51,7 +47,7 @@ public class ScheduleManager {
 
     /**
      * Sets sched num threads.
-     * 
+     *
      * @param schedNumThreads the sched num threads
      */
     public void setSchedNumThreads(int schedNumThreads) {
@@ -60,7 +56,7 @@ public class ScheduleManager {
 
     /**
      * Gets login num threads.
-     * 
+     *
      * @return the login num threads
      */
     public int getLoginNumThreads() {
@@ -69,7 +65,7 @@ public class ScheduleManager {
 
     /**
      * Sets login num threads.
-     * 
+     *
      * @param loginNumThreads the login num threads
      */
     public void setLoginNumThreads(int loginNumThreads) {
@@ -78,7 +74,7 @@ public class ScheduleManager {
 
     /**
      * Gets repeating threads.
-     * 
+     *
      * @return the repeating threads
      */
     public int getRepeatingThreads() {
@@ -87,7 +83,7 @@ public class ScheduleManager {
 
     /**
      * Sets repeating threads.
-     * 
+     *
      * @param repeatingThreads the repeating threads
      */
     public void setRepeatingThreads(int repeatingThreads) {
@@ -99,7 +95,7 @@ public class ScheduleManager {
      * {@link java.util.concurrent.ScheduledExecutorService}
      * <p>
      * details can be found here
-     * 
+     *
      * @return the scheduled executor service
      */
     public ScheduledExecutorService getScheduler() {
@@ -108,7 +104,7 @@ public class ScheduleManager {
 
     /**
      * Get ExecutorService instance {@link java.util.concurrent.ExecutorService}
-     * 
+     *
      * @return the executor service
      */
     public ExecutorService getExecutor() {
@@ -139,7 +135,7 @@ public class ScheduleManager {
      * them.
      * <p>
      * This will throw null if your callable returns null
-     * 
+     *
      * @param callable the callable
      * @return the object This is the object that your callable returns
      */
@@ -167,10 +163,10 @@ public class ScheduleManager {
      * This takes a {@link java.lang.Runnable} and is managed by an
      * {@link java.util.concurrent.ExecutorService} so it is queued if busy Used
      * for quick repetitive tasks.
-     * 
+     *
      * @param runnable the runnable
      * @throws RejectedExecutionException the rejected execution exception
-     * @throws NullPointerException the null pointer exception
+     * @throws NullPointerException       the null pointer exception
      */
     public void runNow(Runnable runnable) throws RejectedExecutionException, NullPointerException {
 

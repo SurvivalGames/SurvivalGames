@@ -22,8 +22,8 @@ public class RailGun implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-    	if(event.getItem() == null)
-    		return;
+        if (event.getItem() == null)
+            return;
         if (event.getItem().getType() == Material.DIAMOND_HOE)
             try {
                 for (Block loc : getLineOfSigt(event.getPlayer())) {
@@ -47,7 +47,8 @@ public class RailGun implements Listener {
         dataStore[4] = ((Method) dataStore[2]).invoke(fw, (Object[]) null);
         if (dataStore[1] == null)
             dataStore[1] = getMethod(dataStore[3].getClass(), "addParticle");
-        ((Method) dataStore[1]).invoke(dataStore[3], "fireworksSpark", loc.getX(), loc.getY(), loc.getZ(), gen.nextGaussian() * 0.05D, -(loc.getZ() * 1.15D) * 0.5D, gen.nextGaussian() * 0.05D);
+        ((Method) dataStore[1]).invoke(dataStore[3], "fireworksSpark", loc.getX(), loc.getY(), loc.getZ(),
+                gen.nextGaussian() * 0.05D, -(loc.getZ() * 1.15D) * 0.5D, gen.nextGaussian() * 0.05D);
         fw.remove();
     }
 

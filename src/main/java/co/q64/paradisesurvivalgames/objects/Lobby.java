@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.objects;
 
 import co.q64.paradisesurvivalgames.util.LocationChecker;
@@ -13,7 +14,7 @@ public class Lobby {
 
     /**
      * Gets location checker.
-     * 
+     *
      * @return the location checker
      */
     public LocationChecker getLocationChecker() {
@@ -22,7 +23,7 @@ public class Lobby {
 
     /**
      * Sets location checker.
-     * 
+     *
      * @param locationChecker the location checker
      */
     public void setLocationChecker(LocationChecker locationChecker) {

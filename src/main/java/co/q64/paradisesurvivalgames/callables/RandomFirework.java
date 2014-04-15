@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.callables;
 
 import org.bukkit.Bukkit;
@@ -25,6 +26,7 @@ public class RandomFirework implements Callable {
     /**
      * Computes a result, or throws an exception if unable to do so.
      * Relicum Test Commit
+     *
      * @return computed result
      * @throws Exception if unable to compute a result
      */
@@ -58,7 +60,8 @@ public class RandomFirework implements Callable {
         Color c2 = Color.fromRGB(r1i, r2i, r3i);
 
         // Create our effect with this
-        FireworkEffect effect = FireworkEffect.builder().flicker(r.nextBoolean()).withColor(c1).withFade(c2).with(type).trail(r.nextBoolean()).build();
+        FireworkEffect effect = FireworkEffect.builder().flicker(r.nextBoolean()).withColor(c1).withFade(c2).with
+                (type).trail(r.nextBoolean()).build();
 
         // Then apply the effect to the meta
         fwm.addEffect(effect);

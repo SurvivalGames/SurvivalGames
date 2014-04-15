@@ -3,11 +3,11 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.command.subcommands.party;
 
 import co.q64.paradisesurvivalgames.command.subcommands.SubCommand;
 import co.q64.paradisesurvivalgames.locale.I18N;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 

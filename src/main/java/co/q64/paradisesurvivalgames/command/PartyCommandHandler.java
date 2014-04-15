@@ -3,7 +3,6 @@ package co.q64.paradisesurvivalgames.command;
 import co.q64.paradisesurvivalgames.command.subcommands.SubCommand;
 import co.q64.paradisesurvivalgames.command.subcommands.party.HelpCommand;
 import co.q64.paradisesurvivalgames.locale.I18N;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandExecutor;
@@ -67,20 +66,20 @@ public class PartyCommandHandler implements CommandExecutor {
         if (command.getName().equalsIgnoreCase("party") && sender instanceof Player) {
             if (args.length == 2) {
                 try {
-                    getCommand(args[0]).execute(args[0], (Player) sender, new String[]{args[1]});
+                    getCommand(args[0]).execute(args[0], (Player) sender, new String[] { args[1] });
                 } catch (CommandException e) {
                     sender.sendMessage(/* error prefix */I18N.getLocaleString("NO_COMMAND"));
                 }
             } else if (args.length == 1) {
                 try {
-                    getCommand(args[0]).execute(args[0], (Player) sender, new String[]{});
+                    getCommand(args[0]).execute(args[0], (Player) sender, new String[] { });
                 } catch (CommandException e) {
                     sender.sendMessage(/* error prefix */I18N.getLocaleString("NO_COMMAND"));
                 }
             } else if (args.length == 0) {
-                HelpCommand.staticExecute((Player) sender, new String[]{});
+                HelpCommand.staticExecute((Player) sender, new String[] { });
             } else {
-                HelpCommand.staticExecute((Player) sender, new String[]{});
+                HelpCommand.staticExecute((Player) sender, new String[] { });
             }
             return true;
 

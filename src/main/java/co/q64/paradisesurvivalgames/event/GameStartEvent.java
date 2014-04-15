@@ -1,7 +1,6 @@
 package co.q64.paradisesurvivalgames.event;
 
 import co.q64.paradisesurvivalgames.objects.SGArena;
-
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
@@ -15,7 +14,7 @@ public class GameStartEvent extends Event {
      * @param arena the {@link SGArena} that started
      */
     public GameStartEvent(SGArena arena) {
-        this.arena = arena;    
+        this.arena = arena;
     }
 
     /**

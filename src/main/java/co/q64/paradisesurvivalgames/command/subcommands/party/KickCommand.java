@@ -3,18 +3,18 @@
  *
  * @version 1.0.0
  */
-package co.q64.paradisesurvivalgames.command.subcommands.party;
 
-import java.util.UUID;
+package co.q64.paradisesurvivalgames.command.subcommands.party;
 
 import co.q64.paradisesurvivalgames.command.subcommands.SubCommand;
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.managers.PartyManager;
 import co.q64.paradisesurvivalgames.managers.SGApi;
 import co.q64.paradisesurvivalgames.objects.Party;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class KickCommand implements SubCommand {
 
@@ -26,17 +26,19 @@ public class KickCommand implements SubCommand {
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 1) && (args[0].equalsIgnoreCase("kick"))) {
             UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());
-           if (id != null) {
+            if (id != null) {
                 Party party = SGApi.getPartyManager().getParties().get(id);
-              if (party.getLeader().equalsIgnoreCase(sender.getName())) {
+                if (party.getLeader().equalsIgnoreCase(sender.getName())) {
                     for (String members : party.getMembers()) {
                         if ((members != null) && (members.equalsIgnoreCase(args[0]))) {
                             party.removeMember(args[0]);
                             SGApi.getPartyManager().getPlayers().remove(args[0]);
-                        sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString("KICKED_FROM_PARTY"));
+                            sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString
+                                    ("KICKED_FROM_PARTY"));
                             Player p = Bukkit.getServer().getPlayer(args[0]);
                             if (p != null) {
-                                p.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("KICKED_FROM_PARTY_2"));
+                                p.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString
+                                        ("KICKED_FROM_PARTY_2"));
                             }
                             if (party.hasNoMembers()) {
                                 PartyManager.endParty(sender.getName(), id);
@@ -45,7 +47,8 @@ public class KickCommand implements SubCommand {
                                 if (member != null) {
                                     Player play = Bukkit.getServer().getPlayer(member);
                                     if (play != null) {
-                                        play.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString("KICKED_FROM_PARTY"));
+                                        play.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString
+                                                ("KICKED_FROM_PARTY"));
                                     }
                                 }
                             }
@@ -53,7 +56,8 @@ public class KickCommand implements SubCommand {
                         }
                     }
 
-                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("PLAYER") + args[0] + I18N.getLocaleString("NOT_IN_YOUR_PARTY"));
+                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("PLAYER") + args[0] + I18N
+                            .getLocaleString("NOT_IN_YOUR_PARTY"));
                 } else {
                     sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("LEADER_TO_KICK"));
                 }

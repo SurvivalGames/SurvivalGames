@@ -6,8 +6,8 @@ import org.bukkit.inventory.ItemStack;
 
 public class SGEnchantment extends Enchantment {
     public SGEnchantment(int id) {
-		super(id);
-	}
+        super(id);
+    }
 
     @Override
     public boolean canEnchantItem(ItemStack item) {
@@ -38,8 +38,8 @@ public class SGEnchantment extends Enchantment {
     public int getStartLevel() {
         return 1;
     }
-    
+
     public String getLore(int lvl) {
-    	return "null";
+        return "null";
     }
 }

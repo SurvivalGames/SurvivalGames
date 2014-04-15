@@ -3,15 +3,15 @@
  *
  * @version 1.0.0
  */
-package co.q64.paradisesurvivalgames.command.subcommands.party;
 
-import java.util.UUID;
+package co.q64.paradisesurvivalgames.command.subcommands.party;
 
 import co.q64.paradisesurvivalgames.command.subcommands.SubCommand;
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.managers.SGApi;
-
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class ChatCommand implements SubCommand {
 
@@ -24,13 +24,13 @@ public class ChatCommand implements SubCommand {
     public void execute(String cmd, Player player, String args[]) {
         if (cmd.equalsIgnoreCase("chat")) {
             UUID id = SGApi.getPartyManager().getPlayers().get(player.getName());
-          if (id != null) {
+            if (id != null) {
                 if (SGApi.getPartyManager().getPlayers().containsKey(player.getName())) {
                     SGApi.getPartyManager().getPlayers().remove(player.getName());
-                player.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NO_CHAT"));
+                    player.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NO_CHAT"));
                 } else {
                     SGApi.getPartyManager().getPartyChat().add(player.getName());
-            player.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("CHAT"));
+                    player.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("CHAT"));
                 }
             } else {
                 player.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("PARTY_TO_CHAT"));

@@ -3,17 +3,17 @@
  *
  * @version 1.0.0
  */
-package co.q64.paradisesurvivalgames.command.subcommands.party;
 
-import java.util.UUID;
+package co.q64.paradisesurvivalgames.command.subcommands.party;
 
 import co.q64.paradisesurvivalgames.command.subcommands.SubCommand;
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.managers.PartyManager;
 import co.q64.paradisesurvivalgames.managers.SGApi;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class InviteCommand implements SubCommand {
 
@@ -25,13 +25,13 @@ public class InviteCommand implements SubCommand {
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 1) && (args[0].equalsIgnoreCase("invite"))) {
             UUID partyID = SGApi.getPartyManager().getPlayers().get(sender.getName());
-          if (partyID == null) {
+            if (partyID == null) {
                 partyID = PartyManager.startParty(sender);
 
                 sendInvite(sender, args[0], partyID);
             } else if (SGApi.getPartyManager().getParties().get(partyID).hasRoom()) {
                 if (SGApi.getPartyManager().getParties().get(partyID).getLeader().equalsIgnoreCase(sender.getName())) {
-                sendInvite(sender, args[0], partyID);
+                    sendInvite(sender, args[0], partyID);
                 } else {
                     sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NOT_LEADER"));
                 }
@@ -55,20 +55,22 @@ public class InviteCommand implements SubCommand {
         Player p = Bukkit.getServer().getPlayer(player);
         if (p != null) {
             if (SGApi.getPartyManager().getPlayers().get(p.getName()) != null) {
-        sender.sendMessage(org.bukkit.ChatColor.YELLOW + player + I18N.getLocaleString("IN_PARTY"));
+                sender.sendMessage(org.bukkit.ChatColor.YELLOW + player + I18N.getLocaleString("IN_PARTY"));
                 if (SGApi.getPartyManager().getParties().get(id).hasNoMembers()) {
-    PartyManager.endParty(sender.getName(), id);
+                    PartyManager.endParty(sender.getName(), id);
                 }
                 return;
             }
-            if ((SGApi.getPartyManager().getInvites().containsKey(p.getName())) && (SGApi.getPartyManager().getInvites().containsValue(id))) {
+            if ((SGApi.getPartyManager().getInvites().containsKey(p.getName())) && (SGApi.getPartyManager()
+                    .getInvites().containsValue(id))) {
                 sender.sendMessage(org.bukkit.ChatColor.YELLOW + player + I18N.getLocaleString("PENDING_INVITE"));
                 return;
             }
 
             SGApi.getPartyManager().getInvites().put(p.getName(), id);
             p.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("INVITED_TO_PARTY") + sender.getName());
-            sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("YOU_INVITED") + player + I18N.getLocaleString("TO_JOIN_PARTY"));
+            sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("YOU_INVITED") + player + I18N
+                    .getLocaleString("TO_JOIN_PARTY"));
         } else {
             sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("COULD_NOT_FIND_INVITE") + player);
             if (SGApi.getPartyManager().getParties().get(id).hasNoMembers()) {

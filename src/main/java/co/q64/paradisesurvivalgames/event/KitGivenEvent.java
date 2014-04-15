@@ -1,21 +1,20 @@
 package co.q64.paradisesurvivalgames.event;
 
 import co.q64.paradisesurvivalgames.kits.Kit;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
- 
+
 public final class KitGivenEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
     Player player;
-    Kit kit;
+    Kit    kit;
 
     /**
      * Constructs a new KitGivenEvent
      *
      * @param player the player that received the kit
-     * @param kit the kit given to the player
+     * @param kit    the kit given to the player
      */
     public KitGivenEvent(Player player, Kit kit) {
         this.player = player;

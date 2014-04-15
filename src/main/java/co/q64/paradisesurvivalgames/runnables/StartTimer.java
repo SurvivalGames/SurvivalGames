@@ -3,21 +3,20 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.runnables;
+
+import co.q64.paradisesurvivalgames.managers.SGApi;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import co.q64.paradisesurvivalgames.managers.SGApi;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-
 /**
  * The type Start timer. Just for testing use makeTimer method THIS IS ONLY A
  * TEST
- * 
  */
 public class StartTimer {
 
@@ -48,10 +47,10 @@ public class StartTimer {
 
     /**
      * Make timer. Used to create a new instance of Start Game Countdown
-     * 
+     *
      * @param initial the initial delay before starting - seconds
-     * @param period the period between executions - seconds
-     * @param tl the max time the timer will run before being shutdown - seconds
+     * @param period  the period between executions - seconds
+     * @param tl      the max time the timer will run before being shutdown - seconds
      */
     public static void makeTimer(long initial, long period, Integer tl) {
         new StartTimer(initial, period, tl);
@@ -63,7 +62,8 @@ public class StartTimer {
     void StartTimerAndStop() {
 
         Runnable GameStartTask = new StartGameTimerTask((int) fShutDownAfter);
-        ScheduledFuture<?> StartGameFuture = scheduler.scheduleAtFixedRate(GameStartTask, fInitialDelay, fDelayPeriod, TimeUnit.SECONDS);
+        ScheduledFuture<?> StartGameFuture = scheduler.scheduleAtFixedRate(GameStartTask, fInitialDelay,
+                fDelayPeriod, TimeUnit.SECONDS);
         Runnable stopStartGameTask = new StopGameStartTask(StartGameFuture);
         scheduler.schedule(stopStartGameTask, fShutDownAfter, TimeUnit.SECONDS);
     }

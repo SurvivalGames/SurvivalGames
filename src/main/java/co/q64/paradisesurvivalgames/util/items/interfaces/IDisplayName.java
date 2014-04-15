@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.util.items.interfaces;
 
 /**
@@ -11,14 +12,14 @@ package co.q64.paradisesurvivalgames.util.items.interfaces;
 public interface IDisplayName extends IMetable {
     /**
      * Gets display name.
-     * 
+     *
      * @return the display name
      */
     public String getDisplayName();
 
     /**
      * Sets display name.
-     * 
+     *
      * @param name the name
      */
     public void setDisplayName(String name);

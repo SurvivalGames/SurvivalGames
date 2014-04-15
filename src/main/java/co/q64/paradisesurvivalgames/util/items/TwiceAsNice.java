@@ -3,14 +3,12 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.util.items;
 
-import java.util.List;
-import java.util.Random;
-import lombok.experimental.Builder;
 import co.q64.paradisesurvivalgames.callables.RandomFirework;
 import co.q64.paradisesurvivalgames.managers.SGApi;
-
+import lombok.experimental.Builder;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -30,16 +28,19 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.BlockIterator;
 
+import java.util.List;
+import java.util.Random;
+
 @Builder
 public class TwiceAsNice implements Listener {
 
-    private ItemStack item;
-    private ItemMeta meta;
-    private Material material;
-    private boolean leftClick;
-    private boolean rightClick;
+    private ItemStack    item;
+    private ItemMeta     meta;
+    private Material     material;
+    private boolean      leftClick;
+    private boolean      rightClick;
     private List<String> lore;
-    private String displayName;
+    private String       displayName;
 
     @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.LOWEST)
@@ -49,7 +50,7 @@ public class TwiceAsNice implements Listener {
         e.getPlayer().getInventory().setItem(0, it);
         e.getPlayer().closeInventory();
         SGApi.getPlugin().getServer().getScheduler().runTask(SGApi.getPlugin(), new Runnable() {
-			@Override
+            @Override
             public void run() {
 
                 e.getPlayer().updateInventory();
@@ -94,7 +95,8 @@ public class TwiceAsNice implements Listener {
                 return;
             }
             try {
-                if (it.getItemMeta().getDisplayName() == null || !(it.getItemMeta().getDisplayName().equalsIgnoreCase(this.displayName))) {
+                if (it.getItemMeta().getDisplayName() == null || !(it.getItemMeta().getDisplayName().equalsIgnoreCase
+                        (this.displayName))) {
                     return;
                 }
             } catch (NullPointerException e1) {
@@ -112,7 +114,8 @@ public class TwiceAsNice implements Listener {
             Snowball snowball = (Snowball) event.getEntity();
             Player player = (Player) snowball.getShooter();
             World world = snowball.getWorld();
-            BlockIterator bi = new BlockIterator(world, snowball.getLocation().toVector(), snowball.getVelocity().normalize(), 0, 4);
+            BlockIterator bi = new BlockIterator(world, snowball.getLocation().toVector(),
+                    snowball.getVelocity().normalize(), 0, 4);
             Block hit = null;
             while (bi.hasNext()) {
                 hit = bi.next();
@@ -121,7 +124,8 @@ public class TwiceAsNice implements Listener {
                 }
             }
             if (hit != null) {
-                System.out.println("The Real block is " + hit.getType() + " location is at  " + hit.getLocation().toVector().toString());
+                System.out.println("The Real block is " + hit.getType() + " location is at  " + hit.getLocation()
+                        .toVector().toString());
 
                 BlockState blockState = hit.getState();
                 player = (Player) event.getEntity().getShooter();
@@ -151,7 +155,8 @@ public class TwiceAsNice implements Listener {
                 System.out.println("health restored");
             }
         }
-        if (event.getCause() != EntityDamageEvent.DamageCause.PROJECTILE && event.getCause() != EntityDamageEvent.DamageCause.BLOCK_EXPLOSION
+        if (event.getCause() != EntityDamageEvent.DamageCause.PROJECTILE && event.getCause() != EntityDamageEvent
+                .DamageCause.BLOCK_EXPLOSION
                 && event.getCause() != EntityDamageEvent.DamageCause.ENTITY_EXPLOSION)
             return;
         System.out.println("DaMAGE HERE");

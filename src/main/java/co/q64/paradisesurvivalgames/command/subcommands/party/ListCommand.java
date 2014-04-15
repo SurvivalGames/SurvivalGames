@@ -3,17 +3,17 @@
  *
  * @version 1.0.0
  */
-package co.q64.paradisesurvivalgames.command.subcommands.party;
 
-import java.util.UUID;
+package co.q64.paradisesurvivalgames.command.subcommands.party;
 
 import co.q64.paradisesurvivalgames.command.subcommands.SubCommand;
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.managers.SGApi;
 import co.q64.paradisesurvivalgames.objects.Party;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class ListCommand implements SubCommand {
 
@@ -29,9 +29,9 @@ public class ListCommand implements SubCommand {
         if ((cmd.equalsIgnoreCase("list"))) {
 
             UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());
-           if (id != null) {
+            if (id != null) {
                 Party party = SGApi.getPartyManager().getParties().get(id);
-              String list = org.bukkit.ChatColor.GOLD + party.getLeader() + " ";
+                String list = org.bukkit.ChatColor.GOLD + party.getLeader() + " ";
                 for (String member : party.getMembers()) {
                     if (member != null) {
                         Player player = Bukkit.getServer().getPlayer(member);
@@ -61,9 +61,9 @@ public class ListCommand implements SubCommand {
         Player p = Bukkit.getServer().getPlayer(args);
         if (p != null) {
             UUID id = SGApi.getPartyManager().getPlayers().get(p.getName());
-        if (id != null) {
+            if (id != null) {
                 Party party = SGApi.getPartyManager().getParties().get(id);
-        String list = org.bukkit.ChatColor.GOLD + party.getLeader() + " ";
+                String list = org.bukkit.ChatColor.GOLD + party.getLeader() + " ";
                 for (String member : party.getMembers()) {
                     if (member != null) {
                         Player player = Bukkit.getServer().getPlayer(member);

@@ -3,15 +3,16 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.objects;
 
-import java.util.List;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * Game Instance of a Game Used to manage the game in real time The Object on
  * last the duration of a single game
- * 
  */
 @Data
 public class Game {

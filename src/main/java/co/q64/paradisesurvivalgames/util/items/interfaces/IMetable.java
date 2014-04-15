@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.util.items.interfaces;
 
 import org.bukkit.Material;
@@ -14,7 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public interface IMetable {
     /**
      * Gets item meta.
-     * 
+     *
      * @param material the material
      * @return the ItemMeta related to the material
      */
@@ -22,14 +23,14 @@ public interface IMetable {
 
     /**
      * Gets material. to use for the icon. {@link org.bukkit.Material}
-     * 
+     *
      * @return the material
      */
     Material getMaterial();
 
     /**
      * Gets id thats unique for this item
-     * 
+     *
      * @return the id
      */
     Integer getId();

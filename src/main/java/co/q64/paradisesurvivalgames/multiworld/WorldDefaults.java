@@ -3,15 +3,15 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.multiworld;
 
 import co.q64.paradisesurvivalgames.configs.FileLoader;
-
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class WorldDefaults {
 
-    FileLoader configy;
+    FileLoader        configy;
     FileConfiguration config;
 
     public WorldDefaults(String name) {

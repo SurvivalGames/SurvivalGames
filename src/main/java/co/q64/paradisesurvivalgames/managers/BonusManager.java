@@ -1,10 +1,11 @@
 package co.q64.paradisesurvivalgames.managers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BonusManager {
 
@@ -18,7 +19,8 @@ public class BonusManager {
         register("High Five!", new String[] { "Kill s player with your fists" }, 300);
         register("Fallout 4", new String[] { "Place 10 TNT within 10 secconds" }, 200);
         register("I Need to AXE You Something", new String[] { "Win a SG Match using axes as your only weapon." }, 200);
-        register("Rainbow Chicken Dance", new String[] { "Win a SG match by killing the last player with raw chicken" }, 1000);
+        register("Rainbow Chicken Dance", new String[] { "Win a SG match by killing the last player with raw chicken"
+        }, 1000);
         register("Y U KILL UR CREATOR", new String[] { "Kill a developer in an SG match" }, 700);
         register("Are you God?", new String[] { "Kill Quantum64 in a SG match" }, Integer.MAX_VALUE);
         register("Mommy, I'm famous!", new String[] { "Be the first person killed by a YouTuber" }, 400);
@@ -33,17 +35,19 @@ public class BonusManager {
 
     public void trigger(Player p, int id) {
         Bonus b = bonus.get(id);
-        Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&4" + p.getDisplayName() + ": &e&l" + b.getName()));
+        Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+                "&4" + p.getDisplayName() + ": &e&l" + b.getName()));
         for (int i = 0; i < b.getLore().length; i++) {
-            Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&3    " + Arrays.toString(b.getLore())));
+            Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&',
+                    "&3    " + Arrays.toString(b.getLore())));
         }
     }
 
     public class Bonus {
-        final int id;
-        final String name;
+        final int      id;
+        final String   name;
         final String[] lore;
-        final int points;
+        final int      points;
 
         public Bonus(String name, String[] lore, int points, int id) {
             this.name = name;

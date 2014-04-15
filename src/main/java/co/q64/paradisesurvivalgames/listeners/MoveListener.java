@@ -4,20 +4,20 @@
  *
  * @version 1.0.0
  */
-package co.q64.paradisesurvivalgames.listeners;
 
-import java.util.ArrayList;
-import java.util.List;
+package co.q64.paradisesurvivalgames.listeners;
 
 import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.managers.SGApi;
 import co.q64.paradisesurvivalgames.objects.SGArena;
-
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MoveListener implements Listener {
 
@@ -28,17 +28,20 @@ public class MoveListener implements Listener {
         Location q = e.getFrom();
         Location w = e.getTo();
 
-        if (list.contains(e.getPlayer().getName()) && (q.getBlockX() != w.getBlockX() || q.getBlockZ() != w.getBlockZ())) {
+        if (list.contains(e.getPlayer().getName()) && (q.getBlockX() != w.getBlockX() || q.getBlockZ() != w.getBlockZ
+                ())) {
             e.setTo(e.getFrom());
         }
 
         try {
-            if (SGApi.getArenaManager().isInGame(e.getPlayer()) && SGApi.getArenaManager().getArena(e.getPlayer()).getState() == SGArena.ArenaState.DEATHMATCH
+            if (SGApi.getArenaManager().isInGame(e.getPlayer()) && SGApi.getArenaManager().getArena(e.getPlayer())
+                    .getState() == SGArena.ArenaState.DEATHMATCH
                     && (Math.abs(e.getPlayer().getLocation().distanceSquared(
-                        SGApi.getMultiWorldManager().worldForName(
-                            SGApi.getArenaManager().getArena(e.getPlayer()).getArenaWorld().getName()).getCenter())) >= 0.5)) {
+                    SGApi.getMultiWorldManager().worldForName(
+                            SGApi.getArenaManager().getArena(e.getPlayer()).getArenaWorld().getName()).getCenter()
+            )) >= 0.5)) {
                 e.setTo(e.getFrom());
-                e.getPlayer().sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("NOT_HAPPY"));
+                e.getPlayer().sendMessage(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("NOT_HAPPY"));
             }
         } catch (ArenaNotFoundException ignored) {
         }

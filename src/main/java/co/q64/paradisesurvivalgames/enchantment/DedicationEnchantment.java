@@ -13,8 +13,8 @@ public class DedicationEnchantment extends SGEnchantment {
         return "DEDICATION";
     }
 
-	@Override
-	public String getLore(int lvl) {
-		return ChatColor.GRAY + "Dedication " + RomanNumeral.convert(lvl);
-	}
+    @Override
+    public String getLore(int lvl) {
+        return ChatColor.GRAY + "Dedication " + RomanNumeral.convert(lvl);
+    }
 }

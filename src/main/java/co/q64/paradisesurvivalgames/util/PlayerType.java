@@ -3,14 +3,22 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.util;
 
 import org.bukkit.ChatColor;
 
 public enum PlayerType {
 
-    PLAYER(ChatColor.GRAY + "%player%"), MOD(ChatColor.BLUE + "%player%"), ADMIN(ChatColor.RED + "%player%"), VIP(ChatColor.GREEN + "%player%"), MVP(ChatColor.AQUA + "%player%"), YOUTUBER(
-            ChatColor.GOLD + "%player%"), OWNER(ChatColor.DARK_PURPLE + "%player%"), DEV(ChatColor.DARK_RED + "%player%");
+    PLAYER(ChatColor.GRAY + "%player%"),
+    MOD(ChatColor.BLUE + "%player%"),
+    ADMIN(ChatColor.RED + "%player%"),
+    VIP(ChatColor.GREEN + "%player%"),
+    MVP(ChatColor.AQUA + "%player%"),
+    YOUTUBER(
+            ChatColor.GOLD + "%player%"),
+    OWNER(ChatColor.DARK_PURPLE + "%player%"),
+    DEV(ChatColor.DARK_RED + "%player%");
     /**
      * The Type.
      */
@@ -18,7 +26,7 @@ public enum PlayerType {
 
     /**
      * Instantiates a new Player Types
-     * 
+     *
      * @param type the node
      */
     private PlayerType(String type) {
@@ -27,7 +35,7 @@ public enum PlayerType {
 
     /**
      * Gets node. For Lobby Status
-     * 
+     *
      * @return the node
      */
     public String getType() {

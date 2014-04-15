@@ -3,21 +3,21 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.managers;
+
+import co.q64.paradisesurvivalgames.multiworld.SGWorld;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
-
-import co.q64.paradisesurvivalgames.multiworld.SGWorld;
-
 public class MultiWorldManager {
-    
+
     List<SGWorld> worlds = new ArrayList<SGWorld>();
 
     public MultiWorldManager() {
@@ -32,14 +32,14 @@ public class MultiWorldManager {
 
     public void deleteWorld(String name) {
         SGWorld w = worldForName(name);
-        if(worlds.contains(w)) {
+        if (worlds.contains(w)) {
             worlds.remove(w);
             w.remove();
         }
     }
 
     public World copyFromInternet(final Player sender, final String worldName, final String display) {
-    	
+
         createWorld(worldName, display);
 
         return Bukkit.getWorld(worldName);
@@ -59,14 +59,14 @@ public class MultiWorldManager {
         // TODO
         return Bukkit.getWorld(worldName);
     }
-    
+
     public List<SGWorld> getWorlds() {
         return worlds;
     }
 
     public SGWorld worldForName(String name) {
-        for(SGWorld world : getWorlds()) {
-            if(world.getWorld().getName().equalsIgnoreCase(name)) {
+        for (SGWorld world : getWorlds()) {
+            if (world.getWorld().getName().equalsIgnoreCase(name)) {
                 return world;
             }
         }

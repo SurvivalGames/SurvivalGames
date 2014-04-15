@@ -3,81 +3,86 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.util;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.util.Vector;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * SerializedLocation Used to store Locations in a standard Configuration file
  * <p>
  * You are not required to call the serialize and deserialize when saving or
  * loading the Location
- * 
+ *
  * @author TheCommunitySurvivalGames
  * @version 0.0.2
  */
 @SerializableAs("SerializedLocation")
 public class SerializedLocation implements ConfigurationSerializable {
 
-    private final int x;
-    private final int y;
-    private final int z;
-    private final float yaw;
-    private final float pitch;
+    private final int    x;
+    private final int    y;
+    private final int    z;
+    private final float  yaw;
+    private final float  pitch;
     private final String world;
     private final String type;
 
     /**
      * Instantiates a new Serialized location.
-     * 
+     *
      * @param world the world
-     * @param x the x
-     * @param y the y
-     * @param z the z
-     * @param yaw the yaw
+     * @param x     the x
+     * @param y     the y
+     * @param z     the z
+     * @param yaw   the yaw
      * @param pitch the pitch
      */
     public SerializedLocation(String world, int x, int y, int z, float yaw, float pitch, LocationType locationType) {
-       this.x = x;
+        this.x = x;
         this.y = y;
         this.z = z;
         this.world = world;
         this.yaw = yaw;
         this.pitch = pitch;
         this.type = locationType.name();
-   }
+    }
 
     /**
      * Instantiates a new Serialized location.
-     * 
+     *
      * @param location the location
      */
     public SerializedLocation(Location location, LocationType locationType) {
-      this.x = location.getBlockX();
+        this.x = location.getBlockX();
         this.y = location.getBlockY();
         this.z = location.getBlockZ();
         this.world = location.getWorld().getName();
         this.yaw = location.getYaw();
         this.pitch = location.getPitch();
         this.type = locationType.name();
- }
+    }
 
     /**
      * Deserialize serialized location. <b>Should never need to call this
      * directly</b>
-     * 
+     *
      * @param map the map
      * @return the serialized location
      */
     public static SerializedLocation deserialize(Map<String, Object> map) {
-        Object xObject = map.get("xpos"), yObject = map.get("ypos"), zObject = map.get("zpos"), worldObject = map.get("world"), yawObject = map.get("yawpos"), pitchObject = map.get("pitchpos"), pType = map.get("type");
-  if (xObject == null || yObject == null || zObject == null || worldObject == null || !(xObject instanceof Integer) || !(yObject instanceof Integer)
+        Object xObject = map.get("xpos"), yObject = map.get("ypos"), zObject = map.get("zpos"),
+                worldObject = map.get("world"), yawObject = map.get("yawpos"), pitchObject = map.get("pitchpos"),
+                pType = map.get("type");
+        if (xObject == null || yObject == null || zObject == null || worldObject == null || !(xObject instanceof
+                Integer) || !(yObject instanceof Integer)
                 || !(zObject instanceof Integer)) {
             return null;
         }
@@ -89,9 +94,9 @@ public class SerializedLocation implements ConfigurationSerializable {
 
     }
 
-   /**
+    /**
      * Gets {@link org.bukkit.Location}
-     * 
+     *
      * @return the location
      */
     public Location getLocation() {
@@ -100,7 +105,7 @@ public class SerializedLocation implements ConfigurationSerializable {
 
     /**
      * Get the location as a {@link org.bukkit.util.Vector}
-     * 
+     *
      * @return the vector
      */
     public Vector getVector() {
@@ -109,9 +114,9 @@ public class SerializedLocation implements ConfigurationSerializable {
 
     /**
      * Serialize map.
-     * 
+     *
      * <b>This should never be called directly</b>
-     * 
+     *
      * @return the map ready to be serialised
      */
     @Override
@@ -129,7 +134,7 @@ public class SerializedLocation implements ConfigurationSerializable {
 
     /**
      * Get the X coordinate of the {@link org.bukkit.Location}
-     * 
+     *
      * @return the x coordinate as an int
      */
     public int getX() {
@@ -138,7 +143,7 @@ public class SerializedLocation implements ConfigurationSerializable {
 
     /**
      * Gets world.
-     * 
+     *
      * @return the world as a string
      */
     public String getWorld() {
@@ -147,7 +152,7 @@ public class SerializedLocation implements ConfigurationSerializable {
 
     /**
      * Get the Z coordinate of the {@link org.bukkit.Location}
-     * 
+     *
      * @return the z coordinate as an int
      */
     public int getZ() {
@@ -156,7 +161,7 @@ public class SerializedLocation implements ConfigurationSerializable {
 
     /**
      * Get the Y coordinate of the {@link org.bukkit.Location}
-     * 
+     *
      * @return the y coordinate as an int
      */
     public int getY() {
@@ -165,7 +170,7 @@ public class SerializedLocation implements ConfigurationSerializable {
 
     /**
      * Gets the yaw to set the {@link org.bukkit.Location} to
-     * 
+     *
      * @return the yaw as a float
      */
     public float getYaw() {
@@ -174,7 +179,7 @@ public class SerializedLocation implements ConfigurationSerializable {
 
     /**
      * Gets the pitch to set the {@link org.bukkit.Location} to
-     * 
+     *
      * @return the pitch as a float
      */
     public float getPitch() {
@@ -184,7 +189,7 @@ public class SerializedLocation implements ConfigurationSerializable {
     /**
      * Get {@link co.q64.paradisesurvivalgames.util.LocationType}
      * of this {@link org.bukkit.Location}
-     * 
+     *
      * @return the location type
      */
     public LocationType getLocationType() {
@@ -193,11 +198,12 @@ public class SerializedLocation implements ConfigurationSerializable {
 
     /**
      * String representation of SerializedLocation
-     * 
+     *
      * @return the string
      */
     @Override
     public String toString() {
-        return "SerializedLocation:world=" + getWorld() + ":x=" + getX() + ":y=" + getY() + ":z=" + getZ() + ":yaw=" + getYaw() + ":pitch=" + getPitch();
+        return "SerializedLocation:world=" + getWorld() + ":x=" + getX() + ":y=" + getY() + ":z=" + getZ() + ":yaw="
+                + getYaw() + ":pitch=" + getPitch();
     }
 }

@@ -3,28 +3,28 @@
  *
  * @version 1.0.0
  */
-package co.q64.paradisesurvivalgames.util.items;
 
-import java.util.List;
+package co.q64.paradisesurvivalgames.util.items;
 
 import co.q64.paradisesurvivalgames.util.items.interfaces.IDisplayName;
 import co.q64.paradisesurvivalgames.util.items.interfaces.IEnhanceable;
 import co.q64.paradisesurvivalgames.util.items.interfaces.ILore;
-
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.List;
+
 public abstract class AbstractItem implements IDisplayName, ILore, IEnhanceable {
 
-    private ItemStack item;
-    private Material material;
-    private ItemMeta meta;
-    private String displayName;
+    private ItemStack         item;
+    private Material          material;
+    private ItemMeta          meta;
+    private String            displayName;
     private List<Enchantment> enchantments;
-    private Integer Id;
-    private String permission;
+    private Integer           Id;
+    private String            permission;
 
     public abstract void setPermission(String s);
 
@@ -32,7 +32,7 @@ public abstract class AbstractItem implements IDisplayName, ILore, IEnhanceable 
 
     /**
      * Gets item meta.
-     * 
+     *
      * @param material the material
      * @return the ItemMeta related to the material
      */
@@ -43,7 +43,7 @@ public abstract class AbstractItem implements IDisplayName, ILore, IEnhanceable 
 
     /**
      * Gets display name.
-     * 
+     *
      * @return the display name
      */
     @Override
@@ -53,7 +53,7 @@ public abstract class AbstractItem implements IDisplayName, ILore, IEnhanceable 
 
     /**
      * Sets display name.
-     * 
+     *
      * @param name the name
      */
     @Override
@@ -63,7 +63,7 @@ public abstract class AbstractItem implements IDisplayName, ILore, IEnhanceable 
 
     /**
      * Gets enchants.
-     * 
+     *
      * @return the enchants
      */
     @Override
@@ -73,7 +73,7 @@ public abstract class AbstractItem implements IDisplayName, ILore, IEnhanceable 
 
     /**
      * Gets lore.
-     * 
+     *
      * @return the lore
      */
     @Override
@@ -83,7 +83,7 @@ public abstract class AbstractItem implements IDisplayName, ILore, IEnhanceable 
 
     /**
      * Add line.
-     * 
+     *
      * @param line the line
      */
     @Override

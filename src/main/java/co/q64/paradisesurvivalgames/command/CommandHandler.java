@@ -3,15 +3,12 @@
  *
  * @version 1.0.0
  */
-package co.q64.paradisesurvivalgames.command;
 
-import java.util.HashMap;
-import java.util.Map;
+package co.q64.paradisesurvivalgames.command;
 
 import co.q64.paradisesurvivalgames.command.subcommands.SubCommand;
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.managers.SGApi;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
@@ -19,16 +16,19 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CommandHandler implements CommandExecutor {
 
     private static final Map<String, SubCommand> commands = new HashMap<>();
 
     /**
      * Registers a command
-     * 
-     * @param cmd The command to register
+     *
+     * @param cmd   The command to register
      * @param clazz The class to register the command to. Must implement
-     *        SubCommand.
+     *              SubCommand.
      */
     public static void register(String cmd, SubCommand clazz) {
         try {
@@ -46,7 +46,7 @@ public class CommandHandler implements CommandExecutor {
 
     /**
      * Gets the SubCommand represnted by a specific Command
-     * 
+     *
      * @param cmd The name of the command to get
      * @return The SubCommand of the command
      * @throws CommandException when the command was not found. Should be caught.
@@ -61,27 +61,27 @@ public class CommandHandler implements CommandExecutor {
 
     /**
      * The main executor for the SubCommands. DO NOT CALL.
-     * 
-     * @param sender The CommandSender that executed the command
-     * @param command The Command executed
+     *
+     * @param sender       The CommandSender that executed the command
+     * @param command      The Command executed
      * @param commandLabel The command's label
-     * @param args The arguments after the command seperated by a space
+     * @param args         The arguments after the command seperated by a space
      * @return whether or not the command was executed successfully
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
         if (command.getName().equalsIgnoreCase("sg") && sender instanceof Player) {
-            if(args.length >= 1) {
+            if (args.length >= 1) {
                 String[] stringArray = new String[args.length];
-                for(int i = 1; i <= (args.length - 1); i++) {
+                for (int i = 1; i <= (args.length - 1); i++) {
                     stringArray[i - 1] = args[i];
                 }
-                
+
                 try {
                     getCommand(args[0]).execute(args[0], (Player) sender, stringArray);
                     return true;
                 } catch (CommandException x) {
-                    sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("NO_COMMAND"));
+                    sender.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("NO_COMMAND"));
                     return true;
                 }
             } else {

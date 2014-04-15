@@ -3,13 +3,15 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.util;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.util.Vector;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The type LocationChecker. Checks if a location is in a
@@ -21,18 +23,18 @@ import org.bukkit.util.Vector;
 @SerializableAs("LocationChecker")
 public class LocationChecker implements ConfigurationSerializable {
 
-    private final Vector max;
-    private final Vector min;
-    private final String type;
+    private final Vector  max;
+    private final Vector  min;
+    private final String  type;
     private final Integer id;
 
     /**
      * Instantiates a new Location checker.
-     * 
-     * @param max the max vector
-     * @param min the min Vector
+     *
+     * @param max  the max vector
+     * @param min  the min Vector
      * @param type the type of Object
-     * @param id the id Id of object
+     * @param id   the id Id of object
      */
     public LocationChecker(Vector max, Vector min, String type, Integer id) {
         this.max = max;
@@ -43,7 +45,7 @@ public class LocationChecker implements ConfigurationSerializable {
 
     /**
      * Instantiates a new Location checker.
-     * 
+     *
      * @param locationChecker the location checker
      */
     public LocationChecker(LocationChecker locationChecker) {
@@ -66,13 +68,15 @@ public class LocationChecker implements ConfigurationSerializable {
 
     /**
      * Deserialize location checker.
-     * 
+     *
      * @param map the map
      * @return the location checker
      */
     public static LocationChecker deserialize(Map<String, Object> map) {
-        Object maxObject = map.get("max"), minObject = map.get("min"), typeObject = map.get("type"), idObject = map.get("id");
-        if (maxObject == null || minObject == null || typeObject == null || idObject == null || !(maxObject instanceof Vector) || !(minObject instanceof Vector)) {
+        Object maxObject = map.get("max"), minObject = map.get("min"), typeObject = map.get("type"),
+                idObject = map.get("id");
+        if (maxObject == null || minObject == null || typeObject == null || idObject == null || !(maxObject
+                instanceof Vector) || !(minObject instanceof Vector)) {
             return null;
         }
 
@@ -84,7 +88,7 @@ public class LocationChecker implements ConfigurationSerializable {
 
     /**
      * Get location checker. THIS IS THE REASON FOR THIS CLASS
-     * 
+     *
      * @return the location checker
      */
     public LocationChecker getChecker() {
@@ -93,7 +97,7 @@ public class LocationChecker implements ConfigurationSerializable {
 
     /**
      * Is Checks to see if the give vector is in The bounded Box
-     * 
+     *
      * @param vector the vector
      * @return the boolean true if the vector is in the box
      */
@@ -103,7 +107,7 @@ public class LocationChecker implements ConfigurationSerializable {
 
     /**
      * Gets max.
-     * 
+     *
      * @return the max
      */
     public Vector getMax() {
@@ -112,7 +116,7 @@ public class LocationChecker implements ConfigurationSerializable {
 
     /**
      * Gets min.
-     * 
+     *
      * @return the min
      */
     public Vector getMin() {
@@ -121,7 +125,7 @@ public class LocationChecker implements ConfigurationSerializable {
 
     /**
      * Gets type.
-     * 
+     *
      * @return the type
      */
     public String getType() {
@@ -130,7 +134,7 @@ public class LocationChecker implements ConfigurationSerializable {
 
     /**
      * Gets id.
-     * 
+     *
      * @return the id
      */
     public Integer getId() {

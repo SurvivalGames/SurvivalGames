@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.objects;
 
 
@@ -12,9 +13,9 @@ import java.util.UUID;
 
 public class Party {
 
-    private String leader;
+    private       String   leader;
     private final String[] members;
-    private final UUID id;
+    private final UUID     id;
 
     /**
      * Creates an instance of a party

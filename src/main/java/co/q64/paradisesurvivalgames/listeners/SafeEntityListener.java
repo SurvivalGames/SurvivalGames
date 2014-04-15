@@ -4,6 +4,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.listeners;
 
 import org.bukkit.entity.Player;

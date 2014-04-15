@@ -3,11 +3,13 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.configs;
 
-import java.util.Map;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
+
+import java.util.Map;
 
 @SerializableAs("PlayersData")
 public class PlayersData implements ConfigurationSerializable {
@@ -18,7 +20,7 @@ public class PlayersData implements ConfigurationSerializable {
      * This class must provide a method to restore this class, as defined in the
      * {@link org.bukkit.configuration.serialization.ConfigurationSerializable}
      * interface javadocs.
-     * 
+     *
      * @return Map containing the current state of this class
      */
     @Override

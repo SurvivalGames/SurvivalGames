@@ -1,8 +1,8 @@
 //PLEASE DON'T EDIT THIS CLASS - Quantum64
+
 package co.q64.paradisesurvivalgames.objects;
 
 import co.q64.paradisesurvivalgames.util.PlayerNameUtil;
-
 import com.avaje.ebean.validation.NotEmpty;
 import com.avaje.ebean.validation.NotNull;
 import org.bukkit.Bukkit;
@@ -26,11 +26,11 @@ public class PlayerData {
     @NotNull
     private String playerName;
     @NotNull
-    private int points;
+    private int    points;
     @NotNull
-    private int kills;
+    private int    kills;
     @NotNull
-    private int wins;
+    private int    wins;
     @NotEmpty
     private String rank;
 
@@ -55,8 +55,8 @@ public class PlayerData {
     }
 
     public void setRank(String rank) {
-    	if(rank.length() > 16)
-    		rank = rank.substring(0, 16);
+        if (rank.length() > 16)
+            rank = rank.substring(0, 16);
         this.rank = rank;
     }
 

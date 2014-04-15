@@ -3,10 +3,11 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.objects;
 
-import lombok.Data;
 import co.q64.paradisesurvivalgames.util.PlayerType;
+import lombok.Data;
 
 /**
  * Gamer Lightweight storage of an player involved in a game. Records this
@@ -15,10 +16,10 @@ import co.q64.paradisesurvivalgames.util.PlayerType;
  */
 @Data
 public class Gamer {
-    private String Id;
+    private String     Id;
     private PlayerType playerType;
-    private String prefix;
-    private String name;
+    private String     prefix;
+    private String     name;
 
     public Gamer(String n, String uuid) {
         this.name = n;

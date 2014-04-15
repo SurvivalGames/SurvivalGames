@@ -1,9 +1,0 @@
-/**
- * Name: GameManager.java Edited: 19 January 2014
- *
- * @version 1.0.0
- */
-package co.q64.paradisesurvivalgames.managers;
-
-public class GameManager {
-}

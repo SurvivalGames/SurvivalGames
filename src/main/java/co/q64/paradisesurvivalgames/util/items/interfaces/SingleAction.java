@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.util.items.interfaces;
 
 import java.util.List;
@@ -11,12 +12,11 @@ import java.util.List;
  * The interface Single action.
  * <p>
  * Does the item only have a single Ability If they do what action sets it off
- * 
  */
 public interface SingleAction {
     /**
      * Gets activators.
-     * 
+     *
      * @return the activators
      */
     List<ActionActivator> getActivators();

@@ -3,17 +3,17 @@
  *
  * @version 1.0.0
  */
-package co.q64.paradisesurvivalgames.command.subcommands.party;
 
-import java.util.UUID;
+package co.q64.paradisesurvivalgames.command.subcommands.party;
 
 import co.q64.paradisesurvivalgames.command.subcommands.SubCommand;
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.managers.SGApi;
 import co.q64.paradisesurvivalgames.objects.Party;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class PromoteCommand implements SubCommand {
 
@@ -26,9 +26,9 @@ public class PromoteCommand implements SubCommand {
     public void execute(String cmd, Player sender, String[] args) {
         if ((args.length == 2) && (args[0].equalsIgnoreCase("promote"))) {
             UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());
-           if (id != null) {
+            if (id != null) {
                 Party party = SGApi.getPartyManager().getParties().get(id);
-              if (party.getLeader().equalsIgnoreCase(sender.getName())) {
+                if (party.getLeader().equalsIgnoreCase(sender.getName())) {
                     for (String member : party.getMembers()) {
                         if ((member != null) && (member.equalsIgnoreCase(args[0]))) {
                             Player p = Bukkit.getServer().getPlayer(args[0]);
@@ -37,16 +37,20 @@ public class PromoteCommand implements SubCommand {
                                 party.setLeader(p.getName());
                                 party.removeMember(p.getName());
                                 party.addMember(oldLeader);
-                                sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("PROMOTED") + p.getName() + I18N.getLocaleString("TO_LEADER"));
-                                p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + I18N.getLocaleString("PROMOTED_YOU"));
+                                sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("PROMOTED") + p
+                                        .getName() + I18N.getLocaleString("TO_LEADER"));
+                                p.sendMessage(org.bukkit.ChatColor.YELLOW + sender.getName() + I18N.getLocaleString
+                                        ("PROMOTED_YOU"));
                             } else {
-                                sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString("NOT_ONLINE"));
+                                sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString
+                                        ("NOT_ONLINE"));
                             }
                             return;
                         }
                     }
 
-                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString("NOT_IN_YOUR_PARTY"));
+                    sender.sendMessage(org.bukkit.ChatColor.YELLOW + args[0] + I18N.getLocaleString
+                            ("NOT_IN_YOUR_PARTY"));
                 } else {
                     sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("LEADER_TO_PROMOTE"));
                 }
