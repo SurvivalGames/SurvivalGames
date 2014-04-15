@@ -67,6 +67,7 @@
 				<configuration>
 					<promoteTransitiveDependencies>false</promoteTransitiveDependencies>
 					<minimizeJar>true</minimizeJar>
+					<outputDirectory>${basedir}</outputDirectory>
 					<filters>
 						<filter>
 							<artifact>*:*</artifact>
