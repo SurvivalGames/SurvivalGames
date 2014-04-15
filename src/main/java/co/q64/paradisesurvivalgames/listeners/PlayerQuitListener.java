@@ -3,17 +3,18 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.listeners;
 
 import java.util.UUID;
 
-import co.q64.paradisesurvivalgames.managers.PartyManager;
-import co.q64.paradisesurvivalgames.managers.SGApi;
-import co.q64.paradisesurvivalgames.objects.Party;
-
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+
+import co.q64.paradisesurvivalgames.managers.PartyManager;
+import co.q64.paradisesurvivalgames.managers.SGApi;
+import co.q64.paradisesurvivalgames.objects.Party;
 
 public class PlayerQuitListener implements Listener {
 
@@ -21,7 +22,7 @@ public class PlayerQuitListener implements Listener {
 	 * Detects when a player quits, and if that player is the party leader, the
 	 * party will disband Also removes the player from the arena if they are in
 	 * game
-	 * 
+	 *
 	 * @param event The event being called
 	 */
 	@EventHandler

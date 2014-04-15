@@ -1,21 +1,20 @@
 package co.q64.paradisesurvivalgames.configs;
 
-import co.q64.paradisesurvivalgames.managers.SGApi;
-import co.q64.paradisesurvivalgames.multiworld.SGWorld;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.block.BlockState;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.bukkit.Location;
+import org.bukkit.block.BlockState;
+
+import co.q64.paradisesurvivalgames.managers.SGApi;
+import co.q64.paradisesurvivalgames.multiworld.SGWorld;
 
 public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 	private SGWorld world;
 
 	private String cachedWorldName;
-    private SGWorld cachedWorldCreator;
+	private SGWorld cachedWorldCreator;
 
 	public WorldConfigTemplate(File file) {
 		super(file);
@@ -25,15 +24,10 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 		super("maps/" + world.getWorld().getName() + ".yml");
 		this.world = world;
 	}
-	
+
 	@Override
 	public String[] pattern() {
-		return new String[] { 
-			"World-name", 
-			"Display-name", 
-			"Spawns", 
-			"Chests" 
-		};
+		return new String[] { "World-name", "Display-name", "Spawns", "Chests" };
 	}
 
 	@Override
@@ -66,7 +60,7 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 			this.cachedWorldName = String.valueOf(o);
 			break;
 		case 1:
-            String cachedDisplayName = String.valueOf(o);
+			String cachedDisplayName = String.valueOf(o);
 
 			this.cachedWorldCreator = new SGWorld(this.cachedWorldName, cachedDisplayName);
 			this.cachedWorldCreator.create();

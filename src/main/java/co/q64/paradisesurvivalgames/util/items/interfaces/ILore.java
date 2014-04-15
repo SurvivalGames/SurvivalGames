@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.util.items.interfaces;
 
 import java.util.List;
@@ -11,17 +12,17 @@ import java.util.List;
  * Simple Interface to an create Lore
  */
 public interface ILore extends IMetable {
-    /**
-     * Gets lore.
-     * 
-     * @return the lore
-     */
-    public List<String> getLore();
+	/**
+	 * Gets lore.
+	 *
+	 * @return the lore
+	 */
+	public List<String> getLore();
 
-    /**
-     * Add line.
-     * 
-     * @param line the line
-     */
-    public void addLoreLine(String line);
+	/**
+	 * Add line.
+	 *
+	 * @param line the line
+	 */
+	public void addLoreLine(String line);
 }

@@ -18,10 +18,42 @@ import co.q64.paradisesurvivalgames.enchantment.UnenchantableEnchantment;
 
 public class EnchantmentManager {
 
-	public static ShockingEnchantment shocking = new ShockingEnchantment(120);
-	public static UnenchantableEnchantment unenchantable = new UnenchantableEnchantment(121);
-	public static DedicationEnchantment dedication = new DedicationEnchantment(122);
-	public static UndroppableEnchantment undroppable = new UndroppableEnchantment(123);
+	private static ShockingEnchantment shocking = new ShockingEnchantment(120);
+	private static UnenchantableEnchantment unenchantable = new UnenchantableEnchantment(121);
+	private static DedicationEnchantment dedication = new DedicationEnchantment(122);
+	private static UndroppableEnchantment undroppable = new UndroppableEnchantment(123);
+
+	public static ShockingEnchantment getShocking() {
+		return shocking;
+	}
+
+	public static void setShocking(final ShockingEnchantment shocking) {
+		EnchantmentManager.shocking = shocking;
+	}
+
+	public static UnenchantableEnchantment getUnenchantable() {
+		return unenchantable;
+	}
+
+	public static void setUnenchantable(final UnenchantableEnchantment unenchantable) {
+		EnchantmentManager.unenchantable = unenchantable;
+	}
+
+	public static DedicationEnchantment getDedication() {
+		return dedication;
+	}
+
+	public static void setDedication(final DedicationEnchantment dedication) {
+		EnchantmentManager.dedication = dedication;
+	}
+
+	public static UndroppableEnchantment getUndroppable() {
+		return undroppable;
+	}
+
+	public static void setUndroppable(final UndroppableEnchantment undroppable) {
+		EnchantmentManager.undroppable = undroppable;
+	}
 
 	public void registerAll() {
 		try {
@@ -32,12 +64,12 @@ public class EnchantmentManager {
 			e.printStackTrace();
 		}
 
-		if(Enchantment.getByName("SHOCKING") != null)
+		if (Enchantment.getByName("SHOCKING") != null)
 			return;
-		Enchantment.registerEnchantment(shocking);
-		Enchantment.registerEnchantment(unenchantable);
-		Enchantment.registerEnchantment(dedication);
-		Enchantment.registerEnchantment(undroppable);
+		Enchantment.registerEnchantment(getShocking());
+		Enchantment.registerEnchantment(getUnenchantable());
+		Enchantment.registerEnchantment(getDedication());
+		Enchantment.registerEnchantment(getUndroppable());
 	}
 
 	public void enchantItemSG(EnchantItemEvent e) {

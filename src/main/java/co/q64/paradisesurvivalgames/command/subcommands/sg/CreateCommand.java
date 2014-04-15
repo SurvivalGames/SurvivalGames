@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.command.subcommands.sg;
 
 import org.bukkit.Bukkit;
@@ -16,9 +17,9 @@ public class CreateCommand implements SubCommand {
 
 	/**
 	 * The create command. DO NOT CALL DIRECTLY. Only use in CommandHandler
-	 * 
-	 * @param cmd The command that was executed
-	 * @param p The player that executed the command
+	 *
+	 * @param cmd  The command that was executed
+	 * @param p    The player that executed the command
 	 * @param args The arguments after the command
 	 */
 	@Override
@@ -26,7 +27,7 @@ public class CreateCommand implements SubCommand {
 		if (!p.hasPermission("sg.create") || !p.isOp())
 			return;
 		if (SGApi.getPlugin().getPluginConfig().isBungeecordMode()) {
-			Bukkit.getLogger().severe("You're running the server in Bungeecord mode, yet you are not running Bungeecord at all... people these days");
+			Bukkit.getLogger().severe("You're running the server in Bungeecord mode, " + "yet you are not running Bungeecord at all... people these days");
 		}
 		if (cmd.equalsIgnoreCase("create")) {
 			try {
@@ -40,7 +41,7 @@ public class CreateCommand implements SubCommand {
 						return;
 					}
 					SGApi.getArenaManager().createWorld(p, args[1], args[1]);
-					p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("CREATING_ARENA"));
+					p.sendMessage(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("CREATING_ARENA"));
 				} else if (args[0].equalsIgnoreCase("download")) {
 					if (args.length == 1 || args.length == 2) {
 						p.sendMessage("Format: /sg create <import type> <world name>");
@@ -57,13 +58,13 @@ public class CreateCommand implements SubCommand {
 				}
 				return;
 			} catch (ArrayIndexOutOfBoundsException x) {
-				p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("INVALID_ARGUMENTS"));
+				p.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("INVALID_ARGUMENTS"));
 			}
 		}
 
 		if (cmd.equalsIgnoreCase("finish")) {
 			SGApi.getArenaManager().getCreators().remove(p.getName());
-			p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("FINISHED"));
+			p.sendMessage(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("FINISHED"));
 		}
 	}
 }

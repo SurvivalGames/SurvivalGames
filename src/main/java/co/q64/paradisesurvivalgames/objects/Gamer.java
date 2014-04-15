@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.objects;
 
 import lombok.Data;
@@ -15,27 +16,27 @@ import co.q64.paradisesurvivalgames.util.PlayerType;
  */
 @Data
 public class Gamer {
-    private String Id;
-    private PlayerType playerType;
-    private String prefix;
-    private String name;
+	private String Id;
+	private PlayerType playerType;
+	private String prefix;
+	private String name;
 
-    public Gamer(String n, String uuid) {
-        this.name = n;
-        this.Id = uuid;
-    }
+	public Gamer(String n, String uuid) {
+		this.name = n;
+		this.Id = uuid;
+	}
 
-    public void setId(String uuid) {
-        this.Id = uuid;
-    }
+	public void setId(String uuid) {
+		this.Id = uuid;
+	}
 
-    public void setPlayerType(PlayerType pt) {
-        this.playerType = pt;
-        this.prefix = pt.getType().replace("%player%", "Relicum");
-    }
+	public void setPlayerType(PlayerType pt) {
+		this.playerType = pt;
+		this.prefix = pt.getType().replace("%player%", "Relicum");
+	}
 
-    private void setPrefix(String prefix) {
+	private void setPrefix(String prefix) {
 
-    }
+	}
 
 }

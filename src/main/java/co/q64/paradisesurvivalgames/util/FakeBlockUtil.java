@@ -57,7 +57,7 @@ public class FakeBlockUtil {
 						//watcher.setObject(10, "This is a test");
 						//watcher.setObject(11, (byte) 1);
 						//watcher.setObject(12, -9999);
-						// 
+						//
 						//wrapper.setMetadata(watcher);
 
 						//try {

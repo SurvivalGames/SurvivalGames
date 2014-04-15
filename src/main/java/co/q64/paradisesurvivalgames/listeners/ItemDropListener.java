@@ -23,10 +23,10 @@ public class ItemDropListener implements Listener {
 			return;
 		}
 		try {
-			if (SGApi.getArenaManager().getArena(event.getPlayer()).spectators.contains(event.getPlayer().getName()))
+			if (SGApi.getArenaManager().getArena(event.getPlayer()).getSpectators().contains(event.getPlayer().getName()))
 				event.setCancelled(true);
 		} catch (ArenaNotFoundException ignored) {}
-		if (event.getItemDrop().getItemStack().containsEnchantment(EnchantmentManager.undroppable)) {
+		if (event.getItemDrop().getItemStack().containsEnchantment(EnchantmentManager.getUndroppable())) {
 			event.setCancelled(true);
 			event.getPlayer().sendMessage(ChatColor.RED + "You cannot drop that item!");
 		}
@@ -35,7 +35,7 @@ public class ItemDropListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onItemPickup(PlayerPickupItemEvent event) {
 		try {
-			if (SGApi.getArenaManager().getArena(event.getPlayer()).spectators.contains(event.getPlayer().getName()))
+			if (SGApi.getArenaManager().getArena(event.getPlayer()).getSpectators().contains(event.getPlayer().getName()))
 				event.setCancelled(true);
 		} catch (ArenaNotFoundException ignored) {}
 	}
@@ -44,7 +44,7 @@ public class ItemDropListener implements Listener {
 	public void onCreative(InventoryCreativeEvent event) {
 		try {
 			Player p = (Player) event.getWhoClicked();
-			if (SGApi.getArenaManager().getArena(p).spectators.contains(p.getName()))
+			if (SGApi.getArenaManager().getArena(p).getSpectators().contains(p.getName()))
 				event.setCancelled(true);
 		} catch (ArenaNotFoundException ignored) {}
 	}

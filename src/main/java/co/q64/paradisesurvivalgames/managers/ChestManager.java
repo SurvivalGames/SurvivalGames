@@ -40,9 +40,9 @@ public class ChestManager {
 	}
 
 	public void fillChest(SGArena a, Chest chest) {
-		if (a.looted.contains(chest))
+		if (a.getLooted().contains(chest))
 			return;
-		a.looted.add(chest);
+		a.getLooted().add(chest);
 		for (int i = 0; i < 27; i++) {
 			if (r.nextInt(100) < slot) {
 				if (r.nextInt(100) < lvlup) {
@@ -68,9 +68,9 @@ public class ChestManager {
 	}
 
 	public void fillDoubleChest(SGArena a, DoubleChest chest) {
-		if (a.dLooted.contains(chest))
+		if (a.getdLooted().contains(chest))
 			return;
-		a.dLooted.add(chest);
+		a.getdLooted().add(chest);
 		for (int i = 0; i < 54; i++) {
 			if (r.nextInt(100) < slot) {
 				if (r.nextInt(100) < lvlup) {

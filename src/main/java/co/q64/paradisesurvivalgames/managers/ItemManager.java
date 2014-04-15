@@ -17,12 +17,12 @@ import co.q64.paradisesurvivalgames.util.player.items.ce.SingleExecutor;
 
 public class ItemManager implements Listener {
 
-	public static ItemManager instance;
+	private static ItemManager instance;
 
-	public SGItem clock;
-	public SGItem compass;
-	public SGItem gem;
-	public SGItem star;
+	private SGItem clock;
+	private SGItem compass;
+	private SGItem gem;
+	private SGItem star;
 
 	public ItemManager() {
 
@@ -46,7 +46,7 @@ public class ItemManager implements Listener {
 		starmeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "Click to spectate a player");
 		starItem.setItemMeta(starmeta);
 
-		clock = new SGItem(clockItem, 8, true, false, new SingleExecutor() {
+		setClock(new SGItem(clockItem, 8, true, false, new SingleExecutor() {
 
 			@Override
 			public void use(Player p) {
@@ -62,45 +62,52 @@ public class ItemManager implements Listener {
 				p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
 
 			}
-		});
+		}));
 
-		compass = new SGItem(compassItem, 0, true, false, new SingleExecutor() {
-
-			@Override
-			public void use(Player player) {
-				MeunManager.getMenuManager().displayJoinMenu(player);
-			}
-		});
-
-		gem = new SGItem(emerald, 0, true, true, new SingleExecutor() {
+		setCompass(new SGItem(compassItem, 0, true, false, new SingleExecutor() {
 
 			@Override
 			public void use(Player player) {
-				MeunManager.getMenuManager().displayVoteMenu(player);
+				MenuManager.getMenuManager().displayJoinMenu(player);
 			}
-		});
+		}));
 
-		star = new SGItem(starItem, 0, false, true, new SingleExecutor() {
+		setGem(new SGItem(emerald, 0, true, true, new SingleExecutor() {
 
 			@Override
 			public void use(Player player) {
-				MeunManager.getMenuManager().displaySpecMenu(player);
+				MenuManager.getMenuManager().displayVoteMenu(player);
 			}
-		});
+		}));
+
+		setStar(new SGItem(starItem, 0, false, true, new SingleExecutor() {
+
+			@Override
+			public void use(Player player) {
+				MenuManager.getMenuManager().displaySpecMenu(player);
+			}
+		}));
 	}
 
 	public static void register() {
-		instance = new ItemManager();
-		SGApi.getPlugin().getServer().getPluginManager().registerEvents(instance, SGApi.getPlugin());
+		setInstance(new ItemManager());
+		SGApi.getPlugin().getServer().getPluginManager().registerEvents(getInstance(), SGApi.getPlugin());
+	}
+
+	public static ItemManager getInstance() {
+		return instance;
+	}
+
+	public static void setInstance(final ItemManager instance) {
+		ItemManager.instance = instance;
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onWorldChange(final PlayerChangedWorldEvent event) {
 		if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
 			event.getPlayer().getInventory().clear();
-			if (SGApi.getPlugin().getPluginConfig().getUseServers())
-				clock.givePlayerItem(event.getPlayer());
-			compass.givePlayerItem(event.getPlayer());
+			getClock().givePlayerItem(event.getPlayer());
+			getCompass().givePlayerItem(event.getPlayer());
 		}
 	}
 
@@ -111,12 +118,45 @@ public class ItemManager implements Listener {
 			public void run() {
 				if (event.getPlayer().getWorld().getName().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
 					event.getPlayer().getInventory().clear();
-					clock.givePlayerItem(event.getPlayer());
-					compass.givePlayerItem(event.getPlayer());
+					if (SGApi.getPlugin().getPluginConfig().getUseServers())
+						getClock().givePlayerItem(event.getPlayer());
+					getCompass().givePlayerItem(event.getPlayer());
 				}
 			}
 
 		}, 10L);
 
+	}
+
+	public SGItem getClock() {
+		return clock;
+	}
+
+	public void setClock(final SGItem clock) {
+		this.clock = clock;
+	}
+
+	public SGItem getCompass() {
+		return compass;
+	}
+
+	public void setCompass(final SGItem compass) {
+		this.compass = compass;
+	}
+
+	public SGItem getGem() {
+		return gem;
+	}
+
+	public void setGem(final SGItem gem) {
+		this.gem = gem;
+	}
+
+	public SGItem getStar() {
+		return star;
+	}
+
+	public void setStar(final SGItem star) {
+		this.star = star;
 	}
 }

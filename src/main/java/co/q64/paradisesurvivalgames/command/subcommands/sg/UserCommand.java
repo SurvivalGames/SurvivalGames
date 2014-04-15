@@ -1,18 +1,18 @@
 package co.q64.paradisesurvivalgames.command.subcommands.sg;
 
-import co.q64.paradisesurvivalgames.command.subcommands.SubCommand;
-import co.q64.paradisesurvivalgames.managers.SGApi;
-import co.q64.paradisesurvivalgames.objects.PlayerData;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import co.q64.paradisesurvivalgames.command.subcommands.SubCommand;
+import co.q64.paradisesurvivalgames.managers.SGApi;
+import co.q64.paradisesurvivalgames.objects.PlayerData;
 
 public class UserCommand implements SubCommand {
 
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
-		if(!p.hasPermission("sg.user") && !p.isOp())
+		if (!p.hasPermission("sg.user") && !p.isOp())
 			return;
 		// TODO Something is getting Null Pointered here every single time -
 		// probably SQL save function, can't be sure

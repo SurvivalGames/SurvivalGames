@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.managers;
 
 import java.io.File;
@@ -17,74 +18,74 @@ import org.bukkit.entity.Player;
 import co.q64.paradisesurvivalgames.multiworld.SGWorld;
 
 public class MultiWorldManager {
-    
-    List<SGWorld> worlds = new ArrayList<SGWorld>();
 
-    public MultiWorldManager() {
-    }
+	List<SGWorld> worlds = new ArrayList<SGWorld>();
 
-    SGWorld createWorld(String name, String display) {
-        SGWorld world = new SGWorld(name, display);
-        world.create();
-        worlds.add(world);
-        return world;
-    }
+	public MultiWorldManager() {
+	}
 
-    public void deleteWorld(String name) {
-        SGWorld w = worldForName(name);
-        if(worlds.contains(w)) {
-            worlds.remove(w);
-            w.remove();
-        }
-    }
+	SGWorld createWorld(String name, String display) {
+		SGWorld world = new SGWorld(name, display);
+		world.create();
+		worlds.add(world);
+		return world;
+	}
 
-    public World copyFromInternet(final Player sender, final String worldName, final String display) {
-    	
-        createWorld(worldName, display);
+	public void deleteWorld(String name) {
+		SGWorld w = worldForName(name);
+		if (worlds.contains(w)) {
+			worlds.remove(w);
+			w.remove();
+		}
+	}
 
-        return Bukkit.getWorld(worldName);
-    }
+	public World copyFromInternet(final Player sender, final String worldName, final String display) {
 
-    public World importWorldFromFolder(final Player sender, final String worldName, String display) {
-        if (!checkIfIsWorld(new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName))) {
-            sender.sendMessage("That's not a world :/");
-            return null;
-        }
-        createWorld(worldName, display);
+		createWorld(worldName, display);
 
-        return Bukkit.getWorld(worldName);
-    }
+		return Bukkit.getWorld(worldName);
+	}
 
-    public World createRandomWorld(final String worldName) {
-        // TODO
-        return Bukkit.getWorld(worldName);
-    }
-    
-    public List<SGWorld> getWorlds() {
-        return worlds;
-    }
+	public World importWorldFromFolder(final Player sender, final String worldName, String display) {
+		if (!checkIfIsWorld(new File(Bukkit.getServer().getWorldContainer().getAbsolutePath(), worldName))) {
+			sender.sendMessage("That's not a world :/");
+			return null;
+		}
+		createWorld(worldName, display);
 
-    public SGWorld worldForName(String name) {
-        for(SGWorld world : getWorlds()) {
-            if(world.getWorld().getName().equalsIgnoreCase(name)) {
-                return world;
-            }
-        }
-        return null;
-    }
+		return Bukkit.getWorld(worldName);
+	}
 
-    private static boolean checkIfIsWorld(File worldFolder) {
-        if (worldFolder.isDirectory()) {
-            File[] files = worldFolder.listFiles(new FilenameFilter() {
-                @Override
-                public boolean accept(File file, String name) {
-                    return name.equalsIgnoreCase("level.dat");
-                }
-            });
-            if (files != null && files.length > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
+	public World createRandomWorld(final String worldName) {
+		// TODO
+		return Bukkit.getWorld(worldName);
+	}
+
+	public List<SGWorld> getWorlds() {
+		return worlds;
+	}
+
+	public SGWorld worldForName(String name) {
+		for (SGWorld world : getWorlds()) {
+			if (world.getWorld().getName().equalsIgnoreCase(name)) {
+				return world;
+			}
+		}
+		return null;
+	}
+
+	private static boolean checkIfIsWorld(File worldFolder) {
+		if (worldFolder.isDirectory()) {
+			File[] files = worldFolder.listFiles(new FilenameFilter() {
+				@Override
+				public boolean accept(File file, String name) {
+					return name.equalsIgnoreCase("level.dat");
+				}
+			});
+			if (files != null && files.length > 0) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

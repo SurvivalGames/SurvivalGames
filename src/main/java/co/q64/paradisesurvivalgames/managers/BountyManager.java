@@ -3,7 +3,6 @@ package co.q64.paradisesurvivalgames.managers;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -11,7 +10,6 @@ import org.bukkit.event.Listener;
 
 import co.q64.paradisesurvivalgames.event.GameEndEvent;
 import co.q64.paradisesurvivalgames.locale.I18N;
-import co.q64.paradisesurvivalgames.objects.PlayerData;
 import co.q64.paradisesurvivalgames.objects.SGArena;
 import co.q64.paradisesurvivalgames.util.EconUtil;
 
@@ -34,13 +32,13 @@ public class BountyManager implements Listener {
 				EconUtil.removePoints(sender, bounty);
 				amount.put(sender.getName(), bounty);
 				bounties.put(reciever.getName(), amount);
-				reciever.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("BOUNTY_SUCCESS_RECEIVED").replace("%amount", amount.toString()).replace("%sender", sender.getName()));
-				sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("BOUNTY_SUCCESS_SENT").replace("%amount", amount.toString()).replace("%receiver", reciever.getName()));
+				reciever.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("BOUNTY_SUCCESS_RECEIVED").replace("%amount", amount.toString()).replace("%sender", sender.getName()));
+				sender.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("BOUNTY_SUCCESS_SENT").replace("%amount", amount.toString()).replace("%receiver", reciever.getName()));
 			} catch (Exception e) {
-				sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("BOUNTY_FAIL"));
+				sender.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("BOUNTY_FAIL"));
 			}
 		} else {
-			sender.sendMessage(SGApi.getArenaManager().error + "Player is not in game.");
+			sender.sendMessage(SGApi.getArenaManager().getError() + "Player is not in game.");
 		}
 	}
 
@@ -48,9 +46,9 @@ public class BountyManager implements Listener {
 		if (arena.getPlayers().contains(reciever.getName())) {
 			try {
 				bounties.remove(reciever.getName());
-				sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("BOUNTY_SUCCESS"));
+				sender.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("BOUNTY_SUCCESS"));
 			} catch (Exception e) {
-				sender.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("BOUNTY_FAIL"));
+				sender.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("BOUNTY_FAIL"));
 			}
 		}
 	}

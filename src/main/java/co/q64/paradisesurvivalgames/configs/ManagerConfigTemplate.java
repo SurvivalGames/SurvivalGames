@@ -1,19 +1,19 @@
 package co.q64.paradisesurvivalgames.configs;
 
-import co.q64.paradisesurvivalgames.managers.ArenaManager;
-import co.q64.paradisesurvivalgames.managers.SGApi;
-import co.q64.paradisesurvivalgames.multiworld.SGWorld;
-import co.q64.paradisesurvivalgames.util.ItemSerialization;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import co.q64.paradisesurvivalgames.managers.ArenaManager;
+import co.q64.paradisesurvivalgames.managers.SGApi;
+import co.q64.paradisesurvivalgames.multiworld.SGWorld;
+import co.q64.paradisesurvivalgames.util.ItemSerialization;
 
 public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
 
@@ -33,33 +33,33 @@ public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
 	@Override
 	public Object toFile(int index) {
 		switch (index) {
-			case 0:
+		case 0:
 			List<String> list = new ArrayList<>();
 			for (Map.Entry<String, SGWorld> entry : SGApi.getArenaManager().getCreators().entrySet()) {
 				list.add(entry.getKey() + ":" + entry.getValue().getWorld().getName());
 			}
 			return list;
-			case 1:
+		case 1:
 			List<String> stringList = new ArrayList<>();
-			for (Map.Entry<String, Location> entry : SGApi.getArenaManager().locs.entrySet()) {
+			for (Map.Entry<String, Location> entry : SGApi.getArenaManager().getLocs().entrySet()) {
 				stringList.add(entry.getKey() + ":" + SGApi.getArenaManager().serializeLoc(entry.getValue()));
 			}
 			return stringList;
-			case 2:
+		case 2:
 			List<String> stringArray = new ArrayList<>();
 			Inventory inventory = Bukkit.getServer().createInventory(null, 54, "Inv");
 			{
-				for (Map.Entry<String, ItemStack[]> entry : SGApi.getArenaManager().inv.entrySet()) {
+				for (Map.Entry<String, ItemStack[]> entry : SGApi.getArenaManager().getInv().entrySet()) {
 					inventory.setContents(entry.getValue());
 					stringArray.add(entry.getKey() + ":" + ItemSerialization.inventoryToString(inventory));
 				}
 			}
 			return stringArray;
-			case 3:
+		case 3:
 			List<String> armorArray = new ArrayList<>();
 			Inventory inv = Bukkit.getServer().createInventory(null, 54, "Inv");
 			{
-				for (Map.Entry<String, ItemStack[]> entry : SGApi.getArenaManager().armor.entrySet()) {
+				for (Map.Entry<String, ItemStack[]> entry : SGApi.getArenaManager().getArmor().entrySet()) {
 					inv.setContents(entry.getValue());
 					armorArray.add(entry.getKey() + ":" + ItemSerialization.inventoryToString(inv));
 				}
@@ -77,30 +77,30 @@ public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
 			index = -1;
 		}
 		switch (index) {
-			case 0:
+		case 0:
 			for (String s : (List<String>) o) {
 				String[] strings = s.split(":");
 				SGApi.getArenaManager().getCreators().put(strings[0], SGApi.getMultiWorldManager().worldForName(strings[1]));
 			}
-				break;
-			case 1:
+			break;
+		case 1:
 			for (String s : (List<String>) o) {
 				String[] strings = s.split(":");
-				SGApi.getArenaManager().locs.put(strings[0], SGApi.getArenaManager().deserializeLoc(strings[1]));
+				SGApi.getArenaManager().getLocs().put(strings[0], SGApi.getArenaManager().deserializeLoc(strings[1]));
 			}
-				break;
-			case 2:
+			break;
+		case 2:
 			for (String s : (List<String>) o) {
 				String[] strings = s.split(":");
-				SGApi.getArenaManager().inv.put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
+				SGApi.getArenaManager().getInv().put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
 			}
-				break;
-			case 3:
+			break;
+		case 3:
 			for (String s : (List<String>) o) {
 				String[] strings = s.split(":");
-				SGApi.getArenaManager().armor.put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
+				SGApi.getArenaManager().getArmor().put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
 			}
-				break;
+			break;
 		}
 		return SGApi.getArenaManager();
 	}

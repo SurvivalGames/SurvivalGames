@@ -13,11 +13,11 @@ public class UnZip {
 	}
 
 	public void begin() {
-	    try {
-	         ZipFile zipFile = new ZipFile(in);
-	         zipFile.extractAll(out);
-	    } catch (ZipException e) {
-	        e.printStackTrace();
-	    }
+		try {
+			ZipFile zipFile = new ZipFile(in);
+			zipFile.extractAll(out);
+		} catch (ZipException e) {
+			e.printStackTrace();
+		}
 	}
 }

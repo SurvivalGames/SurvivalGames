@@ -50,7 +50,7 @@ public class KitManager {
 						return;
 					}
 					event.setWillClose(true);
-					event.getPlayer().sendMessage(ChatColor.RED + "Sorry, but you do not have permission to use this kit!");
+					event.getPlayer().sendMessage(ChatColor.RED + "Sorry, but you do not have permission to use this " + "kit!");
 
 				}
 			}, SGApi.getPlugin()));
@@ -119,9 +119,10 @@ public class KitManager {
 				String iconLore = kitData.getString("iconLore");
 				String serializedInventory = kitData.getString("items.lvl1.inventory");
 
-				Bukkit.getServer().getLogger().info("Attempting to read inventory string of " + kitName + ". If it errors here, its a problem with this kit.");
+				Bukkit.getServer().getLogger().info("Attempting to read inventory string of " + kitName + ". If it " + "errors here, its a problem with this kit.");
 
-				Inventory inventory = ItemSerialization.stringToInventory(serializedInventory); // TODO Not a temp solution, this is awesome!
+				Inventory inventory = ItemSerialization.stringToInventory(serializedInventory); // TODO Not a temp
+				// solution, this is awesome!
 				List<KitItem> list = new ArrayList<>();
 				for (ItemStack itemStack : inventory) {
 					KitItem ki = new KitItem();

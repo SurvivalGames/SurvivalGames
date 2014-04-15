@@ -23,7 +23,7 @@ public class SendWebsocketData {
 	static Random rnd = new Random();
 
 	public static void playToPlayer(final Player p, final String data) {
-		if(!SGApi.getPlugin().getPluginConfig().getUseServers())
+		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
 			return;
 		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
@@ -38,7 +38,7 @@ public class SendWebsocketData {
 	}
 
 	public static void playToArena(final SGArena arena, final String data) {
-		if(!SGApi.getPlugin().getPluginConfig().getUseServers())
+		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
 			return;
 		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
@@ -56,7 +56,7 @@ public class SendWebsocketData {
 	}
 
 	public static void playToAll(final String data) {
-		if(!SGApi.getPlugin().getPluginConfig().getUseServers())
+		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
 			return;
 		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
@@ -73,7 +73,7 @@ public class SendWebsocketData {
 	}
 
 	public static void updateArenaStatusForPlayer(final Player p) {
-		if(!SGApi.getPlugin().getPluginConfig().getUseServers())
+		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
 			return;
 		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
@@ -104,14 +104,14 @@ public class SendWebsocketData {
 	}
 
 	public static void playMusicToPlayer(Player p, String data) {
-		if(!SGApi.getPlugin().getPluginConfig().getUseServers())
+		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
 			return;
 		music.remove(p.getName());
 		WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "music:" + data);
 	}
 
 	public static void stopMusic(Player p) {
-		if(!SGApi.getPlugin().getPluginConfig().getUseServers())
+		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
 			return;
 		WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "stop");
 	}

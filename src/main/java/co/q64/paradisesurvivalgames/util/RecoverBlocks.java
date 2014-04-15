@@ -20,7 +20,7 @@ public class RecoverBlocks {
 				}
 			}.runTaskLater(SGApi.getPlugin(), delay);
 			index++;
-			delay+=20;
+			delay += 20;
 		}
 	}
 }

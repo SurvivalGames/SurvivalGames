@@ -2,8 +2,8 @@ package co.q64.paradisesurvivalgames.ability;
 
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
-import org.bukkit.Material;
 import org.bukkit.FireworkEffect.Type;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -21,7 +21,7 @@ public class Notch extends SGAbility implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onBlockPlace(BlockPlaceEvent event) {
-		if(!event.getBlock().getType().equals(Material.DIAMOND_ORE))
+		if (!event.getBlock().getType().equals(Material.DIAMOND_ORE))
 			return;
 		BlockListener.addBreakable(event.getBlock());
 	}
@@ -33,7 +33,7 @@ public class Notch extends SGAbility implements Listener {
 			try {
 				FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(event.getPlayer().getWorld(), event.getPlayer().getLocation(), fEffect);
 			} catch (Exception e) {
-				//If the firework dosen't work... to bad 
+				//If the firework dosen't work... to bad
 			}
 		}
 	}

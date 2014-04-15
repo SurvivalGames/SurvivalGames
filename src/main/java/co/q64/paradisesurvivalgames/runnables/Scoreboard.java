@@ -2,13 +2,6 @@ package co.q64.paradisesurvivalgames.runnables;
 
 import java.util.logging.Level;
 
-import co.q64.paradisesurvivalgames.TheSurvivalGames;
-import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
-import co.q64.paradisesurvivalgames.locale.I18N;
-import co.q64.paradisesurvivalgames.managers.SGApi;
-import co.q64.paradisesurvivalgames.objects.SGArena;
-import co.q64.paradisesurvivalgames.util.EconUtil;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -16,9 +9,16 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 
+import co.q64.paradisesurvivalgames.TheSurvivalGames;
+import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
+import co.q64.paradisesurvivalgames.locale.I18N;
+import co.q64.paradisesurvivalgames.managers.SGApi;
+import co.q64.paradisesurvivalgames.objects.SGArena;
+import co.q64.paradisesurvivalgames.util.EconUtil;
+
 /**
  * Name: Scoreboard.java Edited: 8 December 2013
- * 
+ *
  * @version 1.0.0
  */
 public class Scoreboard implements Runnable {
@@ -110,7 +110,7 @@ public class Scoreboard implements Runnable {
 		}
 
 		if (arena.getState() == SGArena.ArenaState.PRE_COUNTDOWN) {
-			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("Starting in: " + SGApi.getTimeManager(arena).g.timeToString()) + " " + SGApi.getTimeManager(arena).g.s[1]));
+			objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&a&l" + I18N.getLocaleString("Starting in: " + SGApi.getTimeManager(arena).getG().timeToString()) + "" + " " + SGApi.getTimeManager(arena).getG().s[1]));
 
 			sendScore(objective, "&e" + I18N.getLocaleString("MAX_PLAYERS"), 14, complete);
 			sendScore(objective, "&f" + arena.getMaxPlayers() + " ", 13, complete);
@@ -136,7 +136,7 @@ public class Scoreboard implements Runnable {
 
 		//sendScore(objective, "&bKills", arena.kills.get(player.getName()), complete);
 		sendScore(objective, "&aAlive", arena.getPlayers().size(), complete);
-		sendScore(objective, "&4Dead", arena.dead, complete);
+		sendScore(objective, "&4Dead", arena.getDead(), complete);
 		sendScore(objective, "&7Spectating", arena.getSpectators().size(), complete);
 
 	}

@@ -57,7 +57,7 @@ public class SponsorManager {
 				inMenu.remove(event.getPlayer().getName());
 				final Location loc = sponsored.getLocation();
 				final Location nloc = sponsored.getLocation();
-				a.broadcast(ChatColor.RED + "" + ChatColor.BOLD + "Look up, " + ChatColor.GRAY + ChatColor.BOLD + sponsored.getDisplayName() + ChatColor.RED + "" + ChatColor.BOLD + ", you have been sponsored!");
+				a.broadcast(ChatColor.RED + "" + ChatColor.BOLD + "Look up, " + ChatColor.GRAY + ChatColor.BOLD + sponsored.getDisplayName() + ChatColor.RED + "" + ChatColor.BOLD + ", " + "you have been sponsored!");
 				FireworkEffect fEffect = FireworkEffect.builder().withColor(Color.SILVER).withFade(Color.WHITE).trail(true).flicker(false).with(Type.BALL).build();
 				FireworkUtil.getCircleUtil().playFireworkLine(nloc.add(0, 50, 0), loc, fEffect, 50);
 				Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
@@ -77,8 +77,8 @@ public class SponsorManager {
 						}
 						try {
 							SGArena a = SGApi.getArenaManager().getArena(event.getPlayer());
-							a.looted.add(chest);
-							a.changedBlocks.add(new ChangedBlock(event.getPlayer().getWorld().getName(), m, (byte) 0, Material.CHEST, chest.getBlock().getData(), chest.getBlock().getX(), chest.getBlock().getY(), chest.getBlock().getZ()));
+							a.getLooted().add(chest);
+							a.getChangedBlocks().add(new ChangedBlock(event.getPlayer().getWorld().getName(), m, (byte) 0, Material.CHEST, chest.getBlock().getData(), chest.getBlock().getX(), chest.getBlock().getY(), chest.getBlock().getZ()));
 						} catch (ArenaNotFoundException ignored) {}
 					}
 				}, 155L);
@@ -132,11 +132,11 @@ public class SponsorManager {
 		tmp.addEnchantment(Enchantment.DAMAGE_ALL, 1);
 		sponsor.setOption(15, tmp, ChatColor.translateAlternateColorCodes('&', "&6Eclipse"), new String[] { ChatColor.translateAlternateColorCodes('&', "&5Brings death and destruction"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$50") : ChatColor.translateAlternateColorCodes('&', "&e&l50 Points") });
 		tmp = new ItemStack(Material.DIAMOND_SWORD);
-		tmp.addEnchantment(EnchantmentManager.shocking, 1);
-		sponsor.setOption(16, tmp, ChatColor.translateAlternateColorCodes('&', "&6Corruption"), new String[] { ChatColor.translateAlternateColorCodes('&', "&0Infused with the power of magical Flux"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$82") : ChatColor.translateAlternateColorCodes('&', "&e&l82 Points") });
+		tmp.addEnchantment(EnchantmentManager.getShocking(), 1);
+		sponsor.setOption(16, tmp, ChatColor.translateAlternateColorCodes('&', "&6Corruption"), new String[] { ChatColor.translateAlternateColorCodes('&', "&0Infused with the power of magical " + "Flux"), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$82") : ChatColor.translateAlternateColorCodes('&', "&e&l82 Points") });
 		tmp = new ItemStack(Material.DIAMOND_SWORD);
 		tmp.addEnchantment(Enchantment.DAMAGE_ALL, 1);
-		sponsor.setOption(17, tmp, ChatColor.translateAlternateColorCodes('&', "&6Razor Sharp Dagger"), new String[] { ChatColor.translateAlternateColorCodes('&', "&2You might get cut just by looking at this thing..."), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$90") : ChatColor.translateAlternateColorCodes('&', "&e&l90 Points") });
+		sponsor.setOption(17, tmp, ChatColor.translateAlternateColorCodes('&', "&6Razor Sharp Dagger"), new String[] { ChatColor.translateAlternateColorCodes('&', "&2You might get cut just by looking at " + "this thing..."), EconUtil.isHooked() ? ChatColor.translateAlternateColorCodes('&', "&e&l$90") : ChatColor.translateAlternateColorCodes('&', "&e&l90 Points") });
 
 		/////////////////
 		//   Helmets   //
@@ -277,7 +277,7 @@ public class SponsorManager {
 		List<ItemStack> items = new ArrayList<ItemStack>();
 		for (String s : a.getPlayers()) {
 			try {
-				if (SGApi.getArenaManager().getArena(Bukkit.getPlayer(s)).spectators.contains(s)) {
+				if (SGApi.getArenaManager().getArena(Bukkit.getPlayer(s)).getSpectators().contains(s)) {
 					continue;
 				}
 			} catch (ArenaNotFoundException e) {

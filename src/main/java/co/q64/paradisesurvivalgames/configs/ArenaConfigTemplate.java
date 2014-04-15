@@ -42,15 +42,15 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 			Bukkit.getLogger().info(arena.getId() + "");
 			return arena.getId();
 		case 2:
-			Bukkit.getLogger().info(SGApi.getArenaManager().serializeLoc(arena.lobby));
-			return SGApi.getArenaManager().serializeLoc(arena.lobby);
+			Bukkit.getLogger().info(SGApi.getArenaManager().serializeLoc(arena.getLobby()));
+			return SGApi.getArenaManager().serializeLoc(arena.getLobby());
 		case 3:
-			if(arena.getCurrentMap() == null){
+			if (arena.getCurrentMap() == null) {
 				return "NOT_ACTIVE";
 			}
 			return arena.getCurrentMap().getName();
 		case 4:
-			return arena.voted;
+			return arena.getVoted();
 		case 5:
 			return serializeMaps();
 		case 6:
@@ -77,33 +77,33 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 			this.cachedArena.createArena(Integer.parseInt(String.valueOf(o)));
 			break;
 		case 2:
-			this.cachedArena.lobby = SGApi.getArenaManager().deserializeLoc(String.valueOf(o));
+			this.cachedArena.setLobby(SGApi.getArenaManager().deserializeLoc(String.valueOf(o)));
 			break;
 		case 3:
-			if(String.valueOf(o).equals("NOT_ACTIVE"))
+			if (String.valueOf(o).equals("NOT_ACTIVE"))
 				break;
-			this.cachedArena.currentMap = SGApi.getMultiWorldManager().worldForName(String.valueOf(o));
+			this.cachedArena.setCurrentMap(SGApi.getMultiWorldManager().worldForName(String.valueOf(o)));
 			break;
 		case 4:
-			this.cachedArena.voted = (List<String>) o;
+			this.cachedArena.setVoted((List<String>) o);
 			break;
 		case 5:
-			this.cachedArena.votes = deserializeMaps((List<String>) o);
+			this.cachedArena.setVotes(deserializeMaps((List<String>) o));
 			break;
 		case 6:
-			this.cachedArena.maxPlayers = Integer.parseInt(String.valueOf(o));
+			this.cachedArena.setMaxPlayers(Integer.parseInt(String.valueOf(o)));
 			break;
 		case 7:
-			this.cachedArena.minPlayers = Integer.parseInt(String.valueOf(o));
+			this.cachedArena.setMinPlayers(Integer.parseInt(String.valueOf(o)));
 			break;
 		case 8:
 			for (String s : (List<String>) o) {
-				this.cachedArena.players.add(s);
+				this.cachedArena.getPlayers().add(s);
 			}
 			break;
 		case 9:
 			for (String s : (List<String>) o) {
-				this.cachedArena.spectators.add(s);
+				this.cachedArena.getSpectators().add(s);
 			}
 			break;
 		}
@@ -112,7 +112,7 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 
 	public List<String> serializeMaps() {
 		List<String> list = new ArrayList<>();
-		for (Map.Entry<MapHash, Integer> entry : arena.votes.entrySet()) {
+		for (Map.Entry<MapHash, Integer> entry : arena.getVotes().entrySet()) {
 			list.add(entry.getKey().getId() + ":" + entry.getKey().getWorld().getWorld().getName() + ":" + entry.getValue());
 		}
 		return list;

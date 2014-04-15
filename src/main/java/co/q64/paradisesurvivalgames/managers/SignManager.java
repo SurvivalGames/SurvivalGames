@@ -8,7 +8,6 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -41,7 +40,7 @@ public class SignManager {
 			@Override
 			public void run() {
 				for (Location loc : signs.keySet()) {
-					if(!(loc.getBlock().getState() instanceof Sign))
+					if (!(loc.getBlock().getState() instanceof Sign))
 						continue;
 					Sign sign = (Sign) loc.getBlock().getState();
 					SGArena arena = null;

@@ -24,7 +24,7 @@ public class BungeecordListener implements PluginMessageListener {
 			String tag = in.readUTF();
 			if (tag.equalsIgnoreCase("SGUpdate")) {
 				if (SGApi.getPlugin().getPluginConfig().isHub()) {
-					Bukkit.getLogger().severe("Welp... you configured this server to be a SG server, but Bungee thinks it's a hub -- nice job");
+					Bukkit.getLogger().severe("Welp... you configured this server to be a SG server, " + "but Bungee thinks it's a hub -- nice job");
 				}
 				String realName = in.readUTF();
 				ServerStatus status = ServerStatus.valueOf(in.readUTF());

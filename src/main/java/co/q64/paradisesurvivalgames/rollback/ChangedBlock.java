@@ -10,14 +10,11 @@ public class ChangedBlock {
 	private int x, y, z;
 
 	/**
-	 * 
 	 * @param premat
 	 * @param newmat
 	 * @param x
 	 * @param y
-	 * @param z
-	 * 
-	 * Provides a object for holding the data for block changes
+	 * @param z      Provides a object for holding the data for block changes
 	 */
 	public ChangedBlock(String world, Material premat, byte prevdata, Material newmat, byte newdata, int x, int y, int z) {
 		this.world = world;

@@ -25,7 +25,7 @@ public class WebsocketServer extends WebSocketServer {
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
 		WebsocketSessionManager.getSessionManager().openSession(conn.getRemoteSocketAddress().getAddress().getHostAddress());
-		Bukkit.getLogger().info(conn.getRemoteSocketAddress().getAddress().getHostName() + " has connected to the Websocket server!");
+		Bukkit.getLogger().info(conn.getRemoteSocketAddress().getAddress().getHostName() + " has connected to the " + "Websocket server!");
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class WebsocketServer extends WebSocketServer {
 	}
 
 	public void sendData(WebsocketSession session, String data) {
-		if(session == null)
+		if (session == null)
 			return;
 		Collection<WebSocket> con = connections();
 		synchronized (con) {

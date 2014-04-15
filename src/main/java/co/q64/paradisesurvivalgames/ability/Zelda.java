@@ -54,7 +54,7 @@ public class Zelda extends SGAbility implements Listener {
 				try {
 					FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(event.getPlayer().getWorld(), event.getPlayer().getLocation(), fEffect);
 				} catch (Exception e) {
-					//If the firework dosen't work... to bad 
+					//If the firework dosen't work... to bad
 				}
 			}
 		}
@@ -62,7 +62,7 @@ public class Zelda extends SGAbility implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onKill(PlayerKilledEvent event) {
-		if(!(event.getKiller() instanceof Player))
+		if (!(event.getKiller() instanceof Player))
 			return;
 		Player p = (Player) event.getKiller();
 		if (hasAbility(p)) {

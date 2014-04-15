@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.managers;
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ import co.q64.paradisesurvivalgames.objects.SGArena;
  * SGApi.getKitManager() will return you the kit manager. DO NOT then store this
  * in a field in your class.(See relicum for the reasons)
  * </p>
- * 
+ *
  * @author TheCommunitySurvivalGames
  * @version 0.1
  */
@@ -47,7 +48,7 @@ public class SGApi {
 
 	/**
 	 * Gets arena manager.
-	 * 
+	 *
 	 * @return the arena manager
 	 */
 	public static ArenaManager getArenaManager() {
@@ -58,7 +59,7 @@ public class SGApi {
 
 	/**
 	 * Gets bonus manager.
-	 * 
+	 *
 	 * @return the bonus manager
 	 */
 	public static BonusManager getBonusManager() {
@@ -69,7 +70,7 @@ public class SGApi {
 
 	/**
 	 * Gets kit manager.
-	 * 
+	 *
 	 * @return the kit manager
 	 */
 	public static KitManager getKitManager() {
@@ -80,7 +81,7 @@ public class SGApi {
 
 	/**
 	 * Gets multi world manager.
-	 * 
+	 *
 	 * @return the multi world manager
 	 */
 	public static MultiWorldManager getMultiWorldManager() {
@@ -91,7 +92,7 @@ public class SGApi {
 
 	/**
 	 * Get MultiThread Manager
-	 * 
+	 *
 	 * @return the schedule manager
 	 */
 	public static ScheduleManager getScheduler() {
@@ -102,7 +103,7 @@ public class SGApi {
 
 	/**
 	 * Gets time manager.
-	 * 
+	 *
 	 * @return the time manager
 	 */
 	public static TimeManager getTimeManager(SGArena a) {
@@ -114,7 +115,7 @@ public class SGApi {
 
 	/**
 	 * Gets Bounty manager.
-	 * 
+	 *
 	 * @return the bounty manager
 	 */
 	public static BountyManager getBountyManager(SGArena a) {
@@ -132,7 +133,7 @@ public class SGApi {
 
 	/**
 	 * Gets party manager.
-	 * 
+	 *
 	 * @return the party manager
 	 */
 	public static PartyManager getPartyManager() {
@@ -164,14 +165,14 @@ public class SGApi {
 	}
 
 	public static SignManager getSignManager() {
-		if(signManager == null)
+		if (signManager == null)
 			signManager = new SignManager();
 		return signManager;
 	}
 
 	/**
 	 * Used to create an instance of the main plugin in onEnable
-	 * 
+	 *
 	 * @param survivalGames the survival games
 	 */
 	public static void init(TheSurvivalGames survivalGames) {
@@ -180,7 +181,7 @@ public class SGApi {
 
 	/**
 	 * Gets Main plugin.
-	 * 
+	 *
 	 * @return the plugin
 	 */
 	public static TheSurvivalGames getPlugin() {

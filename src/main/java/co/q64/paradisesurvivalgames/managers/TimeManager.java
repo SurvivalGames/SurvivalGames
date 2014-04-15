@@ -4,6 +4,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.managers;
 
 import java.util.ArrayList;
@@ -20,7 +21,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import co.q64.paradisesurvivalgames.event.GameStartEvent;
 import co.q64.paradisesurvivalgames.listeners.MoveListener;
-import co.q64.paradisesurvivalgames.listeners.SafeEntityListener;
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.multiworld.SGWorld;
 import co.q64.paradisesurvivalgames.net.SendWebsocketData;
@@ -34,15 +34,15 @@ public class TimeManager {
 	private SGArena a;
 
 	public TimeManager(SGArena a) {
-		this.a = a;
+		this.setA(a);
 	}
 
-	public Countdown gameTime;
-	public Countdown g;
-	public Countdown cg;
-	public Countdown dm;
-	public Countdown cdm;
-	public Countdown end;
+	private Countdown gameTime;
+	private Countdown g;
+	private Countdown cg;
+	private Countdown dm;
+	private Countdown cdm;
+	private Countdown end;
 
 	public void countdownLobby(int n) {
 		// setup the voting
@@ -62,70 +62,70 @@ public class TimeManager {
 			}
 		}
 		for (MapHash hash : hashes) {
-			a.votes.put(hash, 0);
+			getA().getVotes().put(hash, 0);
 		}
 
-		for (String s : a.players) {
-			ItemManager.instance.gem.givePlayerItem(Bukkit.getPlayer(s));
+		for (String s : getA().getPlayers()) {
+			ItemManager.getInstance().getGem().givePlayerItem(Bukkit.getPlayer(s));
 		}
 
-		a.broadcast("Use the emerald in your inventory to vote!");
-		a.broadcastVotes();
+		getA().broadcast("Use the emerald in your inventory to vote!");
+		getA().broadcastVotes();
 
-		a.setState(SGArena.ArenaState.PRE_COUNTDOWN);
+		getA().setState(SGArena.ArenaState.PRE_COUNTDOWN);
 
-		g = new Countdown(a, 1, n, "Game", "minutes", new CodeExecutor() {
+		setG(new Countdown(getA(), 1, n, "Game", "minutes", new CodeExecutor() {
 			@Override
 			public void runCode() {
 				//handle votes
 				Map.Entry<MapHash, Integer> maxEntry = null;
-				for (Map.Entry<MapHash, Integer> entry : a.votes.entrySet()) {
+				for (Map.Entry<MapHash, Integer> entry : getA().getVotes().entrySet()) {
 					if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
 						maxEntry = entry;
 					}
 				}
-				a.currentMap = maxEntry.getKey().getWorld();
-				a.votes.remove(maxEntry);
-				for (MapHash m : a.votes.keySet()) {
+				getA().setCurrentMap(maxEntry.getKey().getWorld());
+				getA().getVotes().remove(maxEntry);
+				for (MapHash m : getA().getVotes().keySet()) {
 					m.getWorld().setInLobby(false);
 				}
-				a.votes.clear();
-				a.broadcast(SGApi.getArenaManager().prefix + I18N.getLocaleString("MAP_WINNER") + " " + a.currentMap.getWorld().getName());
+				getA().getVotes().clear();
+				getA().broadcast(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("MAP_WINNER") + " " + getA().getCurrentMap().getWorld().getName());
 
-				Bukkit.getPluginManager().callEvent(new GameStartEvent(a));
-				a.broadcast(I18N.getLocaleString("GAME_STARTING"));
-				a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
+				Bukkit.getPluginManager().callEvent(new GameStartEvent(getA()));
+				getA().broadcast(I18N.getLocaleString("GAME_STARTING"));
+				getA().setState(SGArena.ArenaState.STARTING_COUNTDOWN);
 
 				int index = 0;
-				for (String s : a.getPlayers()) {
+				for (String s : getA().getPlayers()) {
 					Player p = Bukkit.getPlayerExact(s);
-					Bukkit.getLogger().info("List: " + a.currentMap.locs.toString());
-					Location loc = a.currentMap.locs.get(index);
+					Bukkit.getLogger().info("List: " + getA().getCurrentMap().locs.toString());
+					Location loc = getA().getCurrentMap().locs.get(index);
 					p.getInventory().clear();
 					p.teleport(loc);
 
 					index++;
 				}
-				for (String s : a.getPlayers()) {
+				for (String s : getA().getPlayers()) {
 					SendWebsocketData.stopMusic(Bukkit.getPlayer(s));
 				}
 				countdown();
-				MoveListener.getPlayers().addAll(a.getPlayers());
+				MoveListener.getPlayers().addAll(getA().getPlayers());
 			}
-		});
-		g.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), g, 0L, 60 * 20L));
+		}));
+		getG().setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), getG(), 0L, 60 * 20L));
 	}
 
 	public void countdown() {
-		cg = new Countdown(a, 1, 10, "Game", "seconds", new CodeExecutor() {
+		setCg(new Countdown(getA(), 1, 10, "Game", "seconds", new CodeExecutor() {
 			@Override
 			public void runCode() {
 
-				SendWebsocketData.playToArena(a, "play");
+				SendWebsocketData.playToArena(getA(), "play");
 
-				a.broadcast(I18N.getLocaleString("ODDS"));
-				a.setState(SGArena.ArenaState.IN_GAME);
-				for (String s : a.getPlayers()) {
+				getA().broadcast(I18N.getLocaleString("ODDS"));
+				getA().setState(SGArena.ArenaState.IN_GAME);
+				for (String s : getA().getPlayers()) {
 					if (MoveListener.getPlayers().contains(s)) {
 						MoveListener.getPlayers().remove(s);
 						Bukkit.getPlayer(s).addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 500, 9));
@@ -134,13 +134,13 @@ public class TimeManager {
 					}
 				}
 
-				a.broadcast(ChatColor.GOLD + "You will get your kit in 10 seconds!");
+				getA().broadcast(ChatColor.GOLD + "You will get your kit in 10 seconds!");
 
 				Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
 					@Override
 					public void run() {
-						for (String s : a.getPlayers()) {
+						for (String s : getA().getPlayers()) {
 							SGApi.getKitManager().giveKit(Bukkit.getPlayer(s));
 						}
 					}
@@ -148,74 +148,130 @@ public class TimeManager {
 				countupGame();
 				countdownDm();
 			}
-		}, "sounds");
-		cg.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), cg, 0L, 20L));
+		}, "sounds"));
+		getCg().setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), getCg(), 0L, 20L));
 	}
 
 	public void countupGame() {
-		gameTime = new Countdown(a, -1, 1, "GameTime", "seconds", new CodeExecutor() {
+		setGameTime(new Countdown(getA(), -1, 1, "GameTime", "seconds", new CodeExecutor() {
 			@Override
 			public void runCode() {
-				//Ignored			
+				//Ignored
 			}
-		}, "check");
-		gameTime.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), gameTime, 0L, 20L));
+		}, "check"));
+		getGameTime().setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), getGameTime(), 0L, 20L));
 	}
 
 	public void countdownDm() {
-		dm = new Countdown(a, 1, SGApi.getPlugin().getPluginConfig().getDmTime(), "DeathMatch", "minutes", new CodeExecutor() {
+		setDm(new Countdown(getA(), 1, SGApi.getPlugin().getPluginConfig().getDmTime(), "DeathMatch", "minutes", new CodeExecutor() {
 			@Override
 			public void runCode() {
-				a.broadcast(I18N.getLocaleString("DM_STARTING"));
-				a.setState(SGArena.ArenaState.DEATHMATCH);
-				for (int i = 0; i < a.getPlayers().size(); i++) {
-					String s = a.getPlayers().get(i);
+				getA().broadcast(I18N.getLocaleString("DM_STARTING"));
+				getA().setState(SGArena.ArenaState.DEATHMATCH);
+				for (int i = 0; i < getA().getPlayers().size(); i++) {
+					String s = getA().getPlayers().get(i);
 					Player p = Bukkit.getPlayer(s);
-					p.teleport(a.getCurrentMap().locs.get(i));
+					p.teleport(getA().getCurrentMap().locs.get(i));
 				}
-				MoveListener.getPlayers().addAll(a.getPlayers());
+				MoveListener.getPlayers().addAll(getA().getPlayers());
 				commenceDm();
 			}
-		});
-		dm.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), dm, 0L, 60 * 20L));
+		}));
+		getDm().setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), getDm(), 0L, 60 * 20L));
 	}
 
 	void commenceDm() {
-		cdm = new Countdown(a, 1, 10, "DeathMatch", "seconds", new CodeExecutor() {
+		setCdm(new Countdown(getA(), 1, 10, "DeathMatch", "seconds", new CodeExecutor() {
 			@Override
 			public void runCode() {
-				a.broadcast(I18N.getLocaleString("START"));
-				MoveListener.getPlayers().removeAll(a.getPlayers());
+				getA().broadcast(I18N.getLocaleString("START"));
+				MoveListener.getPlayers().removeAll(getA().getPlayers());
 
 				countdownEnd();
 			}
-		});
-		cdm.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), cdm, 0L, 20L));
+		}));
+		getCdm().setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), getCdm(), 0L, 20L));
 	}
 
 	void countdownEnd() {
-		end = new Countdown(a, 1, 5, "EndGame", "minutes", new CodeExecutor() {
+		setEnd(new Countdown(getA(), 1, 5, "EndGame", "minutes", new CodeExecutor() {
 			@Override
 			public void runCode() {
-				a.broadcast(I18N.getLocaleString("END") + " TIED_GAME");
+				getA().broadcast(I18N.getLocaleString("END") + " TIED_GAME");
 				// tp out of arena, rollback, pick up all items and arrows
 			}
-		});
-		end.setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), end, 0L, 60 * 20L));
+		}));
+		getEnd().setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), getEnd(), 0L, 60 * 20L));
 	}
 
 	public void forceReset() {
-		if (g != null)
-			Bukkit.getScheduler().cancelTask(g.getId());
-		if (cg != null)
-			Bukkit.getScheduler().cancelTask(cg.getId());
-		if (dm != null)
-			Bukkit.getScheduler().cancelTask(dm.getId());
-		if (cdm != null)
-			Bukkit.getScheduler().cancelTask(cdm.getId());
-		if (end != null)
-			Bukkit.getScheduler().cancelTask(end.getId());
-		if (gameTime != null)
-			Bukkit.getScheduler().cancelTask(gameTime.getId());
+		if (getG() != null)
+			Bukkit.getScheduler().cancelTask(getG().getId());
+		if (getCg() != null)
+			Bukkit.getScheduler().cancelTask(getCg().getId());
+		if (getDm() != null)
+			Bukkit.getScheduler().cancelTask(getDm().getId());
+		if (getCdm() != null)
+			Bukkit.getScheduler().cancelTask(getCdm().getId());
+		if (getEnd() != null)
+			Bukkit.getScheduler().cancelTask(getEnd().getId());
+		if (getGameTime() != null)
+			Bukkit.getScheduler().cancelTask(getGameTime().getId());
+	}
+
+	public SGArena getA() {
+		return a;
+	}
+
+	public void setA(final SGArena a) {
+		this.a = a;
+	}
+
+	public Countdown getGameTime() {
+		return gameTime;
+	}
+
+	public void setGameTime(final Countdown gameTime) {
+		this.gameTime = gameTime;
+	}
+
+	public Countdown getG() {
+		return g;
+	}
+
+	public void setG(final Countdown g) {
+		this.g = g;
+	}
+
+	public Countdown getCg() {
+		return cg;
+	}
+
+	public void setCg(final Countdown cg) {
+		this.cg = cg;
+	}
+
+	public Countdown getDm() {
+		return dm;
+	}
+
+	public void setDm(final Countdown dm) {
+		this.dm = dm;
+	}
+
+	public Countdown getCdm() {
+		return cdm;
+	}
+
+	public void setCdm(final Countdown cdm) {
+		this.cdm = cdm;
+	}
+
+	public Countdown getEnd() {
+		return end;
+	}
+
+	public void setEnd(final Countdown end) {
+		this.end = end;
 	}
 }

@@ -9,8 +9,7 @@ public class VisitorData {
 	private long timestampCurrent;
 	private int visits;
 
-	VisitorData(int visitorId, long timestampFirst, long timestampPrevious,
-			long timestampCurrent, int visits) {
+	VisitorData(int visitorId, long timestampFirst, long timestampPrevious, long timestampCurrent, int visits) {
 		this.visitorId = visitorId;
 		this.timestampFirst = timestampFirst;
 		this.timestampPrevious = timestampPrevious;
@@ -64,10 +63,8 @@ public class VisitorData {
 		return new VisitorData(visitorId, now, now, now, 1);
 	}
 
-	public static VisitorData newSession(int visitorId, long timestampfirst,
-			long timestamplast, int visits) {
+	public static VisitorData newSession(int visitorId, long timestampfirst, long timestamplast, int visits) {
 		long now = now();
-		return new VisitorData(visitorId, timestampfirst, timestamplast, now,
-				visits + 1);
+		return new VisitorData(visitorId, timestampfirst, timestamplast, now, visits + 1);
 	}
 }

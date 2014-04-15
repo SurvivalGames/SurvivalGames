@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames;
 
 import java.io.File;
@@ -115,7 +116,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		configurationData = new ConfigurationData();
 
 		if (!configurationData.isBungeecordMode() && configurationData.isHub()) {
-			Bukkit.getLogger().severe("How do you expect to have a hub server if you're not even running on Bungeecord Mode?");
+			Bukkit.getLogger().severe("How do you expect to have a hub server if you're not even running on " + "Bungeecord Mode?");
 			getServer().getPluginManager().disablePlugin(this);
 		}
 
@@ -173,8 +174,8 @@ public class TheSurvivalGames extends JavaPlugin {
 		config.setFlashVersion("9.0 r24");
 		tracker = new JGoogleAnalyticsTracker(config, GoogleAnalyticsVersion.V_4_7_2);
 		tracker.setEnabled(true);
-		tracker.trackEvent("Server Start", "Motd: " + ChatColor.stripColor(Bukkit.getMotd()) + ", Max Players: " + Bukkit.getMaxPlayers() + ", Version: " + Bukkit.getVersion() + " running on " + Bukkit.getBukkitVersion() + ", Java: " + System.getProperty("java.version"));
-		
+		tracker.trackEvent("Server Start", "Motd: " + ChatColor.stripColor(Bukkit.getMotd()) + ", " + "Max Players: " + Bukkit.getMaxPlayers() + ", Version: " + Bukkit.getVersion() + " running on " + Bukkit.getBukkitVersion() + ", Java: " + System.getProperty("java.version"));
+
 		getLogger().info(I18N.getLocaleString("BEEN_ENABLED"));
 		getLogger().info(I18N.getLocaleString("COMMUNITY_PROJECT"));
 	}
@@ -182,12 +183,12 @@ public class TheSurvivalGames extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
-		
+
 		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate();
 		template.serialize();
 
 		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
-			List<ChangedBlock> data = arena.changedBlocks;
+			List<ChangedBlock> data = arena.getChangedBlocks();
 
 			for (int i = 0; i < data.size(); i++) {
 				Bukkit.getLogger().info("Resetting block: " + data.get(i).getPrevid().toString());
@@ -218,7 +219,8 @@ public class TheSurvivalGames extends JavaPlugin {
 		getCommand("sg").setExecutor(new CommandHandler());
 		getCommand("party").setExecutor(new PartyCommandHandler());
 
-		//I want the user based commands (ex. /kit /vote /sponsor) to not have the /sg prefix. Looks neater.   - Quantum64
+		//I want the user based commands (ex. /kit /vote /sponsor) to not have the /sg prefix. Looks neater.   -
+		// Quantum64
 		getCommand("sponsor").setExecutor(new SponsorCommand());
 		getCommand("tpx").setExecutor(new TpxCommand());
 
@@ -284,7 +286,7 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		Scoreboard.registerScoreboard();
 		ItemManager.register();
-		
+
 		SGApi.getEnchantmentManager().registerAll();
 
 		SGApi.getKitManager().loadKits();
@@ -310,7 +312,7 @@ public class TheSurvivalGames extends JavaPlugin {
 
 	/**
 	 * Gets Persistence Database classes WARNING: DO NOT EDIT
-	 * 
+	 *
 	 * @return The list of classes for the database
 	 */
 	@Override

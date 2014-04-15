@@ -19,19 +19,19 @@ import co.q64.paradisesurvivalgames.objects.SGArena;
 import co.q64.paradisesurvivalgames.util.IconMenu;
 import co.q64.paradisesurvivalgames.util.IconMenu.OptionClickEvent;
 
-public class MeunManager {
-	static MeunManager menuManager;
+public class MenuManager {
+	static MenuManager menuManager;
 	private IconMenu joinMenu;
 	private IconMenu voteMenu;
 	private IconMenu specMenu;
 
-	public static MeunManager getMenuManager() {
+	public static MenuManager getMenuManager() {
 		if (menuManager == null)
-			menuManager = new MeunManager();
+			menuManager = new MenuManager();
 		return menuManager;
 	}
 
-	public MeunManager() {
+	public MenuManager() {
 		///////////////
 		///Join Menu///
 		///////////////
@@ -63,7 +63,7 @@ public class MeunManager {
 					if (index == 5)
 						break;
 					if (a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS) || a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
-						joinMenu.setOption(11 + index, new ItemStack(Material.EMERALD_BLOCK, a.getPlayers().size()), "SG - Arena " + a.getId(), new String[] { ChatColor.BLACK + "", ChatColor.YELLOW + "Players: " + ChatColor.WHITE + a.getPlayers().size(), ChatColor.YELLOW + "Status: " + ChatColor.GREEN + a.getState().toString(), ChatColor.AQUA + "", ChatColor.WHITE + "" + ChatColor.UNDERLINE + "Click to Join!" });
+						joinMenu.setOption(11 + index, new ItemStack(Material.EMERALD_BLOCK, a.getPlayers().size()), "SG - Arena " + a.getId(), new String[] { ChatColor.BLACK + "", ChatColor.YELLOW + "Players: " + ChatColor.WHITE + a.getPlayers().size(), ChatColor.YELLOW + "Status: " + ChatColor.GREEN + a.getState().toString(), ChatColor.AQUA + "", ChatColor.WHITE + "" + ChatColor.UNDERLINE + "Click to " + "Join!" });
 						index++;
 					}
 
@@ -73,7 +73,7 @@ public class MeunManager {
 					if (index == 27)
 						break;
 					if (a.getState().equals(SGArena.ArenaState.IN_GAME) || a.getState().equals(SGArena.ArenaState.DEATHMATCH)) {
-						joinMenu.setOption(26 + index, new ItemStack(Material.GOLD_BLOCK, a.getPlayers().size()), "SG - Arena " + a.getId(), new String[] { ChatColor.BLACK + "", ChatColor.YELLOW + "Players: " + ChatColor.WHITE + a.getPlayers().size(), ChatColor.YELLOW + "Status: " + ChatColor.GREEN + a.getState().toString(), ChatColor.AQUA + "", ChatColor.WHITE + "" + ChatColor.UNDERLINE + "Click to Spectate!" });
+						joinMenu.setOption(26 + index, new ItemStack(Material.GOLD_BLOCK, a.getPlayers().size()), "SG - Arena " + a.getId(), new String[] { ChatColor.BLACK + "", ChatColor.YELLOW + "Players: " + ChatColor.WHITE + a.getPlayers().size(), ChatColor.YELLOW + "Status: " + ChatColor.GREEN + a.getState().toString(), ChatColor.AQUA + "", ChatColor.WHITE + "" + ChatColor.UNDERLINE + "Click to " + "Spectate!" });
 						index++;
 					}
 
@@ -129,7 +129,7 @@ public class MeunManager {
 		try {
 			SGArena arena = SGApi.getArenaManager().getArena(p);
 			int i = 0;
-			for (Map.Entry<MapHash, Integer> entry : arena.votes.entrySet()) {
+			for (Map.Entry<MapHash, Integer> entry : arena.getVotes().entrySet()) {
 				voteMenu.setOption(i, new ItemStack(Material.EMPTY_MAP), entry.getKey().getWorld().getDisplayName(), new String[] { "Map " + entry.getKey().getId(), "Current Votes: " + entry.getValue() });
 				i++;
 			}
@@ -149,7 +149,7 @@ public class MeunManager {
 		List<ItemStack> items = new ArrayList<ItemStack>();
 		for (String s : a.getPlayers()) {
 			try {
-				if (SGApi.getArenaManager().getArena(Bukkit.getPlayer(s)).spectators.contains(s)) {
+				if (SGApi.getArenaManager().getArena(Bukkit.getPlayer(s)).getSpectators().contains(s)) {
 					continue;
 				}
 			} catch (ArenaNotFoundException e) {

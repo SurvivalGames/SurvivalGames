@@ -53,12 +53,12 @@ public class SGAbility {
 
 	public void removeOneFromHand(Player p) {
 		ItemStack item = p.getInventory().getItemInHand();
-		
+
 		int slot = p.getInventory().getHeldItemSlot();
 		int amount = item.getAmount() - 1;
-		
+
 		item.setAmount(amount);
-		
+
 		p.getInventory().setItemInHand(item);
 	}
 }

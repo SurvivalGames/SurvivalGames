@@ -4,15 +4,16 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.command.subcommands.sg;
+
+import org.bukkit.entity.Player;
 
 import co.q64.paradisesurvivalgames.command.subcommands.SubCommand;
 import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.managers.SGApi;
 import co.q64.paradisesurvivalgames.objects.SGArena;
-
-import org.bukkit.entity.Player;
 
 public class LeaveCommand implements SubCommand {
 
@@ -26,12 +27,12 @@ public class LeaveCommand implements SubCommand {
 					else
 						SGApi.getArenaManager().playerDeathAndLeave(p, SGApi.getArenaManager().getArena(p));
 				} catch (ArenaNotFoundException e) {
-					p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("LOL_NOPE"));
+					p.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("LOL_NOPE"));
 					return;
 				}
-				p.sendMessage(SGApi.getArenaManager().prefix + I18N.getLocaleString("LEFT_ARENA"));
+				p.sendMessage(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("LEFT_ARENA"));
 			} else {
-				p.sendMessage(SGApi.getArenaManager().error + I18N.getLocaleString("LOL_NOPE"));
+				p.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("LOL_NOPE"));
 			}
 		}
 	}

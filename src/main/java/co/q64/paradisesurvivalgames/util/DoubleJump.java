@@ -1,8 +1,5 @@
 package co.q64.paradisesurvivalgames.util;
 
-import co.q64.paradisesurvivalgames.TheSurvivalGames;
-import co.q64.paradisesurvivalgames.managers.SGApi;
-
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -13,6 +10,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
+
+import co.q64.paradisesurvivalgames.TheSurvivalGames;
+import co.q64.paradisesurvivalgames.managers.SGApi;
 
 public class DoubleJump implements Listener {
 

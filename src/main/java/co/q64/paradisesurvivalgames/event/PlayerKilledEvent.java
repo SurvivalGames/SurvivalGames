@@ -32,7 +32,7 @@ public class PlayerKilledEvent extends Event {
 
 	/**
 	 * Gets the killer
-	 * 
+	 *
 	 * @return the player object that killed the player of the event
 	 */
 	public Entity getKiller() {

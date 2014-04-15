@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.listeners;
 
 import java.util.Random;
@@ -54,7 +55,7 @@ public class EntityDamageListener implements Listener {
 	/**
 	 * Listens for a player being hit by a snow ball, gives player Slowness II
 	 * for 30 seconds
-	 * 
+	 *
 	 * @param event - The EntityDamageByEntityEvent event
 	 */
 
@@ -102,7 +103,7 @@ public class EntityDamageListener implements Listener {
 				try {
 					FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(event.getEntity().getWorld(), event.getEntity().getLocation(), fEffect);
 				} catch (Exception e) {
-					//If the firework dosen't work... to bad 
+					//If the firework dosen't work... to bad
 				}
 				Vector v = event.getEntity().getVelocity();
 				event.getEntity().setVelocity(v.add(new Vector(0, Math.abs(v.getY() - (v.getY() - 0.15)), 0)));
@@ -116,11 +117,11 @@ public class EntityDamageListener implements Listener {
 				Player damager = (Player) eentity;
 				try {
 
-					if (SGApi.getArenaManager().getArena(damaged).spectators.contains(damager.getName())) {
+					if (SGApi.getArenaManager().getArena(damaged).getSpectators().contains(damager.getName())) {
 						event.setCancelled(true);
 						return;
 					}
-					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damaged)).gameTime.count > 30) {
+					if (SGApi.getTimeManager(SGApi.getArenaManager().getArena(damaged)).getGameTime().count > 30) {
 						if (!SendWebsocketData.music.containsKey(damaged.getName()) || SendWebsocketData.music.get(damaged.getName()).equalsIgnoreCase("ambient")) {
 							SendWebsocketData.music.put(damaged.getName(), "battle");
 							SendWebsocketData.playMusicToPlayer(damaged, SendWebsocketData.getRandomMusic("battle-music"));
@@ -235,8 +236,8 @@ public class EntityDamageListener implements Listener {
 						shouldWaitDamager = true;
 					}
 					if (SGApi.getPlugin().getPluginConfig().getUseServers()) {
-						if (!SGApi.getArenaManager().getArena(damager).firstBlood) {
-							SGApi.getArenaManager().getArena(damager).firstBlood = true;
+						if (!SGApi.getArenaManager().getArena(damager).isFirstBlood()) {
+							SGApi.getArenaManager().getArena(damager).setFirstBlood(true);
 							SendWebsocketData.playToArena(SGApi.getArenaManager().getArena(damager), "firstblood");
 						} else {
 							if (shouldWaitDamaged) {
@@ -288,7 +289,7 @@ public class EntityDamageListener implements Listener {
 		damaged.setAllowFlight(true);
 		damaged.setFlying(true);
 		damaged.setCanPickupItems(false);
-		
+
 		try {
 			SGApi.getArenaManager().playerKilled(damaged, SGApi.getArenaManager().getArena(damaged));
 		} catch (ArenaNotFoundException e) {}
@@ -304,7 +305,7 @@ public class EntityDamageListener implements Listener {
 		}
 		damaged.getInventory().clear();
 		damaged.getInventory().setArmorContents(null);
-		ItemManager.instance.star.givePlayerItem(damaged);
+		ItemManager.getInstance().getStar().givePlayerItem(damaged);
 	}
 
 	public void fireworkIt(Location loc) {

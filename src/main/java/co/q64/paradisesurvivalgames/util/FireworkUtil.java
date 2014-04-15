@@ -26,7 +26,7 @@ public class FireworkUtil implements Listener {
 
 		}
 	}
-	
+
 	public void playFireworkCircle(final Player player, final FireworkEffect effect, int size, final int distance) {
 		Bukkit.getLogger().info("Called firework method");
 		int index = 0;
@@ -54,7 +54,7 @@ public class FireworkUtil implements Listener {
 			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(l, effect), index);
 		}
 	}
-	
+
 	public void playFireworkLine(Location top, Location bottom, final FireworkEffect effect, int number) {
 		Bukkit.getLogger().info("Called firework method");
 		//double interval = (top.getY() - bottom.getY()) / number;

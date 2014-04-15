@@ -3,16 +3,15 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.runnables;
+
+import org.bukkit.Bukkit;
 
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.managers.SGApi;
 import co.q64.paradisesurvivalgames.net.SendWebsocketData;
-import co.q64.paradisesurvivalgames.net.WebsocketServer;
-import co.q64.paradisesurvivalgames.net.WebsocketSessionManager;
 import co.q64.paradisesurvivalgames.objects.SGArena;
-
-import org.bukkit.Bukkit;
 
 public class Countdown implements Runnable {
 

@@ -14,7 +14,7 @@ public class Rollback implements Runnable {
 	final SGArena arena;
 
 	public Rollback(SGArena a) {
-		this.data = a.changedBlocks;
+		this.data = a.getChangedBlocks();
 		arena = a;
 	}
 

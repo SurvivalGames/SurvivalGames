@@ -3,26 +3,27 @@
  *
  * @version 1.0.0
  */
-package co.q64.paradisesurvivalgames.multiworld;
 
-import co.q64.paradisesurvivalgames.configs.FileLoader;
+package co.q64.paradisesurvivalgames.multiworld;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+import co.q64.paradisesurvivalgames.configs.FileLoader;
+
 public class WorldDefaults {
 
-    FileLoader configy;
-    FileConfiguration config;
+	FileLoader configy;
+	FileConfiguration config;
 
-    public WorldDefaults(String name) {
-        configy = new FileLoader("worldSettings");
-        config = configy.getConfig();
+	public WorldDefaults(String name) {
+		configy = new FileLoader("worldSettings");
+		config = configy.getConfig();
 
-        config.addDefault("testing.name", "relicum");
-        config.addDefault("testing.friend", "Clive");
+		config.addDefault("testing.name", "relicum");
+		config.addDefault("testing.friend", "Clive");
 
-        configy.saveConfig();
+		configy.saveConfig();
 
-    }
+	}
 
 }

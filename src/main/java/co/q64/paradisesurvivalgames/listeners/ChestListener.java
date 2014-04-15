@@ -19,7 +19,7 @@ public class ChestListener implements Listener {
 			SGArena a;
 			try {
 				a = SGApi.getArenaManager().getArena((Player) e.getPlayer());
-				if (a.spectators.contains(e.getPlayer().getName())) {
+				if (a.getSpectators().contains(e.getPlayer().getName())) {
 					e.setCancelled(true);
 					return;
 				}
@@ -33,7 +33,7 @@ public class ChestListener implements Listener {
 			SGArena a;
 			try {
 				a = SGApi.getArenaManager().getArena((Player) e.getPlayer());
-				if (a.spectators.contains(e.getPlayer().getName())) {
+				if (a.getSpectators().contains(e.getPlayer().getName())) {
 					e.setCancelled(true);
 					return;
 				}

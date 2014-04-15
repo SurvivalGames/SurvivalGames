@@ -121,7 +121,7 @@ public class DeathMessages {
 
 		if (dc == DamageCause.CONTACT) {
 			int i = rnd.nextInt(1);
-			
+
 		}
 		if (dc == DamageCause.MAGIC) {
 			int i = rnd.nextInt(1);

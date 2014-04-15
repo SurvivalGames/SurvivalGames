@@ -4,6 +4,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.listeners;
 
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class BlockListener implements Listener {
 				return;
 			}
 			if (allowed.contains(event.getBlock().getType())) {
-				a.changedBlocks.add(new ChangedBlock(event.getBlock().getWorld().getName(), event.getBlock().getType(), event.getBlock().getData(), Material.AIR, Byte.parseByte(0 + ""), event.getBlock().getX(), event.getBlock().getY(), event.getBlock().getZ()));
+				a.getChangedBlocks().add(new ChangedBlock(event.getBlock().getWorld().getName(), event.getBlock().getType(), event.getBlock().getData(), Material.AIR, Byte.parseByte(0 + ""), event.getBlock().getX(), event.getBlock().getY(), event.getBlock().getZ()));
 			} else {
 				event.setCancelled(true);
 			}

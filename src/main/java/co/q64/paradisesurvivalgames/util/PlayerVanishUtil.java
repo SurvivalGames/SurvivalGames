@@ -1,10 +1,9 @@
 package co.q64.paradisesurvivalgames.util;
 
-import co.q64.paradisesurvivalgames.TheSurvivalGames;
-import co.q64.paradisesurvivalgames.objects.SGArena;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import co.q64.paradisesurvivalgames.TheSurvivalGames;
 
 public class PlayerVanishUtil {
 

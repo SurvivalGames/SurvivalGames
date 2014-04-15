@@ -9,7 +9,9 @@ public class RomanNumeral {
 		Numeral(int weight) {
 			this.weight = weight;
 		}
-	};
+	}
+
+	;
 
 	public static String convert(long n) {
 

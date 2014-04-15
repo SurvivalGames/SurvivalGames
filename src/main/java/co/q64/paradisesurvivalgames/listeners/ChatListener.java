@@ -3,6 +3,7 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.listeners;
 
 import java.util.UUID;
@@ -25,7 +26,7 @@ public class ChatListener implements Listener {
 	/**
 	 * Formats chat and detects if the player is using party chat, if so, it
 	 * will only send messages to the people in that player's party
-	 * 
+	 *
 	 * @param event The event being called
 	 */
 	@EventHandler

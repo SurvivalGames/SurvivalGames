@@ -4,14 +4,14 @@ import org.bukkit.ChatColor;
 
 public class DedicationEnchantment extends SGEnchantment {
 
-    public DedicationEnchantment(int id) {
-        super(id);
-    }
+	public DedicationEnchantment(int id) {
+		super(id);
+	}
 
-    @Override
-    public String getName() {
-        return "DEDICATION";
-    }
+	@Override
+	public String getName() {
+		return "DEDICATION";
+	}
 
 	@Override
 	public String getLore(int lvl) {

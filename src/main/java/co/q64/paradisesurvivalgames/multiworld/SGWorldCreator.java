@@ -3,18 +3,19 @@
  *
  * @version 1.0.0
  */
+
 package co.q64.paradisesurvivalgames.multiworld;
 
 public class SGWorldCreator {
 
-    WorldDefaults ws;
+	WorldDefaults ws;
 
-    public SGWorldCreator(String name) {
-        this.ws = new WorldDefaults(name);
+	public SGWorldCreator(String name) {
+		this.ws = new WorldDefaults(name);
 
-    }
+	}
 
-    public WorldDefaults getWs() {
-        return ws;
-    }
+	public WorldDefaults getWs() {
+		return ws;
+	}
 }

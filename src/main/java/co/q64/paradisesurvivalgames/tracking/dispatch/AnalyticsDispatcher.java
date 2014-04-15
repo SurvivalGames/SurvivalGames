@@ -1,7 +1,6 @@
 package co.q64.paradisesurvivalgames.tracking.dispatch;
 
 import java.net.URI;
-import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 
@@ -24,8 +23,7 @@ public abstract class AnalyticsDispatcher {
 		if (timeDispatched != null) {
 			try {
 				Long time = Long.valueOf(Long.parseLong(timeDispatched));
-				analyticsString = analyticsString + "&utmqt="
-						+ (System.currentTimeMillis() - time.longValue());
+				analyticsString = analyticsString + "&utmqt=" + (System.currentTimeMillis() - time.longValue());
 			} catch (NumberFormatException e) {
 				Bukkit.getLogger().severe("Error parsing utmht parameter: " + e.toString());
 			}
