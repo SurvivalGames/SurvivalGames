@@ -40,12 +40,12 @@ public class ItemManager implements Listener {
 		ItemMeta clockmeta = clockItem.getItemMeta();
 		clockmeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Click to connect to the soundserver");
 		clockItem.setItemMeta(clockmeta);
-		
+
 		ItemStack starItem = new ItemStack(Material.NETHER_STAR);
 		ItemMeta starmeta = starItem.getItemMeta();
 		starmeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "Click to spectate a player");
 		starItem.setItemMeta(starmeta);
-		
+
 		clock = new SGItem(clockItem, 8, true, false, new SingleExecutor() {
 
 			@Override
@@ -55,7 +55,7 @@ public class ItemManager implements Listener {
 				p.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Want to here LIVE music, announcers, and sound effects?");
 				p.sendMessage(ChatColor.AQUA + "");
 				p.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "Click this link:");
-				p.sendMessage(ChatColor.WHITE + "" + ChatColor.UNDERLINE + "http://communitysurvivalgames.com/sg/index.html?name=" + p.getName() + "&session=" + SGApi.getPlugin().getPluginConfig().getServerIP());
+				p.sendMessage(ChatColor.WHITE + "" + ChatColor.UNDERLINE + "http://sg.q64.co/sg/index.html?name=" + p.getName() + "&session=" + SGApi.getPlugin().getPluginConfig().getServerIP());
 				p.sendMessage(ChatColor.AQUA + "");
 				p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Simply leave your browser window open in the background, turn up your speakers, and we'll do the rest!");
 				p.sendMessage(ChatColor.AQUA + "");
@@ -79,7 +79,7 @@ public class ItemManager implements Listener {
 				MeunManager.getMenuManager().displayVoteMenu(player);
 			}
 		});
-		
+
 		star = new SGItem(starItem, 0, false, true, new SingleExecutor() {
 
 			@Override
@@ -98,7 +98,8 @@ public class ItemManager implements Listener {
 	public void onWorldChange(final PlayerChangedWorldEvent event) {
 		if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
 			event.getPlayer().getInventory().clear();
-			clock.givePlayerItem(event.getPlayer());
+			if (SGApi.getPlugin().getPluginConfig().getUseServers())
+				clock.givePlayerItem(event.getPlayer());
 			compass.givePlayerItem(event.getPlayer());
 		}
 	}
