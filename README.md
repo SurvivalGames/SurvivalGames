@@ -8,7 +8,7 @@ Build Stats: [![Build Status](https://travis-ci.org/ParadiseMC/ParadiseSurvivalG
 
 **Announcements**
 
-This text was added in the 1000th commit
+This text was added in the 1000th commit 
 
 **[ANNOUNCEMENT|Quantum64]**
 All developers should read the tutorial for developing on the new multilingual string system here:  https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/blob/master/I18N_TUTORIAL.md
