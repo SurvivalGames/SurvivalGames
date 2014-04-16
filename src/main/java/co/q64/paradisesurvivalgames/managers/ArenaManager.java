@@ -105,6 +105,7 @@ public class ArenaManager {
 			p.setCanPickupItems(false);
 			p.setAllowFlight(true);
 			p.setFlying(true);
+			p.setFoodLevel(20);
 			PlayerVanishUtil.hideAll(p);
 			return;
 		}
@@ -149,7 +150,7 @@ public class ArenaManager {
 		p.teleport(a.getLobby());
 		p.setExhaustion(0);
 		p.setGameMode(GameMode.SURVIVAL);
-		p.setFoodLevel(20);
+		healPlayer(p);
 		// Ding!
 		for (Player player : SGApi.getPlugin().getServer().getOnlinePlayers()) {
 			player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1);
@@ -163,7 +164,7 @@ public class ArenaManager {
 			SGApi.getTimeManager(a).countdownLobby(2);
 		}
 	}
-
+	
 	/**
 	 * Removes the player from an arena
 	 *
@@ -422,6 +423,34 @@ public class ArenaManager {
 	 */
 	public List<SGArena> getArenas() {
 		return arenas;
+	}
+	
+	/**
+	 * Heal a given Player
+	 */
+	private void healPlayer(final Player p)
+	{
+		final double amount = p.getMaxHealth() - p.getHealth();
+		final EntityRegainHealthEvent erhe = new EntityRegainHealthEvent(p, amount, RegainReason.CUSTOM);
+		TheSurvivalGames.getServer().getPluginManager().callEvent(erhe);
+		if (erhe.isCancelled())
+		{
+			return;
+		}
+
+		double newAmount = p.getHealth() + erhe.getAmount();
+		if (newAmount > p.getMaxHealth())
+		{
+			newAmount = p.getMaxHealth();
+		}
+
+		p.setHealth(newAmount);
+		p.setFoodLevel(20);
+		p.setFireTicks(0);
+		for (PotionEffect effect : p.getActivePotionEffects())
+		{
+			p.removePotionEffect(effect.getType());
+		}
 	}
 
 	/**
