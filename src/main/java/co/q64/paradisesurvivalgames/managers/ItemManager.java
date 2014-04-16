@@ -104,7 +104,7 @@ public class ItemManager implements Listener {
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onWorldChange(final PlayerChangedWorldEvent event) {
-		if (event.getPlayer().getWorld().getName().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
+		if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
 			event.getPlayer().getInventory().clear();
 			if (SGApi.getPlugin().getPluginConfig().getUseServers())
 				getClock().givePlayerItem(event.getPlayer());
@@ -118,7 +118,7 @@ public class ItemManager implements Listener {
 
 			@Override
 			public void run() {
-				if (event.getPlayer().getWorld().getName().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
+				if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
 					event.getPlayer().getInventory().clear();
 					if (SGApi.getPlugin().getPluginConfig().getUseServers())
 						getClock().givePlayerItem(event.getPlayer());
