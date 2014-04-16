@@ -7,7 +7,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
-import co.q64.paradisesurvivalgames.managers.ArenaManager;
 import co.q64.paradisesurvivalgames.managers.SGApi;
 
 public class EntityInteractListener implements Listener {
