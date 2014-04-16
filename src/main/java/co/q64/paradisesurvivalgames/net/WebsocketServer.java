@@ -44,7 +44,7 @@ public class WebsocketServer extends WebSocketServer {
 	}
 
 	public static void runServer() throws InterruptedException, IOException {
-		WebSocketImpl.DEBUG = true;
+		WebSocketImpl.DEBUG = false;
 		int port = 8887;
 		s = new WebsocketServer(port);
 		s.start();

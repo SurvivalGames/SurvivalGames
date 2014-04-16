@@ -1,7 +1,7 @@
 name: TheSurvivalGames
-main: com.communitysurvivalgames.thesurvivalgames.TheSurvivalGames
+main: co.q64.paradisesurvivalgames.TheSurvivalGames
 version: 1.0.0
-author: The Community!
+author: Some people, but not TheEpicButterStudios
 database: true
 softdepend: [Vault]
 
