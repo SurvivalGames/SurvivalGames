@@ -24,6 +24,7 @@ public class LeaveCommand implements SubCommand {
 	 *
 	 * @param sender The player executing the command
 	 */
+	@Override
 	public void execute(String cmd, Player sender, String[] args) {
 		if (cmd.equalsIgnoreCase("leave")) {
 			UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());

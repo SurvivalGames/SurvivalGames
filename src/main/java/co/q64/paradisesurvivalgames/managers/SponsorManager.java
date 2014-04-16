@@ -290,6 +290,7 @@ public class SponsorManager {
 			items.add(item);
 		}
 		Collections.sort(items, new Comparator<ItemStack>() {
+			@Override
 			public int compare(ItemStack o1, ItemStack o2) {
 				return Integer.compare(o1.getAmount(), o2.getAmount());
 			}

@@ -66,7 +66,7 @@ public class TimeManager {
 		}
 
 		for (String s : getA().getPlayers()) {
-			ItemManager.getInstance().getGem().givePlayerItem(Bukkit.getPlayer(s));
+			ItemManager.getInstance().getItem("vote-item").givePlayerItem(Bukkit.getPlayer(s));
 		}
 
 		getA().broadcast("Use the emerald in your inventory to vote!");

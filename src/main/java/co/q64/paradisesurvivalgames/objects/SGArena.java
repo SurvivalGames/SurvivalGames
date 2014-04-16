@@ -217,6 +217,7 @@ public class SGArena {
 			return true;
 		}
 
+		@Override
 		public String toString() {
 			return name;
 		}
@@ -461,6 +462,7 @@ public class SGArena {
 		return currentMap;
 	}
 
+	@Override
 	public String toString() {
 		return "SGArena.java - Id: " + this.getId() + " State: " + this.getState() + " " + "Players: " + this.getPlayers();
 	}

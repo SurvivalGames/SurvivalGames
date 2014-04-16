@@ -46,6 +46,7 @@ public class GoogleAnalytics implements IGoogleAnalyticsURLBuilder {
 	/**
 	 * @see com.dmurph.tracking.IGoogleAnalyticsURLBuilder#getGoogleAnalyticsVersion()
 	 */
+	@Override
 	public String getGoogleAnalyticsVersion() {
 		return "4.7.2";
 	}
@@ -53,6 +54,7 @@ public class GoogleAnalytics implements IGoogleAnalyticsURLBuilder {
 	/**
 	 * @see com.dmurph.tracking.IGoogleAnalyticsURLBuilder#buildURL(com.dmurph.tracking.AnalyticsRequestData)
 	 */
+	@Override
 	public String buildURL(AnalyticsRequestData argData) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(URL_PREFIX);
@@ -174,6 +176,7 @@ public class GoogleAnalytics implements IGoogleAnalyticsURLBuilder {
 	/**
 	 * @see com.dmurph.tracking.IGoogleAnalyticsURLBuilder#resetSession()
 	 */
+	@Override
 	public void resetSession() {
 		config.getVisitorData().resetSession();
 	}

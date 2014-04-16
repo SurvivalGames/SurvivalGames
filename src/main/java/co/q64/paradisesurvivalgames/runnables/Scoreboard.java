@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
@@ -30,6 +31,7 @@ public class Scoreboard implements Runnable {
 		this.plugin = SGApi.getPlugin();
 	}
 
+	@Override
 	public void run() {
 		for (final Player player : Bukkit.getOnlinePlayers()) {
 			final Objective objective = player.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
@@ -154,6 +156,6 @@ public class Scoreboard implements Runnable {
 	}
 
 	public static void registerScoreboard() {
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Scoreboard(TheSurvivalGames.getPlugin(TheSurvivalGames.class)), 5, 100);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(TheSurvivalGames.class), new Scoreboard(JavaPlugin.getPlugin(TheSurvivalGames.class)), 5, 100);
 	}
 }

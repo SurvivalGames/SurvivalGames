@@ -24,6 +24,7 @@ public class PromoteCommand implements SubCommand {
 	 *
 	 * @param sender The player executing the command
 	 */
+	@Override
 	public void execute(String cmd, Player sender, String[] args) {
 		if ((args.length == 2) && (args[0].equalsIgnoreCase("promote"))) {
 			UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());

@@ -22,6 +22,7 @@ public class ChatCommand implements SubCommand {
 	 *
 	 * @param player The player executing the command
 	 */
+	@Override
 	public void execute(String cmd, Player player, String args[]) {
 		if (cmd.equalsIgnoreCase("chat")) {
 			UUID id = SGApi.getPartyManager().getPlayers().get(player.getName());

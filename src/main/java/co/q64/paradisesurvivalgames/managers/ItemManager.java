@@ -1,8 +1,16 @@
 package co.q64.paradisesurvivalgames.managers;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.FileConfigurationOptions;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -13,40 +21,49 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import co.q64.paradisesurvivalgames.util.player.items.SGItem;
+import co.q64.paradisesurvivalgames.util.player.items.ce.MultiExecutor;
 import co.q64.paradisesurvivalgames.util.player.items.ce.SingleExecutor;
 
 public class ItemManager implements Listener {
 
 	private static ItemManager instance;
-
-	private SGItem clock;
-	private SGItem compass;
-	private SGItem gem;
-	private SGItem star;
+	private FileConfiguration itemsConfig;
+	private File cfgFile;
+	private Map<String, SGItem> items = new HashMap<String, SGItem>();
 
 	public ItemManager() {
 
-		ItemStack emerald = new ItemStack(Material.EMERALD);
-		ItemMeta meta = emerald.getItemMeta();
-		meta.setDisplayName(ChatColor.GREEN.toString() + ChatColor.BOLD + "Click to vote for a map");
-		emerald.setItemMeta(meta);
+		cfgFile = new File(SGApi.getPlugin().getDataFolder(), "items.yml");
+		cfgFile.mkdirs();
+		try {
+			cfgFile.createNewFile();
+		} catch (IOException e) {
+			Bukkit.getLogger().severe("Faild to save items.yml file");
+			return;
+		}
 
-		ItemStack compassItem = new ItemStack(Material.COMPASS);
-		ItemMeta compassmeta = compassItem.getItemMeta();
-		compassmeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Click to join a SG game");
-		compassItem.setItemMeta(compassmeta);
+		itemsConfig = YamlConfiguration.loadConfiguration(cfgFile);
+		FileConfigurationOptions itemConfigOptions = itemsConfig.options();
+		itemConfigOptions.header("You can change the default material binds here\r\nUSE VALID BUKKIT ITEM NAMES ONLY");
+		itemConfigOptions.copyHeader(true);
 
-		ItemStack clockItem = new ItemStack(Material.WATCH);
-		ItemMeta clockmeta = clockItem.getItemMeta();
-		clockmeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Click to connect to the soundserver");
-		clockItem.setItemMeta(clockmeta);
+		registerItem("vote-item", Material.EMERALD, ChatColor.GREEN.toString() + ChatColor.BOLD + "Click to vote for a map", 4, true, true, new SingleExecutor() {
 
-		ItemStack starItem = new ItemStack(Material.NETHER_STAR);
-		ItemMeta starmeta = starItem.getItemMeta();
-		starmeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "Click to spectate a player");
-		starItem.setItemMeta(starmeta);
+			@Override
+			public void use(Player player) {
+				MenuManager.getMenuManager().displayVoteMenu(player);
+			}
+		});
 
-		setClock(new SGItem(clockItem, 8, true, false, new SingleExecutor() {
+		registerItem("join-item", Material.COMPASS, ChatColor.GREEN.toString() + ChatColor.BOLD + "Click to join a SG game", 0, true, false, new SingleExecutor() {
+
+			@Override
+			public void use(Player player) {
+				MenuManager.getMenuManager().displayJoinMenu(player);
+			}
+		});
+
+		registerItem("connect-item", Material.WATCH, ChatColor.YELLOW.toString() + ChatColor.BOLD + "Click to connect to the soundserver", 8, true, false, new SingleExecutor() {
 
 			@Override
 			public void use(Player p) {
@@ -62,31 +79,15 @@ public class ItemManager implements Listener {
 				p.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮■▮");
 
 			}
-		}));
+		});
 
-		setCompass(new SGItem(compassItem, 0, true, false, new SingleExecutor() {
-
-			@Override
-			public void use(Player player) {
-				MenuManager.getMenuManager().displayJoinMenu(player);
-			}
-		}));
-
-		setGem(new SGItem(emerald, 0, true, true, new SingleExecutor() {
-
-			@Override
-			public void use(Player player) {
-				MenuManager.getMenuManager().displayVoteMenu(player);
-			}
-		}));
-
-		setStar(new SGItem(starItem, 0, false, true, new SingleExecutor() {
+		registerItem("spec-item", Material.NETHER_STAR, ChatColor.AQUA.toString() + ChatColor.BOLD + "Click to spectate a player", 0, false, true, new SingleExecutor() {
 
 			@Override
 			public void use(Player player) {
 				MenuManager.getMenuManager().displaySpecMenu(player);
 			}
-		}));
+		});
 	}
 
 	public static void register() {
@@ -107,8 +108,8 @@ public class ItemManager implements Listener {
 		if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
 			event.getPlayer().getInventory().clear();
 			if (SGApi.getPlugin().getPluginConfig().getUseServers())
-				getClock().givePlayerItem(event.getPlayer());
-			getCompass().givePlayerItem(event.getPlayer());
+				getItem("connect-item").givePlayerItem(event.getPlayer());
+			getItem("join-item").givePlayerItem(event.getPlayer());
 		}
 	}
 
@@ -121,8 +122,8 @@ public class ItemManager implements Listener {
 				if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
 					event.getPlayer().getInventory().clear();
 					if (SGApi.getPlugin().getPluginConfig().getUseServers())
-						getClock().givePlayerItem(event.getPlayer());
-					getCompass().givePlayerItem(event.getPlayer());
+						getItem("connect-item").givePlayerItem(event.getPlayer());
+					getItem("join-item").givePlayerItem(event.getPlayer());
 				}
 			}
 
@@ -130,35 +131,37 @@ public class ItemManager implements Listener {
 
 	}
 
-	public SGItem getClock() {
-		return clock;
+	public SGItem getItem(String key) {
+		return items.get(key);
 	}
 
-	public void setClock(final SGItem clock) {
-		this.clock = clock;
+	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, SingleExecutor exe) {
+		Material itemMat = Material.valueOf((itemsConfig.getString("key") == null) ? saveDefaults(key, defMat) : itemsConfig.getString("key"));
+		ItemStack itemStack = new ItemStack(itemMat);
+		ItemMeta itemMeta = itemStack.getItemMeta();
+		itemMeta.setDisplayName(name);
+		itemStack.setItemMeta(itemMeta);
+
+		SGItem item = new SGItem(itemStack, slot, onlyInHub, onlyInGame, exe);
+		items.put(key, item);
 	}
 
-	public SGItem getCompass() {
-		return compass;
+	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, MultiExecutor exe) {
+		Material itemMat = Material.valueOf((itemsConfig.getString("key") == null) ? saveDefaults(key, defMat) : itemsConfig.getString("key"));
+		ItemStack itemStack = new ItemStack(itemMat);
+		ItemMeta itemMeta = itemStack.getItemMeta();
+		itemMeta.setDisplayName(name);
+		itemStack.setItemMeta(itemMeta);
+
+		SGItem item = new SGItem(itemStack, slot, onlyInHub, onlyInGame, exe);
+		items.put(key, item);
 	}
 
-	public void setCompass(final SGItem compass) {
-		this.compass = compass;
-	}
-
-	public SGItem getGem() {
-		return gem;
-	}
-
-	public void setGem(final SGItem gem) {
-		this.gem = gem;
-	}
-
-	public SGItem getStar() {
-		return star;
-	}
-
-	public void setStar(final SGItem star) {
-		this.star = star;
+	private String saveDefaults(String key, Material m) {
+		itemsConfig.set(key, m.toString());
+		try {
+			itemsConfig.save(cfgFile);
+		} catch (IOException e) {}
+		return m.toString();
 	}
 }

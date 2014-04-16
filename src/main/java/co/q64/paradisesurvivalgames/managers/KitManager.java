@@ -139,6 +139,7 @@ public class KitManager {
 		Bukkit.getLogger().info("Sorted: " + kits);
 
 		Collections.sort(kits, new Comparator<Kit>() {
+			@Override
 			public int compare(Kit o1, Kit o2) {
 				return o1.getType().compareTo(o2.getType());
 			}

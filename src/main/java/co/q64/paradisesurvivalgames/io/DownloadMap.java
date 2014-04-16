@@ -34,6 +34,7 @@ public class DownloadMap {
 
 	public void begin() {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+			@Override
 			public void run() {
 				try {
 					fl = new File(SGApi.getPlugin().getDataFolder(), jobName + ".zip");

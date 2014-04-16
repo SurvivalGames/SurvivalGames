@@ -142,6 +142,7 @@ public class SGWorld {
 		Bukkit.getLogger().info("Registered spawn point - List: " + locs.toString() + " Loc: " + loc.toString());
 	}
 
+	@Override
 	public String toString() {
 		return "SGWorld.java - Display name: " + this.displayName + " Locs: " + this.locs + " Chests: " + this.t2;
 	}
