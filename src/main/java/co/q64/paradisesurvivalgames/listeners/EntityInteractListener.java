@@ -19,6 +19,6 @@ public class EntityInteractListener implements Listener {
 			if (SGApi.getArenaManager().getArena(event.getPlayer()).getSpectators().contains(event.getPlayer().getName())){
 				event.setCancelled(true);
 			}
-		} catch (ArenaNotFoundException e) { }
+		} catch (ArenaNotFoundException e){}
 	}
 }
