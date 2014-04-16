@@ -15,9 +15,9 @@ import co.q64.paradisesurvivalgames.util.EconUtil;
 
 public class BountyManager implements Listener {
 
+	HashMap<String, Integer> amount = new HashMap<>();
 	private SGArena arena;
 	private Map<String, HashMap<String, Integer>> bounties = new HashMap<>();
-	HashMap<String, Integer> amount = new HashMap<>();
 
 	public BountyManager(SGArena a) {
 		SGApi.getPlugin().getServer().getPluginManager().registerEvents(this, SGApi.getPlugin());
@@ -42,17 +42,6 @@ public class BountyManager implements Listener {
 		}
 	}
 
-	public void removceBounty(Player reciever, Player sender) {
-		if (arena.getPlayers().contains(reciever.getName())) {
-			try {
-				bounties.remove(reciever.getName());
-				sender.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("BOUNTY_SUCCESS"));
-			} catch (Exception e) {
-				sender.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("BOUNTY_FAIL"));
-			}
-		}
-	}
-
 	public int getBountied(Player reciever, Player sender) {
 		HashMap<String, Integer> name = bounties.get(reciever.getName());
 		int amount = name.get(sender.getName());
@@ -69,5 +58,16 @@ public class BountyManager implements Listener {
 			//TODO Add points through use of EconUtil - I don't really understand how we use getBounty() explain?
 		}
 		bounties.clear();
+	}
+
+	public void removceBounty(Player reciever, Player sender) {
+		if (arena.getPlayers().contains(reciever.getName())) {
+			try {
+				bounties.remove(reciever.getName());
+				sender.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("BOUNTY_SUCCESS"));
+			} catch (Exception e) {
+				sender.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("BOUNTY_FAIL"));
+			}
+		}
 	}
 }

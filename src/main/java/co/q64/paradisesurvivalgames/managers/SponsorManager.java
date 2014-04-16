@@ -33,10 +33,10 @@ import co.q64.paradisesurvivalgames.util.IconMenu;
 import co.q64.paradisesurvivalgames.util.IconMenu.OptionClickEvent;
 
 public class SponsorManager {
+	SGArena a;
+	private Map<String, String> inMenu = new HashMap<String, String>();
 	private final IconMenu players;
 	private final IconMenu sponsor;
-	private Map<String, String> inMenu = new HashMap<String, String>();
-	SGArena a;
 
 	public SponsorManager(final SGArena a) {
 		this.a = a;

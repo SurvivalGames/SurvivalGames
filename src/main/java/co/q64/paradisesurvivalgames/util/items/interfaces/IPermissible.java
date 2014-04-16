@@ -14,16 +14,16 @@ package co.q64.paradisesurvivalgames.util.items.interfaces;
  */
 public interface IPermissible {
 	/**
-	 * Has permission. Returns True if the permission has been set
-	 *
-	 * @return the boolean
-	 */
-	boolean hasPermission();
-
-	/**
 	 * Gets permission to use the item in a string format
 	 *
 	 * @return the permission
 	 */
 	String getPermission();
+
+	/**
+	 * Has permission. Returns True if the permission has been set
+	 *
+	 * @return the boolean
+	 */
+	boolean hasPermission();
 }

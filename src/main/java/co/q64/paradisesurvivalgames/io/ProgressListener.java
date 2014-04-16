@@ -8,9 +8,9 @@ import org.bukkit.entity.Player;
 
 public class ProgressListener implements ActionListener {
 
-	Player p;
-	int i = 0;
 	String bytes;
+	int i = 0;
+	Player p;
 
 	public ProgressListener(Player p, String b) {
 		this.p = p;

@@ -27,9 +27,9 @@ import co.q64.paradisesurvivalgames.util.player.items.ce.SingleExecutor;
 public class ItemManager implements Listener {
 
 	private static ItemManager instance;
-	private FileConfiguration itemsConfig;
 	private File cfgFile;
 	private Map<String, SGItem> items = new HashMap<String, SGItem>();
+	private FileConfiguration itemsConfig;
 
 	public ItemManager() {
 
@@ -90,27 +90,21 @@ public class ItemManager implements Listener {
 		});
 	}
 
+	public static ItemManager getInstance() {
+		return instance;
+	}
+
 	public static void register() {
 		setInstance(new ItemManager());
 		SGApi.getPlugin().getServer().getPluginManager().registerEvents(getInstance(), SGApi.getPlugin());
-	}
-
-	public static ItemManager getInstance() {
-		return instance;
 	}
 
 	public static void setInstance(final ItemManager instance) {
 		ItemManager.instance = instance;
 	}
 
-	@EventHandler(priority = EventPriority.NORMAL)
-	public void onWorldChange(final PlayerChangedWorldEvent event) {
-		if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
-			event.getPlayer().getInventory().clear();
-			if (SGApi.getPlugin().getPluginConfig().getUseServers())
-				getItem("connect-item").givePlayerItem(event.getPlayer());
-			getItem("join-item").givePlayerItem(event.getPlayer());
-		}
+	public SGItem getItem(String key) {
+		return items.get(key);
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
@@ -131,11 +125,17 @@ public class ItemManager implements Listener {
 
 	}
 
-	public SGItem getItem(String key) {
-		return items.get(key);
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onWorldChange(final PlayerChangedWorldEvent event) {
+		if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
+			event.getPlayer().getInventory().clear();
+			if (SGApi.getPlugin().getPluginConfig().getUseServers())
+				getItem("connect-item").givePlayerItem(event.getPlayer());
+			getItem("join-item").givePlayerItem(event.getPlayer());
+		}
 	}
 
-	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, SingleExecutor exe) {
+	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, MultiExecutor exe) {
 		Material itemMat = Material.valueOf((itemsConfig.getString("key") == null) ? saveDefaults(key, defMat) : itemsConfig.getString("key"));
 		ItemStack itemStack = new ItemStack(itemMat);
 		ItemMeta itemMeta = itemStack.getItemMeta();
@@ -146,7 +146,7 @@ public class ItemManager implements Listener {
 		items.put(key, item);
 	}
 
-	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, MultiExecutor exe) {
+	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, SingleExecutor exe) {
 		Material itemMat = Material.valueOf((itemsConfig.getString("key") == null) ? saveDefaults(key, defMat) : itemsConfig.getString("key"));
 		ItemStack itemStack = new ItemStack(itemMat);
 		ItemMeta itemMeta = itemStack.getItemMeta();

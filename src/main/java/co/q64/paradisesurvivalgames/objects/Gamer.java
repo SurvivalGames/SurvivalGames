@@ -17,9 +17,9 @@ import co.q64.paradisesurvivalgames.util.PlayerType;
 @Data
 public class Gamer {
 	private String Id;
+	private String name;
 	private PlayerType playerType;
 	private String prefix;
-	private String name;
 
 	public Gamer(String n, String uuid) {
 		this.name = n;

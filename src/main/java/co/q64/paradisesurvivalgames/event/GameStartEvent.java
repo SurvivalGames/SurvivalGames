@@ -19,21 +19,21 @@ public class GameStartEvent extends Event {
 	}
 
 	/**
-	 * Gets the {@link SGArena} that started
-	 *
-	 * @return the {@link SGArena} that stared
-	 */
-	public SGArena getArena() {
-		return arena;
-	}
-
-	/**
 	 * Gets the {@link HandlerList} for the event
 	 *
 	 * @return the {@link HandlerList} for the event
 	 */
 	public static HandlerList getHandlerList() {
 		return handlers;
+	}
+
+	/**
+	 * Gets the {@link SGArena} that started
+	 *
+	 * @return the {@link SGArena} that stared
+	 */
+	public SGArena getArena() {
+		return arena;
 	}
 
 	/**

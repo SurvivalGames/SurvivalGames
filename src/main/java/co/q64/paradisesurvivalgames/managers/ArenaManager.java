@@ -38,46 +38,18 @@ import co.q64.paradisesurvivalgames.util.PlayerVanishUtil;
 
 public class ArenaManager {
 
-	private final String prefix = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.GOLD;
-	private final String error = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.RED;
-	private final Map<String, SGWorld> creators = new HashMap<>();
-	private final Map<String, Location> locs = new HashMap<>();
-	private final Map<String, ItemStack[]> inv = new HashMap<>();
-	private final Map<String, ItemStack[]> armor = new HashMap<>();
 	private final List<SGArena> arenas = new ArrayList<>();
+	private final Map<String, ItemStack[]> armor = new HashMap<>();
+	private final Map<String, SGWorld> creators = new HashMap<>();
+	private final String error = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.RED;
+	private final Map<String, ItemStack[]> inv = new HashMap<>();
+	private final Map<String, Location> locs = new HashMap<>();
+	private final String prefix = ChatColor.DARK_AQUA + "[TheSurvivalGames]" + ChatColor.GOLD;
 
 	/**
 	 * The constructor for a new reference of the singleton
 	 */
 	public ArenaManager() {
-	}
-
-	/**
-	 * Gets an arena from an integer ID
-	 *
-	 * @param i The ID to get the Arena from
-	 * @return The arena from which the ID represents. May be null.
-	 * @throws ArenaNotFoundException
-	 */
-	public SGArena getArena(int i) throws ArenaNotFoundException {
-		for (SGArena a : getArenas()) {
-			if (a.getId() == i) {
-				return a;
-			}
-		}
-		throw new ArenaNotFoundException("Could not find given arena with given ID: " + i);
-	}
-
-	public SGArena getArena(Player p) throws ArenaNotFoundException {
-		for (SGArena a : getArenas()) {
-			if (a.getPlayers().contains(p.getName())) {
-				return a;
-			}
-			if (a.getSpectators().contains(p.getName())) {
-				return a;
-			}
-		}
-		throw new ArenaNotFoundException("Could not find given arena with given Player: " + p.getDisplayName());
 	}
 
 	/**
@@ -167,7 +139,263 @@ public class ArenaManager {
 			SGApi.getTimeManager(a).countdownLobby(2);
 		}
 	}
+
+	/**
+	 * Creates a lobby
+	 */
+	public SGArena createLobby(Player p) {
+		SGArena a = new SGArena();
+
+		int s = getArenas().size();
+		s += 1;
+
+		a.createArena(s);
+
+		a.setLobby(p.getLocation());
+
+		getArenas().add(a);
+
+		a.restart();
+
+		return a;
+	}
+
+	/**
+	 * Creates a new arena
+	 *
+	 * @param creator The creator attributed with making the arena
+	 */
+	public void createWorld(final Player creator, final String worldName, final String display) {
+		creator.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
+
+		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+			@Override
+			public void run() {
+				// todo this is only a temp solution to create a new map
+				SGWorld world = SGApi.getMultiWorldManager().createWorld(worldName, display);
+				creator.teleport(new Location(world.getWorld(), world.getWorld().getSpawnLocation().getX(), world.getWorld().getSpawnLocation().getY(), world.getWorld().getSpawnLocation().getZ()));
+				getCreators().put(creator.getName(), world);
+			}
+		});
+
+	}
 	
+	public void createWorldFromDownload(final Player creator, final String worldName, final String displayName) {
+
+		new DownloadMap(creator, worldName).begin();
+
+	}
+
+	public void createWorldFromImport(final Player creator, final String worldName, final String displayName) {
+		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+			@Override
+			public void run() {
+				SGApi.getMultiWorldManager().importWorldFromFolder(creator, worldName, displayName);
+			}
+		});
+
+	}
+
+	public Block deserializeBlock(String st) {
+		String[] s = st.split(":");
+		return deserializeLoc(serializeLoc(new Location(Bukkit.getServer().getWorld(s[1]), Integer.parseInt(s[2]), Integer.parseInt(s[3]), Integer.parseInt(s[4])))).getBlock();
+	}
+
+	/**
+	 * Gets a location from a string
+	 *
+	 * @param s The string to deserialize
+	 * @return The location represented from the string
+	 */
+	public Location deserializeLoc(String s) {
+		String[] st = s.split(",");
+		return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), Integer.parseInt(st[3]));
+	}
+
+	/**
+	 * Gets an arena from an integer ID
+	 *
+	 * @param i The ID to get the Arena from
+	 * @return The arena from which the ID represents. May be null.
+	 * @throws ArenaNotFoundException
+	 */
+	public SGArena getArena(int i) throws ArenaNotFoundException {
+		for (SGArena a : getArenas()) {
+			if (a.getId() == i) {
+				return a;
+			}
+		}
+		throw new ArenaNotFoundException("Could not find given arena with given ID: " + i);
+	}
+
+	public SGArena getArena(Player p) throws ArenaNotFoundException {
+		for (SGArena a : getArenas()) {
+			if (a.getPlayers().contains(p.getName())) {
+				return a;
+			}
+			if (a.getSpectators().contains(p.getName())) {
+				return a;
+			}
+		}
+		throw new ArenaNotFoundException("Could not find given arena with given Player: " + p.getDisplayName());
+	}
+
+	/**
+	 * Get the arenas
+	 *
+	 * @return the ArrayList of arenas
+	 */
+	public List<SGArena> getArenas() {
+		return arenas;
+	}
+
+	public Map<String, ItemStack[]> getArmor() {
+		return armor;
+	}
+
+	/**
+	 * Gets the HashMap that contains the creators
+	 *
+	 * @return The HashMap of creators
+	 */
+	public Map<String, SGWorld> getCreators() {
+		return creators;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public Map<String, ItemStack[]> getInv() {
+		return inv;
+	}
+
+	public Map<String, Location> getLocs() {
+		return locs;
+	}
+
+	public String getPrefix() {
+		return prefix;
+	}
+	
+	/**
+	 * Heal a given Player
+	 */
+	private void healPlayer(final Player p)
+	{
+		final double amount = p.getMaxHealth() - p.getHealth();
+		final EntityRegainHealthEvent erhe = new EntityRegainHealthEvent(p, amount, RegainReason.CUSTOM);
+		SGApi.getPlugin().getServer().getPluginManager().callEvent(erhe);
+		if (erhe.isCancelled())
+		{
+			return;
+		}
+
+		double newAmount = p.getHealth() + erhe.getAmount();
+		if (newAmount > p.getMaxHealth())
+		{
+			newAmount = p.getMaxHealth();
+		}
+
+		p.setHealth(newAmount);
+		p.setFoodLevel(20);
+		p.setFireTicks(0);
+		for (PotionEffect effect : p.getActivePotionEffects())
+		{
+			p.removePotionEffect(effect.getType());
+		}
+	}
+
+	/**
+	 * Gets whether the player is playing
+	 *
+	 * @param p The player that will be scanned
+	 * @return Whether the player is in a game
+	 */
+	public boolean isInGame(Player p) {
+		for (SGArena a : getArenas()) {
+			if (a.getPlayers().contains(p.getName())) {
+				return true;
+			}
+
+			if (a.getSpectators().contains(p.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Loads the game into memory after a shutdown or a relaod
+	 */
+	public void loadGames() {
+		File arenas = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + "/arenas/");
+		File maps = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + "/maps/");
+
+		if (SGApi.getPlugin().getPluginConfig().isBungeecordMode()) {
+			if (arenas.listFiles().length > 1) {
+				Bukkit.getLogger().severe("You cannot have mutiple arenas on Bngeecord mode");
+				Bukkit.getPluginManager().disablePlugin(SGApi.getPlugin());
+			}
+		}
+
+		if (maps.listFiles().length == 0)
+			return;
+		for (File file : maps.listFiles()) {
+			ConfigTemplate<SGWorld> configTemplate = new WorldConfigTemplate(file);
+			SGWorld world = configTemplate.deserialize();
+			Bukkit.getLogger().info("Loaded map! " + world.toString());
+			SGApi.getMultiWorldManager().getWorlds().add(world);
+		}
+
+		if (arenas.listFiles().length == 0)
+			return;
+		for (File file : arenas.listFiles()) {
+			ConfigTemplate<SGArena> configTemplate = new ArenaConfigTemplate(file);
+			SGArena arena = configTemplate.deserialize();
+			Bukkit.getLogger().info("Loaded arena! " + arena.toString());
+			this.getArenas().add(arena);
+
+			arena.restart();
+		}
+	}
+
+	public void playerDeathAndLeave(Player p, SGArena a) {
+		a.deathAndLeave(p);
+	}
+
+	/**
+	 * Player disconnects in game :/
+	 *
+	 * We can't get the player's inventory here to shoot out the items.  Oh well.
+	 */
+	public void playerDisconnect(Player p) {
+		try {
+			SGApi.getArenaManager().getArena(p).deathWithQuit(p);
+		} catch (ArenaNotFoundException e) {}
+	}
+
+	public void playerKilled(Player p, SGArena a) {
+		a.death(p);
+	}
+
+	/**
+	 * Removes an arena from memory
+	 *
+	 * @param i The ID of the arena to be removed
+	 */
+	public void removeArena(int i) {
+		SGArena a;
+		try {
+			a = getArena(i);
+		} catch (ArenaNotFoundException e) {
+			Bukkit.getLogger().severe(e.getMessage());
+			return;
+		}
+		getArenas().remove(a);
+		new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + "/arenas/" + i + ".yml").delete();
+	}
+
 	/**
 	 * Removes the player from an arena
 	 *
@@ -264,196 +492,8 @@ public class ArenaManager {
 		//p.getInventory().setArmorContents(armor.get(p.getName()));
 	}
 
-	/**
-	 * Player disconnects in game :/
-	 *
-	 * We can't get the player's inventory here to shoot out the items.  Oh well.
-	 */
-	public void playerDisconnect(Player p) {
-		try {
-			SGApi.getArenaManager().getArena(p).deathWithQuit(p);
-		} catch (ArenaNotFoundException e) {}
-	}
-
-	/**
-	 * Creates a lobby
-	 */
-	public SGArena createLobby(Player p) {
-		SGArena a = new SGArena();
-
-		int s = getArenas().size();
-		s += 1;
-
-		a.createArena(s);
-
-		a.setLobby(p.getLocation());
-
-		getArenas().add(a);
-
-		a.restart();
-
-		return a;
-	}
-
-	/**
-	 * Creates a new arena
-	 *
-	 * @param creator The creator attributed with making the arena
-	 */
-	public void createWorld(final Player creator, final String worldName, final String display) {
-		creator.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
-
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
-			@Override
-			public void run() {
-				// todo this is only a temp solution to create a new map
-				SGWorld world = SGApi.getMultiWorldManager().createWorld(worldName, display);
-				creator.teleport(new Location(world.getWorld(), world.getWorld().getSpawnLocation().getX(), world.getWorld().getSpawnLocation().getY(), world.getWorld().getSpawnLocation().getZ()));
-				getCreators().put(creator.getName(), world);
-			}
-		});
-
-	}
-
-	public void createWorldFromDownload(final Player creator, final String worldName, final String displayName) {
-
-		new DownloadMap(creator, worldName).begin();
-
-	}
-
-	public void createWorldFromImport(final Player creator, final String worldName, final String displayName) {
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
-			@Override
-			public void run() {
-				SGApi.getMultiWorldManager().importWorldFromFolder(creator, worldName, displayName);
-			}
-		});
-
-	}
-
-	/**
-	 * Removes an arena from memory
-	 *
-	 * @param i The ID of the arena to be removed
-	 */
-	public void removeArena(int i) {
-		SGArena a;
-		try {
-			a = getArena(i);
-		} catch (ArenaNotFoundException e) {
-			Bukkit.getLogger().severe(e.getMessage());
-			return;
-		}
-		getArenas().remove(a);
-		new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + "/arenas/" + i + ".yml").delete();
-	}
-
-	/**
-	 * Gets whether the player is playing
-	 *
-	 * @param p The player that will be scanned
-	 * @return Whether the player is in a game
-	 */
-	public boolean isInGame(Player p) {
-		for (SGArena a : getArenas()) {
-			if (a.getPlayers().contains(p.getName())) {
-				return true;
-			}
-
-			if (a.getSpectators().contains(p.getName())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Loads the game into memory after a shutdown or a relaod
-	 */
-	public void loadGames() {
-		File arenas = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + "/arenas/");
-		File maps = new File(SGApi.getPlugin().getDataFolder().getAbsolutePath() + "/maps/");
-
-		if (SGApi.getPlugin().getPluginConfig().isBungeecordMode()) {
-			if (arenas.listFiles().length > 1) {
-				Bukkit.getLogger().severe("You cannot have mutiple arenas on Bngeecord mode");
-				Bukkit.getPluginManager().disablePlugin(SGApi.getPlugin());
-			}
-		}
-
-		if (maps.listFiles().length == 0)
-			return;
-		for (File file : maps.listFiles()) {
-			ConfigTemplate<SGWorld> configTemplate = new WorldConfigTemplate(file);
-			SGWorld world = configTemplate.deserialize();
-			Bukkit.getLogger().info("Loaded map! " + world.toString());
-			SGApi.getMultiWorldManager().getWorlds().add(world);
-		}
-
-		if (arenas.listFiles().length == 0)
-			return;
-		for (File file : arenas.listFiles()) {
-			ConfigTemplate<SGArena> configTemplate = new ArenaConfigTemplate(file);
-			SGArena arena = configTemplate.deserialize();
-			Bukkit.getLogger().info("Loaded arena! " + arena.toString());
-			this.getArenas().add(arena);
-
-			arena.restart();
-		}
-	}
-
-	public void playerKilled(Player p, SGArena a) {
-		a.death(p);
-	}
-
-	public void playerDeathAndLeave(Player p, SGArena a) {
-		a.deathAndLeave(p);
-	}
-
-	/**
-	 * Gets the HashMap that contains the creators
-	 *
-	 * @return The HashMap of creators
-	 */
-	public Map<String, SGWorld> getCreators() {
-		return creators;
-	}
-
-	/**
-	 * Get the arenas
-	 *
-	 * @return the ArrayList of arenas
-	 */
-	public List<SGArena> getArenas() {
-		return arenas;
-	}
-	
-	/**
-	 * Heal a given Player
-	 */
-	private void healPlayer(final Player p)
-	{
-		final double amount = p.getMaxHealth() - p.getHealth();
-		final EntityRegainHealthEvent erhe = new EntityRegainHealthEvent(p, amount, RegainReason.CUSTOM);
-		SGApi.getPlugin().getServer().getPluginManager().callEvent(erhe);
-		if (erhe.isCancelled())
-		{
-			return;
-		}
-
-		double newAmount = p.getHealth() + erhe.getAmount();
-		if (newAmount > p.getMaxHealth())
-		{
-			newAmount = p.getMaxHealth();
-		}
-
-		p.setHealth(newAmount);
-		p.setFoodLevel(20);
-		p.setFireTicks(0);
-		for (PotionEffect effect : p.getActivePotionEffects())
-		{
-			p.removePotionEffect(effect.getType());
-		}
+	public String serializeBlock(Block b) {
+		return b.getType() + ":" + serializeLoc(b.getLocation());
 	}
 
 	/**
@@ -464,45 +504,5 @@ public class ArenaManager {
 	 */
 	public String serializeLoc(Location l) {
 		return l.getWorld().getName() + "," + l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ();
-	}
-
-	public String serializeBlock(Block b) {
-		return b.getType() + ":" + serializeLoc(b.getLocation());
-	}
-
-	/**
-	 * Gets a location from a string
-	 *
-	 * @param s The string to deserialize
-	 * @return The location represented from the string
-	 */
-	public Location deserializeLoc(String s) {
-		String[] st = s.split(",");
-		return new Location(Bukkit.getWorld(st[0]), Integer.parseInt(st[1]), Integer.parseInt(st[2]), Integer.parseInt(st[3]));
-	}
-
-	public Block deserializeBlock(String st) {
-		String[] s = st.split(":");
-		return deserializeLoc(serializeLoc(new Location(Bukkit.getServer().getWorld(s[1]), Integer.parseInt(s[2]), Integer.parseInt(s[3]), Integer.parseInt(s[4])))).getBlock();
-	}
-
-	public String getPrefix() {
-		return prefix;
-	}
-
-	public String getError() {
-		return error;
-	}
-
-	public Map<String, Location> getLocs() {
-		return locs;
-	}
-
-	public Map<String, ItemStack[]> getInv() {
-		return inv;
-	}
-
-	public Map<String, ItemStack[]> getArmor() {
-		return armor;
 	}
 }

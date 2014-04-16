@@ -10,8 +10,8 @@ import co.q64.paradisesurvivalgames.objects.SGArena;
 
 public class Rollback implements Runnable {
 
-	List<ChangedBlock> data;
 	final SGArena arena;
+	List<ChangedBlock> data;
 
 	public Rollback(SGArena a) {
 		this.data = a.getChangedBlocks();

@@ -9,12 +9,12 @@ public class UndroppableEnchantment extends SGEnchantment {
 	}
 
 	@Override
-	public String getName() {
-		return "UNDROPPABLE";
+	public String getLore(int lvl) {
+		return ChatColor.GRAY + "Undroppable " + RomanNumeral.convert(lvl);
 	}
 
 	@Override
-	public String getLore(int lvl) {
-		return ChatColor.GRAY + "Undroppable " + RomanNumeral.convert(lvl);
+	public String getName() {
+		return "UNDROPPABLE";
 	}
 }

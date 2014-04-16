@@ -11,10 +11,10 @@ import co.q64.paradisesurvivalgames.managers.SGApi;
 import co.q64.paradisesurvivalgames.multiworld.SGWorld;
 
 public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
-	private SGWorld world;
+	private SGWorld cachedWorldCreator;
 
 	private String cachedWorldName;
-	private SGWorld cachedWorldCreator;
+	private SGWorld world;
 
 	public WorldConfigTemplate(File file) {
 		super(file);
@@ -23,34 +23,6 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 	public WorldConfigTemplate(SGWorld world) {
 		super("maps/" + world.getWorld().getName() + ".yml");
 		this.world = world;
-	}
-
-	@Override
-	public String[] pattern() {
-		return new String[] { "World-name", "Display-name", "Spawns", "Chests" };
-	}
-
-	@Override
-	public Object toFile(int keyPair) {
-		switch (keyPair) {
-		case 0:
-			return this.world.getName();
-		case 1:
-			return this.world.getDisplayName();
-		case 2:
-			List<String> stringList = new ArrayList<>();
-			for (Location l : this.world.locs) {
-				stringList.add(SGApi.getArenaManager().serializeLoc(l));
-			}
-			return stringList;
-		case 3:
-			List<String> list = new ArrayList<>();
-			for (BlockState b : this.world.t2) {
-				list.add(SGApi.getArenaManager().serializeBlock(b.getBlock()));
-			}
-			return list;
-		}
-		return null;
 	}
 
 	@Override
@@ -81,5 +53,33 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 			break;
 		}
 		return this.cachedWorldCreator;
+	}
+
+	@Override
+	public String[] pattern() {
+		return new String[] { "World-name", "Display-name", "Spawns", "Chests" };
+	}
+
+	@Override
+	public Object toFile(int keyPair) {
+		switch (keyPair) {
+		case 0:
+			return this.world.getName();
+		case 1:
+			return this.world.getDisplayName();
+		case 2:
+			List<String> stringList = new ArrayList<>();
+			for (Location l : this.world.locs) {
+				stringList.add(SGApi.getArenaManager().serializeLoc(l));
+			}
+			return stringList;
+		case 3:
+			List<String> list = new ArrayList<>();
+			for (BlockState b : this.world.t2) {
+				list.add(SGApi.getArenaManager().serializeBlock(b.getBlock()));
+			}
+			return list;
+		}
+		return null;
 	}
 }

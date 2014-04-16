@@ -17,13 +17,17 @@ public class WebsocketSessionManager {
 		return sessionManager;
 	}
 
-	public List<WebsocketSession> getSessions() {
-		return sessions;
-	}
-
-	public void openSession(String host) {
-		sessions.add(new WebsocketSession(host));
-		Bukkit.getLogger().info("Opened Websocket session: " + getSessionByHost(host));
+	public void addSessionUsername(String host, String name) {
+		Bukkit.getLogger().info("Attemption to update session with data: " + name + " and a host of: " + host);
+		for (int i = 0; i < sessions.size(); i++) {
+			if (sessions.get(i).getHost().equalsIgnoreCase(host)) {
+				sessions.get(i).setName(name);
+				if (Bukkit.getPlayer(name) == null) {
+					WebsocketServer.s.sendData(sessions.get(i), "nullPlayer");
+				}
+				Bukkit.getLogger().info("Updated Websocket session information: " + sessions.get(i));
+			}
+		}
 	}
 
 	public void endSession(String host) {
@@ -51,16 +55,12 @@ public class WebsocketSessionManager {
 		return null;
 	}
 
-	public void addSessionUsername(String host, String name) {
-		Bukkit.getLogger().info("Attemption to update session with data: " + name + " and a host of: " + host);
-		for (int i = 0; i < sessions.size(); i++) {
-			if (sessions.get(i).getHost().equalsIgnoreCase(host)) {
-				sessions.get(i).setName(name);
-				if (Bukkit.getPlayer(name) == null) {
-					WebsocketServer.s.sendData(sessions.get(i), "nullPlayer");
-				}
-				Bukkit.getLogger().info("Updated Websocket session information: " + sessions.get(i));
-			}
-		}
+	public List<WebsocketSession> getSessions() {
+		return sessions;
+	}
+
+	public void openSession(String host) {
+		sessions.add(new WebsocketSession(host));
+		Bukkit.getLogger().info("Opened Websocket session: " + getSessionByHost(host));
 	}
 }

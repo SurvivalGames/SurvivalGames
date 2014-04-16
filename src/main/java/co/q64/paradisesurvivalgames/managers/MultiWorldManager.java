@@ -24,6 +24,33 @@ public class MultiWorldManager {
 	public MultiWorldManager() {
 	}
 
+	private static boolean checkIfIsWorld(File worldFolder) {
+		if (worldFolder.isDirectory()) {
+			File[] files = worldFolder.listFiles(new FilenameFilter() {
+				@Override
+				public boolean accept(File file, String name) {
+					return name.equalsIgnoreCase("level.dat");
+				}
+			});
+			if (files != null && files.length > 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public World copyFromInternet(final Player sender, final String worldName, final String display) {
+
+		createWorld(worldName, display);
+
+		return Bukkit.getWorld(worldName);
+	}
+
+	public World createRandomWorld(final String worldName) {
+		// TODO
+		return Bukkit.getWorld(worldName);
+	}
+
 	SGWorld createWorld(String name, String display) {
 		SGWorld world = new SGWorld(name, display);
 		world.create();
@@ -39,11 +66,8 @@ public class MultiWorldManager {
 		}
 	}
 
-	public World copyFromInternet(final Player sender, final String worldName, final String display) {
-
-		createWorld(worldName, display);
-
-		return Bukkit.getWorld(worldName);
+	public List<SGWorld> getWorlds() {
+		return worlds;
 	}
 
 	public World importWorldFromFolder(final Player sender, final String worldName, String display) {
@@ -56,15 +80,6 @@ public class MultiWorldManager {
 		return Bukkit.getWorld(worldName);
 	}
 
-	public World createRandomWorld(final String worldName) {
-		// TODO
-		return Bukkit.getWorld(worldName);
-	}
-
-	public List<SGWorld> getWorlds() {
-		return worlds;
-	}
-
 	public SGWorld worldForName(String name) {
 		for (SGWorld world : getWorlds()) {
 			if (world.getWorld().getName().equalsIgnoreCase(name)) {
@@ -72,20 +87,5 @@ public class MultiWorldManager {
 			}
 		}
 		return null;
-	}
-
-	private static boolean checkIfIsWorld(File worldFolder) {
-		if (worldFolder.isDirectory()) {
-			File[] files = worldFolder.listFiles(new FilenameFilter() {
-				@Override
-				public boolean accept(File file, String name) {
-					return name.equalsIgnoreCase("level.dat");
-				}
-			});
-			if (files != null && files.length > 0) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

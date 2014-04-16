@@ -11,11 +11,11 @@ public class MapHash {
 		this.id = id;
 	}
 
-	public SGWorld getWorld() {
-		return w;
-	}
-
 	public int getId() {
 		return id;
+	}
+
+	public SGWorld getWorld() {
+		return w;
 	}
 }

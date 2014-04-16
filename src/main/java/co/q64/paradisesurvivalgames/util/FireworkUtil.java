@@ -10,21 +10,29 @@ import co.q64.paradisesurvivalgames.managers.SGApi;
 
 public class FireworkUtil implements Listener {
 
+	public class PlayFireworkEffect implements Runnable {
+		FireworkEffect effect;
+		Location fLoc;
+
+		public PlayFireworkEffect(Location fLoc, FireworkEffect fEffect) {
+			this.fLoc = fLoc;
+			this.effect = fEffect;
+		}
+
+		@Override
+		public void run() {
+			try {
+				FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(fLoc.getWorld(), fLoc, effect);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	static FireworkUtil circleUtil = new FireworkUtil();
 
 	public static FireworkUtil getCircleUtil() {
 		return circleUtil;
-	}
-
-	public void playFireworkCircle(final Player player, Location fLoc, final FireworkEffect effect, int size, final int distance) {
-		Bukkit.getLogger().info("Called firework method");
-		int index = 0;
-		for (double t = 0; t < 2 * Math.PI; t += Math.toRadians(size)) {
-			index += 3;
-			Location l = fLoc.add(Math.cos(t) * distance, 0.5, Math.sin(t) * distance);
-			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(l, effect), index);
-
-		}
 	}
 
 	public void playFireworkCircle(final Player player, final FireworkEffect effect, int size, final int distance) {
@@ -38,20 +46,14 @@ public class FireworkUtil implements Listener {
 		}
 	}
 
-	public void playFireworkRing(final Player player, final FireworkEffect effect, int size, final int distance) {
+	public void playFireworkCircle(final Player player, Location fLoc, final FireworkEffect effect, int size, final int distance) {
 		Bukkit.getLogger().info("Called firework method");
 		int index = 0;
 		for (double t = 0; t < 2 * Math.PI; t += Math.toRadians(size)) {
 			index += 3;
-			Location l = player.getLocation().add(Math.cos(t) * distance, 0.5, Math.sin(t) * distance);
+			Location l = fLoc.add(Math.cos(t) * distance, 0.5, Math.sin(t) * distance);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(l, effect), index);
 
-		}
-
-		for (double t = 0; t < 2 * Math.PI; t += Math.toRadians(size)) {
-			index += 3;
-			Location l = player.getLocation().add(Math.cos(t) * distance, 0.5, Math.sin(t) * distance);
-			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(l, effect), index);
 		}
 	}
 
@@ -71,22 +73,20 @@ public class FireworkUtil implements Listener {
 
 	}
 
-	public class PlayFireworkEffect implements Runnable {
-		Location fLoc;
-		FireworkEffect effect;
+	public void playFireworkRing(final Player player, final FireworkEffect effect, int size, final int distance) {
+		Bukkit.getLogger().info("Called firework method");
+		int index = 0;
+		for (double t = 0; t < 2 * Math.PI; t += Math.toRadians(size)) {
+			index += 3;
+			Location l = player.getLocation().add(Math.cos(t) * distance, 0.5, Math.sin(t) * distance);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(l, effect), index);
 
-		public PlayFireworkEffect(Location fLoc, FireworkEffect fEffect) {
-			this.fLoc = fLoc;
-			this.effect = fEffect;
 		}
 
-		@Override
-		public void run() {
-			try {
-				FireworkEffectPlayer.getFireworkEffectPlayer().playFirework(fLoc.getWorld(), fLoc, effect);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		for (double t = 0; t < 2 * Math.PI; t += Math.toRadians(size)) {
+			index += 3;
+			Location l = player.getLocation().add(Math.cos(t) * distance, 0.5, Math.sin(t) * distance);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new PlayFireworkEffect(l, effect), index);
 		}
 	}
 }

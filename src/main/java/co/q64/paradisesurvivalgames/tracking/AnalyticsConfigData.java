@@ -35,13 +35,13 @@ package co.q64.paradisesurvivalgames.tracking;
  */
 public class AnalyticsConfigData {
 
-	private final String trackingCode;
-	private String encoding = "UTF-8";
-	private String screenResolution = null;
 	private String colorDepth = null;
-	private String userLanguage = null;
+	private String encoding = "UTF-8";
 	private String flashVersion = null;
+	private String screenResolution = null;
+	private final String trackingCode;
 	private String userAgent = null;
+	private String userLanguage = null;
 	private VisitorData visitorData;
 
 	/**
@@ -102,17 +102,17 @@ public class AnalyticsConfigData {
 	}
 
 	/**
-	 * @return the userLanguage
-	 */
-	public String getUserLanguage() {
-		return userLanguage;
-	}
-
-	/**
 	 * @return the user agent used for the network requests
 	 */
 	public String getUserAgent() {
 		return userAgent;
+	}
+
+	/**
+	 * @return the userLanguage
+	 */
+	public String getUserLanguage() {
+		return userLanguage;
 	}
 
 	/**
@@ -158,6 +158,10 @@ public class AnalyticsConfigData {
 		screenResolution = argScreenResolution;
 	}
 
+	public void setUserAgent(String userAgent) {
+		this.userAgent = userAgent;
+	}
+
 	/**
 	 * Sets the user language, like "EN-us"
 	 *
@@ -165,9 +169,5 @@ public class AnalyticsConfigData {
 	 */
 	public void setUserLanguage(String argUserLanguage) {
 		userLanguage = argUserLanguage;
-	}
-
-	public void setUserAgent(String userAgent) {
-		this.userAgent = userAgent;
 	}
 }

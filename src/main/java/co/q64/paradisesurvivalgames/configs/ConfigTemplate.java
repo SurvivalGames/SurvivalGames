@@ -9,8 +9,18 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import co.q64.paradisesurvivalgames.managers.SGApi;
 
 public abstract class ConfigTemplate<T> {
-	private File file = null;
 	private FileConfiguration config = null;
+	private File file = null;
+
+	public ConfigTemplate(File file) {
+		this.file = file;
+		this.config = YamlConfiguration.loadConfiguration(file);
+		try {
+			config.save(file);
+		} catch (Exception x) {
+			x.printStackTrace();
+		}
+	}
 
 	public ConfigTemplate(String path) {
 
@@ -32,28 +42,6 @@ public abstract class ConfigTemplate<T> {
 		}
 	}
 
-	public ConfigTemplate(File file) {
-		this.file = file;
-		this.config = YamlConfiguration.loadConfiguration(file);
-		try {
-			config.save(file);
-		} catch (Exception x) {
-			x.printStackTrace();
-		}
-	}
-
-	public final void serialize() {
-		for (int i = 0; i <= pattern().length - 1; i++) {
-			config.set(pattern()[i], toFile(i));
-		}
-
-		try {
-			config.save(file);
-		} catch (Exception x) {
-			x.printStackTrace();
-		}
-	}
-
 	public final T deserialize() {
 		T t = null;
 		for (int i = 0; i <= pattern().length - 1; i++) {
@@ -67,9 +55,21 @@ public abstract class ConfigTemplate<T> {
 		serialize();
 	}
 
-	public abstract Object toFile(int index);
-
 	public abstract T fromFile(int index, Object o);
 
 	public abstract String[] pattern();
+
+	public final void serialize() {
+		for (int i = 0; i <= pattern().length - 1; i++) {
+			config.set(pattern()[i], toFile(i));
+		}
+
+		try {
+			config.save(file);
+		} catch (Exception x) {
+			x.printStackTrace();
+		}
+	}
+
+	public abstract Object toFile(int index);
 }

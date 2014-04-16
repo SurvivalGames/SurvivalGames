@@ -18,8 +18,8 @@ import co.q64.paradisesurvivalgames.objects.SGArena;
 
 public class SignManager {
 
-	private Map<Location, String> signs = new HashMap<Location, String>();
 	private FileConfiguration config;
+	private Map<Location, String> signs = new HashMap<Location, String>();
 
 	public SignManager() {
 

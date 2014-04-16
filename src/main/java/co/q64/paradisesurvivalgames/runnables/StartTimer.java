@@ -21,53 +21,6 @@ import co.q64.paradisesurvivalgames.managers.SGApi;
  */
 public class StartTimer {
 
-	private static final boolean DONT_INTERRUPT_IF_RUNNING = false;
-
-	private final long fInitialDelay;
-
-	private final long fDelayPeriod;
-
-	private final long fShutDownAfter;
-
-	private static ScheduledExecutorService scheduler = SGApi.getScheduler().getScheduler();
-
-	public Integer timeleft;
-
-	public StartTimer(long initial, long period, Integer tl) {
-
-		fInitialDelay = initial;
-		fDelayPeriod = period;
-		timeleft = tl;
-		fShutDownAfter = tl.longValue();
-		StartTimerAndStop();
-	}
-
-	private static void log(String aMsg) {
-		System.out.println(aMsg);
-	}
-
-	/**
-	 * Make timer. Used to create a new instance of Start Game Countdown
-	 *
-	 * @param initial the initial delay before starting - seconds
-	 * @param period  the period between executions - seconds
-	 * @param tl      the max time the timer will run before being shutdown - seconds
-	 */
-	public static void makeTimer(long initial, long period, Integer tl) {
-		new StartTimer(initial, period, tl);
-	}
-
-	/**
-	 * Basically Initialise the object
-	 */
-	void StartTimerAndStop() {
-
-		Runnable GameStartTask = new StartGameTimerTask((int) fShutDownAfter);
-		ScheduledFuture<?> StartGameFuture = scheduler.scheduleAtFixedRate(GameStartTask, fInitialDelay, fDelayPeriod, TimeUnit.SECONDS);
-		Runnable stopStartGameTask = new StopGameStartTask(StartGameFuture);
-		scheduler.schedule(stopStartGameTask, fShutDownAfter, TimeUnit.SECONDS);
-	}
-
 	/**
 	 * The actual Task for the Game Timer
 	 */
@@ -109,6 +62,8 @@ public class StartTimer {
 	 */
 	private final class StopGameStartTask implements Runnable {
 
+		private ScheduledFuture<?> fScheduledFuture;
+
 		StopGameStartTask(ScheduledFuture<?> aSchedFeature) {
 
 			fScheduledFuture = aSchedFeature;
@@ -123,8 +78,53 @@ public class StartTimer {
 
 			// scheduler.shutdown();
 		}
+	}
 
-		private ScheduledFuture<?> fScheduledFuture;
+	private static final boolean DONT_INTERRUPT_IF_RUNNING = false;
+
+	private static ScheduledExecutorService scheduler = SGApi.getScheduler().getScheduler();
+
+	private final long fDelayPeriod;
+
+	private final long fInitialDelay;
+
+	private final long fShutDownAfter;
+
+	public Integer timeleft;
+
+	public StartTimer(long initial, long period, Integer tl) {
+
+		fInitialDelay = initial;
+		fDelayPeriod = period;
+		timeleft = tl;
+		fShutDownAfter = tl.longValue();
+		StartTimerAndStop();
+	}
+
+	private static void log(String aMsg) {
+		System.out.println(aMsg);
+	}
+
+	/**
+	 * Make timer. Used to create a new instance of Start Game Countdown
+	 *
+	 * @param initial the initial delay before starting - seconds
+	 * @param period  the period between executions - seconds
+	 * @param tl      the max time the timer will run before being shutdown - seconds
+	 */
+	public static void makeTimer(long initial, long period, Integer tl) {
+		new StartTimer(initial, period, tl);
+	}
+
+	/**
+	 * Basically Initialise the object
+	 */
+	void StartTimerAndStop() {
+
+		Runnable GameStartTask = new StartGameTimerTask((int) fShutDownAfter);
+		ScheduledFuture<?> StartGameFuture = scheduler.scheduleAtFixedRate(GameStartTask, fInitialDelay, fDelayPeriod, TimeUnit.SECONDS);
+		Runnable stopStartGameTask = new StopGameStartTask(StartGameFuture);
+		scheduler.schedule(stopStartGameTask, fShutDownAfter, TimeUnit.SECONDS);
 	}
 
 }

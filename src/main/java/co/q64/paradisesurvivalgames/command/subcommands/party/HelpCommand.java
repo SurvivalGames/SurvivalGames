@@ -14,19 +14,6 @@ import co.q64.paradisesurvivalgames.locale.I18N;
 
 public class HelpCommand implements SubCommand {
 
-	/**
-	 * Displays the help for the party commands
-	 *
-	 * @param sender The player executing the command
-	 * @param args   The page of help to be shown
-	 */
-	@Override
-	public void execute(String cmd, Player sender, String[] args) {
-		if ((args.length == 0) || (cmd.equalsIgnoreCase("help")) || (cmd.equalsIgnoreCase("?"))) {
-			staticExecute(sender, args);
-		}
-	}
-
 	public static void staticExecute(Player sender, String[] args) {
 
 		String help = ChatColor.YELLOW + "";
@@ -106,5 +93,18 @@ public class HelpCommand implements SubCommand {
 			}
 		}
 		sender.sendMessage(help);
+	}
+
+	/**
+	 * Displays the help for the party commands
+	 *
+	 * @param sender The player executing the command
+	 * @param args   The page of help to be shown
+	 */
+	@Override
+	public void execute(String cmd, Player sender, String[] args) {
+		if ((args.length == 0) || (cmd.equalsIgnoreCase("help")) || (cmd.equalsIgnoreCase("?"))) {
+			staticExecute(sender, args);
+		}
 	}
 }

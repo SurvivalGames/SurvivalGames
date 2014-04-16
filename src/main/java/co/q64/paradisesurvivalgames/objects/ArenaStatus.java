@@ -15,19 +15,19 @@ public enum ArenaStatus {
 	 */
 	DISABLED,
 	/**
-	 * ARENA IS READY TO BE USED
+	 * UNKNOWN ERROR.
 	 */
-	READY,
+	ERROR,
 	/**
 	 * ARENA IS INGAME.
 	 */
 	INGAME,
 	/**
+	 * ARENA IS READY TO BE USED
+	 */
+	READY,
+	/**
 	 * GAME FINISHED.
 	 */
-	RELOAD,
-	/**
-	 * UNKNOWN ERROR.
-	 */
-	ERROR
+	RELOAD
 }

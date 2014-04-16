@@ -23,15 +23,15 @@ import org.bukkit.entity.Player;
 
 public class SGWorld {
 
+	private Location center = null;
+	private String displayName;
+	private boolean inLobby;
+
 	public List<Location> locs = new ArrayList<>();
 	private String name;
-	private WorldCreator wc;
-
 	public List<BlockState> t2 = new ArrayList<>();
-	private String displayName;
-	private Location center = null;
 
-	private boolean inLobby;
+	private WorldCreator wc;
 
 	public SGWorld(String name, String map) {
 		this.name = name;
@@ -40,24 +40,6 @@ public class SGWorld {
 		wc = new WorldCreator(name);
 		wc.environment(World.Environment.NORMAL);
 		wc.type(WorldType.NORMAL);
-	}
-
-	public void init(List<Location> locs, List<BlockState> t2) {
-		Bukkit.getServer().getWorld(name).setDifficulty(Difficulty.EASY);
-		this.locs = locs;
-		this.t2 = t2;
-		for (Location l : locs) {
-			for (Location loc : locs) {
-				if (Math.abs(l.getBlockX()) - Math.abs(loc.getBlockX()) <= 2) {
-					int radius = (int) (loc.distance(l) / 2);
-					center = loc.subtract(radius, loc.getY(), loc.getZ());
-				}
-			}
-		}
-	}
-
-	public World getWorld() {
-		return name != null ? Bukkit.getServer().getWorld(name) : null;
 	}
 
 	public World create() {
@@ -74,6 +56,64 @@ public class SGWorld {
 		}
 
 		return wc.createWorld();
+	}
+
+	private void deleteFiles(File path) {
+		if (path.exists()) {
+			File files[] = path.listFiles();
+			for (File file : files != null ? files : new File[0]) {
+				if (file.isDirectory()) {
+					deleteFiles(file);
+				} else {
+					file.delete();
+				}
+			}
+		}
+		path.delete();
+	}
+
+	public Location getCenter() {
+		return center;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public World getWorld() {
+		return name != null ? Bukkit.getServer().getWorld(name) : null;
+	}
+
+	public void init(List<Location> locs, List<BlockState> t2) {
+		Bukkit.getServer().getWorld(name).setDifficulty(Difficulty.EASY);
+		this.locs = locs;
+		this.t2 = t2;
+		for (Location l : locs) {
+			for (Location loc : locs) {
+				if (Math.abs(l.getBlockX()) - Math.abs(loc.getBlockX()) <= 2) {
+					int radius = (int) (loc.distance(l) / 2);
+					center = loc.subtract(radius, loc.getY(), loc.getZ());
+				}
+			}
+		}
+	}
+
+	public boolean isInLobby() {
+		return inLobby;
+	}
+
+	/**
+	 * Adds the next spawn into the list of spawns
+	 *
+	 * @param loc The location of the spawn
+	 */
+	public void nextSpawn(Location loc) {
+		locs.add(loc);
+		Bukkit.getLogger().info("Registered spawn point - List: " + locs.toString() + " Loc: " + loc.toString());
 	}
 
 	public void remove() {
@@ -94,52 +134,12 @@ public class SGWorld {
 		deleteFiles(world.getWorldFolder());
 	}
 
-	private void deleteFiles(File path) {
-		if (path.exists()) {
-			File files[] = path.listFiles();
-			for (File file : files != null ? files : new File[0]) {
-				if (file.isDirectory()) {
-					deleteFiles(file);
-				} else {
-					file.delete();
-				}
-			}
-		}
-		path.delete();
-	}
-
-	public String getDisplayName() {
-		return displayName;
-	}
-
 	public void setDisplayName(String name) {
 		this.displayName = name;
 	}
 
-	public Location getCenter() {
-		return center;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public boolean isInLobby() {
-		return inLobby;
-	}
-
 	public void setInLobby(boolean b) {
 		inLobby = b;
-	}
-
-	/**
-	 * Adds the next spawn into the list of spawns
-	 *
-	 * @param loc The location of the spawn
-	 */
-	public void nextSpawn(Location loc) {
-		locs.add(loc);
-		Bukkit.getLogger().info("Registered spawn point - List: " + locs.toString() + " Loc: " + loc.toString());
 	}
 
 	@Override

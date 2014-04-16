@@ -9,12 +9,12 @@ public class UnenchantableEnchantment extends SGEnchantment {
 	}
 
 	@Override
-	public String getName() {
-		return "UNENCHANTABLE";
+	public String getLore(int lvl) {
+		return ChatColor.GRAY + "Un-Enchantable " + RomanNumeral.convert(lvl);
 	}
 
 	@Override
-	public String getLore(int lvl) {
-		return ChatColor.GRAY + "Un-Enchantable " + RomanNumeral.convert(lvl);
+	public String getName() {
+		return "UNENCHANTABLE";
 	}
 }

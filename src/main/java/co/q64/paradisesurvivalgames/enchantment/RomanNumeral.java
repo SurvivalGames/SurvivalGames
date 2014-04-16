@@ -3,7 +3,7 @@ package co.q64.paradisesurvivalgames.enchantment;
 public class RomanNumeral {
 
 	enum Numeral {
-		I(1), IV(4), V(5), IX(9), X(10), XL(40), L(50), XC(90), C(100), CD(400), D(500), CM(900), M(1000);
+		C(100), CD(400), CM(900), D(500), I(1), IV(4), IX(9), L(50), M(1000), V(5), X(10), XC(90), XL(40);
 		int weight;
 
 		Numeral(int weight) {

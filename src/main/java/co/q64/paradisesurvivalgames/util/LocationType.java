@@ -12,6 +12,10 @@ package co.q64.paradisesurvivalgames.util;
 public enum LocationType {
 
 	/**
+	 * The AREALOBBY. Pre Game Lobby
+	 */
+	AREALOBBY,
+	/**
 	 * The AREANSPAWN. A Player Game Spawn
 	 */
 	AREANSPAWN,
@@ -19,22 +23,6 @@ public enum LocationType {
 	 * The ARENAADMIN. An Admin Spawn
 	 */
 	ARENAADMIN,
-	/**
-	 * The LOBBYSPAWN. Main Lobby Spawn
-	 */
-	LOBBYSPAWN,
-	/**
-	 * The AREALOBBY. Pre Game Lobby
-	 */
-	AREALOBBY,
-	/**
-	 * The WORLD. World Spawn Point
-	 */
-	WORLD,
-	/**
-	 * The JOINSIGN. Location of a Join sign
-	 */
-	JOINSIGN,
 	/**
 	 * The CLASSSIGN. A Player Class Sign
 	 */
@@ -44,7 +32,19 @@ public enum LocationType {
 	 */
 	DROPS,
 	/**
+	 * The JOINSIGN. Location of a Join sign
+	 */
+	JOINSIGN,
+	/**
+	 * The LOBBYSPAWN. Main Lobby Spawn
+	 */
+	LOBBYSPAWN,
+	/**
 	 * The STATSSIGN. Stats Board
 	 */
-	STATSSIGN
+	STATSSIGN,
+	/**
+	 * The WORLD. World Spawn Point
+	 */
+	WORLD
 }

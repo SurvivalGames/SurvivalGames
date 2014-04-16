@@ -11,17 +11,17 @@ package co.q64.paradisesurvivalgames.util;
  */
 public enum PlayerLocation {
 	/**
-	 * Players in LOBBY.
+	 * Players in ARENALOBBY.
 	 */
-	LOBBY,
+	ARENALOBBY,
 	/**
 	 * Players INGAME.
 	 */
 	INGAME,
 	/**
-	 * Players in ARENALOBBY.
+	 * Players in LOBBY.
 	 */
-	ARENALOBBY,
+	LOBBY,
 	/**
 	 * Players OFFLINE.
 	 */

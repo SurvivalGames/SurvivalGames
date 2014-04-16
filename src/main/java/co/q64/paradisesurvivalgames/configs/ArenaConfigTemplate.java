@@ -26,43 +26,13 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 		this.arena = arena;
 	}
 
-	@Override
-	public String[] pattern() {
-		return new String[] { "Current-state", "Id", "Lobby", "Current-map", "Voted", "Votes", "Max-players", "Min-players", "Players", "Spectators" };
-	}
-
-	@Override
-	public Object toFile(int keyPair) {
-		Bukkit.getLogger().info("Attemping to save prop: " + arena.toString() + " with a keypair of " + keyPair);
-		switch (keyPair) {
-		case 0:
-			Bukkit.getLogger().info(arena.getState().getTrueName());
-			return arena.getState().getTrueName();
-		case 1:
-			Bukkit.getLogger().info(arena.getId() + "");
-			return arena.getId();
-		case 2:
-			Bukkit.getLogger().info(SGApi.getArenaManager().serializeLoc(arena.getLobby()));
-			return SGApi.getArenaManager().serializeLoc(arena.getLobby());
-		case 3:
-			if (arena.getCurrentMap() == null) {
-				return "NOT_ACTIVE";
-			}
-			return arena.getCurrentMap().getName();
-		case 4:
-			return arena.getVoted();
-		case 5:
-			return serializeMaps();
-		case 6:
-			return arena.getMaxPlayers();
-		case 7:
-			return arena.getMinPlayers();
-		case 8:
-			return arena.getPlayers();
-		case 9:
-			return arena.getSpectators();
+	public Map<MapHash, Integer> deserializeMaps(List<String> list) {
+		Map<MapHash, Integer> mapHashIntegerMap = new HashMap<>();
+		for (String s : list) {
+			String[] strings = s.split(":");
+			mapHashIntegerMap.put(new MapHash(SGApi.getMultiWorldManager().worldForName(strings[1]), Integer.parseInt(strings[0])), Integer.parseInt(strings[2]));
 		}
-		return null;
+		return mapHashIntegerMap;
 	}
 
 	@Override
@@ -110,6 +80,11 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 		return cachedArena;
 	}
 
+	@Override
+	public String[] pattern() {
+		return new String[] { "Current-state", "Id", "Lobby", "Current-map", "Voted", "Votes", "Max-players", "Min-players", "Players", "Spectators" };
+	}
+
 	public List<String> serializeMaps() {
 		List<String> list = new ArrayList<>();
 		for (Map.Entry<MapHash, Integer> entry : arena.getVotes().entrySet()) {
@@ -118,12 +93,37 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 		return list;
 	}
 
-	public Map<MapHash, Integer> deserializeMaps(List<String> list) {
-		Map<MapHash, Integer> mapHashIntegerMap = new HashMap<>();
-		for (String s : list) {
-			String[] strings = s.split(":");
-			mapHashIntegerMap.put(new MapHash(SGApi.getMultiWorldManager().worldForName(strings[1]), Integer.parseInt(strings[0])), Integer.parseInt(strings[2]));
+	@Override
+	public Object toFile(int keyPair) {
+		Bukkit.getLogger().info("Attemping to save prop: " + arena.toString() + " with a keypair of " + keyPair);
+		switch (keyPair) {
+		case 0:
+			Bukkit.getLogger().info(arena.getState().getTrueName());
+			return arena.getState().getTrueName();
+		case 1:
+			Bukkit.getLogger().info(arena.getId() + "");
+			return arena.getId();
+		case 2:
+			Bukkit.getLogger().info(SGApi.getArenaManager().serializeLoc(arena.getLobby()));
+			return SGApi.getArenaManager().serializeLoc(arena.getLobby());
+		case 3:
+			if (arena.getCurrentMap() == null) {
+				return "NOT_ACTIVE";
+			}
+			return arena.getCurrentMap().getName();
+		case 4:
+			return arena.getVoted();
+		case 5:
+			return serializeMaps();
+		case 6:
+			return arena.getMaxPlayers();
+		case 7:
+			return arena.getMinPlayers();
+		case 8:
+			return arena.getPlayers();
+		case 9:
+			return arena.getSpectators();
 		}
-		return mapHashIntegerMap;
+		return null;
 	}
 }

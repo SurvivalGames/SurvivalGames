@@ -17,6 +17,15 @@ import co.q64.paradisesurvivalgames.managers.SGApi;
 public class ItemDropListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
+	public void onCreative(InventoryCreativeEvent event) {
+		try {
+			Player p = (Player) event.getWhoClicked();
+			if (SGApi.getArenaManager().getArena(p).getSpectators().contains(p.getName()))
+				event.setCancelled(true);
+		} catch (ArenaNotFoundException ignored) {}
+	}
+
+	@EventHandler(priority = EventPriority.HIGH)
 	public void onItemDrop(PlayerDropItemEvent event) {
 		if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
 			event.setCancelled(true);
@@ -36,15 +45,6 @@ public class ItemDropListener implements Listener {
 	public void onItemPickup(PlayerPickupItemEvent event) {
 		try {
 			if (SGApi.getArenaManager().getArena(event.getPlayer()).getSpectators().contains(event.getPlayer().getName()))
-				event.setCancelled(true);
-		} catch (ArenaNotFoundException ignored) {}
-	}
-
-	@EventHandler(priority = EventPriority.HIGH)
-	public void onCreative(InventoryCreativeEvent event) {
-		try {
-			Player p = (Player) event.getWhoClicked();
-			if (SGApi.getArenaManager().getArena(p).getSpectators().contains(p.getName()))
 				event.setCancelled(true);
 		} catch (ArenaNotFoundException ignored) {}
 	}

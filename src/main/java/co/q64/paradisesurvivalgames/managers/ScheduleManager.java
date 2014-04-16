@@ -18,11 +18,11 @@ import java.util.concurrent.ScheduledExecutorService;
  */
 public class ScheduleManager {
 
-	private int schedNumThreads;
-	private int repeatingThreads;
-	private int loginNumThreads;
-	private ScheduledExecutorService scheduler;
 	private ExecutorService executor;
+	private int loginNumThreads;
+	private int repeatingThreads;
+	private int schedNumThreads;
+	private ScheduledExecutorService scheduler;
 
 	/**
 	 * Instantiates a new Schedule manager.
@@ -32,79 +32,6 @@ public class ScheduleManager {
 		schedNumThreads = 2;
 		scheduler = Executors.newScheduledThreadPool(schedNumThreads);
 		startExecutor();
-	}
-
-	private void startExecutor() {
-		if (executor == null || executor.isShutdown()) {
-			executor = Executors.newFixedThreadPool(2);
-			System.out.println("Fixed Executor Starting");
-		}
-	}
-
-	/**
-	 * Gets sched num threads.
-	 *
-	 * @return the sched num threads
-	 */
-	public int getSchedNumThreads() {
-		return schedNumThreads;
-	}
-
-	/**
-	 * Sets sched num threads.
-	 *
-	 * @param schedNumThreads the sched num threads
-	 */
-	public void setSchedNumThreads(int schedNumThreads) {
-		this.schedNumThreads = schedNumThreads;
-	}
-
-	/**
-	 * Gets login num threads.
-	 *
-	 * @return the login num threads
-	 */
-	public int getLoginNumThreads() {
-		return loginNumThreads;
-	}
-
-	/**
-	 * Sets login num threads.
-	 *
-	 * @param loginNumThreads the login num threads
-	 */
-	public void setLoginNumThreads(int loginNumThreads) {
-		this.loginNumThreads = loginNumThreads;
-	}
-
-	/**
-	 * Gets repeating threads.
-	 *
-	 * @return the repeating threads
-	 */
-	public int getRepeatingThreads() {
-		return repeatingThreads;
-	}
-
-	/**
-	 * Sets repeating threads.
-	 *
-	 * @param repeatingThreads the repeating threads
-	 */
-	public void setRepeatingThreads(int repeatingThreads) {
-		this.repeatingThreads = repeatingThreads;
-	}
-
-	/**
-	 * Get Scheduler for repeating tasks
-	 * {@link java.util.concurrent.ScheduledExecutorService}
-	 * <p>
-	 * details can be found here
-	 *
-	 * @return the scheduled executor service
-	 */
-	public ScheduledExecutorService getScheduler() {
-		return scheduler;
 	}
 
 	/**
@@ -117,19 +44,42 @@ public class ScheduleManager {
 	}
 
 	/**
-	 * Shutdown all thread pools and services
+	 * Gets login num threads.
+	 *
+	 * @return the login num threads
 	 */
-	public void shutdownAll() {
+	public int getLoginNumThreads() {
+		return loginNumThreads;
+	}
 
-		this.executor.shutdown();
-		if (!this.scheduler.isShutdown()) {
-			this.scheduler.shutdown();
-		}
-		if (!this.executor.isShutdown()) {
-			this.executor.shutdown();
-		}
+	/**
+	 * Gets repeating threads.
+	 *
+	 * @return the repeating threads
+	 */
+	public int getRepeatingThreads() {
+		return repeatingThreads;
+	}
 
-		SGApi.getPlugin().getLogger().info("All threads have been successfully shutdown");
+	/**
+	 * Gets sched num threads.
+	 *
+	 * @return the sched num threads
+	 */
+	public int getSchedNumThreads() {
+		return schedNumThreads;
+	}
+
+	/**
+	 * Get Scheduler for repeating tasks
+	 * {@link java.util.concurrent.ScheduledExecutorService}
+	 * <p>
+	 * details can be found here
+	 *
+	 * @return the scheduled executor service
+	 */
+	public ScheduledExecutorService getScheduler() {
+		return scheduler;
 	}
 
 	/**
@@ -178,5 +128,55 @@ public class ScheduleManager {
 		this.startExecutor();
 
 		executor.execute(runnable);
+	}
+
+	/**
+	 * Sets login num threads.
+	 *
+	 * @param loginNumThreads the login num threads
+	 */
+	public void setLoginNumThreads(int loginNumThreads) {
+		this.loginNumThreads = loginNumThreads;
+	}
+
+	/**
+	 * Sets repeating threads.
+	 *
+	 * @param repeatingThreads the repeating threads
+	 */
+	public void setRepeatingThreads(int repeatingThreads) {
+		this.repeatingThreads = repeatingThreads;
+	}
+
+	/**
+	 * Sets sched num threads.
+	 *
+	 * @param schedNumThreads the sched num threads
+	 */
+	public void setSchedNumThreads(int schedNumThreads) {
+		this.schedNumThreads = schedNumThreads;
+	}
+
+	/**
+	 * Shutdown all thread pools and services
+	 */
+	public void shutdownAll() {
+
+		this.executor.shutdown();
+		if (!this.scheduler.isShutdown()) {
+			this.scheduler.shutdown();
+		}
+		if (!this.executor.isShutdown()) {
+			this.executor.shutdown();
+		}
+
+		SGApi.getPlugin().getLogger().info("All threads have been successfully shutdown");
+	}
+
+	private void startExecutor() {
+		if (executor == null || executor.isShutdown()) {
+			executor = Executors.newFixedThreadPool(2);
+			System.out.println("Fixed Executor Starting");
+		}
 	}
 }

@@ -14,33 +14,12 @@ import org.java_websocket.server.WebSocketServer;
 public class WebsocketServer extends WebSocketServer {
 	public static WebsocketServer s;
 
-	public WebsocketServer(int port) throws UnknownHostException {
-		super(new InetSocketAddress(port));
-	}
-
 	public WebsocketServer(InetSocketAddress address) {
 		super(address);
 	}
 
-	@Override
-	public void onOpen(WebSocket conn, ClientHandshake handshake) {
-		WebsocketSessionManager.getSessionManager().openSession(conn.getRemoteSocketAddress().getAddress().getHostAddress());
-		Bukkit.getLogger().info(conn.getRemoteSocketAddress().getAddress().getHostName() + " has connected to the " + "Websocket server!");
-	}
-
-	@Override
-	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-		WebsocketSessionManager.getSessionManager().endSession(conn.getRemoteSocketAddress().getAddress().getHostAddress());
-		Bukkit.getLogger().info(conn + " has disconnected form the Websocket server");
-	}
-
-	@Override
-	public void onMessage(WebSocket conn, String message) {
-		Bukkit.getLogger().info("Recieve Websocket packet - " + conn + ":" + message);
-		if (message.split(":")[0].equalsIgnoreCase("name")) {
-			WebsocketSessionManager.getSessionManager().addSessionUsername(conn.getRemoteSocketAddress().getAddress().getHostAddress(), message.split(":")[1]);
-			SendWebsocketData.updateArenaStatusForPlayer(Bukkit.getPlayer(message.split(":")[1]));
-		}
+	public WebsocketServer(int port) throws UnknownHostException {
+		super(new InetSocketAddress(port));
 	}
 
 	public static void runServer() throws InterruptedException, IOException {
@@ -52,6 +31,12 @@ public class WebsocketServer extends WebSocketServer {
 	}
 
 	@Override
+	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
+		WebsocketSessionManager.getSessionManager().endSession(conn.getRemoteSocketAddress().getAddress().getHostAddress());
+		Bukkit.getLogger().info(conn + " has disconnected form the Websocket server");
+	}
+
+	@Override
 	public void onError(WebSocket conn, Exception ex) {
 		ex.printStackTrace();
 		if (conn != null) {
@@ -59,13 +44,19 @@ public class WebsocketServer extends WebSocketServer {
 		}
 	}
 
-	public void sendToAll(String data) {
-		Collection<WebSocket> con = connections();
-		synchronized (con) {
-			for (WebSocket c : con) {
-				c.send(data);
-			}
+	@Override
+	public void onMessage(WebSocket conn, String message) {
+		Bukkit.getLogger().info("Recieve Websocket packet - " + conn + ":" + message);
+		if (message.split(":")[0].equalsIgnoreCase("name")) {
+			WebsocketSessionManager.getSessionManager().addSessionUsername(conn.getRemoteSocketAddress().getAddress().getHostAddress(), message.split(":")[1]);
+			SendWebsocketData.updateArenaStatusForPlayer(Bukkit.getPlayer(message.split(":")[1]));
 		}
+	}
+
+	@Override
+	public void onOpen(WebSocket conn, ClientHandshake handshake) {
+		WebsocketSessionManager.getSessionManager().openSession(conn.getRemoteSocketAddress().getAddress().getHostAddress());
+		Bukkit.getLogger().info(conn.getRemoteSocketAddress().getAddress().getHostName() + " has connected to the " + "Websocket server!");
 	}
 
 	public void sendData(WebsocketSession session, String data) {
@@ -78,6 +69,15 @@ public class WebsocketServer extends WebSocketServer {
 					Bukkit.getLogger().info("Send data packet: " + data);
 					c.send(data);
 				}
+			}
+		}
+	}
+
+	public void sendToAll(String data) {
+		Collection<WebSocket> con = connections();
+		synchronized (con) {
+			for (WebSocket c : con) {
+				c.send(data);
 			}
 		}
 	}

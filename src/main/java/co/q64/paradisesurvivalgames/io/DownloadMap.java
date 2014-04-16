@@ -18,14 +18,14 @@ import co.q64.paradisesurvivalgames.managers.SGApi;
 import co.q64.paradisesurvivalgames.multiworld.SGWorld;
 
 public class DownloadMap {
-	Player sender;
-	String jobName = null;
 	URL dl = null;
 	File fl = null;
-	String x = null;
-	OutputStream os = null;
 	InputStream is = null;
+	String jobName = null;
+	OutputStream os = null;
 	ProgressListener progressListener;
+	Player sender;
+	String x = null;
 
 	public DownloadMap(Player p, String name) {
 		sender = p;

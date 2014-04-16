@@ -24,6 +24,10 @@ public class MoveListener implements Listener {
 
 	private static final List<String> list = new ArrayList<>();
 
+	public static List<String> getPlayers() {
+		return list;
+	}
+
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		Location q = e.getFrom();
@@ -39,10 +43,6 @@ public class MoveListener implements Listener {
 				e.getPlayer().sendMessage(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("NOT_HAPPY"));
 			}
 		} catch (ArenaNotFoundException ignored) {}
-	}
-
-	public static List<String> getPlayers() {
-		return list;
 	}
 
 }

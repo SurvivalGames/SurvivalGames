@@ -27,13 +27,28 @@ import org.bukkit.util.Vector;
 @SerializableAs("SerializedLocation")
 public class SerializedLocation implements ConfigurationSerializable {
 
+	private final float pitch;
+	private final String type;
+	private final String world;
 	private final int x;
 	private final int y;
-	private final int z;
 	private final float yaw;
-	private final float pitch;
-	private final String world;
-	private final String type;
+	private final int z;
+
+	/**
+	 * Instantiates a new Serialized location.
+	 *
+	 * @param location the location
+	 */
+	public SerializedLocation(Location location, LocationType locationType) {
+		this.x = location.getBlockX();
+		this.y = location.getBlockY();
+		this.z = location.getBlockZ();
+		this.world = location.getWorld().getName();
+		this.yaw = location.getYaw();
+		this.pitch = location.getPitch();
+		this.type = locationType.name();
+	}
 
 	/**
 	 * Instantiates a new Serialized location.
@@ -52,21 +67,6 @@ public class SerializedLocation implements ConfigurationSerializable {
 		this.world = world;
 		this.yaw = yaw;
 		this.pitch = pitch;
-		this.type = locationType.name();
-	}
-
-	/**
-	 * Instantiates a new Serialized location.
-	 *
-	 * @param location the location
-	 */
-	public SerializedLocation(Location location, LocationType locationType) {
-		this.x = location.getBlockX();
-		this.y = location.getBlockY();
-		this.z = location.getBlockZ();
-		this.world = location.getWorld().getName();
-		this.yaw = location.getYaw();
-		this.pitch = location.getPitch();
 		this.type = locationType.name();
 	}
 
@@ -100,41 +100,31 @@ public class SerializedLocation implements ConfigurationSerializable {
 	}
 
 	/**
+	 * Get {@link co.q64.paradisesurvivalgames.util.LocationType}
+	 * of this {@link org.bukkit.Location}
+	 *
+	 * @return the location type
+	 */
+	public LocationType getLocationType() {
+		return LocationType.valueOf(this.type);
+	}
+
+	/**
+	 * Gets the pitch to set the {@link org.bukkit.Location} to
+	 *
+	 * @return the pitch as a float
+	 */
+	public float getPitch() {
+		return pitch;
+	}
+
+	/**
 	 * Get the location as a {@link org.bukkit.util.Vector}
 	 *
 	 * @return the vector
 	 */
 	public Vector getVector() {
 		return new Vector(x, y, z);
-	}
-
-	/**
-	 * Serialize map.
-	 *
-	 * <b>This should never be called directly</b>
-	 *
-	 * @return the map ready to be serialised
-	 */
-	@Override
-	public Map<String, Object> serialize() {
-		Map<String, Object> map = new HashMap<>();
-		map.put("world", world);
-		map.put("xpos", x);
-		map.put("ypos", y);
-		map.put("zpos", z);
-		map.put("yawpos", yaw);
-		map.put("pitchpos", pitch);
-		map.put("type", type);
-		return map;
-	}
-
-	/**
-	 * Get the X coordinate of the {@link org.bukkit.Location}
-	 *
-	 * @return the x coordinate as an int
-	 */
-	public int getX() {
-		return x;
 	}
 
 	/**
@@ -147,12 +137,12 @@ public class SerializedLocation implements ConfigurationSerializable {
 	}
 
 	/**
-	 * Get the Z coordinate of the {@link org.bukkit.Location}
+	 * Get the X coordinate of the {@link org.bukkit.Location}
 	 *
-	 * @return the z coordinate as an int
+	 * @return the x coordinate as an int
 	 */
-	public int getZ() {
-		return z;
+	public int getX() {
+		return x;
 	}
 
 	/**
@@ -174,22 +164,32 @@ public class SerializedLocation implements ConfigurationSerializable {
 	}
 
 	/**
-	 * Gets the pitch to set the {@link org.bukkit.Location} to
+	 * Get the Z coordinate of the {@link org.bukkit.Location}
 	 *
-	 * @return the pitch as a float
+	 * @return the z coordinate as an int
 	 */
-	public float getPitch() {
-		return pitch;
+	public int getZ() {
+		return z;
 	}
 
 	/**
-	 * Get {@link co.q64.paradisesurvivalgames.util.LocationType}
-	 * of this {@link org.bukkit.Location}
+	 * Serialize map.
 	 *
-	 * @return the location type
+	 * <b>This should never be called directly</b>
+	 *
+	 * @return the map ready to be serialised
 	 */
-	public LocationType getLocationType() {
-		return LocationType.valueOf(this.type);
+	@Override
+	public Map<String, Object> serialize() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("world", world);
+		map.put("xpos", x);
+		map.put("ypos", y);
+		map.put("zpos", z);
+		map.put("yawpos", yaw);
+		map.put("pitchpos", pitch);
+		map.put("type", type);
+		return map;
 	}
 
 	/**

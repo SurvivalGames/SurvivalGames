@@ -17,11 +17,11 @@ public class Countdown implements Runnable {
 
 	private SGArena a = null;
 	public int amount = 0;
-	public int count = 0;
-	public final String[] s = new String[2];
 	private CodeExecutor ce = null;
-	private int id = 0;
+	public int count = 0;
 	private String data = "null";
+	private int id = 0;
+	public final String[] s = new String[2];
 
 	/**
 	 * Constructs a new countdown for this arena
@@ -52,22 +52,8 @@ public class Countdown implements Runnable {
 		this.data = data;
 	}
 
-	/**
-	 * Sets the id for the runnable to cancel
-	 *
-	 * @param id The return value from starting a new task
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public int getId() {
 		return id;
-	}
-
-	public String timeToString() {
-		int time = count + 1;
-		return time + "";
 	}
 
 	/**
@@ -96,5 +82,19 @@ public class Countdown implements Runnable {
 			return;
 		}
 		a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + (count + 1) + " " + s[1]);
+	}
+
+	/**
+	 * Sets the id for the runnable to cancel
+	 *
+	 * @param id The return value from starting a new task
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String timeToString() {
+		int time = count + 1;
+		return time + "";
 	}
 }

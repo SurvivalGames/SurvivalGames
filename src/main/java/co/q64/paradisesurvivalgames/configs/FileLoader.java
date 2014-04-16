@@ -28,9 +28,9 @@ import co.q64.paradisesurvivalgames.managers.SGApi;
  */
 public class FileLoader {
 
-	public final String n;
 	public File f;
 	public FileConfiguration fc;
+	public final String n;
 
 	/**
 	 * Instantiates a new File using the

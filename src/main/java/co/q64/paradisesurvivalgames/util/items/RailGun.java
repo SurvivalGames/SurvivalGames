@@ -17,8 +17,27 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.BlockIterator;
 
 public class RailGun implements Listener {
-	int timer, id = 0;
+	private final Object[] dataStore = new Object[5];
 	private final Random gen = new Random();
+
+	int timer, id = 0;
+
+	public Set<Block> getLineOfSigt(Player p) {
+		@SuppressWarnings("Convert2Diamond")
+		Set<Block> set = new HashSet<>();
+		Iterator<Block> it = new BlockIterator(p, 100);
+		while (it.hasNext()) {
+			set.add(it.next());
+		}
+		return set;
+	}
+
+	private Method getMethod(Class<?> cl, String method) {
+		for (Method m : cl.getMethods())
+			if (m.getName().equals(method))
+				return m;
+		return null;
+	}
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
@@ -35,8 +54,6 @@ public class RailGun implements Listener {
 			}
 	}
 
-	private final Object[] dataStore = new Object[5];
-
 	void playFirework(Location loc) throws Exception {
 		Firework fw = loc.getWorld().spawn(loc, Firework.class);
 		if (dataStore[0] == null)
@@ -49,22 +66,5 @@ public class RailGun implements Listener {
 			dataStore[1] = getMethod(dataStore[3].getClass(), "addParticle");
 		((Method) dataStore[1]).invoke(dataStore[3], "fireworksSpark", loc.getX(), loc.getY(), loc.getZ(), gen.nextGaussian() * 0.05D, -(loc.getZ() * 1.15D) * 0.5D, gen.nextGaussian() * 0.05D);
 		fw.remove();
-	}
-
-	private Method getMethod(Class<?> cl, String method) {
-		for (Method m : cl.getMethods())
-			if (m.getName().equals(method))
-				return m;
-		return null;
-	}
-
-	public Set<Block> getLineOfSigt(Player p) {
-		@SuppressWarnings("Convert2Diamond")
-		Set<Block> set = new HashSet<>();
-		Iterator<Block> it = new BlockIterator(p, 100);
-		while (it.hasNext()) {
-			set.add(it.next());
-		}
-		return set;
 	}
 }

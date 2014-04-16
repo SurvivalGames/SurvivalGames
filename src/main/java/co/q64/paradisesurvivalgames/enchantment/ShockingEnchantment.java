@@ -8,12 +8,12 @@ public class ShockingEnchantment extends SGEnchantment {
 	}
 
 	@Override
-	public String getName() {
-		return "SHOCKING";
+	public String getLore(int lvl) {
+		return ChatColor.GRAY + "Shocking " + RomanNumeral.convert(lvl);
 	}
 
 	@Override
-	public String getLore(int lvl) {
-		return ChatColor.GRAY + "Shocking " + RomanNumeral.convert(lvl);
+	public String getName() {
+		return "SHOCKING";
 	}
 }

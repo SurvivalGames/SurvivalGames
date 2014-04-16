@@ -34,11 +34,8 @@ package co.q64.paradisesurvivalgames.tracking;
  */
 public class AnalyticsRequestData {
 
-	private String pageTitle = null;
-	private String hostName = null;
-	private String pageURL = null;
-	private String eventCategory = null;
 	private String eventAction = null;
+	private String eventCategory = null;
 	private String eventLabel = null;
 	private Integer eventValue = null;
 	//	utmcsr
@@ -63,64 +60,16 @@ public class AnalyticsRequestData {
 	//utmcsr=rolwheels.com|utmccn=(referral)|utmcmd=referral|utmcct=/rol_dhuez_wheels.php
 	// search:
 	// utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=rol%20wheels
+	private String hostName = null;
+	private String pageTitle = null;
+	private String pageURL = null;
 
+	private String utmccn = "(direct)";
+	private String utmcct = null;
+	private String utmcmd = "(none)";
 	// utmcsr%3D(direct)%7Cutmccn%D(direct)%7utmcmd%3D(none)
 	private String utmcsr = "(direct)";
-	private String utmccn = "(direct)";
 	private String utmctr = null;
-	private String utmcmd = "(none)";
-	private String utmcct = null;
-
-	public void setReferrer(String argSite, String argPage) {
-		utmcmd = "referral";
-		utmcct = argPage;
-		utmccn = "(referral)";
-		utmcsr = argSite;
-		utmctr = null;
-	}
-
-	public void setSearchReferrer(String argSearchSource, String argSearchKeywords) {
-		utmcsr = argSearchSource;
-		utmctr = argSearchKeywords;
-		utmcmd = "organic";
-		utmccn = "(organic)";
-		utmcct = null;
-	}
-
-	/**
-	 * @return the utmcsr
-	 */
-	public String getUtmcsr() {
-		return utmcsr;
-	}
-
-	/**
-	 * @return the utmccn
-	 */
-	public String getUtmccn() {
-		return utmccn;
-	}
-
-	/**
-	 * @return the utmctr
-	 */
-	public String getUtmctr() {
-		return utmctr;
-	}
-
-	/**
-	 * @return the utmcmd
-	 */
-	public String getUtmcmd() {
-		return utmcmd;
-	}
-
-	/**
-	 * @return the utmcct
-	 */
-	public String getUtmcct() {
-		return utmcct;
-	}
 
 	/**
 	 * @return the eventAction
@@ -169,6 +118,41 @@ public class AnalyticsRequestData {
 	 */
 	public String getPageURL() {
 		return pageURL;
+	}
+
+	/**
+	 * @return the utmccn
+	 */
+	public String getUtmccn() {
+		return utmccn;
+	}
+
+	/**
+	 * @return the utmcct
+	 */
+	public String getUtmcct() {
+		return utmcct;
+	}
+
+	/**
+	 * @return the utmcmd
+	 */
+	public String getUtmcmd() {
+		return utmcmd;
+	}
+
+	/**
+	 * @return the utmcsr
+	 */
+	public String getUtmcsr() {
+		return utmcsr;
+	}
+
+	/**
+	 * @return the utmctr
+	 */
+	public String getUtmctr() {
+		return utmctr;
 	}
 
 	/**
@@ -239,5 +223,21 @@ public class AnalyticsRequestData {
 	 */
 	public void setPageURL(String argPageURL) {
 		pageURL = argPageURL;
+	}
+
+	public void setReferrer(String argSite, String argPage) {
+		utmcmd = "referral";
+		utmcct = argPage;
+		utmccn = "(referral)";
+		utmcsr = argSite;
+		utmctr = null;
+	}
+
+	public void setSearchReferrer(String argSearchSource, String argSearchKeywords) {
+		utmcsr = argSearchSource;
+		utmctr = argSearchKeywords;
+		utmcmd = "organic";
+		utmccn = "(organic)";
+		utmcct = null;
 	}
 }

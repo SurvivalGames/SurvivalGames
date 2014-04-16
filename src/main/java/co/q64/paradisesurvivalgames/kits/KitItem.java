@@ -19,6 +19,10 @@ public class KitItem implements ConfigurationSerializable {
 	public KitItem() {
 	}
 
+	protected KitItem(ItemStack it) {
+		this.item = it;
+	}
+
 	public KitItem(Material type) {
 
 		//This will return the correct ItemMeta for the Material specified
@@ -31,12 +35,18 @@ public class KitItem implements ConfigurationSerializable {
 		item.setItemMeta(Bukkit.getItemFactory().getItemMeta(type));
 	}
 
-	protected KitItem(ItemStack it) {
-		this.item = it;
+	/**
+	 * Deserialize kit item.
+	 *
+	 * @param map the map
+	 * @return the kit item
+	 */
+	public static KitItem deserialize(Map<String, Object> map) {
+		return new KitItem((ItemStack) map.get("stack"));
 	}
 
-	public ItemStack getItem() {
-		return item;
+	public void addEnchantment(Enchantment e) {
+		item.getItemMeta().addEnchant(e, 1, true);
 	}
 
 	public void addEnchantment(Enchantment e, int level) {
@@ -46,38 +56,12 @@ public class KitItem implements ConfigurationSerializable {
 
 	}
 
-	public void addEnchantment(Enchantment e) {
-		item.getItemMeta().addEnchant(e, 1, true);
-	}
-
-	public void addEnchantment(String e, int level) {
-		item.getItemMeta().addEnchant(Enchantment.getByName(e), level, true);
-	}
-
 	public void addEnchantment(String e) {
 		item.getItemMeta().addEnchant(Enchantment.getByName(e), 1, true);
 	}
 
-	public void setLore(String s) {
-
-		//Very wasteful Lore is already a In built list again its Chaining
-		item.getItemMeta().getLore().add(ChatCode(s));
-	}
-
-	public void setLore(List<String> s) {
-
-		//Again not need lore Type even is a List<String>
-		//Also unless its your intention this overrides any single entries
-		for (String string : s)
-			item.getItemMeta().getLore().add(ChatCode(string));
-	}
-
-	public void setDisplayName(String s) {
-		item.getItemMeta().setDisplayName(ChatCode(s));
-	}
-
-	public void setItem(ItemStack item) {
-		this.item = item;
+	public void addEnchantment(String e, int level) {
+		item.getItemMeta().addEnchant(Enchantment.getByName(e), level, true);
 	}
 
 	/**
@@ -92,14 +76,8 @@ public class KitItem implements ConfigurationSerializable {
 		return ChatColor.translateAlternateColorCodes('&', s);
 	}
 
-	/**
-	 * Deserialize kit item.
-	 *
-	 * @param map the map
-	 * @return the kit item
-	 */
-	public static KitItem deserialize(Map<String, Object> map) {
-		return new KitItem((ItemStack) map.get("stack"));
+	public ItemStack getItem() {
+		return item;
 	}
 
 	@Override
@@ -107,5 +85,27 @@ public class KitItem implements ConfigurationSerializable {
 		Map<String, Object> map = new HashMap<>(1);
 		map.put("stack", this.item);
 		return map;
+	}
+
+	public void setDisplayName(String s) {
+		item.getItemMeta().setDisplayName(ChatCode(s));
+	}
+
+	public void setItem(ItemStack item) {
+		this.item = item;
+	}
+
+	public void setLore(List<String> s) {
+
+		//Again not need lore Type even is a List<String>
+		//Also unless its your intention this overrides any single entries
+		for (String string : s)
+			item.getItemMeta().getLore().add(ChatCode(string));
+	}
+
+	public void setLore(String s) {
+
+		//Very wasteful Lore is already a In built list again its Chaining
+		item.getItemMeta().getLore().add(ChatCode(s));
 	}
 }

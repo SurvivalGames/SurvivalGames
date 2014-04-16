@@ -12,8 +12,8 @@ import co.q64.paradisesurvivalgames.configs.FileLoader;
 
 public class WorldDefaults {
 
-	FileLoader configy;
 	FileConfiguration config;
+	FileLoader configy;
 
 	public WorldDefaults(String name) {
 		configy = new FileLoader("worldSettings");

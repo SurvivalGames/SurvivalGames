@@ -24,6 +24,10 @@ public class SGEnchantment extends Enchantment {
 		return EnchantmentTarget.ALL;
 	}
 
+	public String getLore(int lvl) {
+		return "null";
+	}
+
 	@Override
 	public int getMaxLevel() {
 		return 1;
@@ -37,9 +41,5 @@ public class SGEnchantment extends Enchantment {
 	@Override
 	public int getStartLevel() {
 		return 1;
-	}
-
-	public String getLore(int lvl) {
-		return "null";
 	}
 }

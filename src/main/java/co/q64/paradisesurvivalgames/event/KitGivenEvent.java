@@ -8,8 +8,8 @@ import co.q64.paradisesurvivalgames.kits.Kit;
 
 public final class KitGivenEvent extends Event {
 	private static final HandlerList handlers = new HandlerList();
-	Player player;
 	Kit kit;
+	Player player;
 
 	/**
 	 * Constructs a new KitGivenEvent
@@ -20,24 +20,6 @@ public final class KitGivenEvent extends Event {
 	public KitGivenEvent(Player player, Kit kit) {
 		this.player = player;
 		this.kit = kit;
-	}
-
-	/**
-	 * Gets the kit that was given to the player
-	 *
-	 * @return the kit given
-	 */
-	public Kit getKit() {
-		return kit;
-	}
-
-	/**
-	 * Gets the player that recieved the kit
-	 *
-	 * @return the player that recieved the kit
-	 */
-	public Player getPlayer() {
-		return player;
 	}
 
 	/**
@@ -57,5 +39,23 @@ public final class KitGivenEvent extends Event {
 	@Override
 	public HandlerList getHandlers() {
 		return handlers;
+	}
+
+	/**
+	 * Gets the kit that was given to the player
+	 *
+	 * @return the kit given
+	 */
+	public Kit getKit() {
+		return kit;
+	}
+
+	/**
+	 * Gets the player that recieved the kit
+	 *
+	 * @return the player that recieved the kit
+	 */
+	public Player getPlayer() {
+		return player;
 	}
 }

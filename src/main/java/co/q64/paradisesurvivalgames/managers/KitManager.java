@@ -30,6 +30,48 @@ public class KitManager {
 	private List<IconMenu> menus = new ArrayList<IconMenu>();
 	private Map<String, Kit> playerKits = new HashMap<String, Kit>();
 
+	public void displayDefaultKitSelectionMenu(Player p) {
+		menus.get(0).open(p);
+	}
+
+	public void displayKitSelectionMenu(final Player p, final int i) {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+			@Override
+			public void run() {
+				menus.get(i).open(p);
+
+			}
+		}, 2L);
+	}
+
+	public Kit getKit(Player p) {
+		return playerKits.get(p.getName());
+	}
+
+	public Kit getKit(String name) {
+		for (Kit k : kits) {
+			if (k.getName().equalsIgnoreCase(name))
+				return k;
+		}
+		return kits.get(0);
+	}
+
+	public List<Kit> getKits() {
+		return kits;
+	}
+
+	public void giveKit(Player p) {
+		Kit kit = playerKits.get(p.getName());
+		if (kit == null) {
+			p.sendMessage(ChatColor.RED + "You did not select a kit so no kit will be given to you.");
+			return;
+		}
+		p.sendMessage(ChatColor.GOLD + "You got your kit!");
+		for (KitItem item : kit.getItems()) {
+			p.getInventory().addItem(item.getItem());
+		}
+	}
+
 	public void loadKits() {
 
 		saveDefaultKits();
@@ -161,51 +203,9 @@ public class KitManager {
 		SGApi.getPlugin().saveResource("kits/kit_zelda.yml", true);
 	}
 
-	public Kit getKit(String name) {
-		for (Kit k : kits) {
-			if (k.getName().equalsIgnoreCase(name))
-				return k;
-		}
-		return kits.get(0);
-	}
-
-	public Kit getKit(Player p) {
-		return playerKits.get(p.getName());
-	}
-
-	public List<Kit> getKits() {
-		return kits;
-	}
-
-	public void displayDefaultKitSelectionMenu(Player p) {
-		menus.get(0).open(p);
-	}
-
-	public void displayKitSelectionMenu(final Player p, final int i) {
-		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
-			@Override
-			public void run() {
-				menus.get(i).open(p);
-
-			}
-		}, 2L);
-	}
-
 	public void setPlayerKit(Player player, Kit kit) {
 		Bukkit.getServer().getPluginManager().callEvent(new KitGivenEvent(player, kit));
 		playerKits.put(player.getName(), kit);
-	}
-
-	public void giveKit(Player p) {
-		Kit kit = playerKits.get(p.getName());
-		if (kit == null) {
-			p.sendMessage(ChatColor.RED + "You did not select a kit so no kit will be given to you.");
-			return;
-		}
-		p.sendMessage(ChatColor.GOLD + "You got your kit!");
-		for (KitItem item : kit.getItems()) {
-			p.getInventory().addItem(item.getItem());
-		}
 	}
 
 }

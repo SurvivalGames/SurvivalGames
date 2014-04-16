@@ -33,18 +33,18 @@ public class SGApi {
 
 	private static ArenaManager arenaManager;
 	private static BonusManager bonusManager;
+	private static Map<SGArena, BountyManager> bountyManager = new HashMap<>();
+	private static ChestManager chestManager;
+	private static EnchantmentManager enchantmentManager;
 	private static KitManager kitManager;
 	private static MultiWorldManager multiWorldManager;
-	private static Map<SGArena, TimeManager> timeManager = new HashMap<>();
-	private static Map<SGArena, BountyManager> bountyManager = new HashMap<>();
 	private static PartyManager partyManager;
 	private static TheSurvivalGames plugin;
-	private static ScheduleManager scheduler;
-	private static EnchantmentManager enchantmentManager;
-	private static Map<SGArena, SponsorManager> sponsorManager = new HashMap<>();
 	private static RollbackManager rollbackManager;
-	private static ChestManager chestManager;
+	private static ScheduleManager scheduler;
 	private static SignManager signManager;
+	private static Map<SGArena, SponsorManager> sponsorManager = new HashMap<>();
+	private static Map<SGArena, TimeManager> timeManager = new HashMap<>();
 
 	/**
 	 * Gets arena manager.
@@ -66,6 +66,30 @@ public class SGApi {
 		if (bonusManager == null)
 			bonusManager = new BonusManager();
 		return bonusManager;
+	}
+
+	/**
+	 * Gets Bounty manager.
+	 *
+	 * @return the bounty manager
+	 */
+	public static BountyManager getBountyManager(SGArena a) {
+		BountyManager manager = bountyManager.get(a);
+		if (manager == null)
+			bountyManager.put(a, new BountyManager(a));
+		return bountyManager.get(a);
+	}
+
+	public static ChestManager getChestManager() {
+		if (chestManager == null)
+			chestManager = new ChestManager();
+		return chestManager;
+	}
+
+	public static EnchantmentManager getEnchantmentManager() {
+		if (enchantmentManager == null)
+			enchantmentManager = new EnchantmentManager();
+		return enchantmentManager;
 	}
 
 	/**
@@ -91,6 +115,33 @@ public class SGApi {
 	}
 
 	/**
+	 * Gets party manager.
+	 *
+	 * @return the party manager
+	 */
+	public static PartyManager getPartyManager() {
+		if (partyManager == null)
+			partyManager = new PartyManager();
+		return partyManager;
+	}
+
+	/**
+	 * Gets Main plugin.
+	 *
+	 * @return the plugin
+	 */
+	public static TheSurvivalGames getPlugin() {
+		return plugin;
+
+	}
+
+	public static RollbackManager getRollbackManager() {
+		if (rollbackManager == null)
+			rollbackManager = new RollbackManager();
+		return rollbackManager;
+	}
+
+	/**
 	 * Get MultiThread Manager
 	 *
 	 * @return the schedule manager
@@ -99,6 +150,22 @@ public class SGApi {
 		if (scheduler == null)
 			scheduler = new ScheduleManager();
 		return scheduler;
+	}
+
+	public static SignManager getSignManager() {
+		if (signManager == null)
+			signManager = new SignManager();
+		return signManager;
+	}
+
+	public static SponsorManager getSponsorManager(SGArena a) {
+		SponsorManager manager = sponsorManager.get(a);
+		if (manager == null) {
+			SponsorManager s = new SponsorManager(a);
+			sponsorManager.put(a, s);
+
+		}
+		return sponsorManager.get(a);
 	}
 
 	/**
@@ -114,79 +181,12 @@ public class SGApi {
 	}
 
 	/**
-	 * Gets Bounty manager.
-	 *
-	 * @return the bounty manager
-	 */
-	public static BountyManager getBountyManager(SGArena a) {
-		BountyManager manager = bountyManager.get(a);
-		if (manager == null)
-			bountyManager.put(a, new BountyManager(a));
-		return bountyManager.get(a);
-	}
-
-	public static EnchantmentManager getEnchantmentManager() {
-		if (enchantmentManager == null)
-			enchantmentManager = new EnchantmentManager();
-		return enchantmentManager;
-	}
-
-	/**
-	 * Gets party manager.
-	 *
-	 * @return the party manager
-	 */
-	public static PartyManager getPartyManager() {
-		if (partyManager == null)
-			partyManager = new PartyManager();
-		return partyManager;
-	}
-
-	public static SponsorManager getSponsorManager(SGArena a) {
-		SponsorManager manager = sponsorManager.get(a);
-		if (manager == null) {
-			SponsorManager s = new SponsorManager(a);
-			sponsorManager.put(a, s);
-
-		}
-		return sponsorManager.get(a);
-	}
-
-	public static RollbackManager getRollbackManager() {
-		if (rollbackManager == null)
-			rollbackManager = new RollbackManager();
-		return rollbackManager;
-	}
-
-	public static ChestManager getChestManager() {
-		if (chestManager == null)
-			chestManager = new ChestManager();
-		return chestManager;
-	}
-
-	public static SignManager getSignManager() {
-		if (signManager == null)
-			signManager = new SignManager();
-		return signManager;
-	}
-
-	/**
 	 * Used to create an instance of the main plugin in onEnable
 	 *
 	 * @param survivalGames the survival games
 	 */
 	public static void init(TheSurvivalGames survivalGames) {
 		plugin = survivalGames;
-	}
-
-	/**
-	 * Gets Main plugin.
-	 *
-	 * @return the plugin
-	 */
-	public static TheSurvivalGames getPlugin() {
-		return plugin;
-
 	}
 
 }

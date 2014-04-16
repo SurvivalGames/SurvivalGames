@@ -3,10 +3,10 @@ package co.q64.paradisesurvivalgames.rollback;
 import org.bukkit.Material;
 
 public class ChangedBlock {
-	private String world;
-	private Material premat;
 	private Material newmat;
+	private Material premat;
 	private byte prevdata, newdata;
+	private String world;
 	private int x, y, z;
 
 	/**
@@ -27,24 +27,24 @@ public class ChangedBlock {
 		this.z = z;
 	}
 
-	public String getWorld() {
-		return world;
+	public byte getNewdata() {
+		return newdata;
+	}
+
+	public Material getNewid() {
+		return newmat;
 	}
 
 	public byte getPrevdata() {
 		return prevdata;
 	}
 
-	public byte getNewdata() {
-		return newdata;
-	}
-
 	public Material getPrevid() {
 		return premat;
 	}
 
-	public Material getNewid() {
-		return newmat;
+	public String getWorld() {
+		return world;
 	}
 
 	public int getX() {

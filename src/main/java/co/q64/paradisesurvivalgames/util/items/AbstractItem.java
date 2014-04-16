@@ -19,27 +19,22 @@ import co.q64.paradisesurvivalgames.util.items.interfaces.ILore;
 
 public abstract class AbstractItem implements IDisplayName, ILore, IEnhanceable {
 
-	private ItemStack item;
-	private Material material;
-	private ItemMeta meta;
 	private String displayName;
 	private List<Enchantment> enchantments;
 	private Integer Id;
+	private ItemStack item;
+	private Material material;
+	private ItemMeta meta;
 	private String permission;
 
-	public abstract void setPermission(String s);
-
-	public abstract String getPermission();
-
 	/**
-	 * Gets item meta.
+	 * Add line.
 	 *
-	 * @param material the material
-	 * @return the ItemMeta related to the material
+	 * @param line the line
 	 */
 	@Override
-	public ItemMeta getItemMeta(Material material) {
-		return null;
+	public void addLoreLine(String line) {
+
 	}
 
 	/**
@@ -53,22 +48,23 @@ public abstract class AbstractItem implements IDisplayName, ILore, IEnhanceable 
 	}
 
 	/**
-	 * Sets display name.
-	 *
-	 * @param name the name
-	 */
-	@Override
-	public void setDisplayName(String name) {
-
-	}
-
-	/**
 	 * Gets enchants.
 	 *
 	 * @return the enchants
 	 */
 	@Override
 	public List<Enchantment> getEnchants() {
+		return null;
+	}
+
+	/**
+	 * Gets item meta.
+	 *
+	 * @param material the material
+	 * @return the ItemMeta related to the material
+	 */
+	@Override
+	public ItemMeta getItemMeta(Material material) {
 		return null;
 	}
 
@@ -82,13 +78,17 @@ public abstract class AbstractItem implements IDisplayName, ILore, IEnhanceable 
 		return null;
 	}
 
+	public abstract String getPermission();
+
 	/**
-	 * Add line.
+	 * Sets display name.
 	 *
-	 * @param line the line
+	 * @param name the name
 	 */
 	@Override
-	public void addLoreLine(String line) {
+	public void setDisplayName(String name) {
 
 	}
+
+	public abstract void setPermission(String s);
 }

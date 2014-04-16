@@ -19,6 +19,10 @@ public class SafeEntityListener implements Listener {
 
 	private static final List<String> safe = new ArrayList<>();
 
+	public static List<String> getPlayers() {
+		return safe;
+	}
+
 	@EventHandler
 	public void onDamage(EntityDamageEvent e) {
 		if (e.getEntity() instanceof Player) {
@@ -26,10 +30,6 @@ public class SafeEntityListener implements Listener {
 				e.setCancelled(true);
 			}
 		}
-	}
-
-	public static List<String> getPlayers() {
-		return safe;
 	}
 
 }

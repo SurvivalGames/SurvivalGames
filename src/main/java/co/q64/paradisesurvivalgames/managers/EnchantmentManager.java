@@ -18,58 +18,41 @@ import co.q64.paradisesurvivalgames.enchantment.UnenchantableEnchantment;
 
 public class EnchantmentManager {
 
-	private static ShockingEnchantment shocking = new ShockingEnchantment(120);
-	private static UnenchantableEnchantment unenchantable = new UnenchantableEnchantment(121);
 	private static DedicationEnchantment dedication = new DedicationEnchantment(122);
+	private static ShockingEnchantment shocking = new ShockingEnchantment(120);
 	private static UndroppableEnchantment undroppable = new UndroppableEnchantment(123);
-
-	public static ShockingEnchantment getShocking() {
-		return shocking;
-	}
-
-	public static void setShocking(final ShockingEnchantment shocking) {
-		EnchantmentManager.shocking = shocking;
-	}
-
-	public static UnenchantableEnchantment getUnenchantable() {
-		return unenchantable;
-	}
-
-	public static void setUnenchantable(final UnenchantableEnchantment unenchantable) {
-		EnchantmentManager.unenchantable = unenchantable;
-	}
+	private static UnenchantableEnchantment unenchantable = new UnenchantableEnchantment(121);
 
 	public static DedicationEnchantment getDedication() {
 		return dedication;
 	}
 
-	public static void setDedication(final DedicationEnchantment dedication) {
-		EnchantmentManager.dedication = dedication;
+	public static ShockingEnchantment getShocking() {
+		return shocking;
 	}
 
 	public static UndroppableEnchantment getUndroppable() {
 		return undroppable;
 	}
 
+	public static UnenchantableEnchantment getUnenchantable() {
+		return unenchantable;
+	}
+
+	public static void setDedication(final DedicationEnchantment dedication) {
+		EnchantmentManager.dedication = dedication;
+	}
+
+	public static void setShocking(final ShockingEnchantment shocking) {
+		EnchantmentManager.shocking = shocking;
+	}
+
 	public static void setUndroppable(final UndroppableEnchantment undroppable) {
 		EnchantmentManager.undroppable = undroppable;
 	}
 
-	public void registerAll() {
-		try {
-			Field f = Enchantment.class.getDeclaredField("acceptingNew");
-			f.setAccessible(true);
-			f.set(null, true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		if (Enchantment.getByName("SHOCKING") != null)
-			return;
-		Enchantment.registerEnchantment(getShocking());
-		Enchantment.registerEnchantment(getUnenchantable());
-		Enchantment.registerEnchantment(getDedication());
-		Enchantment.registerEnchantment(getUndroppable());
+	public static void setUnenchantable(final UnenchantableEnchantment unenchantable) {
+		EnchantmentManager.unenchantable = unenchantable;
 	}
 
 	public void enchantItemSG(EnchantItemEvent e) {
@@ -128,5 +111,22 @@ public class EnchantmentManager {
 		itemMeta.addEnchant(enchantment, 1, true);
 		itemStack.setItemMeta(itemMeta);
 		return itemStack;
+	}
+
+	public void registerAll() {
+		try {
+			Field f = Enchantment.class.getDeclaredField("acceptingNew");
+			f.setAccessible(true);
+			f.set(null, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (Enchantment.getByName("SHOCKING") != null)
+			return;
+		Enchantment.registerEnchantment(getShocking());
+		Enchantment.registerEnchantment(getUnenchantable());
+		Enchantment.registerEnchantment(getDedication());
+		Enchantment.registerEnchantment(getUndroppable());
 	}
 }

@@ -34,9 +34,12 @@ package co.q64.paradisesurvivalgames.tracking;
 public interface IGoogleAnalyticsURLBuilder {
 
 	/**
-	 * Reset the session cookie.
+	 * Build the url request from the data.
+	 *
+	 * @param requestData
+	 * @return
 	 */
-	public void resetSession();
+	public String buildURL(AnalyticsRequestData requestData);
 
 	/**
 	 * Gets the version for this builder.
@@ -46,10 +49,7 @@ public interface IGoogleAnalyticsURLBuilder {
 	public String getGoogleAnalyticsVersion();
 
 	/**
-	 * Build the url request from the data.
-	 *
-	 * @param requestData
-	 * @return
+	 * Reset the session cookie.
 	 */
-	public String buildURL(AnalyticsRequestData requestData);
+	public void resetSession();
 }

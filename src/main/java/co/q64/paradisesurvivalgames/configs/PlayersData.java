@@ -14,6 +14,11 @@ import org.bukkit.configuration.serialization.SerializableAs;
 @SerializableAs("PlayersData")
 public class PlayersData implements ConfigurationSerializable {
 
+	public static PlayersData deserialize(Map<String, Object> map) {
+
+		return new PlayersData();
+	}
+
 	/**
 	 * Creates a Map representation of this class.
 	 * <p/>
@@ -26,10 +31,5 @@ public class PlayersData implements ConfigurationSerializable {
 	@Override
 	public Map<String, Object> serialize() {
 		return null;
-	}
-
-	public static PlayersData deserialize(Map<String, Object> map) {
-
-		return new PlayersData();
 	}
 }

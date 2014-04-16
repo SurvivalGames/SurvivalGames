@@ -17,12 +17,48 @@ import co.q64.paradisesurvivalgames.util.ItemSerialization;
 
 public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
 
+	public ManagerConfigTemplate() {
+		super("ArenaManager.yml");
+	}
+
 	public ManagerConfigTemplate(File file) {
 		super(file);
 	}
 
-	public ManagerConfigTemplate() {
-		super("ArenaManager.yml");
+	@Override
+	public ArenaManager fromFile(int index, Object o) {
+		if (o == null) {
+			fixErrorsTheQuantum64Way();
+			Bukkit.getLogger().severe("Something went wrong :(  Restart the server and it shoudl be fine");
+			index = -1;
+		}
+		switch (index) {
+		case 0:
+			for (String s : (List<String>) o) {
+				String[] strings = s.split(":");
+				SGApi.getArenaManager().getCreators().put(strings[0], SGApi.getMultiWorldManager().worldForName(strings[1]));
+			}
+			break;
+		case 1:
+			for (String s : (List<String>) o) {
+				String[] strings = s.split(":");
+				SGApi.getArenaManager().getLocs().put(strings[0], SGApi.getArenaManager().deserializeLoc(strings[1]));
+			}
+			break;
+		case 2:
+			for (String s : (List<String>) o) {
+				String[] strings = s.split(":");
+				SGApi.getArenaManager().getInv().put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
+			}
+			break;
+		case 3:
+			for (String s : (List<String>) o) {
+				String[] strings = s.split(":");
+				SGApi.getArenaManager().getArmor().put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
+			}
+			break;
+		}
+		return SGApi.getArenaManager();
 	}
 
 	@Override
@@ -67,41 +103,5 @@ public class ManagerConfigTemplate extends ConfigTemplate<ArenaManager> {
 			return armorArray;
 		}
 		return null;
-	}
-
-	@Override
-	public ArenaManager fromFile(int index, Object o) {
-		if (o == null) {
-			fixErrorsTheQuantum64Way();
-			Bukkit.getLogger().severe("Something went wrong :(  Restart the server and it shoudl be fine");
-			index = -1;
-		}
-		switch (index) {
-		case 0:
-			for (String s : (List<String>) o) {
-				String[] strings = s.split(":");
-				SGApi.getArenaManager().getCreators().put(strings[0], SGApi.getMultiWorldManager().worldForName(strings[1]));
-			}
-			break;
-		case 1:
-			for (String s : (List<String>) o) {
-				String[] strings = s.split(":");
-				SGApi.getArenaManager().getLocs().put(strings[0], SGApi.getArenaManager().deserializeLoc(strings[1]));
-			}
-			break;
-		case 2:
-			for (String s : (List<String>) o) {
-				String[] strings = s.split(":");
-				SGApi.getArenaManager().getInv().put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
-			}
-			break;
-		case 3:
-			for (String s : (List<String>) o) {
-				String[] strings = s.split(":");
-				SGApi.getArenaManager().getArmor().put(strings[0], ItemSerialization.stringToInventory(strings[1]).getContents());
-			}
-			break;
-		}
-		return SGApi.getArenaManager();
 	}
 }

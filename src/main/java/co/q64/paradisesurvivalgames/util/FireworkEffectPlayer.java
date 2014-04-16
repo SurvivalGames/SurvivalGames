@@ -12,9 +12,23 @@ public class FireworkEffectPlayer {
 
 	private static FireworkEffectPlayer fp = new FireworkEffectPlayer();
 
-	private Method world_getHandle = null;
-	private Method nms_world_broadcastEntityEffect = null;
 	private Method firework_getHandle = null;
+	private Method nms_world_broadcastEntityEffect = null;
+	private Method world_getHandle = null;
+
+	public static FireworkEffectPlayer getFireworkEffectPlayer() {
+		return fp;
+
+	}
+
+	private static Method getMethod(Class<?> cl, String method) {
+		for (Method m : cl.getMethods()) {
+			if (m.getName().equals(method)) {
+				return m;
+			}
+		}
+		return null;
+	}
 
 	public void playFirework(World world, Location loc, FireworkEffect fe) throws Exception {
 		// Bukkity load (CraftFirework)
@@ -61,20 +75,6 @@ public class FireworkEffectPlayer {
 		nms_world_broadcastEntityEffect.invoke(nms_world, new Object[] { nms_firework, (byte) 17 });
 		// remove from the game
 		fw.remove();
-	}
-
-	private static Method getMethod(Class<?> cl, String method) {
-		for (Method m : cl.getMethods()) {
-			if (m.getName().equals(method)) {
-				return m;
-			}
-		}
-		return null;
-	}
-
-	public static FireworkEffectPlayer getFireworkEffectPlayer() {
-		return fp;
-
 	}
 
 }

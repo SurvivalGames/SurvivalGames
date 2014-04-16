@@ -22,14 +22,8 @@ import co.q64.paradisesurvivalgames.util.IconMenu.OptionClickEvent;
 public class MenuManager {
 	static MenuManager menuManager;
 	private IconMenu joinMenu;
-	private IconMenu voteMenu;
 	private IconMenu specMenu;
-
-	public static MenuManager getMenuManager() {
-		if (menuManager == null)
-			menuManager = new MenuManager();
-		return menuManager;
-	}
+	private IconMenu voteMenu;
 
 	public MenuManager() {
 		///////////////
@@ -120,23 +114,29 @@ public class MenuManager {
 		}, SGApi.getPlugin());
 	}
 
-	public void displayJoinMenu(Player p) {
-		joinMenu.open(p);
+	public static MenuManager getMenuManager() {
+		if (menuManager == null)
+			menuManager = new MenuManager();
+		return menuManager;
 	}
 
-	public void displayVoteMenu(Player p) {
-		voteMenu.clearOptions();
-		try {
-			SGArena arena = SGApi.getArenaManager().getArena(p);
-			int i = 0;
-			for (Map.Entry<MapHash, Integer> entry : arena.getVotes().entrySet()) {
-				voteMenu.setOption(i, new ItemStack(Material.EMPTY_MAP), entry.getKey().getWorld().getDisplayName(), new String[] { "Map " + entry.getKey().getId(), "Current Votes: " + entry.getValue() });
-				i++;
-			}
-		} catch (ArenaNotFoundException e) {
-			return;
+	private List<SGArena> cloneThoseArenas() {
+		List<SGArena> a = new ArrayList<SGArena>();
+		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
+			a.add(arena);
 		}
-		voteMenu.open(p);
+		Collections.sort(a, new Comparator<SGArena>() {
+			@Override
+			public int compare(SGArena o1, SGArena o2) {
+				return Integer.compare(o1.getPlayers().size(), o2.getPlayers().size());
+			}
+		});
+		Collections.reverse(a);
+		return a;
+	}
+
+	public void displayJoinMenu(Player p) {
+		joinMenu.open(p);
 	}
 
 	public void displaySpecMenu(Player player) {
@@ -175,18 +175,18 @@ public class MenuManager {
 		specMenu.open(player);
 	}
 
-	private List<SGArena> cloneThoseArenas() {
-		List<SGArena> a = new ArrayList<SGArena>();
-		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
-			a.add(arena);
-		}
-		Collections.sort(a, new Comparator<SGArena>() {
-			@Override
-			public int compare(SGArena o1, SGArena o2) {
-				return Integer.compare(o1.getPlayers().size(), o2.getPlayers().size());
+	public void displayVoteMenu(Player p) {
+		voteMenu.clearOptions();
+		try {
+			SGArena arena = SGApi.getArenaManager().getArena(p);
+			int i = 0;
+			for (Map.Entry<MapHash, Integer> entry : arena.getVotes().entrySet()) {
+				voteMenu.setOption(i, new ItemStack(Material.EMPTY_MAP), entry.getKey().getWorld().getDisplayName(), new String[] { "Map " + entry.getKey().getId(), "Current Votes: " + entry.getValue() });
+				i++;
 			}
-		});
-		Collections.reverse(a);
-		return a;
+		} catch (ArenaNotFoundException e) {
+			return;
+		}
+		voteMenu.open(p);
 	}
 }

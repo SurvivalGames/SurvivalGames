@@ -16,22 +16,22 @@ import co.q64.paradisesurvivalgames.util.player.items.ce.SingleExecutor;
 
 public class SGItem implements Listener {
 
-	private List<String> use = new ArrayList<String>();
-
-	private boolean onlyInHubWorld = false;
-	private boolean onlyInGame = false;
-	private boolean multiExecutor = false;
-
-	private int slot = 0;
-
 	private ItemStack item;
 
-	private SingleExecutor se;
 	private MultiExecutor me;
+	private boolean multiExecutor = false;
+	private boolean onlyInGame = false;
 
-	public SGItem(ItemStack item, int slot, boolean onlyInHub, boolean onlyInGame, SingleExecutor se) {
-		this.multiExecutor = false;
-		this.se = se;
+	private boolean onlyInHubWorld = false;
+
+	private SingleExecutor se;
+
+	private int slot = 0;
+	private List<String> use = new ArrayList<String>();
+
+	public SGItem(ItemStack item, int slot, boolean onlyInHub, boolean onlyInGame, MultiExecutor se) {
+		this.multiExecutor = true;
+		this.me = me;
 		this.slot = slot;
 		this.onlyInGame = onlyInGame;
 		this.onlyInHubWorld = onlyInHub;
@@ -39,9 +39,9 @@ public class SGItem implements Listener {
 		SGApi.getPlugin().getServer().getPluginManager().registerEvents(this, SGApi.getPlugin());
 	}
 
-	public SGItem(ItemStack item, int slot, boolean onlyInHub, boolean onlyInGame, MultiExecutor se) {
-		this.multiExecutor = true;
-		this.me = me;
+	public SGItem(ItemStack item, int slot, boolean onlyInHub, boolean onlyInGame, SingleExecutor se) {
+		this.multiExecutor = false;
+		this.se = se;
 		this.slot = slot;
 		this.onlyInGame = onlyInGame;
 		this.onlyInHubWorld = onlyInHub;

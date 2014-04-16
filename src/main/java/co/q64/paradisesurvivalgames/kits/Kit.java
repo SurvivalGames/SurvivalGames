@@ -7,14 +7,14 @@ import org.bukkit.inventory.ItemStack;
 
 public class Kit {
 
-	private String kitName;
-	private String kitIconLore;
-	private String type;
-
-	private ItemStack kitIcon;
-	private List<KitItem> items = new ArrayList<KitItem>();
-
 	private List<Integer> ability = new ArrayList<Integer>();
+	private List<KitItem> items = new ArrayList<KitItem>();
+	private ItemStack kitIcon;
+
+	private String kitIconLore;
+	private String kitName;
+
+	private String type;
 
 	public Kit(String kitName, String type, List<KitItem> items, ItemStack kitIcon, String kitIconLore, List<Integer> abilityIds) {
 		this.kitName = kitName;
@@ -25,24 +25,24 @@ public class Kit {
 		this.type = type;
 	}
 
-	public String getName() {
-		return kitName;
+	public List<Integer> getAbilityIds() {
+		return ability;
 	}
 
 	public ItemStack getIcon() {
 		return kitIcon;
 	}
 
-	public List<KitItem> getItems() {
-		return items;
-	}
-
 	public String getIconLore() {
 		return kitIconLore;
 	}
 
-	public List<Integer> getAbilityIds() {
-		return ability;
+	public List<KitItem> getItems() {
+		return items;
+	}
+
+	public String getName() {
+		return kitName;
 	}
 
 	public String getType() {

@@ -23,10 +23,22 @@ import org.bukkit.util.Vector;
 @SerializableAs("LocationChecker")
 public class LocationChecker implements ConfigurationSerializable {
 
+	private final Integer id;
 	private final Vector max;
 	private final Vector min;
 	private final String type;
-	private final Integer id;
+
+	/**
+	 * Instantiates a new Location checker.
+	 *
+	 * @param locationChecker the location checker
+	 */
+	public LocationChecker(LocationChecker locationChecker) {
+		this.max = locationChecker.max;
+		this.min = locationChecker.min;
+		this.type = locationChecker.type;
+		this.id = locationChecker.id;
+	}
 
 	/**
 	 * Instantiates a new Location checker.
@@ -41,29 +53,6 @@ public class LocationChecker implements ConfigurationSerializable {
 		this.min = min;
 		this.type = type;
 		this.id = id;
-	}
-
-	/**
-	 * Instantiates a new Location checker.
-	 *
-	 * @param locationChecker the location checker
-	 */
-	public LocationChecker(LocationChecker locationChecker) {
-		this.max = locationChecker.max;
-		this.min = locationChecker.min;
-		this.type = locationChecker.type;
-		this.id = locationChecker.id;
-	}
-
-	@Override
-	public Map<String, Object> serialize() {
-		Map<String, Object> map = new HashMap<>();
-		map.put("max", max);
-		map.put("min", min);
-		map.put("type", type);
-		map.put("id", id);
-
-		return map;
 	}
 
 	/**
@@ -94,13 +83,12 @@ public class LocationChecker implements ConfigurationSerializable {
 	}
 
 	/**
-	 * Is Checks to see if the give vector is in The bounded Box
+	 * Gets id.
 	 *
-	 * @param vector the vector
-	 * @return the boolean true if the vector is in the box
+	 * @return the id
 	 */
-	public boolean isAABB(Vector vector) {
-		return vector.isInAABB(min, max);
+	public Integer getId() {
+		return id;
 	}
 
 	/**
@@ -131,11 +119,23 @@ public class LocationChecker implements ConfigurationSerializable {
 	}
 
 	/**
-	 * Gets id.
+	 * Is Checks to see if the give vector is in The bounded Box
 	 *
-	 * @return the id
+	 * @param vector the vector
+	 * @return the boolean true if the vector is in the box
 	 */
-	public Integer getId() {
-		return id;
+	public boolean isAABB(Vector vector) {
+		return vector.isInAABB(min, max);
+	}
+
+	@Override
+	public Map<String, Object> serialize() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("max", max);
+		map.put("min", min);
+		map.put("type", type);
+		map.put("id", id);
+
+		return map;
 	}
 }

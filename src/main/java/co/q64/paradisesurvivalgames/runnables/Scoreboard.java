@@ -24,24 +24,23 @@ import co.q64.paradisesurvivalgames.util.EconUtil;
  */
 public class Scoreboard implements Runnable {
 
-	private final TheSurvivalGames plugin;
 	private boolean count = false;
+	private final TheSurvivalGames plugin;
 
 	private Scoreboard(TheSurvivalGames base) {
 		this.plugin = SGApi.getPlugin();
 	}
 
-	@Override
-	public void run() {
-		for (final Player player : Bukkit.getOnlinePlayers()) {
-			final Objective objective = player.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
+	public static void registerScoreboard() {
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(TheSurvivalGames.class), new Scoreboard(JavaPlugin.getPlugin(TheSurvivalGames.class)), 5, 100);
+	}
 
-			//if (objective == null) {
-			createScoreboard(player);
-			//} else {
-			//	updateScoreboard(player, false);
-			//}
-		}
+	private static void sendScore(Objective objective, String title, int value, boolean complete) {
+
+		@SuppressWarnings("deprecation")
+		//f bukkit
+		final Score score = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.translateAlternateColorCodes('&', title)));
+		score.setScore(value);
 	}
 
 	private void createScoreboard(Player player) {
@@ -59,6 +58,23 @@ public class Scoreboard implements Runnable {
 			}
 
 			updateScoreboard(player, true);
+		}
+	}
+
+	TheSurvivalGames getPlugin() {
+		return plugin;
+	}
+
+	@Override
+	public void run() {
+		for (final Player player : Bukkit.getOnlinePlayers()) {
+			final Objective objective = player.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
+
+			//if (objective == null) {
+			createScoreboard(player);
+			//} else {
+			//	updateScoreboard(player, false);
+			//}
 		}
 	}
 
@@ -141,21 +157,5 @@ public class Scoreboard implements Runnable {
 		sendScore(objective, "&4Dead", arena.getDead(), complete);
 		sendScore(objective, "&7Spectating", arena.getSpectators().size(), complete);
 
-	}
-
-	private static void sendScore(Objective objective, String title, int value, boolean complete) {
-
-		@SuppressWarnings("deprecation")
-		//f bukkit
-		final Score score = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.translateAlternateColorCodes('&', title)));
-		score.setScore(value);
-	}
-
-	TheSurvivalGames getPlugin() {
-		return plugin;
-	}
-
-	public static void registerScoreboard() {
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(JavaPlugin.getPlugin(TheSurvivalGames.class), new Scoreboard(JavaPlugin.getPlugin(TheSurvivalGames.class)), 5, 100);
 	}
 }

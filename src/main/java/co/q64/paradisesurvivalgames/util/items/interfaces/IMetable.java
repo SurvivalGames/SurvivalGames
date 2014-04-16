@@ -14,6 +14,13 @@ import org.bukkit.inventory.meta.ItemMeta;
  */
 public interface IMetable {
 	/**
+	 * Gets id thats unique for this item
+	 *
+	 * @return the id
+	 */
+	Integer getId();
+
+	/**
 	 * Gets item meta.
 	 *
 	 * @param material the material
@@ -27,11 +34,4 @@ public interface IMetable {
 	 * @return the material
 	 */
 	Material getMaterial();
-
-	/**
-	 * Gets id thats unique for this item
-	 *
-	 * @return the id
-	 */
-	Integer getId();
 }

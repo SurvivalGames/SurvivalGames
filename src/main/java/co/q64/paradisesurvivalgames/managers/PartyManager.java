@@ -21,62 +21,11 @@ import co.q64.paradisesurvivalgames.objects.Party;
 
 public class PartyManager {
 
-	private static final Map<String, UUID> partyPlayers = new HashMap<>();
-	private static final Map<UUID, Party> parties = new HashMap<>();
 	private static final Map<String, UUID> invites = new HashMap<>();
+	private static final Map<UUID, Party> parties = new HashMap<>();
 	private static final Set<String> partyChat = new HashSet<>();
+	private static final Map<String, UUID> partyPlayers = new HashMap<>();
 	private static int partySize;
-
-	/**
-	 * Gets the list of partyPlayers in parties
-	 *
-	 * @return THe list of partyPlayers
-	 */
-	public Map<String, UUID> getPlayers() {
-		return partyPlayers;
-	}
-
-	/**
-	 * Gets the list of parties
-	 *
-	 * @return List of parties
-	 */
-	public Map<UUID, Party> getParties() {
-		return parties;
-	}
-
-	/**
-	 * Gets the list of current party invites
-	 *
-	 * @return The list of invites
-	 */
-	public Map<String, UUID> getInvites() {
-		return invites;
-	}
-
-	/**
-	 * Gets the list of usernames of partyPlayers currently in party chat
-	 *
-	 * @return List of usernames as a Set
-	 */
-	public Set<String> getPartyChat() {
-		return partyChat;
-	}
-
-	/**
-	 * @param player The player starting the party
-	 * @return UUID The UUID (Unique ID) of the new party
-	 */
-	public static UUID startParty(Player player) {
-		Party party = new Party(player.getName());
-		partyPlayers.put(player.getName(), party.getID());
-		parties.put(party.getID(), party);
-		if (player != null) { // TODO problem-an NPE would be thrown before the
-			// statement is reached
-			player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
-		}
-		return party.getID();
-	}
 
 	/**
 	 * Ends a party
@@ -117,6 +66,39 @@ public class PartyManager {
 	}
 
 	/**
+	 * @param player The player starting the party
+	 * @return UUID The UUID (Unique ID) of the new party
+	 */
+	public static UUID startParty(Player player) {
+		Party party = new Party(player.getName());
+		partyPlayers.put(player.getName(), party.getID());
+		parties.put(party.getID(), party);
+		if (player != null) { // TODO problem-an NPE would be thrown before the
+			// statement is reached
+			player.sendMessage(ChatColor.YELLOW + I18N.getLocaleString("PARTY_CREATED"));
+		}
+		return party.getID();
+	}
+
+	/**
+	 * Gets the list of current party invites
+	 *
+	 * @return The list of invites
+	 */
+	public Map<String, UUID> getInvites() {
+		return invites;
+	}
+
+	/**
+	 * Gets the list of parties
+	 *
+	 * @return List of parties
+	 */
+	public Map<UUID, Party> getParties() {
+		return parties;
+	}
+
+	/**
 	 * Gets the party members of the party the player is in
 	 *
 	 * @param p The player to get the members of
@@ -141,6 +123,24 @@ public class PartyManager {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Gets the list of usernames of partyPlayers currently in party chat
+	 *
+	 * @return List of usernames as a Set
+	 */
+	public Set<String> getPartyChat() {
+		return partyChat;
+	}
+
+	/**
+	 * Gets the list of partyPlayers in parties
+	 *
+	 * @return THe list of partyPlayers
+	 */
+	public Map<String, UUID> getPlayers() {
+		return partyPlayers;
 	}
 
 	/**

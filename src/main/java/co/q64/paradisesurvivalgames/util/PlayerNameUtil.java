@@ -6,12 +6,11 @@ import org.bukkit.entity.Player;
 
 public class PlayerNameUtil {
 
-	public static int getNameUUID(Player p) {
-		return stringToHash(p.getName());
-	}
+	public static ArrayList<String> getAwesomePeople() {
+		ArrayList<String> list = new ArrayList<>();
+		//TODO: What's your IGN everyone ?
 
-	public static int getNameUUID(String p) {
-		return stringToHash(p);
+		return list;
 	}
 
 	public static ArrayList<String> getDevs() {
@@ -31,11 +30,12 @@ public class PlayerNameUtil {
 		return list;
 	}
 
-	public static ArrayList<String> getAwesomePeople() {
-		ArrayList<String> list = new ArrayList<>();
-		//TODO: What's your IGN everyone ?
+	public static int getNameUUID(Player p) {
+		return stringToHash(p.getName());
+	}
 
-		return list;
+	public static int getNameUUID(String p) {
+		return stringToHash(p);
 	}
 
 	private static int stringToHash(String s) {

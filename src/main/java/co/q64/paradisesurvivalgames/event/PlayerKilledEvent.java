@@ -7,8 +7,8 @@ import org.bukkit.event.HandlerList;
 
 public class PlayerKilledEvent extends Event {
 	private static final HandlerList handlers = new HandlerList();
-	Player player;
 	Entity killer;
+	Player player;
 
 	/**
 	 * Constructs a new KitGivenEvent
@@ -19,24 +19,6 @@ public class PlayerKilledEvent extends Event {
 	public PlayerKilledEvent(Player player, Entity killer) {
 		this.player = player;
 		this.killer = killer;
-	}
-
-	/**
-	 * Gets the player that died
-	 *
-	 * @return the player that died
-	 */
-	public Player getPlayer() {
-		return player;
-	}
-
-	/**
-	 * Gets the killer
-	 *
-	 * @return the player object that killed the player of the event
-	 */
-	public Entity getKiller() {
-		return killer;
 	}
 
 	/**
@@ -56,5 +38,23 @@ public class PlayerKilledEvent extends Event {
 	@Override
 	public HandlerList getHandlers() {
 		return handlers;
+	}
+
+	/**
+	 * Gets the killer
+	 *
+	 * @return the player object that killed the player of the event
+	 */
+	public Entity getKiller() {
+		return killer;
+	}
+
+	/**
+	 * Gets the player that died
+	 *
+	 * @return the player that died
+	 */
+	public Player getPlayer() {
+		return player;
 	}
 }

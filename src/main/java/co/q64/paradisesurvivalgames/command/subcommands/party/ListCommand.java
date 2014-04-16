@@ -19,40 +19,6 @@ import co.q64.paradisesurvivalgames.objects.Party;
 public class ListCommand implements SubCommand {
 
 	/**
-	 * Lists the current members of your party
-	 *
-	 * @param sender The player executing the command
-	 */
-	@Override
-	public void execute(String cmd, Player sender, String[] args) {
-		if ((args.length == 1) && (args[0].equalsIgnoreCase("list")) && (sender.hasPermission("party.admin.list"))) {
-			executeAdmin(sender, args[0]);
-		}
-		if ((cmd.equalsIgnoreCase("list"))) {
-
-			UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());
-			if (id != null) {
-				Party party = SGApi.getPartyManager().getParties().get(id);
-				String list = org.bukkit.ChatColor.GOLD + party.getLeader() + " ";
-				for (String member : party.getMembers()) {
-					if (member != null) {
-						Player player = Bukkit.getServer().getPlayer(member);
-						if (player == null) {
-							list = list + org.bukkit.ChatColor.DARK_GRAY + member + " ";
-						} else {
-							list = list + org.bukkit.ChatColor.WHITE + member + " ";
-						}
-					}
-				}
-
-				sender.sendMessage(list);
-			} else {
-				sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NO_PARTY_2"));
-			}
-		}
-	}
-
-	/**
 	 * Lists the members of another player's party
 	 *
 	 * @param sender The player executing the command
@@ -83,6 +49,40 @@ public class ListCommand implements SubCommand {
 			}
 		} else {
 			sender.sendMessage(org.bukkit.ChatColor.YELLOW + args + I18N.getLocaleString("NOT_IN_PARTY"));
+		}
+	}
+
+	/**
+	 * Lists the current members of your party
+	 *
+	 * @param sender The player executing the command
+	 */
+	@Override
+	public void execute(String cmd, Player sender, String[] args) {
+		if ((args.length == 1) && (args[0].equalsIgnoreCase("list")) && (sender.hasPermission("party.admin.list"))) {
+			executeAdmin(sender, args[0]);
+		}
+		if ((cmd.equalsIgnoreCase("list"))) {
+
+			UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());
+			if (id != null) {
+				Party party = SGApi.getPartyManager().getParties().get(id);
+				String list = org.bukkit.ChatColor.GOLD + party.getLeader() + " ";
+				for (String member : party.getMembers()) {
+					if (member != null) {
+						Player player = Bukkit.getServer().getPlayer(member);
+						if (player == null) {
+							list = list + org.bukkit.ChatColor.DARK_GRAY + member + " ";
+						} else {
+							list = list + org.bukkit.ChatColor.WHITE + member + " ";
+						}
+					}
+				}
+
+				sender.sendMessage(list);
+			} else {
+				sender.sendMessage(org.bukkit.ChatColor.YELLOW + I18N.getLocaleString("NO_PARTY_2"));
+			}
 		}
 	}
 }

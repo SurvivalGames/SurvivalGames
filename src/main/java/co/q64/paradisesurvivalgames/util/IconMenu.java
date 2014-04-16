@@ -23,16 +23,70 @@ import co.q64.paradisesurvivalgames.managers.SGApi;
 
 public class IconMenu implements Listener {
 
-	private String name;
-	private int size;
+	public class OptionClickEvent {
+		private boolean close;
+		private boolean destroy;
+		private ItemStack item;
+		private String name;
+		private Player player;
+		private int position;
+
+		public OptionClickEvent(Player player, int position, String name, ItemStack item) {
+			this.player = player;
+			this.position = position;
+			this.name = name;
+			this.item = item;
+			this.close = true;
+			this.destroy = false;
+		}
+
+		public ItemStack getItem() {
+			return item;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public Player getPlayer() {
+			return player;
+		}
+
+		public int getPosition() {
+			return position;
+		}
+
+		public void setWillClose(boolean close) {
+			this.close = close;
+		}
+
+		public void setWillDestroy(boolean destroy) {
+			this.destroy = destroy;
+		}
+
+		public boolean willClose() {
+			return close;
+		}
+
+		public boolean willDestroy() {
+			return destroy;
+		}
+	}
+	public interface OptionClickEventHandler {
+		public void onOptionClick(OptionClickEvent event);
+	}
 	private OptionClickEventHandler handler;
+	private String name;
+	private ItemStack[] optionIcons;
+
+	private String[] optionNames;
+
 	private Plugin plugin;
-	private boolean update;
+	private int size;
 
 	private Map<String, Integer> tasks = new HashMap<String, Integer>();
 
-	private String[] optionNames;
-	private ItemStack[] optionIcons;
+	private boolean update;
 
 	public IconMenu(String name, int size, boolean update, OptionClickEventHandler handler, Plugin plugin) {
 		this.name = name;
@@ -45,10 +99,9 @@ public class IconMenu implements Listener {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
-	public IconMenu setOption(int position, ItemStack icon, String name, String... info) {
-		optionNames[position] = name;
-		optionIcons[position] = setItemNameAndLore(icon, name, info);
-		return this;
+	public void clear() {
+		this.optionNames = new String[size];
+		this.optionIcons = new ItemStack[size];
 	}
 
 	public void clearOptions() {
@@ -58,40 +111,12 @@ public class IconMenu implements Listener {
 		}
 	}
 
-	public void open(Player player) {
-		final Inventory inventory = Bukkit.createInventory(player, size, name);
-		for (int i = 0; i < optionIcons.length; i++) {
-			if (optionIcons[i] != null) {
-				inventory.setItem(i, optionIcons[i]);
-			}
-		}
-		player.openInventory(inventory);
-		if (update) {
-			tasks.put(player.getName(), Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), new Runnable() {
-
-				@Override
-				public void run() {
-					for (int i = 0; i < optionIcons.length; i++) {
-						if (optionIcons[i] != null) {
-							inventory.setItem(i, optionIcons[i]);
-						}
-					}
-				}
-			}, 20L, 20L));
-		}
-	}
-
 	public void destroy() {
 		HandlerList.unregisterAll(this);
 		handler = null;
 		plugin = null;
 		optionNames = null;
 		optionIcons = null;
-	}
-
-	public void clear() {
-		this.optionNames = new String[size];
-		this.optionIcons = new ItemStack[size];
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
@@ -129,57 +154,26 @@ public class IconMenu implements Listener {
 		}
 	}
 
-	public interface OptionClickEventHandler {
-		public void onOptionClick(OptionClickEvent event);
-	}
-
-	public class OptionClickEvent {
-		private Player player;
-		private int position;
-		private String name;
-		private ItemStack item;
-		private boolean close;
-		private boolean destroy;
-
-		public OptionClickEvent(Player player, int position, String name, ItemStack item) {
-			this.player = player;
-			this.position = position;
-			this.name = name;
-			this.item = item;
-			this.close = true;
-			this.destroy = false;
+	public void open(Player player) {
+		final Inventory inventory = Bukkit.createInventory(player, size, name);
+		for (int i = 0; i < optionIcons.length; i++) {
+			if (optionIcons[i] != null) {
+				inventory.setItem(i, optionIcons[i]);
+			}
 		}
+		player.openInventory(inventory);
+		if (update) {
+			tasks.put(player.getName(), Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), new Runnable() {
 
-		public Player getPlayer() {
-			return player;
-		}
-
-		public int getPosition() {
-			return position;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public ItemStack getItem() {
-			return item;
-		}
-
-		public boolean willClose() {
-			return close;
-		}
-
-		public boolean willDestroy() {
-			return destroy;
-		}
-
-		public void setWillClose(boolean close) {
-			this.close = close;
-		}
-
-		public void setWillDestroy(boolean destroy) {
-			this.destroy = destroy;
+				@Override
+				public void run() {
+					for (int i = 0; i < optionIcons.length; i++) {
+						if (optionIcons[i] != null) {
+							inventory.setItem(i, optionIcons[i]);
+						}
+					}
+				}
+			}, 20L, 20L));
 		}
 	}
 
@@ -192,5 +186,11 @@ public class IconMenu implements Listener {
 		im.setLore(Arrays.asList(lore));
 		item.setItemMeta(im);
 		return item;
+	}
+
+	public IconMenu setOption(int position, ItemStack icon, String name, String... info) {
+		optionNames[position] = name;
+		optionIcons[position] = setItemNameAndLore(icon, name, info);
+		return this;
 	}
 }

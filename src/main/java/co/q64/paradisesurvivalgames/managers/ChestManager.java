@@ -19,10 +19,10 @@ public class ChestManager {
 
 	FileConfiguration chests;
 
-	int slot = 0;
 	int lvlup = 0;
-
 	Random r = new Random();
+
+	int slot = 0;
 
 	public ChestManager() {
 		File chest = new File(SGApi.getPlugin().getDataFolder(), "chests.yml");
@@ -37,6 +37,12 @@ public class ChestManager {
 
 		Validate.notNull(slot, "You deleted the 'slot-probability' option in the chest config  :(  Why?");
 		Validate.notNull(lvlup, "You deleted the 'lvlup-probability' option in the chest config  :(  Why?");
+	}
+
+	private String anyItem(List<String> list) {
+		int index = r.nextInt(list.size());
+		String s = list.get(index);
+		return s;
 	}
 
 	public void fillChest(SGArena a, Chest chest) {
@@ -113,11 +119,5 @@ public class ChestManager {
 			return is;
 		}
 		return null;
-	}
-
-	private String anyItem(List<String> list) {
-		int index = r.nextInt(list.size());
-		String s = list.get(index);
-		return s;
 	}
 }

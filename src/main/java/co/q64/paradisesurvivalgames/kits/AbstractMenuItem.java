@@ -28,14 +28,14 @@ import co.q64.paradisesurvivalgames.util.items.interfaces.SingleAction;
  * The type Abstract icon menu item
  */
 public class AbstractMenuItem implements ILore, IDisplayName, Selectable, SingleAction, IPermissible, ConfigurationSerializable {
-	private ItemStack item;
-	private Material material;
-	private ItemMeta meta;
-	private List<String> lore;
+	private List<ActionActivator> activators;
 	private String displayName;
 	private Integer Id;
+	private ItemStack item;
+	private List<String> lore;
+	private Material material;
+	private ItemMeta meta;
 	private String permission;
-	private List<ActionActivator> activators;
 
 	/**
 	 * Instantiates a new Abstract menu item. This is NOT to be used
@@ -87,6 +87,113 @@ public class AbstractMenuItem implements ILore, IDisplayName, Selectable, Single
 	}
 
 	/**
+	 * Add line.
+	 *
+	 * @param line the line
+	 */
+	@Override
+	public void addLoreLine(String line) {
+		this.lore.add(line);
+	}
+
+	/**
+	 * Gets activators.
+	 *
+	 * @return the activators
+	 */
+	@Override
+	public List<ActionActivator> getActivators() {
+		return this.activators;
+	}
+
+	/**
+	 * Gets display name.
+	 *
+	 * @return the display name
+	 */
+	@Override
+	public String getDisplayName() {
+		return this.displayName;
+	}
+
+	/**
+	 * Gets id thats unique for this item
+	 *
+	 * @return the id
+	 */
+	@Override
+	public Integer getId() {
+		return this.Id;
+	}
+
+	/**
+	 * Get item. To use in the icon menu
+	 * <p>
+	 * {@link org.bukkit.inventory.ItemStack}
+	 *
+	 * @return the item stack
+	 */
+	public ItemStack getItem() {
+		return this.item;
+	}
+
+	/**
+	 * Gets item meta.
+	 *
+	 * @param material the material
+	 * @return the ItemMeta related to the material
+	 */
+	@Override
+	public ItemMeta getItemMeta(Material material) {
+		this.meta = Bukkit.getItemFactory().getItemMeta(material);
+		this.item = new ItemStack(material, 1);
+		return this.meta;
+	}
+
+	/**
+	 * Gets lore.
+	 *
+	 * @return the lore
+	 */
+	@Override
+	public List<String> getLore() {
+		return this.lore;
+	}
+
+	/**
+	 * Gets material. to use for the icon. {@link org.bukkit.Material}
+	 *
+	 * @return the material
+	 */
+	@Override
+	public Material getMaterial() {
+		return this.material;
+	}
+
+	/**
+	 * Gets permission to use the item in a string format
+	 *
+	 * @return the permission
+	 */
+	@Override
+	public String getPermission() {
+		return this.permission;
+	}
+
+	/**
+	 * Has permission. Returns True if the permission has been set
+	 *
+	 * @return the boolean
+	 */
+	@Override
+	public boolean hasPermission() {
+		if (this.permission != null) {
+			return true;
+		}
+		return true;
+	}
+
+	/**
 	 * Creates a Map representation of this class.
 	 * <p/>
 	 * This class must provide a method to restore this class, as defined in the
@@ -110,13 +217,12 @@ public class AbstractMenuItem implements ILore, IDisplayName, Selectable, Single
 	}
 
 	/**
-	 * Gets display name.
+	 * Sets activator.
 	 *
-	 * @return the display name
+	 * @param activator the activator
 	 */
-	@Override
-	public String getDisplayName() {
-		return this.displayName;
+	public void setActivator(ActionActivator activator) {
+		this.activators.add(activator);
 	}
 
 	/**
@@ -130,87 +236,12 @@ public class AbstractMenuItem implements ILore, IDisplayName, Selectable, Single
 	}
 
 	/**
-	 * Gets lore.
-	 *
-	 * @return the lore
-	 */
-	@Override
-	public List<String> getLore() {
-		return this.lore;
-	}
-
-	/**
-	 * Add line.
-	 *
-	 * @param line the line
-	 */
-	@Override
-	public void addLoreLine(String line) {
-		this.lore.add(line);
-	}
-
-	/**
-	 * Gets item meta.
-	 *
-	 * @param material the material
-	 * @return the ItemMeta related to the material
-	 */
-	@Override
-	public ItemMeta getItemMeta(Material material) {
-		this.meta = Bukkit.getItemFactory().getItemMeta(material);
-		this.item = new ItemStack(material, 1);
-		return this.meta;
-	}
-
-	/**
-	 * Gets material. to use for the icon. {@link org.bukkit.Material}
-	 *
-	 * @return the material
-	 */
-	@Override
-	public Material getMaterial() {
-		return this.material;
-	}
-
-	/**
-	 * Gets id thats unique for this item
-	 *
-	 * @return the id
-	 */
-	@Override
-	public Integer getId() {
-		return this.Id;
-	}
-
-	/**
 	 * Sets id the unique id
 	 *
 	 * @param id the id
 	 */
 	public void setId(Integer id) {
 		this.Id = id;
-	}
-
-	/**
-	 * Sets material to be used as the icon
-	 * <p>
-	 * {@link org.bukkit.Material}
-	 *
-	 * @param material the material
-	 */
-	public void setMaterial(Material material) {
-		this.material = material;
-	}
-
-	/**
-	 * Get item. To use in the icon menu
-	 * <p>
-	 * {@link org.bukkit.inventory.ItemStack}
-	 *
-	 * @return the item stack
-	 */
-	public ItemStack getItem() {
-		return this.item;
 	}
 
 	/**
@@ -226,26 +257,18 @@ public class AbstractMenuItem implements ILore, IDisplayName, Selectable, Single
 	}
 
 	/**
-	 * Has permission. Returns True if the permission has been set
+	 * Sets material to be used as the icon
+	 * <p>
+	 * {@link org.bukkit.Material}
 	 *
-	 * @return the boolean
+	 * @param material the material
 	 */
-	@Override
-	public boolean hasPermission() {
-		if (this.permission != null) {
-			return true;
-		}
-		return true;
+	public void setMaterial(Material material) {
+		this.material = material;
 	}
 
-	/**
-	 * Gets permission to use the item in a string format
-	 *
-	 * @return the permission
-	 */
-	@Override
-	public String getPermission() {
-		return this.permission;
+	public void setMeta() {
+		this.item.setItemMeta(this.meta);
 	}
 
 	/**
@@ -256,29 +279,6 @@ public class AbstractMenuItem implements ILore, IDisplayName, Selectable, Single
 	 */
 	public void setPermission(String permission) {
 		this.permission = permission;
-	}
-
-	/**
-	 * Gets activators.
-	 *
-	 * @return the activators
-	 */
-	@Override
-	public List<ActionActivator> getActivators() {
-		return this.activators;
-	}
-
-	/**
-	 * Sets activator.
-	 *
-	 * @param activator the activator
-	 */
-	public void setActivator(ActionActivator activator) {
-		this.activators.add(activator);
-	}
-
-	public void setMeta() {
-		this.item.setItemMeta(this.meta);
 	}
 
 }

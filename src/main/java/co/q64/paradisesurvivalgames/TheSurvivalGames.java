@@ -98,10 +98,86 @@ import co.q64.paradisesurvivalgames.util.items.RailGun;
 
 public class TheSurvivalGames extends JavaPlugin {
 
+	private Chat chat = null;
 	private ConfigurationData configurationData;
 	private Economy econ = null;
-	private Chat chat = null;
 	private JGoogleAnalyticsTracker tracker;
+
+	public Chat getChat() {
+		return chat;
+	}
+
+	/**
+	 * Gets Persistence Database classes WARNING: DO NOT EDIT
+	 *
+	 * @return The list of classes for the database
+	 */
+	@Override
+	public List<Class<?>> getDatabaseClasses() {
+		List<Class<?>> list = new ArrayList<>();
+		list.add(PlayerData.class);
+		return list;
+	}
+
+	public Economy getEcon() {
+		return econ;
+	}
+
+	public PlayerData getPlayerData(Player player) {
+		PlayerData data = getDatabase().find(PlayerData.class).where().ieq("playerName", player.getName()).findUnique();
+		if (data == null) {
+			data = new PlayerData(player);
+			setPlayerData(data);
+		}
+		return data;
+	}
+
+	public ConfigurationData getPluginConfig() {
+		return configurationData;
+	}
+
+	public String getPrefix(Player p) {
+		return chat.getPlayerPrefix(p);
+	}
+
+	public JGoogleAnalyticsTracker getTracker() {
+		return tracker;
+	}
+
+	@Override
+	public void onDisable() {
+		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
+
+		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate();
+		template.serialize();
+
+		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
+			List<ChangedBlock> data = arena.getChangedBlocks();
+
+			for (int i = 0; i < data.size(); i++) {
+				Bukkit.getLogger().info("Resetting block: " + data.get(i).getPrevid().toString());
+				Location l = new Location(Bukkit.getWorld(data.get(i).getWorld()), data.get(i).getX(), data.get(i).getY(), data.get(i).getZ());
+				Block b = l.getBlock();
+				b.setType(data.get(i).getPrevid());
+				b.setData(data.get(i).getPrevdata());
+				b.getState().update();
+			}
+		}
+
+		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
+			Bukkit.getLogger().info("Attemping to save arena: " + arena.toString());
+			ConfigTemplate<SGArena> configTemplate = new ArenaConfigTemplate(arena);
+			configTemplate.serialize();
+		}
+
+		for (SGWorld world : SGApi.getMultiWorldManager().getWorlds()) {
+			Bukkit.getLogger().info("Attempting to save world: " + world);
+			ConfigTemplate<SGWorld> configTemplate = new WorldConfigTemplate(world);
+			configTemplate.serialize();
+		}
+
+		SGApi.getScheduler().shutdownAll();
+	}
 
 	@Override
 	public void onEnable() {
@@ -182,41 +258,6 @@ public class TheSurvivalGames extends JavaPlugin {
 		getLogger().info("ParadiseSurvivalGames has been ebabeled!");
 	}
 
-	@Override
-	public void onDisable() {
-		getLogger().info(I18N.getLocaleString("BEEN_DISABLED"));
-
-		ConfigTemplate<ArenaManager> template = new ManagerConfigTemplate();
-		template.serialize();
-
-		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
-			List<ChangedBlock> data = arena.getChangedBlocks();
-
-			for (int i = 0; i < data.size(); i++) {
-				Bukkit.getLogger().info("Resetting block: " + data.get(i).getPrevid().toString());
-				Location l = new Location(Bukkit.getWorld(data.get(i).getWorld()), data.get(i).getX(), data.get(i).getY(), data.get(i).getZ());
-				Block b = l.getBlock();
-				b.setType(data.get(i).getPrevid());
-				b.setData(data.get(i).getPrevdata());
-				b.getState().update();
-			}
-		}
-
-		for (SGArena arena : SGApi.getArenaManager().getArenas()) {
-			Bukkit.getLogger().info("Attemping to save arena: " + arena.toString());
-			ConfigTemplate<SGArena> configTemplate = new ArenaConfigTemplate(arena);
-			configTemplate.serialize();
-		}
-
-		for (SGWorld world : SGApi.getMultiWorldManager().getWorlds()) {
-			Bukkit.getLogger().info("Attempting to save world: " + world);
-			ConfigTemplate<SGWorld> configTemplate = new WorldConfigTemplate(world);
-			configTemplate.serialize();
-		}
-
-		SGApi.getScheduler().shutdownAll();
-	}
-
 	void registerAll() {
 		getCommand("sg").setExecutor(new CommandHandler());
 		getCommand("party").setExecutor(new PartyCommandHandler());
@@ -294,6 +335,19 @@ public class TheSurvivalGames extends JavaPlugin {
 		SGApi.getKitManager().loadKits();
 	}
 
+	public void setPlayerData(PlayerData data) {
+		getDatabase().save(data);
+	}
+
+	private boolean setupChat() {
+		RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
+		if (chatProvider != null) {
+			chat = chatProvider.getProvider();
+		}
+
+		return (chat != null);
+	}
+
 	/**
 	 * Setup Persistence Databases and Install DDL if there are none
 	 */
@@ -312,44 +366,6 @@ public class TheSurvivalGames extends JavaPlugin {
 		//SGApi.getSignManager().signs = getDatabase().find(JSign.class).findList();
 	}
 
-	/**
-	 * Gets Persistence Database classes WARNING: DO NOT EDIT
-	 *
-	 * @return The list of classes for the database
-	 */
-	@Override
-	public List<Class<?>> getDatabaseClasses() {
-		List<Class<?>> list = new ArrayList<>();
-		list.add(PlayerData.class);
-		return list;
-	}
-
-	public PlayerData getPlayerData(Player player) {
-		PlayerData data = getDatabase().find(PlayerData.class).where().ieq("playerName", player.getName()).findUnique();
-		if (data == null) {
-			data = new PlayerData(player);
-			setPlayerData(data);
-		}
-		return data;
-	}
-
-	public void setPlayerData(PlayerData data) {
-		getDatabase().save(data);
-	}
-
-	public ConfigurationData getPluginConfig() {
-		return configurationData;
-	}
-
-	private boolean setupChat() {
-		RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
-		if (chatProvider != null) {
-			chat = chatProvider.getProvider();
-		}
-
-		return (chat != null);
-	}
-
 	private boolean setupEconomy() {
 		RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
 		if (economyProvider != null) {
@@ -359,27 +375,11 @@ public class TheSurvivalGames extends JavaPlugin {
 		return (econ != null);
 	}
 
-	public Economy getEcon() {
-		return econ;
-	}
-
-	public Chat getChat() {
-		return chat;
-	}
-
-	public boolean useEcon() {
-		return (econ != null);
-	}
-
 	public boolean useChat() {
 		return (chat != null);
 	}
 
-	public String getPrefix(Player p) {
-		return chat.getPlayerPrefix(p);
-	}
-
-	public JGoogleAnalyticsTracker getTracker() {
-		return tracker;
+	public boolean useEcon() {
+		return (econ != null);
 	}
 }

@@ -17,19 +17,9 @@ import lombok.Data;
 @Data
 public class Game {
 	/**
-	 * The ID of the game
+	 * The Broadcast perm each player will have this.
 	 */
-	private int id;
-
-	/**
-	 * The Min players the game requires to start
-	 */
-	private int minPlayers;
-
-	/**
-	 * The Max players the game requires to start
-	 */
-	private int maxPlayers;
+	private String broadcastPerm;
 
 	/**
 	 * The Current number of players in game
@@ -37,9 +27,19 @@ public class Game {
 	private int currentPlayers;
 
 	/**
-	 * The Broadcast perm each player will have this.
+	 * The ID of the game
 	 */
-	private String broadcastPerm;
+	private int id;
+
+	/**
+	 * The Max players the game requires to start
+	 */
+	private int maxPlayers;
+
+	/**
+	 * The Min players the game requires to start
+	 */
+	private int minPlayers;
 
 	/**
 	 * The Player keys. The players UUID which linked to

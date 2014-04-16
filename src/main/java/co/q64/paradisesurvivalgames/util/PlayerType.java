@@ -10,7 +10,7 @@ import org.bukkit.ChatColor;
 
 public enum PlayerType {
 
-	PLAYER(ChatColor.GRAY + "%player%"), MOD(ChatColor.BLUE + "%player%"), ADMIN(ChatColor.RED + "%player%"), VIP(ChatColor.GREEN + "%player%"), MVP(ChatColor.AQUA + "%player%"), YOUTUBER(ChatColor.GOLD + "%player%"), OWNER(ChatColor.DARK_PURPLE + "%player%"), DEV(ChatColor.DARK_RED + "%player%");
+	ADMIN(ChatColor.RED + "%player%"), DEV(ChatColor.DARK_RED + "%player%"), MOD(ChatColor.BLUE + "%player%"), MVP(ChatColor.AQUA + "%player%"), OWNER(ChatColor.DARK_PURPLE + "%player%"), PLAYER(ChatColor.GRAY + "%player%"), VIP(ChatColor.GREEN + "%player%"), YOUTUBER(ChatColor.GOLD + "%player%");
 	/**
 	 * The Type.
 	 */

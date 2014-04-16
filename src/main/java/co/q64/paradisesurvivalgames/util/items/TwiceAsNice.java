@@ -49,111 +49,16 @@ import co.q64.paradisesurvivalgames.managers.SGApi;
 @Builder
 public class TwiceAsNice implements Listener {
 
-	private ItemStack item;
-	private ItemMeta meta;
-	private Material material;
-	private boolean leftClick;
-	private boolean rightClick;
-	private List<String> lore;
 	private String displayName;
+	private ItemStack item;
+	private boolean leftClick;
+	private List<String> lore;
+	private Material material;
+	private ItemMeta meta;
+	private boolean rightClick;
 
-	@SuppressWarnings("deprecation")
-	@EventHandler(priority = EventPriority.LOWEST)
-	public void playerJoin(final PlayerJoinEvent e) {
-
-		ItemStack it = this.item.clone();
-		e.getPlayer().getInventory().setItem(0, it);
-		e.getPlayer().closeInventory();
-		SGApi.getPlugin().getServer().getScheduler().runTask(SGApi.getPlugin(), new Runnable() {
-			@Override
-			public void run() {
-
-				e.getPlayer().updateInventory();
-			}
-		});
-	}
-
-	@EventHandler(priority = EventPriority.LOWEST)
-	public void onRightClick(PlayerInteractEvent e) {
-		if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-
-			ItemStack it = e.getItem();
-			/*
-			 * if(!it.getType().equals(this.material)){ return; } try {
-			 * if(it.getItemMeta().getDisplayName() == null ||
-			 * !(it.getItemMeta()
-			 * .getDisplayName().equalsIgnoreCase(ChatColor.stripColor
-			 * (this.displayName)))){ return; } } catch (NullPointerException
-			 * e1) { return; }
-			 */
-			Player p = e.getPlayer();
-
-			double recoilBack = 0.3d;
-			Projectile snowball = p.launchProjectile(Snowball.class);
-			p.setVelocity(p.getLocation().getDirection().multiply(-recoilBack));
-			snowball.setVelocity(p.getLocation().getDirection().multiply(3.0d));
-			Firework fw = (Firework) snowball.getWorld().spawnEntity(snowball.getLocation(), EntityType.FIREWORK);
-			FireworkMeta fwm = (FireworkMeta) SGApi.getScheduler().runNow(new RandomFirework());
-			fw.setFireworkMeta(fwm);
-			fw.detonate();
-
-		}
-
-	}
-
-	@EventHandler(priority = EventPriority.LOW)
-	public void onLeftClick(PlayerInteractEvent e) {
-		if (e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.LEFT_CLICK_AIR) {
-
-			ItemStack it = e.getItem();
-			if (!it.getType().equals(this.material)) {
-				return;
-			}
-			try {
-				if (it.getItemMeta().getDisplayName() == null || !(it.getItemMeta().getDisplayName().equalsIgnoreCase(this.displayName))) {
-					return;
-				}
-			} catch (NullPointerException e1) {
-				return;
-			}
-			Player p = e.getPlayer();
-			p.playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 3.0f, 1.0f);
-		}
-	}
-
-	@EventHandler(priority = EventPriority.LOW)
-	public void onHit(ProjectileHitEvent event) {
-
-		if ((event.getEntity().getShooter() instanceof Player)) {
-			Snowball snowball = (Snowball) event.getEntity();
-			Player player = (Player) snowball.getShooter();
-			World world = snowball.getWorld();
-			BlockIterator bi = new BlockIterator(world, snowball.getLocation().toVector(), snowball.getVelocity().normalize(), 0, 4);
-			Block hit = null;
-			while (bi.hasNext()) {
-				hit = bi.next();
-				if (!hit.getType().equals(Material.AIR)) {
-					break;
-				}
-			}
-			if (hit != null) {
-				System.out.println("The Real block is " + hit.getType() + " location is at  " + hit.getLocation().toVector().toString());
-
-				BlockState blockState = hit.getState();
-				player = (Player) event.getEntity().getShooter();
-				System.out.println("Hit " + blockState.getType());
-
-				if (blockState.getType().equals(Material.STONE)) {
-					player.sendMessage(ChatColor.GOLD + "Turning Stone to Gold");
-					blockState.setType(Material.GOLD_BLOCK);
-					blockState.update(true);
-
-				}
-
-			}
-
-		}
-
+	public void applyMeta() {
+		item.setItemMeta(meta);
 	}
 
 	@EventHandler(priority = EventPriority.LOWEST)
@@ -208,15 +113,110 @@ public class TwiceAsNice implements Listener {
 		item = new ItemStack(material, 1);
 	}
 
+	@EventHandler(priority = EventPriority.LOW)
+	public void onHit(ProjectileHitEvent event) {
+
+		if ((event.getEntity().getShooter() instanceof Player)) {
+			Snowball snowball = (Snowball) event.getEntity();
+			Player player = (Player) snowball.getShooter();
+			World world = snowball.getWorld();
+			BlockIterator bi = new BlockIterator(world, snowball.getLocation().toVector(), snowball.getVelocity().normalize(), 0, 4);
+			Block hit = null;
+			while (bi.hasNext()) {
+				hit = bi.next();
+				if (!hit.getType().equals(Material.AIR)) {
+					break;
+				}
+			}
+			if (hit != null) {
+				System.out.println("The Real block is " + hit.getType() + " location is at  " + hit.getLocation().toVector().toString());
+
+				BlockState blockState = hit.getState();
+				player = (Player) event.getEntity().getShooter();
+				System.out.println("Hit " + blockState.getType());
+
+				if (blockState.getType().equals(Material.STONE)) {
+					player.sendMessage(ChatColor.GOLD + "Turning Stone to Gold");
+					blockState.setType(Material.GOLD_BLOCK);
+					blockState.update(true);
+
+				}
+
+			}
+
+		}
+
+	}
+
+	@EventHandler(priority = EventPriority.LOW)
+	public void onLeftClick(PlayerInteractEvent e) {
+		if (e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.LEFT_CLICK_AIR) {
+
+			ItemStack it = e.getItem();
+			if (!it.getType().equals(this.material)) {
+				return;
+			}
+			try {
+				if (it.getItemMeta().getDisplayName() == null || !(it.getItemMeta().getDisplayName().equalsIgnoreCase(this.displayName))) {
+					return;
+				}
+			} catch (NullPointerException e1) {
+				return;
+			}
+			Player p = e.getPlayer();
+			p.playSound(p.getLocation(), Sound.ENDERDRAGON_GROWL, 3.0f, 1.0f);
+		}
+	}
+
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onRightClick(PlayerInteractEvent e) {
+		if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+
+			ItemStack it = e.getItem();
+			/*
+			 * if(!it.getType().equals(this.material)){ return; } try {
+			 * if(it.getItemMeta().getDisplayName() == null ||
+			 * !(it.getItemMeta()
+			 * .getDisplayName().equalsIgnoreCase(ChatColor.stripColor
+			 * (this.displayName)))){ return; } } catch (NullPointerException
+			 * e1) { return; }
+			 */
+			Player p = e.getPlayer();
+
+			double recoilBack = 0.3d;
+			Projectile snowball = p.launchProjectile(Snowball.class);
+			p.setVelocity(p.getLocation().getDirection().multiply(-recoilBack));
+			snowball.setVelocity(p.getLocation().getDirection().multiply(3.0d));
+			Firework fw = (Firework) snowball.getWorld().spawnEntity(snowball.getLocation(), EntityType.FIREWORK);
+			FireworkMeta fwm = (FireworkMeta) SGApi.getScheduler().runNow(new RandomFirework());
+			fw.setFireworkMeta(fwm);
+			fw.detonate();
+
+		}
+
+	}
+
+	@SuppressWarnings("deprecation")
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void playerJoin(final PlayerJoinEvent e) {
+
+		ItemStack it = this.item.clone();
+		e.getPlayer().getInventory().setItem(0, it);
+		e.getPlayer().closeInventory();
+		SGApi.getPlugin().getServer().getScheduler().runTask(SGApi.getPlugin(), new Runnable() {
+			@Override
+			public void run() {
+
+				e.getPlayer().updateInventory();
+			}
+		});
+	}
+
 	public void setAllLore() {
 
 		this.meta.addEnchant(Enchantment.DAMAGE_ALL, 10, true);
 		this.meta.setDisplayName(displayName);
 		this.meta.setLore(this.lore);
-	}
-
-	public void applyMeta() {
-		item.setItemMeta(meta);
 	}
 
 }

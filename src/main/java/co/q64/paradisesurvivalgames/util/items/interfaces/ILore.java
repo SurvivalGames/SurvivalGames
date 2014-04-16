@@ -13,16 +13,16 @@ import java.util.List;
  */
 public interface ILore extends IMetable {
 	/**
-	 * Gets lore.
-	 *
-	 * @return the lore
-	 */
-	public List<String> getLore();
-
-	/**
 	 * Add line.
 	 *
 	 * @param line the line
 	 */
 	public void addLoreLine(String line);
+
+	/**
+	 * Gets lore.
+	 *
+	 * @return the lore
+	 */
+	public List<String> getLore();
 }

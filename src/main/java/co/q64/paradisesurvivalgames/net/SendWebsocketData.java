@@ -22,15 +22,51 @@ public class SendWebsocketData {
 	public static Map<String, String> music = new HashMap<String, String>();
 	static Random rnd = new Random();
 
-	public static void playToPlayer(final Player p, final String data) {
+	public static String getRandomMusic(String key) {
+		File soundcolud = new File(SGApi.getPlugin().getDataFolder(), "soundcloud.yml");
+		if (!soundcolud.exists()) {
+			SGApi.getPlugin().saveResource("soundcloud.yml", false);
+		}
+		FileConfiguration cfg = YamlConfiguration.loadConfiguration(soundcolud);
+		List<Integer> list = cfg.getIntegerList(key);
+		return String.valueOf(list.get(rnd.nextInt(list.size())));
+	}
+
+	public static String join(List<String> list, String delim) {
+
+		StringBuilder sb = new StringBuilder();
+
+		String loopDelim = "";
+
+		for (String s : list) {
+
+			sb.append(loopDelim);
+			sb.append(s);
+
+			loopDelim = delim;
+		}
+
+		return sb.toString();
+	}
+
+	public static void playMusicToPlayer(Player p, String data) {
+		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
+			return;
+		music.remove(p.getName());
+		WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "music:" + data);
+	}
+
+	public static void playToAll(final String data) {
 		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
 			return;
 		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
 			@Override
 			public void run() {
-				if (WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()) != null) {
-					WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "sound:" + data);
+				for (Player p : Bukkit.getOnlinePlayers()) {
+					if (WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()) != null) {
+						WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "sound:" + data);
+					}
 				}
 			}
 		});
@@ -55,21 +91,25 @@ public class SendWebsocketData {
 
 	}
 
-	public static void playToAll(final String data) {
+	public static void playToPlayer(final Player p, final String data) {
 		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
 			return;
 		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
 
 			@Override
 			public void run() {
-				for (Player p : Bukkit.getOnlinePlayers()) {
-					if (WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()) != null) {
-						WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "sound:" + data);
-					}
+				if (WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()) != null) {
+					WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "sound:" + data);
 				}
 			}
 		});
 
+	}
+
+	public static void stopMusic(Player p) {
+		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
+			return;
+		WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "stop");
 	}
 
 	public static void updateArenaStatusForPlayer(final Player p) {
@@ -101,45 +141,5 @@ public class SendWebsocketData {
 			}
 		});
 
-	}
-
-	public static void playMusicToPlayer(Player p, String data) {
-		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
-			return;
-		music.remove(p.getName());
-		WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "music:" + data);
-	}
-
-	public static void stopMusic(Player p) {
-		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
-			return;
-		WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "stop");
-	}
-
-	public static String join(List<String> list, String delim) {
-
-		StringBuilder sb = new StringBuilder();
-
-		String loopDelim = "";
-
-		for (String s : list) {
-
-			sb.append(loopDelim);
-			sb.append(s);
-
-			loopDelim = delim;
-		}
-
-		return sb.toString();
-	}
-
-	public static String getRandomMusic(String key) {
-		File soundcolud = new File(SGApi.getPlugin().getDataFolder(), "soundcloud.yml");
-		if (!soundcolud.exists()) {
-			SGApi.getPlugin().saveResource("soundcloud.yml", false);
-		}
-		FileConfiguration cfg = YamlConfiguration.loadConfiguration(soundcolud);
-		List<Integer> list = cfg.getIntegerList(key);
-		return String.valueOf(list.get(rnd.nextInt(list.size())));
 	}
 }

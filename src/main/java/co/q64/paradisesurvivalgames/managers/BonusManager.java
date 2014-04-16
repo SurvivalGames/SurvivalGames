@@ -9,7 +9,41 @@ import org.bukkit.entity.Player;
 
 public class BonusManager {
 
+	public class Bonus {
+		final int id;
+		final String[] lore;
+		final String name;
+		final int points;
+
+		public Bonus(String name, String[] lore, int points, int id) {
+			this.name = name;
+			this.lore = lore;
+			this.points = points;
+			this.id = id;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public String[] getLore() {
+			return lore;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public int getPoints() {
+			return points;
+		}
+	}
+
 	private final ArrayList<Bonus> bonus = new ArrayList<>();
+
+	void register(String name, String[] lore, int points) {
+		bonus.add(new Bonus(name, lore, points, bonus.size()));
+	}
 
 	public void registerAll() {
 		register("Who's in charge NOW?!", new String[] { "Kill an Administrator in the survival games" }, 100);
@@ -28,45 +62,11 @@ public class BonusManager {
 		// TODO Translate these? Do we need to?
 	}
 
-	void register(String name, String[] lore, int points) {
-		bonus.add(new Bonus(name, lore, points, bonus.size()));
-	}
-
 	public void trigger(Player p, int id) {
 		Bonus b = bonus.get(id);
 		Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&4" + p.getDisplayName() + ": &e&l" + b.getName()));
 		for (int i = 0; i < b.getLore().length; i++) {
 			Bukkit.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&3    " + Arrays.toString(b.getLore())));
-		}
-	}
-
-	public class Bonus {
-		final int id;
-		final String name;
-		final String[] lore;
-		final int points;
-
-		public Bonus(String name, String[] lore, int points, int id) {
-			this.name = name;
-			this.lore = lore;
-			this.points = points;
-			this.id = id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public String[] getLore() {
-			return lore;
-		}
-
-		public int getPoints() {
-			return points;
-		}
-
-		public int getId() {
-			return id;
 		}
 	}
 }

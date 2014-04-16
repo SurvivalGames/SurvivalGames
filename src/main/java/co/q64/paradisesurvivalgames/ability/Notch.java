@@ -20,13 +20,6 @@ public class Notch extends SGAbility implements Listener {
 	}
 
 	@EventHandler(priority = EventPriority.HIGH)
-	public void onBlockPlace(BlockPlaceEvent event) {
-		if (!event.getBlock().getType().equals(Material.DIAMOND_ORE))
-			return;
-		BlockListener.addBreakable(event.getBlock());
-	}
-
-	@EventHandler(priority = EventPriority.HIGH)
 	public void onBlockBreak(BlockBreakEvent event) {
 		if (hasAbility(event.getPlayer()) && event.getBlock().getType() == Material.DIAMOND_ORE) {
 			FireworkEffect fEffect = FireworkEffect.builder().flicker(false).withColor(Color.BLUE).withFade(Color.AQUA).with(Type.BALL_LARGE).trail(false).build();
@@ -36,5 +29,12 @@ public class Notch extends SGAbility implements Listener {
 				//If the firework dosen't work... to bad
 			}
 		}
+	}
+
+	@EventHandler(priority = EventPriority.HIGH)
+	public void onBlockPlace(BlockPlaceEvent event) {
+		if (!event.getBlock().getType().equals(Material.DIAMOND_ORE))
+			return;
+		BlockListener.addBreakable(event.getBlock());
 	}
 }
