@@ -162,6 +162,7 @@ public class MenuManager {
 			items.add(item);
 		}
 		Collections.sort(items, new Comparator<ItemStack>() {
+			@Override
 			public int compare(ItemStack o1, ItemStack o2) {
 				return Integer.compare(o1.getAmount(), o2.getAmount());
 			}
@@ -180,6 +181,7 @@ public class MenuManager {
 			a.add(arena);
 		}
 		Collections.sort(a, new Comparator<SGArena>() {
+			@Override
 			public int compare(SGArena o1, SGArena o2) {
 				return Integer.compare(o1.getPlayers().size(), o2.getPlayers().size());
 			}

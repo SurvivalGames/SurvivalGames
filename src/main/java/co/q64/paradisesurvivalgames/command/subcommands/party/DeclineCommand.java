@@ -24,6 +24,7 @@ public class DeclineCommand implements SubCommand {
 	 *
 	 * @param sender The player executing the command
 	 */
+	@Override
 	public void execute(String cmd, Player sender, String[] args) {
 		if (cmd.equalsIgnoreCase("decline")) {
 			UUID id = SGApi.getPartyManager().getInvites().get(sender.getName());

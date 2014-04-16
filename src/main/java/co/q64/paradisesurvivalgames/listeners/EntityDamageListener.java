@@ -33,6 +33,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -85,7 +86,7 @@ public class EntityDamageListener implements Listener {
 		}
 
 		if (SGApi.getPlugin().getPluginConfig().doBloodEffect()) {
-			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(TheSurvivalGames.getPlugin(TheSurvivalGames.class), new Runnable() {
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(JavaPlugin.getPlugin(TheSurvivalGames.class), new Runnable() {
 				@Override
 				public void run() {
 					for (int i = 0; i < event.getDamage(); i++) {
@@ -159,7 +160,7 @@ public class EntityDamageListener implements Listener {
 				damaged.setVelocity(new Vector(0, 0, 0.5));
 				for (int i = 0; i < 4; i++)
 					fireworkIt(event.getDamager().getLocation());
-				TheSurvivalGames.getPlugin(TheSurvivalGames.class).getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("FAIL") + " &e&l" + event.getDamager()));
+				JavaPlugin.getPlugin(TheSurvivalGames.class).getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("FAIL") + " &e&l" + event.getDamager()));
 			}
 		}
 		return;
@@ -200,7 +201,7 @@ public class EntityDamageListener implements Listener {
 					damaged.setVelocity(new Vector(0, 0, 0.5));
 					for (int i = 0; i < 4; i++)
 						fireworkIt(damaged.getLocation());
-					TheSurvivalGames.getPlugin(TheSurvivalGames.class).getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("FAIL") + " &e&l" + event.getCause().toString()));
+					JavaPlugin.getPlugin(TheSurvivalGames.class).getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("FAIL") + " &e&l" + event.getCause().toString()));
 				}
 				event.setCancelled(true);
 

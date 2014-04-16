@@ -24,6 +24,7 @@ public class KickCommand implements SubCommand {
 	 *
 	 * @param sender The player executing the command
 	 */
+	@Override
 	public void execute(String cmd, Player sender, String[] args) {
 		if ((args.length == 1) && (args[0].equalsIgnoreCase("kick"))) {
 			UUID id = SGApi.getPartyManager().getPlayers().get(sender.getName());

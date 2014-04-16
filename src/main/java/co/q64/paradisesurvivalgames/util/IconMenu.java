@@ -106,6 +106,7 @@ public class IconMenu implements Listener {
 				if (e.willClose()) {
 					final Player p = (Player) event.getWhoClicked();
 					Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+						@Override
 						public void run() {
 							p.closeInventory();
 						}

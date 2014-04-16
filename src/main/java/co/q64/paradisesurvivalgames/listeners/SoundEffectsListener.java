@@ -14,7 +14,7 @@ public class SoundEffectsListener implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onProjectileHit(ProjectileHitEvent event) {
 		if ((event.getEntity() instanceof Projectile)) {
-			Projectile a = (Projectile) event.getEntity();
+			Projectile a = event.getEntity();
 			if (a.getShooter() instanceof Player) {
 				Player p = (Player) a.getShooter();
 				Bukkit.getLogger().info("Player " + p.getName() + " hit something with an arrow, " + "so I think I'll play a sound");

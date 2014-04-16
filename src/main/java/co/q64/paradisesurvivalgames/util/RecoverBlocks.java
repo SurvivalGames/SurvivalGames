@@ -15,6 +15,7 @@ public class RecoverBlocks {
 		for (final Block b : blocks) {
 			final int i = index;
 			new BukkitRunnable() {
+				@Override
 				public void run() {
 					b.setType(replace.get(i));
 				}

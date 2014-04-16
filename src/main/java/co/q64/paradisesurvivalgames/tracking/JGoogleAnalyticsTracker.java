@@ -413,6 +413,7 @@ public class JGoogleAnalyticsTracker {
 		switch (mode) {
 		case MULTI_THREAD:
 			Thread t = new Thread(asyncThreadGroup, "AnalyticsThread-" + asyncThreadGroup.activeCount()) {
+				@Override
 				public void run() {
 					synchronized (JGoogleAnalyticsTracker.class) {
 						asyncThreadsRunning++;
@@ -478,6 +479,7 @@ public class JGoogleAnalyticsTracker {
 		if (backgroundThread == null) {
 			backgroundThreadMayRun = true;
 			backgroundThread = new Thread(asyncThreadGroup, "AnalyticsBackgroundThread") {
+				@Override
 				public void run() {
 					Bukkit.getLogger().info("AnalyticsBackgroundThread started");
 					while (backgroundThreadMayRun) {

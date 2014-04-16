@@ -30,7 +30,7 @@ public class ThrowableSpawnEggs implements Listener {
 			if ((!(item.getData() instanceof SpawnEgg)) || (item == null))
 				return;
 			SpawnEgg segg = (SpawnEgg) item.getData();
-			Egg egg = (Egg) event.getPlayer().launchProjectile(Egg.class);
+			Egg egg = event.getPlayer().launchProjectile(Egg.class);
 			this.eggs.put(egg, segg.getSpawnedType());
 			if (item.getAmount() > 1)
 				item.setAmount(item.getAmount() - 1);
@@ -45,7 +45,7 @@ public class ThrowableSpawnEggs implements Listener {
 	public void throwEgg(PlayerEggThrowEvent event) {
 		Egg egg = event.getEgg();
 		if (this.eggs.containsKey(egg)) {
-			EntityType entityType = (EntityType) this.eggs.get(egg);
+			EntityType entityType = this.eggs.get(egg);
 			Entity entity = egg.getWorld().spawnEntity(egg.getLocation(), entityType);
 			if (entityType == EntityType.SHEEP) {
 				((Sheep) entity).setColor(org.bukkit.DyeColor.values()[((int) (java.lang.Math.random() * org.bukkit.DyeColor.values().length))]);

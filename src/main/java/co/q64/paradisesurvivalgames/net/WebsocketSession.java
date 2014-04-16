@@ -20,6 +20,7 @@ public class WebsocketSession {
 		this.name = name;
 	}
 
+	@Override
 	public String toString() {
 		return "WebsocketSession.java - Host: " + host + " Name: " + name;
 	}

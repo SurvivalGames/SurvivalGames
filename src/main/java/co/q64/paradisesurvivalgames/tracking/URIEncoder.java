@@ -43,7 +43,7 @@ public class URIEncoder {
 				uri.append(c);
 			} else {
 				uri.append("%");
-				uri.append(Integer.toHexString((int) c));
+				uri.append(Integer.toHexString(c));
 			}
 		}
 		return uri.toString();

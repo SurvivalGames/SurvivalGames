@@ -20,6 +20,7 @@ public class HelpCommand implements SubCommand {
 	 * @param sender The player executing the command
 	 * @param args   The page of help to be shown
 	 */
+	@Override
 	public void execute(String cmd, Player sender, String[] args) {
 		if ((args.length == 0) || (cmd.equalsIgnoreCase("help")) || (cmd.equalsIgnoreCase("?"))) {
 			staticExecute(sender, args);

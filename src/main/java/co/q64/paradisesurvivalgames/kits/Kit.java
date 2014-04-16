@@ -49,6 +49,7 @@ public class Kit {
 		return type;
 	}
 
+	@Override
 	public String toString() {
 		return "[Kit - Name: " + kitName + " Type: " + type + "]";
 	}
