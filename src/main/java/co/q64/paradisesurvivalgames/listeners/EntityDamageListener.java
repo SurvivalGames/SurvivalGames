@@ -305,7 +305,7 @@ public class EntityDamageListener implements Listener {
 		}
 		damaged.getInventory().clear();
 		damaged.getInventory().setArmorContents(null);
-		ItemManager.getInstance().getStar().givePlayerItem(damaged);
+		ItemManager.getInstance().getItem("spec-item").givePlayerItem(damaged);
 	}
 
 	public void fireworkIt(Location loc) {
