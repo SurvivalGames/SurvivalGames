@@ -108,7 +108,7 @@ public class ItemManager implements Listener {
 		if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
 			event.getPlayer().getInventory().clear();
 			if (SGApi.getPlugin().getPluginConfig().getUseServers())
-				getItem("connenct-item").givePlayerItem(event.getPlayer());
+				getItem("connect-item").givePlayerItem(event.getPlayer());
 			getItem("join-item").givePlayerItem(event.getPlayer());
 		}
 	}
@@ -122,7 +122,7 @@ public class ItemManager implements Listener {
 				if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
 					event.getPlayer().getInventory().clear();
 					if (SGApi.getPlugin().getPluginConfig().getUseServers())
-						getItem("connenct-item").givePlayerItem(event.getPlayer());
+						getItem("connect-item").givePlayerItem(event.getPlayer());
 					getItem("join-item").givePlayerItem(event.getPlayer());
 				}
 			}
