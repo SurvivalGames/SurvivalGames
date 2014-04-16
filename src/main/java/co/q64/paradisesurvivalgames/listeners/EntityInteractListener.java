@@ -6,6 +6,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
+import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
 import co.q64.paradisesurvivalgames.managers.SGApi;
 
 public class EntityInteractListener implements Listener {
@@ -14,5 +15,10 @@ public class EntityInteractListener implements Listener {
 		if (event.getRightClicked() instanceof EnderCrystal) {
 			SGApi.getKitManager().displayDefaultKitSelectionMenu(event.getPlayer());
 		}
+		try {
+			if (SGApi.getArenaManager().getArena(event.getPlayer()).getSpectators().contains(event.getPlayer().getName())){
+				event.setCancelled(true);
+			}
+		} catch (ArenaNotFoundException e){}
 	}
 }
