@@ -108,6 +108,7 @@ public class ArenaManager {
 			p.setAllowFlight(true);
 			p.setFlying(true);
 			p.setFoodLevel(20);
+			p.setExp(0);
 			PlayerVanishUtil.hideAll(p);
 			return;
 		}
