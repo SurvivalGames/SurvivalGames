@@ -1,7 +1,7 @@
-name: TheSurvivalGames
+name: ParadiseSurvivalGames
 main: co.q64.paradisesurvivalgames.TheSurvivalGames
 version: 1.0.0
-author: Some people, but not TheEpicButterStudios
+author: Quantum64, AgentTroll, Relicum, TGICN, calebbfmv
 database: true
 softdepend: [Vault]
 
