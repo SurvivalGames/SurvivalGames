@@ -104,13 +104,15 @@ public class ItemManager implements Listener {
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onWorldChange(final PlayerChangedWorldEvent event) {
-		if (event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
+		if (event.getPlayer().getWorld().getName().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
 			event.getPlayer().getInventory().clear();
-			getClock().givePlayerItem(event.getPlayer());
+			if (SGApi.getPlugin().getPluginConfig().getUseServers())
+				getClock().givePlayerItem(event.getPlayer());
 			getCompass().givePlayerItem(event.getPlayer());
 		}
 	}
 
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerJoin(final PlayerJoinEvent event) {
 		Bukkit.getScheduler().runTaskLater(SGApi.getPlugin(), new Runnable() {
 

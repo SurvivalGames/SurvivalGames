@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>co.q64.paradisesurvivalgames</groupId>
-  <artifactId>TheSurvivalGames</artifactId>
+  <artifactId>ParadiseSurvivalGames</artifactId>
   <name>ParadiseSurvivalGames</name>
   <version>1.0.0</version>
   <build>
@@ -19,7 +19,7 @@
         </includes>
       </resource>
     </resources>
-    <finalName>TheSurvivalGames</finalName>
+    <finalName>ParadiseSurvivalGames</finalName>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -71,7 +71,6 @@
         <configuration>
           <promoteTransitiveDependencies>false</promoteTransitiveDependencies>
           <minimizeJar>true</minimizeJar>
-          <outputDirectory>${basedir}</outputDirectory>
           <filters>
             <filter>
               <artifact>*:*</artifact>
@@ -108,13 +107,6 @@
           <descriptors>
             <descriptor>src/main/assembly/package.xml</descriptor>
           </descriptors>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.3.1</version>
-        <configuration>
-          <outputDirectory>${basedir}</outputDirectory>
         </configuration>
       </plugin>
     </plugins>
