@@ -20,6 +20,8 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
@@ -432,7 +434,7 @@ public class ArenaManager {
 	{
 		final double amount = p.getMaxHealth() - p.getHealth();
 		final EntityRegainHealthEvent erhe = new EntityRegainHealthEvent(p, amount, RegainReason.CUSTOM);
-		TheSurvivalGames.getServer().getPluginManager().callEvent(erhe);
+		SGApi.getPlugin().getServer().getPluginManager().callEvent(erhe);
 		if (erhe.isCancelled())
 		{
 			return;

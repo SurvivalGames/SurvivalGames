@@ -152,7 +152,10 @@ public class TheSurvivalGames extends JavaPlugin {
 
 		registerAll();
 
-		saveResource("ArenaManager.yml", false);
+		File arenaManagerConfig = new File(getDataFolder(), "ArenaManager.yml"); // Added to fix bug #11 which was an "Annoyance" in the console.
+		if (!arenaManagerConfig.exists()) {
+			saveResource("ArenaManager.yml", false);
+		}
 		ConfigTemplate<ArenaManager> configTemplate = new ManagerConfigTemplate();
 		configTemplate.deserialize();
 
