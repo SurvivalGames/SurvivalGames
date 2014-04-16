@@ -19,14 +19,15 @@ public class PlayerNameUtil {
 		list.add("Quantum64");
 		list.add("Trolldood3");
 		list.add("Relicum");
-		list.add("sam4215");
+		//list.add("sam4215"); - Removed
 		list.add("Jonthespartan29");
 		list.add("GregPlaysMC");
+		list.add("TGI_CN");
 		//TODO: What's your IGN everyone?
 		//Quantum64 - Jonthespartan29
-		//TheEpicButterStudion - sam4215
 		//GregoriusMC - GregPlaysMC
 		//AgentTroll - Trolldude3
+		//TGICN - TGI_CN
 		return list;
 	}
 
