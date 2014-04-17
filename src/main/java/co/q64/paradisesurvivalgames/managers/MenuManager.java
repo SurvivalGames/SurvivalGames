@@ -35,7 +35,7 @@ public class MenuManager {
 			public void onOptionClick(OptionClickEvent event) {
 				if (event.getItem().getType() == Material.EMERALD_BLOCK) {
 					try {
-						SGApi.getArenaManager().addPlayer(event.getPlayer(), Integer.parseInt(event.getName().charAt(11) + ""));
+						SGApi.getArenaManager().addPlayer(event.getPlayer(), Integer.parseInt(event.getName().replaceAll("[^0-9]", "")));
 						event.setWillClose(true);
 					} catch (NumberFormatException e) {
 						e.printStackTrace();

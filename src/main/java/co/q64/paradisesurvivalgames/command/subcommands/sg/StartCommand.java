@@ -26,65 +26,15 @@ public class StartCommand implements SubCommand {
 	 */
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
-		if (!p.isOp() && !p.hasPermission("sg.start"))
-			return;
-		if (cmd.equalsIgnoreCase("start") && args.length == 2 && p.hasPermission("sg.gamestate.start")) {
-			int id = 0;
+		if (p.isOp() || p.hasPermission("sg.start")) {
 			try {
-				id = Integer.parseInt(args[0]);
-			} catch (NumberFormatException x) {
-				p.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("INVALID_ARENA") + args[0]);
+				SGArena a = SGApi.getArenaManager().getArena(Integer.parseInt(args[0]));
+				a.forceStart();
+			} catch (NumberFormatException | ArenaNotFoundException e) {
+				p.sendMessage("That's not a valid arena");
 			}
-			SGArena a;
-			try {
-				a = SGApi.getArenaManager().getArena(id);
-			} catch (ArenaNotFoundException e) {
-				Bukkit.getLogger().severe(e.getMessage());
-				return;
-			}
-
-			if (args[1].equals("starting") && p.hasPermission("sg.gamestate.starting")) {
-				if (!a.getState().equals(SGArena.ArenaState.STARTING_COUNTDOWN) || a.getState().isConvertable(a, SGArena.ArenaState.STARTING_COUNTDOWN)) {
-					p.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("CANT_FORCE"));
-					return;
-				}
-				a.setState(SGArena.ArenaState.STARTING_COUNTDOWN);
-				SGApi.getTimeManager(a).countdownLobby(1);
-				p.sendMessage(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("CHANGED_STATE"));
-				return;
-			}
-
-			if (args[1].equals("game") && p.hasPermission("sg.gamestate.ingame")) {
-				if (!a.getState().equals(SGArena.ArenaState.IN_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.IN_GAME)) {
-					p.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("CANT_FORCE"));
-					return;
-				}
-				a.setState(SGArena.ArenaState.IN_GAME);
-				SGApi.getTimeManager(a).countdown();
-				p.sendMessage(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("CHANGED_STATE"));
-				return;
-			}
-
-			if (args[1].equals("dm") && p.hasPermission("sg.gamestate.dm")) {
-				if (!a.getState().equals(SGArena.ArenaState.DEATHMATCH) || a.getState().isConvertable(a, SGArena.ArenaState.DEATHMATCH)) {
-					p.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("CANT_FORCE"));
-					return;
-				}
-				a.setState(SGArena.ArenaState.DEATHMATCH);
-				p.sendMessage(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("CHANGED_STATE"));
-				return;
-			}
-
-			if (args[1].equals("dm") && p.hasPermission("sg.gamestate.dm")) {
-				if (!a.getState().equals(SGArena.ArenaState.IN_GAME) || a.getState().isConvertable(a, SGArena.ArenaState.IN_GAME)) {
-					p.sendMessage(SGApi.getArenaManager().getError() + I18N.getLocaleString("CANT_FORCE"));
-					return;
-				}
-				a.setState(SGArena.ArenaState.DEATHMATCH);
-				SGApi.getTimeManager(a).countdownDm();
-				p.sendMessage(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("CHANGED_STATE"));
-			}
+				
+			
 		}
 	}
-
 }

@@ -84,6 +84,10 @@ public class ArenaManager {
 			PlayerVanishUtil.hideAll(p);
 			return;
 		}
+		if(a.getPlayers().size() >= a.getMaxPlayers()){
+			p.sendMessage("Sorry, but that arena is full!");
+			return;
+		}
 		if (a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
 			//a.broadcastVotes();
 			p.sendMessage(getPrefix() + "Type in /sg vote <ID> to vote for a map.");
@@ -145,18 +149,14 @@ public class ArenaManager {
 	 */
 	public SGArena createLobby(Player p) {
 		SGArena a = new SGArena();
-
 		int s = getArenas().size();
 		s += 1;
-
 		a.createArena(s);
-
 		a.setLobby(p.getLocation());
-
 		getArenas().add(a);
-
+		a.setMinPlayers(2);
+		a.setMaxPlayers(24);
 		a.restart();
-
 		return a;
 	}
 
@@ -179,7 +179,7 @@ public class ArenaManager {
 		});
 
 	}
-	
+
 	public void createWorldFromDownload(final Player creator, final String worldName, final String displayName) {
 
 		new DownloadMap(creator, worldName).begin();
@@ -277,31 +277,27 @@ public class ArenaManager {
 	public String getPrefix() {
 		return prefix;
 	}
-	
+
 	/**
 	 * Heal a given Player
 	 */
-	private void healPlayer(final Player p)
-	{
+	private void healPlayer(final Player p) {
 		final double amount = p.getMaxHealth() - p.getHealth();
 		final EntityRegainHealthEvent erhe = new EntityRegainHealthEvent(p, amount, RegainReason.CUSTOM);
 		SGApi.getPlugin().getServer().getPluginManager().callEvent(erhe);
-		if (erhe.isCancelled())
-		{
+		if (erhe.isCancelled()) {
 			return;
 		}
 
 		double newAmount = p.getHealth() + erhe.getAmount();
-		if (newAmount > p.getMaxHealth())
-		{
+		if (newAmount > p.getMaxHealth()) {
 			newAmount = p.getMaxHealth();
 		}
 
 		p.setHealth(newAmount);
 		p.setFoodLevel(20);
 		p.setFireTicks(0);
-		for (PotionEffect effect : p.getActivePotionEffects())
-		{
+		for (PotionEffect effect : p.getActivePotionEffects()) {
 			p.removePotionEffect(effect.getType());
 		}
 	}
@@ -339,24 +335,24 @@ public class ArenaManager {
 			}
 		}
 
-		if (maps.listFiles().length == 0)
-			return;
-		for (File file : maps.listFiles()) {
-			ConfigTemplate<SGWorld> configTemplate = new WorldConfigTemplate(file);
-			SGWorld world = configTemplate.deserialize();
-			Bukkit.getLogger().info("Loaded map! " + world.toString());
-			SGApi.getMultiWorldManager().getWorlds().add(world);
+		if (maps.listFiles().length != 0) {
+			for (File file : maps.listFiles()) {
+				ConfigTemplate<SGWorld> configTemplate = new WorldConfigTemplate(file);
+				SGWorld world = configTemplate.deserialize();
+				Bukkit.getLogger().info("Loaded map! " + world.toString());
+				SGApi.getMultiWorldManager().getWorlds().add(world);
+			}
 		}
 
-		if (arenas.listFiles().length == 0)
-			return;
-		for (File file : arenas.listFiles()) {
-			ConfigTemplate<SGArena> configTemplate = new ArenaConfigTemplate(file);
-			SGArena arena = configTemplate.deserialize();
-			Bukkit.getLogger().info("Loaded arena! " + arena.toString());
-			this.getArenas().add(arena);
+		if (arenas.listFiles().length != 0) {
+			for (File file : arenas.listFiles()) {
+				ConfigTemplate<SGArena> configTemplate = new ArenaConfigTemplate(file);
+				SGArena arena = configTemplate.deserialize();
+				Bukkit.getLogger().info("Loaded arena! " + arena.toString());
+				this.getArenas().add(arena);
 
-			arena.restart();
+				arena.restart();
+			}
 		}
 	}
 

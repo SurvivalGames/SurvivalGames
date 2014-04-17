@@ -40,6 +40,7 @@ public class TimeManager {
 	private Countdown end;
 	private Countdown g;
 	private Countdown gameTime;
+
 	public TimeManager(SGArena a) {
 		this.setA(a);
 	}
@@ -273,5 +274,14 @@ public class TimeManager {
 
 	public void setGameTime(final Countdown gameTime) {
 		this.gameTime = gameTime;
+	}
+
+	public void forceStart() {
+		if (getG() != null) {
+			Bukkit.getScheduler().cancelTask(getG().getId());
+			getG().ce.runCode();
+		} else {
+			
+		}
 	}
 }

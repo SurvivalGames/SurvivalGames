@@ -535,4 +535,8 @@ public class SGArena {
 		broadcastVotes();
 		getVoted().add(p.getName());
 	}
+
+	public void forceStart() {
+		SGApi.getTimeManager(this).forceStart();
+	}
 }
