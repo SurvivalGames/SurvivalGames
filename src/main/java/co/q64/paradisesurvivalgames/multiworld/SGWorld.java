@@ -44,15 +44,7 @@ public class SGWorld {
 
 	public World create() {
 		if (Bukkit.getServer().getWorld(name) != null) {
-			int i = 0;
-			while (true) {
-				String s = name + i;
-				if (Bukkit.getServer().getWorld(s) == null) {
-					wc = new WorldCreator(s);
-					break;
-				}
-				i++;
-			}
+			Bukkit.getLogger().severe("Could not load world because world " + name + " is already loaded.  If you just used the /reload command, ignore this error, it's all cool!");
 		}
 
 		return wc.createWorld();
