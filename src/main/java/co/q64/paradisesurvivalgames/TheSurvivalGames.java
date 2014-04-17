@@ -8,6 +8,7 @@ package co.q64.paradisesurvivalgames;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.BindException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -241,6 +242,8 @@ public class TheSurvivalGames extends JavaPlugin {
 		if (getPluginConfig().getUseServers()) {
 			try {
 				WebsocketServer.runServer();
+			} catch (BindException e){
+				Bukkit.getLogger().warning("Failed to bind port 8887 - if you just used /reload, ignore this error, otherwise be sure to set enable-servers to false in your config, or make sure port 8887 is open and not in use.");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
