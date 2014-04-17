@@ -16,8 +16,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
 import co.q64.paradisesurvivalgames.objects.MapHash;
 import co.q64.paradisesurvivalgames.objects.SGArena;
-import co.q64.paradisesurvivalgames.util.IconMenu;
-import co.q64.paradisesurvivalgames.util.IconMenu.OptionClickEvent;
+import co.q64.paradisesurvivalgames.util.gui.IconMenu;
+import co.q64.paradisesurvivalgames.util.gui.IconMenu.OptionClickEvent;
 
 public class MenuManager {
 	static MenuManager menuManager;

@@ -22,8 +22,8 @@ import org.bukkit.potion.PotionType;
 import co.q64.paradisesurvivalgames.event.KitGivenEvent;
 import co.q64.paradisesurvivalgames.kits.Kit;
 import co.q64.paradisesurvivalgames.kits.KitItem;
-import co.q64.paradisesurvivalgames.util.IconMenu;
 import co.q64.paradisesurvivalgames.util.ItemSerialization;
+import co.q64.paradisesurvivalgames.util.gui.IconMenu;
 
 public class KitManager {
 	private List<Kit> kits = new ArrayList<Kit>();

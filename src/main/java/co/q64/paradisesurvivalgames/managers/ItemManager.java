@@ -27,25 +27,14 @@ import co.q64.paradisesurvivalgames.util.player.items.ce.SingleExecutor;
 public class ItemManager implements Listener {
 
 	private static ItemManager instance;
-	private File cfgFile;
 	private Map<String, SGItem> items = new HashMap<String, SGItem>();
 	private FileConfiguration itemsConfig;
 
 	public ItemManager() {
 
-		cfgFile = new File(SGApi.getPlugin().getDataFolder(), "items.yml");
-		cfgFile.mkdirs();
-		try {
-			cfgFile.createNewFile();
-		} catch (IOException e) {
-			Bukkit.getLogger().severe("Faild to save items.yml file");
-			return;
-		}
+		SGApi.getPlugin().saveResource("items.yml", false);
 
-		itemsConfig = YamlConfiguration.loadConfiguration(cfgFile);
-		FileConfigurationOptions itemConfigOptions = itemsConfig.options();
-		itemConfigOptions.header("You can change the default material binds here\r\nUSE VALID BUKKIT ITEM NAMES ONLY");
-		itemConfigOptions.copyHeader(true);
+		itemsConfig = YamlConfiguration.loadConfiguration(new File(SGApi.getPlugin().getDataFolder(), "items.yml"));
 
 		registerItem("vote-item", Material.EMERALD, ChatColor.GREEN.toString() + ChatColor.BOLD + "Click to vote for a map", 4, true, true, new SingleExecutor() {
 
@@ -160,7 +149,7 @@ public class ItemManager implements Listener {
 	private String saveDefaults(String key, Material m) {
 		itemsConfig.set(key, m.toString());
 		try {
-			itemsConfig.save(cfgFile);
+			itemsConfig.save(new File(SGApi.getPlugin().getDataFolder(), "items.yml"));
 		} catch (IOException e) {}
 		return m.toString();
 	}

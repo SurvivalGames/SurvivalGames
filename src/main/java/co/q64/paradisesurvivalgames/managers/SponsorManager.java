@@ -29,8 +29,8 @@ import co.q64.paradisesurvivalgames.rollback.ChangedBlock;
 import co.q64.paradisesurvivalgames.util.EconUtil;
 import co.q64.paradisesurvivalgames.util.FireworkEffectPlayer;
 import co.q64.paradisesurvivalgames.util.FireworkUtil;
-import co.q64.paradisesurvivalgames.util.IconMenu;
-import co.q64.paradisesurvivalgames.util.IconMenu.OptionClickEvent;
+import co.q64.paradisesurvivalgames.util.gui.IconMenu;
+import co.q64.paradisesurvivalgames.util.gui.IconMenu.OptionClickEvent;
 
 public class SponsorManager {
 	SGArena a;

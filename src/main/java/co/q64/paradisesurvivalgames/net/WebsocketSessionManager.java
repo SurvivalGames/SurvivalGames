@@ -18,14 +18,12 @@ public class WebsocketSessionManager {
 	}
 
 	public void addSessionUsername(String host, String name) {
-		Bukkit.getLogger().info("Attemption to update session with data: " + name + " and a host of: " + host);
 		for (int i = 0; i < sessions.size(); i++) {
 			if (sessions.get(i).getHost().equalsIgnoreCase(host)) {
 				sessions.get(i).setName(name);
 				if (Bukkit.getPlayer(name) == null) {
 					WebsocketServer.s.sendData(sessions.get(i), "nullPlayer");
 				}
-				Bukkit.getLogger().info("Updated Websocket session information: " + sessions.get(i));
 			}
 		}
 	}
@@ -48,7 +46,6 @@ public class WebsocketSessionManager {
 
 	public WebsocketSession getSessionByName(String name) {
 		for (int i = 0; i < sessions.size(); i++) {
-			Bukkit.getLogger().info("Session gotten:" + sessions.get(i));
 			if (sessions.get(i).getName().equalsIgnoreCase(name))
 				return sessions.get(i);
 		}

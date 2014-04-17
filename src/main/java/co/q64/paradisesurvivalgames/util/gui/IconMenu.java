@@ -1,4 +1,4 @@
-package co.q64.paradisesurvivalgames.util;
+package co.q64.paradisesurvivalgames.util.gui;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -66,7 +66,6 @@ public class WebsocketServer extends WebSocketServer {
 		synchronized (con) {
 			for (WebSocket c : con) {
 				if (c.getRemoteSocketAddress().getAddress().getHostAddress().equalsIgnoreCase(session.getHost())) {
-					Bukkit.getLogger().info("Send data packet: " + data);
 					c.send(data);
 				}
 			}
