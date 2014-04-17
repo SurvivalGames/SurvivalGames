@@ -125,7 +125,7 @@ public class ItemManager implements Listener {
 	}
 
 	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, MultiExecutor exe) {
-		Material itemMat = Material.valueOf((itemsConfig.getString("key") == null) ? saveDefaults(key, defMat) : itemsConfig.getString("key"));
+		Material itemMat = Material.valueOf((itemsConfig.getString(key) == null) ? saveDefaults(key, defMat) : itemsConfig.getString(key));
 		ItemStack itemStack = new ItemStack(itemMat);
 		ItemMeta itemMeta = itemStack.getItemMeta();
 		itemMeta.setDisplayName(name);
@@ -136,7 +136,7 @@ public class ItemManager implements Listener {
 	}
 
 	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, SingleExecutor exe) {
-		Material itemMat = Material.valueOf((itemsConfig.getString("key") == null) ? saveDefaults(key, defMat) : itemsConfig.getString("key"));
+		Material itemMat = Material.valueOf((itemsConfig.getString(key) == null) ? saveDefaults(key, defMat) : itemsConfig.getString(key));
 		ItemStack itemStack = new ItemStack(itemMat);
 		ItemMeta itemMeta = itemStack.getItemMeta();
 		itemMeta.setDisplayName(name);
