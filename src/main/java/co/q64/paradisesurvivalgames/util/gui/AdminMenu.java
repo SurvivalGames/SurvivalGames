@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import org.apache.commons.io.FileUtils;
@@ -13,6 +15,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
 
 import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
 import co.q64.paradisesurvivalgames.locale.I18N;
@@ -173,7 +177,12 @@ public class AdminMenu {
 
 						@Override
 						public void run() {
-							gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, new ItemStack(Material.NAME_TAG));
+							ItemStack itemStack = new ItemStack(Material.NAME_TAG);
+							ItemMeta im = itemStack.getItemMeta();
+							im.setDisplayName("" + arena.getMaxPlayers());
+							im.setLore(Arrays.asList("Current Max Players"));
+							itemStack.setItemMeta(im);
+							gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, itemStack);
 							gui.open();
 						}
 					}, 10L);
@@ -207,7 +216,12 @@ public class AdminMenu {
 
 						@Override
 						public void run() {
-							gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, new ItemStack(Material.NAME_TAG));
+							ItemStack itemStack = new ItemStack(Material.NAME_TAG);
+							ItemMeta im = itemStack.getItemMeta();
+							im.setDisplayName("" + arena.getMinPlayers());
+							im.setLore(Arrays.asList("Current Min Players"));
+							itemStack.setItemMeta(im);
+							gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, itemStack);
 							gui.open();
 						}
 					}, 10L);
