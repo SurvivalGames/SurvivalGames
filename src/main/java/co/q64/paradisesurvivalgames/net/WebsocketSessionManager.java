@@ -60,4 +60,8 @@ public class WebsocketSessionManager {
 		sessions.add(new WebsocketSession(host));
 		Bukkit.getLogger().info("Opened Websocket session: " + getSessionByHost(host));
 	}
+
+	public void revokeSession(WebsocketSession session) {
+		sessions.remove(session);
+	}
 }

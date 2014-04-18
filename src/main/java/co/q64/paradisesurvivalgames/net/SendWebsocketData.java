@@ -50,6 +50,9 @@ public class SendWebsocketData {
 	}
 
 	public static void playMusicToPlayer(Player p, String data) {
+		if (!checkValidSession(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName())))
+			return;
+
 		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
 			return;
 		music.remove(p.getName());
@@ -92,6 +95,8 @@ public class SendWebsocketData {
 	}
 
 	public static void playToPlayer(final Player p, final String data) {
+		if (!checkValidSession(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName())))
+			return;
 		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
 			return;
 		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
@@ -113,6 +118,8 @@ public class SendWebsocketData {
 	}
 
 	public static void updateArenaStatusForPlayer(final Player p) {
+		if (!checkValidSession(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName())))
+			return;
 		if (!SGApi.getPlugin().getPluginConfig().getUseServers())
 			return;
 		Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
@@ -141,5 +148,12 @@ public class SendWebsocketData {
 			}
 		});
 
+	}
+
+	public static boolean checkValidSession(WebsocketSession session) {
+		if (session == null) {
+			return false;
+		}
+		return true;
 	}
 }
