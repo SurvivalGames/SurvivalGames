@@ -46,7 +46,7 @@ public class ItemManager implements Listener {
 			}
 		});
 		
-		registerItem("vote-item", Material.EMERALD, ChatColor.GREEN.toString() + ChatColor.BOLD + "Click to vote for a map", 4, true, true, new SingleExecutor() {
+		registerItem("vote-item", Material.EMERALD, ChatColor.GREEN.toString() + ChatColor.BOLD + "Click to vote for a map", 4, true, true, false, new SingleExecutor() {
 
 			@Override
 			public void use(Player player) {
@@ -54,7 +54,7 @@ public class ItemManager implements Listener {
 			}
 		});
 
-		registerItem("join-item", Material.COMPASS, ChatColor.GREEN.toString() + ChatColor.BOLD + "Click to join a SG game", 0, true, false, new SingleExecutor() {
+		registerItem("join-item", Material.COMPASS, ChatColor.GREEN.toString() + ChatColor.BOLD + "Click to join a SG game", 0, true, false, false, new SingleExecutor() {
 
 			@Override
 			public void use(Player player) {
@@ -62,7 +62,7 @@ public class ItemManager implements Listener {
 			}
 		});
 
-		registerItem("connect-item", Material.WATCH, ChatColor.YELLOW.toString() + ChatColor.BOLD + "Click to connect to the soundserver", 8, true, false, new SingleExecutor() {
+		registerItem("connect-item", Material.WATCH, ChatColor.YELLOW.toString() + ChatColor.BOLD + "Click to connect to the soundserver", 8, true, false, false, new SingleExecutor() {
 
 			@Override
 			public void use(Player p) {
@@ -80,7 +80,7 @@ public class ItemManager implements Listener {
 			}
 		});
 
-		registerItem("spec-item", Material.NETHER_STAR, ChatColor.AQUA.toString() + ChatColor.BOLD + "Click to spectate a player", 0, false, true, new SingleExecutor() {
+		registerItem("spec-item", Material.NETHER_STAR, ChatColor.AQUA.toString() + ChatColor.BOLD + "Click to spectate a player", 0, false, true, false, new SingleExecutor() {
 
 			@Override
 			public void use(Player player) {
@@ -135,28 +135,6 @@ public class ItemManager implements Listener {
 				getItem("connect-item").givePlayerItem(event.getPlayer());
 			getItem("join-item").givePlayerItem(event.getPlayer());
 		}
-	}
-
-	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, MultiExecutor exe) {
-		Material itemMat = Material.valueOf((itemsConfig.getString(key) == null) ? saveDefaults(key, defMat) : itemsConfig.getString(key));
-		ItemStack itemStack = new ItemStack(itemMat);
-		ItemMeta itemMeta = itemStack.getItemMeta();
-		itemMeta.setDisplayName(name);
-		itemStack.setItemMeta(itemMeta);
-
-		SGItem item = new SGItem(itemStack, slot, onlyInHub, onlyInGame, exe);
-		items.put(key, item);
-	}
-
-	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, SingleExecutor exe) {
-		Material itemMat = Material.valueOf((itemsConfig.getString(key) == null) ? saveDefaults(key, defMat) : itemsConfig.getString(key));
-		ItemStack itemStack = new ItemStack(itemMat);
-		ItemMeta itemMeta = itemStack.getItemMeta();
-		itemMeta.setDisplayName(name);
-		itemStack.setItemMeta(itemMeta);
-
-		SGItem item = new SGItem(itemStack, slot, onlyInHub, onlyInGame, exe);
-		items.put(key, item);
 	}
 	
 	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, boolean ifAdmin, SingleExecutor exe) {
