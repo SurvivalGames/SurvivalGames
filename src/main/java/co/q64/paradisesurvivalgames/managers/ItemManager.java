@@ -118,7 +118,7 @@ public class ItemManager implements Listener {
 						getItem("connect-item").givePlayerItem(event.getPlayer());
 					getItem("join-item").givePlayerItem(event.getPlayer());
 					if (event.getPlayer().hasPermission("sg.admin")|| event.getPlayer().isOp()){
-						getItem("admin-item");
+						getItem("admin-item").givePlayerItem(event.getPlayer());
 					}
 				}
 			}
@@ -134,6 +134,9 @@ public class ItemManager implements Listener {
 			if (SGApi.getPlugin().getPluginConfig().getUseServers())
 				getItem("connect-item").givePlayerItem(event.getPlayer());
 			getItem("join-item").givePlayerItem(event.getPlayer());
+			if (event.getPlayer().hasPermission("sg.admin")|| event.getPlayer().isOp()){
+				getItem("admin-item").givePlayerItem(event.getPlayer());
+			}
 		}
 	}
 	
