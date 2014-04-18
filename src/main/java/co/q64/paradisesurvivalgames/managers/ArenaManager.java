@@ -80,8 +80,12 @@ public class ArenaManager {
 			p.setAllowFlight(true);
 			p.setFlying(true);
 			p.setFoodLevel(20);
+			p.getInventory().clear();
+			p.getInventory().setArmorContents(null);
+			ItemManager.getInstance().getItem("spec-item").givePlayerItem(p);
 			p.setExp(0);
 			PlayerVanishUtil.hideAll(p);
+			
 			return;
 		}
 		if(a.getPlayers().size() >= a.getMaxPlayers()){

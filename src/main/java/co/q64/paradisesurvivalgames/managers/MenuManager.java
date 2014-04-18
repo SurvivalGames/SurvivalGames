@@ -33,7 +33,7 @@ public class MenuManager {
 
 			@Override
 			public void onOptionClick(OptionClickEvent event) {
-				if (event.getItem().getType() == Material.EMERALD_BLOCK) {
+				if (event.getItem().getType() == Material.EMERALD_BLOCK || event.getItem().getType() == Material.GOLD_BLOCK) {
 					try {
 						SGApi.getArenaManager().addPlayer(event.getPlayer(), Integer.parseInt(event.getName().replaceAll("[^0-9]", "")));
 						event.setWillClose(true);
