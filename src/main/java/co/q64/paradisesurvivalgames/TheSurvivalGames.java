@@ -259,7 +259,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		tracker.setEnabled(true);
 		tracker.trackEvent("Server Start", "Motd: " + ChatColor.stripColor(Bukkit.getMotd()) + ", " + "Max Players: " + Bukkit.getMaxPlayers() + ", Version: " + Bukkit.getVersion() + " running on " + Bukkit.getBukkitVersion() + ", Java: " + System.getProperty("java.version"));
 
-		getLogger().info("ParadiseSurvivalGames has been ebabeled!");
+		getLogger().info("ParadiseSurvivalGames has been enabeled!");
 	}
 
 	void registerAll() {

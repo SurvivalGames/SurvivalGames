@@ -20,6 +20,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import co.q64.paradisesurvivalgames.util.gui.AdminMenu;
 import co.q64.paradisesurvivalgames.util.player.items.SGItem;
 import co.q64.paradisesurvivalgames.util.player.items.ce.MultiExecutor;
 import co.q64.paradisesurvivalgames.util.player.items.ce.SingleExecutor;
@@ -36,6 +37,15 @@ public class ItemManager implements Listener {
 
 		itemsConfig = YamlConfiguration.loadConfiguration(new File(SGApi.getPlugin().getDataFolder(), "items.yml"));
 
+		registerItem("admin-item", Material.COMMAND, ChatColor.GREEN.toString() + ChatColor.BOLD + "Admin Setup", 4, true, false, true, new SingleExecutor() {
+			
+			@Override
+			public void use(Player player) {
+				new AdminMenu().display(player);
+				
+			}
+		});
+		
 		registerItem("vote-item", Material.EMERALD, ChatColor.GREEN.toString() + ChatColor.BOLD + "Click to vote for a map", 4, true, true, new SingleExecutor() {
 
 			@Override
@@ -107,6 +117,9 @@ public class ItemManager implements Listener {
 					if (SGApi.getPlugin().getPluginConfig().getUseServers())
 						getItem("connect-item").givePlayerItem(event.getPlayer());
 					getItem("join-item").givePlayerItem(event.getPlayer());
+					if (event.getPlayer().hasPermission("sg.admin")|| event.getPlayer().isOp()){
+						getItem("admin-item");
+					}
 				}
 			}
 
@@ -145,7 +158,29 @@ public class ItemManager implements Listener {
 		SGItem item = new SGItem(itemStack, slot, onlyInHub, onlyInGame, exe);
 		items.put(key, item);
 	}
+	
+	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, boolean ifAdmin, SingleExecutor exe) {
+		Material itemMat = Material.valueOf((itemsConfig.getString(key) == null) ? saveDefaults(key, defMat) : itemsConfig.getString(key));
+		ItemStack itemStack = new ItemStack(itemMat);
+		ItemMeta itemMeta = itemStack.getItemMeta();
+		itemMeta.setDisplayName(name);
+		itemStack.setItemMeta(itemMeta);
 
+		SGItem item = new SGItem(itemStack, slot, onlyInHub, onlyInGame, ifAdmin, exe);
+		items.put(key, item);
+	}
+
+	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, boolean ifAdmin, MultiExecutor exe) {
+		Material itemMat = Material.valueOf((itemsConfig.getString(key) == null) ? saveDefaults(key, defMat) : itemsConfig.getString(key));
+		ItemStack itemStack = new ItemStack(itemMat);
+		ItemMeta itemMeta = itemStack.getItemMeta();
+		itemMeta.setDisplayName(name);
+		itemStack.setItemMeta(itemMeta);
+
+		SGItem item = new SGItem(itemStack, slot, onlyInHub, onlyInGame, ifAdmin, exe);
+		items.put(key, item);
+	}
+	
 	private String saveDefaults(String key, Material m) {
 		itemsConfig.set(key, m.toString());
 		try {

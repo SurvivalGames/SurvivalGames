@@ -21,6 +21,7 @@ public class SGItem implements Listener {
 	private MultiExecutor me;
 	private boolean multiExecutor = false;
 	private boolean onlyInGame = false;
+	private boolean onlyIfAdmin = false;
 
 	private boolean onlyInHubWorld = false;
 
@@ -48,6 +49,28 @@ public class SGItem implements Listener {
 		this.item = item;
 		SGApi.getPlugin().getServer().getPluginManager().registerEvents(this, SGApi.getPlugin());
 	}
+	
+	public SGItem(ItemStack item, int slot, boolean onlyInHub, boolean onlyInGame, boolean onlyIfAdmin, MultiExecutor se) {
+		this.multiExecutor = true;
+		this.me = me;
+		this.slot = slot;
+		this.onlyInGame = onlyInGame;
+		this.onlyInHubWorld = onlyInHub;
+		this.onlyIfAdmin = onlyIfAdmin;
+		this.item = item;
+		SGApi.getPlugin().getServer().getPluginManager().registerEvents(this, SGApi.getPlugin());
+	}
+	
+	public SGItem(ItemStack item, int slot, boolean onlyInHub, boolean onlyInGame, boolean onlyIfAdmin, SingleExecutor se) {
+		this.multiExecutor = false;
+		this.se = se;
+		this.slot = slot;
+		this.onlyInGame = onlyInGame;
+		this.onlyInHubWorld = onlyInHub;
+		this.onlyIfAdmin = onlyIfAdmin;
+		this.item = item;
+		SGApi.getPlugin().getServer().getPluginManager().registerEvents(this, SGApi.getPlugin());
+	}
 
 	public void givePlayerItem(Player p) {
 		p.getInventory().setItem(slot, item);
@@ -66,17 +89,17 @@ public class SGItem implements Listener {
 				if (onlyInGame) {
 					if (SGApi.getArenaManager().isInGame(p)) {
 						if (multiExecutor) {
-							if (use.contains(p.getName())) {
-								use.remove(p.getName());
-								me.unUse(p);
-								return;
-							} else {
-								use.add(p.getName());
-								me.use(p);
-								return;
+							if (onlyIfAdmin && (p.hasPermission("sg.admin") || p.isOp())){
+								RunMultiExecuter(p);
+							} else{
+								RunMultiExecuter(p);
 							}
 						} else {
-							se.use(p);
+							if (onlyIfAdmin && (p.hasPermission("sg.admin") || p.isOp())){
+								se.use(p);
+							} else{
+								se.use(p);
+							}
 							return;
 						}
 					} else {
@@ -84,17 +107,17 @@ public class SGItem implements Listener {
 					}
 				} else {
 					if (multiExecutor) {
-						if (use.contains(p.getName())) {
-							use.remove(p.getName());
-							me.unUse(p);
-							return;
-						} else {
-							use.add(p.getName());
-							me.use(p);
-							return;
+						if (onlyIfAdmin && (p.hasPermission("sg.admin") || p.isOp())){
+							RunMultiExecuter(p);
+						} else{
+							RunMultiExecuter(p);
 						}
 					} else {
-						se.use(p);
+						if (onlyIfAdmin && (p.hasPermission("sg.admin") || p.isOp())){
+							se.use(p);
+						} else{
+							se.use(p);
+						}
 						return;
 					}
 				}
@@ -105,17 +128,17 @@ public class SGItem implements Listener {
 			if (onlyInGame) {
 				if (SGApi.getArenaManager().isInGame(p)) {
 					if (multiExecutor) {
-						if (use.contains(p.getName())) {
-							use.remove(p.getName());
-							me.unUse(p);
-							return;
-						} else {
-							use.add(p.getName());
-							me.use(p);
-							return;
+						if (onlyIfAdmin && (p.hasPermission("sg.admin") || p.isOp())){
+							RunMultiExecuter(p);
+						} else{
+							RunMultiExecuter(p);
 						}
 					} else {
-						se.use(p);
+						if (onlyIfAdmin && (p.hasPermission("sg.admin") || p.isOp())){
+							se.use(p);
+						} else{
+							se.use(p);
+						}
 						return;
 					}
 				} else {
@@ -123,20 +146,32 @@ public class SGItem implements Listener {
 				}
 			} else {
 				if (multiExecutor) {
-					if (use.contains(p.getName())) {
-						use.remove(p.getName());
-						me.unUse(p);
-						return;
-					} else {
-						use.add(p.getName());
-						me.use(p);
-						return;
+					if (onlyIfAdmin && (p.hasPermission("sg.admin") || p.isOp())){
+						RunMultiExecuter(p);
+					} else{
+						RunMultiExecuter(p);
 					}
 				} else {
-					se.use(p);
+					if (onlyIfAdmin && (p.hasPermission("sg.admin") || p.isOp())){
+						se.use(p);
+					} else{
+						se.use(p);
+					}
 					return;
 				}
 			}
+		}
+	}
+	
+	private void RunMultiExecuter(Player p){
+		if (use.contains(p.getName())) {
+			use.remove(p.getName());
+			me.unUse(p);
+			return;
+		} else {
+			use.add(p.getName());
+			me.use(p);
+			return;
 		}
 	}
 }
