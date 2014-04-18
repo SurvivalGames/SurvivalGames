@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 import org.apache.commons.io.FileUtils;
@@ -16,7 +15,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
 
 import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
 import co.q64.paradisesurvivalgames.locale.I18N;
@@ -179,7 +177,7 @@ public class AdminMenu {
 						public void run() {
 							ItemStack itemStack = new ItemStack(Material.NAME_TAG);
 							ItemMeta im = itemStack.getItemMeta();
-							im.setDisplayName("" + arena.getMaxPlayers());
+							im.setDisplayName(String.valueOf(arena.getMaxPlayers()));
 							im.setLore(Arrays.asList("Current Max Players"));
 							itemStack.setItemMeta(im);
 							gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, itemStack);
@@ -218,7 +216,7 @@ public class AdminMenu {
 						public void run() {
 							ItemStack itemStack = new ItemStack(Material.NAME_TAG);
 							ItemMeta im = itemStack.getItemMeta();
-							im.setDisplayName("" + arena.getMinPlayers());
+							im.setDisplayName(String.valueOf(arena.getMinPlayers()));
 							im.setLore(Arrays.asList("Current Min Players"));
 							itemStack.setItemMeta(im);
 							gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, itemStack);
