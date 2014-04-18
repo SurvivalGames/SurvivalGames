@@ -17,7 +17,7 @@ ws.onopen = function() {
 ws.onmessage = function(evt) {
     var split = evt.data.split(':');
 	if (split[0] == 'nullPlayer'){
-	    window.location.replace("http://communitysurvivalgames.com/sg/nullobject.html");
+	    window.location.replace("http://sg.q64.co/sg/nullobject.html");
 	}
 	if (split[0] == 'points'){
 	    $('#points').html(split[1]);
@@ -79,7 +79,7 @@ ws.onclose = function() {
 };
 
 ws.onerror = function(err) {
-	window.location.replace("http://communitysurvivalgames.com/sg/serverdown.html");
+	window.location.replace("http://sg.q64.co/sg/serverdown.html");
 };
 
 function delineate(str) {
