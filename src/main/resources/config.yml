@@ -36,7 +36,7 @@ dm-time: 10
 # Enable sound servers to add custom sounds to your SG games
 # This will open a HTTP server on port 8080, and a Websocket server on port 8887
 # Thus, you will need to have both ports 8080 and 8887 open and unbinded
-enable-servers: true
+enable-servers: false
 
 # This will be the IP that websocket uses to connect to the websockert server
 # This can be the direct IP of the server, or an A record (direct link) of your DNS to the IP  
