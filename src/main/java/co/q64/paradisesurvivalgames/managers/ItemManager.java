@@ -149,17 +149,6 @@ public class ItemManager implements Listener {
 		SGItem item = new SGItem(itemStack, slot, onlyInHub, onlyInGame, ifAdmin, exe);
 		items.put(key, item);
 	}
-
-	private void registerItem(String key, Material defMat, String name, int slot, boolean onlyInHub, boolean onlyInGame, boolean ifAdmin, MultiExecutor exe) {
-		Material itemMat = Material.valueOf((itemsConfig.getString(key) == null) ? saveDefaults(key, defMat) : itemsConfig.getString(key));
-		ItemStack itemStack = new ItemStack(itemMat);
-		ItemMeta itemMeta = itemStack.getItemMeta();
-		itemMeta.setDisplayName(name);
-		itemStack.setItemMeta(itemMeta);
-
-		SGItem item = new SGItem(itemStack, slot, onlyInHub, onlyInGame, ifAdmin, exe);
-		items.put(key, item);
-	}
 	
 	private String saveDefaults(String key, Material m) {
 		itemsConfig.set(key, m.toString());
