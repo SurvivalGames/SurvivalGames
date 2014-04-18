@@ -37,12 +37,11 @@ public class ItemManager implements Listener {
 
 		itemsConfig = YamlConfiguration.loadConfiguration(new File(SGApi.getPlugin().getDataFolder(), "items.yml"));
 
-		registerItem("admin-item", Material.COMMAND, ChatColor.GREEN.toString() + ChatColor.BOLD + "Admin Setup", 4, true, false, true, new SingleExecutor() {
+		registerItem("admin-item", Material.BLAZE_POWDER, ChatColor.GREEN.toString() + ChatColor.BOLD + "Admin Setup", 4, true, false, true, new SingleExecutor() {
 			
 			@Override
 			public void use(Player player) {
 				new AdminMenu().display(player);
-				
 			}
 		});
 		
