@@ -1,5 +1,6 @@
 package co.q64.paradisesurvivalgames.util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -52,7 +53,7 @@ public class DoubleJump implements Listener {
 	public void onMove(PlayerMoveEvent event) {
 		if ((event.getPlayer().getGameMode() != GameMode.CREATIVE) && (event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR)) {
 			if (SGApi.getArenaManager().isInGame(event.getPlayer())) {
-				if (plugin.getPluginConfig().allowDoubleJumpIG()) {
+				if (plugin.getPluginConfig().allowDoubleJumpIG() && event.getPlayer().getWorld().equals(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()))) {
 					event.getPlayer().setAllowFlight(true);
 				} else {
 					event.getPlayer().setAllowFlight(false);

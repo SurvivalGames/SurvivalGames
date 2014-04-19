@@ -90,6 +90,11 @@ public class AdminMenu {
 
 						@Override
 						public void run() {
+							ItemStack itemStack = new ItemStack(Material.NAME_TAG);
+							ItemMeta im = itemStack.getItemMeta();
+							im.setDisplayName(String.valueOf("Map world name"));
+							itemStack.setItemMeta(im);
+							gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, itemStack);
 							gui.open();
 						}
 					}, 10L);
@@ -177,6 +182,7 @@ public class AdminMenu {
 						public void run() {
 							ItemStack itemStack = new ItemStack(Material.NAME_TAG);
 							ItemMeta im = itemStack.getItemMeta();
+							itemStack.setAmount(arena.getMaxPlayers());
 							im.setDisplayName(String.valueOf(arena.getMaxPlayers()));
 							im.setLore(Arrays.asList("Current Max Players"));
 							itemStack.setItemMeta(im);
@@ -215,6 +221,7 @@ public class AdminMenu {
 						@Override
 						public void run() {
 							ItemStack itemStack = new ItemStack(Material.NAME_TAG);
+							itemStack.setAmount(arena.getMinPlayers());
 							ItemMeta im = itemStack.getItemMeta();
 							im.setDisplayName(String.valueOf(arena.getMinPlayers()));
 							im.setLore(Arrays.asList("Current Min Players"));
