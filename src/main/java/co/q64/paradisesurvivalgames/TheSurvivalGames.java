@@ -272,17 +272,17 @@ public class TheSurvivalGames extends JavaPlugin {
 		getCommand("tpx").setExecutor(new TpxCommand());
 
 		CommandHandler.register("help", new co.q64.paradisesurvivalgames.command.subcommands.sg.HelpCommand());
-		//CommandHandler.register("create", new CreateCommand());
-		//CommandHandler.register("remove", new RemoveCommand());
+		CommandHandler.register("create", new CreateCommand());
+		CommandHandler.register("remove", new RemoveCommand());
 		CommandHandler.register("join", new co.q64.paradisesurvivalgames.command.subcommands.sg.JoinCommand());
 		CommandHandler.register("leave", new co.q64.paradisesurvivalgames.command.subcommands.sg.LeaveCommand());
 		CommandHandler.register("user", new UserCommand());
-		//CommandHandler.register("createlobby", new SetCommand());
-		//CommandHandler.register("setdeathmatch", new SetCommand());
-		//CommandHandler.register("setmaxplayers", new SetCommand());
-		//CommandHandler.register("setminplayers", new SetCommand());
-		//CommandHandler.register("setchest", new SetCommand());
-		//CommandHandler.register("setspawn", new SetCommand());
+		CommandHandler.register("createlobby", new SetCommand());
+		CommandHandler.register("setdeathmatch", new SetCommand());
+		CommandHandler.register("setmaxplayers", new SetCommand());
+		CommandHandler.register("setminplayers", new SetCommand());
+		CommandHandler.register("setchest", new SetCommand());
+		CommandHandler.register("setspawn", new SetCommand());
 		CommandHandler.register("stop", new StopCommand());
 		CommandHandler.register("start", new StartCommand());
 		CommandHandler.register("finish", new CreateCommand());
