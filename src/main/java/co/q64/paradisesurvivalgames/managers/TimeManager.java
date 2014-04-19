@@ -72,7 +72,7 @@ public class TimeManager {
 						MoveListener.getPlayers().remove(s);
 						Bukkit.getPlayer(s).addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 500, 9));
 						Bukkit.getPlayer(s).addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 250, 2));
-						Bukkit.getPlayer(s).addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 20, 50));
+						Bukkit.getPlayer(s).addPotionEffect(new PotionEffect(PotionEffectType.HEAL, getA().getCurrentMap().getGracePeriod(), 50));
 					}
 				}
 

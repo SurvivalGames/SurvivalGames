@@ -30,6 +30,7 @@ public class SGWorld {
 	public List<Location> locs = new ArrayList<>();
 	private String name;
 	public List<BlockState> t2 = new ArrayList<>();
+	private int gracePeriod = 20;
 
 	private WorldCreator wc;
 
@@ -78,6 +79,10 @@ public class SGWorld {
 
 	public World getWorld() {
 		return name != null ? Bukkit.getServer().getWorld(name) : null;
+	}
+	
+	public int getGracePeriod(){
+		return this.gracePeriod;
 	}
 
 	public void init(List<Location> locs, List<BlockState> t2) {
@@ -128,6 +133,10 @@ public class SGWorld {
 
 	public void setDisplayName(String name) {
 		this.displayName = name;
+	}
+	
+	public void setGracePeriod(int gracePeriod){
+		this.gracePeriod = gracePeriod;
 	}
 
 	public void setInLobby(boolean b) {

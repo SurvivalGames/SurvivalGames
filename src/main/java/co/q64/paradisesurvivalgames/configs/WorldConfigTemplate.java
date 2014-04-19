@@ -51,13 +51,16 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 			}
 			this.cachedWorldCreator.t2 = list;
 			break;
+		case 4:
+			this.cachedWorldCreator.setGracePeriod(Integer.valueOf(String.valueOf(o)));
+			break;
 		}
 		return this.cachedWorldCreator;
 	}
 
 	@Override
 	public String[] pattern() {
-		return new String[] { "World-name", "Display-name", "Spawns", "Chests" };
+		return new String[] { "World-name", "Display-name", "Spawns", "Chests", "GracePeriod" };
 	}
 
 	@Override
@@ -79,6 +82,8 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 				list.add(SGApi.getArenaManager().serializeBlock(b.getBlock()));
 			}
 			return list;
+		case 4:
+			return this.world.getGracePeriod();
 		}
 		return null;
 	}
