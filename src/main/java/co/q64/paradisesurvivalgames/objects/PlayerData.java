@@ -41,7 +41,7 @@ public class PlayerData {
 	}
 
 	public PlayerData(Player p) {
-		this.playerName = p.getName();
+		this.playerName = p.getUniqueId().toString();
 		this.kills = 0;
 		this.points = 0;
 		this.rank = "&7M";

@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.bukkit.Bukkit;
@@ -115,9 +116,9 @@ public class SGArena {
 
 	private int maxPlayers;
 	private int minPlayers;
-	private final List<String> players = new CopyOnWriteArrayList<>();
+	private final List<UUID> players = new CopyOnWriteArrayList<>();
 
-	private final List<String> spectators = new CopyOnWriteArrayList<>();
+	private final List<UUID> spectators = new CopyOnWriteArrayList<>();
 
 	private List<String> voted = new ArrayList<>();
 
@@ -146,15 +147,15 @@ public class SGArena {
 	 * @param message The message to send, do not include prefix
 	 */
 	public void broadcast(String message) {
-		for (String s : getPlayers()) {
-			Player p = Bukkit.getServer().getPlayerExact(s);
+		for (UUID s : getPlayers()) {
+			Player p = Bukkit.getServer().getPlayer(s);
 			if (p != null) {
 				p.sendMessage(SGApi.getArenaManager().getPrefix() + message);
 			}
 		}
 
-		for (String s : getSpectators()) {
-			Player p = Bukkit.getServer().getPlayerExact(s);
+		for (UUID s : getSpectators()) {
+			Player p = Bukkit.getServer().getPlayer(s);
 			if (p != null) {
 				p.sendMessage(SGApi.getArenaManager().getPrefix() + message);
 			}
@@ -162,15 +163,15 @@ public class SGArena {
 	}
 
 	public void broadcastNoPrefix(String message) {
-		for (String s : getPlayers()) {
-			Player p = Bukkit.getServer().getPlayerExact(s);
+		for (UUID s : getPlayers()) {
+			Player p = Bukkit.getServer().getPlayer(s);
 			if (p != null) {
 				p.sendMessage(message);
 			}
 		}
 
-		for (String s : getSpectators()) {
-			Player p = Bukkit.getServer().getPlayerExact(s);
+		for (UUID s : getSpectators()) {
+			Player p = Bukkit.getServer().getPlayer(s);
 			if (p != null) {
 				p.sendMessage(message);
 			}
@@ -198,17 +199,17 @@ public class SGArena {
 	}
 
 	public void death(Player p) {
-		for (String s : getPlayers()) {
+		for (UUID s : getPlayers()) {
 			Player player = Bukkit.getPlayer(s);
 			SendWebsocketData.updateArenaStatusForPlayer(player);
 		}
-		for (String s : getSpectators()) {
+		for (UUID s : getSpectators()) {
 			Player player = Bukkit.getPlayer(s);
 			SendWebsocketData.updateArenaStatusForPlayer(player);
 		}
 		setDead(getDead() + 1);
-		getPlayers().remove(p.getName());
-		getSpectators().add(p.getName());
+		getPlayers().remove(p.getUniqueId());
+		getSpectators().add(p.getUniqueId());
 		SGApi.getPlugin().getTracker().trackEvent("Player Death", p.getName());
 		if (getPlayers().size() <= 1)
 			end();
@@ -216,7 +217,7 @@ public class SGArena {
 
 	public void deathAndLeave(Player p) {
 		setDead(getDead() + 1);
-		getPlayers().remove(p.getName());
+		getPlayers().remove(p.getUniqueId());
 		SGApi.getArenaManager().removePlayer(p);
 		SGApi.getPlugin().getTracker().trackEvent("Player Death", p.getName());
 		if (getPlayers().size() <= 1)
@@ -225,7 +226,7 @@ public class SGArena {
 
 	public void deathWithQuit(Player p) {
 		setDead(getDead() + 1);
-		getPlayers().remove(p.getName());
+		getPlayers().remove(p.getUniqueId());
 		if (getPlayers().size() <= 1)
 			end();
 	}
@@ -235,7 +236,7 @@ public class SGArena {
 	 */
 	public void dm() {
 		int i = 0;
-		for (String s : getPlayers()) {
+		for (UUID s : getPlayers()) {
 			Player p;
 			if ((p = Bukkit.getServer().getPlayer(s)) != null) {
 				p.teleport(getCurrentMap().locs.get(i));
@@ -248,11 +249,11 @@ public class SGArena {
 	 * Ends the arena
 	 */
 	public void end() {
-		for (String s : getPlayers()) {
+		for (UUID s : getPlayers()) {
 			Player p = Bukkit.getPlayer(s);
 			SendWebsocketData.updateArenaStatusForPlayer(p);
 		}
-		for (String s : getSpectators()) {
+		for (UUID s : getSpectators()) {
 			Player p = Bukkit.getPlayer(s);
 			SendWebsocketData.updateArenaStatusForPlayer(p);
 		}
@@ -275,10 +276,10 @@ public class SGArena {
 
 			@Override
 			public void run() {
-				for (String s : getPlayers()) {
+				for (UUID s : getPlayers()) {
 					SGApi.getArenaManager().removePlayer(Bukkit.getPlayer(s));
 				}
-				for (String s : getSpectators()) {
+				for (UUID s : getSpectators()) {
 					SGApi.getArenaManager().removePlayer(Bukkit.getPlayer(s));
 				}
 				getVoted().clear();
@@ -360,11 +361,11 @@ public class SGArena {
 	 *
 	 * @return List of players in the arena
 	 */
-	public List<String> getPlayers() {
+	public List<UUID> getPlayers() {
 		return this.players;
 	}
 
-	public List<String> getSpectators() {
+	public List<UUID> getSpectators() {
 		return spectators;
 	}
 

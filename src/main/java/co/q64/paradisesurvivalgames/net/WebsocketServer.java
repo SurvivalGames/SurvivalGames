@@ -44,6 +44,7 @@ public class WebsocketServer extends WebSocketServer {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onMessage(WebSocket conn, String message) {
 		Bukkit.getLogger().info("Recieve Websocket packet - " + conn + ":" + message);

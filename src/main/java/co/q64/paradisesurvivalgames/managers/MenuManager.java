@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -147,7 +148,7 @@ public class MenuManager {
 			return;
 		}
 		List<ItemStack> items = new ArrayList<ItemStack>();
-		for (String s : a.getPlayers()) {
+		for (UUID s : a.getPlayers()) {
 			try {
 				if (SGApi.getArenaManager().getArena(Bukkit.getPlayer(s)).getSpectators().contains(s)) {
 					continue;
@@ -157,7 +158,7 @@ public class MenuManager {
 			}
 			ItemStack item = new ItemStack(Material.EMERALD, (int) Bukkit.getPlayer(s).getHealth());
 			ItemMeta meta = item.getItemMeta();
-			meta.setDisplayName(s);
+			meta.setDisplayName(Bukkit.getPlayer(s).getName());
 			item.setItemMeta(meta);
 			items.add(item);
 		}

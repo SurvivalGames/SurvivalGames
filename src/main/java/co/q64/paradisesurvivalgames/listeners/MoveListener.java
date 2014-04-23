@@ -9,6 +9,7 @@ package co.q64.paradisesurvivalgames.listeners;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
@@ -22,9 +23,9 @@ import co.q64.paradisesurvivalgames.objects.SGArena;
 
 public class MoveListener implements Listener {
 
-	private static final List<String> list = new ArrayList<>();
+	private static final List<UUID> list = new ArrayList<>();
 
-	public static List<String> getPlayers() {
+	public static List<UUID> getPlayers() {
 		return list;
 	}
 

@@ -9,6 +9,7 @@ package co.q64.paradisesurvivalgames.listeners;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,9 +18,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class SafeEntityListener implements Listener {
 
-	private static final List<String> safe = new ArrayList<>();
+	private static final List<UUID> safe = new ArrayList<>();
 
-	public static List<String> getPlayers() {
+	public static List<UUID> getPlayers() {
 		return safe;
 	}
 

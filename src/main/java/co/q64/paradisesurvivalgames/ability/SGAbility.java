@@ -1,5 +1,7 @@
 package co.q64.paradisesurvivalgames.ability;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -35,7 +37,7 @@ public class SGAbility {
 		return false;
 	}
 
-	public boolean hasAbility(String p) {
+	public boolean hasAbility(UUID p) {
 		try {
 			if (SGApi.getArenaManager().getArena(Bukkit.getPlayer(p)).getState().equals(SGArena.ArenaState.IN_GAME) || SGApi.getArenaManager().getArena(Bukkit.getPlayer(p)).getState().equals(SGArena.ArenaState.DEATHMATCH)) {
 				if (SGApi.getKitManager().getKit(Bukkit.getPlayer(p)) != null) {

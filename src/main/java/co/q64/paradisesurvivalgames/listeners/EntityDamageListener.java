@@ -160,6 +160,7 @@ public class EntityDamageListener implements Listener {
 					} else {
 						SGApi.getArenaManager().getArena(damager).broadcast(ChatColor.translateAlternateColorCodes('&', "&e&l" + damaged.getDisplayName() + " &r&6" + I18N.getLocaleString("KILLED_BY") + " &e&l" + damager.getDisplayName() + " &r&6" + I18N.getLocaleString("WITH_A") + " &e&l" + "fist"));
 					}
+					damager.setLevel(damager.getLevel() + 1);
 					SGApi.getArenaManager().getArena(damager).addKill(damager);
 				} catch (ArenaNotFoundException e) {
 					e.printStackTrace();
