@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 
@@ -67,12 +68,12 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 			this.cachedArena.setMinPlayers(Integer.parseInt(String.valueOf(o)));
 			break;
 		case 8:
-			for (String s : (List<String>) o) {
+			for (UUID s : (List<UUID>) o) {
 				this.cachedArena.getPlayers().add(s);
 			}
 			break;
 		case 9:
-			for (String s : (List<String>) o) {
+			for (UUID s : (List<UUID>) o) {
 				this.cachedArena.getSpectators().add(s);
 			}
 			break;
