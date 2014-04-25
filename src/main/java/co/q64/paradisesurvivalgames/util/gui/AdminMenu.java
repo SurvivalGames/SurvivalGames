@@ -154,7 +154,11 @@ public class AdminMenu {
 
 		int i = 0;
 		for (SGArena a : SGApi.getArenaManager().getArenas()) {
-			arenaMenu.setOption(i, new ItemStack(Material.CHEST), "Arena " + a.getId(), "Click for options!");
+			if (a.getPlayers().contains(p.getUniqueId())){
+				arenaMenu.setOption(i, new ItemStack(Material.CHEST), "Arena " + a.getId(), "Current Arena! Click for options!");
+			} else{
+				arenaMenu.setOption(i, new ItemStack(Material.CHEST), "Arena " + a.getId(), "Click for options!");
+			}
 			i++;
 		}
 
@@ -247,6 +251,10 @@ public class AdminMenu {
 					}, 10L);
 
 				}
+				
+				if (event.getItem().getType() == Material.DIAMOND_SWORD){
+					SGApi.getTimeManager(arena).forceStartDM();
+				}
 				event.setWillClose(true);
 				event.setWillDestroy(true);
 			}
@@ -254,6 +262,7 @@ public class AdminMenu {
 
 		manageArena.setOption(0, new ItemStack(Material.GOLD_INGOT), "Force Start", "Click here to force start the arena");
 		manageArena.setOption(1, new ItemStack(Material.REDSTONE), "Force Stop", "Click here to force end the arena");
+		manageArena.setOption(2, new ItemStack(Material.DIAMOND_SWORD), "Force Start DeathMatch", "Click here to force the death match to start in the selected arena.");
 		manageArena.setOption(9, new ItemStack(Material.DIAMOND_BARDING), "Set max players", "Click here, then input the new value in the Anvil GUI");
 		manageArena.setOption(10, new ItemStack(Material.GOLD_BARDING), "Set min players", "Click here, then input the new value in the Anvil GUI");
 

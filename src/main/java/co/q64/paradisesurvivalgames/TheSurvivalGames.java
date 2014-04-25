@@ -50,6 +50,7 @@ import co.q64.paradisesurvivalgames.command.subcommands.party.ListCommand;
 import co.q64.paradisesurvivalgames.command.subcommands.party.PromoteCommand;
 import co.q64.paradisesurvivalgames.command.subcommands.sg.AdminCommand;
 import co.q64.paradisesurvivalgames.command.subcommands.sg.CreateCommand;
+import co.q64.paradisesurvivalgames.command.subcommands.sg.ForceDMCommand;
 import co.q64.paradisesurvivalgames.command.subcommands.sg.RemoveCommand;
 import co.q64.paradisesurvivalgames.command.subcommands.sg.RemoveKitSelectionLocationCommand;
 import co.q64.paradisesurvivalgames.command.subcommands.sg.SetCommand;
@@ -305,6 +306,7 @@ public class TheSurvivalGames extends JavaPlugin {
 		CommandHandler.register("admin", new AdminCommand());
 		CommandHandler.register("setkitselectionlocation", new SetKitSelectionLocationCommand());
 		CommandHandler.register("removekitselectionlocation", new RemoveKitSelectionLocationCommand());
+		CommandHandler.register("forcedm", new ForceDMCommand());
 
 		PartyCommandHandler.register("chat", new ChatCommand());
 		PartyCommandHandler.register("decline", new DeclineCommand());

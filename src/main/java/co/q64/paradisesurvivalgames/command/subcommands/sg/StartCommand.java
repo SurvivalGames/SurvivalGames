@@ -27,13 +27,21 @@ public class StartCommand implements SubCommand {
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
 		if (p.isOp() || p.hasPermission("sg.start")) {
-			try {
-				SGArena a = SGApi.getArenaManager().getArena(Integer.parseInt(args[0]));
-				a.forceStart();
-			} catch (NumberFormatException | ArenaNotFoundException e) {
-				p.sendMessage("That's not a valid arena");
+			if (args.length > 1){
+				try {
+					SGArena a = SGApi.getArenaManager().getArena(Integer.parseInt(args[0]));
+					a.forceStart();
+				} catch (NumberFormatException | ArenaNotFoundException e) {
+					p.sendMessage("That's not a valid arena");
+				}
+			} else{
+				try {
+					SGArena a = SGApi.getArenaManager().getArena(p);
+					a.forceStart();
+				} catch (NumberFormatException | ArenaNotFoundException e) {
+					p.sendMessage("You are not currently in an arena");
+				}
 			}
-				
 			
 		}
 	}

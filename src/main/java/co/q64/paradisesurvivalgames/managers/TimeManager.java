@@ -285,4 +285,11 @@ public class TimeManager {
 			
 		}
 	}
+	
+	public void forceStartDM(){
+		if (getDm() != null){
+			Bukkit.getScheduler().cancelTask(getDm().getId());
+			getDm().ce.runCode();
+		}
+	}
 }

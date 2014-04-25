@@ -335,7 +335,7 @@ public class ArenaManager {
 
 		if (SGApi.getPlugin().getPluginConfig().isBungeecordMode()) {
 			if (arenas.listFiles().length > 1) {
-				Bukkit.getLogger().severe("You cannot have mutiple arenas on Bngeecord mode");
+				Bukkit.getLogger().severe("You cannot have mutiple arenas on Bungeecord mode");
 				Bukkit.getPluginManager().disablePlugin(SGApi.getPlugin());
 			}
 		}
