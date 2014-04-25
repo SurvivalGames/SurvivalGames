@@ -19,18 +19,22 @@ import org.bukkit.inventory.meta.ItemMeta;
 import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.managers.SGApi;
+import co.q64.paradisesurvivalgames.multiworld.SGWorld;
 import co.q64.paradisesurvivalgames.objects.SGArena;
 import co.q64.paradisesurvivalgames.util.gui.IconMenu.OptionClickEvent;
 import co.q64.paradisesurvivalgames.util.gui.anvil.AnvilGUI;
 
 public class AdminMenu {
 	private SGArena arena;
+	private SGWorld map;
 	private Player p;
 
 	private IconMenu mainMenu;
 	private IconMenu downloadMenu;
 	private IconMenu arenaMenu;
+	private IconMenu mapMenu;
 	private IconMenu manageArena;
+	private IconMenu manageMap;
 
 	public AdminMenu() {
 		mainMenu = new IconMenu("Select a task", 9, false, new IconMenu.OptionClickEventHandler() {
@@ -46,6 +50,16 @@ public class AdminMenu {
 						}
 					}, 10L);
 
+				}
+				
+				if (event.getItem().getType() == Material.PAINTING){
+					Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+
+						@Override
+						public void run() {
+							mapMenu.open(p);
+						}
+					}, 10L);
 				}
 
 				if (event.getItem().getType() == Material.MAP) {
@@ -110,6 +124,7 @@ public class AdminMenu {
 		mainMenu.setOption(1, new ItemStack(Material.WATCH), "Create Arena", "Click to create an arena with the spawn point where you are standing");
 		mainMenu.setOption(2, new ItemStack(Material.MAP), "Download Maps", "Click to download game ready maps");
 		mainMenu.setOption(3, new ItemStack(Material.EMPTY_MAP), "Import Maps", "Import a custom map and set it up yourself!");
+		mainMenu.setOption(4, new ItemStack(Material.PAINTING), "Manage Maps", "Click to manage imported/downloaded maps");
 
 		arenaMenu = new IconMenu("Select an arena to manage", 54, false, new IconMenu.OptionClickEventHandler() {
 
@@ -242,6 +257,82 @@ public class AdminMenu {
 		manageArena.setOption(9, new ItemStack(Material.DIAMOND_BARDING), "Set max players", "Click here, then input the new value in the Anvil GUI");
 		manageArena.setOption(10, new ItemStack(Material.GOLD_BARDING), "Set min players", "Click here, then input the new value in the Anvil GUI");
 
+		mapMenu = new IconMenu("Select a map to manage", 54, false, new IconMenu.OptionClickEventHandler() {
+
+			@Override
+			public void onOptionClick(final OptionClickEvent event) {
+				if (event.getItem().getType() == Material.MAP) {
+					map = SGApi.getMultiWorldManager().worldForName(event.getName());
+					Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+
+						@Override
+						public void run() {
+							manageMap.open(event.getPlayer());
+						}
+					}, 10L);
+
+				}
+				event.setWillClose(true);
+				event.setWillDestroy(true);
+			}
+		}, SGApi.getPlugin());
+
+		i = 0;
+		for (SGWorld w : SGApi.getMultiWorldManager().getWorlds()) {
+			arenaMenu.setOption(i, new ItemStack(Material.MAP), w.getDisplayName(), "Click for options!");
+			i++;
+		}
+		
+		manageMap = new IconMenu("Select an action for map", 18, false, new IconMenu.OptionClickEventHandler() {
+
+			@Override
+			public void onOptionClick(final OptionClickEvent event) {
+				if (event.getItem().getType() == Material.COMPASS) {
+					final AnvilGUI gui = new AnvilGUI(event.getPlayer(), new AnvilGUI.AnvilClickEventHandler() {
+						@Override
+						public void onAnvilClick(AnvilGUI.AnvilClickEvent event) {
+							if (event.getSlot() == AnvilGUI.AnvilSlot.OUTPUT) {
+								event.setWillClose(true);
+								event.setWillDestroy(true);
+								int gracePeriod;
+								try {
+									gracePeriod = Integer.parseInt(event.getName());
+								} catch (NumberFormatException e) {
+									p.sendMessage("That's not a number :/");
+									return;
+								}
+								p.sendMessage("Grace Period for Map: " + map.getDisplayName() + ": " + gracePeriod);
+								map.setGracePeriod(gracePeriod);
+							} else {
+								event.setWillClose(false);
+								event.setWillDestroy(false);
+							}
+						}
+					});
+
+					Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+
+						@Override
+						public void run() {
+							ItemStack itemStack = new ItemStack(Material.NAME_TAG);
+							ItemMeta im = itemStack.getItemMeta();
+							itemStack.setAmount(map.getGracePeriod());
+							im.setDisplayName(String.valueOf(map.getGracePeriod()));
+							im.setLore(Arrays.asList("Current Grace Period"));
+							itemStack.setItemMeta(im);
+							gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, itemStack);
+							gui.open();
+						}
+					}, 10L);
+
+				}
+				event.setWillClose(true);
+				event.setWillDestroy(true);
+			}
+		}, SGApi.getPlugin());
+
+		manageArena.setOption(0, new ItemStack(Material.COMPASS), "Set Grace Period", "Click here, then input the new value in the Anvil GUI");
+		
 		downloadMenu = new IconMenu("Select an map to download", 54, false, new IconMenu.OptionClickEventHandler() {
 
 			@Override
