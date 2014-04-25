@@ -279,7 +279,7 @@ public class AdminMenu {
 
 		i = 0;
 		for (SGWorld w : SGApi.getMultiWorldManager().getWorlds()) {
-			arenaMenu.setOption(i, new ItemStack(Material.MAP), w.getDisplayName(), "Click for options!");
+			mapMenu.setOption(i, new ItemStack(Material.MAP), w.getDisplayName(), "Click for options!");
 			i++;
 		}
 		
