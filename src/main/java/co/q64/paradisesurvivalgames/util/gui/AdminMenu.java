@@ -326,12 +326,46 @@ public class AdminMenu {
 					}, 10L);
 
 				}
+				if (event.getItem().getType() == Material.NAME_TAG) {
+					final AnvilGUI gui = new AnvilGUI(event.getPlayer(), new AnvilGUI.AnvilClickEventHandler() {
+						@Override
+						public void onAnvilClick(AnvilGUI.AnvilClickEvent event) {
+							if (event.getSlot() == AnvilGUI.AnvilSlot.OUTPUT) {
+								event.setWillClose(true);
+								event.setWillDestroy(true);
+								String displayName = event.getName();
+								p.sendMessage("Map Display Name changed from: " + map.getDisplayName() + " to: " + displayName);
+								map.setDisplayName(displayName);
+							} else {
+								event.setWillClose(false);
+								event.setWillDestroy(false);
+							}
+						}
+					});
+
+					Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable() {
+
+						@Override
+						public void run() {
+							ItemStack itemStack = new ItemStack(Material.NAME_TAG);
+							ItemMeta im = itemStack.getItemMeta();
+							itemStack.setAmount(1);
+							im.setDisplayName(String.valueOf(map.getDisplayName()));
+							im.setLore(Arrays.asList("Current Display Name"));
+							itemStack.setItemMeta(im);
+							gui.setSlot(AnvilGUI.AnvilSlot.INPUT_LEFT, itemStack);
+							gui.open();
+						}
+					}, 10L);
+
+				}
 				event.setWillClose(true);
 				event.setWillDestroy(true);
 			}
 		}, SGApi.getPlugin());
 
 		manageArena.setOption(0, new ItemStack(Material.COMPASS), "Set Grace Period", "Click here, then input the new value in the Anvil GUI");
+		manageArena.setOption(1, new ItemStack(Material.NAME_TAG), "Set Map Display Name", "Click here, then input the new value in the Anvil GUI");
 		
 		downloadMenu = new IconMenu("Select an map to download", 54, false, new IconMenu.OptionClickEventHandler() {
 
