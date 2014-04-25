@@ -364,8 +364,8 @@ public class AdminMenu {
 			}
 		}, SGApi.getPlugin());
 
-		manageArena.setOption(0, new ItemStack(Material.COMPASS), "Set Grace Period", "Click here, then input the new value in the Anvil GUI");
-		manageArena.setOption(1, new ItemStack(Material.NAME_TAG), "Set Map Display Name", "Click here, then input the new value in the Anvil GUI");
+		manageMap.setOption(0, new ItemStack(Material.COMPASS), "Set Grace Period", "Click here, then input the new value in the Anvil GUI");
+		manageMap.setOption(1, new ItemStack(Material.NAME_TAG), "Set Map Display Name", "Click here, then input the new value in the Anvil GUI");
 		
 		downloadMenu = new IconMenu("Select an map to download", 54, false, new IconMenu.OptionClickEventHandler() {
 
