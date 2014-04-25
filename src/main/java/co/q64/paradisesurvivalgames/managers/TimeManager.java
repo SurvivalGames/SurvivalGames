@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -67,7 +68,7 @@ public class TimeManager {
 
 				getA().broadcast(I18N.getLocaleString("ODDS"));
 				getA().setState(SGArena.ArenaState.IN_GAME);
-				for (String s : getA().getPlayers()) {
+				for (UUID s : getA().getPlayers()) {
 					if (MoveListener.getPlayers().contains(s)) {
 						MoveListener.getPlayers().remove(s);
 						Bukkit.getPlayer(s).addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 500, 9));
@@ -82,7 +83,7 @@ public class TimeManager {
 
 					@Override
 					public void run() {
-						for (String s : getA().getPlayers()) {
+						for (UUID s : getA().getPlayers()) {
 							SGApi.getKitManager().giveKit(Bukkit.getPlayer(s));
 						}
 					}
@@ -101,7 +102,7 @@ public class TimeManager {
 				getA().broadcast(I18N.getLocaleString("DM_STARTING"));
 				getA().setState(SGArena.ArenaState.DEATHMATCH);
 				for (int i = 0; i < getA().getPlayers().size(); i++) {
-					String s = getA().getPlayers().get(i);
+					UUID s = getA().getPlayers().get(i);
 					Player p = Bukkit.getPlayer(s);
 					p.teleport(getA().getCurrentMap().locs.get(i));
 				}
@@ -144,7 +145,7 @@ public class TimeManager {
 			getA().getVotes().put(hash, 0);
 		}
 
-		for (String s : getA().getPlayers()) {
+		for (UUID s : getA().getPlayers()) {
 			ItemManager.getInstance().getItem("vote-item").givePlayerItem(Bukkit.getPlayer(s));
 		}
 
@@ -176,8 +177,8 @@ public class TimeManager {
 				getA().setState(SGArena.ArenaState.STARTING_COUNTDOWN);
 
 				int index = 0;
-				for (String s : getA().getPlayers()) {
-					Player p = Bukkit.getPlayerExact(s);
+				for (UUID s : getA().getPlayers()) {
+					Player p = Bukkit.getPlayer(s);
 					Bukkit.getLogger().info("List: " + getA().getCurrentMap().locs.toString());
 					Location loc = getA().getCurrentMap().locs.get(index);
 					p.getInventory().clear();
@@ -185,7 +186,7 @@ public class TimeManager {
 
 					index++;
 				}
-				for (String s : getA().getPlayers()) {
+				for (UUID s : getA().getPlayers()) {
 					SendWebsocketData.stopMusic(Bukkit.getPlayer(s));
 				}
 				countdown();

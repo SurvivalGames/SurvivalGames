@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -32,16 +33,16 @@ public class SendWebsocketData {
 		return String.valueOf(list.get(rnd.nextInt(list.size())));
 	}
 
-	public static String join(List<String> list, String delim) {
+	public static String join(List<UUID> list, String delim) {
 
 		StringBuilder sb = new StringBuilder();
 
 		String loopDelim = "";
 
-		for (String s : list) {
+		for (UUID s : list) {
 
 			sb.append(loopDelim);
-			sb.append(s);
+			sb.append(Bukkit.getPlayer(s).getName());
 
 			loopDelim = delim;
 		}
@@ -83,7 +84,7 @@ public class SendWebsocketData {
 
 			@Override
 			public void run() {
-				for (String s : arena.getPlayers()) {
+				for (UUID s : arena.getPlayers()) {
 					Player p = Bukkit.getPlayer(s);
 					if (WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()) != null) {
 						WebsocketServer.s.sendData(WebsocketSessionManager.getSessionManager().getSessionByName(p.getName()), "sound:" + data);

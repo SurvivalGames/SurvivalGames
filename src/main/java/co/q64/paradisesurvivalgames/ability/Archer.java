@@ -1,5 +1,7 @@
 package co.q64.paradisesurvivalgames.ability;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -21,7 +23,7 @@ public class Archer extends SGAbility implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onGameStart(GameStartEvent event) {
-		for (String p : event.getArena().getPlayers()) {
+		for (UUID p : event.getArena().getPlayers()) {
 			final Player player = Bukkit.getPlayer(p);
 			if (hasAbility(player)) {
 				for (int i = 0; i < 32; i++) {

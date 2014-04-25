@@ -47,9 +47,7 @@ sg.user Allows the player to edit a user's status.
 
 **SGDevTeam in the Social Media**
 
-***Twitter*** : https://twitter.com/SGDevTeam (**@SGDevTeam**)
-
-***Instagram*** : http://instagram.com/SGDevTeam#
+***Twitter*** : https://twitter.com/ParadiseSGDev (**@ParadiseSGDev**)
 
 ========
 

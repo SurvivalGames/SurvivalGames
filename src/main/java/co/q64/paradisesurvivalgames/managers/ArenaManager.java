@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -73,7 +74,7 @@ public class ArenaManager {
 		}
 
 		if (!a.getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS) && !a.getState().equals(SGArena.ArenaState.PRE_COUNTDOWN)) {
-			a.getSpectators().add(p.getName());
+			a.getSpectators().add(p.getUniqueId());
 			p.teleport(a.getCurrentMap().locs.get(0));
 			p.setGameMode(GameMode.CREATIVE);
 			p.setCanPickupItems(false);
@@ -113,12 +114,12 @@ public class ArenaManager {
 			//TODO Temp
 		}
 
-		a.getPlayers().add(p.getName());
-		for (String s : a.getPlayers()) {
+		a.getPlayers().add(p.getUniqueId());
+		for (UUID s : a.getPlayers()) {
 			Player player = Bukkit.getPlayer(s);
 			SendWebsocketData.updateArenaStatusForPlayer(player);
 		}
-		for (String s : a.getSpectators()) {
+		for (UUID s : a.getSpectators()) {
 			Player player = Bukkit.getPlayer(s);
 			SendWebsocketData.updateArenaStatusForPlayer(player);
 		}
@@ -407,13 +408,13 @@ public class ArenaManager {
 		try {
 			if (this.getArena(p).getState().equals(SGArena.ArenaState.PRE_COUNTDOWN) || this.getArena(p).getState().equals(SGArena.ArenaState.WAITING_FOR_PLAYERS)) {
 				SGArena a = getArena(p);
-				a.getPlayers().remove(p.getName());
+				a.getPlayers().remove(p.getUniqueId());
 				if (a.getPlayers().size() < a.getMinPlayers())
 					a.restart();
-				if (a.getSpectators().contains(p.getName()))
-					a.getSpectators().remove(p.getName());
+				if (a.getSpectators().contains(p.getUniqueId()))
+					a.getSpectators().remove(p.getUniqueId());
 				else {
-					a.getPlayers().remove(p.getName());
+					a.getPlayers().remove(p.getUniqueId());
 				}
 				p.teleport(Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()).getSpawnLocation());
 				p.setGameMode(GameMode.SURVIVAL);

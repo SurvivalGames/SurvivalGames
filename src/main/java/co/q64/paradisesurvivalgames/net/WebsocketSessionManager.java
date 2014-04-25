@@ -17,6 +17,7 @@ public class WebsocketSessionManager {
 		return sessionManager;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void addSessionUsername(String host, String name) {
 		for (int i = 0; i < sessions.size(); i++) {
 			if (sessions.get(i).getHost().equalsIgnoreCase(host)) {

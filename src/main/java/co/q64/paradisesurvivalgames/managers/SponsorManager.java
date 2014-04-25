@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -275,7 +276,7 @@ public class SponsorManager {
 
 	public void sponsor(Player sender) {
 		List<ItemStack> items = new ArrayList<ItemStack>();
-		for (String s : a.getPlayers()) {
+		for (UUID s : a.getPlayers()) {
 			try {
 				if (SGApi.getArenaManager().getArena(Bukkit.getPlayer(s)).getSpectators().contains(s)) {
 					continue;
@@ -285,7 +286,7 @@ public class SponsorManager {
 			}
 			ItemStack item = new ItemStack(Material.EMERALD, (int) Bukkit.getPlayer(s).getHealth());
 			ItemMeta meta = item.getItemMeta();
-			meta.setDisplayName(s);
+			meta.setDisplayName(Bukkit.getPlayer(s).getName());
 			item.setItemMeta(meta);
 			items.add(item);
 		}

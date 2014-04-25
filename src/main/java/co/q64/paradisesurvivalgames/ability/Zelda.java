@@ -2,6 +2,7 @@ package co.q64.paradisesurvivalgames.ability;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -30,7 +31,7 @@ public class Zelda extends SGAbility implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onGameStart(GameStartEvent event) {
-		for (String p : event.getArena().getPlayers()) {
+		for (UUID p : event.getArena().getPlayers()) {
 			if (hasAbility(p)) {
 				Player player = Bukkit.getPlayer(p);
 				player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 99999, 5, false));

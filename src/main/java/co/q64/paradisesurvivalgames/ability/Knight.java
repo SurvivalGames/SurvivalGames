@@ -1,5 +1,7 @@
 package co.q64.paradisesurvivalgames.ability;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,7 +20,7 @@ public class Knight extends SGAbility implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onGameStart(GameStartEvent event) {
-		for (String p : event.getArena().getPlayers()) {
+		for (UUID p : event.getArena().getPlayers()) {
 			if (hasAbility(p)) {
 				Player player = Bukkit.getPlayer(p);
 				player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 99999, 1, false));
