@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
@@ -153,8 +155,10 @@ public class AdminMenu {
 		}, SGApi.getPlugin());
 
 		int i = 0;
+		List<UUID> playerList;
 		for (SGArena a : SGApi.getArenaManager().getArenas()) {
-			if (a.getPlayers().contains(p.getUniqueId())){
+			playerList = a.getPlayers();
+			if (playerList != null && playerList.contains(p.getUniqueId())){
 				arenaMenu.setOption(i, new ItemStack(Material.CHEST), "Arena " + a.getId(), "Current Arena! Click for options!");
 			} else{
 				arenaMenu.setOption(i, new ItemStack(Material.CHEST), "Arena " + a.getId(), "Click for options!");
