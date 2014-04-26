@@ -158,11 +158,16 @@ public class AdminMenu {
 		List<UUID> playerList;
 		for (SGArena a : SGApi.getArenaManager().getArenas()) {
 			playerList = a.getPlayers();
-			if (playerList != null && playerList.contains(p.getUniqueId())){
-				arenaMenu.setOption(i, new ItemStack(Material.CHEST), "Arena " + a.getId(), "Current Arena! Click for options!");
-			} else{
-				arenaMenu.setOption(i, new ItemStack(Material.CHEST), "Arena " + a.getId(), "Click for options!");
+			if (playerList != null){
+				if (p != null){
+					if (playerList.contains(p.getUniqueId())){
+						arenaMenu.setOption(i, new ItemStack(Material.CHEST), "Arena " + a.getId(), "Current Arena! Click for options!");
+						i++;
+						return;
+					}
+				}
 			}
+			arenaMenu.setOption(i, new ItemStack(Material.CHEST), "Arena " + a.getId(), "Click for options!");
 			i++;
 		}
 
