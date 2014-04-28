@@ -8,6 +8,7 @@ package co.q64.paradisesurvivalgames.runnables;
 
 import org.bukkit.Bukkit;
 
+import co.q64.paradisesurvivalgames.event.GameStartCountdownEvent;
 import co.q64.paradisesurvivalgames.locale.I18N;
 import co.q64.paradisesurvivalgames.managers.SGApi;
 import co.q64.paradisesurvivalgames.net.SendWebsocketData;
@@ -22,6 +23,7 @@ public class Countdown implements Runnable {
 	private String data = "null";
 	private int id = 0;
 	public final String[] s = new String[2];
+	private GameStartCountdownEvent gsce;
 
 	/**
 	 * Constructs a new countdown for this arena
@@ -82,6 +84,8 @@ public class Countdown implements Runnable {
 			return;
 		}
 		a.broadcast(s[0] + " " + I18N.getLocaleString("STARTING_IN") + " " + (count + 1) + " " + s[1]);
+		gsce = new GameStartCountdownEvent(count + 1);
+		Bukkit.getServer().getPluginManager().callEvent(gsce);
 	}
 
 	/**
