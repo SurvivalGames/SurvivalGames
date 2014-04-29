@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -251,11 +252,19 @@ public class SGArena {
 	public void end() {
 		for (UUID s : getPlayers()) {
 			Player p = Bukkit.getPlayer(s);
-			SendWebsocketData.updateArenaStatusForPlayer(p);
+			try {
+				SendWebsocketData.updateArenaStatusForPlayer(p);
+			} catch (NullPointerException e){
+				Bukkit.getLogger().log(Level.WARNING, "Could not communitcate with web socket sound server.");
+			}
 		}
 		for (UUID s : getSpectators()) {
 			Player p = Bukkit.getPlayer(s);
-			SendWebsocketData.updateArenaStatusForPlayer(p);
+			try {
+				SendWebsocketData.updateArenaStatusForPlayer(p);
+			} catch (NullPointerException e){
+				Bukkit.getLogger().log(Level.WARNING, "Could not communitcate with web socket sound server.");
+			}
 		}
 		if (getPlayers().size() == 1) {
 			broadcast(I18N.getLocaleString("END") + " " + getPlayers().get(0));
