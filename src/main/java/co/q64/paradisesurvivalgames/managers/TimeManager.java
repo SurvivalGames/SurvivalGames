@@ -106,8 +106,13 @@ public class TimeManager {
 					Player p = Bukkit.getPlayer(s);
 					p.teleport(getA().getCurrentMap().locs.get(i));
 				}
-				MoveListener.getPlayers().addAll(getA().getPlayers());
-				commenceDm();
+				Bukkit.getScheduler().scheduleSyncDelayedTask(SGApi.getPlugin(), new Runnable(){
+
+					@Override
+					public void run() {
+						MoveListener.getPlayers().addAll(getA().getPlayers());
+						commenceDm();
+					}}, 50L);
 			}
 		}));
 		getDm().setId(Bukkit.getScheduler().scheduleSyncRepeatingTask(SGApi.getPlugin(), getDm(), 0L, 60 * 20L));
