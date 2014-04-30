@@ -288,7 +288,7 @@ public class EntityDamageListener implements Listener {
 				Player damager = (Player) eentity;
 				try {
 
-					if (SGApi.getArenaManager().getArena(damaged).getSpectators().contains(damager.getName())) {
+					if (SGApi.getArenaManager().getArena(damaged).getSpectators().contains(damager.getUniqueId())) {
 						event.setCancelled(true);
 						return;
 					}

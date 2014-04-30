@@ -98,6 +98,7 @@ public class SGArena {
 			return name;
 		}
 	}
+
 	private List<ChangedBlock> changedBlocks = new ArrayList<>();
 
 	private boolean countdown = false;
@@ -252,19 +253,15 @@ public class SGArena {
 	public void end() {
 		for (UUID s : getPlayers()) {
 			Player p = Bukkit.getPlayer(s);
-			try {
-				SendWebsocketData.updateArenaStatusForPlayer(p);
-			} catch (NullPointerException e){
-				Bukkit.getLogger().log(Level.WARNING, "Could not communitcate with web socket sound server.");
-			}
+
+			SendWebsocketData.updateArenaStatusForPlayer(p);
+
 		}
 		for (UUID s : getSpectators()) {
 			Player p = Bukkit.getPlayer(s);
-			try {
-				SendWebsocketData.updateArenaStatusForPlayer(p);
-			} catch (NullPointerException e){
-				Bukkit.getLogger().log(Level.WARNING, "Could not communitcate with web socket sound server.");
-			}
+
+			SendWebsocketData.updateArenaStatusForPlayer(p);
+
 		}
 		if (getPlayers().size() == 1) {
 			broadcast(I18N.getLocaleString("END") + " " + getPlayers().get(0));
@@ -293,7 +290,7 @@ public class SGArena {
 				}
 				getVoted().clear();
 				getVotes().clear();
-				
+
 				SGApi.getRollbackManager().rollbackArena(getThis());
 
 			}

@@ -28,7 +28,7 @@ public class PlayerData {
 	@NotNull
 	private int kills;
 	@NotNull
-	private String playerName;
+	private String playerID;
 	@NotNull
 	private int points;
 	@NotEmpty
@@ -41,7 +41,7 @@ public class PlayerData {
 	}
 
 	public PlayerData(Player p) {
-		this.playerName = p.getUniqueId().toString();
+		this.playerID = p.getUniqueId().toString();
 		this.kills = 0;
 		this.points = 0;
 		this.rank = "&7M";
@@ -79,11 +79,11 @@ public class PlayerData {
 	}
 
 	public Player getPlayer() {
-		return Bukkit.getServer().getPlayer(playerName);
+		return Bukkit.getServer().getPlayer(playerID);
 	}
 
 	public String getPlayerName() {
-		return playerName;
+		return playerID;
 	}
 
 	public int getPoints() {
@@ -123,11 +123,11 @@ public class PlayerData {
 	}
 
 	public void setPlayer(Player player) {
-		this.playerName = player.getName();
+		this.playerID = player.getName();
 	}
 
 	public void setPlayerName(String ply) {
-		this.playerName = ply;
+		this.playerID = ply;
 	}
 
 	public void setPoints(int points) {
