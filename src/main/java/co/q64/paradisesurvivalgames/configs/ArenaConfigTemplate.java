@@ -68,14 +68,34 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 			this.cachedArena.setMinPlayers(Integer.parseInt(String.valueOf(o)));
 			break;
 		case 8:
-			for (UUID s : (List<UUID>) o) {
-				this.cachedArena.getPlayers().add(s);
+			for (String p : (List<String>)o){
+				UUID uid;
+				try{
+					uid = UUID.fromString(p);
+				} catch(IllegalArgumentException e){ 
+					uid = Bukkit.getServer().getOfflinePlayer(p).getUniqueId();
+				}
+				
+				this.cachedArena.getPlayers().add(uid);
 			}
+			//for (UUID s : (List<UUID>) o) {
+			//	this.cachedArena.getPlayers().add(s);			Commented out in order to allow the upgrade from Player name to UUID. Temp fix above.
+			//}
 			break;
 		case 9:
-			for (UUID s : (List<UUID>) o) {
-				this.cachedArena.getSpectators().add(s);
+			for (String p : (List<String>)o){
+				UUID uid;
+				try{
+					uid = UUID.fromString(p);
+				} catch(IllegalArgumentException e){ 
+					uid = Bukkit.getServer().getOfflinePlayer(p).getUniqueId();
+				}
+				
+				this.cachedArena.getSpectators().add(uid);
 			}
+			//for (UUID s : (List<UUID>) o) {
+			//	this.cachedArena.getSpectators().add(s);		Commented out in order to allow the upgrade from Player name to UUID. Temp fix above.
+			//}
 			break;
 		}
 		return cachedArena;

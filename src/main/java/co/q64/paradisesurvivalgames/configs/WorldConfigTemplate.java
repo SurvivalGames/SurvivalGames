@@ -52,7 +52,9 @@ public class WorldConfigTemplate extends ConfigTemplate<SGWorld> {
 			this.cachedWorldCreator.t2 = list;
 			break;
 		case 4:
-			this.cachedWorldCreator.setGracePeriod(Integer.valueOf(String.valueOf(o)));
+			if (o != null){
+				this.cachedWorldCreator.setGracePeriod(Integer.valueOf(String.valueOf(o)));
+			}
 			break;
 		}
 		return this.cachedWorldCreator;
