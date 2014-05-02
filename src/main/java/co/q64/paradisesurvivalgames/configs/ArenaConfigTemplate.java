@@ -38,7 +38,7 @@ public class ArenaConfigTemplate extends ConfigTemplate<SGArena> {
 
 	@Override
 	public SGArena fromFile(int index, Object o) {
-		Bukkit.getLogger().info("Attempting to load arnea prop: " + o + " with a keypair of " + index);
+		Bukkit.getLogger().info("Attempting to load arena prop: " + o + " with a keypair of " + index);
 		switch (index) {
 		case 0:
 			this.cachedArena = new SGArena(); //This should only be called once.  Here?

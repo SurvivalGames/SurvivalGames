@@ -2,6 +2,8 @@
 
 package co.q64.paradisesurvivalgames.objects;
 
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -79,10 +81,14 @@ public class PlayerData {
 	}
 
 	public Player getPlayer() {
-		return Bukkit.getServer().getPlayer(playerID);
+		return Bukkit.getServer().getPlayer(UUID.fromString(playerID));
 	}
 
 	public String getPlayerName() {
+		return Bukkit.getPlayer(UUID.fromString(playerID)).getName();
+	}
+	
+	public String getPlayerID(){
 		return playerID;
 	}
 
@@ -123,11 +129,15 @@ public class PlayerData {
 	}
 
 	public void setPlayer(Player player) {
-		this.playerID = player.getName();
+		this.playerID = player.getUniqueId().toString();
 	}
 
 	public void setPlayerName(String ply) {
-		this.playerID = ply;
+		this.playerID = Bukkit.getPlayer(ply).getUniqueId().toString();
+	}
+	
+	public void setPlayerID(String plyID){
+		this.playerID = plyID;
 	}
 
 	public void setPoints(int points) {
