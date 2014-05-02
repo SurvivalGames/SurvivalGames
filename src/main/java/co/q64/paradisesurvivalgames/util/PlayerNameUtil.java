@@ -18,7 +18,6 @@ public class PlayerNameUtil {
 		list.add("Quantum64");
 		list.add("Trolldood3");
 		list.add("Relicum");
-		//list.add("sam4215"); - Removed
 		list.add("Jonthespartan29");
 		list.add("GregPlaysMC");
 		list.add("TGI_CN");
@@ -27,6 +26,7 @@ public class PlayerNameUtil {
 		//GregoriusMC - GregPlaysMC
 		//AgentTroll - Trolldude3
 		//TGICN - TGI_CN
+                //Relicum - Relicum
 		return list;
 	}
 
