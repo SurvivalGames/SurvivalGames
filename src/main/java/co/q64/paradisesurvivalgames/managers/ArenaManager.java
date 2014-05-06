@@ -235,10 +235,10 @@ public class ArenaManager {
 
 	public SGArena getArena(Player p) throws ArenaNotFoundException {
 		for (SGArena a : getArenas()) {
-			if (a.getPlayers().contains(p.getName())) {
+			if (a.getPlayers().contains(p.getUniqueId())) {
 				return a;
 			}
-			if (a.getSpectators().contains(p.getName())) {
+			if (a.getSpectators().contains(p.getUniqueId())) {
 				return a;
 			}
 		}
@@ -315,11 +315,11 @@ public class ArenaManager {
 	 */
 	public boolean isInGame(Player p) {
 		for (SGArena a : getArenas()) {
-			if (a.getPlayers().contains(p.getName())) {
+			if (a.getPlayers().contains(p.getUniqueId())) {
 				return true;
 			}
 
-			if (a.getSpectators().contains(p.getName())) {
+			if (a.getSpectators().contains(p.getUniqueId())) {
 				return true;
 			}
 		}

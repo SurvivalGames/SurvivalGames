@@ -34,16 +34,16 @@ public class MoveListener implements Listener {
 		Location q = e.getFrom();
 		Location w = e.getTo();
 
-		if (list.contains(e.getPlayer().getName()) && (q.getBlockX() != w.getBlockX() || q.getBlockZ() != w.getBlockZ())) {
+		if (list.contains(e.getPlayer().getUniqueId()) && (q.getBlockX() != w.getBlockX() || q.getBlockZ() != w.getBlockZ())) {
 			e.setTo(e.getFrom());
 		}
 
-		try {
-			if (SGApi.getArenaManager().isInGame(e.getPlayer()) && SGApi.getArenaManager().getArena(e.getPlayer()).getState() == SGArena.ArenaState.DEATHMATCH && (Math.abs(e.getPlayer().getLocation().distanceSquared(SGApi.getMultiWorldManager().worldForName(SGApi.getArenaManager().getArena(e.getPlayer()).getArenaWorld().getName()).getCenter())) >= 0.5)) {
-				e.setTo(e.getFrom());
-				e.getPlayer().sendMessage(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("NOT_HAPPY"));
-			}
-		} catch (ArenaNotFoundException ignored) {}
+		//try {
+		//	if (SGApi.getArenaManager().isInGame(e.getPlayer()) && SGApi.getArenaManager().getArena(e.getPlayer()).getState() == SGArena.ArenaState.DEATHMATCH && (Math.abs(e.getPlayer().getLocation().distanceSquared(SGApi.getMultiWorldManager().worldForName(SGApi.getArenaManager().getArena(e.getPlayer()).getArenaWorld().getName()).getCenter())) >= 0.5)) {
+		//		e.setTo(e.getFrom());
+		//		e.getPlayer().sendMessage(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("NOT_HAPPY"));
+		//	}
+		//} catch (ArenaNotFoundException ignored) {}
 	}
 
 }

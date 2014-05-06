@@ -251,17 +251,19 @@ public class SGArena {
 	 * Ends the arena
 	 */
 	public void end() {
-		for (UUID s : getPlayers()) {
-			Player p = Bukkit.getPlayer(s);
+		if (SGApi.getPlugin().getPluginConfig().getUseServers()) {
+			for (UUID s : getPlayers()) {
+				Player p = Bukkit.getPlayer(s);
 
-			SendWebsocketData.updateArenaStatusForPlayer(p);
+				SendWebsocketData.updateArenaStatusForPlayer(p);
 
-		}
-		for (UUID s : getSpectators()) {
-			Player p = Bukkit.getPlayer(s);
+			}
+			for (UUID s : getSpectators()) {
+				Player p = Bukkit.getPlayer(s);
 
-			SendWebsocketData.updateArenaStatusForPlayer(p);
+				SendWebsocketData.updateArenaStatusForPlayer(p);
 
+			}
 		}
 		if (getPlayers().size() == 1) {
 			broadcast(I18N.getLocaleString("END") + " " + getPlayers().get(0));
