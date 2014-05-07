@@ -6,13 +6,16 @@
 
 package co.q64.paradisesurvivalgames.managers;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
+import co.q64.paradisesurvivalgames.configs.ArenaConfigTemplate;
+import co.q64.paradisesurvivalgames.configs.ConfigTemplate;
+import co.q64.paradisesurvivalgames.configs.WorldConfigTemplate;
+import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
+import co.q64.paradisesurvivalgames.io.DownloadMap;
+import co.q64.paradisesurvivalgames.locale.I18N;
+import co.q64.paradisesurvivalgames.multiworld.SGWorld;
+import co.q64.paradisesurvivalgames.net.SendWebsocketData;
+import co.q64.paradisesurvivalgames.objects.SGArena;
+import co.q64.paradisesurvivalgames.util.PlayerVanishUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -26,16 +29,12 @@ import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
-import co.q64.paradisesurvivalgames.configs.ArenaConfigTemplate;
-import co.q64.paradisesurvivalgames.configs.ConfigTemplate;
-import co.q64.paradisesurvivalgames.configs.WorldConfigTemplate;
-import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
-import co.q64.paradisesurvivalgames.io.DownloadMap;
-import co.q64.paradisesurvivalgames.locale.I18N;
-import co.q64.paradisesurvivalgames.multiworld.SGWorld;
-import co.q64.paradisesurvivalgames.net.SendWebsocketData;
-import co.q64.paradisesurvivalgames.objects.SGArena;
-import co.q64.paradisesurvivalgames.util.PlayerVanishUtil;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class ArenaManager {
 
@@ -143,7 +142,7 @@ public class ArenaManager {
 		SendWebsocketData.stopMusic(p);
 		SendWebsocketData.playMusicToPlayer(p, SendWebsocketData.getRandomMusic("lobby-music"));
 
-		if (a.getPlayers().size() == a.getMinPlayers() && a.isCountdown() == false) {
+		if (a.getPlayers().size() == a.getMinPlayers() && !a.isCountdown()) {
 			a.setCountdown(true);
 			SGApi.getTimeManager(a).countdownLobby(2);
 		}
@@ -452,7 +451,7 @@ public class ArenaManager {
 		}
 		SGArena a = null;
 		for (SGArena arena : getArenas()) {
-			if (arena.getPlayers().contains(p.getName()) || arena.getSpectators().contains(p.getName())) {
+			if (arena.getPlayers().contains(p.getUniqueId()) || arena.getSpectators().contains(p.getUniqueId())) {
 				a = arena;
 			}
 		}
@@ -483,10 +482,10 @@ public class ArenaManager {
 		if (a == null)
 			return;
 
-		if (a.getSpectators().contains(p.getName()))
-			a.getSpectators().remove(p.getName());
+		if (a.getSpectators().contains(p.getUniqueId()))
+			a.getSpectators().remove(p.getUniqueId());
 		else {
-			a.getPlayers().remove(p.getName());
+			a.getPlayers().remove(p.getUniqueId());
 		}
 
 		//p.getInventory().setContents(inv.get(p.getName()));

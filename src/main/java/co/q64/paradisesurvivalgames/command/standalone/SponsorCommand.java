@@ -19,7 +19,7 @@ public class SponsorCommand implements CommandExecutor {
 		Player p = (Player) sender;
 		try {
 			SGArena a = SGApi.getArenaManager().getArena(p);
-			if (a.getPlayers().contains(p.getName())) {
+			if (a.getPlayers().contains(p.getUniqueId())) {
 				p.sendMessage(ChatColor.RED + "You must be dead to sponsor players");
 			} else {
 				SGApi.getSponsorManager(a).sponsor(p);

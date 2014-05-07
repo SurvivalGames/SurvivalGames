@@ -1,9 +1,6 @@
 package co.q64.paradisesurvivalgames.managers;
 
-import java.io.File;
-import java.util.List;
-import java.util.Random;
-
+import co.q64.paradisesurvivalgames.objects.SGArena;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
@@ -13,7 +10,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
-import co.q64.paradisesurvivalgames.objects.SGArena;
+import java.io.File;
+import java.util.List;
+import java.util.Random;
 
 public class ChestManager {
 
@@ -108,8 +107,7 @@ public class ChestManager {
 	private ItemStack readItemFromString(String s) {
 		String[] l = s.split(",");
 		if (l.length == 2) {
-			ItemStack is = new ItemStack(Material.valueOf(l[0]), Integer.parseInt(l[1]));
-			return is;
+            return new ItemStack(Material.valueOf(l[0]), Integer.parseInt(l[1]));
 		}
 		if (l.length == 3) {
 			ItemStack is = new ItemStack(Material.valueOf(l[0]), Integer.parseInt(l[1]));
