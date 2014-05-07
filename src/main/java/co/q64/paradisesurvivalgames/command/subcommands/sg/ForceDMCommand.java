@@ -11,7 +11,7 @@ public class ForceDMCommand implements SubCommand {
 
 	@Override
 	public void execute(String cmd, Player p, String[] args) {
-		if (p.isOp() || p.hasPermission("sg.start")) {
+		if (p.isOp() || p.hasPermission("sg.start"))  {
 			if (args.length > 1){
 				try {
 					SGArena a = SGApi.getArenaManager().getArena(Integer.parseInt(args[0]));
