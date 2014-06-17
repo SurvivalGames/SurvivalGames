@@ -33,14 +33,19 @@ import co.q64.paradisesurvivalgames.rollback.ChangedBlock;
 public class BlockListener implements Listener {
 
 	static List<Block> breakable;
-	final List<Material> allowed;
+	final List<Material> breakAllowed;
+	final List<Material> placeAllowed;
 
 	public BlockListener() {
 
-		allowed = new ArrayList<Material>();
+		breakAllowed = new ArrayList<Material>();
+		placeAllowed = new ArrayList<Material>();
 		breakable = new ArrayList<Block>();
 		for (String s : SGApi.getPlugin().getPluginConfig().getAllowedBlockBreaks()) {
-			allowed.add(Material.valueOf(s));
+			breakAllowed.add(Material.valueOf(s));
+		}
+		for (String s : SGApi.getPlugin().getPluginConfig().getAllowedPlaceableBLocks()) {
+			placeAllowed.add(Material.valueOf(s));
 		}
 	}
 
@@ -56,13 +61,14 @@ public class BlockListener implements Listener {
 				event.setCancelled(true);
 				return;
 			}
-			if (allowed.contains(event.getBlock().getType())) {
+			if (breakAllowed.contains(event.getBlock().getType())) {
 				a.getChangedBlocks().add(new ChangedBlock(event.getBlock().getWorld().getName(), event.getBlock().getType(), event.getBlock().getData(), Material.AIR, Byte.parseByte(0 + ""), event.getBlock().getX(), event.getBlock().getY(), event.getBlock().getZ()));
 			} else {
 				event.setCancelled(true);
 			}
 			return;
-		} catch (ArenaNotFoundException ignored) {}
+		} catch (ArenaNotFoundException ignored) {
+		}
 
 		if (Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()) == event.getPlayer().getWorld() && !event.getPlayer().isOp()) {
 			event.setCancelled(true);
@@ -72,18 +78,28 @@ public class BlockListener implements Listener {
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onBlockPlace(BlockPlaceEvent event) {
 		if (SGApi.getArenaManager().isInGame(event.getPlayer())) {
-			if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
+			SGArena a;
+			try {
+				a = SGApi.getArenaManager().getArena(event.getPlayer());
+
+				if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
+					event.setCancelled(true);
+					return;
+				}
+				if (event.getBlock().getType().equals(Material.TNT)) {
+					event.getPlayer().getWorld().spawnEntity(event.getBlock().getLocation(), EntityType.PRIMED_TNT);
+					ItemStack item = event.getPlayer().getInventory().getItemInHand();
+					int amount = item.getAmount() - 1;
+					item.setAmount(amount);
+					event.getPlayer().getInventory().setItemInHand(item);
+				}
+				if (breakAllowed.contains(event.getBlock().getType())) {
+					a.getChangedBlocks().add(new ChangedBlock(event.getBlock().getWorld().getName(), event.getBlock().getType(), event.getBlock().getData(), Material.AIR, Byte.parseByte(0 + ""), event.getBlock().getX(), event.getBlock().getY(), event.getBlock().getZ()));
+					return;
+				}
+			} catch (ArenaNotFoundException e) {
 				event.setCancelled(true);
-				return;
 			}
-			if (event.getBlock().getType().equals(Material.TNT)) {
-				event.getPlayer().getWorld().spawnEntity(event.getBlock().getLocation(), EntityType.PRIMED_TNT);
-				ItemStack item = event.getPlayer().getInventory().getItemInHand();
-				int amount = item.getAmount() - 1;
-				item.setAmount(amount);
-				event.getPlayer().getInventory().setItemInHand(item);
-			}
-			event.setCancelled(true);
 		}
 
 		if (Bukkit.getWorld(SGApi.getPlugin().getPluginConfig().getHubWorld()) == event.getPlayer().getWorld() && !event.getPlayer().isOp()) {
