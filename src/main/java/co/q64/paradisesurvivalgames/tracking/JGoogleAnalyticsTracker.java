@@ -49,32 +49,34 @@ import org.bukkit.Bukkit;
  * <li>If you are not tracking an event,
  * {@link AnalyticsRequestData#setPageURL(String)} must be populated</li>
  * </ul>
- * See the <a href=http://code.google.com/intl/en-US/apis/analytics/docs/tracking/gaTrackingTroubleshooting
- * .html#gifParameters>
- * Google Troubleshooting Guide</a> for more info on the tracking parameters (although it doesn't seem to be fully
- * updated).
+ * See the <a
+ * href=http://code.google.com/intl/en-US/apis/analytics/docs/tracking
+ * /gaTrackingTroubleshooting .html#gifParameters> Google Troubleshooting
+ * Guide</a> for more info on the tracking parameters (although it doesn't seem
+ * to be fully updated).
  * <p>
  * The tracker can operate in three modes:
  * <ul>
- * <li>synchronous mode: The HTTP request is sent to GA immediately, before the track
- * method returns.
- * This may slow your application down if GA doesn't respond fast.
- * <li>multi-thread mode: Each track method call creates a new short-lived thread that sends
- * the HTTP request to GA in the background and terminates.
- * <li>single-thread mode (the default): The track method stores the request in a FIFO and returns
- * immediately. A single long-lived background thread consumes the FIFO content and sends the HTTP
- * requests to GA.
+ * <li>synchronous mode: The HTTP request is sent to GA immediately, before the
+ * track method returns. This may slow your application down if GA doesn't
+ * respond fast.
+ * <li>multi-thread mode: Each track method call creates a new short-lived
+ * thread that sends the HTTP request to GA in the background and terminates.
+ * <li>single-thread mode (the default): The track method stores the request in
+ * a FIFO and returns immediately. A single long-lived background thread
+ * consumes the FIFO content and sends the HTTP requests to GA.
  * </ul>
  * </p>
  * <p>
- * To halt the background thread safely, use the call {@link #stopBackgroundThread(long)}, where the parameter is the
- * timeout to wait for any remaining queued tracking calls to be made.  Keep in mind that if new tracking requests
- * are made
- * after the thread is stopped, they will just be stored in the queue, and will not be sent to GA until the thread is
- * started again with
- * {@link #startBackgroundThread()} (This is assuming you are in single-threaded mode to begin with).
+ * To halt the background thread safely, use the call
+ * {@link #stopBackgroundThread(long)}, where the parameter is the timeout to
+ * wait for any remaining queued tracking calls to be made. Keep in mind that if
+ * new tracking requests are made after the thread is stopped, they will just be
+ * stored in the queue, and will not be sent to GA until the thread is started
+ * again with {@link #startBackgroundThread()} (This is assuming you are in
+ * single-threaded mode to begin with).
  * </p>
- *
+ * 
  * @author Daniel Murphy, Stefan Brozinski
  */
 public class JGoogleAnalyticsTracker {
@@ -85,12 +87,13 @@ public class JGoogleAnalyticsTracker {
 		 */
 		MULTI_THREAD,
 		/**
-		 * Each tracking request is added to a queue, and a single dispatch thread makes the requests.
+		 * Each tracking request is added to a queue, and a single dispatch
+		 * thread makes the requests.
 		 */
 		SINGLE_THREAD,
 		/**
-		 * Each tracking call will wait until the http request
-		 * completes before returning
+		 * Each tracking call will wait until the http request completes before
+		 * returning
 		 */
 		SYNCHRONOUS
 	}
@@ -98,9 +101,11 @@ public class JGoogleAnalyticsTracker {
 	public static enum GoogleAnalyticsVersion {
 		V_4_7_2
 	}
+
 	private static final ThreadGroup asyncThreadGroup = new ThreadGroup("Async Google Analytics Threads");
 	private static long asyncThreadsRunning = 0;
-	private static Thread backgroundThread = null; // the thread used in 'queued' mode.
+	private static Thread backgroundThread = null; // the thread used in
+													// 'queued' mode.
 	private static boolean backgroundThreadMayRun = false;
 	private static LinkedList<String> fifo = new LinkedList<String>();
 
@@ -112,6 +117,7 @@ public class JGoogleAnalyticsTracker {
 	private boolean enabled;
 	private GoogleAnalyticsVersion gaVersion;
 	private DispatchMode mode;
+
 	public JGoogleAnalyticsTracker(AnalyticsConfigData argConfigData, GoogleAnalyticsVersion argVersion) {
 		this(argConfigData, argVersion, DispatchMode.SINGLE_THREAD);
 	}
@@ -133,8 +139,9 @@ public class JGoogleAnalyticsTracker {
 	 * Wait for background tasks to complete.
 	 * <p>
 	 * This works in queued and asynchronous mode.
-	 *
-	 * @param timeoutMillis The maximum number of milliseconds to wait.
+	 * 
+	 * @param timeoutMillis
+	 *            The maximum number of milliseconds to wait.
 	 */
 	public static void completeBackgroundTasks(long timeoutMillis) {
 
@@ -173,7 +180,8 @@ public class JGoogleAnalyticsTracker {
 			int responseCode = connection.getResponseCode();
 			if (responseCode != HttpURLConnection.HTTP_OK) {
 				Bukkit.getLogger().severe("JGoogleAnalyticsTracker: Error requesting url '{}', " + "received response code {}");
-			} else {}
+			} else {
+			}
 		} catch (Exception e) {
 			Bukkit.getLogger().severe("Error making tracking request");
 		}
@@ -183,8 +191,9 @@ public class JGoogleAnalyticsTracker {
 	 * Define the proxy to use for all GA tracking requests.
 	 * <p>
 	 * Call this static method early (before creating any tracking requests).
-	 *
-	 * @param argProxy The proxy to use
+	 * 
+	 * @param argProxy
+	 *            The proxy to use
 	 */
 	public static void setProxy(Proxy argProxy) {
 		proxy = (argProxy != null) ? argProxy : Proxy.NO_PROXY;
@@ -194,8 +203,10 @@ public class JGoogleAnalyticsTracker {
 	 * Define the proxy to use for all GA tracking requests.
 	 * <p>
 	 * Call this static method early (before creating any tracking requests).
-	 *
-	 * @param proxyAddr "addr:port" of the proxy to use; may also be given as URL ("http://addr:port/").
+	 * 
+	 * @param proxyAddr
+	 *            "addr:port" of the proxy to use; may also be given as URL
+	 *            ("http://addr:port/").
 	 */
 	public static void setProxy(String proxyAddr) {
 		if (proxyAddr != null) {
@@ -246,8 +257,10 @@ public class JGoogleAnalyticsTracker {
 								}
 
 								if (!fifo.isEmpty()) {
-									// Get a reference to the oldest element in the FIFO,
-									// but leave it in the FIFO until it is processed.
+									// Get a reference to the oldest element in
+									// the FIFO,
+									// but leave it in the FIFO until it is
+									// processed.
 									url = fifo.getFirst();
 								}
 							}
@@ -256,7 +269,8 @@ public class JGoogleAnalyticsTracker {
 								try {
 									dispatchRequest(url);
 								} finally {
-									// Now that we have completed the HTTP request to GA,
+									// Now that we have completed the HTTP
+									// request to GA,
 									// remove the element from the FIFO.
 									synchronized (fifo) {
 										fifo.removeFirst();
@@ -271,7 +285,8 @@ public class JGoogleAnalyticsTracker {
 			};
 
 			// Don't prevent the application from terminating.
-			// Use completeBackgroundTasks() before exit if you want to ensure that all pending GA requests are sent. 
+			// Use completeBackgroundTasks() before exit if you want to ensure
+			// that all pending GA requests are sent.
 			backgroundThread.setDaemon(true);
 
 			backgroundThread.start();
@@ -281,10 +296,12 @@ public class JGoogleAnalyticsTracker {
 	/**
 	 * Stop the long-lived background thread.
 	 * <p>
-	 * This method is needed for debugging purposes only. Calling it in an application is not really
-	 * required: The background thread will terminate automatically when the application exits.
-	 *
-	 * @param timeoutMillis If nonzero, wait for thread completion before returning.
+	 * This method is needed for debugging purposes only. Calling it in an
+	 * application is not really required: The background thread will terminate
+	 * automatically when the application exits.
+	 * 
+	 * @param timeoutMillis
+	 *            If nonzero, wait for thread completion before returning.
 	 */
 	public static void stopBackgroundThread(long timeoutMillis) {
 		backgroundThreadMayRun = false;
@@ -294,7 +311,8 @@ public class JGoogleAnalyticsTracker {
 		if ((backgroundThread != null) && (timeoutMillis > 0)) {
 			try {
 				backgroundThread.join(timeoutMillis);
-			} catch (InterruptedException e) {}
+			} catch (InterruptedException e) {
+			}
 			backgroundThread = null;
 		}
 	}
@@ -311,8 +329,9 @@ public class JGoogleAnalyticsTracker {
 	}
 
 	/**
-	 * Gets the current dispatch mode.  Default is {@link DispatchMode#SINGLE_THREAD}.
-	 *
+	 * Gets the current dispatch mode. Default is
+	 * {@link DispatchMode#SINGLE_THREAD}.
+	 * 
 	 * @return
 	 * @see DispatchMode
 	 */
@@ -322,7 +341,7 @@ public class JGoogleAnalyticsTracker {
 
 	/**
 	 * If the api is dispatching tracking requests (default of true).
-	 *
+	 * 
 	 * @return
 	 */
 	public boolean isEnabled() {
@@ -331,7 +350,7 @@ public class JGoogleAnalyticsTracker {
 
 	/**
 	 * Convenience method to check if the tracker is in multi-thread mode
-	 *
+	 * 
 	 * @return
 	 */
 	public boolean isMultiThreaded() {
@@ -340,7 +359,7 @@ public class JGoogleAnalyticsTracker {
 
 	/**
 	 * Convenience method to check if the tracker is in single-thread mode
-	 *
+	 * 
 	 * @return
 	 */
 	public boolean isSingleThreaded() {
@@ -349,7 +368,7 @@ public class JGoogleAnalyticsTracker {
 
 	/**
 	 * Convenience method to check if the tracker is in synchronous mode.
-	 *
+	 * 
 	 * @return
 	 */
 	public boolean isSynchronous() {
@@ -358,9 +377,10 @@ public class JGoogleAnalyticsTracker {
 
 	/**
 	 * Makes a custom tracking request based from the given data.
-	 *
+	 * 
 	 * @param argData
-	 * @throws NullPointerException if argData is null or if the URL builder is null
+	 * @throws NullPointerException
+	 *             if argData is null or if the URL builder is null
 	 */
 	public synchronized void makeCustomRequest(AnalyticsRequestData argData) {
 		if (!enabled) {
@@ -419,9 +439,10 @@ public class JGoogleAnalyticsTracker {
 
 	/**
 	 * Sets the dispatch mode
-	 *
-	 * @param argMode the mode to to put the tracker in.  If this is null, the tracker
-	 *                defaults to {@link DispatchMode#SINGLE_THREAD}
+	 * 
+	 * @param argMode
+	 *            the mode to to put the tracker in. If this is null, the
+	 *            tracker defaults to {@link DispatchMode#SINGLE_THREAD}
 	 * @see DispatchMode
 	 */
 	public void setDispatchMode(DispatchMode argMode) {
@@ -436,7 +457,7 @@ public class JGoogleAnalyticsTracker {
 
 	/**
 	 * Sets if the api dispatches tracking requests.
-	 *
+	 * 
 	 * @param argEnabled
 	 */
 	public void setEnabled(boolean argEnabled) {
@@ -446,7 +467,7 @@ public class JGoogleAnalyticsTracker {
 	/**
 	 * Tracks an event. To provide more info about the page, use
 	 * {@link #makeCustomRequest(AnalyticsRequestData)}.
-	 *
+	 * 
 	 * @param argCategory
 	 * @param argAction
 	 */
@@ -457,7 +478,7 @@ public class JGoogleAnalyticsTracker {
 	/**
 	 * Tracks an event. To provide more info about the page, use
 	 * {@link #makeCustomRequest(AnalyticsRequestData)}.
-	 *
+	 * 
 	 * @param argCategory
 	 * @param argAction
 	 * @param argLabel
@@ -469,30 +490,40 @@ public class JGoogleAnalyticsTracker {
 	/**
 	 * Tracks an event. To provide more info about the page, use
 	 * {@link #makeCustomRequest(AnalyticsRequestData)}.
-	 *
-	 * @param argCategory required
-	 * @param argAction   required
-	 * @param argLabel    optional
-	 * @param argValue    optional
+	 * 
+	 * @param argCategory
+	 *            required
+	 * @param argAction
+	 *            required
+	 * @param argLabel
+	 *            optional
+	 * @param argValue
+	 *            optional
 	 */
 	public void trackEvent(String argCategory, String argAction, String argLabel, Integer argValue) {
-		AnalyticsRequestData data = new AnalyticsRequestData();
-		data.setEventCategory(argCategory);
-		data.setEventAction(argAction);
-		data.setEventLabel(argLabel);
-		data.setEventValue(argValue);
+		try {
+			AnalyticsRequestData data = new AnalyticsRequestData();
+			data.setEventCategory(argCategory);
+			data.setEventAction(argAction);
+			data.setEventLabel(argLabel);
+			data.setEventValue(argValue);
 
-		makeCustomRequest(data);
+			makeCustomRequest(data);
+		} catch (NullPointerException e) {
+		}
 	}
 
 	/**
 	 * Tracks a page view.
-	 *
-	 * @param argPageURL   required, Google won't track without it. Ex:
-	 *                     <code>"org/me/javaclass.java"</code>, or anything you want as
-	 *                     the page url.
-	 * @param argPageTitle content title
-	 * @param argHostName  the host name for the url
+	 * 
+	 * @param argPageURL
+	 *            required, Google won't track without it. Ex:
+	 *            <code>"org/me/javaclass.java"</code>, or anything you want as
+	 *            the page url.
+	 * @param argPageTitle
+	 *            content title
+	 * @param argHostName
+	 *            the host name for the url
 	 */
 	public void trackPageView(String argPageURL, String argPageTitle, String argHostName) {
 		trackPageViewFromReferrer(argPageURL, argPageTitle, argHostName, "http://www.dmurph.com", "/");
@@ -500,14 +531,19 @@ public class JGoogleAnalyticsTracker {
 
 	/**
 	 * Tracks a page view.
-	 *
-	 * @param argPageURL      required, Google won't track without it. Ex:
-	 *                        <code>"org/me/javaclass.java"</code>, or anything you want as
-	 *                        the page url.
-	 * @param argPageTitle    content title
-	 * @param argHostName     the host name for the url
-	 * @param argReferrerSite site of the referrer. ex, www.dmurph.com
-	 * @param argReferrerPage page of the referrer. ex, /mypage.php
+	 * 
+	 * @param argPageURL
+	 *            required, Google won't track without it. Ex:
+	 *            <code>"org/me/javaclass.java"</code>, or anything you want as
+	 *            the page url.
+	 * @param argPageTitle
+	 *            content title
+	 * @param argHostName
+	 *            the host name for the url
+	 * @param argReferrerSite
+	 *            site of the referrer. ex, www.dmurph.com
+	 * @param argReferrerPage
+	 *            page of the referrer. ex, /mypage.php
 	 */
 	public void trackPageViewFromReferrer(String argPageURL, String argPageTitle, String argHostName, String argReferrerSite, String argReferrerPage) {
 		if (argPageURL == null) {
@@ -523,15 +559,20 @@ public class JGoogleAnalyticsTracker {
 
 	/**
 	 * Tracks a page view.
-	 *
-	 * @param argPageURL        required, Google won't track without it. Ex:
-	 *                          <code>"org/me/javaclass.java"</code>, or anything you want as
-	 *                          the page url.
-	 * @param argPageTitle      content title
-	 * @param argHostName       the host name for the url
-	 * @param argSearchSource   source of the search engine. ex: google
-	 * @param argSearchKeywords the keywords of the search. ex: java google analytics tracking
-	 *                          utility
+	 * 
+	 * @param argPageURL
+	 *            required, Google won't track without it. Ex:
+	 *            <code>"org/me/javaclass.java"</code>, or anything you want as
+	 *            the page url.
+	 * @param argPageTitle
+	 *            content title
+	 * @param argHostName
+	 *            the host name for the url
+	 * @param argSearchSource
+	 *            source of the search engine. ex: google
+	 * @param argSearchKeywords
+	 *            the keywords of the search. ex: java google analytics tracking
+	 *            utility
 	 */
 	public void trackPageViewFromSearch(String argPageURL, String argPageTitle, String argHostName, String argSearchSource, String argSearchKeywords) {
 		if (argPageURL == null) {
