@@ -12,8 +12,10 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import co.q64.paradisesurvivalgames.exception.ArenaNotFoundException;
@@ -38,12 +40,25 @@ public class MoveListener implements Listener {
 			e.setTo(e.getFrom());
 		}
 
-		//try {
-		//	if (SGApi.getArenaManager().isInGame(e.getPlayer()) && SGApi.getArenaManager().getArena(e.getPlayer()).getState() == SGArena.ArenaState.DEATHMATCH && (Math.abs(e.getPlayer().getLocation().distanceSquared(SGApi.getMultiWorldManager().worldForName(SGApi.getArenaManager().getArena(e.getPlayer()).getArenaWorld().getName()).getCenter())) >= 0.5)) {
-		//		e.setTo(e.getFrom());
-		//		e.getPlayer().sendMessage(SGApi.getArenaManager().getPrefix() + I18N.getLocaleString("NOT_HAPPY"));
-		//	}
-		//} catch (ArenaNotFoundException ignored) {}
+		// try {
+		// if (SGApi.getArenaManager().isInGame(e.getPlayer()) &&
+		// SGApi.getArenaManager().getArena(e.getPlayer()).getState() ==
+		// SGArena.ArenaState.DEATHMATCH &&
+		// (Math.abs(e.getPlayer().getLocation().distanceSquared(SGApi.getMultiWorldManager().worldForName(SGApi.getArenaManager().getArena(e.getPlayer()).getArenaWorld().getName()).getCenter()))
+		// >= 0.5)) {
+		// e.setTo(e.getFrom());
+		// e.getPlayer().sendMessage(SGApi.getArenaManager().getPrefix() +
+		// I18N.getLocaleString("NOT_HAPPY"));
+		// }
+		// } catch (ArenaNotFoundException ignored) {}
+	}
+
+	public void onInteract(PlayerInteractEvent event) {
+		if (list.contains(event.getPlayer().getUniqueId())) {
+			if (event.getPlayer().getItemInHand().getType().equals(Material.ENDER_PEARL) || event.getPlayer().getItemInHand().getType().equals(Material.BOW)) {
+				event.setCancelled(true);
+			}
+		}
 	}
 
 }
