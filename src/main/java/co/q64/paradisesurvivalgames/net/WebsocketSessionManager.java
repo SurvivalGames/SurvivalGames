@@ -1,14 +1,21 @@
 package co.q64.paradisesurvivalgames.net;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 public class WebsocketSessionManager {
 	private static WebsocketSessionManager sessionManager;
 
 	private List<WebsocketSession> sessions = new ArrayList<WebsocketSession>();
+	private Map<UUID, Integer> sessionId = new HashMap<UUID, Integer>();
+	private Random rnd = new Random();
 
 	public static WebsocketSessionManager getSessionManager() {
 		if (sessionManager == null) {
@@ -64,5 +71,12 @@ public class WebsocketSessionManager {
 
 	public void revokeSession(WebsocketSession session) {
 		sessions.remove(session);
+	}
+
+	public int getSessionId(Player p) {
+		if (sessionId.get(p.getUniqueId()) == null) {
+			sessionId.put(p.getUniqueId(), rnd.nextInt(100000));
+		}
+		return sessionId.get(p.getUniqueId());
 	}
 }
