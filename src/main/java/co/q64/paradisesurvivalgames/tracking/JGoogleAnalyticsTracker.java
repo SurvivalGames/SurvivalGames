@@ -119,7 +119,7 @@ public class JGoogleAnalyticsTracker {
 	private DispatchMode mode;
 
 	public JGoogleAnalyticsTracker(AnalyticsConfigData argConfigData, GoogleAnalyticsVersion argVersion) {
-		this(argConfigData, argVersion, DispatchMode.SINGLE_THREAD);
+		this(argConfigData, argVersion, DispatchMode.MULTI_THREAD);
 	}
 
 	public JGoogleAnalyticsTracker(AnalyticsConfigData argConfigData, GoogleAnalyticsVersion argVersion, DispatchMode argMode) {

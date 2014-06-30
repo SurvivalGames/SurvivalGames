@@ -6,6 +6,7 @@
 
 package co.q64.paradisesurvivalgames.listeners;
 
+import java.util.Collection;
 import java.util.UUID;
 import java.util.logging.Level;
 
@@ -56,10 +57,8 @@ public class ChatListener implements Listener {
 				event.setCancelled(true);
 				Bukkit.getLogger().log(Level.INFO, "[P] {0}: {1}", new Object[] { event.getPlayer().getDisplayName(), event.getMessage() });
 
-				org.bukkit.entity.Player[] playerList = org.bukkit.Bukkit.getServer().getOnlinePlayers();
-				int playersNum = org.bukkit.Bukkit.getServer().getOnlinePlayers().length;
-				for (int i = 0; i < playersNum; i++) {
-					org.bukkit.entity.Player p = playerList[i];
+
+				for (Player p : Bukkit.getOnlinePlayers()) {
 					assert party != null;
 					if ((p.hasPermission("partymanager.admin.spy")) && (!party.hasMember(p.getName()))) {
 						p.sendMessage(org.bukkit.ChatColor.GRAY + "[P] " + event.getPlayer().getName() + ": " + event.getMessage());
@@ -74,4 +73,5 @@ public class ChatListener implements Listener {
 			event.setFormat(ChatColor.GRAY + "[" + SGApi.getPlugin().getPlayerData(event.getPlayer()).getKills() + "] " + prefix + ChatColor.GRAY + " " + name + ": " + event.getMessage());
 		}
 	}
+
 }

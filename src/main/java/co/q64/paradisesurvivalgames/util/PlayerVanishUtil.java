@@ -12,8 +12,8 @@ public class PlayerVanishUtil {
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(JavaPlugin.getPlugin(TheSurvivalGames.class), new Runnable() {
 			@Override
 			public void run() {
-				for (int i = 0; i < Bukkit.getServer().getOnlinePlayers().length; i++) {
-					Bukkit.getServer().getOnlinePlayers()[i].hidePlayer(player);
+				for (Player p : Bukkit.getOnlinePlayers()) {
+					p.hidePlayer(player);
 				}
 			}
 		});
@@ -24,8 +24,8 @@ public class PlayerVanishUtil {
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(JavaPlugin.getPlugin(TheSurvivalGames.class), new Runnable() {
 			@Override
 			public void run() {
-				for (int i = 0; i < Bukkit.getServer().getOnlinePlayers().length; i++) {
-					Bukkit.getServer().getOnlinePlayers()[i].showPlayer(player);
+				for (Player p : Bukkit.getOnlinePlayers()) {
+					p.showPlayer(player);
 				}
 			}
 		});
