@@ -92,7 +92,6 @@ import co.q64.paradisesurvivalgames.runnables.Scoreboard;
 import co.q64.paradisesurvivalgames.tracking.AnalyticsConfigData;
 import co.q64.paradisesurvivalgames.tracking.JGoogleAnalyticsTracker;
 import co.q64.paradisesurvivalgames.tracking.JGoogleAnalyticsTracker.GoogleAnalyticsVersion;
-import co.q64.paradisesurvivalgames.tracking.PluginMetrics;
 import co.q64.paradisesurvivalgames.util.DoubleJump;
 import co.q64.paradisesurvivalgames.util.LocationChecker;
 import co.q64.paradisesurvivalgames.util.SerializedLocation;
@@ -106,7 +105,6 @@ public class TheSurvivalGames extends JavaPlugin {
 	private ConfigurationData configurationData;
 	private Economy econ = null;
 	private JGoogleAnalyticsTracker tracker;
-	private PluginMetrics tgicnTracker;
 
 	public Chat getChat() {
 		return chat;
@@ -182,11 +180,6 @@ public class TheSurvivalGames extends JavaPlugin {
 		}
 
 		SGApi.getScheduler().shutdownAll();
-		try {
-			tgicnTracker.disable();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -267,12 +260,6 @@ public class TheSurvivalGames extends JavaPlugin {
 		tracker.setEnabled(true);
 		tracker.trackEvent("Server Start", "Motd: " + ChatColor.stripColor(Bukkit.getMotd()) + ", " + "Max Players: " + Bukkit.getMaxPlayers() + ", Version: " + Bukkit.getVersion() + " running on " + Bukkit.getBukkitVersion() + ", Java: " + System.getProperty("java.version"));
 
-		try {
-			tgicnTracker = new PluginMetrics(this);
-			tgicnTracker.enable();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		getLogger().info("ParadiseSurvivalGames has been enabeled!");
 	}
