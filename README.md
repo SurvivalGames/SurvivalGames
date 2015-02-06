@@ -10,6 +10,9 @@
 This text was added in the 1000th commit 
 
 **[ANNOUNCEMENT|Quantum64]**
+Fixed website DNS
+
+**[ANNOUNCEMENT|Quantum64]**
 All developers should read the tutorial for developing on the new multilingual string system here:  https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/blob/master/I18N_TUTORIAL.md
 
 **[ANNOUNCEMENT|AgentTroll]**
@@ -21,34 +24,5 @@ Let's not use .*; for imports. If you're using eclipse, just Ctrl + Shift + o an
 **[ANNOUNCEMENT|AgentTroll]**
 Never use tabs.
 
-=========
-
-**Description**
-Description is faulty, so I erased it. See the [![wiki](https://github.com/SurvivalGamesDevTeam/TheSurvivalGames/wiki)]
-
-=========
-**Permissions**
-
-```
-sg.create Allows the player to create maps.
-
-sg.remove Allows the player to remove a map.
-
-sg.set Allows the player to create arenas, set min and max players, and create kit selection locations.
-
-sg.start Allows the player to force start the arena.
-
-sg.stop Allows the player to force stop an arena.
-
-sg.user Allows the player to edit a user's status.
-```
-
-========
-
-**SGDevTeam in the Social Media**
-
-***Twitter*** : [**@ParadiseSGDev**](https://twitter.com/ParadiseSGDev)
-
-========
 
 
